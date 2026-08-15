@@ -122,6 +122,10 @@ for (const r of photos) {
       ? { name: dept['Department Name'] ?? '', city: dept.City ?? '', county: dept.County ?? '' }
       : null,
     town: dept ? townKey(dept) : null,
+    // Pins the photo to one building in multi-station towns. Per-photo
+    // "Station Address" (Photos table) wins if present; otherwise the linked
+    // department's Street Address (per-station dept records carry these).
+    stationAddress: f['Station Address'] ?? dept?.['Street Address'] ?? null,
   });
 }
 

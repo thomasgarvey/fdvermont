@@ -20,18 +20,46 @@ const OSM_ATTR = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenS
 
 const DISPLAY_KEYS = ['PRIMARYADD', 'SITETYPE', 'TOWNNAME', 'COUNTY', 'STATE', 'ZIP'];
 
-// Photos are synced from Airtable keyed by E911 town name (see scripts/sync-airtable.mjs)
+// Photos are synced from Airtable keyed by E911 town name (see scripts/sync-airtable.mjs).
+// A photo's optional stationAddress pins it to one building; without it, the
+// photo applies town-wide — but only in towns with a single station, so a
+// photo is never shown on a building it might not depict.
+const ADDR_TOKENS: Record<string, string> = {
+  SOUTH: 'S', NORTH: 'N', EAST: 'E', WEST: 'W',
+  AVENUE: 'AVE', STREET: 'ST', ROAD: 'RD', DRIVE: 'DR', LANE: 'LN',
+  TURNPIKE: 'TPKE', PARKWAY: 'PKWY', HIGHWAY: 'HWY', ROUTE: '', RTE: '', RT: '',
+};
+const normAddr = (s: string | null | undefined) =>
+  (s ?? '')
+    .toUpperCase()
+    .replace(/[^A-Z0-9 ]/g, ' ')
+    .split(/\s+/)
+    .map((w) => (w in ADDR_TOKENS ? ADDR_TOKENS[w] : w))
+    .filter(Boolean)
+    .join(' ');
+
 const photosByTown = new Map<string, typeof photosData>();
+const stationsPerTown = new Map<string, number>();
 for (const p of photosData) {
   if (!p.town) continue;
   if (!photosByTown.has(p.town)) photosByTown.set(p.town, []);
   photosByTown.get(p.town)!.push(p);
 }
+for (const f of (locationsData as GeoJSON.FeatureCollection).features) {
+  const t = (f.properties as any)?.TOWNNAME;
+  if (t) stationsPerTown.set(t, (stationsPerTown.get(t) ?? 0) + 1);
+}
 
-function photoHtml(town: string | undefined): string {
-  const photos = town ? photosByTown.get(town) : undefined;
-  if (!photos?.length) return '';
-  const p = photos[0]; // featured-first order from the sync
+function photoHtml(town: string | undefined, address: string | undefined): string {
+  const townPhotos = town ? photosByTown.get(town) : undefined;
+  if (!townPhotos?.length) return '';
+  const addr = normAddr(address);
+  // Exact building match wins; otherwise town-wide only if unambiguous
+  let p = townPhotos.find((x) => x.stationAddress && normAddr(x.stationAddress) === addr);
+  if (!p) {
+    if ((stationsPerTown.get(town!) ?? 0) > 1) return '';
+    p = townPhotos[0]; // featured-first order from the sync
+  }
   const credit = p.photographer ? `<div style="color:#888;font-size:11px;margin-top:2px">📷 ${p.photographer}</div>` : '';
   const caption = p.caption && p.caption !== p.department?.name
     ? `<div style="color:#555;font-size:12px;margin-top:2px">${p.caption}</div>` : '';
@@ -47,7 +75,7 @@ function buildPopup(props: Record<string, any>): string {
     .filter((k) => props[k] != null && typeof props[k] === 'string')
     .map((k) => `<tr><td style="padding:2px 6px 2px 0;color:#555">${k}</td><td style="padding:2px 0">${props[k]}</td></tr>`)
     .join('');
-  return `<strong>${title}</strong>${photoHtml(props.TOWNNAME)}${rows ? `<table style="margin-top:4px;border-collapse:collapse">${rows}</table>` : ''}`;
+  return `<strong>${title}</strong>${photoHtml(props.TOWNNAME, props.PRIMARYADD)}${rows ? `<table style="margin-top:4px;border-collapse:collapse">${rows}</table>` : ''}`;
 }
 
 const titleCase = (s: string) =>

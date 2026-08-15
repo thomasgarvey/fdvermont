@@ -16,7 +16,8 @@
       "city": "Northfield",
       "county": "Washington"
     },
-    "town": "BERLIN"
+    "town": "BERLIN",
+    "stationAddress": "2095 VT-12"
   },
   {
     "id": "recaeqhmXy04tIOP7",
@@ -35,7 +36,8 @@
       "city": "Burlington",
       "county": "Chittenden"
     },
-    "town": "BURLINGTON"
+    "town": "BURLINGTON",
+    "stationAddress": "20 Mansfield Avenue"
   },
   {
     "id": "receny9qpGCc1uy6J",
@@ -54,7 +56,8 @@
       "city": "Montpelier",
       "county": "Washington"
     },
-    "town": "MONTPELIER"
+    "town": "MONTPELIER",
+    "stationAddress": "Paine Turnpike N"
   },
   {
     "id": "reciHm2zR4OG2Gfh3",
@@ -73,7 +76,8 @@
       "city": "South Hero",
       "county": "Grand Isle"
     },
-    "town": "SOUTH HERO"
+    "town": "SOUTH HERO",
+    "stationAddress": "318 US ROUTE 2 or 131 COMMUNITY LN)"
   },
   {
     "id": "rec5xiuLqk3waey0I",
@@ -88,7 +92,8 @@
     "dateTaken": "2026-04-12",
     "featured": false,
     "department": null,
-    "town": null
+    "town": null,
+    "stationAddress": null
   },
   {
     "id": "rec8SgyXgTA9IJoZN",
@@ -107,7 +112,8 @@
       "city": "Colchester",
       "county": "Chittenden"
     },
-    "town": "COLCHESTER"
+    "town": "COLCHESTER",
+    "stationAddress": "483 Main St"
   },
   {
     "id": "recEVBl6EFAVVRe30",
@@ -126,7 +132,8 @@
       "city": "Burlington",
       "county": "Chittenden"
     },
-    "town": "BURLINGTON"
+    "town": "BURLINGTON",
+    "stationAddress": "1391 North Ave"
   },
   {
     "id": "recKT2ZG3VraekZsm",
@@ -145,7 +152,8 @@
       "city": "Colchester",
       "county": "Chittenden"
     },
-    "town": "COLCHESTER"
+    "town": "COLCHESTER",
+    "stationAddress": "687 Blakely Rd"
   },
   {
     "id": "recQCxK7qpLlYmQTf",
@@ -164,7 +172,8 @@
       "city": "Colchester",
       "county": "Chittenden"
     },
-    "town": "COLCHESTER"
+    "town": "COLCHESTER",
+    "stationAddress": "687 Blakely Rd"
   },
   {
     "id": "recZsVT6L02QyGVn7",
@@ -179,7 +188,8 @@
     "dateTaken": "2026-04-12",
     "featured": false,
     "department": null,
-    "town": null
+    "town": null,
+    "stationAddress": null
   },
   {
     "id": "recnI4SqV9JD3z5O8",
@@ -198,7 +208,8 @@
       "city": "South Burlington",
       "county": "Chitttenden"
     },
-    "town": "SOUTH BURLINGTON"
+    "town": "SOUTH BURLINGTON",
+    "stationAddress": "575 Dorset St"
   },
   {
     "id": "rectkIQmk5IH7PQoe",
@@ -217,7 +228,8 @@
       "city": "Shelburne",
       "county": "Chittenden"
     },
-    "town": "SHELBURNE"
+    "town": "SHELBURNE",
+    "stationAddress": null
   },
   {
     "id": "recgXteLqjyCqrHyJ",
@@ -236,7 +248,8 @@
       "city": "Winooski",
       "county": "Chittenden"
     },
-    "town": "WINOOSKI"
+    "town": "WINOOSKI",
+    "stationAddress": null
   },
   {
     "id": "rec99cMf4oatlYyMr",
@@ -255,7 +268,8 @@
       "city": "Essex Junction",
       "county": "Chittenden"
     },
-    "town": "ESSEX TOWN"
+    "town": "ESSEX TOWN",
+    "stationAddress": "190 Sandhill Rd"
   },
   {
     "id": "rec2keNqUYSD7ttE5",
@@ -274,7 +288,8 @@
       "city": "Williston",
       "county": "Chittenden"
     },
-    "town": "WILLISTON"
+    "town": "WILLISTON",
+    "stationAddress": "645 Talcott Rd"
   },
   {
     "id": "recqXVqpnb3RAXhyW",
@@ -293,7 +308,48 @@
       "city": "Jericho",
       "county": "Chittenden"
     },
-    "town": "UNDERHILL"
+    "town": "UNDERHILL",
+    "stationAddress": "288 Browns Trace Road"
+  },
+  {
+    "id": "recofCtqpHw9TwZoN",
+    "src": "/photos/recofCtqpHw9TwZoN.jpg",
+    "thumb": "/photos/recofCtqpHw9TwZoN.thumb.jpg",
+    "width": 1650,
+    "height": 1320,
+    "thumbWidth": 640,
+    "thumbHeight": 512,
+    "caption": "Burlington Fire Station 5",
+    "photographer": "Tom Garvey",
+    "dateTaken": "2026-03-19",
+    "featured": false,
+    "department": {
+      "name": "Burlington Fire Department #5",
+      "city": "Burlington",
+      "county": "Chittenden"
+    },
+    "town": "BURLINGTON",
+    "stationAddress": "23 Ferguson Ave"
+  },
+  {
+    "id": "rec1dBpBUR5gOcDIo",
+    "src": "/photos/rec1dBpBUR5gOcDIo.jpg",
+    "thumb": "/photos/rec1dBpBUR5gOcDIo.thumb.jpg",
+    "width": 990,
+    "height": 1320,
+    "thumbWidth": 512,
+    "thumbHeight": 683,
+    "caption": "Burlington Fire Station #1",
+    "photographer": "Tom Garvey",
+    "dateTaken": "2024-10-24",
+    "featured": false,
+    "department": {
+      "name": "Burlington Fire Department #1",
+      "city": "Burlington",
+      "county": "Chittenden"
+    },
+    "town": "BURLINGTON",
+    "stationAddress": "136 South Winooski Ave"
   },
   {
     "id": "rec3K4fRkIL2IZQZx",
@@ -312,7 +368,8 @@
       "city": "Burlington",
       "county": "Chittenden"
     },
-    "town": "BURLINGTON"
+    "town": "BURLINGTON",
+    "stationAddress": "132 North Ave"
   },
   {
     "id": "recgIY3hUbdIfagyy",
@@ -331,7 +388,8 @@
       "city": "Jamaica",
       "county": "Windham"
     },
-    "town": "JAMAICA"
+    "town": "JAMAICA",
+    "stationAddress": null
   },
   {
     "id": "recpUaKVeKwKDMogb",
@@ -350,7 +408,8 @@
       "city": "Windham",
       "county": "Windham"
     },
-    "town": "WINDHAM"
+    "town": "WINDHAM",
+    "stationAddress": null
   },
   {
     "id": "recZSA5kHjF8VT0n1",
@@ -369,7 +428,8 @@
       "city": "Charlotte",
       "county": "Chittenden"
     },
-    "town": "CHARLOTTE"
+    "town": "CHARLOTTE",
+    "stationAddress": "170 Ferry Rd"
   },
   {
     "id": "recapYmJZRB3utYZ2",
@@ -388,6 +448,7 @@
       "city": "Ferrisburg",
       "county": "Addison"
     },
-    "town": "FERRISBURGH"
+    "town": "FERRISBURGH",
+    "stationAddress": "Route 7"
   }
 ]
