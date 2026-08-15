@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'preact/hooks';
+import { useEffect, useRef, useState } from 'preact/hooks';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet.markercluster/dist/MarkerCluster.css';
@@ -50,6 +50,17 @@ function buildPopup(props: Record<string, any>): string {
   return `<strong>${title}</strong>${photoHtml(props.TOWNNAME)}${rows ? `<table style="margin-top:4px;border-collapse:collapse">${rows}</table>` : ''}`;
 }
 
+const titleCase = (s: string) =>
+  s.toLowerCase().replace(/\b[a-z]/g, (c) => c.toUpperCase()).replace(/\bVt\b/g, 'VT');
+
+interface SearchEntry {
+  town: string;      // raw TOWNNAME
+  address: string;   // raw PRIMARYADD
+  haystack: string;  // uppercase text to match against
+  hasPhoto: boolean;
+  marker: L.Marker;
+}
+
 interface Props {
   height?: string;
   zoom?: number;
@@ -64,6 +75,30 @@ export default function LocationMap({
   attribution = OSM_ATTR,
 }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const clusterRef = useRef<any>(null);
+  const indexRef = useRef<SearchEntry[]>([]);
+  const [query, setQuery] = useState('');
+  const [results, setResults] = useState<SearchEntry[]>([]);
+
+  const runSearch = (q: string) => {
+    setQuery(q);
+    const needle = q.toUpperCase().trim();
+    if (needle.length < 2) { setResults([]); return; }
+    const scored = indexRef.current
+      .filter((e) => e.haystack.includes(needle))
+      .sort((a, b) => {
+        const aTown = a.town.startsWith(needle) ? 0 : 1;
+        const bTown = b.town.startsWith(needle) ? 0 : 1;
+        return aTown - bTown || a.town.localeCompare(b.town);
+      });
+    setResults(scored.slice(0, 8));
+  };
+
+  const goTo = (e: SearchEntry) => {
+    setQuery('');
+    setResults([]);
+    clusterRef.current?.zoomToShowLayer(e.marker, () => e.marker.openPopup());
+  };
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -101,13 +136,27 @@ export default function LocationMap({
 
       if (feature.geometry.type === 'Point') {
         const [lng, lat] = (feature.geometry as GeoJSON.Point).coordinates;
-        cluster.addLayer(L.marker([lat, lng]).bindPopup(popup));
+        const marker = L.marker([lat, lng]).bindPopup(popup);
+        cluster.addLayer(marker);
+        const props = (feature.properties ?? {}) as Record<string, any>;
+        const town = props.TOWNNAME ?? '';
+        const deptNames = (photosByTown.get(town) ?? [])
+          .map((p) => p.department?.name ?? '')
+          .join(' ');
+        indexRef.current.push({
+          town,
+          address: props.PRIMARYADD ?? '',
+          haystack: `${town} ${props.PRIMARYADD ?? ''} ${props.ZIP ?? ''} ${deptNames}`.toUpperCase(),
+          hasPhoto: photosByTown.has(town),
+          marker,
+        });
       } else {
         nonPointLayers.push(L.geoJSON(feature).bindPopup(popup));
       }
     }
 
     map.addLayer(cluster);
+    clusterRef.current = cluster;
     nonPointLayers.forEach((l) => l.addTo(map));
 
     if (cluster.getLayers().length === 1 && (locationsData as GeoJSON.FeatureCollection).features[0]?.geometry?.type === 'Point') {
@@ -117,8 +166,66 @@ export default function LocationMap({
       map.fitBounds(cluster.getBounds());
     }
 
-    return () => { map.remove(); };
+    return () => { map.remove(); indexRef.current = []; clusterRef.current = null; };
   }, []);
 
-  return <div ref={containerRef} style={{ height, width: '100%' }} />;
+  return (
+    <div style={{ position: 'relative', height, width: '100%' }}>
+      <div ref={containerRef} style={{ height: '100%', width: '100%' }} />
+      <div
+        style={{
+          position: 'absolute', top: '12px', left: '50%', transform: 'translateX(-50%)',
+          zIndex: 1000, width: 'min(340px, calc(100% - 24px))',
+          fontFamily: 'system-ui, sans-serif',
+        }}
+      >
+        <form
+          action=""
+          onSubmit={(e) => {
+            e.preventDefault();
+            if (results[0]) goTo(results[0]);
+          }}
+        >
+        <input
+          type="search"
+          placeholder="🔍 Search a town or address…"
+          value={query}
+          onInput={(e) => runSearch((e.target as HTMLInputElement).value)}
+          style={{
+            width: '100%', padding: '10px 14px', fontSize: '15px', border: 'none',
+            borderRadius: results.length ? '12px 12px 0 0' : '999px',
+            boxShadow: '0 2px 8px rgba(0,0,0,.25)', outline: 'none', boxSizing: 'border-box',
+          }}
+        />
+        </form>
+        {results.length > 0 && (
+          <ul
+            style={{
+              listStyle: 'none', margin: 0, padding: '4px 0', background: '#fff',
+              borderRadius: '0 0 12px 12px', boxShadow: '0 2px 8px rgba(0,0,0,.25)',
+              maxHeight: '300px', overflowY: 'auto',
+            }}
+          >
+            {results.map((r) => (
+              <li key={`${r.town}-${r.address}`}>
+                <button
+                  onClick={() => goTo(r)}
+                  style={{
+                    display: 'block', width: '100%', textAlign: 'left', border: 'none',
+                    background: 'none', padding: '8px 14px', fontSize: '14px', cursor: 'pointer',
+                  }}
+                  onMouseOver={(e) => ((e.target as HTMLElement).style.background = '#f6efe7')}
+                  onMouseOut={(e) => ((e.target as HTMLElement).style.background = 'none')}
+                >
+                  <strong>{titleCase(r.town)}</strong>
+                  {r.hasPhoto ? ' 📸' : ''}
+                  <span style={{ color: '#777' }}> — {titleCase(r.address)}</span>
+                </button>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+    </div>
+  );
 }
