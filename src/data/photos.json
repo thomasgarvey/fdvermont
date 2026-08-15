@@ -1,0 +1,393 @@
+[
+  {
+    "id": "rec61V8qy6sSM2VwT",
+    "src": "/photos/rec61V8qy6sSM2VwT.jpg",
+    "thumb": "/photos/rec61V8qy6sSM2VwT.thumb.jpg",
+    "width": 2136,
+    "height": 1602,
+    "thumbWidth": 683,
+    "thumbHeight": 512,
+    "caption": "Berlin Volunteer Fire Department",
+    "photographer": "Tom Garvey",
+    "dateTaken": "2026-05-30",
+    "featured": false,
+    "department": {
+      "name": "Berlin Volunteer Fire Department",
+      "city": "Northfield",
+      "county": "Washington"
+    },
+    "town": "BERLIN"
+  },
+  {
+    "id": "recaeqhmXy04tIOP7",
+    "src": "/photos/recaeqhmXy04tIOP7.jpg",
+    "thumb": "/photos/recaeqhmXy04tIOP7.thumb.jpg",
+    "width": 977,
+    "height": 1302,
+    "thumbWidth": 512,
+    "thumbHeight": 682,
+    "caption": "Burlington Fire Station 3",
+    "photographer": "Tom Garvey",
+    "dateTaken": "2026-05-02",
+    "featured": false,
+    "department": {
+      "name": "Burlington Fire Department #3",
+      "city": "Burlington",
+      "county": "Chittenden"
+    },
+    "town": "BURLINGTON"
+  },
+  {
+    "id": "receny9qpGCc1uy6J",
+    "src": "/photos/receny9qpGCc1uy6J.jpg",
+    "thumb": "/photos/receny9qpGCc1uy6J.thumb.jpg",
+    "width": 1868,
+    "height": 1602,
+    "thumbWidth": 597,
+    "thumbHeight": 512,
+    "caption": "Montpelier Fire Department",
+    "photographer": "Tom Garvey",
+    "dateTaken": "2026-04-19",
+    "featured": false,
+    "department": {
+      "name": "Montpelier City Fire Department",
+      "city": "Montpelier",
+      "county": "Washington"
+    },
+    "town": "MONTPELIER"
+  },
+  {
+    "id": "reciHm2zR4OG2Gfh3",
+    "src": "/photos/reciHm2zR4OG2Gfh3.jpg",
+    "thumb": "/photos/reciHm2zR4OG2Gfh3.thumb.jpg",
+    "width": 2136,
+    "height": 1602,
+    "thumbWidth": 683,
+    "thumbHeight": 512,
+    "caption": "South Hero Fire & Rescue",
+    "photographer": "Tom Garvey",
+    "dateTaken": "2026-04-18",
+    "featured": false,
+    "department": {
+      "name": "South Hero VFD",
+      "city": "South Hero",
+      "county": "Grand Isle"
+    },
+    "town": "SOUTH HERO"
+  },
+  {
+    "id": "rec5xiuLqk3waey0I",
+    "src": "/photos/rec5xiuLqk3waey0I.jpg",
+    "thumb": "/photos/rec5xiuLqk3waey0I.thumb.jpg",
+    "width": 1745,
+    "height": 1309,
+    "thumbWidth": 683,
+    "thumbHeight": 512,
+    "caption": "Mallets Bay Station",
+    "photographer": "Tom Garvey",
+    "dateTaken": "2026-04-12",
+    "featured": false,
+    "department": null,
+    "town": null
+  },
+  {
+    "id": "rec8SgyXgTA9IJoZN",
+    "src": "/photos/rec8SgyXgTA9IJoZN.jpg",
+    "thumb": "/photos/rec8SgyXgTA9IJoZN.thumb.jpg",
+    "width": 1745,
+    "height": 1309,
+    "thumbWidth": 683,
+    "thumbHeight": 512,
+    "caption": "Colchester Center Station",
+    "photographer": "Tom Garvey",
+    "dateTaken": "2026-04-12",
+    "featured": false,
+    "department": {
+      "name": "Colchester Fire Department Central Station 1",
+      "city": "Colchester",
+      "county": "Chittenden"
+    },
+    "town": "COLCHESTER"
+  },
+  {
+    "id": "recEVBl6EFAVVRe30",
+    "src": "/photos/recEVBl6EFAVVRe30.jpg",
+    "thumb": "/photos/recEVBl6EFAVVRe30.thumb.jpg",
+    "width": 1745,
+    "height": 1309,
+    "thumbWidth": 683,
+    "thumbHeight": 512,
+    "caption": "Burlington Fire Station 4",
+    "photographer": "Tom Garvey",
+    "dateTaken": "2026-04-12",
+    "featured": false,
+    "department": {
+      "name": "Burlington Fire Department #4",
+      "city": "Burlington",
+      "county": "Chittenden"
+    },
+    "town": "BURLINGTON"
+  },
+  {
+    "id": "recKT2ZG3VraekZsm",
+    "src": "/photos/recKT2ZG3VraekZsm.jpg",
+    "thumb": "/photos/recKT2ZG3VraekZsm.thumb.jpg",
+    "width": 1745,
+    "height": 1309,
+    "thumbWidth": 683,
+    "thumbHeight": 512,
+    "caption": "Colchester Technical Rescue",
+    "photographer": "Tom Garvey",
+    "dateTaken": "2026-04-12",
+    "featured": false,
+    "department": {
+      "name": "Colchester Technical Rescue Team",
+      "city": "Colchester",
+      "county": "Chittenden"
+    },
+    "town": "COLCHESTER"
+  },
+  {
+    "id": "recQCxK7qpLlYmQTf",
+    "src": "/photos/recQCxK7qpLlYmQTf.jpg",
+    "thumb": "/photos/recQCxK7qpLlYmQTf.thumb.jpg",
+    "width": 1745,
+    "height": 1309,
+    "thumbWidth": 683,
+    "thumbHeight": 512,
+    "caption": "Colchester Rescue",
+    "photographer": "Tom Garvey",
+    "dateTaken": "2026-04-12",
+    "featured": false,
+    "department": {
+      "name": "Colchester Rescue Squad",
+      "city": "Colchester",
+      "county": "Chittenden"
+    },
+    "town": "COLCHESTER"
+  },
+  {
+    "id": "recZsVT6L02QyGVn7",
+    "src": "/photos/recZsVT6L02QyGVn7.jpg",
+    "thumb": "/photos/recZsVT6L02QyGVn7.thumb.jpg",
+    "width": 1745,
+    "height": 981,
+    "thumbWidth": 911,
+    "thumbHeight": 512,
+    "caption": "St. Michael's College Fire & Rescue",
+    "photographer": "Tom Garvey",
+    "dateTaken": "2026-04-12",
+    "featured": false,
+    "department": null,
+    "town": null
+  },
+  {
+    "id": "recnI4SqV9JD3z5O8",
+    "src": "/photos/recnI4SqV9JD3z5O8.jpg",
+    "thumb": "/photos/recnI4SqV9JD3z5O8.thumb.jpg",
+    "width": 1745,
+    "height": 1309,
+    "thumbWidth": 683,
+    "thumbHeight": 512,
+    "caption": "South Burlington Fire Station 1",
+    "photographer": "Tom Garvey",
+    "dateTaken": "2026-04-12",
+    "featured": false,
+    "department": {
+      "name": "South Burlington Fire Station 1",
+      "city": "South Burlington",
+      "county": "Chitttenden"
+    },
+    "town": "SOUTH BURLINGTON"
+  },
+  {
+    "id": "rectkIQmk5IH7PQoe",
+    "src": "/photos/rectkIQmk5IH7PQoe.jpg",
+    "thumb": "/photos/rectkIQmk5IH7PQoe.thumb.jpg",
+    "width": 1676,
+    "height": 1360,
+    "thumbWidth": 631,
+    "thumbHeight": 512,
+    "caption": "Shelburne Fire Department",
+    "photographer": "Tom Garvey",
+    "dateTaken": "2026-04-12",
+    "featured": false,
+    "department": {
+      "name": "Shelburne Fire Department",
+      "city": "Shelburne",
+      "county": "Chittenden"
+    },
+    "town": "SHELBURNE"
+  },
+  {
+    "id": "recgXteLqjyCqrHyJ",
+    "src": "/photos/recgXteLqjyCqrHyJ.jpg",
+    "thumb": "/photos/recgXteLqjyCqrHyJ.thumb.jpg",
+    "width": 1745,
+    "height": 1071,
+    "thumbWidth": 834,
+    "thumbHeight": 512,
+    "caption": "Winooski Fire Department",
+    "photographer": "Winooski Fire Department",
+    "dateTaken": "2026-04-11",
+    "featured": false,
+    "department": {
+      "name": "Winooski Fire Department",
+      "city": "Winooski",
+      "county": "Chittenden"
+    },
+    "town": "WINOOSKI"
+  },
+  {
+    "id": "rec99cMf4oatlYyMr",
+    "src": "/photos/rec99cMf4oatlYyMr.jpg",
+    "thumb": "/photos/rec99cMf4oatlYyMr.thumb.jpg",
+    "width": 1745,
+    "height": 1309,
+    "thumbWidth": 683,
+    "thumbHeight": 512,
+    "caption": "Essex Junction FD",
+    "photographer": "Tom Garvey",
+    "dateTaken": "2026-04-10",
+    "featured": false,
+    "department": {
+      "name": "Essex Fire Department",
+      "city": "Essex Junction",
+      "county": "Chittenden"
+    },
+    "town": "ESSEX TOWN"
+  },
+  {
+    "id": "rec2keNqUYSD7ttE5",
+    "src": "/photos/rec2keNqUYSD7ttE5.jpg",
+    "thumb": "/photos/rec2keNqUYSD7ttE5.thumb.jpg",
+    "width": 2220,
+    "height": 818,
+    "thumbWidth": 1390,
+    "thumbHeight": 512,
+    "caption": "Williston Fire Department",
+    "photographer": "Tom Garvey",
+    "dateTaken": "2026-04-04",
+    "featured": false,
+    "department": {
+      "name": "Williston Fire Department",
+      "city": "Williston",
+      "county": "Chittenden"
+    },
+    "town": "WILLISTON"
+  },
+  {
+    "id": "recqXVqpnb3RAXhyW",
+    "src": "/photos/recqXVqpnb3RAXhyW.jpg",
+    "thumb": "/photos/recqXVqpnb3RAXhyW.thumb.jpg",
+    "width": 1928,
+    "height": 1214,
+    "thumbWidth": 813,
+    "thumbHeight": 512,
+    "caption": "Underhill Jericho FD 1",
+    "photographer": "Tom Garvey",
+    "dateTaken": "2026-03-21",
+    "featured": false,
+    "department": {
+      "name": "Underhill-Jericho Fire Department",
+      "city": "Jericho",
+      "county": "Chittenden"
+    },
+    "town": "UNDERHILL"
+  },
+  {
+    "id": "rec3K4fRkIL2IZQZx",
+    "src": "/photos/rec3K4fRkIL2IZQZx.jpg",
+    "thumb": "/photos/rec3K4fRkIL2IZQZx.thumb.jpg",
+    "width": 1760,
+    "height": 1320,
+    "thumbWidth": 683,
+    "thumbHeight": 512,
+    "caption": "Burlington Fire Station #2",
+    "photographer": "Tom Garvey",
+    "dateTaken": "2024-10-24",
+    "featured": false,
+    "department": {
+      "name": "Burlington Fire Department #2",
+      "city": "Burlington",
+      "county": "Chittenden"
+    },
+    "town": "BURLINGTON"
+  },
+  {
+    "id": "recgIY3hUbdIfagyy",
+    "src": "/photos/recgIY3hUbdIfagyy.jpg",
+    "thumb": "/photos/recgIY3hUbdIfagyy.thumb.jpg",
+    "width": 1745,
+    "height": 854,
+    "thumbWidth": 1046,
+    "thumbHeight": 512,
+    "caption": "Jamaica Fire Department",
+    "photographer": "Tom Garvey",
+    "dateTaken": "2024-10-06",
+    "featured": false,
+    "department": {
+      "name": "Jamaica Volunteer Fire & Rescue",
+      "city": "Jamaica",
+      "county": "Windham"
+    },
+    "town": "JAMAICA"
+  },
+  {
+    "id": "recpUaKVeKwKDMogb",
+    "src": "/photos/recpUaKVeKwKDMogb.jpg",
+    "thumb": "/photos/recpUaKVeKwKDMogb.thumb.jpg",
+    "width": 1760,
+    "height": 1320,
+    "thumbWidth": 683,
+    "thumbHeight": 512,
+    "caption": "Windham Fire Department",
+    "photographer": "Tom Garvey",
+    "dateTaken": "2024-10-06",
+    "featured": false,
+    "department": {
+      "name": "Windham Fire Department",
+      "city": "Windham",
+      "county": "Windham"
+    },
+    "town": "WINDHAM"
+  },
+  {
+    "id": "recZSA5kHjF8VT0n1",
+    "src": "/photos/recZSA5kHjF8VT0n1.jpg",
+    "thumb": "/photos/recZSA5kHjF8VT0n1.thumb.jpg",
+    "width": 914,
+    "height": 1218,
+    "thumbWidth": 512,
+    "thumbHeight": 682,
+    "caption": "Charlotte Fire & Rescue",
+    "photographer": "Tom Garvey",
+    "dateTaken": "2020-08-18",
+    "featured": false,
+    "department": {
+      "name": "Charlotte Fire and Rescue Services",
+      "city": "Charlotte",
+      "county": "Chittenden"
+    },
+    "town": "CHARLOTTE"
+  },
+  {
+    "id": "recapYmJZRB3utYZ2",
+    "src": "/photos/recapYmJZRB3utYZ2.jpg",
+    "thumb": "/photos/recapYmJZRB3utYZ2.thumb.jpg",
+    "width": 1434,
+    "height": 784,
+    "thumbWidth": 936,
+    "thumbHeight": 512,
+    "caption": "Ferrisburgh Fire Department",
+    "photographer": "Tom Garvey",
+    "dateTaken": "2020-08-18",
+    "featured": false,
+    "department": {
+      "name": "Ferrisburgh Volunteer Fire Department",
+      "city": "Ferrisburg",
+      "county": "Addison"
+    },
+    "town": "FERRISBURGH"
+  }
+]

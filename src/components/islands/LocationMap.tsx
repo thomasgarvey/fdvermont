@@ -5,6 +5,7 @@ import 'leaflet.markercluster/dist/MarkerCluster.css';
 import 'leaflet.markercluster/dist/MarkerCluster.Default.css';
 import 'leaflet.markercluster';
 import locationsData from '../../data/locations.geojson';
+import photosData from '../../data/photos.json';
 
 // Fix broken default marker icons — reference PNGs from public/ to avoid Vite resolution issues
 delete (L.Icon.Default.prototype as any)._getIconUrl;
@@ -19,13 +20,34 @@ const OSM_ATTR = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenS
 
 const DISPLAY_KEYS = ['PRIMARYADD', 'SITETYPE', 'TOWNNAME', 'COUNTY', 'STATE', 'ZIP'];
 
+// Photos are synced from Airtable keyed by E911 town name (see scripts/sync-airtable.mjs)
+const photosByTown = new Map<string, typeof photosData>();
+for (const p of photosData) {
+  if (!p.town) continue;
+  if (!photosByTown.has(p.town)) photosByTown.set(p.town, []);
+  photosByTown.get(p.town)!.push(p);
+}
+
+function photoHtml(town: string | undefined): string {
+  const photos = town ? photosByTown.get(town) : undefined;
+  if (!photos?.length) return '';
+  const p = photos[0]; // featured-first order from the sync
+  const credit = p.photographer ? `<div style="color:#888;font-size:11px;margin-top:2px">📷 ${p.photographer}</div>` : '';
+  const caption = p.caption && p.caption !== p.department?.name
+    ? `<div style="color:#555;font-size:12px;margin-top:2px">${p.caption}</div>` : '';
+  return `
+    <a href="${p.src}" target="_blank" rel="noopener" style="display:block;margin-top:6px">
+      <img src="${p.thumb}" alt="${p.caption || 'Station photo'}" style="width:240px;max-width:100%;border-radius:8px;display:block" />
+    </a>${caption}${credit}`;
+}
+
 function buildPopup(props: Record<string, any>): string {
   const title = props.name ?? props.PRIMARYADD ?? 'Location';
   const rows = DISPLAY_KEYS
     .filter((k) => props[k] != null && typeof props[k] === 'string')
     .map((k) => `<tr><td style="padding:2px 6px 2px 0;color:#555">${k}</td><td style="padding:2px 0">${props[k]}</td></tr>`)
     .join('');
-  return `<strong>${title}</strong>${rows ? `<table style="margin-top:4px;border-collapse:collapse">${rows}</table>` : ''}`;
+  return `<strong>${title}</strong>${photoHtml(props.TOWNNAME)}${rows ? `<table style="margin-top:4px;border-collapse:collapse">${rows}</table>` : ''}`;
 }
 
 interface Props {
