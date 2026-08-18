@@ -10,8 +10,122 @@ import LocationMap from "../components/islands/LocationMap.tsx";
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <title>Vermont Fire Stations</title>
+    <meta
+      name="description"
+      content="An interactive map of fire department stations across Vermont — with photos, station details, and search."
+    />
   </head>
-  <body style="margin:0">
-    <LocationMap client:only="preact" height="100vh" />
+  <body>
+    <header>
+      <div class="brand">
+        <span class="truck" aria-hidden="true">🚒</span>
+        <div>
+          <h1>Vermont Fire Stations</h1>
+          <p>Photos &amp; facts from firehouses across the Green Mountain State</p>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <LocationMap client:only="preact" height="100%" />
+    </main>
+
+    <footer>
+      <span>Made in Vermont</span>
+      <span aria-hidden="true">·</span>
+      <span>Photos © Tom Garvey</span>
+      <span aria-hidden="true">·</span>
+      <span>
+        Station data:
+        <a href="https://geodata.vermont.gov/" rel="noopener">VT E911 (VCGI)</a>
+        &amp;
+        <a href="https://www.openstreetmap.org/" rel="noopener">OpenStreetMap</a>
+      </span>
+    </footer>
   </body>
 </html>
+
+<style>
+  :root {
+    --red: #c62828;
+    --ink: #2b2b2b;
+    --paper: #faf7f2;
+  }
+  * {
+    box-sizing: border-box;
+  }
+  html,
+  body {
+    height: 100%;
+  }
+  body {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+  }
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.6rem 1rem;
+    background: var(--red);
+    color: #fff;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+    z-index: 1100;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    min-width: 0;
+  }
+  .truck {
+    font-size: 1.7rem;
+    line-height: 1;
+  }
+  h1 {
+    margin: 0;
+    font-size: 1.15rem;
+    line-height: 1.2;
+    letter-spacing: 0.01em;
+  }
+  header p {
+    margin: 0;
+    font-size: 0.78rem;
+    opacity: 0.85;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  main {
+    flex: 1;
+    min-height: 0;
+  }
+  footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.45rem;
+    padding: 0.45rem 1rem;
+    font-size: 0.75rem;
+    color: #6b6257;
+    background: var(--paper);
+    border-top: 1px solid #e7ded2;
+    z-index: 1100;
+  }
+  footer a {
+    color: inherit;
+    text-decoration: underline;
+  }
+  footer a:hover {
+    color: var(--red);
+  }
+  @media (max-width: 480px) {
+    header p {
+      display: none;
+    }
+  }
+</style>

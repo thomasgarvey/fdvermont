@@ -131,7 +131,8 @@ export default function LocationMap({
   useEffect(() => {
     if (!containerRef.current) return;
 
-    const map = L.map(containerRef.current);
+    const map = L.map(containerRef.current, { zoomControl: false });
+    L.control.zoom({ position: 'bottomleft' }).addTo(map);
     L.tileLayer(tileUrl, { attribution }).addTo(map);
 
     const cluster = (L as any).markerClusterGroup({
