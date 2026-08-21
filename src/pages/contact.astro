@@ -1,5 +1,4 @@
 ---
-import LocationMap from "../components/islands/LocationMap.tsx";
 ---
 
 <html lang="en">
@@ -8,12 +7,7 @@ import LocationMap from "../components/islands/LocationMap.tsx";
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <title>Vermont Fire Stations</title>
-    <meta
-      name="description"
-      content="An interactive map of fire department stations across Vermont — with photos, station details, and search."
-    />
+    <title>Contact – Vermont Fire Stations</title>
   </head>
   <body>
     <header>
@@ -27,14 +21,27 @@ import LocationMap from "../components/islands/LocationMap.tsx";
           </svg>
         </span>
         <span class="wordmark">
-          <h1 class="title">Vermont Fire Stations</h1>
-          <p class="tagline">Photos &amp; facts from firehouses across the Green Mountain State</p>
+          <span class="title">Vermont Fire Stations</span>
         </span>
       </a>
     </header>
 
     <main>
-      <LocationMap client:only="preact" height="100%" />
+      <h1>Contact</h1>
+
+      <p>Vermont Fire Stations is an independent project cataloguing fire department
+        stations across the state — photos, locations, and a few fun facts.</p>
+
+      <p>Spot an error, have a correction, or want to share a photo of your local
+        station? Open an issue on GitHub and it'll get a look:</p>
+
+      <p>
+        <a href="https://github.com/thomasgarvey/fdvt-2/issues" rel="noopener">
+          github.com/thomasgarvey/fdvt-2/issues →
+        </a>
+      </p>
+
+      <p><a href="/">← Back to the map</a></p>
     </main>
 
     <footer>
@@ -43,13 +50,6 @@ import LocationMap from "../components/islands/LocationMap.tsx";
       <a href="/privacy">Privacy Policy</a>
       <span aria-hidden="true">·</span>
       <a href="/contact">Contact</a>
-      <span aria-hidden="true">·</span>
-      <span>
-        Data:
-        <a href="https://geodata.vermont.gov/" rel="noopener">VT E911 (VCGI)</a>
-        &amp;
-        <a href="https://www.openstreetmap.org/" rel="noopener">OpenStreetMap</a>
-      </span>
     </footer>
   </body>
 </html>
@@ -80,13 +80,11 @@ import LocationMap from "../components/islands/LocationMap.tsx";
     background: var(--paper);
     border-bottom: 3px solid var(--red);
     box-shadow: 0 1px 3px rgba(43, 43, 43, 0.08);
-    z-index: 1100;
   }
   .brand {
     display: flex;
     align-items: center;
     gap: 0.7rem;
-    min-width: 0;
     text-decoration: none;
     color: inherit;
     width: fit-content;
@@ -102,28 +100,25 @@ import LocationMap from "../components/islands/LocationMap.tsx";
     background: var(--red);
     color: #fff;
   }
-  .wordmark {
-    display: flex;
-    flex-direction: column;
-    min-width: 0;
-  }
   .title {
     font-size: 1.1rem;
     font-weight: 700;
-    line-height: 1.2;
     letter-spacing: -0.01em;
     color: var(--ink);
   }
-  .tagline {
-    font-size: 0.76rem;
-    color: #7a7166;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
   main {
     flex: 1;
-    min-height: 0;
+    max-width: 38rem;
+    margin: 0 auto;
+    padding: 2rem 1.25rem 3rem;
+    line-height: 1.6;
+  }
+  main h1 {
+    font-size: 1.5rem;
+    margin-bottom: 0.25rem;
+  }
+  main a {
+    color: var(--red);
   }
   footer {
     display: flex;
@@ -135,7 +130,6 @@ import LocationMap from "../components/islands/LocationMap.tsx";
     color: #6b6257;
     background: var(--paper);
     border-top: 1px solid #e7ded2;
-    z-index: 1100;
   }
   footer a {
     color: inherit;
@@ -143,10 +137,5 @@ import LocationMap from "../components/islands/LocationMap.tsx";
   }
   footer a:hover {
     color: var(--red);
-  }
-  @media (max-width: 480px) {
-    .tagline {
-      display: none;
-    }
   }
 </style>

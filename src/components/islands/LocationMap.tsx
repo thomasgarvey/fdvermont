@@ -203,35 +203,16 @@ export default function LocationMap({
       <div ref={containerRef} style={{ height: '100%', width: '100%' }} />
       <div
         style={{
-          position: 'absolute', top: '12px', left: '50%', transform: 'translateX(-50%)',
+          position: 'absolute', bottom: '18px', left: '50%', transform: 'translateX(-50%)',
           zIndex: 1000, width: 'min(340px, calc(100% - 24px))',
           fontFamily: 'system-ui, sans-serif',
         }}
       >
-        <form
-          action=""
-          onSubmit={(e) => {
-            e.preventDefault();
-            if (results[0]) goTo(results[0]);
-          }}
-        >
-        <input
-          type="search"
-          placeholder="🔍 Search a town or address…"
-          value={query}
-          onInput={(e) => runSearch((e.target as HTMLInputElement).value)}
-          style={{
-            width: '100%', padding: '10px 14px', fontSize: '15px', border: 'none',
-            borderRadius: results.length ? '12px 12px 0 0' : '999px',
-            boxShadow: '0 2px 8px rgba(0,0,0,.25)', outline: 'none', boxSizing: 'border-box',
-          }}
-        />
-        </form>
         {results.length > 0 && (
           <ul
             style={{
-              listStyle: 'none', margin: 0, padding: '4px 0', background: '#fff',
-              borderRadius: '0 0 12px 12px', boxShadow: '0 2px 8px rgba(0,0,0,.25)',
+              listStyle: 'none', margin: '0 0 -1px', padding: '4px 0', background: '#fff',
+              borderRadius: '12px 12px 0 0', boxShadow: '0 -2px 8px rgba(0,0,0,.2)',
               maxHeight: '300px', overflowY: 'auto',
             }}
           >
@@ -254,6 +235,25 @@ export default function LocationMap({
             ))}
           </ul>
         )}
+        <form
+          action=""
+          onSubmit={(e) => {
+            e.preventDefault();
+            if (results[0]) goTo(results[0]);
+          }}
+        >
+        <input
+          type="search"
+          placeholder="🔍 Search a town or address…"
+          value={query}
+          onInput={(e) => runSearch((e.target as HTMLInputElement).value)}
+          style={{
+            width: '100%', padding: '10px 14px', fontSize: '15px', border: 'none',
+            borderRadius: results.length ? '0 0 12px 12px' : '999px',
+            boxShadow: '0 2px 8px rgba(0,0,0,.25)', outline: 'none', boxSizing: 'border-box',
+          }}
+        />
+        </form>
       </div>
     </div>
   );
