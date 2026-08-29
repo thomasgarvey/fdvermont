@@ -17,7 +17,273 @@
       "county": "Chittenden"
     },
     "town": "ESSEX JUNCTION CITY",
+    "lat": null,
+    "lng": null,
     "stationAddress": "3 Pearl St"
+  },
+  {
+    "id": "rec8gGALoTcaplJXH",
+    "src": "/photos/rec8gGALoTcaplJXH.jpg",
+    "thumb": "/photos/rec8gGALoTcaplJXH.thumb.jpg",
+    "width": 2189,
+    "height": 1286,
+    "thumbWidth": 872,
+    "thumbHeight": 512,
+    "caption": "Georgia Fire & Rescue Station",
+    "photographer": "Tom Garvey",
+    "dateTaken": "2026-08-29",
+    "featured": false,
+    "department": {
+      "name": "Georgia Volunteer Fire Department",
+      "city": "Georgia",
+      "county": "Franklin"
+    },
+    "town": "GEORGIA",
+    "lat": null,
+    "lng": null,
+    "stationAddress": "4134 ETHAN ALLEN HWY"
+  },
+  {
+    "id": "recE9eCM3tjkbtD6a",
+    "src": "/photos/recE9eCM3tjkbtD6a.jpg",
+    "thumb": "/photos/recE9eCM3tjkbtD6a.thumb.jpg",
+    "width": 2189,
+    "height": 941,
+    "thumbWidth": 1191,
+    "thumbHeight": 512,
+    "caption": "Franklin Fire & Rescue",
+    "photographer": "Tom Garvey",
+    "dateTaken": "2026-08-29",
+    "featured": false,
+    "department": {
+      "name": "Franklin Fire & Rescue",
+      "city": "Franklin",
+      "county": "Franklin"
+    },
+    "town": "FRANKLIN",
+    "lat": null,
+    "lng": null,
+    "stationAddress": "5154 Main St"
+  },
+  {
+    "id": "recIRyyTAduDrfVJb",
+    "src": "/photos/recIRyyTAduDrfVJb.jpg",
+    "thumb": "/photos/recIRyyTAduDrfVJb.thumb.jpg",
+    "width": 1811,
+    "height": 1358,
+    "thumbWidth": 683,
+    "thumbHeight": 512,
+    "caption": "Highgate FD",
+    "photographer": "Tom Garvey",
+    "dateTaken": "2026-08-29",
+    "featured": false,
+    "department": {
+      "name": "Highgate Volunteer Fire Department",
+      "city": "Highgate Center",
+      "county": "Franklin"
+    },
+    "town": null,
+    "lat": null,
+    "lng": null,
+    "stationAddress": "2996 VT-78, Highgate Center"
+  },
+  {
+    "id": "recKofDfSCLcl7RG9",
+    "src": "/photos/recKofDfSCLcl7RG9.jpg",
+    "thumb": "/photos/recKofDfSCLcl7RG9.thumb.jpg",
+    "width": 2155,
+    "height": 1374,
+    "thumbWidth": 803,
+    "thumbHeight": 512,
+    "caption": "Isle La Motte Fire Department",
+    "photographer": "Tom Garvey",
+    "dateTaken": "2026-08-29",
+    "featured": false,
+    "department": {
+      "name": "Isle La Motte Volunteer Fire Company",
+      "city": "Isle La Motte",
+      "county": "Grand Isle"
+    },
+    "town": "ISLE LA MOTTE",
+    "lat": null,
+    "lng": null,
+    "stationAddress": "349 Shrine Rd"
+  },
+  {
+    "id": "recL3OkDs8R0x1ntK",
+    "src": "/photos/recL3OkDs8R0x1ntK.jpg",
+    "thumb": "/photos/recL3OkDs8R0x1ntK.thumb.jpg",
+    "width": 2189,
+    "height": 986,
+    "thumbWidth": 1137,
+    "thumbHeight": 512,
+    "caption": "St. Albans Town FD",
+    "photographer": "Tom Garvey",
+    "dateTaken": "2026-08-29",
+    "featured": false,
+    "department": {
+      "name": "St. Albans Town Fire Department",
+      "city": "Saint Albans Town",
+      "county": "Franklin"
+    },
+    "town": null,
+    "lat": null,
+    "lng": null,
+    "stationAddress": "428 LAKE RD"
+  },
+  {
+    "id": "recO6rHaMhRv3oufJ",
+    "src": "/photos/recO6rHaMhRv3oufJ.jpg",
+    "thumb": "/photos/recO6rHaMhRv3oufJ.thumb.jpg",
+    "width": 2189,
+    "height": 1334,
+    "thumbWidth": 840,
+    "thumbHeight": 512,
+    "caption": "Sheldon Fire Department",
+    "photographer": "Tom Garvey",
+    "dateTaken": "2026-08-29",
+    "featured": false,
+    "department": {
+      "name": "Sheldon Fire Department",
+      "city": "Sheldon",
+      "county": "Franklin"
+    },
+    "town": "SHELDON",
+    "lat": null,
+    "lng": null,
+    "stationAddress": null
+  },
+  {
+    "id": "recWMyHbR16Cgwe5v",
+    "src": "/photos/recWMyHbR16Cgwe5v.jpg",
+    "thumb": "/photos/recWMyHbR16Cgwe5v.thumb.jpg",
+    "width": 1811,
+    "height": 1358,
+    "thumbWidth": 683,
+    "thumbHeight": 512,
+    "caption": "Swanton Village FD",
+    "photographer": "Tom Garvey",
+    "dateTaken": "2026-08-29",
+    "featured": false,
+    "department": {
+      "name": "Swanton Village Fire Department",
+      "city": "Swanton",
+      "county": "Franklin"
+    },
+    "town": null,
+    "lat": null,
+    "lng": null,
+    "stationAddress": "120 1st St"
+  },
+  {
+    "id": "recZJWdmrnEqcWWGo",
+    "src": "/photos/recZJWdmrnEqcWWGo.jpg",
+    "thumb": "/photos/recZJWdmrnEqcWWGo.thumb.jpg",
+    "width": 2189,
+    "height": 1203,
+    "thumbWidth": 932,
+    "thumbHeight": 512,
+    "caption": "St. Albans City FD",
+    "photographer": "Tom Garvey",
+    "dateTaken": "2026-08-29",
+    "featured": false,
+    "department": {
+      "name": "St. Albans City Fire Department",
+      "city": "Saint Albans",
+      "county": "Franklin"
+    },
+    "town": null,
+    "lat": null,
+    "lng": null,
+    "stationAddress": "30 LOWER WELDEN ST"
+  },
+  {
+    "id": "recadTX7ZwoRllm8E",
+    "src": "/photos/recadTX7ZwoRllm8E.jpg",
+    "thumb": "/photos/recadTX7ZwoRllm8E.thumb.jpg",
+    "width": 2136,
+    "height": 1602,
+    "thumbWidth": 683,
+    "thumbHeight": 512,
+    "caption": "Colchester FD Champlain Station",
+    "photographer": "Tom Garvey",
+    "dateTaken": "2026-08-29",
+    "featured": false,
+    "department": {
+      "name": "Colchester FD Champlain Station",
+      "city": "Colchester",
+      "county": "Chittenden"
+    },
+    "town": "COLCHESTER",
+    "lat": null,
+    "lng": null,
+    "stationAddress": "227 CLAY POINT RD"
+  },
+  {
+    "id": "receqiKM8jFxPLdvf",
+    "src": "/photos/receqiKM8jFxPLdvf.jpg",
+    "thumb": "/photos/receqiKM8jFxPLdvf.thumb.jpg",
+    "width": 2189,
+    "height": 1210,
+    "thumbWidth": 926,
+    "thumbHeight": 512,
+    "caption": "Milton Fire Department",
+    "photographer": "Tom Garvey",
+    "dateTaken": "2026-08-29",
+    "featured": false,
+    "department": {
+      "name": "Milton Fire Deparmtent",
+      "city": "Milton",
+      "county": "Chittenden"
+    },
+    "town": "MILTON",
+    "lat": null,
+    "lng": null,
+    "stationAddress": "47 Bombardier Rd"
+  },
+  {
+    "id": "recfHP4lVffJLIltb",
+    "src": "/photos/recfHP4lVffJLIltb.jpg",
+    "thumb": "/photos/recfHP4lVffJLIltb.thumb.jpg",
+    "width": 1806,
+    "height": 1358,
+    "thumbWidth": 681,
+    "thumbHeight": 512,
+    "caption": "Grand Isle FD",
+    "photographer": "Tom Garvey",
+    "dateTaken": "2026-08-29",
+    "featured": false,
+    "department": {
+      "name": "Grand Isle VFD",
+      "city": "Grand Isle",
+      "county": "Grand Isle"
+    },
+    "town": "GRAND ISLE",
+    "lat": null,
+    "lng": null,
+    "stationAddress": "17 HYDE RD"
+  },
+  {
+    "id": "rectOraHDUYRnYTME",
+    "src": "/photos/rectOraHDUYRnYTME.jpg",
+    "thumb": "/photos/rectOraHDUYRnYTME.thumb.jpg",
+    "width": 2157,
+    "height": 978,
+    "thumbWidth": 1129,
+    "thumbHeight": 512,
+    "caption": "Alburgh Fire Department",
+    "photographer": "Tom Garvey",
+    "dateTaken": "2026-08-29",
+    "featured": false,
+    "department": {
+      "name": "Alburgh Fire Department",
+      "city": "Alburgh",
+      "county": "Grand Isle"
+    },
+    "town": "ALBURGH",
+    "lat": null,
+    "lng": null,
+    "stationAddress": "60 FIRE HOUSE RD"
   },
   {
     "id": "rec61V8qy6sSM2VwT",
@@ -37,6 +303,8 @@
       "county": "Washington"
     },
     "town": "BERLIN",
+    "lat": null,
+    "lng": null,
     "stationAddress": "2095 VT-12"
   },
   {
@@ -57,6 +325,8 @@
       "county": "Chittenden"
     },
     "town": "BURLINGTON",
+    "lat": null,
+    "lng": null,
     "stationAddress": "20 Mansfield Avenue"
   },
   {
@@ -77,6 +347,8 @@
       "county": "Washington"
     },
     "town": "MONTPELIER",
+    "lat": null,
+    "lng": null,
     "stationAddress": "Paine Turnpike N"
   },
   {
@@ -97,7 +369,9 @@
       "county": "Grand Isle"
     },
     "town": "SOUTH HERO",
-    "stationAddress": "318 US ROUTE 2 or 131 COMMUNITY LN)"
+    "lat": null,
+    "lng": null,
+    "stationAddress": "131 COMMUNITY LN"
   },
   {
     "id": "rec5xiuLqk3waey0I",
@@ -113,6 +387,8 @@
     "featured": false,
     "department": null,
     "town": null,
+    "lat": null,
+    "lng": null,
     "stationAddress": null
   },
   {
@@ -133,6 +409,8 @@
       "county": "Chittenden"
     },
     "town": "COLCHESTER",
+    "lat": null,
+    "lng": null,
     "stationAddress": "483 Main St"
   },
   {
@@ -153,6 +431,8 @@
       "county": "Chittenden"
     },
     "town": "BURLINGTON",
+    "lat": null,
+    "lng": null,
     "stationAddress": "1391 North Ave"
   },
   {
@@ -173,6 +453,8 @@
       "county": "Chittenden"
     },
     "town": "COLCHESTER",
+    "lat": null,
+    "lng": null,
     "stationAddress": "687 Blakely Rd"
   },
   {
@@ -193,6 +475,8 @@
       "county": "Chittenden"
     },
     "town": "COLCHESTER",
+    "lat": null,
+    "lng": null,
     "stationAddress": "687 Blakely Rd"
   },
   {
@@ -209,6 +493,8 @@
     "featured": false,
     "department": null,
     "town": null,
+    "lat": null,
+    "lng": null,
     "stationAddress": null
   },
   {
@@ -229,6 +515,8 @@
       "county": "Chitttenden"
     },
     "town": "SOUTH BURLINGTON",
+    "lat": null,
+    "lng": null,
     "stationAddress": "575 Dorset St"
   },
   {
@@ -249,6 +537,8 @@
       "county": "Chittenden"
     },
     "town": "SHELBURNE",
+    "lat": null,
+    "lng": null,
     "stationAddress": null
   },
   {
@@ -269,6 +559,8 @@
       "county": "Chittenden"
     },
     "town": "WINOOSKI",
+    "lat": null,
+    "lng": null,
     "stationAddress": null
   },
   {
@@ -289,6 +581,8 @@
       "county": "Chittenden"
     },
     "town": "ESSEX TOWN",
+    "lat": null,
+    "lng": null,
     "stationAddress": "190 Sandhill Rd"
   },
   {
@@ -309,6 +603,8 @@
       "county": "Chittenden"
     },
     "town": "WILLISTON",
+    "lat": null,
+    "lng": null,
     "stationAddress": "645 Talcott Rd"
   },
   {
@@ -329,6 +625,8 @@
       "county": "Chittenden"
     },
     "town": "UNDERHILL",
+    "lat": null,
+    "lng": null,
     "stationAddress": "288 Browns Trace Road"
   },
   {
@@ -349,6 +647,8 @@
       "county": "Chittenden"
     },
     "town": "BURLINGTON",
+    "lat": null,
+    "lng": null,
     "stationAddress": "23 Ferguson Ave"
   },
   {
@@ -369,6 +669,8 @@
       "county": "Chittenden"
     },
     "town": "BURLINGTON",
+    "lat": null,
+    "lng": null,
     "stationAddress": "136 South Winooski Ave"
   },
   {
@@ -389,6 +691,8 @@
       "county": "Chittenden"
     },
     "town": "BURLINGTON",
+    "lat": null,
+    "lng": null,
     "stationAddress": "132 North Ave"
   },
   {
@@ -409,6 +713,8 @@
       "county": "Windham"
     },
     "town": "JAMAICA",
+    "lat": null,
+    "lng": null,
     "stationAddress": null
   },
   {
@@ -429,6 +735,8 @@
       "county": "Windham"
     },
     "town": "WINDHAM",
+    "lat": null,
+    "lng": null,
     "stationAddress": null
   },
   {
@@ -449,6 +757,8 @@
       "county": "Chittenden"
     },
     "town": "CHARLOTTE",
+    "lat": null,
+    "lng": null,
     "stationAddress": "170 Ferry Rd"
   },
   {
@@ -469,6 +779,8 @@
       "county": "Addison"
     },
     "town": "FERRISBURGH",
+    "lat": null,
+    "lng": null,
     "stationAddress": "Route 7"
   }
 ]

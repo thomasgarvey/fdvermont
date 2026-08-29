@@ -63,9 +63,9 @@ function findPhoto(town: string | undefined, address: string | undefined) {
   return townPhotos[0]; // featured-first order from the sync
 }
 
-function photoHtml(town: string | undefined, address: string | undefined): string {
-  const p = findPhoto(town, address);
-  if (!p) return '';
+type Photo = (typeof photosData)[number];
+
+function photoBlockHtml(p: Photo): string {
   const credit = p.photographer ? `<div style="color:#888;font-size:11px;margin-top:2px">📷 ${p.photographer}</div>` : '';
   const caption = p.caption && p.caption !== p.department?.name
     ? `<div style="color:#555;font-size:12px;margin-top:2px">${p.caption}</div>` : '';
@@ -73,6 +73,11 @@ function photoHtml(town: string | undefined, address: string | undefined): strin
     <a href="${p.src}" target="_blank" rel="noopener" style="display:block;margin-top:6px">
       <img src="${p.thumb}" alt="${p.caption || 'Station photo'}" style="width:240px;max-width:100%;border-radius:8px;display:block" />
     </a>${caption}${credit}`;
+}
+
+function photoHtml(town: string | undefined, address: string | undefined): string {
+  const p = findPhoto(town, address);
+  return p ? photoBlockHtml(p) : '';
 }
 
 function buildPopup(props: Record<string, any>): string {
@@ -183,6 +188,8 @@ export default function LocationMap({
 
     const nonPointLayers: L.Layer[] = [];
 
+    const placed = new Set<string>();
+
     for (const feature of (locationsData as GeoJSON.FeatureCollection).features) {
       if (!feature.geometry) continue;
       const popup = buildPopup((feature.properties ?? {}) as Record<string, any>);
@@ -192,6 +199,7 @@ export default function LocationMap({
         const props = (feature.properties ?? {}) as Record<string, any>;
         const town = props.TOWNNAME ?? '';
         const photo = findPhoto(town, props.PRIMARYADD);
+        if (photo) placed.add(photo.id);
         const marker = L.marker([lat, lng], {
           icon: photo ? ICON_WITH_PHOTO : ICON_NO_PHOTO,
         }).bindPopup(popup);
@@ -209,6 +217,25 @@ export default function LocationMap({
       } else {
         nonPointLayers.push(L.geoJSON(feature).bindPopup(popup));
       }
+    }
+
+    // Photos whose department has no station in the E911 fire-station layer
+    // (rescue squads and the like) get their own pin from the department's
+    // Airtable coordinates, so a photo is never stranded off the map.
+    for (const p of photosData as Photo[]) {
+      if (placed.has(p.id) || p.lat == null || p.lng == null) continue;
+      const name = p.department?.name || p.caption || 'Station';
+      const addr = p.stationAddress ? `<div style="color:#555;margin-top:2px">${p.stationAddress}</div>` : '';
+      const marker = L.marker([p.lat, p.lng], { icon: ICON_WITH_PHOTO })
+        .bindPopup(`<strong>${name}</strong>${photoBlockHtml(p)}${addr}`);
+      cluster.addLayer(marker);
+      indexRef.current.push({
+        town: (p.town ?? '').toUpperCase(),
+        address: p.stationAddress ?? '',
+        haystack: `${p.town ?? ''} ${p.stationAddress ?? ''} ${name}`.toUpperCase(),
+        hasPhoto: true,
+        marker,
+      });
     }
 
     map.addLayer(cluster);

@@ -122,6 +122,12 @@ for (const r of photos) {
       ? { name: dept['Department Name'] ?? '', city: dept.City ?? '', county: dept.County ?? '' }
       : null,
     town: dept ? townKey(dept) : null,
+    // Department's own coordinates, when set in Airtable. Used only as a
+    // fallback: some departments (rescue squads, say) occupy buildings the
+    // state's FIRE STATION layer doesn't include, so there is no pin to
+    // attach to. Given a lat/lng the map draws its own pin for them.
+    lat: typeof dept?.Latitude === 'number' ? dept.Latitude : null,
+    lng: typeof dept?.Longitude === 'number' ? dept.Longitude : null,
     // Pins the photo to one building in multi-station towns. Per-photo
     // "Station Address" (Photos table) wins if present; otherwise the linked
     // department's Street Address (per-station dept records carry these).
