@@ -6,6 +6,7 @@ import 'leaflet.markercluster/dist/MarkerCluster.Default.css';
 import 'leaflet.markercluster';
 import locationsData from '../../data/locations.geojson';
 import photosData from '../../data/photos.json';
+import excludedStations from '../../data/excluded-stations.json';
 
 // Fix broken default marker icons — reference PNGs from public/ to avoid Vite resolution issues
 delete (L.Icon.Default.prototype as any)._getIconUrl;
@@ -38,6 +39,10 @@ const normAddr = (s: string | null | undefined) =>
     .filter(Boolean)
     .join(' ');
 
+// Points the state still lists as FIRE STATION but which aren't one any more.
+const EXCLUDED_IDS = new Set(excludedStations.excluded.map((e) => e.esiteid));
+const isExcluded = (props: any) => EXCLUDED_IDS.has(props?.ESITEID);
+
 const photosByTown = new Map<string, typeof photosData>();
 const stationsPerTown = new Map<string, number>();
 for (const p of photosData) {
@@ -46,6 +51,7 @@ for (const p of photosData) {
   photosByTown.get(p.town)!.push(p);
 }
 for (const f of (locationsData as GeoJSON.FeatureCollection).features) {
+  if (isExcluded(f.properties)) continue;
   const t = (f.properties as any)?.TOWNNAME;
   if (t) stationsPerTown.set(t, (stationsPerTown.get(t) ?? 0) + 1);
 }
@@ -191,6 +197,7 @@ export default function LocationMap({
 
     for (const feature of (locationsData as GeoJSON.FeatureCollection).features) {
       if (!feature.geometry) continue;
+      if (isExcluded(feature.properties)) continue;
       const popup = buildPopup((feature.properties ?? {}) as Record<string, any>);
 
       if (feature.geometry.type === 'Point') {

@@ -1,0 +1,13 @@
+{
+  "_comment": "E911 points still classified FIRE STATION that are not fire stations any more, confirmed on the ground. Keyed by ESITEID so refreshing locations.geojson from VCGI cannot silently reintroduce them. Add an entry rather than editing locations.geojson, so the reason stays on the record.",
+  "excluded": [
+    {
+      "esiteid": 71574,
+      "address": "245 MAIN ST",
+      "town": "COLCHESTER",
+      "reason": "Now a food shelf. E911 record dates from 1998 (MAPYEAR 1998-01-01).",
+      "verifiedBy": "Tom Garvey",
+      "verifiedOn": "2026-08-29"
+    }
+  ]
+}

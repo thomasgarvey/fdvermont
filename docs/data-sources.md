@@ -53,6 +53,22 @@ FDVT models **departments** as the primary content entity (Airtable), and uses
   points (Overpass API, fetched 2026-08-14), each matched by station name.
 - The backfill CSV's "Coordinate Source" column records E911 vs. OSM per row.
 
+## Stale E911 records
+
+The E911 layer is authoritative for location but not always current on *use* —
+some points are still classified `FIRE STATION` after the building changed
+hands. Rather than editing `locations.geojson` (which a refresh from VCGI would
+undo), such points are listed in `src/data/excluded-stations.json`, keyed by
+`ESITEID`, with the reason and who verified it. The map skips them.
+
+Verified so far:
+
+| ESITEID | Address | Why excluded |
+|---|---|---|
+| 71574 | 245 MAIN ST, COLCHESTER | Now a food shelf; E911 record dates from 1998 |
+
+Since photographing the stations means visiting them, expect this list to grow.
+
 ## Sources evaluated but not used
 
 - **USFA/FEMA registry** (<https://apps.usfa.fema.gov/registry/>): 206 VT
