@@ -50,16 +50,22 @@ for (const f of (locationsData as GeoJSON.FeatureCollection).features) {
   if (t) stationsPerTown.set(t, (stationsPerTown.get(t) ?? 0) + 1);
 }
 
-function photoHtml(town: string | undefined, address: string | undefined): string {
+// The one place that decides which photo (if any) belongs to a station.
+// Used for both the popup and the marker colour so the two can't disagree.
+function findPhoto(town: string | undefined, address: string | undefined) {
   const townPhotos = town ? photosByTown.get(town) : undefined;
-  if (!townPhotos?.length) return '';
+  if (!townPhotos?.length) return null;
   const addr = normAddr(address);
   // Exact building match wins; otherwise town-wide only if unambiguous
-  let p = townPhotos.find((x) => x.stationAddress && normAddr(x.stationAddress) === addr);
-  if (!p) {
-    if ((stationsPerTown.get(town!) ?? 0) > 1) return '';
-    p = townPhotos[0]; // featured-first order from the sync
-  }
+  const exact = townPhotos.find((x) => x.stationAddress && normAddr(x.stationAddress) === addr);
+  if (exact) return exact;
+  if ((stationsPerTown.get(town!) ?? 0) > 1) return null;
+  return townPhotos[0]; // featured-first order from the sync
+}
+
+function photoHtml(town: string | undefined, address: string | undefined): string {
+  const p = findPhoto(town, address);
+  if (!p) return '';
   const credit = p.photographer ? `<div style="color:#888;font-size:11px;margin-top:2px">📷 ${p.photographer}</div>` : '';
   const caption = p.caption && p.caption !== p.department?.name
     ? `<div style="color:#555;font-size:12px;margin-top:2px">${p.caption}</div>` : '';
@@ -80,6 +86,24 @@ function buildPopup(props: Record<string, any>): string {
 
 const titleCase = (s: string) =>
   s.toLowerCase().replace(/\b[a-z]/g, (c) => c.toUpperCase()).replace(/\bVt\b/g, 'VT');
+
+// Green = we have a photo of this station, blue = still needs one.
+const PHOTO_GREEN = '#2e7d32';
+const NEEDS_BLUE = '#2563eb';
+const pinIcon = (color: string) =>
+  L.divIcon({
+    html: `<svg width="26" height="38" viewBox="0 0 26 38" xmlns="http://www.w3.org/2000/svg">
+      <path d="M13 0.6C6.1 0.6 0.6 6.1 0.6 13c0 8.9 12.4 24.4 12.4 24.4S25.4 21.9 25.4 13C25.4 6.1 19.9 0.6 13 0.6z"
+        fill="${color}" stroke="#fff" stroke-width="1.2"/>
+      <circle cx="13" cy="13" r="4.6" fill="#fff"/>
+    </svg>`,
+    className: '',
+    iconSize: [26, 38],
+    iconAnchor: [13, 38],
+    popupAnchor: [0, -34],
+  });
+const ICON_WITH_PHOTO = pinIcon(PHOTO_GREEN);
+const ICON_NO_PHOTO = pinIcon(NEEDS_BLUE);
 
 interface SearchEntry {
   town: string;      // raw TOWNNAME
@@ -137,19 +161,19 @@ export default function LocationMap({
 
     const cluster = (L as any).markerClusterGroup({
       chunkedLoading: true,
+      // Ring shows the share of stations in this cluster that have a photo,
+      // so photo coverage is legible before you zoom in to individual pins.
       iconCreateFunction(c: any) {
-        const count = c.getChildCount();
-        let size: number;
-        let color: string;
-        if (count < 10) {
-          size = 36; color = '#60a5fa';
-        } else if (count < 40) {
-          size = 44; color = '#2563eb';
-        } else {
-          size = 52; color = '#1e3a8a';
-        }
+        const children = c.getAllChildMarkers();
+        const count = children.length;
+        const withPhoto = children.filter(
+          (m: any) => m.options.icon === ICON_WITH_PHOTO,
+        ).length;
+        const pct = count ? (withPhoto / count) * 100 : 0;
+        const size = count < 10 ? 36 : count < 40 ? 44 : 52;
+        const inner = size - 9;
         return L.divIcon({
-          html: `<div style="width:${size}px;height:${size}px;border-radius:50%;background:${color};display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:${size < 44 ? 13 : 15}px;box-shadow:0 1px 4px rgba(0,0,0,.4)">${count}</div>`,
+          html: `<div style="width:${size}px;height:${size}px;border-radius:50%;background:conic-gradient(${PHOTO_GREEN} 0 ${pct}%, ${NEEDS_BLUE} ${pct}% 100%);display:flex;align-items:center;justify-content:center;box-shadow:0 1px 4px rgba(0,0,0,.4)"><div style="width:${inner}px;height:${inner}px;border-radius:50%;background:#2b2b2b;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:${size < 44 ? 13 : 15}px">${count}</div></div>`,
           className: '',
           iconSize: [size, size],
           iconAnchor: [size / 2, size / 2],
@@ -165,10 +189,13 @@ export default function LocationMap({
 
       if (feature.geometry.type === 'Point') {
         const [lng, lat] = (feature.geometry as GeoJSON.Point).coordinates;
-        const marker = L.marker([lat, lng]).bindPopup(popup);
-        cluster.addLayer(marker);
         const props = (feature.properties ?? {}) as Record<string, any>;
         const town = props.TOWNNAME ?? '';
+        const photo = findPhoto(town, props.PRIMARYADD);
+        const marker = L.marker([lat, lng], {
+          icon: photo ? ICON_WITH_PHOTO : ICON_NO_PHOTO,
+        }).bindPopup(popup);
+        cluster.addLayer(marker);
         const deptNames = (photosByTown.get(town) ?? [])
           .map((p) => p.department?.name ?? '')
           .join(' ');
@@ -176,7 +203,7 @@ export default function LocationMap({
           town,
           address: props.PRIMARYADD ?? '',
           haystack: `${town} ${props.PRIMARYADD ?? ''} ${props.ZIP ?? ''} ${deptNames}`.toUpperCase(),
-          hasPhoto: photosByTown.has(town),
+          hasPhoto: !!photo,
           marker,
         });
       } else {
@@ -188,14 +215,29 @@ export default function LocationMap({
     clusterRef.current = cluster;
     nonPointLayers.forEach((l) => l.addTo(map));
 
-    if (cluster.getLayers().length === 1 && (locationsData as GeoJSON.FeatureCollection).features[0]?.geometry?.type === 'Point') {
-      const [lng, lat] = ((locationsData as GeoJSON.FeatureCollection).features[0].geometry as GeoJSON.Point).coordinates;
-      map.setView([lat, lng], zoom);
-    } else if (cluster.getLayers().length > 0) {
-      map.fitBounds(cluster.getBounds());
-    }
+    // The map lives in a flex row between the header and footer, so its final
+    // height can resolve after mount. Re-measure before fitting, and again on
+    // the next frame, or the initial fitBounds lands on a world view.
+    const fitToStations = () => {
+      map.invalidateSize();
+      if (cluster.getLayers().length === 1 && (locationsData as GeoJSON.FeatureCollection).features[0]?.geometry?.type === 'Point') {
+        const [lng, lat] = ((locationsData as GeoJSON.FeatureCollection).features[0].geometry as GeoJSON.Point).coordinates;
+        map.setView([lat, lng], zoom);
+        return;
+      }
+      const bounds = cluster.getBounds();
+      if (bounds.isValid()) map.fitBounds(bounds, { padding: [20, 20] });
+    };
 
-    return () => { map.remove(); indexRef.current = []; clusterRef.current = null; };
+    fitToStations();
+    const raf = requestAnimationFrame(fitToStations);
+
+    return () => {
+      cancelAnimationFrame(raf);
+      map.remove();
+      indexRef.current = [];
+      clusterRef.current = null;
+    };
   }, []);
 
   return (
