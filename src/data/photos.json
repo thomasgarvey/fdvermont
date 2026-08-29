@@ -83,8 +83,8 @@
       "county": "Franklin"
     },
     "town": null,
-    "lat": null,
-    "lng": null,
+    "lat": 44.938071000003,
+    "lng": -73.046866500001,
     "stationAddress": "2996 VT-78, Highgate Center"
   },
   {
@@ -171,8 +171,8 @@
       "county": "Franklin"
     },
     "town": null,
-    "lat": null,
-    "lng": null,
+    "lat": 44.920692000003,
+    "lng": -73.112980500001,
     "stationAddress": "120 1st St"
   },
   {
@@ -453,8 +453,8 @@
       "county": "Chittenden"
     },
     "town": "COLCHESTER",
-    "lat": null,
-    "lng": null,
+    "lat": 44.537310000003,
+    "lng": -73.207134000001,
     "stationAddress": "687 Blakely Rd"
   },
   {
@@ -475,9 +475,31 @@
       "county": "Chittenden"
     },
     "town": "COLCHESTER",
+    "lat": 44.537310000003,
+    "lng": -73.207134000001,
+    "stationAddress": "687 Blakely Rd"
+  },
+  {
+    "id": "recRq4aXVCz8t6qKp",
+    "src": "/photos/recRq4aXVCz8t6qKp.jpg",
+    "thumb": "/photos/recRq4aXVCz8t6qKp.thumb.jpg",
+    "width": 1745,
+    "height": 981,
+    "thumbWidth": 911,
+    "thumbHeight": 512,
+    "caption": "Colchester FD St. Michael's College Station 4",
+    "photographer": "Tom Garvey",
+    "dateTaken": "2026-04-12",
+    "featured": false,
+    "department": {
+      "name": "Colchester Fire Department St. Michael's College Station 4 ",
+      "city": "Colchester",
+      "county": "Chittenden"
+    },
+    "town": "COLCHESTER",
     "lat": null,
     "lng": null,
-    "stationAddress": "687 Blakely Rd"
+    "stationAddress": "220 College Pkwy"
   },
   {
     "id": "recZsVT6L02QyGVn7",
@@ -518,6 +540,28 @@
     "lat": null,
     "lng": null,
     "stationAddress": "575 Dorset St"
+  },
+  {
+    "id": "recr2GwM37f3PZItb",
+    "src": "/photos/recr2GwM37f3PZItb.jpg",
+    "thumb": "/photos/recr2GwM37f3PZItb.thumb.jpg",
+    "width": 1745,
+    "height": 1309,
+    "thumbWidth": 683,
+    "thumbHeight": 512,
+    "caption": "Colchester FD Mallets Bay Station",
+    "photographer": "Tom Garvey",
+    "dateTaken": "2026-04-12",
+    "featured": false,
+    "department": {
+      "name": "Colchester Fire Department Mallets Bay Station 2",
+      "city": "Colchester",
+      "county": "Chittenden"
+    },
+    "town": "COLCHESTER",
+    "lat": null,
+    "lng": null,
+    "stationAddress": "844 Church Rd"
   },
   {
     "id": "rectkIQmk5IH7PQoe",

@@ -91,6 +91,55 @@ const ext = (type, filename) =>
   ({ 'image/jpeg': 'jpg', 'image/png': 'png', 'image/webp': 'webp', 'image/gif': 'gif' }[type]
     ?? filename?.split('.').pop()?.toLowerCase() ?? 'jpg');
 
+// --- Placing photos that have no fire-station pin -------------------------
+// Mirrors the map's findPhoto() test: a photo lands on a station when the
+// department's street address matches one, or the town has exactly one.
+const ADDR_TOKENS = {
+  SOUTH: 'S', NORTH: 'N', EAST: 'E', WEST: 'W',
+  AVENUE: 'AVE', STREET: 'ST', ROAD: 'RD', DRIVE: 'DR', LANE: 'LN',
+  TURNPIKE: 'TPKE', PARKWAY: 'PKWY', HIGHWAY: 'HWY', ROUTE: '', RTE: '', RT: '',
+};
+const normAddr = (s) => (s ?? '')
+  .toUpperCase().replace(/[^A-Z0-9 ]/g, ' ').split(/\s+/)
+  .map((w) => (w in ADDR_TOKENS ? ADDR_TOKENS[w] : w)).filter(Boolean).join(' ');
+
+const STATION_ADDRS = {};
+for (const f of JSON.parse(readFileSync(`${ROOT}/src/data/locations.geojson`, 'utf8')).features) {
+  (STATION_ADDRS[f.properties.TOWNNAME] ??= []).push(normAddr(f.properties.PRIMARYADD));
+}
+function hasStationPin(town, address) {
+  const list = town ? STATION_ADDRS[town] : null;
+  if (!list?.length) return false;
+  return list.includes(normAddr(address)) || list.length === 1;
+}
+
+// Vermont's official E911 address-point geocoder. Departments in towns with
+// no FIRE STATION point (or at buildings filed under another site type, e.g.
+// AMBULANCE SERVICE) get coordinates from their Airtable street address, so
+// nobody has to look up and paste lat/lng by hand.
+const GEOCODER = 'https://maps.vcgi.vermont.gov/arcgis/rest/services/EGC_services/GCS_E911_COMPOSITE_SP_v2/GeocodeServer/findAddressCandidates';
+const geocodeCache = new Map();
+async function geocode(address, city) {
+  const single = [address, city, 'VT'].filter(Boolean).join(', ');
+  if (geocodeCache.has(single)) return geocodeCache.get(single);
+  const u = new URL(GEOCODER);
+  u.searchParams.set('SingleLine', single);
+  u.searchParams.set('outSR', '4326');
+  u.searchParams.set('maxLocations', '1');
+  u.searchParams.set('f', 'json');
+  let hit = null;
+  try {
+    const d = await (await fetch(u)).json();
+    const c = d.candidates?.[0];
+    // Only trust a confident match; a vague one would drop a pin in the wrong place.
+    if (c && c.score >= 90) hit = { lat: c.location.y, lng: c.location.x, matched: c.address };
+  } catch {
+    hit = null;
+  }
+  geocodeCache.set(single, hit);
+  return hit;
+}
+
 const [photos, depts] = await Promise.all([fetchAll('Photos'), fetchAll('Fire Departments')]);
 const deptById = new Map(depts.map((r) => [r.id, r.fields]));
 
@@ -143,7 +192,23 @@ for (const r of photos) {
   });
 }
 
+// Fill coordinates for photos with no station pin to land on. Airtable's own
+// Latitude/Longitude wins if set; otherwise geocode the department address.
+let geocoded = 0;
+for (const p of out) {
+  if (p.lat != null && p.lng != null) continue;
+  if (!p.department || hasStationPin(p.town, p.stationAddress)) continue;
+  if (!p.stationAddress) continue;
+  const hit = await geocode(p.stationAddress, p.department.city);
+  if (hit) {
+    p.lat = hit.lat;
+    p.lng = hit.lng;
+    geocoded++;
+    console.log(`  geocoded "${p.caption || p.department.name}" -> ${hit.matched}`);
+  }
+}
+
 // Featured first, then newest
 out.sort((a, b) => (b.featured - a.featured) || String(b.dateTaken).localeCompare(String(a.dateTaken)));
 writeFileSync(`${ROOT}/src/data/photos.json`, JSON.stringify(out, null, 2) + '\n');
-console.log(`Synced ${out.length} photos (${photos.length} records total) -> src/data/photos.json + public/photos/`);
+console.log(`Synced ${out.length} photos (${photos.length} records total), ${geocoded} geocoded -> src/data/photos.json + public/photos/`);

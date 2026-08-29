@@ -228,10 +228,13 @@ export default function LocationMap({
       const marker = L.marker([p.lat, p.lng], { icon: ICON_WITH_PHOTO })
         .bindPopup(`<strong>${name}</strong>${photoBlockHtml(p)}${addr}`);
       cluster.addLayer(marker);
+      // These pins sit outside the E911 town list, so fall back to the
+      // department's city for the label the search results show.
+      const label = p.town ?? p.department?.city ?? '';
       indexRef.current.push({
-        town: (p.town ?? '').toUpperCase(),
+        town: label.toUpperCase(),
         address: p.stationAddress ?? '',
-        haystack: `${p.town ?? ''} ${p.stationAddress ?? ''} ${name}`.toUpperCase(),
+        haystack: `${label} ${p.stationAddress ?? ''} ${name}`.toUpperCase(),
         hasPhoto: true,
         marker,
       });
