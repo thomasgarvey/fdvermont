@@ -57,11 +57,15 @@ const VILLAGE_TO_TOWN = {
   'NEWPORT CENTER': 'NEWPORT TOWN',
   'BEECHER FALLS': 'CANAAN',
 };
-// E911 towns are the join target — validate keys against the real list
+// E911 towns are the join target — validate keys against the real list.
+// Compare on the normalized form but return the raw TOWNNAME, since that is
+// what the map keys pins by. (E911 spells out "SAINT ALBANS TOWN" while norm()
+// rewrites SAINT -> ST, so comparing normalized-to-raw silently missed those.)
 const E911_TOWNS = [...new Set(
   JSON.parse(readFileSync(`${ROOT}/src/data/locations.geojson`, 'utf8'))
     .features.map((f) => f.properties.TOWNNAME),
 )];
+const TOWN_BY_NORM = new Map(E911_TOWNS.map((t) => [norm(t), t]));
 function townKey(dept) {
   const fromName = norm(dept['Department Name']).replace(SUFFIX, ' ').replace(/\s+/g, ' ').trim();
   const city = norm(dept.City);
@@ -71,11 +75,15 @@ function townKey(dept) {
     cands.push(VILLAGE_TO_TOWN[c] ?? c);
     cands.push(...c.split(' ')); // two-town depts, e.g. "Underhill Jericho"
   }
-  for (const c of cands) if (E911_TOWNS.includes(c)) return c;
+  for (const c of cands) {
+    const hit = TOWN_BY_NORM.get(norm(c));
+    if (hit) return hit;
+  }
   // Prefix fallback: "ESSEX" -> "ESSEX TOWN", "ESSEX JUNCTION" -> "ESSEX JUNCTION CITY"
   for (const c of cands) {
-    const pref = E911_TOWNS.filter((t) => t.startsWith(c + ' ') || c.startsWith(t + ' '));
-    if (pref.length) return pref.sort((a, b) => a.length - b.length)[0];
+    const n = norm(c);
+    const pref = [...TOWN_BY_NORM.keys()].filter((t) => t.startsWith(n + ' ') || n.startsWith(t + ' '));
+    if (pref.length) return TOWN_BY_NORM.get(pref.sort((a, b) => a.length - b.length)[0]);
   }
   return null;
 }

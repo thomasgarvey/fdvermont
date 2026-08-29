@@ -126,7 +126,7 @@
       "city": "Saint Albans Town",
       "county": "Franklin"
     },
-    "town": null,
+    "town": "SAINT ALBANS TOWN",
     "lat": null,
     "lng": null,
     "stationAddress": "428 LAKE RD"
@@ -192,7 +192,7 @@
       "city": "Saint Albans",
       "county": "Franklin"
     },
-    "town": null,
+    "town": "SAINT ALBANS CITY",
     "lat": null,
     "lng": null,
     "stationAddress": "30 LOWER WELDEN ST"

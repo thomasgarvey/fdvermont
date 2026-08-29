@@ -75,18 +75,17 @@ function photoBlockHtml(p: Photo): string {
     </a>${caption}${credit}`;
 }
 
-function photoHtml(town: string | undefined, address: string | undefined): string {
-  const p = findPhoto(town, address);
-  return p ? photoBlockHtml(p) : '';
-}
 
 function buildPopup(props: Record<string, any>): string {
-  const title = props.name ?? props.PRIMARYADD ?? 'Location';
+  const p = findPhoto(props.TOWNNAME, props.PRIMARYADD);
+  // Prefer the department's name; fall back to the street address for stations
+  // we have no Airtable record for.
+  const title = p?.department?.name || props.name || props.PRIMARYADD || 'Location';
   const rows = DISPLAY_KEYS
     .filter((k) => props[k] != null && typeof props[k] === 'string')
     .map((k) => `<tr><td style="padding:2px 6px 2px 0;color:#555">${k}</td><td style="padding:2px 0">${props[k]}</td></tr>`)
     .join('');
-  return `<strong>${title}</strong>${photoHtml(props.TOWNNAME, props.PRIMARYADD)}${rows ? `<table style="margin-top:4px;border-collapse:collapse">${rows}</table>` : ''}`;
+  return `<strong>${title}</strong>${p ? photoBlockHtml(p) : ''}${rows ? `<table style="margin-top:4px;border-collapse:collapse">${rows}</table>` : ''}`;
 }
 
 const titleCase = (s: string) =>
