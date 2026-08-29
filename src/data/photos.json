@@ -1,5 +1,25 @@
 [
   {
+    "id": "recNmbB1Qwj5h09KA",
+    "src": "/photos/recNmbB1Qwj5h09KA.jpg",
+    "thumb": "/photos/recNmbB1Qwj5h09KA.thumb.jpg",
+    "width": 1674,
+    "height": 1360,
+    "thumbWidth": 630,
+    "thumbHeight": 512,
+    "caption": "Essex Junction Fire Department",
+    "photographer": "Tom Garvey",
+    "dateTaken": null,
+    "featured": false,
+    "department": {
+      "name": "Essex Junction Fire Department",
+      "city": "Essex Junction",
+      "county": "Chittenden"
+    },
+    "town": "ESSEX JUNCTION CITY",
+    "stationAddress": "3 Pearl St"
+  },
+  {
     "id": "rec61V8qy6sSM2VwT",
     "src": "/photos/rec61V8qy6sSM2VwT.jpg",
     "thumb": "/photos/rec61V8qy6sSM2VwT.thumb.jpg",
@@ -240,7 +260,7 @@
     "thumbWidth": 834,
     "thumbHeight": 512,
     "caption": "Winooski Fire Department",
-    "photographer": "Winooski Fire Department",
+    "photographer": "Tom Garvey",
     "dateTaken": "2026-04-11",
     "featured": false,
     "department": {
