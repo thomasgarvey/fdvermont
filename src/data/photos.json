@@ -8,7 +8,7 @@
     "thumbWidth": 630,
     "thumbHeight": 512,
     "caption": "Essex Junction Fire Department",
-    "photographer": "Tom Garvey",
+    "photographer": "T. Garvey",
     "dateTaken": null,
     "featured": false,
     "department": {
@@ -30,7 +30,7 @@
     "thumbWidth": 872,
     "thumbHeight": 512,
     "caption": "Georgia Fire & Rescue Station",
-    "photographer": "Tom Garvey",
+    "photographer": "T. Garvey",
     "dateTaken": "2026-08-29",
     "featured": false,
     "department": {
@@ -52,7 +52,7 @@
     "thumbWidth": 1191,
     "thumbHeight": 512,
     "caption": "Franklin Fire & Rescue",
-    "photographer": "Tom Garvey",
+    "photographer": "T. Garvey",
     "dateTaken": "2026-08-29",
     "featured": false,
     "department": {
@@ -74,7 +74,7 @@
     "thumbWidth": 683,
     "thumbHeight": 512,
     "caption": "Highgate FD",
-    "photographer": "Tom Garvey",
+    "photographer": "TGG",
     "dateTaken": "2026-08-29",
     "featured": false,
     "department": {
@@ -96,7 +96,7 @@
     "thumbWidth": 803,
     "thumbHeight": 512,
     "caption": "Isle La Motte Fire Department",
-    "photographer": "Tom Garvey",
+    "photographer": "TGG",
     "dateTaken": "2026-08-29",
     "featured": false,
     "department": {
@@ -118,7 +118,7 @@
     "thumbWidth": 1137,
     "thumbHeight": 512,
     "caption": "St. Albans Town FD",
-    "photographer": "Tom Garvey",
+    "photographer": "TGG",
     "dateTaken": "2026-08-29",
     "featured": false,
     "department": {
@@ -140,7 +140,7 @@
     "thumbWidth": 840,
     "thumbHeight": 512,
     "caption": "Sheldon Fire Department",
-    "photographer": "Tom Garvey",
+    "photographer": "TGG",
     "dateTaken": "2026-08-29",
     "featured": false,
     "department": {
@@ -162,7 +162,7 @@
     "thumbWidth": 683,
     "thumbHeight": 512,
     "caption": "Swanton Village FD",
-    "photographer": "Tom Garvey",
+    "photographer": "TGG",
     "dateTaken": "2026-08-29",
     "featured": false,
     "department": {
@@ -184,7 +184,7 @@
     "thumbWidth": 932,
     "thumbHeight": 512,
     "caption": "St. Albans City FD",
-    "photographer": "Tom Garvey",
+    "photographer": "TGG",
     "dateTaken": "2026-08-29",
     "featured": false,
     "department": {
@@ -206,7 +206,7 @@
     "thumbWidth": 683,
     "thumbHeight": 512,
     "caption": "Colchester FD Champlain Station",
-    "photographer": "Tom Garvey",
+    "photographer": "T. Garvey",
     "dateTaken": "2026-08-29",
     "featured": false,
     "department": {
@@ -228,11 +228,11 @@
     "thumbWidth": 926,
     "thumbHeight": 512,
     "caption": "Milton Fire Department",
-    "photographer": "Tom Garvey",
+    "photographer": "TGG",
     "dateTaken": "2026-08-29",
     "featured": false,
     "department": {
-      "name": "Milton Fire Deparmtent",
+      "name": "Milton Fire Department",
       "city": "Milton",
       "county": "Chittenden"
     },
@@ -250,7 +250,7 @@
     "thumbWidth": 681,
     "thumbHeight": 512,
     "caption": "Grand Isle FD",
-    "photographer": "Tom Garvey",
+    "photographer": "T. Garvey",
     "dateTaken": "2026-08-29",
     "featured": false,
     "department": {
@@ -272,7 +272,7 @@
     "thumbWidth": 1129,
     "thumbHeight": 512,
     "caption": "Alburgh Fire Department",
-    "photographer": "Tom Garvey",
+    "photographer": "T. Garvey",
     "dateTaken": "2026-08-29",
     "featured": false,
     "department": {
@@ -294,12 +294,12 @@
     "thumbWidth": 683,
     "thumbHeight": 512,
     "caption": "Berlin Volunteer Fire Department",
-    "photographer": "Tom Garvey",
+    "photographer": "T. Garvey",
     "dateTaken": "2026-05-30",
     "featured": false,
     "department": {
       "name": "Berlin Volunteer Fire Department",
-      "city": "Northfield",
+      "city": "Berlin",
       "county": "Washington"
     },
     "town": "BERLIN",
@@ -316,7 +316,7 @@
     "thumbWidth": 512,
     "thumbHeight": 682,
     "caption": "Burlington Fire Station 3",
-    "photographer": "Tom Garvey",
+    "photographer": "T. Garvey",
     "dateTaken": "2026-05-02",
     "featured": false,
     "department": {
@@ -338,7 +338,7 @@
     "thumbWidth": 597,
     "thumbHeight": 512,
     "caption": "Montpelier Fire Department",
-    "photographer": "Tom Garvey",
+    "photographer": "TGG",
     "dateTaken": "2026-04-19",
     "featured": false,
     "department": {
@@ -349,7 +349,7 @@
     "town": "MONTPELIER",
     "lat": null,
     "lng": null,
-    "stationAddress": "Paine Turnpike N"
+    "stationAddress": "61 Main St"
   },
   {
     "id": "reciHm2zR4OG2Gfh3",
@@ -382,7 +382,7 @@
     "thumbWidth": 683,
     "thumbHeight": 512,
     "caption": "Colchester Center Station",
-    "photographer": "Tom Garvey",
+    "photographer": "T. Garvey",
     "dateTaken": "2026-04-12",
     "featured": false,
     "department": {
@@ -404,7 +404,7 @@
     "thumbWidth": 683,
     "thumbHeight": 512,
     "caption": "Burlington Fire Station 4",
-    "photographer": "Tom Garvey",
+    "photographer": "T. Garvey",
     "dateTaken": "2026-04-12",
     "featured": false,
     "department": {
@@ -426,7 +426,7 @@
     "thumbWidth": 683,
     "thumbHeight": 512,
     "caption": "Colchester Technical Rescue",
-    "photographer": "Tom Garvey",
+    "photographer": "T. Garvey",
     "dateTaken": "2026-04-12",
     "featured": false,
     "department": {
@@ -448,7 +448,7 @@
     "thumbWidth": 683,
     "thumbHeight": 512,
     "caption": "Colchester Rescue",
-    "photographer": "Tom Garvey",
+    "photographer": "T. Garvey",
     "dateTaken": "2026-04-12",
     "featured": false,
     "department": {
@@ -470,7 +470,7 @@
     "thumbWidth": 911,
     "thumbHeight": 512,
     "caption": "Colchester FD St. Michael's College Station 4",
-    "photographer": "Tom Garvey",
+    "photographer": "T. Garvey",
     "dateTaken": "2026-04-12",
     "featured": false,
     "department": {
@@ -484,24 +484,6 @@
     "stationAddress": "220 College Pkwy"
   },
   {
-    "id": "recZsVT6L02QyGVn7",
-    "src": "/photos/recZsVT6L02QyGVn7.jpg",
-    "thumb": "/photos/recZsVT6L02QyGVn7.thumb.jpg",
-    "width": 1745,
-    "height": 981,
-    "thumbWidth": 911,
-    "thumbHeight": 512,
-    "caption": "St. Michael's College Fire & Rescue",
-    "photographer": "Tom Garvey",
-    "dateTaken": "2026-04-12",
-    "featured": false,
-    "department": null,
-    "town": null,
-    "lat": null,
-    "lng": null,
-    "stationAddress": null
-  },
-  {
     "id": "recnI4SqV9JD3z5O8",
     "src": "/photos/recnI4SqV9JD3z5O8.jpg",
     "thumb": "/photos/recnI4SqV9JD3z5O8.thumb.jpg",
@@ -510,7 +492,7 @@
     "thumbWidth": 683,
     "thumbHeight": 512,
     "caption": "South Burlington Fire Station 1",
-    "photographer": "Tom Garvey",
+    "photographer": "TGG",
     "dateTaken": "2026-04-12",
     "featured": false,
     "department": {
@@ -554,7 +536,7 @@
     "thumbWidth": 631,
     "thumbHeight": 512,
     "caption": "Shelburne Fire Department",
-    "photographer": "Tom Garvey",
+    "photographer": "TGG",
     "dateTaken": "2026-04-12",
     "featured": false,
     "department": {
@@ -576,7 +558,7 @@
     "thumbWidth": 834,
     "thumbHeight": 512,
     "caption": "Winooski Fire Department",
-    "photographer": "Tom Garvey",
+    "photographer": "TGG",
     "dateTaken": "2026-04-11",
     "featured": false,
     "department": {
@@ -598,7 +580,7 @@
     "thumbWidth": 683,
     "thumbHeight": 512,
     "caption": "Essex Junction FD",
-    "photographer": "Tom Garvey",
+    "photographer": "T. Garvey",
     "dateTaken": "2026-04-10",
     "featured": false,
     "department": {
@@ -620,7 +602,7 @@
     "thumbWidth": 1390,
     "thumbHeight": 512,
     "caption": "Williston Fire Department",
-    "photographer": "Tom Garvey",
+    "photographer": "TGG",
     "dateTaken": "2026-04-04",
     "featured": false,
     "department": {
@@ -642,7 +624,7 @@
     "thumbWidth": 813,
     "thumbHeight": 512,
     "caption": "Underhill Jericho FD 1",
-    "photographer": "Tom Garvey",
+    "photographer": "TGG",
     "dateTaken": "2026-03-21",
     "featured": false,
     "department": {
@@ -664,7 +646,7 @@
     "thumbWidth": 640,
     "thumbHeight": 512,
     "caption": "Burlington Fire Station 5",
-    "photographer": "Tom Garvey",
+    "photographer": "T. Garvey",
     "dateTaken": "2026-03-19",
     "featured": false,
     "department": {
@@ -686,7 +668,7 @@
     "thumbWidth": 512,
     "thumbHeight": 683,
     "caption": "Burlington Fire Station #1",
-    "photographer": "Tom Garvey",
+    "photographer": "T. Garvey",
     "dateTaken": "2024-10-24",
     "featured": false,
     "department": {
@@ -708,7 +690,7 @@
     "thumbWidth": 683,
     "thumbHeight": 512,
     "caption": "Burlington Fire Station #2",
-    "photographer": "Tom Garvey",
+    "photographer": "T. Garvey",
     "dateTaken": "2024-10-24",
     "featured": false,
     "department": {
@@ -730,7 +712,7 @@
     "thumbWidth": 1046,
     "thumbHeight": 512,
     "caption": "Jamaica Fire Department",
-    "photographer": "Tom Garvey",
+    "photographer": "TGG",
     "dateTaken": "2024-10-06",
     "featured": false,
     "department": {
@@ -752,7 +734,7 @@
     "thumbWidth": 683,
     "thumbHeight": 512,
     "caption": "Windham Fire Department",
-    "photographer": "Tom Garvey",
+    "photographer": "TGG",
     "dateTaken": "2024-10-06",
     "featured": false,
     "department": {
@@ -774,7 +756,7 @@
     "thumbWidth": 512,
     "thumbHeight": 682,
     "caption": "Charlotte Fire & Rescue",
-    "photographer": "Tom Garvey",
+    "photographer": "T. Garvey",
     "dateTaken": "2020-08-18",
     "featured": false,
     "department": {
@@ -796,7 +778,7 @@
     "thumbWidth": 936,
     "thumbHeight": 512,
     "caption": "Ferrisburgh Fire Department",
-    "photographer": "Tom Garvey",
+    "photographer": "T. Garvey",
     "dateTaken": "2020-08-18",
     "featured": false,
     "department": {
