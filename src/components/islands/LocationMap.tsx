@@ -7,6 +7,11 @@ import 'leaflet.markercluster';
 import locationsData from '../../data/locations.geojson';
 import photosData from '../../data/photos.json';
 import excludedStations from '../../data/excluded-stations.json';
+import { stations as stationRecords } from '../../lib/stations';
+
+// Slugs come from the same module that generates /stations/[slug], so a popup
+// link can never point at a page that was not built.
+const SLUG_BY_ESITEID = new Map(stationRecords.map((s) => [s.esiteid, s.slug]));
 
 // Fix broken default marker icons — reference PNGs from public/ to avoid Vite resolution issues
 delete (L.Icon.Default.prototype as any)._getIconUrl;
@@ -91,7 +96,11 @@ function buildPopup(props: Record<string, any>): string {
     .filter((k) => props[k] != null && typeof props[k] === 'string')
     .map((k) => `<tr><td style="padding:2px 6px 2px 0;color:var(--fdvt-muted,#555)">${k}</td><td style="padding:2px 0">${props[k]}</td></tr>`)
     .join('');
-  return `<strong>${title}</strong>${p ? photoBlockHtml(p) : ''}${rows ? `<table style="margin-top:4px;border-collapse:collapse">${rows}</table>` : ''}`;
+  const slug = SLUG_BY_ESITEID.get(props.ESITEID);
+  const more = slug
+    ? `<a href="/stations/${slug}" style="display:inline-block;margin-top:6px;font-weight:600;color:var(--fdvt-link,#8B211E)">Station record →</a>`
+    : '';
+  return `<strong>${title}</strong>${p ? photoBlockHtml(p) : ''}${rows ? `<table style="margin-top:4px;border-collapse:collapse">${rows}</table>` : ''}${more}`;
 }
 
 const titleCase = (s: string) =>

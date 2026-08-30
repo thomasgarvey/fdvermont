@@ -1,0 +1,164 @@
+---
+import Archive from "../../layouts/Archive.astro";
+import { stations, titleCase, type Station } from "../../lib/stations";
+
+export function getStaticPaths() {
+  return stations.map((station) => ({ params: { slug: station.slug }, props: { station } }));
+}
+
+const { station } = Astro.props as { station: Station };
+const p = station.photo;
+
+// Neighbouring stations in the same town, so a multi-station department is
+// navigable rather than a set of orphan pages.
+const siblings = stations.filter((s) => s.town === station.town && s.slug !== station.slug);
+
+const record: [string, string][] = [
+  ["Street address", station.address],
+  ["Town", station.town],
+  ["County", station.county ? `${station.county} County` : ""],
+  ["ZIP", String(station.zip || "")],
+  ["Coordinates", `${station.lat.toFixed(5)}, ${station.lng.toFixed(5)}`],
+  ["E911 site ID", String(station.esiteid)],
+  ["E911 first mapped", station.mapped],
+  ["E911 last updated", station.updated],
+].filter(([, v]) => v);
+
+const title = `${station.name}, ${station.town} – Vermont Fire Stations`;
+const description = p
+  ? `Photograph and record for ${station.name} at ${station.address}, ${station.town}, Vermont.`
+  : `Station record for ${station.name} at ${station.address}, ${station.town}, Vermont. No photograph yet — submissions welcome.`;
+---
+
+<Archive title={title} description={description}>
+  <main class="wrap page">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <a href="/stations">All stations</a>
+      <span aria-hidden="true">/</span>
+      <span>{station.town}</span>
+    </nav>
+
+    <header class="head">
+      <h1>{station.name}</h1>
+      <p class="sub">
+        {station.address} · {station.town}{station.county && `, ${station.county} County`}
+      </p>
+    </header>
+
+    {p ? (
+      <figure class="shot">
+        <img src={p.src} alt={`${station.name} at ${station.address}, ${station.town}, Vermont`}
+             width={p.width ?? undefined} height={p.height ?? undefined} loading="eager" />
+        <figcaption>
+          {p.caption && p.caption !== station.name && <span class="cap">{p.caption}</span>}
+          <span class="credit">
+            {p.photographer ? `Photograph by ${p.photographer}` : "Photograph"}
+            {p.dateTaken && `, ${p.dateTaken}`}
+          </span>
+        </figcaption>
+      </figure>
+    ) : (
+      <div class="nophoto">
+        <p><strong>No photograph yet.</strong></p>
+        <p>
+          If you have a picture of this station, <a href="/contact">send it in</a> — it will be
+          credited to you.
+        </p>
+      </div>
+    )}
+
+    <section class="record" aria-labelledby="rec-h">
+      <h2 id="rec-h">Record</h2>
+      <dl>
+        {record.map(([k, v]) => (
+          <div class="row">
+            <dt>{k}</dt>
+            <dd>{v}</dd>
+          </div>
+        ))}
+      </dl>
+      <p class="prov">
+        Location data from the <a href="https://geodata.vermont.gov/" rel="noopener">Vermont
+        E911 site file (VCGI)</a>. Spotted something wrong?
+        <a href="/contact">Send a correction</a>.
+      </p>
+    </section>
+
+    {siblings.length > 0 && (
+      <section class="siblings" aria-labelledby="sib-h">
+        <h2 id="sib-h">Also in {station.town}</h2>
+        <ul>
+          {siblings.map((s) => (
+            <li>
+              <a href={`/stations/${s.slug}`}>
+                <span class="dot" data-has={s.photo ? "yes" : "no"} aria-hidden="true"></span>
+                {s.address}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+
+    <p class="back"><a href="/#map">← Back to the map</a></p>
+  </main>
+</Archive>
+
+<style>
+  .page { padding: 2.4rem 0 3.4rem; max-width: 46rem; }
+  .crumbs {
+    font-size: 0.72rem; letter-spacing: 0.11em; text-transform: uppercase;
+    color: var(--ink-3); display: flex; gap: 0.5rem; margin-bottom: 1.4rem;
+  }
+  .crumbs a { color: var(--ink-2); text-decoration: none; border-bottom: 1px solid transparent; }
+  .crumbs a:hover { color: var(--ink); border-color: var(--red); }
+  .head { margin-bottom: 1.6rem; }
+  h1 {
+    font-family: "Source Serif 4", Georgia, serif;
+    font-size: clamp(1.6rem, 4vw, 2.3rem); line-height: 1.15; margin: 0 0 0.35rem;
+  }
+  .sub { margin: 0; color: var(--ink-2); font-size: 0.95rem; }
+  .shot { margin: 0 0 2rem; }
+  .shot img {
+    display: block; width: 100%; height: auto;
+    border: 1px solid var(--line); box-shadow: var(--shadow);
+  }
+  figcaption { margin-top: 0.6rem; font-size: 0.82rem; color: var(--ink-2); }
+  .cap { display: block; }
+  .credit { display: block; color: var(--ink-3); }
+  .nophoto {
+    border: 1px dashed var(--line); padding: 1.4rem 1.5rem; margin-bottom: 2rem;
+    background: var(--surface);
+  }
+  .nophoto p { margin: 0 0 0.4rem; font-size: 0.92rem; }
+  .nophoto p:last-child { margin-bottom: 0; color: var(--ink-2); }
+  h2 {
+    font-family: "Source Serif 4", Georgia, serif; font-size: 1.15rem;
+    margin: 0 0 0.8rem; padding-bottom: 0.4rem; border-bottom: 1px solid var(--line);
+  }
+  dl { margin: 0 0 0.9rem; }
+  .row {
+    display: grid; grid-template-columns: 12rem 1fr; gap: 0.5rem;
+    padding: 0.42rem 0; border-bottom: 1px solid var(--line);
+  }
+  dt {
+    font-size: 0.72rem; letter-spacing: 0.09em; text-transform: uppercase;
+    color: var(--ink-3); align-self: center;
+  }
+  dd { margin: 0; font-size: 0.94rem; }
+  .prov { font-size: 0.8rem; color: var(--ink-3); margin: 0.9rem 0 2.2rem; }
+  .prov a, .nophoto a, .back a { color: var(--red); }
+  .siblings ul { list-style: none; margin: 0 0 2rem; padding: 0; }
+  .siblings li { border-bottom: 1px solid var(--line); }
+  .siblings a {
+    display: flex; align-items: center; gap: 0.6rem; padding: 0.55rem 0;
+    text-decoration: none; color: var(--ink); font-size: 0.94rem;
+  }
+  .siblings a:hover { color: var(--red); }
+  .dot { width: 9px; height: 9px; border-radius: 50%; flex: none; background: var(--ink-3); }
+  .dot[data-has="yes"] { background: var(--red); }
+  .back { font-size: 0.88rem; margin: 0; }
+  @media (max-width: 560px) {
+    .row { grid-template-columns: 1fr; gap: 0.1rem; }
+  }
+</style>
