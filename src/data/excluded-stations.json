@@ -16,6 +16,14 @@
       "reason": "Former South Hero station; the department operates from 131 COMMUNITY LN. Note this E911 record is recent (MAPYEAR 2026-02-03), so the layer is not stale here — it still classifies the old building as a fire station.",
       "verifiedBy": "Tom Garvey",
       "verifiedOn": "2026-08-29"
+    },
+    {
+      "esiteid": 333310,
+      "address": "838 CHURCH RD",
+      "town": "COLCHESTER",
+      "reason": "Colchester Water Department, Fire District No. 2 — a water utility, not a fire station. In Vermont a 'fire district' is a municipal water/services district, so E911 may be classifying these by name; worth watching for others.",
+      "verifiedBy": "Tom Garvey",
+      "verifiedOn": "2026-08-29"
     }
   ]
 }
