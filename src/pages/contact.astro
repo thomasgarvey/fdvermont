@@ -131,6 +131,15 @@ const ways = [
         write to <a href={mail("FD Vermont", "")}>{EMAIL}</a> directly.
       </p>
 
+      <section class="terms" aria-labelledby="terms-h">
+        <h2 id="terms-h">Using your photographs</h2>
+        <p>
+          Photographs remain the copyright of the photographer. Sending one grants Vermont
+          Fire Stations permission to publish it on this site with credit. Tell me you'd
+          like it removed and it comes down.
+        </p>
+      </section>
+
       <p class="back"><a href="/">← Back to the map</a></p>
     </main>
 
@@ -409,6 +418,22 @@ const ways = [
   .note {
     margin: 2.6rem 0 0;
     max-width: 58ch;
+    font-size: 0.95rem;
+    color: var(--ink-2);
+  }
+  .terms {
+    margin: 2.2rem 0 0;
+    max-width: 58ch;
+    padding-top: 1.4rem;
+    border-top: 1px solid var(--line);
+  }
+  .terms h2 {
+    font-family: "Source Serif 4", Georgia, serif;
+    font-size: 1.05rem;
+    margin: 0 0 0.45rem;
+  }
+  .terms p {
+    margin: 0;
     font-size: 0.95rem;
     color: var(--ink-2);
   }

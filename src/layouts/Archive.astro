@@ -47,11 +47,25 @@ const { title, description } = Astro.props;
           </svg>
           <span class="brand-txt">Vermont Fire Stations<span>fdvermont.org</span></span>
         </a>
-        <nav class="nav">
+        <nav class="nav" id="sitenav">
           <a href="/#map">Map</a>
-          <a href="/#stations">Firehouses</a>
+          <a href="/stations">Firehouses</a>
           <a href="/#about">About</a>
+          <a href="/contact">Contact</a>
         </nav>
+        <button
+          class="navtoggle"
+          type="button"
+          data-nav-toggle
+          aria-controls="sitenav"
+          aria-expanded="false"
+          aria-label="Menu"
+        >
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path class="n-open" d="M3.5 6.5h17M3.5 12h17M3.5 17.5h17"></path>
+            <path class="n-close" d="M5.5 5.5l13 13M18.5 5.5l-13 13"></path>
+          </svg>
+        </button>
         <button class="themetoggle" type="button" data-theme-toggle aria-label="Switch color theme">
           <svg class="i-sun" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
             <circle cx="12" cy="12" r="4.2"></circle>
@@ -94,6 +108,28 @@ const { title, description } = Astro.props;
           try {
             localStorage.setItem("fdvt-theme", dark ? "dark" : "light");
           } catch (e) {}
+        });
+      });
+
+      // Mobile menu. The nav is hidden by CSS on small screens; this button is
+      // the only way to reach it there, so it stays keyboard- and SR-friendly.
+      document.querySelectorAll("[data-nav-toggle]").forEach((btn) => {
+        const nav = document.getElementById(btn.getAttribute("aria-controls"));
+        if (!nav) return;
+        const setOpen = (open) => {
+          btn.setAttribute("aria-expanded", String(open));
+          nav.classList.toggle("is-open", open);
+        };
+        btn.addEventListener("click", () =>
+          setOpen(btn.getAttribute("aria-expanded") !== "true"),
+        );
+        // Close on Escape, and when a link is followed (same-page anchors do
+        // not reload, so the panel would otherwise stay open over the content).
+        nav.addEventListener("click", (e) => {
+          if (e.target.closest("a")) setOpen(false);
+        });
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "Escape") setOpen(false);
         });
       });
     </script>
@@ -202,12 +238,6 @@ body {
     color: var(--ink);
     border-color: var(--red);
   }
-.nav {
-      display: none;
-    }
-.themetoggle {
-      margin-left: auto;
-    }
 .themetoggle {
     display: inline-flex;
     align-items: center;
@@ -264,4 +294,57 @@ footer {
 .foot a:hover {
     color: var(--red);
   }
+
+/* --- Responsive chrome ------------------------------------------------- */
+/* The nav is the only way around the site, so on small screens it becomes a
+   disclosure panel rather than disappearing. */
+.navtoggle {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    margin-left: 0.35rem;
+    padding: 0;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    background: none;
+    color: var(--ink-2);
+    cursor: pointer;
+  }
+.navtoggle:hover { color: var(--ink); border-color: var(--red); }
+.navtoggle .n-close { display: none; }
+.navtoggle[aria-expanded="true"] .n-open { display: none; }
+.navtoggle[aria-expanded="true"] .n-close { display: block; }
+
+/* Comfortable touch targets everywhere (44px is the usual minimum). */
+@media (pointer: coarse) {
+  .nav a, footer a, .foot a { min-height: 44px; display: inline-flex; align-items: center; }
+  .themetoggle { min-height: 44px; }
+}
+
+@media (max-width: 780px) {
+  .mast-in { flex-wrap: wrap; gap: 0.6rem 1rem; }
+  .brand { flex: 1 1 auto; min-width: 0; }
+  .themetoggle { margin-left: auto; }
+  .navtoggle { display: inline-flex; }
+  .nav {
+    display: none;
+    order: 10;
+    flex-basis: 100%;
+    margin-left: 0;
+    flex-direction: column;
+    gap: 0;
+    border-top: 1px solid var(--line);
+    padding-top: 0.3rem;
+  }
+  .nav.is-open { display: flex; }
+  .nav a {
+    padding: 0.85rem 0.1rem;
+    border-bottom: 1px solid var(--line);
+    font-size: 0.85rem;
+  }
+  .nav a:last-child { border-bottom: 0; }
+  .foot { flex-direction: column; gap: 0.15rem; text-align: center; }
+}
 </style>
