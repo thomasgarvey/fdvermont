@@ -136,7 +136,7 @@ const MARK_NEEDS = "#5C6469";
 
             <form class="search" id="hero-search" autocomplete="off">
               <label class="vh" for="q">Search Vermont fire stations</label>
-              <input id="q" type="search" placeholder="Search a town, address, or department…" />
+              <input id="q" type="search" placeholder="Search a town or department…" />
               <button type="submit">Search</button>
             </form>
             <p class="search-note" id="searchhint">Results open on the map below.</p>
@@ -924,26 +924,58 @@ const MARK_NEEDS = "#5C6469";
     .plates {
       grid-template-columns: 1fr;
     }
-    /* The input and its button share a row; below this width that squeezes the
-       placeholder to about 20 characters, so stack them. */
-    .search {
-      flex-direction: column;
-    }
-    .search input {
-      width: 100%;
-      padding: 0.8rem 0.9rem;
-    }
-    .search button {
-      width: 100%;
-      min-height: 44px;
-      border-top: 1px solid var(--line);
-    }
     /* Four figures in one flex row leaves a lone orphan; two-up reads better. */
     .ledger-in {
       gap: 1.1rem 2rem;
     }
     .fig {
       flex: 1 1 40%;
+    }
+  }
+
+  /* On a phone the panel covered the whole viewport, so the hero photograph —
+     the point of the page — was invisible behind it. Let the photograph take a
+     band at the top and the panel sit beneath, overlapping slightly. */
+  @media (max-width: 700px) {
+    .hero-photo {
+      position: relative;
+      inset: auto;
+      z-index: 0;
+      height: 52vw;
+      min-height: 190px;
+      max-height: 300px;
+    }
+    .hero-wrap {
+      min-height: 0;
+      padding: 0 0 2.2rem;
+    }
+    .panel {
+      /* Positioned, so it paints above the photograph it overlaps — without
+         this the photo (position:relative) covers the panel's top edge. */
+      position: relative;
+      z-index: 1;
+      margin-top: -2.2rem;
+      padding: 1.5rem 1.4rem 1.6rem;
+    }
+    .panel h1 {
+      font-size: 1.32rem;
+      margin-bottom: 0.6rem;
+    }
+    .panel-sub {
+      font-size: 0.94rem;
+    }
+    /* Keep the field and its button on one row — stacking them made the search
+       twice as tall, which read as the page's main event. */
+    .search input {
+      padding: 0.62rem 0.75rem;
+      font-size: 0.92rem;
+    }
+    .search button {
+      padding-inline: 0.95rem;
+      font-size: 0.72rem;
+    }
+    .btn {
+      margin-top: 1.1rem;
     }
   }
 
