@@ -55,7 +55,7 @@ const ways = [
     <link rel="icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
-    <meta name="color-scheme" content="dark light" />
+    <meta name="color-scheme" content="light dark" />
     <title>Contact – Vermont Fire Stations</title>
     <meta
       name="description"
@@ -64,8 +64,8 @@ const ways = [
     <script is:inline>
       // Same key the homepage uses, so the theme carries across pages.
       try {
-        if (localStorage.getItem("fdvt-theme") === "light") {
-          document.documentElement.dataset.theme = "light";
+        if (localStorage.getItem("fdvt-theme") === "dark") {
+          document.documentElement.dataset.theme = "dark";
         }
       } catch (e) {}
     </script>
@@ -155,11 +155,11 @@ const ways = [
       const root = document.documentElement;
       document.querySelectorAll("[data-theme-toggle]").forEach((btn) => {
         btn.addEventListener("click", () => {
-          const light = root.dataset.theme !== "light";
-          if (light) root.dataset.theme = "light";
+          const dark = root.dataset.theme !== "dark";
+          if (dark) root.dataset.theme = "dark";
           else delete root.dataset.theme;
           try {
-            localStorage.setItem("fdvt-theme", light ? "light" : "dark");
+            localStorage.setItem("fdvt-theme", dark ? "dark" : "light");
           } catch (e) {}
         });
       });
@@ -169,20 +169,6 @@ const ways = [
 
 <style>
   :root {
-    color-scheme: dark;
-    --paper: #1a1918;
-    --surface: #232120;
-    --ink: #e8e0d2;
-    --ink-2: #a9a093;
-    --ink-3: #7e766b;
-    --line: #383431;
-    --brass: #c9a45e;
-    --red: #b8453c;
-    --red-deep: #8b211e;
-    --charcoal: #14100e;
-    --shadow: 0 1px 2px rgba(0, 0, 0, 0.45), 0 14px 34px rgba(0, 0, 0, 0.4);
-  }
-  :root[data-theme="light"] {
     color-scheme: light;
     --paper: #f3ebdd;
     --surface: #faf7f0;
@@ -196,6 +182,21 @@ const ways = [
     --charcoal: #242526;
     --shadow: 0 1px 2px rgba(36, 37, 38, 0.06), 0 12px 30px rgba(36, 37, 38, 0.09);
   }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --paper: #1a1918;
+    --surface: #232120;
+    --ink: #e8e0d2;
+    --ink-2: #a9a093;
+    --ink-3: #7e766b;
+    --line: #383431;
+    --brass: #c9a45e;
+    --red: #b8453c;
+    --red-deep: #8b211e;
+    --charcoal: #14100e;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.45), 0 14px 34px rgba(0, 0, 0, 0.4);
+  }
+
   * {
     box-sizing: border-box;
   }
@@ -322,18 +323,18 @@ const ways = [
     color: var(--ink);
     border-color: var(--ink-3);
   }
-  .themetoggle .i-moon,
-  .themetoggle .tt-b {
+  .themetoggle .i-sun,
+  .themetoggle .tt-a {
     display: none;
   }
-  :root[data-theme="light"] .themetoggle .i-sun,
-  :root[data-theme="light"] .themetoggle .tt-a {
+  :root[data-theme="dark"] .themetoggle .i-moon,
+  :root[data-theme="dark"] .themetoggle .tt-b {
     display: none;
   }
-  :root[data-theme="light"] .themetoggle .i-moon {
+  :root[data-theme="dark"] .themetoggle .i-sun {
     display: block;
   }
-  :root[data-theme="light"] .themetoggle .tt-b {
+  :root[data-theme="dark"] .themetoggle .tt-a {
     display: inline;
   }
 
