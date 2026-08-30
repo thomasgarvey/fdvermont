@@ -1,5 +1,47 @@
 ---
 import LocationMap from "../components/islands/LocationMap.tsx";
+import photosData from "../data/photos.json";
+import locationsData from "../data/locations.geojson";
+import excludedStations from "../data/excluded-stations.json";
+
+// Every number on this page comes from the data in src/data — nothing is typed in by hand.
+const EXCLUDED = new Set(excludedStations.excluded.map((e) => e.esiteid));
+const stations = (locationsData as GeoJSON.FeatureCollection).features.filter(
+  (f) => f.geometry?.type === "Point" && !EXCLUDED.has((f.properties as any)?.ESITEID),
+);
+const props = stations.map((f) => (f.properties ?? {}) as Record<string, any>);
+const count = (key: string) => new Set(props.map((p) => p[key]).filter(Boolean)).size;
+
+const stats = [
+  { n: stations.length, label: "Stations mapped" },
+  { n: count("TOWNNAME"), label: "Towns" },
+  { n: count("COUNTY"), label: "Counties" },
+  { n: photosData.length, label: "Photographed" },
+];
+
+const titleCase = (s: string) =>
+  s.toLowerCase().replace(/\b[a-z]/g, (c) => c.toUpperCase()).replace(/\bVt\b/g, "VT");
+
+const place = (p: (typeof photosData)[number]) =>
+  [p.department?.city, p.department?.county].filter(Boolean).join(", ");
+
+// Hero and featured photos are data-driven: mark one `featured` in Airtable and it
+// takes the featured slot on the next sync. HERO_ID is the fallback cover shot.
+const HERO_ID = "recKofDfSCLcl7RG9"; // Isle La Motte Volunteer Fire Company
+const hero = photosData.find((p) => p.id === HERO_ID) ?? photosData[0];
+const featured =
+  photosData.find((p) => p.featured) ??
+  photosData.find((p) => p.id === "receny9qpGCc1uy6J") ?? // Montpelier City Fire Department
+  photosData.find((p) => p.id !== hero.id)!;
+
+const newest = [...photosData]
+  .filter((p) => p.id !== hero.id && p.id !== featured.id)
+  .sort((a, b) => (b.dateTaken ?? "").localeCompare(a.dateTaken ?? ""))
+  .slice(0, 12);
+
+// Matches the marker colours in LocationMap.tsx so the legend can't drift from the map.
+const PHOTO_GREEN = "#2e7d32";
+const NEEDS_BLUE = "#2563eb";
 ---
 
 <html lang="en">
@@ -12,141 +54,825 @@ import LocationMap from "../components/islands/LocationMap.tsx";
     <title>Vermont Fire Stations</title>
     <meta
       name="description"
-      content="An interactive map of fire department stations across Vermont — with photos, station details, and search."
+      content="A photographic record of Vermont's firehouses — station photos, department details, and an interactive map of every fire station in the state."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,400..800&family=Newsreader:opsz,wght@6..72,300..600&family=IBM+Plex+Mono:wght@400;500&display=swap"
     />
   </head>
+
   <body>
-    <header>
-      <a class="brand" href="/">
-        <span class="badge" aria-hidden="true">
-          <svg viewBox="0 0 24 24" width="20" height="20" fill="none">
+    <header class="masthead">
+      <div class="wrap mast-in">
+        <a class="brand" href="/">
+          <svg class="mark" viewBox="0 0 40 40" aria-hidden="true">
+            <path d="M8 3h24v22.5L20 37 8 25.5Z" fill="#BC241B"></path>
             <path
-              d="M12 2.5c1.1 2.6-1.4 3.9-1.7 6.3-.2 1.7.9 3.2 2.6 3.2.4 0 .8-.1 1.1-.3-.3 2-2.1 3.5-4.2 3.5a4.3 4.3 0 0 1-4.3-4.3c0-3.6 2.9-5 3.6-7.7.3 1 .1 2-.4 2.8 1.6-.8 2.7-2.2 3.3-3.5Z"
-              fill="currentColor"
-            />
+              d="M20 9.5c2.6 3 3.9 5.4 3.9 7.2 0 1.3-.6 2.3-1.7 3 .2-1.6-.4-3-1.8-4.4.2 2.6-.7 4.4-2.6 5.6-1.3.8-2 1.9-2 3.2 0 2.3 1.9 4 4.2 4s4.3-1.8 4.3-4.2c0-1-.2-2-.7-3 1.9 1.3 2.9 3 2.9 5.2 0 3.5-2.9 6.2-6.5 6.2s-6.6-2.8-6.6-6.4c0-2.3 1-4.3 3-6.2 2.2-2 3.4-3.7 3.6-5.2Z"
+              fill="#F2F1E8"></path>
           </svg>
-        </span>
-        <span class="wordmark">
-          <h1 class="title">Vermont Fire Stations</h1>
-          <p class="tagline">Photos &amp; facts from firehouses across the Green Mountain State</p>
-        </span>
-      </a>
+          <span class="brand-txt">Vermont Fire Stations<span>fdvermont.org</span></span>
+        </a>
+        <nav class="nav">
+          <a href="#map">Map</a>
+          <a href="#firehouses">Firehouses</a>
+          <a href="#about">About</a>
+          <a href="/map">Full-screen map</a>
+        </nav>
+      </div>
     </header>
 
     <main>
-      <LocationMap client:only="preact" height="100%" />
+      <section class="hero" style={`--hero-img:url("${hero.src}")`}>
+        <div class="hero-in">
+          <p class="eyebrow">Photos &amp; facts from the Green Mountain State</p>
+          <h1>Every firehouse <em>in Vermont.</em></h1>
+          <div class="hero-rule"></div>
+          <p class="hero-sub">
+            A photographic record of the stations, apparatus, and volunteers behind Vermont's
+            fire service — department by department, town by town.
+          </p>
+
+          <form class="searchbox" id="hero-search" autocomplete="off">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path>
+            </svg>
+            <input
+              id="q"
+              type="search"
+              placeholder="Search a town, address, or department…"
+              aria-label="Search Vermont fire stations"
+            />
+            <button class="searchbtn" type="submit">Search</button>
+          </form>
+          <p class="searchhint" id="searchhint">Results open on the map below.</p>
+
+          <div class="stats">
+            {stats.map((s) => (
+              <div class="stat"><b>{s.n.toLocaleString()}</b><span>{s.label}</span></div>
+            ))}
+          </div>
+
+          <p class="credit">
+            <b>Above:</b> {hero.department?.name ?? hero.caption}
+            {place(hero) && <> — {place(hero)}</>}
+            {hero.stationAddress && <> · {titleCase(hero.stationAddress)}</>}
+            {hero.photographer && <> · Photo by {hero.photographer}</>}
+          </p>
+        </div>
+      </section>
+
+      <section class="mapsec" id="map">
+        <div class="wrap">
+          <div class="sec-head">
+            <div class="lead">
+              <p class="eyebrow">The map is the index</p>
+              <h2>{stations.length} fire stations, mapped from Vermont E911 addresses.</h2>
+              <p>
+                Every pin is a station in the state's address data. Green means we have a photo
+                of it; blue means it still needs one. Click a pin for the department, the photo,
+                and the address.
+              </p>
+            </div>
+            <a class="link-more" href="/map">Open full screen →</a>
+          </div>
+
+          <div class="mapframe">
+            <LocationMap client:only="preact" height="100%" />
+          </div>
+
+          <div class="legend">
+            <span class="lg"><i style={`background:${PHOTO_GREEN}`}></i>Photographed</span>
+            <span class="lg"><i style={`background:${NEEDS_BLUE}`}></i>Needs a photo</span>
+            <span class="lg lg-note">{photosData.length} station photographs in the archive so far</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="featured">
+        <div class="wrap">
+          <div class="sec-head">
+            <div class="lead">
+              <p class="eyebrow">Featured firehouse</p>
+              <h2>A closer look at {featured.department?.city ?? titleCase(featured.town ?? "one station")}.</h2>
+            </div>
+            <a class="link-more" href="#firehouses">More firehouses →</a>
+          </div>
+
+          <article class="feat">
+            <a class="feat-img" href={featured.src} target="_blank" rel="noopener"
+               style={`background-image:url("${featured.src}")`}
+               aria-label={`${featured.caption} — open full size photograph`}></a>
+            <div class="feat-body">
+              <p class="eyebrow">{place(featured)}</p>
+              <h3>{featured.department?.name ?? featured.caption}</h3>
+              {featured.stationAddress && <p class="place">{titleCase(featured.stationAddress)}</p>}
+              <p class="body">
+                One of {photosData.length} Vermont firehouses photographed for this archive so far.
+                Vermont's fire service is overwhelmingly volunteer, and its stations change quietly —
+                a building is replaced, a company merges, a hand-painted sign comes down. This is an
+                attempt to photograph them before that happens.
+              </p>
+              <div class="feat-facts">
+                {featured.department?.city && <div><b>{featured.department.city}</b><span>Town</span></div>}
+                {featured.department?.county && <div><b>{titleCase(featured.department.county)}</b><span>County</span></div>}
+                {featured.dateTaken && <div><b>{featured.dateTaken}</b><span>Photographed</span></div>}
+                {featured.photographer && <div><b>{featured.photographer}</b><span>Photographer</span></div>}
+              </div>
+              <button class="panel-cta" type="button" data-find={featured.department?.city ?? featured.town ?? ""}>
+                Find it on the map →
+              </button>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="firehouses">
+        <div class="wrap">
+          <div class="sec-head">
+            <div class="lead">
+              <p class="eyebrow">From around Vermont</p>
+              <h2>Recently photographed.</h2>
+              <p>The newest station photography in the archive, from Lake Champlain's islands to the Windham hills.</p>
+            </div>
+            <a class="link-more" href="/map">See them all on the map →</a>
+          </div>
+
+          <div class="grid">
+            {newest.map((p) => (
+              <article class="card">
+                <a class="ph" href={p.src} target="_blank" rel="noopener"
+                   style={`background-image:url("${p.thumb}")`}
+                   aria-label={`${p.caption} — open full size photograph`}></a>
+                <div class="cap">
+                  <h3>{p.department?.name ?? p.caption}</h3>
+                  <p>
+                    {place(p) || titleCase(p.town ?? "")}
+                    {p.dateTaken && <> · <em>{p.dateTaken}</em></>}
+                  </p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section class="about" id="about">
+        <div class="wrap about-grid">
+          <div>
+            <p class="eyebrow">About the project</p>
+            <h2>Preserving Vermont's firehouse record.</h2>
+            <p>
+              Vermont Fire Stations is an independent archive of the state's fire service: a pin for
+              every station in the E911 address data, filled in with original photography and
+              department details.
+            </p>
+            <p class="note">
+              Station locations come from VT E911 / VCGI and OpenStreetMap. Points the state still
+              lists as fire stations but which no longer are get removed as they're found — {" "}
+              {excludedStations.excluded.length} so far.
+            </p>
+          </div>
+          <div class="contribs">
+            <div>
+              <h4>Submit a photo</h4>
+              <p>
+                Shot a station that's still a blue pin? <a href="/contact">Send it in</a> with the
+                department and roughly when you took it — photographers are credited on the page.
+              </p>
+            </div>
+            <div>
+              <h4>Correct a record</h4>
+              <p>Wrong address, a station that's closed, a department renamed? <a href="/contact">Tell us</a> and it gets fixed at the source.</p>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
 
     <footer>
-      <span>© {new Date().getFullYear()} Vermont Fire Stations</span>
-      <span aria-hidden="true">·</span>
-      <a href="/privacy">Privacy Policy</a>
-      <span aria-hidden="true">·</span>
-      <a href="/contact">Contact</a>
-      <span aria-hidden="true">·</span>
-      <span>
-        Data:
-        <a href="https://geodata.vermont.gov/" rel="noopener">VT E911 (VCGI)</a>
-        &amp;
-        <a href="https://www.openstreetmap.org/" rel="noopener">OpenStreetMap</a>
-      </span>
+      <div class="wrap foot">
+        <span>© {new Date().getFullYear()} Vermont Fire Stations</span>
+        <span aria-hidden="true">·</span>
+        <a href="/privacy">Privacy Policy</a>
+        <span aria-hidden="true">·</span>
+        <a href="/contact">Contact</a>
+        <span aria-hidden="true">·</span>
+        <span>
+          Data:
+          <a href="https://geodata.vermont.gov/" rel="noopener">VT E911 (VCGI)</a>
+          &amp;
+          <a href="https://www.openstreetmap.org/" rel="noopener">OpenStreetMap</a>
+        </span>
+      </div>
     </footer>
+
+    <script>
+      // The hero search drives the map island: it forwards the query to LocationMap,
+      // which owns the station index and shows the results over the map.
+      const form = document.getElementById("hero-search") as HTMLFormElement | null;
+      const input = document.getElementById("q") as HTMLInputElement | null;
+      const hint = document.getElementById("searchhint");
+      const mapSection = document.getElementById("map");
+
+      const send = (q: string, go: boolean) =>
+        window.dispatchEvent(new CustomEvent("fdvt:search", { detail: { q, go } }));
+
+      input?.addEventListener("input", () => {
+        const q = input.value.trim();
+        send(q, false);
+        if (hint) hint.textContent = q.length >= 2 ? "Results are showing on the map below." : "Results open on the map below.";
+      });
+
+      form?.addEventListener("submit", (e) => {
+        e.preventDefault();
+        mapSection?.scrollIntoView({ behavior: "smooth", block: "start" });
+        send(input?.value.trim() ?? "", true);
+      });
+
+      document.querySelectorAll<HTMLElement>("[data-find]").forEach((el) => {
+        el.addEventListener("click", () => {
+          mapSection?.scrollIntoView({ behavior: "smooth", block: "start" });
+          send(el.dataset.find ?? "", true);
+        });
+      });
+    </script>
   </body>
 </html>
 
 <style>
   :root {
-    --red: #c62828;
-    --ink: #2b2b2b;
-    --paper: #faf7f2;
+    --paper: #ebe9e0;
+    --surface: #f7f6f0;
+    --surface-2: #e2e0d5;
+    --ink: #171c18;
+    --ink-2: #4c544d;
+    --ink-3: #79806f;
+    --line: #cfcdc1;
+    --green: #123420;
+    --red: #bc241b;
+    --red-ink: #9c1b14;
+    --shadow: 0 1px 2px rgba(16, 28, 20, 0.06), 0 8px 28px rgba(16, 28, 20, 0.1);
   }
   * {
     box-sizing: border-box;
   }
-  html,
-  body {
-    height: 100%;
-  }
   body {
     margin: 0;
-    display: flex;
-    flex-direction: column;
-    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
     background: var(--paper);
     color: var(--ink);
+    font-family: "Newsreader", Georgia, "Times New Roman", serif;
+    font-size: 17px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
   }
-  header {
-    padding: 0.65rem 1.1rem;
-    background: var(--paper);
-    border-bottom: 3px solid var(--red);
-    box-shadow: 0 1px 3px rgba(43, 43, 43, 0.08);
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  }
+  a {
+    color: inherit;
+  }
+  :focus-visible {
+    outline: 2px solid var(--red);
+    outline-offset: 3px;
+  }
+  .wrap {
+    width: min(1180px, 100% - 3rem);
+    margin-inline: auto;
+  }
+  .eyebrow {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin: 0 0 0.6rem;
+  }
+
+  /* masthead */
+  .masthead {
+    position: absolute;
+    inset: 0 0 auto;
     z-index: 1100;
+    padding-top: 1.4rem;
+  }
+  .mast-in {
+    display: flex;
+    align-items: center;
+    gap: 1.6rem;
   }
   .brand {
     display: flex;
     align-items: center;
-    gap: 0.7rem;
-    min-width: 0;
+    gap: 0.72rem;
     text-decoration: none;
-    color: inherit;
-    width: fit-content;
+    color: #f2f1e8;
   }
-  .badge {
-    flex-shrink: 0;
+  .mark {
+    width: 38px;
+    height: 38px;
+    flex: none;
+  }
+  .brand-txt {
+    font-family: "Archivo", sans-serif;
+    font-variation-settings: "wdth" 112;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    line-height: 1.05;
+  }
+  .brand-txt span {
+    display: block;
+    font-weight: 500;
+    font-size: 0.62rem;
+    letter-spacing: 0.2em;
+    color: rgba(242, 241, 232, 0.62);
+  }
+  .nav {
+    margin-left: auto;
+    display: flex;
+    gap: 1.5rem;
+  }
+  .nav a {
+    font-family: "Archivo", sans-serif;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: rgba(242, 241, 232, 0.78);
+    padding-bottom: 2px;
+    border-bottom: 1px solid transparent;
+    transition: color 0.18s, border-color 0.18s;
+  }
+  .nav a:hover {
+    color: #fff;
+    border-color: var(--red);
+  }
+  @media (max-width: 780px) {
+    .nav {
+      display: none;
+    }
+  }
+
+  /* hero */
+  .hero {
+    position: relative;
+    isolation: isolate;
+    min-height: min(92vh, 840px);
+    display: flex;
+    align-items: flex-end;
+    padding: 9rem 0 2.4rem;
+    background-image: var(--hero-img);
+    background-size: cover;
+    background-position: 50% 62%;
+    color: #f2f1e8;
+  }
+  .hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(180deg, rgba(9, 26, 16, 0.3) 0%, rgba(9, 26, 16, 0.42) 40%, rgba(9, 26, 16, 0.86) 84%);
+  }
+  .hero-in {
+    width: min(1180px, 100% - 3rem);
+    margin-inline: auto;
+  }
+  .hero .eyebrow {
+    color: rgba(242, 241, 232, 0.68);
+    margin-bottom: 1rem;
+  }
+  .hero h1 {
+    margin: 0 0 0.6rem;
+    font-variation-settings: "wdth" 118;
+    font-weight: 800;
+    font-size: clamp(3rem, 7.2vw, 6.6rem);
+    line-height: 0.92;
+    letter-spacing: -0.022em;
+    text-wrap: balance;
+    max-width: 15ch;
+    text-shadow: 0 2px 30px rgba(0, 0, 0, 0.35);
+  }
+  .hero h1 em {
+    font-style: normal;
+    color: #e9b36a;
+    display: block;
+  }
+  .hero-rule {
+    width: 64px;
+    height: 3px;
+    background: var(--red);
+    margin-bottom: 1.4rem;
+  }
+  .hero-sub {
+    margin: 0 0 1.9rem;
+    max-width: 46ch;
+    font-size: 1.18rem;
+    line-height: 1.5;
+    color: rgba(242, 241, 232, 0.88);
+  }
+
+  .searchbox {
     display: flex;
     align-items: center;
-    justify-content: center;
-    width: 34px;
-    height: 34px;
-    border-radius: 9px;
+    gap: 0.75rem;
+    max-width: 640px;
+    background: var(--surface);
+    border-radius: 3px;
+    padding: 0.2rem 0.2rem 0.2rem 1rem;
+    box-shadow: 0 18px 40px rgba(6, 16, 10, 0.35);
+    color: var(--ink-3);
+  }
+  .searchbox input {
+    flex: 1;
+    min-width: 0;
+    border: 0;
+    background: transparent;
+    outline: none;
+    font-family: "Archivo", sans-serif;
+    font-size: 1rem;
+    color: var(--ink);
+    padding: 0.95rem 0;
+  }
+  .searchbtn {
+    border: 0;
+    cursor: pointer;
     background: var(--red);
     color: #fff;
-  }
-  .wordmark {
-    display: flex;
-    flex-direction: column;
-    min-width: 0;
-  }
-  .title {
-    font-size: 1.1rem;
+    font-family: "Archivo", sans-serif;
     font-weight: 700;
-    line-height: 1.2;
-    letter-spacing: -0.01em;
+    font-size: 0.78rem;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+    padding: 0.9rem 1.25rem;
+    border-radius: 2px;
+    transition: background 0.18s;
+  }
+  .searchbtn:hover {
+    background: var(--red-ink);
+  }
+  .searchhint {
+    margin: 0.7rem 0 0;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.06em;
+    color: rgba(242, 241, 232, 0.6);
+  }
+
+  .stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2.6rem;
+    margin-top: 2.2rem;
+  }
+  .stat b {
+    display: block;
+    font-family: "Archivo", sans-serif;
+    font-variation-settings: "wdth" 108;
+    font-weight: 700;
+    font-size: 2rem;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+  .stat span {
+    display: block;
+    margin-top: 0.35rem;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.66rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(242, 241, 232, 0.66);
+  }
+  .credit {
+    margin: 2.6rem 0 0;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(242, 241, 232, 0.18);
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.06em;
+    color: rgba(242, 241, 232, 0.6);
+  }
+  .credit b {
+    color: rgba(242, 241, 232, 0.88);
+    font-weight: 500;
+  }
+
+  /* sections */
+  section {
+    padding: 5rem 0;
+  }
+  .sec-head {
+    display: flex;
+    align-items: flex-end;
+    gap: 2rem;
+    margin-bottom: 2.4rem;
+    flex-wrap: wrap;
+  }
+  .sec-head .lead {
+    flex: 1 1 380px;
+  }
+  .sec-head h2 {
+    margin: 0;
+    font-variation-settings: "wdth" 112;
+    font-weight: 700;
+    font-size: clamp(1.8rem, 3.4vw, 2.9rem);
+    line-height: 1.03;
+    letter-spacing: -0.02em;
+    max-width: 20ch;
+    text-wrap: balance;
+  }
+  .sec-head p {
+    margin: 0.5rem 0 0;
+    color: var(--ink-2);
+    max-width: 46ch;
+    font-size: 1.02rem;
+  }
+  .link-more {
+    font-family: "Archivo", sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--red-ink);
+    border-bottom: 2px solid currentColor;
+    padding-bottom: 3px;
+    white-space: nowrap;
+  }
+  .link-more:hover {
     color: var(--ink);
   }
-  .tagline {
-    font-size: 0.76rem;
-    color: #7a7166;
-    white-space: nowrap;
+
+  /* map */
+  .mapsec {
+    background: var(--surface);
+    border-block: 1px solid var(--line);
+  }
+  .mapframe {
+    height: clamp(430px, 64vh, 700px);
+    border: 1px solid var(--line);
+    border-radius: 3px;
     overflow: hidden;
-    text-overflow: ellipsis;
+    background: var(--paper);
+    box-shadow: var(--shadow);
   }
-  main {
-    flex: 1;
-    min-height: 0;
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 1.4rem;
+    margin-top: 1rem;
   }
+  .lg {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.66rem;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+  .lg i {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+  }
+  .lg-note {
+    color: var(--ink-3);
+    margin-left: auto;
+  }
+
+  /* featured */
+  .feat {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    border-radius: 3px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+  }
+  .feat-img {
+    display: block;
+    background-size: cover;
+    background-position: 50% 58%;
+    min-height: 420px;
+  }
+  .feat-body {
+    padding: clamp(1.8rem, 3.4vw, 3.2rem);
+  }
+  .feat-body h3 {
+    margin: 0 0 0.2rem;
+    font-variation-settings: "wdth" 110;
+    font-weight: 700;
+    font-size: clamp(1.55rem, 2.8vw, 2.2rem);
+    line-height: 1.04;
+    letter-spacing: -0.018em;
+  }
+  .feat-body .place {
+    color: var(--ink-2);
+    font-size: 1rem;
+    margin: 0 0 1.3rem;
+  }
+  .feat-body p.body {
+    margin: 0;
+    max-width: 52ch;
+  }
+  .feat-facts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.6rem;
+    margin-top: 1.6rem;
+    padding-top: 1.3rem;
+    border-top: 1px solid var(--line);
+  }
+  .feat-facts div b {
+    display: block;
+    font-family: "Archivo", sans-serif;
+    font-weight: 700;
+    font-size: 1.2rem;
+    line-height: 1.1;
+  }
+  .feat-facts div span {
+    display: block;
+    margin-top: 0.3rem;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.63rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+  .panel-cta {
+    display: inline-block;
+    margin-top: 1.5rem;
+    background: none;
+    border: 0;
+    border-bottom: 2px solid currentColor;
+    padding: 0 0 2px;
+    cursor: pointer;
+    font-family: "Archivo", sans-serif;
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--red-ink);
+  }
+  .panel-cta:hover {
+    color: var(--ink);
+  }
+  @media (max-width: 840px) {
+    .feat {
+      grid-template-columns: 1fr;
+    }
+    .feat-img {
+      min-height: 260px;
+    }
+  }
+
+  /* photo grid */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.4rem;
+  }
+  .card {
+    border: 1px solid var(--line);
+    background: var(--surface);
+    border-radius: 3px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.22s ease, box-shadow 0.22s ease;
+  }
+  .card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow);
+  }
+  .card .ph {
+    display: block;
+    aspect-ratio: 4 / 3;
+    background-size: cover;
+    background-position: 50% 55%;
+    border-bottom: 1px solid var(--line);
+  }
+  .card .cap {
+    padding: 1rem 1.1rem 1.15rem;
+  }
+  .card h3 {
+    margin: 0 0 0.2rem;
+    font-variation-settings: "wdth" 104;
+    font-weight: 600;
+    font-size: 1.02rem;
+    line-height: 1.2;
+  }
+  .card p {
+    margin: 0;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.67rem;
+    letter-spacing: 0.05em;
+    color: var(--ink-3);
+    text-transform: uppercase;
+  }
+  .card em {
+    font-style: normal;
+    color: var(--red-ink);
+  }
+  @media (max-width: 900px) {
+    .grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 560px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* about */
+  .about {
+    background: var(--surface);
+    border-top: 1px solid var(--line);
+  }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3.4rem;
+  }
+  .about h2 {
+    margin: 0 0 1rem;
+    font-variation-settings: "wdth" 110;
+    font-weight: 700;
+    font-size: clamp(1.7rem, 3vw, 2.4rem);
+    line-height: 1.04;
+    letter-spacing: -0.02em;
+    max-width: 16ch;
+  }
+  .about p {
+    margin: 0 0 1.1rem;
+    max-width: 56ch;
+  }
+  .about .note {
+    color: var(--ink-2);
+    font-size: 0.95rem;
+  }
+  .contribs {
+    border-left: 2px solid var(--red);
+    padding-left: 1.4rem;
+    display: grid;
+    gap: 1.4rem;
+    align-content: start;
+  }
+  .contribs h4 {
+    margin: 0 0 0.25rem;
+    font-size: 0.95rem;
+    font-weight: 700;
+  }
+  .contribs p {
+    margin: 0;
+    font-size: 0.95rem;
+    color: var(--ink-2);
+  }
+  @media (max-width: 840px) {
+    .about-grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+  }
+
+  /* footer */
   footer {
+    border-top: 1px solid var(--line);
+    background: var(--paper);
+    padding: 2rem 0 2.6rem;
+  }
+  .foot {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 0.5rem;
-    padding: 0.5rem 1rem;
-    font-size: 0.75rem;
-    color: #6b6257;
-    background: var(--paper);
-    border-top: 1px solid #e7ded2;
-    z-index: 1100;
+    font-family: "Archivo", sans-serif;
+    font-size: 0.8rem;
+    color: var(--ink-2);
   }
-  footer a {
+  .foot a {
     color: inherit;
     text-decoration: underline;
   }
-  footer a:hover {
-    color: var(--red);
+  .foot a:hover {
+    color: var(--red-ink);
   }
-  @media (max-width: 480px) {
-    .tagline {
-      display: none;
+
+  @media (prefers-reduced-motion: reduce) {
+    .card:hover {
+      transform: none;
     }
   }
 </style>

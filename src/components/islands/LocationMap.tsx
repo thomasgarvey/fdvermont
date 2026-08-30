@@ -142,10 +142,12 @@ export default function LocationMap({
   const [query, setQuery] = useState('');
   const [results, setResults] = useState<SearchEntry[]>([]);
 
-  const runSearch = (q: string) => {
+  // Returns the results it just rendered, so callers outside the input (the
+  // homepage hero search) can act on the top hit without waiting for state.
+  const runSearch = (q: string): SearchEntry[] => {
     setQuery(q);
     const needle = q.toUpperCase().trim();
-    if (needle.length < 2) { setResults([]); return; }
+    if (needle.length < 2) { setResults([]); return []; }
     const scored = indexRef.current
       .filter((e) => e.haystack.includes(needle))
       .sort((a, b) => {
@@ -153,7 +155,9 @@ export default function LocationMap({
         const bTown = b.town.startsWith(needle) ? 0 : 1;
         return aTown - bTown || a.town.localeCompare(b.town);
       });
-    setResults(scored.slice(0, 8));
+    const top = scored.slice(0, 8);
+    setResults(top);
+    return top;
   };
 
   const goTo = (e: SearchEntry) => {
@@ -161,6 +165,19 @@ export default function LocationMap({
     setResults([]);
     clusterRef.current?.zoomToShowLayer(e.marker, () => e.marker.openPopup());
   };
+
+  // The homepage hero search is the page's primary entry point; it hands the
+  // query here rather than keeping a second copy of the station index.
+  // detail.go means "jump to the best match", not just list the results.
+  useEffect(() => {
+    const onExternalSearch = (e: Event) => {
+      const { q = '', go = false } = (e as CustomEvent).detail ?? {};
+      const top = runSearch(q);
+      if (go && top[0]) goTo(top[0]);
+    };
+    window.addEventListener('fdvt:search', onExternalSearch);
+    return () => window.removeEventListener('fdvt:search', onExternalSearch);
+  }, []);
 
   useEffect(() => {
     if (!containerRef.current) return;
