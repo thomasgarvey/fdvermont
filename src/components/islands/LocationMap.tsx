@@ -76,14 +76,21 @@ function findPhoto(town: string | undefined, address: string | undefined) {
 
 type Photo = (typeof photosData)[number];
 
-function photoBlockHtml(p: Photo): string {
+/**
+ * @param href Where the thumbnail should lead. Pass the station's page so a tap
+ *   keeps the visitor on the site; omitted (supplemental pins, which have no
+ *   page) the image is shown but not linked — opening a bare JPEG in a new tab
+ *   just strands people outside the archive.
+ */
+function photoBlockHtml(p: Photo, href?: string): string {
   const credit = p.photographer ? `<div style="color:var(--fdvt-faint,#888);font-size:11px;margin-top:2px">📷 ${p.photographer}</div>` : '';
   const caption = p.caption && p.caption !== p.department?.name
     ? `<div style="color:var(--fdvt-muted,#555);font-size:12px;margin-top:2px">${p.caption}</div>` : '';
-  return `
-    <a href="${p.src}" target="_blank" rel="noopener" style="display:block;margin-top:6px">
-      <img src="${p.thumb}" alt="${p.caption || 'Station photo'}" style="width:240px;max-width:100%;border-radius:8px;display:block" />
-    </a>${caption}${credit}`;
+  const img = `<img src="${p.thumb}" alt="${p.caption || 'Station photo'}" style="width:240px;max-width:100%;border-radius:8px;display:block" />`;
+  const block = href
+    ? `<a href="${href}" style="display:block;margin-top:6px">${img}</a>`
+    : `<div style="margin-top:6px">${img}</div>`;
+  return `${block}${caption}${credit}`;
 }
 
 
@@ -97,10 +104,11 @@ function buildPopup(props: Record<string, any>): string {
     .map((k) => `<tr><td style="padding:2px 6px 2px 0;color:var(--fdvt-muted,#555)">${k}</td><td style="padding:2px 0">${props[k]}</td></tr>`)
     .join('');
   const slug = SLUG_BY_ESITEID.get(props.ESITEID);
-  const more = slug
-    ? `<a href="/stations/${slug}" style="display:inline-block;margin-top:6px;font-weight:600;color:var(--fdvt-link,#8B211E)">Station record →</a>`
+  const page = slug ? `/stations/${slug}` : undefined;
+  const more = page
+    ? `<a href="${page}" style="display:inline-block;margin-top:6px;font-weight:600;color:var(--fdvt-link,#8B211E)">Station record →</a>`
     : '';
-  return `<strong>${title}</strong>${p ? photoBlockHtml(p) : ''}${rows ? `<table style="margin-top:4px;border-collapse:collapse">${rows}</table>` : ''}${more}`;
+  return `<strong>${title}</strong>${p ? photoBlockHtml(p, page) : ''}${rows ? `<table style="margin-top:4px;border-collapse:collapse">${rows}</table>` : ''}${more}`;
 }
 
 const titleCase = (s: string) =>
