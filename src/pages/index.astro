@@ -936,6 +936,18 @@ const MARK_NEEDS = "#5C6469";
   /* On a phone the panel covered the whole viewport, so the hero photograph —
      the point of the page — was invisible behind it. Let the photograph take a
      band at the top and the panel sit beneath, overlapping slightly. */
+  /* The map section is inset by the page gutter, which on a phone costs 50px of
+     an already small map — and squeezes every popup with it. Let it run edge to
+     edge; the surrounding text keeps its margins. */
+  @media (max-width: 700px) {
+    .mapframe {
+      width: 100vw;
+      margin-inline: calc(50% - 50vw);
+      border-inline: 0;
+      height: clamp(380px, 58vh, 560px);
+    }
+  }
+
   @media (max-width: 700px) {
     .hero-photo {
       position: relative;

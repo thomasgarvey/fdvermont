@@ -86,9 +86,14 @@ function photoBlockHtml(p: Photo, href?: string): string {
   const credit = p.photographer ? `<div style="color:var(--fdvt-faint,#888);font-size:11px;margin-top:2px">📷 ${p.photographer}</div>` : '';
   const caption = p.caption && p.caption !== p.department?.name
     ? `<div style="color:var(--fdvt-muted,#555);font-size:12px;margin-top:2px">${p.caption}</div>` : '';
-  const img = `<img src="${p.thumb}" alt="${p.caption || 'Station photo'}" style="width:240px;max-width:100%;border-radius:8px;display:block" />`;
+  const img = `<img src="${p.thumb}" alt="${p.caption || 'Station photo'}" style="width:100%;max-width:340px;border-radius:8px;display:block" />`;
+  // Without a cue the thumbnail does not look tappable, and the station page is
+  // where the photograph is shown full size.
+  const cue = href
+    ? `<div style="color:var(--fdvt-link,#8B211E);font-size:11px;font-weight:600;margin-top:3px">Tap for the full record →</div>`
+    : '';
   const block = href
-    ? `<a href="${href}" style="display:block;margin-top:6px">${img}</a>`
+    ? `<a href="${href}" style="display:block;margin-top:6px;text-decoration:none">${img}${cue}</a>`
     : `<div style="margin-top:6px">${img}</div>`;
   return `${block}${caption}${credit}`;
 }
@@ -130,6 +135,14 @@ const pinIcon = (color: string) =>
     iconAnchor: [13, 38],
     popupAnchor: [0, -34],
   });
+// Leaflet caps popups at 300px and otherwise shrinks to fit its content, so an
+// image set to width:100% cannot widen it — on a phone that left the photograph
+// at ~208px though the thumbnail we ship is 512px. Where there is a photograph,
+// pin min and max together to force the width; plain popups still shrink.
+const POPUP_W = Math.min(340, Math.max(240, Math.round(window.innerWidth * 0.86)));
+const POPUP_OPTS_PHOTO: L.PopupOptions = { maxWidth: POPUP_W, minWidth: POPUP_W };
+const POPUP_OPTS_PLAIN: L.PopupOptions = { maxWidth: POPUP_W };
+
 const ICON_WITH_PHOTO = pinIcon(PHOTO_GREEN);
 const ICON_NO_PHOTO = pinIcon(NEEDS_BLUE);
 
@@ -243,7 +256,7 @@ export default function LocationMap({
         if (photo) placed.add(photo.id);
         const marker = L.marker([lat, lng], {
           icon: photo ? ICON_WITH_PHOTO : ICON_NO_PHOTO,
-        }).bindPopup(popup);
+        }).bindPopup(popup, photo ? POPUP_OPTS_PHOTO : POPUP_OPTS_PLAIN);
         cluster.addLayer(marker);
         const deptNames = (photosByTown.get(town) ?? [])
           .map((p) => p.department?.name ?? '')
@@ -268,7 +281,7 @@ export default function LocationMap({
       const name = p.department?.name || p.caption || 'Station';
       const addr = p.stationAddress ? `<div style="color:var(--fdvt-muted,#555);margin-top:2px">${p.stationAddress}</div>` : '';
       const marker = L.marker([p.lat, p.lng], { icon: ICON_WITH_PHOTO })
-        .bindPopup(`<strong>${name}</strong>${photoBlockHtml(p)}${addr}`);
+        .bindPopup(`<strong>${name}</strong>${photoBlockHtml(p)}${addr}`, POPUP_OPTS_PHOTO);
       cluster.addLayer(marker);
       // These pins sit outside the E911 town list, so fall back to the
       // department's city for the label the search results show.
