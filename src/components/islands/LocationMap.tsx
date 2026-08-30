@@ -72,9 +72,9 @@ function findPhoto(town: string | undefined, address: string | undefined) {
 type Photo = (typeof photosData)[number];
 
 function photoBlockHtml(p: Photo): string {
-  const credit = p.photographer ? `<div style="color:#888;font-size:11px;margin-top:2px">📷 ${p.photographer}</div>` : '';
+  const credit = p.photographer ? `<div style="color:var(--fdvt-faint,#888);font-size:11px;margin-top:2px">📷 ${p.photographer}</div>` : '';
   const caption = p.caption && p.caption !== p.department?.name
-    ? `<div style="color:#555;font-size:12px;margin-top:2px">${p.caption}</div>` : '';
+    ? `<div style="color:var(--fdvt-muted,#555);font-size:12px;margin-top:2px">${p.caption}</div>` : '';
   return `
     <a href="${p.src}" target="_blank" rel="noopener" style="display:block;margin-top:6px">
       <img src="${p.thumb}" alt="${p.caption || 'Station photo'}" style="width:240px;max-width:100%;border-radius:8px;display:block" />
@@ -89,7 +89,7 @@ function buildPopup(props: Record<string, any>): string {
   const title = p?.department?.name || props.name || props.PRIMARYADD || 'Location';
   const rows = DISPLAY_KEYS
     .filter((k) => props[k] != null && typeof props[k] === 'string')
-    .map((k) => `<tr><td style="padding:2px 6px 2px 0;color:#555">${k}</td><td style="padding:2px 0">${props[k]}</td></tr>`)
+    .map((k) => `<tr><td style="padding:2px 6px 2px 0;color:var(--fdvt-muted,#555)">${k}</td><td style="padding:2px 0">${props[k]}</td></tr>`)
     .join('');
   return `<strong>${title}</strong>${p ? photoBlockHtml(p) : ''}${rows ? `<table style="margin-top:4px;border-collapse:collapse">${rows}</table>` : ''}`;
 }
@@ -142,10 +142,12 @@ export default function LocationMap({
   const [query, setQuery] = useState('');
   const [results, setResults] = useState<SearchEntry[]>([]);
 
-  const runSearch = (q: string) => {
+  // Returns the results it just rendered, so callers outside the input (the
+  // homepage hero search) can act on the top hit without waiting for state.
+  const runSearch = (q: string): SearchEntry[] => {
     setQuery(q);
     const needle = q.toUpperCase().trim();
-    if (needle.length < 2) { setResults([]); return; }
+    if (needle.length < 2) { setResults([]); return []; }
     const scored = indexRef.current
       .filter((e) => e.haystack.includes(needle))
       .sort((a, b) => {
@@ -153,7 +155,9 @@ export default function LocationMap({
         const bTown = b.town.startsWith(needle) ? 0 : 1;
         return aTown - bTown || a.town.localeCompare(b.town);
       });
-    setResults(scored.slice(0, 8));
+    const top = scored.slice(0, 8);
+    setResults(top);
+    return top;
   };
 
   const goTo = (e: SearchEntry) => {
@@ -161,6 +165,19 @@ export default function LocationMap({
     setResults([]);
     clusterRef.current?.zoomToShowLayer(e.marker, () => e.marker.openPopup());
   };
+
+  // The homepage hero search is the page's primary entry point; it hands the
+  // query here rather than keeping a second copy of the station index.
+  // detail.go means "jump to the best match", not just list the results.
+  useEffect(() => {
+    const onExternalSearch = (e: Event) => {
+      const { q = '', go = false } = (e as CustomEvent).detail ?? {};
+      const top = runSearch(q);
+      if (go && top[0]) goTo(top[0]);
+    };
+    window.addEventListener('fdvt:search', onExternalSearch);
+    return () => window.removeEventListener('fdvt:search', onExternalSearch);
+  }, []);
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -231,7 +248,7 @@ export default function LocationMap({
     for (const p of photosData as Photo[]) {
       if (placed.has(p.id) || p.lat == null || p.lng == null) continue;
       const name = p.department?.name || p.caption || 'Station';
-      const addr = p.stationAddress ? `<div style="color:#555;margin-top:2px">${p.stationAddress}</div>` : '';
+      const addr = p.stationAddress ? `<div style="color:var(--fdvt-muted,#555);margin-top:2px">${p.stationAddress}</div>` : '';
       const marker = L.marker([p.lat, p.lng], { icon: ICON_WITH_PHOTO })
         .bindPopup(`<strong>${name}</strong>${photoBlockHtml(p)}${addr}`);
       cluster.addLayer(marker);
@@ -289,7 +306,8 @@ export default function LocationMap({
         {results.length > 0 && (
           <ul
             style={{
-              listStyle: 'none', margin: '0 0 -1px', padding: '4px 0', background: '#fff',
+              listStyle: 'none', margin: '0 0 -1px', padding: '4px 0',
+              background: 'var(--fdvt-panel, #fff)', color: 'var(--fdvt-panel-ink, #2b2b2b)',
               borderRadius: '12px 12px 0 0', boxShadow: '0 -2px 8px rgba(0,0,0,.2)',
               maxHeight: '300px', overflowY: 'auto',
             }}
@@ -300,14 +318,14 @@ export default function LocationMap({
                   onClick={() => goTo(r)}
                   style={{
                     display: 'block', width: '100%', textAlign: 'left', border: 'none',
-                    background: 'none', padding: '8px 14px', fontSize: '14px', cursor: 'pointer',
+                    background: 'none', color: 'inherit', padding: '8px 14px', fontSize: '14px', cursor: 'pointer',
                   }}
-                  onMouseOver={(e) => ((e.target as HTMLElement).style.background = '#f6efe7')}
+                  onMouseOver={(e) => ((e.target as HTMLElement).style.background = 'var(--fdvt-panel-hover, #f6efe7)')}
                   onMouseOut={(e) => ((e.target as HTMLElement).style.background = 'none')}
                 >
                   <strong>{titleCase(r.town)}</strong>
                   {r.hasPhoto ? ' 📸' : ''}
-                  <span style={{ color: '#777' }}> — {titleCase(r.address)}</span>
+                  <span style={{ color: 'var(--fdvt-muted, #777)' }}> — {titleCase(r.address)}</span>
                 </button>
               </li>
             ))}
