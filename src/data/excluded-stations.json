@@ -8,6 +8,14 @@
       "reason": "Now a food shelf. E911 record dates from 1998 (MAPYEAR 1998-01-01).",
       "verifiedBy": "Tom Garvey",
       "verifiedOn": "2026-08-29"
+    },
+    {
+      "esiteid": 773054,
+      "address": "318 US ROUTE 2",
+      "town": "SOUTH HERO",
+      "reason": "Former South Hero station; the department operates from 131 COMMUNITY LN. Note this E911 record is recent (MAPYEAR 2026-02-03), so the layer is not stale here — it still classifies the old building as a fire station.",
+      "verifiedBy": "Tom Garvey",
+      "verifiedOn": "2026-08-29"
     }
   ]
 }

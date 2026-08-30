@@ -66,6 +66,11 @@ Verified so far:
 | ESITEID | Address | Why excluded |
 |---|---|---|
 | 71574 | 245 MAIN ST, COLCHESTER | Now a food shelf; E911 record dates from 1998 |
+| 773054 | 318 US ROUTE 2, SOUTH HERO | Former station; department operates from 131 COMMUNITY LN |
+
+Note the South Hero record was mapped 2026-02-03, so this is not simply old
+data going unrevised — the layer can classify a former station as current.
+On-the-ground checks are the only reliable correction.
 
 Since photographing the stations means visiting them, expect this list to grow.
 
