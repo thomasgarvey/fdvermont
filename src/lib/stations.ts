@@ -107,3 +107,18 @@ export const stations: Station[] = features.map((f) => {
 }).sort((a, b) => a.town.localeCompare(b.town) || a.address.localeCompare(b.address));
 
 export const photographedCount = stations.filter((s) => s.photo).length;
+
+/** Photo id → the station page showing it, for linking a thumbnail anywhere. */
+export const slugByPhotoId = new Map(
+  stations.filter((s) => s.photo).map((s) => [s.photo!.id, s.slug]),
+);
+
+/**
+ * Where a thumbnail of this photo should lead. Falls back to the station index
+ * for photos whose department has no station page — never to the bare image,
+ * which strands people outside the archive.
+ */
+export const photoHref = (photoId: string) => {
+  const slug = slugByPhotoId.get(photoId);
+  return slug ? `/stations/${slug}` : '/stations';
+};

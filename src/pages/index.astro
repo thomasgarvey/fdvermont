@@ -3,7 +3,7 @@ import LocationMap from "../components/islands/LocationMap.tsx";
 import photosData from "../data/photos.json";
 import locationsData from "../data/locations.geojson";
 import excludedStations from "../data/excluded-stations.json";
-import { photographedCount } from "../lib/stations";
+import { photographedCount, photoHref } from "../lib/stations";
 
 // Every figure on this page is computed from src/data at build time.
 const EXCLUDED = new Set(excludedStations.excluded.map((e) => e.esiteid));
@@ -193,9 +193,9 @@ const MARK_NEEDS = "#5C6469";
           </div>
 
           <div class="feature">
-            <a class="feature-plate" href={featured.src} target="_blank" rel="noopener"
+            <a class="feature-plate" href={photoHref(featured.id)}
               style={`background-image:url("${featured.src}")`}
-              aria-label={`${featured.caption} — open the full-size photograph`}></a>
+              aria-label={`${featured.caption} — open the station record`}></a>
             <div class="feature-record">
               <dl class="record">
                 {record.map(([k, v]) => (
@@ -229,9 +229,9 @@ const MARK_NEEDS = "#5C6469";
           <div class="plates">
             {plates.map((p) => (
               <figure class="plate">
-                <a href={p.src} target="_blank" rel="noopener"
+                <a href={photoHref(p.id)}
                   style={`background-image:url("${p.thumb}")`}
-                  aria-label={`${p.caption} — open the full-size photograph`}></a>
+                  aria-label={`${p.caption} — open the station record`}></a>
                 <figcaption>
                   <h3>{p.department?.name ?? p.caption}</h3>
                   <p>{place(p) || titleCase(p.town ?? "")}{p.dateTaken && <> · {p.dateTaken}</>}</p>
