@@ -97,9 +97,10 @@ function buildPopup(props: Record<string, any>): string {
 const titleCase = (s: string) =>
   s.toLowerCase().replace(/\b[a-z]/g, (c) => c.toUpperCase()).replace(/\bVt\b/g, 'VT');
 
-// Green = we have a photo of this station, blue = still needs one.
-const PHOTO_GREEN = '#2e7d32';
-const NEEDS_BLUE = '#2563eb';
+// Firehouse red = we have a photograph of this station, slate = still needs one.
+// Kept in step with the map key on the homepage.
+const PHOTO_GREEN = '#8B211E';
+const NEEDS_BLUE = '#5C6469';
 const pinIcon = (color: string) =>
   L.divIcon({
     html: `<svg width="26" height="38" viewBox="0 0 26 38" xmlns="http://www.w3.org/2000/svg">
@@ -200,7 +201,7 @@ export default function LocationMap({
         const size = count < 10 ? 36 : count < 40 ? 44 : 52;
         const inner = size - 9;
         return L.divIcon({
-          html: `<div style="width:${size}px;height:${size}px;border-radius:50%;background:conic-gradient(${PHOTO_GREEN} 0 ${pct}%, ${NEEDS_BLUE} ${pct}% 100%);display:flex;align-items:center;justify-content:center;box-shadow:0 1px 4px rgba(0,0,0,.4)"><div style="width:${inner}px;height:${inner}px;border-radius:50%;background:#2b2b2b;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:${size < 44 ? 13 : 15}px">${count}</div></div>`,
+          html: `<div style="width:${size}px;height:${size}px;border-radius:50%;background:conic-gradient(${PHOTO_GREEN} 0 ${pct}%, ${NEEDS_BLUE} ${pct}% 100%);display:flex;align-items:center;justify-content:center;box-shadow:0 1px 4px rgba(0,0,0,.35)"><div style="width:${inner}px;height:${inner}px;border-radius:50%;background:#242526;color:#F3EBDD;display:flex;align-items:center;justify-content:center;font-family:'Source Serif 4',Georgia,serif;font-weight:600;font-size:${size < 44 ? 13 : 15}px">${count}</div></div>`,
           className: '',
           iconSize: [size, size],
           iconAnchor: [size / 2, size / 2],
