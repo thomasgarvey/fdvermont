@@ -65,14 +65,27 @@ Verified so far:
 
 | ESITEID | Address | Why excluded |
 |---|---|---|
-| 71574 | 245 MAIN ST, COLCHESTER | Now a food shelf; E911 record dates from 1998 |
-| 773054 | 318 US ROUTE 2, SOUTH HERO | Former station; department operates from 131 COMMUNITY LN |
+| 71574 | 245 MAIN ST, COLCHESTER | Now a food shelf; record dates from 1998 |
+| 773054 | 318 US ROUTE 2, SOUTH HERO | Former station; department is at 131 COMMUNITY LN |
+| 333310 | 838 CHURCH RD, COLCHESTER | Colchester Water Department, Fire District No. 2 |
+| 74984 | 282 ETHAN ALLEN AVE, COLCHESTER | Not a fire station; a small single-bay building |
 
-Note the South Hero record was mapped 2026-02-03, so this is not simply old
-data going unrevised — the layer can classify a former station as current.
-On-the-ground checks are the only reliable correction.
+Two things this list has already taught us.
 
-Since photographing the stations means visiting them, expect this list to grow.
+**A recent `UPDATEDATE` means nothing about `SITETYPE`.** South Hero's record was
+mapped 2026-02-03 and Ethan Allen Ave was touched 2025-04-18; both are wrong. The
+layer can revise a record without anyone rechecking what the building is.
+
+**Colchester is the warning sign.** E911 listed seven fire stations there and
+three were wrong — a food shelf, a water utility, and an ordinary outbuilding.
+In the one town checked building by building, the error rate is 43%. Two of the
+three carry "fire district" or municipal associations, which fits the theory that
+some entries are classified by name: in Vermont a *fire district* is a water and
+services district, not a fire department.
+
+So the statewide figure of 277 is optimistic, and the layer should not be trusted
+for *what a building is* without a visit. Since photographing the stations means
+visiting them, expect this list to grow.
 
 ## Sources evaluated but not used
 

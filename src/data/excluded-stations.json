@@ -24,6 +24,14 @@
       "reason": "Colchester Water Department, Fire District No. 2 — a water utility, not a fire station. In Vermont a 'fire district' is a municipal water/services district, so E911 may be classifying these by name; worth watching for others.",
       "verifiedBy": "Tom Garvey",
       "verifiedOn": "2026-08-29"
+    },
+    {
+      "esiteid": 74984,
+      "address": "282 ETHAN ALLEN AVE",
+      "town": "COLCHESTER",
+      "reason": "Not a fire station — a small single-bay building on Ethan Allen Ave. Record dates from 1998 but was touched as recently as 2025-04-18, so a recent UPDATEDATE is no guarantee the SITETYPE was rechecked.",
+      "verifiedBy": "Tom Garvey",
+      "verifiedOn": "2026-08-30"
     }
   ]
 }
