@@ -140,8 +140,13 @@ async function geocode(address, city) {
   return hit;
 }
 
-const [photos, depts] = await Promise.all([fetchAll('Photos'), fetchAll('Fire Departments')]);
+const [photos, depts, stationRows] = await Promise.all([
+  fetchAll('Photos'), fetchAll('Fire Departments'), fetchAll('Fire Stations'),
+]);
 const deptById = new Map(depts.map((r) => [r.id, r.fields]));
+// Airtable's Fire Stations table, keyed by record id so a photo's Station link
+// resolves straight to a building — no address guessing.
+const stationById = new Map(stationRows.map((r) => [r.id, r.fields]));
 
 mkdirSync(`${ROOT}/public/photos`, { recursive: true });
 const out = [];
@@ -163,6 +168,10 @@ for (const r of photos) {
   }
 
   const dept = deptById.get(f['Fire Department']?.[0]);
+  // The Station link is the authority once set (migration step 2); the address
+  // join below stays as a fallback for photos not yet linked.
+  const linkedStation = stationById.get(f.Station?.[0]);
+  const station = linkedStation && linkedStation.Status !== 'Retired' ? linkedStation : undefined;
   out.push({
     id: r.id,
     src: `/${fullPath}`,
@@ -178,7 +187,7 @@ for (const r of photos) {
     department: dept
       ? { name: dept['Department Name'] ?? '', city: dept.City ?? '', county: dept.County ?? '' }
       : null,
-    town: dept ? townKey(dept) : null,
+    town: station ? townKey({ City: station.Town, 'Department Name': station.Town }) : (dept ? townKey(dept) : null),
     // Department's own coordinates, when set in Airtable. Used only as a
     // fallback: some departments (rescue squads, say) occupy buildings the
     // state's FIRE STATION layer doesn't include, so there is no pin to
@@ -188,7 +197,10 @@ for (const r of photos) {
     // Pins the photo to one building in multi-station towns. Per-photo
     // "Station Address" (Photos table) wins if present; otherwise the linked
     // department's Street Address (per-station dept records carry these).
-    stationAddress: f['Station Address'] ?? dept?.['Street Address'] ?? null,
+    stationAddress: station?.['Street Address'] ?? f['Station Address'] ?? dept?.['Street Address'] ?? null,
+    // Which route placed this photo, so the parity check can show its working.
+    placedBy: station ? 'station-link' : (dept ? 'address-join' : 'unplaced'),
+    esiteid: station?.ESITEID ?? null,
   });
 }
 

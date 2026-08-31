@@ -19,7 +19,9 @@
     "town": "ESSEX JUNCTION CITY",
     "lat": null,
     "lng": null,
-    "stationAddress": "3 Pearl St"
+    "stationAddress": "3 Pearl St",
+    "placedBy": "station-link",
+    "esiteid": 98545
   },
   {
     "id": "recGN4nqDP1JzxWL4",
@@ -41,7 +43,9 @@
     "town": "SOUTH BURLINGTON",
     "lat": null,
     "lng": null,
-    "stationAddress": "3 Holmes Rd"
+    "stationAddress": "3 Holmes Rd",
+    "placedBy": "station-link",
+    "esiteid": 230944
   },
   {
     "id": "rec8gGALoTcaplJXH",
@@ -63,7 +67,9 @@
     "town": "GEORGIA",
     "lat": null,
     "lng": null,
-    "stationAddress": "4134 ETHAN ALLEN HWY"
+    "stationAddress": "4134 Ethan Allen Hwy",
+    "placedBy": "station-link",
+    "esiteid": 110386
   },
   {
     "id": "recE9eCM3tjkbtD6a",
@@ -85,7 +91,9 @@
     "town": "FRANKLIN",
     "lat": null,
     "lng": null,
-    "stationAddress": "5154 Main St"
+    "stationAddress": "5154 Main St",
+    "placedBy": "station-link",
+    "esiteid": 109383
   },
   {
     "id": "recIRyyTAduDrfVJb",
@@ -107,7 +115,9 @@
     "town": null,
     "lat": 44.938071000003,
     "lng": -73.046866500001,
-    "stationAddress": "2996 VT-78, Highgate Center"
+    "stationAddress": "2996 VT-78, Highgate Center",
+    "placedBy": "address-join",
+    "esiteid": null
   },
   {
     "id": "recKofDfSCLcl7RG9",
@@ -129,7 +139,9 @@
     "town": "ISLE LA MOTTE",
     "lat": null,
     "lng": null,
-    "stationAddress": "349 Shrine Rd"
+    "stationAddress": "2241 Main St",
+    "placedBy": "station-link",
+    "esiteid": 134226
   },
   {
     "id": "recL3OkDs8R0x1ntK",
@@ -151,7 +163,9 @@
     "town": "SAINT ALBANS TOWN",
     "lat": null,
     "lng": null,
-    "stationAddress": "428 LAKE RD"
+    "stationAddress": "428 Lake Rd",
+    "placedBy": "station-link",
+    "esiteid": 242027
   },
   {
     "id": "recO6rHaMhRv3oufJ",
@@ -173,7 +187,9 @@
     "town": "SHELDON",
     "lat": null,
     "lng": null,
-    "stationAddress": null
+    "stationAddress": "479 Mill St",
+    "placedBy": "station-link",
+    "esiteid": 342859
   },
   {
     "id": "recWMyHbR16Cgwe5v",
@@ -195,7 +211,9 @@
     "town": null,
     "lat": 44.920692000003,
     "lng": -73.112980500001,
-    "stationAddress": "120 1st St"
+    "stationAddress": "120 1st St",
+    "placedBy": "address-join",
+    "esiteid": null
   },
   {
     "id": "recZJWdmrnEqcWWGo",
@@ -217,7 +235,9 @@
     "town": "SAINT ALBANS CITY",
     "lat": null,
     "lng": null,
-    "stationAddress": "30 LOWER WELDEN ST"
+    "stationAddress": "30 Lower Welden St",
+    "placedBy": "station-link",
+    "esiteid": 240104
   },
   {
     "id": "recadTX7ZwoRllm8E",
@@ -239,7 +259,9 @@
     "town": "COLCHESTER",
     "lat": null,
     "lng": null,
-    "stationAddress": "227 CLAY POINT RD"
+    "stationAddress": "227 Clay Point Rd",
+    "placedBy": "station-link",
+    "esiteid": 69588
   },
   {
     "id": "receqiKM8jFxPLdvf",
@@ -261,7 +283,9 @@
     "town": "MILTON",
     "lat": null,
     "lng": null,
-    "stationAddress": "47 Bombardier Rd"
+    "stationAddress": "47 Bombardier Rd",
+    "placedBy": "station-link",
+    "esiteid": 161741
   },
   {
     "id": "recfHP4lVffJLIltb",
@@ -283,7 +307,9 @@
     "town": "GRAND ISLE",
     "lat": null,
     "lng": null,
-    "stationAddress": "17 HYDE RD"
+    "stationAddress": "17 Hyde Rd",
+    "placedBy": "station-link",
+    "esiteid": 754088
   },
   {
     "id": "rectOraHDUYRnYTME",
@@ -305,7 +331,9 @@
     "town": "ALBURGH",
     "lat": null,
     "lng": null,
-    "stationAddress": "60 FIRE HOUSE RD"
+    "stationAddress": "60 Fire House Rd",
+    "placedBy": "station-link",
+    "esiteid": 1847
   },
   {
     "id": "rec61V8qy6sSM2VwT",
@@ -327,7 +355,9 @@
     "town": "BERLIN",
     "lat": null,
     "lng": null,
-    "stationAddress": "2095 VT-12"
+    "stationAddress": "2095 VT Route 12",
+    "placedBy": "station-link",
+    "esiteid": 23637
   },
   {
     "id": "recaeqhmXy04tIOP7",
@@ -349,7 +379,9 @@
     "town": "BURLINGTON",
     "lat": null,
     "lng": null,
-    "stationAddress": "20 Mansfield Avenue"
+    "stationAddress": "20 Mansfield Ave",
+    "placedBy": "station-link",
+    "esiteid": 48725
   },
   {
     "id": "receny9qpGCc1uy6J",
@@ -371,7 +403,9 @@
     "town": "MONTPELIER",
     "lat": null,
     "lng": null,
-    "stationAddress": "61 Main St"
+    "stationAddress": "61 Main St",
+    "placedBy": "station-link",
+    "esiteid": 165458
   },
   {
     "id": "reciHm2zR4OG2Gfh3",
@@ -393,7 +427,9 @@
     "town": "SOUTH HERO",
     "lat": null,
     "lng": null,
-    "stationAddress": "131 COMMUNITY LN"
+    "stationAddress": "131 Community Ln",
+    "placedBy": "station-link",
+    "esiteid": 755731
   },
   {
     "id": "rec8SgyXgTA9IJoZN",
@@ -415,7 +451,9 @@
     "town": "COLCHESTER",
     "lat": null,
     "lng": null,
-    "stationAddress": "483 Main St"
+    "stationAddress": "483 Main St",
+    "placedBy": "station-link",
+    "esiteid": 71881
   },
   {
     "id": "recEVBl6EFAVVRe30",
@@ -437,7 +475,9 @@
     "town": "BURLINGTON",
     "lat": null,
     "lng": null,
-    "stationAddress": "1391 North Ave"
+    "stationAddress": "1391 North Ave",
+    "placedBy": "station-link",
+    "esiteid": 44321
   },
   {
     "id": "recKT2ZG3VraekZsm",
@@ -459,7 +499,9 @@
     "town": "COLCHESTER",
     "lat": 44.537310000003,
     "lng": -73.207134000001,
-    "stationAddress": "687 Blakely Rd"
+    "stationAddress": "687 Blakely Rd",
+    "placedBy": "address-join",
+    "esiteid": null
   },
   {
     "id": "recQCxK7qpLlYmQTf",
@@ -481,7 +523,9 @@
     "town": "COLCHESTER",
     "lat": 44.537310000003,
     "lng": -73.207134000001,
-    "stationAddress": "687 Blakely Rd"
+    "stationAddress": "687 Blakely Rd",
+    "placedBy": "address-join",
+    "esiteid": null
   },
   {
     "id": "recRq4aXVCz8t6qKp",
@@ -503,7 +547,9 @@
     "town": "COLCHESTER",
     "lat": null,
     "lng": null,
-    "stationAddress": "220 College Pkwy"
+    "stationAddress": "220 College Pkwy",
+    "placedBy": "station-link",
+    "esiteid": 75538
   },
   {
     "id": "recnI4SqV9JD3z5O8",
@@ -525,7 +571,9 @@
     "town": "SOUTH BURLINGTON",
     "lat": null,
     "lng": null,
-    "stationAddress": "575 Dorset St"
+    "stationAddress": "575 Dorset St",
+    "placedBy": "station-link",
+    "esiteid": 229130
   },
   {
     "id": "recr2GwM37f3PZItb",
@@ -547,7 +595,9 @@
     "town": "COLCHESTER",
     "lat": null,
     "lng": null,
-    "stationAddress": "844 Church Rd"
+    "stationAddress": "844 Church Rd",
+    "placedBy": "station-link",
+    "esiteid": 73511
   },
   {
     "id": "rectkIQmk5IH7PQoe",
@@ -569,7 +619,9 @@
     "town": "SHELBURNE",
     "lat": null,
     "lng": null,
-    "stationAddress": null
+    "stationAddress": "5380 Shelburne Rd",
+    "placedBy": "station-link",
+    "esiteid": 221961
   },
   {
     "id": "recgXteLqjyCqrHyJ",
@@ -591,7 +643,9 @@
     "town": "WINOOSKI",
     "lat": null,
     "lng": null,
-    "stationAddress": null
+    "stationAddress": "120 Main St",
+    "placedBy": "station-link",
+    "esiteid": 299332
   },
   {
     "id": "rec99cMf4oatlYyMr",
@@ -613,7 +667,9 @@
     "town": "ESSEX TOWN",
     "lat": null,
     "lng": null,
-    "stationAddress": "190 Sandhill Rd"
+    "stationAddress": "188 Sand Hill Rd",
+    "placedBy": "station-link",
+    "esiteid": 96300
   },
   {
     "id": "rec2keNqUYSD7ttE5",
@@ -635,7 +691,9 @@
     "town": "WILLISTON",
     "lat": null,
     "lng": null,
-    "stationAddress": "645 Talcott Rd"
+    "stationAddress": "645 Talcott Rd",
+    "placedBy": "station-link",
+    "esiteid": 307597
   },
   {
     "id": "recqXVqpnb3RAXhyW",
@@ -657,7 +715,9 @@
     "town": "UNDERHILL",
     "lat": null,
     "lng": null,
-    "stationAddress": "288 Browns Trace Road"
+    "stationAddress": "420 VT Route 15",
+    "placedBy": "station-link",
+    "esiteid": 263994
   },
   {
     "id": "recofCtqpHw9TwZoN",
@@ -679,7 +739,9 @@
     "town": "BURLINGTON",
     "lat": null,
     "lng": null,
-    "stationAddress": "23 Ferguson Ave"
+    "stationAddress": "23 Ferguson Ave",
+    "placedBy": "station-link",
+    "esiteid": 51634
   },
   {
     "id": "rec1dBpBUR5gOcDIo",
@@ -701,7 +763,9 @@
     "town": "BURLINGTON",
     "lat": null,
     "lng": null,
-    "stationAddress": "136 South Winooski Ave"
+    "stationAddress": "136 S Winooski Ave",
+    "placedBy": "station-link",
+    "esiteid": 49157
   },
   {
     "id": "rec3K4fRkIL2IZQZx",
@@ -723,7 +787,9 @@
     "town": "BURLINGTON",
     "lat": null,
     "lng": null,
-    "stationAddress": "132 North Ave"
+    "stationAddress": "132 North Ave",
+    "placedBy": "station-link",
+    "esiteid": 337646
   },
   {
     "id": "recgIY3hUbdIfagyy",
@@ -745,7 +811,9 @@
     "town": "JAMAICA",
     "lat": null,
     "lng": null,
-    "stationAddress": null
+    "stationAddress": "4017 VT Route 30",
+    "placedBy": "station-link",
+    "esiteid": 135015
   },
   {
     "id": "recpUaKVeKwKDMogb",
@@ -767,7 +835,9 @@
     "town": "WINDHAM",
     "lat": null,
     "lng": null,
-    "stationAddress": null
+    "stationAddress": "290 White Rd",
+    "placedBy": "station-link",
+    "esiteid": 294986
   },
   {
     "id": "recZSA5kHjF8VT0n1",
@@ -789,7 +859,9 @@
     "town": "CHARLOTTE",
     "lat": null,
     "lng": null,
-    "stationAddress": "170 Ferry Rd"
+    "stationAddress": "170 Ferry Rd",
+    "placedBy": "station-link",
+    "esiteid": 63817
   },
   {
     "id": "recapYmJZRB3utYZ2",
@@ -811,6 +883,8 @@
     "town": "FERRISBURGH",
     "lat": null,
     "lng": null,
-    "stationAddress": "Route 7"
+    "stationAddress": "3909 US Route 7",
+    "placedBy": "station-link",
+    "esiteid": 107428
   }
 ]
