@@ -22,6 +22,28 @@
     "stationAddress": "3 Pearl St"
   },
   {
+    "id": "recGN4nqDP1JzxWL4",
+    "src": "/photos/recGN4nqDP1JzxWL4.jpg",
+    "thumb": "/photos/recGN4nqDP1JzxWL4.thumb.jpg",
+    "width": 2322,
+    "height": 1238,
+    "thumbWidth": 960,
+    "thumbHeight": 512,
+    "caption": "South Burlington Fire Station 2",
+    "photographer": "TGG",
+    "dateTaken": "2026-08-30",
+    "featured": false,
+    "department": {
+      "name": "South Burlington Fire Station 2",
+      "city": "South Burlington",
+      "county": "Chittenden"
+    },
+    "town": "SOUTH BURLINGTON",
+    "lat": null,
+    "lng": null,
+    "stationAddress": "3 Holmes Rd"
+  },
+  {
     "id": "rec8gGALoTcaplJXH",
     "src": "/photos/rec8gGALoTcaplJXH.jpg",
     "thumb": "/photos/rec8gGALoTcaplJXH.thumb.jpg",
