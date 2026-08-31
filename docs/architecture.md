@@ -85,12 +85,34 @@ the site is never in a broken state.
 
 | # | Step | Whose | Risk |
 |---|---|---|---|
-| 1 | Convert Fire Stations' `Airtable Department` from text to a **linked record** field | Airtable | None — additive |
-| 2 | **Link Photos to Fire Stations**, keeping the existing Department link for now | Airtable | None — additive |
-| 3 | Rewrite the sync to prefer the station link, falling back to the current address join | Code | Low — both paths work |
-| 4 | **Verify parity**: same photos placed, same pins | Code | — checkpoint |
+| 1 | Link Fire Stations → Fire Departments | Airtable | **Deferred** — see below |
+| 2 | ~~Link Photos to Fire Stations~~ | Airtable | **DONE 2026-08-30** — 33 of 37 |
+| 3 | ~~Sync prefers the station link, address join as fallback~~ | Code | **DONE** — commit cb7c164 |
+| 4 | ~~Verify parity~~ | Code | **PASSED** — 37/37, same pins |
 | 5 | Consolidate Fire Departments; drop the old Photos→Department link | Airtable | Destructive — do last |
 | 6 | Add the ~20 stations E911 omits | Either | Independent |
+
+**Step 1 is deferred, not skipped.** A dry run showed it would link only 35 of
+277 stations, because just 95 of 235 departments carry a Street Address and 58 of
+those are unusable for matching — PO boxes, street-only entries like "Route 5",
+or buildings E911 does not list. That is a data-completeness limit, not a method
+one: you cannot link a department to a building nobody has recorded it occupying.
+It will grow as addresses get filled in. (Matching on the `Airtable Department`
+text column does worse still — 32 — because that column is a frozen snapshot of
+the CSV import and already contains a typo since corrected in the departments
+table.)
+
+**Step 2 result.** The four photos left unlinked are exactly those whose
+department has no station record — Highgate, Swanton Village, and the two
+Colchester rescue units — so they continue to place via their geocoded pins.
+They link themselves once step 6 adds those stations.
+
+**Step 4 result.** 37 of 37 photos placed, 33 via the link and 4 via geocoding,
+and a pin-level comparison confirmed every photo lands on the same building as
+before. Nineteen address *strings* changed, but only cosmetically — the station's
+canonical `428 Lake Rd` replacing a department's typed `428 LAKE RD` — except
+Essex Junction, where the link corrected `190 Sandhill Rd` to E911's actual
+`188 Sand Hill Rd`.
 
 **Step 4 is the checkpoint that makes the rest safe.** Do not start step 5 until
 it passes.
