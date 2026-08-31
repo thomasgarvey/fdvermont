@@ -99,9 +99,16 @@ it passes.
 site breaks once photos hang off stations — they are redundant records that would
 look wrong in a future department listing. Data hygiene, not a blocker.
 
-**The cutover is exact, not approximate.** Fire Stations holds 277 rows, 3 marked
-Retired, so filtering to Active gives exactly the 274 pins the map shows today.
-That equality is the parity test.
+**The cutover is exact, not approximate.** Filtering Fire Stations to Active
+should equal the number of pins the map draws. That equality is the parity test.
+
+**Keep the two retirement lists in step.** Retiring a station is currently done
+twice — once in `excluded-stations.json` (which the site reads) and once in the
+Fire Stations `Status` column (which it does not read yet). They drift: as of
+2026-08-30 the repo retires four but Airtable retires three, so Active reads 274
+against 273 pins. Reconcile before testing parity, or the check fails by the
+count of the drift rather than for any real reason. After the migration only the
+Airtable column exists and the problem disappears.
 
 **Ordering matters.** An earlier draft of this plan put step 5 before step 2.
 That would have removed the department records photos currently link to *before*
