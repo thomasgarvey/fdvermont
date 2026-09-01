@@ -1,8 +1,13 @@
 ---
 import LocationMap from "../components/islands/LocationMap.tsx";
+import Analytics from "../components/Analytics.astro";
 ---
 <html lang="en">
-  <head><meta charset="utf-8" /><title>Fire Stations – Vermont</title></head>
+  <head>
+    <meta charset="utf-8" />
+    <title>Fire Stations – Vermont</title>
+    <Analytics />
+  </head>
   <body style="margin:0">
     <LocationMap client:only="preact" height="100vh" />
   </body>

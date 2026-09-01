@@ -1,0 +1,16 @@
+---
+// Google Analytics 4 — property "fdvermont.org" (552149614) in the "Tom Garvey"
+// account. Guarded on PROD so `astro dev` traffic never reaches the property.
+---
+
+{import.meta.env.PROD && (
+  <Fragment>
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-WWVDDS9BTP"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag("js", new Date());
+      gtag("config", "G-WWVDDS9BTP");
+    </script>
+  </Fragment>
+)}
