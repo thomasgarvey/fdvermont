@@ -215,6 +215,23 @@ export default function LocationMap({
 
     const map = L.map(containerRef.current, { zoomControl: false });
     L.control.zoom({ position: 'bottomleft' }).addTo(map);
+
+    // A photo popup runs ~460px tall: thumbnail, caption, credit, the six-row
+    // table and two links. The homepage panel is only clamp(380px, 58vh, 560px),
+    // so on a phone the popup is as tall as the map that has to hold it. Leaflet
+    // then auto-pans to fit a popup that can never fit, panning hard against the
+    // container edge — and every pan re-clusters the markers, which takes the
+    // popup's own marker out from under it and closes it. Capping the popup to
+    // part of the map's height makes Leaflet scroll the content instead, so the
+    // pan settles and the popup stays put. Measured on open, because the panel
+    // is a flex child whose height only resolves after mount.
+    map.on('popupopen', (e: any) => {
+      const max = Math.max(160, Math.round(map.getSize().y * 0.62));
+      if (e.popup.options.maxHeight !== max) {
+        e.popup.options.maxHeight = max;
+        e.popup.update();
+      }
+    });
     L.tileLayer(tileUrl, { attribution }).addTo(map);
 
     const cluster = (L as any).markerClusterGroup({
