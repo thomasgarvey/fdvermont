@@ -375,9 +375,9 @@
     "town": "SAINT ALBANS CITY",
     "lat": null,
     "lng": null,
-    "stationAddress": "30 Lower Welden St",
+    "stationAddress": "32 Lower Welden St",
     "placedBy": "station-link",
-    "esiteid": 240104
+    "esiteid": 241097
   },
   {
     "id": "recadTX7ZwoRllm8E",
@@ -402,6 +402,30 @@
     "stationAddress": "227 Clay Point Rd",
     "placedBy": "station-link",
     "esiteid": 69588
+  },
+  {
+    "id": "receqGrlckkFRxT7l",
+    "src": "/photos/receqGrlckkFRxT7l.jpg",
+    "thumb": "/photos/receqGrlckkFRxT7l.thumb.jpg",
+    "width": 2189,
+    "height": 1203,
+    "thumbWidth": 932,
+    "thumbHeight": 512,
+    "caption": "Saint Albans City Fire Department",
+    "photographer": "T. Garvey",
+    "dateTaken": "2026-08-29",
+    "featured": false,
+    "department": {
+      "name": "St. Albans City Fire Department",
+      "city": "Saint Albans",
+      "county": "Franklin"
+    },
+    "town": "SAINT ALBANS CITY",
+    "lat": null,
+    "lng": null,
+    "stationAddress": "32 Lower Welden St",
+    "placedBy": "station-link",
+    "esiteid": 241097
   },
   {
     "id": "receqiKM8jFxPLdvf",
