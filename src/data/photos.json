@@ -535,11 +535,7 @@
     "photographer": "T. Garvey",
     "dateTaken": "2026-05-02",
     "featured": false,
-    "department": {
-      "name": "Burlington Fire Department #3",
-      "city": "Burlington",
-      "county": "Chittenden"
-    },
+    "department": null,
     "town": "BURLINGTON",
     "lat": null,
     "lng": null,
@@ -631,11 +627,7 @@
     "photographer": "T. Garvey",
     "dateTaken": "2026-04-12",
     "featured": false,
-    "department": {
-      "name": "Burlington Fire Department #4",
-      "city": "Burlington",
-      "county": "Chittenden"
-    },
+    "department": null,
     "town": "BURLINGTON",
     "lat": null,
     "lng": null,
@@ -895,11 +887,7 @@
     "photographer": "T. Garvey",
     "dateTaken": "2026-03-19",
     "featured": false,
-    "department": {
-      "name": "Burlington Fire Department #5",
-      "city": "Burlington",
-      "county": "Chittenden"
-    },
+    "department": null,
     "town": "BURLINGTON",
     "lat": null,
     "lng": null,
@@ -919,11 +907,7 @@
     "photographer": "T. Garvey",
     "dateTaken": "2024-10-24",
     "featured": false,
-    "department": {
-      "name": "Burlington Fire Department #1",
-      "city": "Burlington",
-      "county": "Chittenden"
-    },
+    "department": null,
     "town": "BURLINGTON",
     "lat": null,
     "lng": null,
@@ -943,11 +927,7 @@
     "photographer": "T. Garvey",
     "dateTaken": "2024-10-24",
     "featured": false,
-    "department": {
-      "name": "Burlington Fire Department #2",
-      "city": "Burlington",
-      "county": "Chittenden"
-    },
+    "department": null,
     "town": "BURLINGTON",
     "lat": null,
     "lng": null,

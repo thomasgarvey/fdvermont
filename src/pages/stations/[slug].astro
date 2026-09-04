@@ -24,7 +24,9 @@ const record: [string, string][] = [
   ["E911 last updated", station.updated],
 ].filter(([, v]) => v);
 
-const title = `${station.name}, ${station.town} – Vermont Fire Stations`;
+// Include the address: towns with several stations would otherwise produce
+// identical <title>s, which is poor for search and for open tabs.
+const title = `${station.name}, ${station.address}, ${station.town} – Vermont Fire Stations`;
 const description = p
   ? `Photograph and record for ${station.name} at ${station.address}, ${station.town}, Vermont.`
   : `Station record for ${station.name} at ${station.address}, ${station.town}, Vermont. No photograph yet — submissions welcome.`;

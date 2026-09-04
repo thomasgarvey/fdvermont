@@ -94,6 +94,13 @@ export const stations: Station[] = features.map((f) => {
   seen.add(slug);
 
   const department = photo?.department?.name ?? null;
+  // A station's name used to come from its department record, which worked only
+  // while departments were really stations ("Burlington Fire Department #3").
+  // Consolidating those left five Burlington pages all called "Burlington Fire
+  // Station". Prefer the photograph's caption, which names the building, and
+  // fall back to the town. Airtable's Fire Stations table has no name column
+  // yet — that is where this belongs.
+  const name = photo?.caption?.trim() || department || `${town} Fire Station`;
   return {
     slug,
     esiteid: f.esiteid as number,
@@ -107,7 +114,7 @@ export const stations: Station[] = features.map((f) => {
     updated: f.updated ?? '',
     department,
     photo,
-    name: department ?? `${town} Fire Station`,
+    name,
   };
 }).sort((a, b) => a.town.localeCompare(b.town) || a.address.localeCompare(b.address));
 
