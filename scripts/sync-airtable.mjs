@@ -265,5 +265,21 @@ const retired = stationRows
   }))
   .sort((a, b) => a.town.localeCompare(b.town) || a.address.localeCompare(b.address));
 writeFileSync(`${ROOT}/src/data/retired-stations.json`, JSON.stringify(retired, null, 2) + '\n');
+// A photograph whose station has been retired has nowhere to land and simply
+// vanishes from the map. Retiring is a one-click action in Airtable, so say so
+// loudly rather than letting the picture disappear quietly.
+const rosterIds = new Set(roster.map((s) => s.esiteid));
+const orphaned = out.filter(
+  (p) => !(p.esiteid != null && rosterIds.has(p.esiteid)) && p.lat == null,
+);
+if (orphaned.length) {
+  console.warn(`\n  !! ${orphaned.length} photograph(s) have nowhere to land and will NOT appear:`);
+  for (const p of orphaned) {
+    console.warn(`     - ${p.caption || p.department?.name || p.id}`);
+  }
+  console.warn('     Usually this means the station was retired in Airtable, or its');
+  console.warn('     department has no address to match. Check before deploying.\n');
+}
+
 const noReason = retired.filter((r) => !r.reason).length;
 console.log(`Retired: ${retired.length} -> src/data/retired-stations.json${noReason ? `  (${noReason} with no reason recorded)` : ''}`);
