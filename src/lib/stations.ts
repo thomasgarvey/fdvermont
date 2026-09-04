@@ -1,9 +1,8 @@
 // One place that turns the two data files into the station records the
 // per-station pages are built from. Kept out of the pages themselves so the
 // index and the detail pages cannot drift apart.
-import locationsData from '../data/locations.geojson';
+import stationsData from '../data/stations.json';
 import photosData from '../data/photos.json';
-import excludedStations from '../data/excluded-stations.json';
 
 export type Photo = (typeof photosData)[number];
 
@@ -25,8 +24,6 @@ export interface Station {
   name: string;
 }
 
-const EXCLUDED = new Set(excludedStations.excluded.map((e) => e.esiteid));
-
 export const titleCase = (s: string | null | undefined) =>
   (s ?? '').toLowerCase()
     .replace(/\b[a-z]/g, (c) => c.toUpperCase())
@@ -45,27 +42,36 @@ const normAddr = (s: string | null | undefined) =>
     .split(/\s+/).map((w) => (w in ADDR_TOKENS ? ADDR_TOKENS[w] : w))
     .filter(Boolean).join(' ');
 
+// Photos carry E911's uppercase town ("SOUTH BURLINGTON"); Airtable's roster is
+// title-case ("South Burlington"). Compare on a normalised form, and treat
+// Saint/St alike — that difference silently dropped both St. Albans photos once.
+const normTown = (s: string | null | undefined) =>
+  (s ?? '').toUpperCase().replace(/\b(SAINT|ST\.?)\b/g, 'ST')
+    .replace(/[^A-Z0-9 ]/g, ' ').replace(/\s+/g, ' ').trim();
+
 const slugify = (s: string) =>
   s.toLowerCase().normalize('NFKD').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 
-const features = (locationsData as GeoJSON.FeatureCollection).features.filter(
-  (f) => f.geometry?.type === 'Point' && !EXCLUDED.has((f.properties as any)?.ESITEID),
-);
+// The roster comes from Airtable's Fire Stations table (synced to
+// src/data/stations.json); a station is retired by setting Status there, not
+// by editing code.
+const features = stationsData;
 
 // photos indexed by normalised street address, the same join the map uses
 const photoByAddr = new Map<string, Photo>();
 const townPhotos = new Map<string, Photo[]>();
 const stationsPerTown = new Map<string, number>();
 for (const f of features) {
-  const t = (f.properties as any)?.TOWNNAME;
+  const t = normTown(f.town);
   if (t) stationsPerTown.set(t, (stationsPerTown.get(t) ?? 0) + 1);
 }
 for (const p of photosData) {
   const a = normAddr(p.stationAddress);
   if (a && !photoByAddr.has(a)) photoByAddr.set(a, p);
-  if (p.town) {
-    if (!townPhotos.has(p.town)) townPhotos.set(p.town, []);
-    townPhotos.get(p.town)!.push(p);
+  const t = normTown(p.town);
+  if (t) {
+    if (!townPhotos.has(t)) townPhotos.set(t, []);
+    townPhotos.get(t)!.push(p);
   }
 }
 
@@ -79,27 +85,26 @@ function photoFor(townRaw: string, addrRaw: string): Photo | null {
 
 const seen = new Set<string>();
 export const stations: Station[] = features.map((f) => {
-  const p = (f.properties ?? {}) as Record<string, any>;
-  const [lng, lat] = (f.geometry as GeoJSON.Point).coordinates;
-  const town = titleCase(p.TOWNNAME);
-  const address = titleCase(p.PRIMARYADD);
-  const photo = photoFor(p.TOWNNAME, p.PRIMARYADD);
+  const town = titleCase(f.town);
+  const address = titleCase(f.address);
+  const photo = photoFor(normTown(f.town), f.address);
 
   let slug = slugify(`${town} ${address}`);
-  if (seen.has(slug)) slug = `${slug}-${p.ESITEID}`; // ESITEID guarantees uniqueness
+  if (seen.has(slug)) slug = `${slug}-${f.esiteid ?? f.id}`; // guarantees uniqueness
   seen.add(slug);
 
   const department = photo?.department?.name ?? null;
   return {
     slug,
-    esiteid: p.ESITEID,
+    esiteid: f.esiteid as number,
     address,
     town,
-    county: titleCase((p.COUNTY ?? '').replace(/ County$/i, '')),
-    zip: p.ZIP ?? '',
-    lat, lng,
-    mapped: p.MAPYEAR ?? '',
-    updated: p.UPDATEDATE ?? '',
+    county: titleCase((f.county ?? '').replace(/ County$/i, '')),
+    zip: f.zip ?? '',
+    lat: f.lat as number,
+    lng: f.lng as number,
+    mapped: f.mapped ?? '',
+    updated: f.updated ?? '',
     department,
     photo,
     name: department ?? `${town} Fire Station`,

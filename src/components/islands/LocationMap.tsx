@@ -4,9 +4,7 @@ import 'leaflet/dist/leaflet.css';
 import 'leaflet.markercluster/dist/MarkerCluster.css';
 import 'leaflet.markercluster/dist/MarkerCluster.Default.css';
 import 'leaflet.markercluster';
-import locationsData from '../../data/locations.geojson';
 import photosData from '../../data/photos.json';
-import excludedStations from '../../data/excluded-stations.json';
 import { stations as stationRecords } from '../../lib/stations';
 
 // Slugs come from the same module that generates /stations/[slug], so a popup
@@ -24,55 +22,8 @@ L.Icon.Default.mergeOptions({
 const OSM_TILE = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 const OSM_ATTR = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
 
-const DISPLAY_KEYS = ['PRIMARYADD', 'SITETYPE', 'TOWNNAME', 'COUNTY', 'STATE', 'ZIP'];
-
-// Photos are synced from Airtable keyed by E911 town name (see scripts/sync-airtable.mjs).
-// A photo's optional stationAddress pins it to one building; without it, the
-// photo applies town-wide — but only in towns with a single station, so a
-// photo is never shown on a building it might not depict.
-const ADDR_TOKENS: Record<string, string> = {
-  SOUTH: 'S', NORTH: 'N', EAST: 'E', WEST: 'W',
-  AVENUE: 'AVE', STREET: 'ST', ROAD: 'RD', DRIVE: 'DR', LANE: 'LN',
-  TURNPIKE: 'TPKE', PARKWAY: 'PKWY', HIGHWAY: 'HWY', ROUTE: '', RTE: '', RT: '',
-};
-const normAddr = (s: string | null | undefined) =>
-  (s ?? '')
-    .toUpperCase()
-    .replace(/[^A-Z0-9 ]/g, ' ')
-    .split(/\s+/)
-    .map((w) => (w in ADDR_TOKENS ? ADDR_TOKENS[w] : w))
-    .filter(Boolean)
-    .join(' ');
-
-// Points the state still lists as FIRE STATION but which aren't one any more.
-const EXCLUDED_IDS = new Set(excludedStations.excluded.map((e) => e.esiteid));
-const isExcluded = (props: any) => EXCLUDED_IDS.has(props?.ESITEID);
-
-const photosByTown = new Map<string, typeof photosData>();
-const stationsPerTown = new Map<string, number>();
-for (const p of photosData) {
-  if (!p.town) continue;
-  if (!photosByTown.has(p.town)) photosByTown.set(p.town, []);
-  photosByTown.get(p.town)!.push(p);
-}
-for (const f of (locationsData as GeoJSON.FeatureCollection).features) {
-  if (isExcluded(f.properties)) continue;
-  const t = (f.properties as any)?.TOWNNAME;
-  if (t) stationsPerTown.set(t, (stationsPerTown.get(t) ?? 0) + 1);
-}
-
-// The one place that decides which photo (if any) belongs to a station.
-// Used for both the popup and the marker colour so the two can't disagree.
-function findPhoto(town: string | undefined, address: string | undefined) {
-  const townPhotos = town ? photosByTown.get(town) : undefined;
-  if (!townPhotos?.length) return null;
-  const addr = normAddr(address);
-  // Exact building match wins; otherwise town-wide only if unambiguous
-  const exact = townPhotos.find((x) => x.stationAddress && normAddr(x.stationAddress) === addr);
-  if (exact) return exact;
-  if ((stationsPerTown.get(town!) ?? 0) > 1) return null;
-  return townPhotos[0]; // featured-first order from the sync
-}
+// Photo-to-station matching lives in lib/stations.ts; this component reads the
+// resolved result so the map, the station pages and the search cannot disagree.
 
 type Photo = (typeof photosData)[number];
 
@@ -99,21 +50,22 @@ function photoBlockHtml(p: Photo, href?: string): string {
 }
 
 
-function buildPopup(props: Record<string, any>): string {
-  const p = findPhoto(props.TOWNNAME, props.PRIMARYADD);
-  // Prefer the department's name; fall back to the street address for stations
-  // we have no Airtable record for.
-  const title = p?.department?.name || props.name || props.PRIMARYADD || 'Location';
-  const rows = DISPLAY_KEYS
-    .filter((k) => props[k] != null && typeof props[k] === 'string')
-    .map((k) => `<tr><td style="padding:2px 6px 2px 0;color:var(--fdvt-muted,#555)">${k}</td><td style="padding:2px 0">${props[k]}</td></tr>`)
+type StationRecord = (typeof stationRecords)[number];
+
+function buildPopup(st: StationRecord): string {
+  const p = st.photo;
+  const page = `/stations/${st.slug}`;
+  const rows: [string, string][] = [
+    ['Address', st.address],
+    ['Town', st.town],
+    ['County', st.county ? `${st.county} County` : ''],
+    ['ZIP', st.zip],
+  ].filter(([, v]) => v) as [string, string][];
+  const table = rows
+    .map(([k, v]) => `<tr><td style="padding:2px 8px 2px 0;color:var(--fdvt-muted,#555)">${k}</td><td style="padding:2px 0">${v}</td></tr>`)
     .join('');
-  const slug = SLUG_BY_ESITEID.get(props.ESITEID);
-  const page = slug ? `/stations/${slug}` : undefined;
-  const more = page
-    ? `<a href="${page}" style="display:inline-block;margin-top:6px;font-weight:600;color:var(--fdvt-link,#8B211E)">Station record →</a>`
-    : '';
-  return `<strong>${title}</strong>${p ? photoBlockHtml(p, page) : ''}${rows ? `<table style="margin-top:4px;border-collapse:collapse">${rows}</table>` : ''}${more}`;
+  const more = `<a href="${page}" style="display:inline-block;margin-top:6px;font-weight:600;color:var(--fdvt-link,#8B211E)">Station record →</a>`;
+  return `<strong>${st.name}</strong>${p ? photoBlockHtml(p, page) : ''}<table style="margin-top:4px;border-collapse:collapse">${table}</table>${more}`;
 }
 
 const titleCase = (s: string) =>
@@ -260,39 +212,28 @@ export default function LocationMap({
 
     const placed = new Set<string>();
 
-    for (const feature of (locationsData as GeoJSON.FeatureCollection).features) {
-      if (!feature.geometry) continue;
-      if (isExcluded(feature.properties)) continue;
-      const popup = buildPopup((feature.properties ?? {}) as Record<string, any>);
-
-      if (feature.geometry.type === 'Point') {
-        const [lng, lat] = (feature.geometry as GeoJSON.Point).coordinates;
-        const props = (feature.properties ?? {}) as Record<string, any>;
-        const town = props.TOWNNAME ?? '';
-        const photo = findPhoto(town, props.PRIMARYADD);
-        if (photo) placed.add(photo.id);
-        const marker = L.marker([lat, lng], {
-          icon: photo ? ICON_WITH_PHOTO : ICON_NO_PHOTO,
-        }).bindPopup(popup, photo ? POPUP_OPTS_PHOTO : POPUP_OPTS_PLAIN);
-        cluster.addLayer(marker);
-        const deptNames = (photosByTown.get(town) ?? [])
-          .map((p) => p.department?.name ?? '')
-          .join(' ');
-        indexRef.current.push({
-          town,
-          address: props.PRIMARYADD ?? '',
-          haystack: `${town} ${props.PRIMARYADD ?? ''} ${props.ZIP ?? ''} ${deptNames}`.toUpperCase(),
-          hasPhoto: !!photo,
-          marker,
-        });
-      } else {
-        nonPointLayers.push(L.geoJSON(feature).bindPopup(popup));
-      }
+    // One pin per active station in Airtable's Fire Stations table. lib/stations
+    // has already resolved which photograph belongs to each, so the map does not
+    // repeat that matching and cannot disagree with the station pages.
+    for (const st of stationRecords) {
+      const photo = st.photo;
+      if (photo) placed.add(photo.id);
+      const marker = L.marker([st.lat, st.lng], {
+        icon: photo ? ICON_WITH_PHOTO : ICON_NO_PHOTO,
+      }).bindPopup(buildPopup(st), photo ? POPUP_OPTS_PHOTO : POPUP_OPTS_PLAIN);
+      cluster.addLayer(marker);
+      indexRef.current.push({
+        town: st.town.toUpperCase(),
+        address: st.address,
+        haystack: `${st.town} ${st.address} ${st.zip} ${st.name}`.toUpperCase(),
+        hasPhoto: !!photo,
+        marker,
+      });
     }
 
-    // Photos whose department has no station in the E911 fire-station layer
-    // (rescue squads and the like) get their own pin from the department's
-    // Airtable coordinates, so a photo is never stranded off the map.
+    // Photos whose department has no row in Fire Stations (rescue squads, and
+    // towns the E911 import missed) get their own pin from the department's
+    // coordinates, so a photograph is never stranded off the map.
     for (const p of photosData as Photo[]) {
       if (placed.has(p.id) || p.lat == null || p.lng == null) continue;
       const name = p.department?.name || p.caption || 'Station';
@@ -321,9 +262,8 @@ export default function LocationMap({
     // the next frame, or the initial fitBounds lands on a world view.
     const fitToStations = () => {
       map.invalidateSize();
-      if (cluster.getLayers().length === 1 && (locationsData as GeoJSON.FeatureCollection).features[0]?.geometry?.type === 'Point') {
-        const [lng, lat] = ((locationsData as GeoJSON.FeatureCollection).features[0].geometry as GeoJSON.Point).coordinates;
-        map.setView([lat, lng], zoom);
+      if (cluster.getLayers().length === 1 && stationRecords[0]) {
+        map.setView([stationRecords[0].lat, stationRecords[0].lng], zoom);
         return;
       }
       const bounds = cluster.getBounds();

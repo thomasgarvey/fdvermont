@@ -1,23 +1,20 @@
 ---
 import LocationMap from "../components/islands/LocationMap.tsx";
 import photosData from "../data/photos.json";
-import locationsData from "../data/locations.geojson";
-import excludedStations from "../data/excluded-stations.json";
-import { photographedCount, photoHref } from "../lib/stations";
+import retiredStations from "../data/retired-stations.json";
+import { photographedCount, photoHref, stations } from "../lib/stations";
 import Analytics from "../components/Analytics.astro";
 
-// Every figure on this page is computed from src/data at build time.
-const EXCLUDED = new Set(excludedStations.excluded.map((e) => e.esiteid));
-const stations = (locationsData as GeoJSON.FeatureCollection).features.filter(
-  (f) => f.geometry?.type === "Point" && !EXCLUDED.has((f.properties as any)?.ESITEID),
-);
-const props = stations.map((f) => (f.properties ?? {}) as Record<string, any>);
-const count = (key: string) => new Set(props.map((p) => p[key]).filter(Boolean)).size;
+// Every figure on this page is computed at build time from the same roster the
+// map and the station pages use — Airtable's Fire Stations table, minus anything
+// marked Retired there.
+const count = (key: "town" | "county") =>
+  new Set(stations.map((s) => s[key]).filter(Boolean)).size;
 
 const ledger = [
   { n: stations.length, label: "Stations recorded" },
-  { n: count("TOWNNAME"), label: "Towns" },
-  { n: count("COUNTY"), label: "Counties" },
+  { n: count("town"), label: "Towns" },
+  { n: count("county"), label: "Counties" },
   // Stations we hold a photograph of — not the number of photographs, which is
   // higher because some stations have more than one.
   { n: photographedCount, label: "Photographed" },
@@ -257,7 +254,7 @@ const MARK_NEEDS = "#5C6469";
             <p class="fine">
               Station locations come from VT E911 / VCGI and OpenStreetMap. Points the state still
               lists as fire stations but which no longer are get removed as they come to light —
-              {" "}{excludedStations.excluded.length} so far.
+              {" "}{retiredStations.length} so far.
             </p>
           </div>
           <div class="contribute">

@@ -224,3 +224,46 @@ for (const p of out) {
 out.sort((a, b) => (b.featured - a.featured) || String(b.dateTaken).localeCompare(String(a.dateTaken)));
 writeFileSync(`${ROOT}/src/data/photos.json`, JSON.stringify(out, null, 2) + '\n');
 console.log(`Synced ${out.length} photos (${photos.length} records total), ${geocoded} geocoded -> src/data/photos.json + public/photos/`);
+
+// --- The station roster the site draws ------------------------------------
+// Airtable's Fire Stations table is the source of truth for which stations
+// exist and where. Retiring one is a Status change here, not a code edit —
+// which is what src/data/excluded-stations.json used to do.
+const roster = stationRows
+  .filter((r) => r.fields.Status !== 'Retired')
+  .map((r) => {
+    const f = r.fields;
+    return {
+      id: r.id,
+      esiteid: f.ESITEID ?? null,
+      address: f['Street Address'] ?? '',
+      town: f.Town ?? '',
+      county: f.County ?? '',
+      zip: f.Zip != null ? String(f.Zip).padStart(5, '0') : '',
+      lat: typeof f.Latitude === 'number' ? f.Latitude : null,
+      lng: typeof f.Longitude === 'number' ? f.Longitude : null,
+      mapped: f['E911 Mapped'] ?? '',
+      updated: f['E911 Updated'] ?? '',
+    };
+  })
+  .filter((s) => s.lat != null && s.lng != null && s.address && s.town)
+  .sort((a, b) => a.town.localeCompare(b.town) || a.address.localeCompare(b.address));
+
+writeFileSync(`${ROOT}/src/data/stations.json`, JSON.stringify(roster, null, 2) + '\n');
+const dropped = stationRows.filter((r) => r.fields.Status !== 'Retired').length - roster.length;
+console.log(`Roster: ${roster.length} active stations -> src/data/stations.json${dropped ? `  (${dropped} skipped: missing coordinates or address)` : ''}`);
+
+// Retired stations, kept in the repo so the reasons survive in git history —
+// each one is a building somebody drove to and checked.
+const retired = stationRows
+  .filter((r) => r.fields.Status === 'Retired')
+  .map((r) => ({
+    esiteid: r.fields.ESITEID ?? null,
+    address: r.fields['Street Address'] ?? '',
+    town: r.fields.Town ?? '',
+    reason: r.fields['Retired Reason'] ?? '',
+  }))
+  .sort((a, b) => a.town.localeCompare(b.town) || a.address.localeCompare(b.address));
+writeFileSync(`${ROOT}/src/data/retired-stations.json`, JSON.stringify(retired, null, 2) + '\n');
+const noReason = retired.filter((r) => !r.reason).length;
+console.log(`Retired: ${retired.length} -> src/data/retired-stations.json${noReason ? `  (${noReason} with no reason recorded)` : ''}`);
