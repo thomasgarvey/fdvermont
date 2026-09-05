@@ -130,7 +130,7 @@ const MARK_NEEDS = "#5C6469";
         <div class="wrap hero-wrap">
           <div class="panel">
             <p class="stamp">Vermont Fire Stations</p>
-            <h1>Vermont's firehouses, photographed.</h1>
+            <h1>Vermont's fire stations.</h1>
             <p class="panel-sub">Explore the stations by town, department, or county.</p>
 
             <form class="search" id="hero-search" autocomplete="off">
@@ -947,7 +947,10 @@ const MARK_NEEDS = "#5C6469";
       width: 100vw;
       margin-inline: calc(50% - 50vw);
       border-inline: 0;
-      height: clamp(380px, 58vh, 560px);
+      /* Vermont is tall and narrow. On a phone the map has to hold the state,
+         the pin overhang and the search pill; too short and the fit drops a
+         zoom level and frames half of New England instead. */
+      height: clamp(460px, 72vh, 640px);
     }
   }
 

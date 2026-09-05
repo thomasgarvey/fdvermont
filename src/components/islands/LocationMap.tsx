@@ -165,8 +165,20 @@ export default function LocationMap({
   useEffect(() => {
     if (!containerRef.current) return;
 
-    const map = L.map(containerRef.current, { zoomControl: false });
-    L.control.zoom({ position: 'bottomleft' }).addTo(map);
+    // Leaflet snaps to whole zoom levels, so fitting Vermont into a phone-sized
+    // box lands on 7 when it wants about 7.6 — and 7 frames Montreal and
+    // Massachusetts around a small Vermont. Fractional zoom lets the fit be
+    // exact; zoomDelta keeps the +/- buttons stepping a whole level at a time.
+    const map = L.map(containerRef.current, {
+      zoomControl: false,
+      zoomSnap: 0,
+      zoomDelta: 1,
+    });
+    // The search pill sits bottom-centre and spans nearly the full width on a
+    // phone, which puts it straight over a bottom-left zoom control.
+    L.control
+      .zoom({ position: window.innerWidth < 700 ? 'topleft' : 'bottomleft' })
+      .addTo(map);
 
     // A photo popup runs ~460px tall: thumbnail, caption, credit, the six-row
     // table and two links. The homepage panel is only clamp(380px, 58vh, 560px),
@@ -267,13 +279,38 @@ export default function LocationMap({
         return;
       }
       const bounds = cluster.getBounds();
-      if (bounds.isValid()) map.fitBounds(bounds, { padding: [20, 20] });
+      // Markers are pins anchored at their tip, so they need headroom above;
+      // and the search pill covers the bottom ~60px of the map.
+      if (bounds.isValid()) {
+        // Keep this modest: on a phone the map is only ~470px tall, so every
+        // 40px of padding costs most of a zoom level and pushes Vermont back
+        // into a view of the whole north-east.
+        // fitBounds pads marker *positions*, but a pin is drawn 38px above its
+        // anchor and a cluster circle straddles its centre, so both overflow
+        // the padded box. Top clears a pin; bottom clears the search pill.
+        map.fitBounds(bounds, {
+          paddingTopLeft: [10, 44],
+          paddingBottomRight: [10, 72],
+        });
+      }
     };
 
     fitToStations();
     const raf = requestAnimationFrame(fitToStations);
 
+    // Two frames is not enough: the panel is a flex child whose height settles
+    // after fonts and the hero image land. Fitting early against a shorter box
+    // yields a lower zoom — the whole north-east instead of Vermont — and
+    // nothing corrected it. Refit whenever the container resizes, until the
+    // visitor takes control of the view themselves.
+    let userHasMoved = false;
+    const release = () => { userHasMoved = true; ro.disconnect(); };
+    map.once('zoomstart dragstart', release);
+    const ro = new ResizeObserver(() => { if (!userHasMoved) fitToStations(); });
+    ro.observe(containerRef.current);
+
     return () => {
+      ro.disconnect();
       cancelAnimationFrame(raf);
       map.remove();
       indexRef.current = [];
