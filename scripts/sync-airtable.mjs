@@ -236,6 +236,10 @@ const roster = stationRows
     return {
       id: r.id,
       esiteid: f.ESITEID ?? null,
+      // What the building is called, when anyone has said. Beats guessing from
+      // a photograph caption, and is the only way two stations in one town get
+      // distinct names when neither has been photographed.
+      name: (f['Station Name'] ?? '').trim() || null,
       address: f['Street Address'] ?? '',
       town: f.Town ?? '',
       county: f.County ?? '',

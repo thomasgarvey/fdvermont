@@ -100,7 +100,7 @@ export const stations: Station[] = features.map((f) => {
   // Station". Prefer the photograph's caption, which names the building, and
   // fall back to the town. Airtable's Fire Stations table has no name column
   // yet — that is where this belongs.
-  const name = photo?.caption?.trim() || department || `${town} Fire Station`;
+  const name = f.name?.trim() || photo?.caption?.trim() || department || `${town} Fire Station`;
   return {
     slug,
     esiteid: f.esiteid as number,
