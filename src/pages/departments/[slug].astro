@@ -15,7 +15,25 @@ export function getStaticPaths() {
 const { town } = Astro.props as { town: Town };
 const dept = town.departments[0] ?? null;
 const members = memberCount(town);
-const photo = town.stations.find((s) => s.photo)?.photo ?? null;
+
+// Each station's own record, rendered inline. 139 of 196 towns have exactly one
+// station, so a separate page per building said the same thing twice; the
+// station keeps its slug as an anchor here so old links still land on it.
+const stationRecord = (s: (typeof town.stations)[number]): [string, string][] =>
+  (
+    [
+      ["Street address", s.address],
+      ["Town", s.town],
+      ["County", s.county ? `${s.county} County` : ""],
+      ["ZIP", String(s.zip || "")],
+      ["Coordinates", `${s.lat.toFixed(5)}, ${s.lng.toFixed(5)}`],
+      // A station added from a photograph has no E911 record, and String(null)
+      // is "null" — truthy — so it has to be emptied before the filter.
+      ["E911 site ID", s.esiteid != null ? String(s.esiteid) : ""],
+      ["E911 first mapped", s.mapped],
+      ["E911 last updated", s.updated],
+    ] as [string, string][]
+  ).filter(([, v]) => v);
 
 // The town drawn inside its county, with every station in the county plotted.
 // A lone outline says nothing; the neighbours are the point, because that is
@@ -91,6 +109,80 @@ const description = dept
       </dl>
     </div>
 
+
+    <section class="block" aria-labelledby="st-h">
+      <h2 id="st-h">
+        {town.stations.length === 1 ? "The station" : `The ${town.stations.length} stations`}
+      </h2>
+
+      {town.stations.length > 1 && (
+        <ul class="jump">
+          {town.stations.map((s) => (
+            <li>
+              <a href={`#${s.slug}`}>
+                <span class="dot" data-has={s.photo ? "yes" : "no"} aria-hidden="true"></span>
+                {s.name}
+              </a>
+            </li>
+          ))}
+        </ul>
+      )}
+
+      {town.stations.map((s) => (
+        <article class="station" id={s.slug}>
+          {town.stations.length > 1 && <h3>{s.name}</h3>}
+          <p class="staddr">{s.address}</p>
+
+          {s.photo ? (
+            <figure class="shot">
+              <img src={s.photo.src}
+                   alt={`${s.name} at ${s.address}, ${s.town}, Vermont`}
+                   width={s.photo.width ?? undefined} height={s.photo.height ?? undefined}
+                   loading="lazy" />
+              <figcaption>
+                {s.photo.caption && s.photo.caption !== s.name && (
+                  <span class="cap">{s.photo.caption}</span>
+                )}
+                <span class="credit">
+                  {s.photo.photographer ? `Photograph by ${s.photo.photographer}` : "Photograph"}
+                  {s.photo.dateTaken && `, ${s.photo.dateTaken}`}
+                </span>
+              </figcaption>
+            </figure>
+          ) : (
+            <div class="nophoto">
+              <p><strong>No photograph yet.</strong></p>
+              <p>
+                If you have a picture of this station, <a href="/contact">send it in</a> — it
+                will be credited to you.
+              </p>
+            </div>
+          )}
+
+          <dl class="rec">
+            {stationRecord(s).map(([k, v]) => (
+              <div class="row"><dt>{k}</dt><dd>{v}</dd></div>
+            ))}
+          </dl>
+          <p class="prov">
+            {s.esiteid != null ? (
+              <>
+                Location from the <a href="https://geodata.vermont.gov/" target="_blank"
+                rel="noopener">Vermont E911 site file (VCGI)</a>.{" "}
+              </>
+            ) : (
+              <>
+                This station is <strong>not</strong> in the{" "}
+                <a href="https://geodata.vermont.gov/" target="_blank" rel="noopener">Vermont
+                E911 site file</a>; it was added from a photograph taken at the building.{" "}
+              </>
+            )}
+            Spotted something wrong? <a href="/contact">Send a correction</a>.
+          </p>
+        </article>
+      ))}
+    </section>
+
     {map && (
       <figure class="cmap">
         <svg viewBox={`0 0 ${map.width} ${map.height}`} role="img"
@@ -109,7 +201,7 @@ const description = dept
             <circle cx={p.x} cy={p.y} r="3" class="pt"><title>{p.label}</title></circle>
           ))}
           {map.points.filter((p) => p.mine).map((p) => (
-            <circle cx={p.x} cy={p.y} r="5.5" class={p.photo ? "pt mine shot" : "pt mine"}>
+            <circle cx={p.x} cy={p.y} r="5.5" class={p.photo ? "pt mine lit" : "pt mine"}>
               <title>{p.label}</title>
             </circle>
           ))}
@@ -133,35 +225,6 @@ const description = dept
         </figcaption>
       </figure>
     )}
-
-    {photo && (
-      <figure class="shot">
-        <img src={photo.src} alt={`Fire station in ${town.name}, Vermont`}
-             width={photo.width ?? undefined} height={photo.height ?? undefined} loading="lazy" />
-        <figcaption>
-          {photo.caption && <span class="cap">{photo.caption}</span>}
-          <span class="credit">
-            {photo.photographer ? `Photograph by ${photo.photographer}` : "Photograph"}
-            {photo.dateTaken && `, ${photo.dateTaken}`}
-          </span>
-        </figcaption>
-      </figure>
-    )}
-
-    <section class="block" aria-labelledby="st-h">
-      <h2 id="st-h">Stations</h2>
-      <ul class="stations">
-        {town.stations.map((s) => (
-          <li>
-            <a href={`/stations/${s.slug}`}>
-              <span class="dot" data-has={s.photo ? "yes" : "no"} aria-hidden="true"></span>
-              <span class="nm">{s.name}</span>
-              <span class="ad">{s.address}</span>
-            </a>
-          </li>
-        ))}
-      </ul>
-    </section>
 
     {dept && (dept.chief || dept.phone || dept.email || dept.website) && (
       <section class="block" aria-labelledby="c-h">
@@ -300,7 +363,7 @@ const description = dept
   }
   .pt { fill: var(--ink-3); stroke: var(--surface); stroke-width: 1; }
   .pt.mine { fill: var(--ink); stroke-width: 1.5; }
-  .pt.mine.shot { fill: var(--red); }
+  .pt.mine.lit { fill: var(--red); }
   .bar line { stroke: var(--ink-3); stroke-width: 1; }
   .bar text { font-size: 9px; fill: var(--ink-3); }
   .cmap figcaption { margin-top: 0.6rem; font-size: 0.78rem; color: var(--ink-3); line-height: 1.5; }
@@ -331,14 +394,22 @@ const description = dept
   dd a { color: var(--red); }
   .fine { font-size: 0.8rem; color: var(--ink-3); margin: 0.8rem 0 0; }
 
-  .stations { list-style: none; margin: 0; padding: 0; }
-  .stations li { border-bottom: 1px solid var(--line); }
-  .stations a {
-    display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 0.7rem;
-    padding: 0.6rem 0; text-decoration: none; color: var(--ink); font-size: 0.94rem;
+  /* Jump list only appears where there is more than one building to jump to. */
+  .jump { list-style: none; display: flex; flex-wrap: wrap; gap: 0.4rem 1.2rem; margin: 0 0 1.6rem; padding: 0; }
+  .jump a {
+    display: inline-flex; align-items: center; gap: 0.45rem;
+    text-decoration: none; color: var(--ink-2); font-size: 0.88rem;
   }
-  .stations a:hover .nm { color: var(--red); }
-  .ad { color: var(--ink-3); font-size: 0.86rem; }
+  .jump a:hover { color: var(--red); }
+  .station { margin-bottom: 2.6rem; scroll-margin-top: 1rem; }
+  .station:last-child { margin-bottom: 0; }
+  .station h3 {
+    font-family: "Source Serif 4", Georgia, serif; font-size: 1.05rem; margin: 0 0 0.15rem;
+  }
+  .staddr { margin: 0 0 0.9rem; font-size: 0.86rem; color: var(--ink-3); }
+  .rec { margin: 1rem 0 0; }
+  .prov { font-size: 0.8rem; color: var(--ink-3); margin: 0.8rem 0 0; }
+  .prov a { color: var(--red); }
   .dot { width: 9px; height: 9px; border-radius: 50%; flex: none; background: var(--ink-3); }
   .dot[data-has="yes"] { background: var(--red); }
 

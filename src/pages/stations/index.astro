@@ -42,7 +42,7 @@ const counties = new Set(stations.map((s) => s.county).filter(Boolean)).size;
           <ul>
             {list.map((s) => (
               <li>
-                <a href={`/stations/${s.slug}`}>
+                <a href={`/departments/${townSlugForStation(s)}#${s.slug}`}>
                   <span class="dot" data-has={s.photo ? "yes" : "no"} aria-hidden="true"></span>
                   <span class="nm">{s.name}</span>
                   <span class="ad">{s.address}</span>

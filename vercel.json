@@ -1,7 +1,1385 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "redirects": [
-    { "source": "/towns", "destination": "/departments", "permanent": true },
-    { "source": "/towns/:slug", "destination": "/departments/:slug", "permanent": true }
+    {
+      "source": "/towns",
+      "destination": "/departments",
+      "permanent": true
+    },
+    {
+      "source": "/towns/:slug",
+      "destination": "/departments/:slug",
+      "permanent": true
+    },
+    {
+      "source": "/stations/addison-44-vt-route-17-w",
+      "destination": "/departments/addison#addison-44-vt-route-17-w",
+      "permanent": true
+    },
+    {
+      "source": "/stations/albany-833-main-st",
+      "destination": "/departments/albany#albany-833-main-st",
+      "permanent": true
+    },
+    {
+      "source": "/stations/alburgh-60-fire-house-rd",
+      "destination": "/departments/alburgh#alburgh-60-fire-house-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/arlington-184-old-mill-rd",
+      "destination": "/departments/arlington#arlington-184-old-mill-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/arlington-41-berwal-rd",
+      "destination": "/departments/arlington#arlington-41-berwal-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/bakersfield-181-main-st-n",
+      "destination": "/departments/bakersfield#bakersfield-181-main-st-n",
+      "permanent": true
+    },
+    {
+      "source": "/stations/barnard-117-north-rd",
+      "destination": "/departments/barnard#barnard-117-north-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/barnard-5458-broad-brook-rd",
+      "destination": "/departments/barnard#barnard-5458-broad-brook-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/barnet-151-bimson-dr",
+      "destination": "/departments/barnet#barnet-151-bimson-dr",
+      "permanent": true
+    },
+    {
+      "source": "/stations/barre-town-119-mill-st",
+      "destination": "/departments/barre-town#barre-town-119-mill-st",
+      "permanent": true
+    },
+    {
+      "source": "/stations/barre-town-528-s-barre-rd",
+      "destination": "/departments/barre-town#barre-town-528-s-barre-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/barton-126-main-st",
+      "destination": "/departments/barton#barton-126-main-st",
+      "permanent": true
+    },
+    {
+      "source": "/stations/bellows-falls-170-rockingham-st",
+      "destination": "/departments/bellows-falls#bellows-falls-170-rockingham-st",
+      "permanent": true
+    },
+    {
+      "source": "/stations/bennington-130-river-st",
+      "destination": "/departments/bennington#bennington-130-river-st",
+      "permanent": true
+    },
+    {
+      "source": "/stations/bennington-276-orchard-rd",
+      "destination": "/departments/bennington#bennington-276-orchard-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/bennington-63-gore-rd",
+      "destination": "/departments/bennington#bennington-63-gore-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/bennington-900-west-rd",
+      "destination": "/departments/bennington#bennington-900-west-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/benson-2646-stage-rd",
+      "destination": "/departments/benson#benson-2646-stage-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/berkshire-5948-berkshire-center-rd",
+      "destination": "/departments/berkshire#berkshire-5948-berkshire-center-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/berlin-2095-vt-route-12",
+      "destination": "/departments/berlin#berlin-2095-vt-route-12",
+      "permanent": true
+    },
+    {
+      "source": "/stations/berlin-338-paine-tpke-n",
+      "destination": "/departments/berlin#berlin-338-paine-tpke-n",
+      "permanent": true
+    },
+    {
+      "source": "/stations/bethel-587-pleasant-st",
+      "destination": "/departments/bethel#bethel-587-pleasant-st",
+      "permanent": true
+    },
+    {
+      "source": "/stations/bolton-3107-theodore-roosevelt-hwy",
+      "destination": "/departments/bolton#bolton-3107-theodore-roosevelt-hwy",
+      "permanent": true
+    },
+    {
+      "source": "/stations/bradford-135-carson-ln",
+      "destination": "/departments/bradford#bradford-135-carson-ln",
+      "permanent": true
+    },
+    {
+      "source": "/stations/brandon-61-franklin-st",
+      "destination": "/departments/brandon#brandon-61-franklin-st",
+      "permanent": true
+    },
+    {
+      "source": "/stations/brattleboro-103-elliot-st",
+      "destination": "/departments/brattleboro#brattleboro-103-elliot-st",
+      "permanent": true
+    },
+    {
+      "source": "/stations/brattleboro-16-south-st",
+      "destination": "/departments/brattleboro#brattleboro-16-south-st",
+      "permanent": true
+    },
+    {
+      "source": "/stations/bridgewater-28-southgate-loop",
+      "destination": "/departments/bridgewater#bridgewater-28-southgate-loop",
+      "permanent": true
+    },
+    {
+      "source": "/stations/bridport-82-crown-point-rd",
+      "destination": "/departments/bridport#bridport-82-crown-point-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/brighton-102-railroad-st",
+      "destination": "/departments/brighton#brighton-102-railroad-st",
+      "permanent": true
+    },
+    {
+      "source": "/stations/bristol-79-west-st",
+      "destination": "/departments/bristol#bristol-79-west-st",
+      "permanent": true
+    },
+    {
+      "source": "/stations/brookfield-56-fire-dept-ln",
+      "destination": "/departments/brookfield#brookfield-56-fire-dept-ln",
+      "permanent": true
+    },
+    {
+      "source": "/stations/burke-195-vt-route-114",
+      "destination": "/departments/burke#burke-195-vt-route-114",
+      "permanent": true
+    },
+    {
+      "source": "/stations/burke-42-vt-route-5a",
+      "destination": "/departments/burke#burke-42-vt-route-5a",
+      "permanent": true
+    },
+    {
+      "source": "/stations/burlington-132-north-ave",
+      "destination": "/departments/burlington#burlington-132-north-ave",
+      "permanent": true
+    },
+    {
+      "source": "/stations/burlington-136-s-winooski-ave",
+      "destination": "/departments/burlington#burlington-136-s-winooski-ave",
+      "permanent": true
+    },
+    {
+      "source": "/stations/burlington-1391-north-ave",
+      "destination": "/departments/burlington#burlington-1391-north-ave",
+      "permanent": true
+    },
+    {
+      "source": "/stations/burlington-20-mansfield-ave",
+      "destination": "/departments/burlington#burlington-20-mansfield-ave",
+      "permanent": true
+    },
+    {
+      "source": "/stations/burlington-23-ferguson-ave",
+      "destination": "/departments/burlington#burlington-23-ferguson-ave",
+      "permanent": true
+    },
+    {
+      "source": "/stations/cabot-137-s-walden-rd",
+      "destination": "/departments/cabot#cabot-137-s-walden-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/cambridge-153-church-st",
+      "destination": "/departments/cambridge#cambridge-153-church-st",
+      "permanent": true
+    },
+    {
+      "source": "/stations/canaan-1252-vt-route-253",
+      "destination": "/departments/canaan#canaan-1252-vt-route-253",
+      "permanent": true
+    },
+    {
+      "source": "/stations/castleton-39-elm-st",
+      "destination": "/departments/castleton#castleton-39-elm-st",
+      "permanent": true
+    },
+    {
+      "source": "/stations/cavendish-148-mill-st",
+      "destination": "/departments/cavendish#cavendish-148-mill-st",
+      "permanent": true
+    },
+    {
+      "source": "/stations/cavendish-2154-main-st",
+      "destination": "/departments/cavendish#cavendish-2154-main-st",
+      "permanent": true
+    },
+    {
+      "source": "/stations/cavendish-513-main-st",
+      "destination": "/departments/cavendish#cavendish-513-main-st",
+      "permanent": true
+    },
+    {
+      "source": "/stations/charleston-7113-vt-route-105",
+      "destination": "/departments/charleston#charleston-7113-vt-route-105",
+      "permanent": true
+    },
+    {
+      "source": "/stations/charlotte-170-ferry-rd",
+      "destination": "/departments/charlotte#charlotte-170-ferry-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/chelsea-324-vt-route-110",
+      "destination": "/departments/chelsea#chelsea-324-vt-route-110",
+      "permanent": true
+    },
+    {
+      "source": "/stations/chittenden-266-chittenden-rd",
+      "destination": "/departments/chittenden#chittenden-266-chittenden-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/clarendon-23-firehouse-rd",
+      "destination": "/departments/clarendon#clarendon-23-firehouse-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/clarendon-39-grange-hall-rd",
+      "destination": "/departments/clarendon#clarendon-39-grange-hall-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/colchester-220-college-pkwy",
+      "destination": "/departments/colchester#colchester-220-college-pkwy",
+      "permanent": true
+    },
+    {
+      "source": "/stations/colchester-227-clay-point-rd",
+      "destination": "/departments/colchester#colchester-227-clay-point-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/colchester-483-main-st",
+      "destination": "/departments/colchester#colchester-483-main-st",
+      "permanent": true
+    },
+    {
+      "source": "/stations/colchester-687-blakely-rd",
+      "destination": "/departments/colchester#colchester-687-blakely-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/colchester-844-church-rd",
+      "destination": "/departments/colchester#colchester-844-church-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/concord-49-shadow-lake-rd",
+      "destination": "/departments/concord#concord-49-shadow-lake-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/corinth-1407-cookeville-rd",
+      "destination": "/departments/corinth#corinth-1407-cookeville-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/corinth-349-fairground-rd",
+      "destination": "/departments/corinth#corinth-349-fairground-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/corinth-832-village-rd",
+      "destination": "/departments/corinth#corinth-832-village-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/cornwall-1952-vt-route-30",
+      "destination": "/departments/cornwall#cornwall-1952-vt-route-30",
+      "permanent": true
+    },
+    {
+      "source": "/stations/cornwall-63-n-bingham-st",
+      "destination": "/departments/cornwall#cornwall-63-n-bingham-st",
+      "permanent": true
+    },
+    {
+      "source": "/stations/danby-590-n-main-st",
+      "destination": "/departments/danby#danby-590-n-main-st",
+      "permanent": true
+    },
+    {
+      "source": "/stations/danville-24-mcreynolds-rd",
+      "destination": "/departments/danville#danville-24-mcreynolds-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/danville-296-peacham-rd",
+      "destination": "/departments/danville#danville-296-peacham-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/derby-239-elm-st",
+      "destination": "/departments/derby#derby-239-elm-st",
+      "permanent": true
+    },
+    {
+      "source": "/stations/derby-34-ducharme-dr",
+      "destination": "/departments/derby#derby-34-ducharme-dr",
+      "permanent": true
+    },
+    {
+      "source": "/stations/dorset-2788-vt-route-30",
+      "destination": "/departments/dorset#dorset-2788-vt-route-30",
+      "permanent": true
+    },
+    {
+      "source": "/stations/dorset-341-village-st",
+      "destination": "/departments/dorset#dorset-341-village-st",
+      "permanent": true
+    },
+    {
+      "source": "/stations/dover-22-dover-hill-rd",
+      "destination": "/departments/dover#dover-22-dover-hill-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/dover-253-vt-route-100",
+      "destination": "/departments/dover#dover-253-vt-route-100",
+      "permanent": true
+    },
+    {
+      "source": "/stations/dummerston-1049-east-west-rd",
+      "destination": "/departments/dummerston#dummerston-1049-east-west-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/dummerston-226-west-st",
+      "destination": "/departments/dummerston#dummerston-226-west-st",
+      "permanent": true
+    },
+    {
+      "source": "/stations/east-haven-1419-vt-route-114",
+      "destination": "/departments/east-haven#east-haven-1419-vt-route-114",
+      "permanent": true
+    },
+    {
+      "source": "/stations/east-montpelier-365-templeton-rd",
+      "destination": "/departments/east-montpelier#east-montpelier-365-templeton-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/elmore-343-beach-rd",
+      "destination": "/departments/elmore#elmore-343-beach-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/enosburgh-83-sampsonville-rd",
+      "destination": "/departments/enosburgh#enosburgh-83-sampsonville-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/essex-junction-city-3-pearl-st",
+      "destination": "/departments/essex-junction-city#essex-junction-city-3-pearl-st",
+      "permanent": true
+    },
+    {
+      "source": "/stations/essex-town-188-sand-hill-rd",
+      "destination": "/departments/essex-town#essex-town-188-sand-hill-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/fairfax-15-goodall-st",
+      "destination": "/departments/fairfax#fairfax-15-goodall-st",
+      "permanent": true
+    },
+    {
+      "source": "/stations/fairfield-4964-vt-route-36",
+      "destination": "/departments/fairfield#fairfield-4964-vt-route-36",
+      "permanent": true
+    },
+    {
+      "source": "/stations/fairfield-9461-vt-route-36",
+      "destination": "/departments/fairfield#fairfield-9461-vt-route-36",
+      "permanent": true
+    },
+    {
+      "source": "/stations/fairlee-5445-lake-morey-rd",
+      "destination": "/departments/fairlee#fairlee-5445-lake-morey-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/ferrisburgh-3909-us-route-7",
+      "destination": "/departments/ferrisburgh#ferrisburgh-3909-us-route-7",
+      "permanent": true
+    },
+    {
+      "source": "/stations/franklin-5154-main-st",
+      "destination": "/departments/franklin#franklin-5154-main-st",
+      "permanent": true
+    },
+    {
+      "source": "/stations/georgia-4134-ethan-allen-hwy",
+      "destination": "/departments/georgia#georgia-4134-ethan-allen-hwy",
+      "permanent": true
+    },
+    {
+      "source": "/stations/glover-3132-glover-st",
+      "destination": "/departments/glover#glover-3132-glover-st",
+      "permanent": true
+    },
+    {
+      "source": "/stations/glover-63-bean-hill-rd",
+      "destination": "/departments/glover#glover-63-bean-hill-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/grafton-711-route-121-e",
+      "destination": "/departments/grafton#grafton-711-route-121-e",
+      "permanent": true
+    },
+    {
+      "source": "/stations/grand-isle-17-hyde-rd",
+      "destination": "/departments/grand-isle#grand-isle-17-hyde-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/granville-5051-vt-route-100",
+      "destination": "/departments/granville#granville-5051-vt-route-100",
+      "permanent": true
+    },
+    {
+      "source": "/stations/greensboro-765-breezy-ave",
+      "destination": "/departments/greensboro#greensboro-765-breezy-ave",
+      "permanent": true
+    },
+    {
+      "source": "/stations/groton-1456-scott-hwy",
+      "destination": "/departments/groton#groton-1456-scott-hwy",
+      "permanent": true
+    },
+    {
+      "source": "/stations/guilford-108-guilford-center-rd",
+      "destination": "/departments/guilford#guilford-108-guilford-center-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/halifax-118-branch-rd",
+      "destination": "/departments/halifax#halifax-118-branch-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/hancock-50-taylor-mdw",
+      "destination": "/departments/hancock#hancock-50-taylor-mdw",
+      "permanent": true
+    },
+    {
+      "source": "/stations/hardwick-333-wolcott-st",
+      "destination": "/departments/hardwick#hardwick-333-wolcott-st",
+      "permanent": true
+    },
+    {
+      "source": "/stations/hartford-131-willard-rd",
+      "destination": "/departments/hartford#hartford-131-willard-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/hartland-3-clay-hill-rd",
+      "destination": "/departments/hartland#hartland-3-clay-hill-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/hartland-57-vt-route-12",
+      "destination": "/departments/hartland#hartland-57-vt-route-12",
+      "permanent": true
+    },
+    {
+      "source": "/stations/highgate-2996-vt-route-78",
+      "destination": "/departments/highgate#highgate-2996-vt-route-78",
+      "permanent": true
+    },
+    {
+      "source": "/stations/hinesburg-10340-vt-route-116",
+      "destination": "/departments/hinesburg#hinesburg-10340-vt-route-116",
+      "permanent": true
+    },
+    {
+      "source": "/stations/hubbardton-2125-hortonia-rd",
+      "destination": "/departments/hubbardton#hubbardton-2125-hortonia-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/hubbardton-4645-monument-hill-rd",
+      "destination": "/departments/hubbardton#hubbardton-4645-monument-hill-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/huntington-4960-main-rd",
+      "destination": "/departments/huntington#huntington-4960-main-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/hyde-park-212-centerville-rd",
+      "destination": "/departments/hyde-park#hyde-park-212-centerville-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/hyde-park-5809-vt-route-100",
+      "destination": "/departments/hyde-park#hyde-park-5809-vt-route-100",
+      "permanent": true
+    },
+    {
+      "source": "/stations/ira-2659-vt-route-133",
+      "destination": "/departments/ira#ira-2659-vt-route-133",
+      "permanent": true
+    },
+    {
+      "source": "/stations/irasburg-217-vt-route-58-e",
+      "destination": "/departments/irasburg#irasburg-217-vt-route-58-e",
+      "permanent": true
+    },
+    {
+      "source": "/stations/isle-la-motte-2241-main-st",
+      "destination": "/departments/isle-la-motte#isle-la-motte-2241-main-st",
+      "permanent": true
+    },
+    {
+      "source": "/stations/jamaica-4017-vt-route-30",
+      "destination": "/departments/jamaica#jamaica-4017-vt-route-30",
+      "permanent": true
+    },
+    {
+      "source": "/stations/jay-157-revoir-flat-rd",
+      "destination": "/departments/jay#jay-157-revoir-flat-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/jay-51-jay-peak-rd",
+      "destination": "/departments/jay#jay-51-jay-peak-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/jericho-288-browns-trce",
+      "destination": "/departments/jericho#jericho-288-browns-trce",
+      "permanent": true
+    },
+    {
+      "source": "/stations/johnson-251-lower-main-st-w",
+      "destination": "/departments/johnson#johnson-251-lower-main-st-w",
+      "permanent": true
+    },
+    {
+      "source": "/stations/killington-3852-river-rd",
+      "destination": "/departments/killington#killington-3852-river-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/killington-800-killington-rd",
+      "destination": "/departments/killington#killington-800-killington-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/lincoln-34-gove-hill-rd",
+      "destination": "/departments/lincoln#lincoln-34-gove-hill-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/londonderry-5862-vt-route-100",
+      "destination": "/departments/londonderry#londonderry-5862-vt-route-100",
+      "permanent": true
+    },
+    {
+      "source": "/stations/londonderry-60-main-st",
+      "destination": "/departments/londonderry#londonderry-60-main-st",
+      "permanent": true
+    },
+    {
+      "source": "/stations/lowell-2534-vt-route-100",
+      "destination": "/departments/lowell#lowell-2534-vt-route-100",
+      "permanent": true
+    },
+    {
+      "source": "/stations/ludlow-67-pond-st",
+      "destination": "/departments/ludlow#ludlow-67-pond-st",
+      "permanent": true
+    },
+    {
+      "source": "/stations/lunenburg-291-w-main-st",
+      "destination": "/departments/lunenburg#lunenburg-291-w-main-st",
+      "permanent": true
+    },
+    {
+      "source": "/stations/lunenburg-41-treatment-plant-rd",
+      "destination": "/departments/lunenburg#lunenburg-41-treatment-plant-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/lyndon-316-main-st",
+      "destination": "/departments/lyndon#lyndon-316-main-st",
+      "permanent": true
+    },
+    {
+      "source": "/stations/manchester-3632-main-st",
+      "destination": "/departments/manchester#manchester-3632-main-st",
+      "permanent": true
+    },
+    {
+      "source": "/stations/manchester-62-jeff-williams-way",
+      "destination": "/departments/manchester#manchester-62-jeff-williams-way",
+      "permanent": true
+    },
+    {
+      "source": "/stations/marlboro-779-south-rd",
+      "destination": "/departments/marlboro#marlboro-779-south-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/marshfield-1333-us-route-2",
+      "destination": "/departments/marshfield#marshfield-1333-us-route-2",
+      "permanent": true
+    },
+    {
+      "source": "/stations/middlebury-373-e-main-st",
+      "destination": "/departments/middlebury#middlebury-373-e-main-st",
+      "permanent": true
+    },
+    {
+      "source": "/stations/middlebury-5-seymour-st",
+      "destination": "/departments/middlebury#middlebury-5-seymour-st",
+      "permanent": true
+    },
+    {
+      "source": "/stations/middlesex-473-shady-rill-rd",
+      "destination": "/departments/middlesex#middlesex-473-shady-rill-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/middlesex-67-welch-park-dr",
+      "destination": "/departments/middlesex#middlesex-67-welch-park-dr",
+      "permanent": true
+    },
+    {
+      "source": "/stations/middletown-springs-8-firehouse-ln",
+      "destination": "/departments/middletown-springs#middletown-springs-8-firehouse-ln",
+      "permanent": true
+    },
+    {
+      "source": "/stations/milton-47-bombardier-rd",
+      "destination": "/departments/milton#milton-47-bombardier-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/monkton-3747-states-prison-hollow-rd",
+      "destination": "/departments/monkton#monkton-3747-states-prison-hollow-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/montpelier-61-main-st",
+      "destination": "/departments/montpelier#montpelier-61-main-st",
+      "permanent": true
+    },
+    {
+      "source": "/stations/moretown-1049-vt-route-100b",
+      "destination": "/departments/moretown#moretown-1049-vt-route-100b",
+      "permanent": true
+    },
+    {
+      "source": "/stations/morristown-162-upper-main-st",
+      "destination": "/departments/morristown#morristown-162-upper-main-st",
+      "permanent": true
+    },
+    {
+      "source": "/stations/mount-holly-14-school-st",
+      "destination": "/departments/mount-holly#mount-holly-14-school-st",
+      "permanent": true
+    },
+    {
+      "source": "/stations/mount-holly-52-church-st",
+      "destination": "/departments/mount-holly#mount-holly-52-church-st",
+      "permanent": true
+    },
+    {
+      "source": "/stations/new-haven-1839-main-st",
+      "destination": "/departments/new-haven#new-haven-1839-main-st",
+      "permanent": true
+    },
+    {
+      "source": "/stations/newark-1558-newark-st",
+      "destination": "/departments/newark#newark-1558-newark-st",
+      "permanent": true
+    },
+    {
+      "source": "/stations/newbury-15-main-st-n",
+      "destination": "/departments/newbury#newbury-15-main-st-n",
+      "permanent": true
+    },
+    {
+      "source": "/stations/newbury-2745-snake-rd",
+      "destination": "/departments/newbury#newbury-2745-snake-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/newbury-60-chapel-st",
+      "destination": "/departments/newbury#newbury-60-chapel-st",
+      "permanent": true
+    },
+    {
+      "source": "/stations/newfane-24-dover-rd",
+      "destination": "/departments/newfane#newfane-24-dover-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/newfane-698-vt-route-30",
+      "destination": "/departments/newfane#newfane-698-vt-route-30",
+      "permanent": true
+    },
+    {
+      "source": "/stations/newport-city-350-western-ave",
+      "destination": "/departments/newport-city#newport-city-350-western-ave",
+      "permanent": true
+    },
+    {
+      "source": "/stations/newport-town-144-cross-rd",
+      "destination": "/departments/newport-town#newport-town-144-cross-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/north-bennington-2-prospect-st",
+      "destination": "/departments/north-bennington#north-bennington-2-prospect-st",
+      "permanent": true
+    },
+    {
+      "source": "/stations/north-hero-3559-us-route-2",
+      "destination": "/departments/north-hero#north-hero-3559-us-route-2",
+      "permanent": true
+    },
+    {
+      "source": "/stations/north-hero-7444-us-route-2",
+      "destination": "/departments/north-hero#north-hero-7444-us-route-2",
+      "permanent": true
+    },
+    {
+      "source": "/stations/northfield-128-wall-st",
+      "destination": "/departments/northfield#northfield-128-wall-st",
+      "permanent": true
+    },
+    {
+      "source": "/stations/norwich-11-firehouse-ln",
+      "destination": "/departments/norwich#norwich-11-firehouse-ln",
+      "permanent": true
+    },
+    {
+      "source": "/stations/orleans-102-main-st",
+      "destination": "/departments/orleans#orleans-102-main-st",
+      "permanent": true
+    },
+    {
+      "source": "/stations/orwell-604-main-st",
+      "destination": "/departments/orwell#orwell-604-main-st",
+      "permanent": true
+    },
+    {
+      "source": "/stations/pawlet-155-vt-route-133",
+      "destination": "/departments/pawlet#pawlet-155-vt-route-133",
+      "permanent": true
+    },
+    {
+      "source": "/stations/peacham-64-macks-mountain-rd",
+      "destination": "/departments/peacham#peacham-64-macks-mountain-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/peru-1005-hapgood-pond-rd",
+      "destination": "/departments/peru#peru-1005-hapgood-pond-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/pittsfield-3956-vt-route-100",
+      "destination": "/departments/pittsfield#pittsfield-3956-vt-route-100",
+      "permanent": true
+    },
+    {
+      "source": "/stations/pittsford-152-pleasant-st",
+      "destination": "/departments/pittsford#pittsford-152-pleasant-st",
+      "permanent": true
+    },
+    {
+      "source": "/stations/pittsford-64-unknown-1",
+      "destination": "/departments/pittsford#pittsford-64-unknown-1",
+      "permanent": true
+    },
+    {
+      "source": "/stations/pittsford-85-unknown-1",
+      "destination": "/departments/pittsford#pittsford-85-unknown-1",
+      "permanent": true
+    },
+    {
+      "source": "/stations/pittsford-92-dorfner-dr",
+      "destination": "/departments/pittsford#pittsford-92-dorfner-dr",
+      "permanent": true
+    },
+    {
+      "source": "/stations/plainfield-169-main-st",
+      "destination": "/departments/plainfield#plainfield-169-main-st",
+      "permanent": true
+    },
+    {
+      "source": "/stations/pomfret-2026-pomfret-rd",
+      "destination": "/departments/pomfret#pomfret-2026-pomfret-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/pomfret-7373-pomfret-rd",
+      "destination": "/departments/pomfret#pomfret-7373-pomfret-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/poultney-55-firehouse-ln",
+      "destination": "/departments/poultney#poultney-55-firehouse-ln",
+      "permanent": true
+    },
+    {
+      "source": "/stations/poultney-98-depot-st",
+      "destination": "/departments/poultney#poultney-98-depot-st",
+      "permanent": true
+    },
+    {
+      "source": "/stations/pownal-253-vt-route-346",
+      "destination": "/departments/pownal#pownal-253-vt-route-346",
+      "permanent": true
+    },
+    {
+      "source": "/stations/pownal-2854-s-stream-rd",
+      "destination": "/departments/pownal#pownal-2854-s-stream-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/pownal-2872-n-pownal-rd",
+      "destination": "/departments/pownal#pownal-2872-n-pownal-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/pownal-3137-vt-route-346",
+      "destination": "/departments/pownal#pownal-3137-vt-route-346",
+      "permanent": true
+    },
+    {
+      "source": "/stations/pownal-753-vt-route-346",
+      "destination": "/departments/pownal#pownal-753-vt-route-346",
+      "permanent": true
+    },
+    {
+      "source": "/stations/proctor-37-main-st",
+      "destination": "/departments/proctor#proctor-37-main-st",
+      "permanent": true
+    },
+    {
+      "source": "/stations/putney-21-carl-snyder-dr",
+      "destination": "/departments/putney#putney-21-carl-snyder-dr",
+      "permanent": true
+    },
+    {
+      "source": "/stations/randolph-0-water-st",
+      "destination": "/departments/randolph#randolph-0-water-st",
+      "permanent": true
+    },
+    {
+      "source": "/stations/randolph-107-furnace-st",
+      "destination": "/departments/randolph#randolph-107-furnace-st",
+      "permanent": true
+    },
+    {
+      "source": "/stations/randolph-152-vt-route-14-s",
+      "destination": "/departments/randolph#randolph-152-vt-route-14-s",
+      "permanent": true
+    },
+    {
+      "source": "/stations/randolph-2-central-st",
+      "destination": "/departments/randolph#randolph-2-central-st",
+      "permanent": true
+    },
+    {
+      "source": "/stations/reading-1688-vt-route-106",
+      "destination": "/departments/reading#reading-1688-vt-route-106",
+      "permanent": true
+    },
+    {
+      "source": "/stations/readsboro-122-school-st",
+      "destination": "/departments/readsboro#readsboro-122-school-st",
+      "permanent": true
+    },
+    {
+      "source": "/stations/richmond-357-e-main-st",
+      "destination": "/departments/richmond#richmond-357-e-main-st",
+      "permanent": true
+    },
+    {
+      "source": "/stations/ripton-25-dugway-rd",
+      "destination": "/departments/ripton#ripton-25-dugway-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/rochester-24-peavine-dr",
+      "destination": "/departments/rochester#rochester-24-peavine-dr",
+      "permanent": true
+    },
+    {
+      "source": "/stations/rockingham-5-transport-park",
+      "destination": "/departments/rockingham#rockingham-5-transport-park",
+      "permanent": true
+    },
+    {
+      "source": "/stations/roxbury-1726-roxbury-rd",
+      "destination": "/departments/roxbury#roxbury-1726-roxbury-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/royalton-53-safford-st",
+      "destination": "/departments/royalton#royalton-53-safford-st",
+      "permanent": true
+    },
+    {
+      "source": "/stations/rupert-2673-vt-route-153",
+      "destination": "/departments/rupert#rupert-2673-vt-route-153",
+      "permanent": true
+    },
+    {
+      "source": "/stations/rutland-city-104-center-st",
+      "destination": "/departments/rutland-city#rutland-city-104-center-st",
+      "permanent": true
+    },
+    {
+      "source": "/stations/rutland-town-272-mckinley-ave",
+      "destination": "/departments/rutland-town#rutland-town-272-mckinley-ave",
+      "permanent": true
+    },
+    {
+      "source": "/stations/rutland-town-619-business-route-4",
+      "destination": "/departments/rutland-town#rutland-town-619-business-route-4",
+      "permanent": true
+    },
+    {
+      "source": "/stations/ryegate-1429-creamery-rd",
+      "destination": "/departments/ryegate#ryegate-1429-creamery-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/ryegate-57-witherspoon-rd",
+      "destination": "/departments/ryegate#ryegate-57-witherspoon-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/saint-albans-city-32-lower-welden-st",
+      "destination": "/departments/saint-albans-city#saint-albans-city-32-lower-welden-st",
+      "permanent": true
+    },
+    {
+      "source": "/stations/saint-albans-town-428-lake-rd",
+      "destination": "/departments/saint-albans-town#saint-albans-town-428-lake-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/salisbury-2399-us-route-7",
+      "destination": "/departments/salisbury#salisbury-2399-us-route-7",
+      "permanent": true
+    },
+    {
+      "source": "/stations/saxtons-river-44-main-st",
+      "destination": "/departments/saxtons-river#saxtons-river-44-main-st",
+      "permanent": true
+    },
+    {
+      "source": "/stations/shaftsbury-166-buck-hill-rd",
+      "destination": "/departments/shaftsbury#shaftsbury-166-buck-hill-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/shaftsbury-364-old-depot-rd",
+      "destination": "/departments/shaftsbury#shaftsbury-364-old-depot-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/sharon-5808-vt-route-14",
+      "destination": "/departments/sharon#sharon-5808-vt-route-14",
+      "permanent": true
+    },
+    {
+      "source": "/stations/shelburne-5380-shelburne-rd",
+      "destination": "/departments/shelburne#shelburne-5380-shelburne-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/sheldon-479-mill-st",
+      "destination": "/departments/sheldon#sheldon-479-mill-st",
+      "permanent": true
+    },
+    {
+      "source": "/stations/shoreham-53-firehouse-rd",
+      "destination": "/departments/shoreham#shoreham-53-firehouse-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/shrewsbury-23-shunpike-rd",
+      "destination": "/departments/shrewsbury#shrewsbury-23-shunpike-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/shrewsbury-9800-cold-river-rd",
+      "destination": "/departments/shrewsbury#shrewsbury-9800-cold-river-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/south-burlington-3-holmes-rd",
+      "destination": "/departments/south-burlington#south-burlington-3-holmes-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/south-burlington-40-nco-dr",
+      "destination": "/departments/south-burlington#south-burlington-40-nco-dr",
+      "permanent": true
+    },
+    {
+      "source": "/stations/south-burlington-575-dorset-st",
+      "destination": "/departments/south-burlington#south-burlington-575-dorset-st",
+      "permanent": true
+    },
+    {
+      "source": "/stations/south-hero-131-community-ln",
+      "destination": "/departments/south-hero#south-hero-131-community-ln",
+      "permanent": true
+    },
+    {
+      "source": "/stations/springfield-77-hartness-ave",
+      "destination": "/departments/springfield#springfield-77-hartness-ave",
+      "permanent": true
+    },
+    {
+      "source": "/stations/stamford-142-stebbins-ln",
+      "destination": "/departments/stamford#stamford-142-stebbins-ln",
+      "permanent": true
+    },
+    {
+      "source": "/stations/starksboro-3011-vt-route-116",
+      "destination": "/departments/starksboro#starksboro-3011-vt-route-116",
+      "permanent": true
+    },
+    {
+      "source": "/stations/starksboro-3902-vt-route-116",
+      "destination": "/departments/starksboro#starksboro-3902-vt-route-116",
+      "permanent": true
+    },
+    {
+      "source": "/stations/starksboro-397-jerusalem-rd",
+      "destination": "/departments/starksboro#starksboro-397-jerusalem-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/strafford-149-route-132",
+      "destination": "/departments/strafford#strafford-149-route-132",
+      "permanent": true
+    },
+    {
+      "source": "/stations/strafford-241-justin-morrill-memorial-hwy",
+      "destination": "/departments/strafford#strafford-241-justin-morrill-memorial-hwy",
+      "permanent": true
+    },
+    {
+      "source": "/stations/stratton-5-brazers-way",
+      "destination": "/departments/stratton#stratton-5-brazers-way",
+      "permanent": true
+    },
+    {
+      "source": "/stations/stratton-8-town-garage-rd",
+      "destination": "/departments/stratton#stratton-8-town-garage-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/sutton-691-burke-rd",
+      "destination": "/departments/sutton#sutton-691-burke-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/swanton-120-1st-st",
+      "destination": "/departments/swanton#swanton-120-1st-st",
+      "permanent": true
+    },
+    {
+      "source": "/stations/thetford-2829-vt-route-113",
+      "destination": "/departments/thetford#thetford-2829-vt-route-113",
+      "permanent": true
+    },
+    {
+      "source": "/stations/thetford-382-vt-route-244",
+      "destination": "/departments/thetford#thetford-382-vt-route-244",
+      "permanent": true
+    },
+    {
+      "source": "/stations/tinmouth-5-mountain-view-rd",
+      "destination": "/departments/tinmouth#tinmouth-5-mountain-view-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/topsham-24-powder-spring-rd",
+      "destination": "/departments/topsham#topsham-24-powder-spring-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/topsham-477-vt-route-25",
+      "destination": "/departments/topsham#topsham-477-vt-route-25",
+      "permanent": true
+    },
+    {
+      "source": "/stations/townshend-208-grafton-rd",
+      "destination": "/departments/townshend#townshend-208-grafton-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/troy-160-railroad-st",
+      "destination": "/departments/troy#troy-160-railroad-st",
+      "permanent": true
+    },
+    {
+      "source": "/stations/troy-6850-vt-route-100",
+      "destination": "/departments/troy#troy-6850-vt-route-100",
+      "permanent": true
+    },
+    {
+      "source": "/stations/tunbridge-4-monarch-hill-rd",
+      "destination": "/departments/tunbridge#tunbridge-4-monarch-hill-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/underhill-420-vt-route-15",
+      "destination": "/departments/underhill#underhill-420-vt-route-15",
+      "permanent": true
+    },
+    {
+      "source": "/stations/vergennes-50-green-st",
+      "destination": "/departments/vergennes#vergennes-50-green-st",
+      "permanent": true
+    },
+    {
+      "source": "/stations/vernon-2842-fort-bridgman-rd",
+      "destination": "/departments/vernon#vernon-2842-fort-bridgman-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/vershire-9111-vt-route-113",
+      "destination": "/departments/vershire#vershire-9111-vt-route-113",
+      "permanent": true
+    },
+    {
+      "source": "/stations/waitsfield-4103-main-st",
+      "destination": "/departments/waitsfield#waitsfield-4103-main-st",
+      "permanent": true
+    },
+    {
+      "source": "/stations/wallingford-17-railroad-st",
+      "destination": "/departments/wallingford#wallingford-17-railroad-st",
+      "permanent": true
+    },
+    {
+      "source": "/stations/wallingford-5988-vt-route-140-e",
+      "destination": "/departments/wallingford#wallingford-5988-vt-route-140-e",
+      "permanent": true
+    },
+    {
+      "source": "/stations/wardsboro-49-main-st",
+      "destination": "/departments/wardsboro#wardsboro-49-main-st",
+      "permanent": true
+    },
+    {
+      "source": "/stations/warren-140-village-rd",
+      "destination": "/departments/warren#warren-140-village-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/warren-351-main-st",
+      "destination": "/departments/warren#warren-351-main-st",
+      "permanent": true
+    },
+    {
+      "source": "/stations/washington-51-firehouse-rd",
+      "destination": "/departments/washington#washington-51-firehouse-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/waterbury-158-maple-st",
+      "destination": "/departments/waterbury#waterbury-158-maple-st",
+      "permanent": true
+    },
+    {
+      "source": "/stations/waterbury-43-s-main-st",
+      "destination": "/departments/waterbury#waterbury-43-s-main-st",
+      "permanent": true
+    },
+    {
+      "source": "/stations/waterford-2661-duck-pond-rd",
+      "destination": "/departments/waterford#waterford-2661-duck-pond-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/weathersfield-540-vt-route-131",
+      "destination": "/departments/weathersfield#weathersfield-540-vt-route-131",
+      "permanent": true
+    },
+    {
+      "source": "/stations/weathersfield-7259-vt-route-131",
+      "destination": "/departments/weathersfield#weathersfield-7259-vt-route-131",
+      "permanent": true
+    },
+    {
+      "source": "/stations/wells-1126-vt-route-30",
+      "destination": "/departments/wells#wells-1126-vt-route-30",
+      "permanent": true
+    },
+    {
+      "source": "/stations/west-fairlee-927-vt-route-113",
+      "destination": "/departments/west-fairlee#west-fairlee-927-vt-route-113",
+      "permanent": true
+    },
+    {
+      "source": "/stations/west-haven-59-north-rd",
+      "destination": "/departments/west-haven#west-haven-59-north-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/west-pawlet-2806-vt-route-153",
+      "destination": "/departments/west-pawlet#west-pawlet-2806-vt-route-153",
+      "permanent": true
+    },
+    {
+      "source": "/stations/west-rutland-217-marble-st",
+      "destination": "/departments/west-rutland#west-rutland-217-marble-st",
+      "permanent": true
+    },
+    {
+      "source": "/stations/west-windsor-889-vt-route-44",
+      "destination": "/departments/west-windsor#west-windsor-889-vt-route-44",
+      "permanent": true
+    },
+    {
+      "source": "/stations/westford-35-cambridge-rd",
+      "destination": "/departments/westford#westford-35-cambridge-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/westminster-103-grout-ave",
+      "destination": "/departments/westminster#westminster-103-grout-ave",
+      "permanent": true
+    },
+    {
+      "source": "/stations/westminster-33-wright-way",
+      "destination": "/departments/westminster#westminster-33-wright-way",
+      "permanent": true
+    },
+    {
+      "source": "/stations/westmore-5712-willoughby-lake-rd",
+      "destination": "/departments/westmore#westmore-5712-willoughby-lake-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/weston-734-main-st",
+      "destination": "/departments/weston#weston-734-main-st",
+      "permanent": true
+    },
+    {
+      "source": "/stations/weybridge-460-quaker-village-rd",
+      "destination": "/departments/weybridge#weybridge-460-quaker-village-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/whiting-75-s-main-st",
+      "destination": "/departments/whiting#whiting-75-s-main-st",
+      "permanent": true
+    },
+    {
+      "source": "/stations/whitingham-2964-vt-route-100",
+      "destination": "/departments/whitingham#whitingham-2964-vt-route-100",
+      "permanent": true
+    },
+    {
+      "source": "/stations/whitingham-32-brook-st",
+      "destination": "/departments/whitingham#whitingham-32-brook-st",
+      "permanent": true
+    },
+    {
+      "source": "/stations/whitingham-333-maple-dr",
+      "destination": "/departments/whitingham#whitingham-333-maple-dr",
+      "permanent": true
+    },
+    {
+      "source": "/stations/williamstown-249-meadow-st",
+      "destination": "/departments/williamstown#williamstown-249-meadow-st",
+      "permanent": true
+    },
+    {
+      "source": "/stations/williston-645-talcott-rd",
+      "destination": "/departments/williston#williston-645-talcott-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/windham-290-white-rd",
+      "destination": "/departments/windham#windham-290-white-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/winhall-107-vt-route-30",
+      "destination": "/departments/winhall#winhall-107-vt-route-30",
+      "permanent": true
+    },
+    {
+      "source": "/stations/winooski-120-main-st",
+      "destination": "/departments/winooski#winooski-120-main-st",
+      "permanent": true
+    },
+    {
+      "source": "/stations/wolcott-326-school-st",
+      "destination": "/departments/wolcott#wolcott-326-school-st",
+      "permanent": true
+    },
+    {
+      "source": "/stations/woodbury-3665-vt-route-14",
+      "destination": "/departments/woodbury#woodbury-3665-vt-route-14",
+      "permanent": true
+    },
+    {
+      "source": "/stations/woodstock-25-morgan-hill-rd",
+      "destination": "/departments/woodstock#woodstock-25-morgan-hill-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/woodstock-454-woodstock-rd",
+      "destination": "/departments/woodstock#woodstock-454-woodstock-rd",
+      "permanent": true
+    },
+    {
+      "source": "/stations/worcester-20-worcester-village-rd",
+      "destination": "/departments/worcester#worcester-20-worcester-village-rd",
+      "permanent": true
+    }
   ]
 }
