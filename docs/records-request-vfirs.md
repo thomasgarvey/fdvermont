@@ -23,24 +23,30 @@ or give notice of a ten-day extension.
 
 ## The letter
 
-**Subject:** Public records request — VFIRS incident data, Richmond Fire Department (FDID 4519)
+**To:** dps.vfirs@vermont.gov
+**Subject:** Public records request — VFIRS incident counts (1 V.S.A. §§ 315–320)
 
 To the Division of Fire Safety,
 
 Under Vermont's Public Records Act, 1 V.S.A. §§ 315–320, I request the following
-records held by the Division.
+records held by the Division, for calendar years **2021 through 2025**.
 
-**What I am asking for.** For the **Richmond Fire Department, FDID 4519**, for
-calendar years **2021 through 2025**:
+**1. Richmond Fire Department (FDID 4519).** A count of the incidents recorded
+in VFIRS, broken down by NFIRS incident type code and by year. If the VFIRS
+reporting module produces a standard report of this kind, that report is what I
+am after.
 
-1. A count of the incidents recorded in VFIRS, broken down by NFIRS incident
-   type code and by year. If the VFIRS reporting module produces a standard
-   report of this kind, that report is what I am after.
+**2. The same table for every reporting department in Vermont**, identified by
+FDID and department name. I ask for this in the same request because I expect it
+is the same query without the filter on one department, and it would spare us
+both a great many separate requests. If it turns out to be materially more
+work, please treat it as severable and fill item 1 alone — I would rather have
+Richmond promptly than hold up both.
 
-2. If no such summary exists as a record, then in the alternative: an export of
-   that department's VFIRS incident records for the same period containing only
-   these fields — incident date, NFIRS incident type code and description, and
-   aid given or received.
+**3. In the alternative,** if no summary of that kind exists as a record: an
+export of the incident records for the same period containing only these fields
+— FDID, incident date, NFIRS incident type code and description, and aid given
+or received.
 
 **What I am not asking for.** No personally identifying information of any kind:
 no names, no patient information, no street addresses, no narrative fields, no
@@ -53,12 +59,12 @@ is preferred. If filling this request will incur charges, please give me an
 estimate before doing the work.
 
 **Why I am asking.** I maintain fdvermont.org, a free public archive of every
-fire station in Vermont. It carries a page for each town setting out what is on
-the public record about its fire department — coverage, budget, how to join,
-burn permits. The Report of the State Fire Marshal publishes statewide totals
-but no department-level figures, so this is the only route to what a single
-department actually turns out for. Anything the Division releases will be
-published with the Division named as its source.
+fire station in Vermont — 274 stations across 196 towns, with a page for each
+department setting out what is on the public record: coverage, contact, budget,
+burn permits, how to join. The Report of the State Fire Marshal publishes
+statewide totals but no department-level figures, so this is the only route to
+what a given department actually turns out for. Anything the Division releases
+will be published with the Division named as its source, free to read.
 
 Thank you for your help.
 
@@ -90,11 +96,21 @@ VFIRS gathers the full NFIRS incident set, EMS included, and participation is
 short of universal (77.53% of Vermont departments in 2016, 85% in 2014). So do
 not tell the Division that the law requires everything in VFIRS. It does not.
 
+**Asking for the whole state, severably.** Item 2 is the same query as item 1
+without the filter, so the marginal effort is small and the payoff is every
+department at once rather than 196 separate requests. Saying plainly that it can
+be severed protects item 1: an agency that would refuse a broad request as
+burdensome can drop it and still fill the narrow one, rather than refusing the
+lot. Do not drop that sentence.
+
 ## If it works
 
-The same letter serves any department — swap the name and FDID, both of which
-are on the town page already. Worth asking for two or three at once rather than
-one at a time, since the Division's effort is much the same and each request
-starts its own clock. The answer goes in the `Calls Note` field on the Fire
-Departments table in Airtable, with the Division named as source and the date it
-was received.
+Answers go in the `Calls Note` field on the Fire Departments table in Airtable,
+with the Division named as the source and the date it was received — the town
+page renders that field verbatim, so the source travels with the figure.
+
+If only item 1 comes back, the same letter serves any other department: swap the
+name and FDID, both of which are on its department page already.
+
+**Status: not sent yet.** Record the date here when it goes, so the
+three-business-day clock under 1 V.S.A. § 318(a) can be counted.
