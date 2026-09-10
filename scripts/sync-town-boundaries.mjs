@@ -38,6 +38,79 @@ const norm = (s) =>
 // seven decimal places, and this roughly halves the committed file.
 const round = (n) => Math.round(n * 1e5) / 1e5;
 
+const pointInRings = (x, y, rings) => {
+  let inside = false;
+  for (const r of rings) {
+    for (let i = 0, j = r.length - 1; i < r.length; j = i++) {
+      const [xi, yi] = r[i];
+      const [xj, yj] = r[j];
+      if (yi > y !== yj > y && x < ((xj - xi) * (y - yi)) / (yj - yi) + xi) inside = !inside;
+    }
+  }
+  return inside;
+};
+
+const distToEdges = (x, y, rings) => {
+  let best = Infinity;
+  for (const r of rings) {
+    for (let i = 0, j = r.length - 1; i < r.length; j = i++) {
+      const [x1, y1] = r[j];
+      const [x2, y2] = r[i];
+      const dx = x2 - x1;
+      const dy = y2 - y1;
+      const len = dx * dx + dy * dy;
+      const t = len ? Math.max(0, Math.min(1, ((x - x1) * dx + (y - y1) * dy) / len)) : 0;
+      const ex = x1 + t * dx - x;
+      const ey = y1 + t * dy - y;
+      best = Math.min(best, Math.hypot(ex, ey));
+    }
+  }
+  return best;
+};
+
+/**
+ * Where a town's name should sit. The centre of the bounding box is wrong for
+ * any town that is not roughly convex — it put South Burlington's label inside
+ * Burlington, which reads as the two towns overlapping. Use the area-weighted
+ * centroid when it actually falls inside the town, and otherwise search for the
+ * interior point furthest from any edge.
+ */
+function labelPoint(rings) {
+  const ring = rings.reduce((a, b) => (b.length > a.length ? b : a), rings[0]);
+  let a2 = 0;
+  let cx = 0;
+  let cy = 0;
+  for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) {
+    const f = ring[j][0] * ring[i][1] - ring[i][0] * ring[j][1];
+    a2 += f;
+    cx += (ring[j][0] + ring[i][0]) * f;
+    cy += (ring[j][1] + ring[i][1]) * f;
+  }
+  if (a2) {
+    const c = [cx / (3 * a2), cy / (3 * a2)];
+    if (pointInRings(c[0], c[1], rings)) return [round(c[0]), round(c[1])];
+  }
+  const pts = rings.flat();
+  const [minX, maxX] = [Math.min(...pts.map((p) => p[0])), Math.max(...pts.map((p) => p[0]))];
+  const [minY, maxY] = [Math.min(...pts.map((p) => p[1])), Math.max(...pts.map((p) => p[1]))];
+  const N = 48;
+  let best = null;
+  let bestD = -1;
+  for (let i = 1; i < N; i++) {
+    for (let j = 1; j < N; j++) {
+      const x = minX + ((maxX - minX) * i) / N;
+      const y = minY + ((maxY - minY) * j) / N;
+      if (!pointInRings(x, y, rings)) continue;
+      const d = distToEdges(x, y, rings);
+      if (d > bestD) {
+        bestD = d;
+        best = [x, y];
+      }
+    }
+  }
+  return best ? [round(best[0]), round(best[1])] : [round((minX + maxX) / 2), round((minY + maxY) / 2)];
+}
+
 const stations = JSON.parse(readFileSync(`${ROOT}/src/data/stations.json`, 'utf8'));
 const wanted = new Map();
 for (const s of stations) if (s.town) wanted.set(norm(s.town), s.town);
@@ -87,12 +160,8 @@ for (const f of features) {
     onRoster,
     acres: Math.round(m2 / SQM_PER_ACRE),
     sqmi: Math.round((m2 / SQM_PER_SQMI) * 100) / 100,
-    // Bounding-box centre, which is where a town label wants to sit. A true
-    // centroid is not worth the arithmetic at this scale.
-    centre: [
-      round((Math.min(...pts.map((p) => p[0])) + Math.max(...pts.map((p) => p[0]))) / 2),
-      round((Math.min(...pts.map((p) => p[1])) + Math.max(...pts.map((p) => p[1]))) / 2),
-    ],
+    // An interior point for the town's label — see labelPoint above.
+    centre: labelPoint(rings),
     // Outer rings only. Vermont towns are simple polygons; keeping holes would
     // complicate the SVG for no visible gain at the scale these are drawn.
     rings,

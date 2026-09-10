@@ -354,7 +354,11 @@ const description = dept
   /* Neighbouring towns: outlined, not filled, so the subject reads first.
      A town with no station on the roster is left hollow — the gap is data. */
   .nb { fill: color-mix(in srgb, var(--ink-3) 8%, transparent); stroke: var(--ink-3); stroke-width: 0.6; }
-  .nb.none { fill: none; }
+  /* A town with no station on the roster keeps the same fill and says so with a
+     dashed edge. Leaving it unfilled read as a hole in the county rather than
+     as a gap in the record — badly so in dark mode, where no fill is darker
+     than its neighbours. */
+  .nb.none { stroke-dasharray: 3 2.5; }
   .me { fill: color-mix(in srgb, var(--red) 14%, transparent); stroke: var(--red); stroke-width: 1.8; }
   .nbl { font-size: 8px; fill: var(--ink-3); letter-spacing: 0.02em; }
   .mel {
