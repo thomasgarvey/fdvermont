@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+  <title id="title">FDvermont.org logo</title>
+  <desc id="desc">Minimal black outline of an anvil above the FDvermont.org wordmark.</desc>
+
+  <!-- Anvil outline -->
+  <path
+    d="M180 205
+       L430 205
+       L430 185
+       Q430 175 440 175
+       L1020 175
+       Q1030 175 1030 185
+       L1030 220
+       Q1030 230 1020 232
+       Q875 250 785 305
+       Q750 327 750 365
+       Q750 400 785 425
+       Q805 438 835 445
+       L835 495
+       L365 495
+       L365 445
+       Q395 438 415 425
+       Q450 400 450 365
+       Q450 327 415 305
+       Q325 250 180 232
+       Q165 230 165 218
+       Q165 205 180 205 Z"
+    fill="none"
+    stroke="#000"
+    stroke-width="16"
+    stroke-linejoin="round"
+    stroke-linecap="round"/>
+
+  <!-- Wordmark -->
+  <text x="600" y="600"
+        text-anchor="middle"
+        font-family="Arial, Helvetica, sans-serif"
+        font-size="92"
+        font-weight="700"
+        letter-spacing="2"
+        fill="#000">FDvermont.org</text>
+</svg>
