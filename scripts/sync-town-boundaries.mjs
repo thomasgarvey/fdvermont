@@ -10,11 +10,18 @@
  * village districts and contracted coverage all cut across them. The town line
  * is a stated approximation, and the page says so.
  *
+ * Nor does a town boundary stop at the shoreline: the area here is the town's
+ * whole area, water included, which for Burlington is half again its land. The
+ * lake is drawn separately, from scripts/sync-water.mjs.
+ *
+ *   node scripts/sync-water.mjs            # first: labels are kept out of it
  *   node scripts/sync-town-boundaries.mjs
  */
 import { readFileSync, writeFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+
+import { labelPoint, pointInRings, round } from './geo.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const SERVICE =
@@ -34,82 +41,21 @@ const norm = (s) =>
     .replace(/\s+/g, ' ')
     .trim();
 
-// Round coordinates to ~1m. A town outline drawn at map scale does not need
-// seven decimal places, and this roughly halves the committed file.
-const round = (n) => Math.round(n * 1e5) / 1e5;
-
-const pointInRings = (x, y, rings) => {
-  let inside = false;
-  for (const r of rings) {
-    for (let i = 0, j = r.length - 1; i < r.length; j = i++) {
-      const [xi, yi] = r[i];
-      const [xj, yj] = r[j];
-      if (yi > y !== yj > y && x < ((xj - xi) * (y - yi)) / (yj - yi) + xi) inside = !inside;
-    }
-  }
-  return inside;
-};
-
-const distToEdges = (x, y, rings) => {
-  let best = Infinity;
-  for (const r of rings) {
-    for (let i = 0, j = r.length - 1; i < r.length; j = i++) {
-      const [x1, y1] = r[j];
-      const [x2, y2] = r[i];
-      const dx = x2 - x1;
-      const dy = y2 - y1;
-      const len = dx * dx + dy * dy;
-      const t = len ? Math.max(0, Math.min(1, ((x - x1) * dx + (y - y1) * dy) / len)) : 0;
-      const ex = x1 + t * dx - x;
-      const ey = y1 + t * dy - y;
-      best = Math.min(best, Math.hypot(ex, ey));
-    }
-  }
-  return best;
-};
-
 /**
- * Where a town's name should sit. The centre of the bounding box is wrong for
- * any town that is not roughly convex — it put South Burlington's label inside
- * Burlington, which reads as the two towns overlapping. Use the area-weighted
- * centroid when it actually falls inside the town, and otherwise search for the
- * interior point furthest from any edge.
+ * Lake Champlain, so a town label does not end up in it. A Vermont town
+ * boundary runs out into the lake, and the interior point furthest from any
+ * edge of Burlington's boundary is open water a mile west of the city — which
+ * put the label west of every station in Burlington, so they read as belonging
+ * to the town whose name was written nearest them instead.
  */
-function labelPoint(rings) {
-  const ring = rings.reduce((a, b) => (b.length > a.length ? b : a), rings[0]);
-  let a2 = 0;
-  let cx = 0;
-  let cy = 0;
-  for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) {
-    const f = ring[j][0] * ring[i][1] - ring[i][0] * ring[j][1];
-    a2 += f;
-    cx += (ring[j][0] + ring[i][0]) * f;
-    cy += (ring[j][1] + ring[i][1]) * f;
-  }
-  if (a2) {
-    const c = [cx / (3 * a2), cy / (3 * a2)];
-    if (pointInRings(c[0], c[1], rings)) return [round(c[0]), round(c[1])];
-  }
-  const pts = rings.flat();
-  const [minX, maxX] = [Math.min(...pts.map((p) => p[0])), Math.max(...pts.map((p) => p[0]))];
-  const [minY, maxY] = [Math.min(...pts.map((p) => p[1])), Math.max(...pts.map((p) => p[1]))];
-  const N = 48;
-  let best = null;
-  let bestD = -1;
-  for (let i = 1; i < N; i++) {
-    for (let j = 1; j < N; j++) {
-      const x = minX + ((maxX - minX) * i) / N;
-      const y = minY + ((maxY - minY) * j) / N;
-      if (!pointInRings(x, y, rings)) continue;
-      const d = distToEdges(x, y, rings);
-      if (d > bestD) {
-        bestD = d;
-        best = [x, y];
-      }
-    }
-  }
-  return best ? [round(best[0]), round(best[1])] : [round((minX + maxX) / 2), round((minY + maxY) / 2)];
+let water = [];
+try {
+  water = JSON.parse(readFileSync(`${ROOT}/src/data/water.json`, 'utf8')).flatMap((b) => b.rings);
+} catch {
+  console.warn('  !! no src/data/water.json — run scripts/sync-water.mjs first.');
+  console.warn('     Labels for lakeside towns will fall in the lake.');
 }
+const inWater = (x, y) => pointInRings(x, y, water);
 
 const stations = JSON.parse(readFileSync(`${ROOT}/src/data/stations.json`, 'utf8'));
 const wanted = new Map();
@@ -160,8 +106,10 @@ for (const f of features) {
     onRoster,
     acres: Math.round(m2 / SQM_PER_ACRE),
     sqmi: Math.round((m2 / SQM_PER_SQMI) * 100) / 100,
-    // An interior point for the town's label — see labelPoint above.
-    centre: labelPoint(rings),
+    // An interior point for the town's label — see scripts/geo.mjs. Keeping it
+    // out of the water is a preference, not a rule: a town that is all water at
+    // this resolution still needs its name somewhere.
+    centre: labelPoint(rings, inWater) ?? labelPoint(rings),
     // Outer rings only. Vermont towns are simple polygons; keeping holes would
     // complicate the SVG for no visible gain at the scale these are drawn.
     rings,

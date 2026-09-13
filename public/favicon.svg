@@ -1,10 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="157 -105.5 881 881">
-    <path d="M180 205 L430 205 L430 185 Q430 175 440 175 L1020 175 Q1030 175 1030 185 L1030 220 Q1030 230 1020 232 Q875 250 785 305 Q750 327 750 365 Q750 400 785 425 Q805 438 835 445 L835 495 L365 495 L365 445 Q395 438 415 425 Q450 400 450 365 Q450 327 415 305 Q325 250 180 232 Q165 230 165 218 Q165 205 180 205 Z" fill="none" stroke="#000" stroke-width="60"
-          stroke-linejoin="round" stroke-linecap="round"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="165 -97.5 865 865">
+    <path d="M180 205 L430 205 L430 185 Q430 175 440 175 L1020 175 Q1030 175 1030 185 L1030 220 Q1030 230 1020 232 Q875 250 785 305 Q750 327 750 365 Q750 400 785 425 Q805 438 835 445 L835 495 L365 495 L365 445 Q395 438 415 425 Q450 400 450 365 Q450 327 415 305 Q325 250 180 232 Q165 230 165 218 Q165 205 180 205 Z" fill="#000"/>
     <style>
-        path { stroke: #000; }
-        @media (prefers-color-scheme: dark) {
-            path { stroke: #FFF; }
-        }
+        path { fill: #000; }
+        @media (prefers-color-scheme: dark) { path { fill: #FFF; } }
     </style>
 </svg>

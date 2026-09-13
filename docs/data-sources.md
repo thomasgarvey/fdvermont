@@ -53,6 +53,31 @@ FDVT models **departments** as the primary content entity (Airtable), and uses
   points (Overpass API, fetched 2026-08-14), each matched by station name.
 - The backfill CSV's "Coordinate Source" column records E911 vs. OSM per row.
 
+### 4. VCGI town boundaries — the outline and the acreage
+
+- Layer: `FS_VCGI_OPENDATA_Boundary_BNDHASH_poly_towns_SP_v1`, fetched by
+  `scripts/sync-town-boundaries.mjs` into `src/data/towns.json` (all 256 towns,
+  not only the ones on the roster — a county map needs the neighbours).
+- **The boundary does not stop at the shoreline.** A Vermont town's line runs
+  out into Lake Champlain, so the `acres`/`sqmi` here are the town's *total*
+  area, water included. Burlington is 15.3 sq mi by this measure and about 10.6
+  sq mi of land. Anywhere the page means "how much ground does this department
+  cover", that overstates it for the eight lakeside towns.
+
+### 5. VCGI hydrography — the lake
+
+- Layer: `FS_VCGI_OPENDATA_Water_VHDCARTO_poly_SP_v1`, fetched by
+  `scripts/sync-water.mjs` into `src/data/water.json`: the 41 named bodies over
+  1 km², generalised to half a pixel at county scale.
+- Drawn over the towns on the county map, which is what puts the shoreline back
+  — see the header of `scripts/sync-water.mjs` for why the map needs it. Also
+  read by `sync-town-boundaries.mjs`, to keep a lakeside town's label out of the
+  water, so **run `sync-water.mjs` first**.
+- VCGI carries the Vermont side of Lake Champlain as one feature named
+  "Narrows, The" (a reach in the middle of it). The script renames that one.
+- The unnamed features in the layer are wide reaches of river carried as
+  polygons; they are skipped.
+
 ## Stale E911 records
 
 The E911 layer is authoritative for location but not always current on *use* —

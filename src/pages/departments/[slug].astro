@@ -187,11 +187,35 @@ const description = dept
       <figure class="cmap">
         <svg viewBox={`0 0 ${map.width} ${map.height}`} role="img"
              aria-label={`${town.name} within ${map.county} County, with every fire station in the county marked`}>
-          {/* Neighbours first, so the subject town draws over their shared edges. */}
-          {map.shapes.filter((s) => !s.isSubject).map((s) => (
-            <path d={s.d} class={s.onRoster ? "nb" : "nb none"} />
+          {/* Neighbours first, so the subject town draws over their shared edges.
+              The id is the shape's own index either way, so the clip below can
+              name every town without caring which order they were drawn in. */}
+          {map.shapes.map((s, i) => !s.isSubject && (
+            <path id={`t${i}`} d={s.d} class={s.onRoster ? "nb" : "nb none"} />
           ))}
-          {map.shapes.filter((s) => s.isSubject).map((s) => <path d={s.d} class="me" />)}
+          {map.shapes.map((s, i) => s.isSubject && (
+            <path id={`t${i}`} d={s.d} class="me" />
+          ))}
+
+          {/* The lake over the towns: a town boundary runs out into Lake
+              Champlain, so this is what puts the shoreline back. Clipped to the
+              county, because the far side of the lake is New York and drawing
+              it would say this map covers more than it does. The clip reuses
+              the town paths rather than repeating them — they are the single
+              largest thing on the page. */}
+          {map.water && (
+            <>
+              <clipPath id="county">
+                {map.shapes.map((_, i) => <use href={`#t${i}`} />)}
+              </clipPath>
+              <path d={map.water} class="water" fill-rule="evenodd" clip-path="url(#county)" />
+            </>
+          )}
+          {map.waterLabels.map((w) => (
+            <text x={w.cx} y={w.cy} class="wl" text-anchor="middle"
+                  transform={w.vertical ? `rotate(-90 ${w.cx.toFixed(1)} ${w.cy.toFixed(1)})` : undefined}
+            >{w.name}</text>
+          ))}
 
           {map.shapes.filter((s) => !s.isSubject && s.labelled).map((s) => (
             <text x={s.cx} y={s.cy} class="nbl" text-anchor="middle">{s.name}</text>
@@ -220,8 +244,10 @@ const description = dept
         <figcaption>
           {town.name} in {map.county} County. Every fire station in the county is marked —
           {" "}{town.stations.length} here, {neighbourStations} in neighbouring towns, which is
-          who turns out on a mutual aid call. Boundaries from VCGI; fire district lines are
-          not town lines, and village districts and contracted coverage cross them.
+          who turns out on a mutual aid call. Boundaries and water from VCGI; fire district
+          lines are not town lines, and village districts and contracted coverage cross
+          them. A town line runs out into the lake, so the shoreline here is the water
+          drawn over the boundary, not the boundary itself.
         </figcaption>
       </figure>
     )}
@@ -360,6 +386,15 @@ const description = dept
      than its neighbours. */
   .nb.none { stroke-dasharray: 3 2.5; }
   .me { fill: color-mix(in srgb, var(--red) 14%, transparent); stroke: var(--red); stroke-width: 1.8; }
+  /* Water is the page itself showing through: the land is what carries the
+     tint, so the shoreline needs no colour of its own to read as an edge. The
+     fill has to be opaque — it is covering the part of each town boundary that
+     lies in the lake, the subject town's red outline included. */
+  .water { fill: var(--surface); stroke: var(--ink-3); stroke-width: 0.5; }
+  .wl {
+    font-size: 8.5px; fill: var(--ink-3); letter-spacing: 0.14em;
+    text-transform: uppercase; font-style: italic;
+  }
   .nbl { font-size: 8px; fill: var(--ink-3); letter-spacing: 0.02em; }
   .mel {
     font-family: "Source Serif 4", Georgia, serif; font-size: 15px;
