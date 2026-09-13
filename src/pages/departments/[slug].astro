@@ -390,7 +390,11 @@ const description = dept
      tint, so the shoreline needs no colour of its own to read as an edge. The
      fill has to be opaque — it is covering the part of each town boundary that
      lies in the lake, the subject town's red outline included. */
-  .water { fill: var(--surface); stroke: var(--ink-3); stroke-width: 0.5; }
+  /* Water needs its own tone. Filled with --surface it differed from land by
+     seven levels out of 255 in dark mode — the lake was drawn, clipped and
+     labelled, and still invisible, so Burlington looked like it had land
+     between it and the shore. */
+  .water { fill: var(--water); stroke: var(--ink-3); stroke-width: 0.7; }
   .wl {
     font-size: 8.5px; fill: var(--ink-3); letter-spacing: 0.14em;
     text-transform: uppercase; font-style: italic;
