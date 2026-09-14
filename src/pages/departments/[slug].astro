@@ -218,7 +218,7 @@ const description = dept
           ))}
 
           {map.shapes.filter((s) => !s.isSubject && s.labelled).map((s) => (
-            <text x={s.cx} y={s.cy} class="nbl" text-anchor="middle">{s.name}</text>
+            <text x={s.cx} y={s.ly} class="nbl" text-anchor="middle">{s.name}</text>
           ))}
 
           {map.points.filter((p) => !p.mine).map((p) => (
@@ -230,9 +230,9 @@ const description = dept
             </circle>
           ))}
 
-          <text x={map.shapes.find((s) => s.isSubject)?.cx ?? 0}
-                y={(map.shapes.find((s) => s.isSubject)?.cy ?? 0) - 12}
-                class="mel" text-anchor="middle">{town.name}</text>
+          {map.label && (
+            <text x={map.label.x} y={map.label.y} class="mel" text-anchor="middle">{town.name}</text>
+          )}
 
           <g class="bar" transform={`translate(${map.width - map.scale.px - 16}, ${map.height - 18})`}>
             <line x1="0" y1="0" x2={map.scale.px} y2="0" />

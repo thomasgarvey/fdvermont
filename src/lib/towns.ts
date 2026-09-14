@@ -42,6 +42,23 @@ for (const [town, b] of Object.entries(townsData as Record<string, Boundary>)) {
   boundaryByTown.set(normTown(town), b);
 }
 
+/**
+ * Which boundary a town on the roster is drawn from. The roster files two of
+ * them under a longer name than VCGI does — "Essex Town" for Essex, "Essex
+ * Junction City" for Essex Junction — and neither found a boundary, so both
+ * pages drew a county with no town of their own in it and stated no area.
+ * The name itself is tried first, which leaves Barre City, Barre Town, Rutland
+ * City, Rutland Town and both Newports matching themselves: VCGI carries those
+ * under exactly the names the roster uses, and they are genuinely separate
+ * towns from the ones they are named after.
+ */
+const boundaryKey = (name: string) => {
+  const key = normTown(name);
+  if (boundaryByTown.has(key)) return key;
+  const bare = key.replace(/ (CITY|TOWN|VILLAGE)$/, '');
+  return boundaryByTown.has(bare) ? bare : key;
+};
+
 // A department's City is sometimes the village it sits in ("Highgate Center")
 // rather than the town the roster files it under. Match on the normalised name
 // and fall back to the leading word, which is what village names share with
@@ -63,7 +80,7 @@ export const towns: Town[] = townNames.map((name) => {
     slug: slugify(name),
     name,
     county: inTown.find((s) => s.county)?.county ?? '',
-    boundary: boundaryByTown.get(key) ?? null,
+    boundary: boundaryByTown.get(boundaryKey(name)) ?? null,
     departments: deptsByTown.get(key) ?? [],
     stations: inTown,
     photographed: inTown.filter((s) => s.photo).length,
@@ -104,6 +121,15 @@ interface WaterBody {
   centre: number[] | null;
   rings: number[][][];
 }
+
+/**
+ * How wide a town name draws, per character, at the 8px the county map labels
+ * towns in. Measured across all 256 names in the page's own font: 3.9px on
+ * average and 4.7 at the widest, so this sits at the wide end — which is what
+ * both the callers want, one deciding whether a name fits inside its town and
+ * the other whether a station dot has landed on it.
+ */
+const NAME_PX = 4.6;
 
 /**
  * A town drawn inside its county, which is the context a town outline on its
@@ -152,7 +178,12 @@ export function countyMap(subject: Town, width = 680, maxHeight = 620, pad = 14)
   const projectRings = (rings: number[][][]): Point[][] =>
     rings.map((r) => r.map(([lng, lat]) => project(lng, lat)));
 
+  // Two different matches, because the roster's name for a town and VCGI's are
+  // not always the same string: a station is the subject's when it is filed
+  // under the subject's own name, a shape is when it is the boundary that name
+  // resolves to.
   const subjectKey = normTown(subject.name);
+  const shapeKey = boundaryKey(subject.name);
   // Kept alongside the path string: the water label has to know where the
   // county actually is, since the lake is drawn clipped to it.
   const landRings: Point[][] = [];
@@ -164,14 +195,17 @@ export function countyMap(subject: Town, width = 680, maxHeight = 620, pad = 14)
     landRings.push(...projected);
     return {
       name: t.name,
-      isSubject: normTown(t.name) === subjectKey,
+      isSubject: normTown(t.name) === shapeKey,
       onRoster: t.onRoster,
       d: pathOf(projected),
       cx,
       cy,
+      // Where the name is drawn. The town's own point to begin with; the pass
+      // below lifts it off any station dot that lands on the text.
+      ly: cy,
       // Around Burlington the towns are small and the labels collide. Only
       // label a town wide enough to hold its own name at 8px.
-      labelled: widthPx > t.name.length * 4.6,
+      labelled: widthPx > t.name.length * NAME_PX,
       slug: slugify(t.name),
     };
   });
@@ -189,6 +223,94 @@ export function countyMap(subject: Town, width = 680, maxHeight = 620, pad = 14)
         slug: s.slug,
       };
     });
+
+  // Station dots are drawn over the town labels, so a dot that lands on a name
+  // takes a letter out of it: around Burlington three sat across the city's own
+  // label, and one on the C of Charlotte. Lift the name off the dot instead.
+  // The move is the shortest one that clears, so the label stays plainly on the
+  // town it names, and where nothing within reach is clear the label goes — the
+  // same answer the width test above gives a town with no room for its name.
+  //
+  // How far a name may be slid. 16px: at 12 the four dots around Pittsford
+  // boxed its name in and Rutland County lost it off 24 of its 25 maps, and
+  // above 16 a name is further from its town than it is tall. Almost every move
+  // is far shorter — half are 5px or less, and 30 of the 814 go past 12. One
+  // name in the state is given up on: on the West Pawlet page the village's own
+  // 15px label lies across the middle of Pawlet and its station sits just under
+  // that, leaving the town's name nowhere to go but 21px off its own point.
+  const REACH = 16;
+  // The dots as the page draws them: r=3, or 5.5 for a station in the subject
+  // town, each ringed by a stroke in the surface colour that reads as part of
+  // the dot.
+  const onDot = (box: number[], p: { x: number; y: number; mine: boolean }) => {
+    const r = p.mine ? 6.25 : 3.5;
+    const dx = Math.max(box[0] - p.x, 0, p.x - box[2]);
+    const dy = Math.max(box[1] - p.y, 0, p.y - box[3]);
+    return dx * dx + dy * dy < r * r;
+  };
+  // What a name covers, drawn centred on (x, y) with y the baseline: the ink
+  // runs about 6px above that baseline at 8px and 2px below it, and a pixel is
+  // added all round so a dot grazing the edge still counts as touching.
+  const labelBox = (name: string, x: number, y: number, px = 8): number[] => {
+    const half = (name.length * NAME_PX * px) / 8 / 2 + 1;
+    return [x - half, y - (6.5 * px) / 8, x + half, y + (3 * px) / 8];
+  };
+
+  // Where the subject's own name is written: over its town, a little above the
+  // point the town is labelled from. Five departments on the roster are
+  // villages with no boundary of their own — Bellows Falls and Saxtons River
+  // are in Rockingham, Orleans in Barton, North Bennington in Bennington, West
+  // Pawlet in Pawlet — and for those there is no shape to write over, so the
+  // name goes above the department's own station, which is the one thing on the
+  // map that is certainly theirs. Before this it fell back to (0, -12) and the
+  // name was drawn half off the top left corner of every one of those maps.
+  const subjectShape = shapes.find((s) => s.isSubject);
+  const own = points.filter((p) => p.mine);
+  const label = subjectShape
+    ? { x: subjectShape.cx, y: subjectShape.cy - 12 }
+    : own.length
+      ? {
+          x: own.reduce((sum, p) => sum + p.x, 0) / own.length,
+          y: Math.min(...own.map((p) => p.y)) - 12,
+        }
+      : null;
+
+  // The subject's own label is drawn last and over everything else, so a
+  // neighbour under it is as unreadable as one under a dot, and a neighbour
+  // nudged under it would simply disappear. Same measure, at the 15px it is
+  // drawn in.
+  const subjectBox = label ? labelBox(subject.name, label.x, label.y, 15) : null;
+  const placed = subjectBox ? [subjectBox] : [];
+  // Labels nothing touches stay on their town's own point, and are fixed before
+  // anything moves, so a nudge has somewhere real to avoid.
+  const toMove: typeof shapes = [];
+  for (const s of shapes) {
+    if (!s.labelled || s.isSubject) continue;
+    const box = labelBox(s.name, s.cx, s.cy);
+    if (points.some((p) => onDot(box, p)) || (subjectBox && boxesOverlap(subjectBox, box))) {
+      toMove.push(s);
+    } else {
+      placed.push(box);
+    }
+  }
+
+  // Up before down at each distance: the box reaches further above the baseline
+  // than below it, so a dot sitting on the text clears sooner upwards.
+  const offsets = Array.from({ length: REACH }, (_, i) => i + 1).flatMap((d) => [-d, d]);
+  for (const s of toMove) {
+    const clear = offsets
+      .map((dy) => ({ dy, box: labelBox(s.name, s.cx, s.cy + dy) }))
+      .find(
+        ({ box }) =>
+          !points.some((p) => onDot(box, p)) && !placed.some((b) => boxesOverlap(b, box)),
+      );
+    if (!clear) {
+      s.labelled = false;
+      continue;
+    }
+    s.ly = s.cy + clear.dy;
+    placed.push(clear.box);
+  }
 
   // The lake, cut to the drawing and thinned to it. Stored shorelines are
   // metre-accurate, which at this scale is a thousand points nobody can see and
@@ -265,7 +387,7 @@ export function countyMap(subject: Town, width = 680, maxHeight = 620, pad = 14)
   const miles = [1, 2, 5, 10, 20, 50].find((m) => m * pxPerMile > width * 0.15) ?? 50;
 
   return {
-    width, height, shapes, points,
+    width, height, shapes, points, label,
     // One path for every ring, filled even-odd so an island in the lake reads
     // as land without having to know which rings VCGI meant as holes.
     water: waterRings.length ? pathOf(waterRings) : null,
