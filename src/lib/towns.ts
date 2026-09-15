@@ -73,6 +73,17 @@ for (const d of departmentsData as Department[]) {
 
 const townNames = [...new Set(stations.map((s) => s.town).filter(Boolean))].sort();
 
+/**
+ * Which boundaries the roster actually has a station in. towns.json carries a
+ * flag of its own for this, written at sync time by a name match with no
+ * fallback, so it says no station is recorded in Essex or Essex Junction — the
+ * two the roster spells longer than VCGI does. Both were drawn on every
+ * Chittenden map with the dashed edge that means exactly that, while their own
+ * pages listed the station standing in them. Answering from the roster the
+ * pages are built from is the only way the two cannot drift apart again.
+ */
+const rosterBoundaries = new Set(townNames.map(boundaryKey));
+
 export const towns: Town[] = townNames.map((name) => {
   const key = normTown(name);
   const inTown = stations.filter((s) => s.town === name);
@@ -196,7 +207,7 @@ export function countyMap(subject: Town, width = 680, maxHeight = 620, pad = 14)
     return {
       name: t.name,
       isSubject: normTown(t.name) === shapeKey,
-      onRoster: t.onRoster,
+      onRoster: rosterBoundaries.has(normTown(t.name)),
       d: pathOf(projected),
       cx,
       cy,
