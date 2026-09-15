@@ -12,7 +12,11 @@ export type Department = (typeof departmentsData)[number];
 
 export interface Boundary {
   name: string;
-  fips: number;
+  /**
+   * VCGI's FIPS6, and null where their own layer carries none. One town of the
+   * 256 has none: Essex Junction.
+   */
+  fips: number | null;
   /** Learned from the roster at sync time; null for a town we have no station in. */
   county: string | null;
   /** Whether any station in the roster sits in this town. */
