@@ -212,7 +212,8 @@ export function countyMap(subject: Town, width = 680, maxHeight = 620, pad = 14)
       cx,
       cy,
       // Where the name is drawn. The town's own point to begin with; the pass
-      // below lifts it off any station dot that lands on the text.
+      // below moves it off any station dot that lands on the text.
+      lx: cx,
       ly: cy,
       // Around Burlington the towns are small and the labels collide. Only
       // label a town wide enough to hold its own name at 8px.
@@ -242,13 +243,10 @@ export function countyMap(subject: Town, width = 680, maxHeight = 620, pad = 14)
   // town it names, and where nothing within reach is clear the label goes — the
   // same answer the width test above gives a town with no room for its name.
   //
-  // How far a name may be slid. 16px: at 12 the four dots around Pittsford
-  // boxed its name in and Rutland County lost it off 24 of its 25 maps, and
-  // above 16 a name is further from its town than it is tall. Almost every move
-  // is far shorter — half are 5px or less, and 30 of the 814 go past 12. One
-  // name in the state is given up on: on the West Pawlet page the village's own
-  // 15px label lies across the middle of Pawlet and its station sits just under
-  // that, leaving the town's name nowhere to go but 21px off its own point.
+  // How far a name may be slid, in either direction. 16px: at 12 the four dots
+  // around Pittsford boxed its name in and Rutland County lost it off 24 of its
+  // 25 maps, and past 16 a name is further from its town than it is tall.
+  // Almost every move is far shorter — half are 5px or less.
   const REACH = 16;
   // The dots as the page draws them: r=3, or 5.5 for a station in the subject
   // town, each ringed by a stroke in the surface colour that reads as part of
@@ -308,17 +306,23 @@ export function countyMap(subject: Town, width = 680, maxHeight = 620, pad = 14)
   // Up before down at each distance: the box reaches further above the baseline
   // than below it, so a dot sitting on the text clears sooner upwards.
   const offsets = Array.from({ length: REACH }, (_, i) => i + 1).flatMap((d) => [-d, d]);
+  const free = ({ box }: { box: number[] }) =>
+    !points.some((p) => onDot(box, p)) && !placed.some((b) => boxesOverlap(b, box));
   for (const s of toMove) {
-    const clear = offsets
-      .map((dy) => ({ dy, box: labelBox(s.name, s.cx, s.cy + dy) }))
-      .find(
-        ({ box }) =>
-          !points.some((p) => onDot(box, p)) && !placed.some((b) => boxesOverlap(b, box)),
-      );
+    // Vertically first, and only then sideways. A name that has moved up or
+    // down is still centred on its town and still reads as that town's; one
+    // slid sideways has to be read against the boundary it sits in. Sideways is
+    // what is left for a name hemmed in above and below — on the West Pawlet
+    // page the village's own 15px label lies across the middle of Pawlet with
+    // the station just under it, and 15px to the right is the only way out.
+    const clear =
+      offsets.map((dy) => ({ dx: 0, dy, box: labelBox(s.name, s.cx, s.cy + dy) })).find(free) ??
+      offsets.map((dx) => ({ dx, dy: 0, box: labelBox(s.name, s.cx + dx, s.cy) })).find(free);
     if (!clear) {
       s.labelled = false;
       continue;
     }
+    s.lx = s.cx + clear.dx;
     s.ly = s.cy + clear.dy;
     placed.push(clear.box);
   }

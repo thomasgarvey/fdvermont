@@ -218,7 +218,7 @@ const description = dept
           ))}
 
           {map.shapes.filter((s) => !s.isSubject && s.labelled).map((s) => (
-            <text x={s.cx} y={s.ly} class="nbl" text-anchor="middle">{s.name}</text>
+            <text x={s.lx} y={s.ly} class="nbl" text-anchor="middle">{s.name}</text>
           ))}
 
           {map.points.filter((p) => !p.mine).map((p) => (
