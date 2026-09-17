@@ -43,12 +43,44 @@ const neighbourStations = map ? map.points.filter((p) => !p.mine).length : 0;
 
 const num = (n: number) => n.toLocaleString("en-US");
 
+// Area, in the terms this page means it. A Vermont town line does not stop at
+// the shoreline, so what VCGI files as the town's area is land and water
+// together — half again the land in Burlington, three times it in North Hero.
+// What this page asks is how much ground a department covers, so the land
+// leads. Neither number is quietly swapped for the other: every row says which
+// of the two it is, because an unlabelled "Area" is how the overstatement sat
+// here unnoticed.
+const area = town.boundary;
+const acreage = (acres: number, sqmi: number) => `${num(acres)} acres · ${sqmi} sq mi`;
+const areaSplit =
+  area && area.landAcres != null && area.landSqmi != null && area.waterSqmi != null
+    ? {
+        land: acreage(area.landAcres, area.landSqmi),
+        total: acreage(area.totalAcres, area.totalSqmi),
+        waterSqmi: area.waterSqmi,
+        totalSqmi: area.totalSqmi,
+        // The total earns a row of its own wherever the water is a twentieth of
+        // the town or more — 28 of the 189 towns on the roster, and the ones
+        // where anyone who knows the place would read the land figure as wrong.
+        // Below that the two numbers say the same thing and the second row is
+        // noise: Barre Town is 30.53 sq mi of land inside 30.73.
+        showTotal: area.waterSqmi / (area.landSqmi + area.waterSqmi) >= 0.05,
+      }
+    : null;
+
 // Only facts we hold. A row we cannot fill is left out rather than shown empty,
 // which would read as a claim that the answer is nothing.
 const facts: [string, string][] = [
   ["Stations", String(town.stations.length)],
   ["Photographed", `${town.photographed} of ${town.stations.length}`],
-  town.boundary ? ["Area", `${num(town.boundary.acres)} acres · ${town.boundary.sqmi} sq mi`] : null,
+  // No land figure means the Census carries no row under a name that matches,
+  // so the total is all there is — said as the total, not as "Area".
+  areaSplit
+    ? ["Land area", areaSplit.land]
+    : area
+      ? ["Area, water included", acreage(area.totalAcres, area.totalSqmi)]
+      : null,
+  areaSplit?.showTotal ? ["Inside the town line", areaSplit.total] : null,
   members != null ? ["Firefighters", String(members)] : null,
   dept?.budget ? ["Budget, FY2026", `$${num(dept.budget)}`] : null,
   dept?.type ? ["Department type", dept.type] : null,
@@ -107,6 +139,13 @@ const description = dept
           <div class="row"><dt>{k}</dt><dd>{v}</dd></div>
         ))}
       </dl>
+      {areaSplit?.showTotal && (
+        <p class="fine">
+          {town.name}'s line runs out into the water, and {areaSplit.waterSqmi} of the
+          {" "}{areaSplit.totalSqmi} square miles inside it are water. The land figure is the
+          Census count; the total is the boundary VCGI draws.
+        </p>
+      )}
     </div>
 
 

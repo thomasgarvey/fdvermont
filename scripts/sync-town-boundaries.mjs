@@ -10,9 +10,12 @@
  * village districts and contracted coverage all cut across them. The town line
  * is a stated approximation, and the page says so.
  *
- * Nor does a town boundary stop at the shoreline: the area here is the town's
- * whole area, water included, which for Burlington is half again its land. The
- * lake is drawn separately, from scripts/sync-water.mjs.
+ * Nor does a town boundary stop at the shoreline, so VCGI's area for a town is
+ * land and water together: half again the land in Burlington, three times it in
+ * North Hero. Both numbers are written out — totalAcres/totalSqmi for
+ * everything inside the line, landAcres/landSqmi for the land, the latter from
+ * the Census, which counts the two separately. The page says which it is
+ * showing. The lake itself is drawn from scripts/sync-water.mjs.
  *
  *   node scripts/sync-water.mjs            # first: labels are kept out of it
  *   node scripts/sync-town-boundaries.mjs
@@ -24,12 +27,34 @@ import { fileURLToPath } from 'node:url';
 import { labelPoint, pointInRings, round } from './geo.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const SERVICE =
-  'https://services1.arcgis.com/BkFxaEFNwHqX3tAw/arcgis/rest/services' +
-  '/FS_VCGI_OPENDATA_Boundary_BNDHASH_poly_towns_SP_v1/FeatureServer/0/query';
+const HOST = 'https://services1.arcgis.com/BkFxaEFNwHqX3tAw/arcgis/rest/services';
+const TOWNS = `${HOST}/FS_VCGI_OPENDATA_Boundary_BNDHASH_poly_towns_SP_v1/FeatureServer/0/query`;
+// The Census files land and water area separately, per county subdivision —
+// which in Vermont is the town. Nothing else on the host carries the split.
+const CENSUS = `${HOST}/FS_Census_County_Subdivision_Boundaries_2020_Vintage/FeatureServer/0/query`;
 
 const SQM_PER_ACRE = 4046.8564224;
 const SQM_PER_SQMI = 2589988.110336;
+const acresOf = (m2) => Math.round(m2 / SQM_PER_ACRE);
+const sqmiOf = (m2) => Math.round((m2 / SQM_PER_SQMI) * 100) / 100;
+
+/** One page of features, with the server's own limit treated as an error. */
+async function query(service, outFields, geometry = false) {
+  const url = new URL(service);
+  url.searchParams.set('where', '1=1');
+  url.searchParams.set('outFields', outFields);
+  url.searchParams.set('returnGeometry', String(geometry));
+  if (geometry) url.searchParams.set('outSR', '4326');
+  url.searchParams.set('f', 'json');
+  const res = await fetch(url);
+  if (!res.ok) throw new Error(`ArcGIS ${res.status} ${res.statusText}: ${url.pathname}`);
+  const data = await res.json();
+  if (data.error) throw new Error(`ArcGIS: ${JSON.stringify(data.error)}`);
+  // Vermont has 255 county subdivisions and 256 towns; both layers cap at 2,000.
+  // If that ever stops being true the answer is paging, not a short file.
+  if (data.exceededTransferLimit) throw new Error(`ArcGIS truncated ${url.pathname}`);
+  return data.features ?? [];
+}
 
 // VCGI spells towns in caps and without the "Saint"/"St." variance the roster
 // carries; normalise both sides the way src/lib/stations.ts does.
@@ -68,19 +93,30 @@ const countyName = new Map();
 const rosterCounty = new Map();
 for (const s of stations) if (s.town && s.county) rosterCounty.set(norm(s.town), s.county);
 
-const url = new URL(SERVICE);
-url.searchParams.set('where', '1=1');
-url.searchParams.set("outFields", "TOWNNAMEMC,CNTY,FIPS6,Shape__Area");
-url.searchParams.set('returnGeometry', 'true');
-url.searchParams.set('outSR', '4326');
-url.searchParams.set('f', 'json');
+const features = await query(TOWNS, 'TOWNNAMEMC,CNTY,FIPS6,Shape__Area', true);
 
-const res = await fetch(url);
-if (!res.ok) throw new Error(`VCGI ${res.status} ${res.statusText}`);
-const data = await res.json();
-if (data.error) throw new Error(`VCGI: ${JSON.stringify(data.error)}`);
-
-const features = data.features ?? [];
+/**
+ * Land area, by name. The Census NAME is the bare town name — "Barre" for both
+ * the city and the town, and likewise Newport, Rutland and St. Albans — so the
+ * name that tells them apart is NAMELSAD, "Barre city", which is how VCGI
+ * spells those four pairs too. Both spellings are indexed, and a key that two
+ * subdivisions share is dropped rather than resolved: a town with an ambiguous
+ * name should come out with no land figure, not with its neighbour's.
+ */
+const censusLand = new Map();
+const ambiguous = new Set();
+for (const f of await query(CENSUS, 'NAME,NAMELSAD,ALAND,AWATER')) {
+  const a = f.attributes;
+  for (const key of [norm(a.NAME), norm(a.NAMELSAD)]) {
+    if (ambiguous.has(key)) continue;
+    if (censusLand.has(key)) {
+      ambiguous.add(key);
+      censusLand.delete(key);
+    } else {
+      censusLand.set(key, a);
+    }
+  }
+}
 for (const f of features) {
   const county = rosterCounty.get(norm(f.attributes.TOWNNAMEMC));
   if (county && !countyName.has(f.attributes.CNTY)) countyName.set(f.attributes.CNTY, county);
@@ -97,15 +133,21 @@ for (const f of features) {
   const onRoster = wanted.has(key);
   if (onRoster) matched++;
   const m2 = a.Shape__Area;
+  const land = censusLand.get(key);
   const rings = f.geometry.rings.map((r) => r.map(([x, y]) => [round(x), round(y)]));
-  const pts = rings.flat();
   towns[onRoster ? wanted.get(key) : a.TOWNNAMEMC] = {
     name: a.TOWNNAMEMC,
     fips: a.FIPS6,
     county: countyName.get(a.CNTY) ?? null,
     onRoster,
-    acres: Math.round(m2 / SQM_PER_ACRE),
-    sqmi: Math.round((m2 / SQM_PER_SQMI) * 100) / 100,
+    // Everything inside the town line, water included — VCGI's own polygon.
+    totalAcres: acresOf(m2),
+    totalSqmi: sqmiOf(m2),
+    // Land only, and the water that makes up the difference. Null where the
+    // Census does not carry the town under a name we can match.
+    landAcres: land ? acresOf(land.ALAND) : null,
+    landSqmi: land ? sqmiOf(land.ALAND) : null,
+    waterSqmi: land ? sqmiOf(land.AWATER) : null,
     // An interior point for the town's label — see scripts/geo.mjs. Keeping it
     // out of the water is a preference, not a rule: a town that is all water at
     // this resolution still needs its name somewhere.
@@ -119,12 +161,18 @@ for (const f of features) {
 writeFileSync(`${ROOT}/src/data/towns.json`, JSON.stringify(towns, null, 0) + '\n');
 
 const missing = [...wanted.values()].filter((t) => !towns[t]);
+const noLand = Object.values(towns).filter((t) => t.landSqmi == null);
 const bytes = JSON.stringify(towns).length;
 console.log(
   `Towns: ${features.length} from VCGI (${matched} of ${wanted.size} on the roster)` +
     ` -> src/data/towns.json (${(bytes / 1024).toFixed(0)} KB)`,
 );
 console.log(`Counties named: ${countyName.size} of 14`);
+console.log(`Land area from the Census for ${features.length - noLand.length} of ${features.length}`);
+if (noLand.length) {
+  console.warn(`\n  !! no Census land area for: ${noLand.map((t) => t.name).join(', ')}`);
+  console.warn('     The page falls back to stating the total, water included.');
+}
 if (missing.length) {
   console.warn(`\n  !! no VCGI boundary for ${missing.length} town(s): ${missing.join(', ')}`);
   console.warn('     Usually a village name where VCGI carries the parent town.');

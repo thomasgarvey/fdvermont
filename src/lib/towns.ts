@@ -21,8 +21,20 @@ export interface Boundary {
   county: string | null;
   /** Whether any station in the roster sits in this town. */
   onRoster: boolean;
-  acres: number;
-  sqmi: number;
+  /**
+   * Everything inside the town line, water included. A Vermont boundary runs
+   * out into the lake, so for a lakeside town this is well over its land.
+   */
+  totalAcres: number;
+  totalSqmi: number;
+  /**
+   * Land only, from the Census, with the water that makes up the difference.
+   * Null for a town the Census does not carry under a name we can match — see
+   * scripts/sync-town-boundaries.mjs.
+   */
+  landAcres: number | null;
+  landSqmi: number | null;
+  waterSqmi: number | null;
   /** An interior point on the town's land, where its label sits — see scripts/geo.mjs. */
   centre: number[];
   rings: number[][][];

@@ -1,7 +1,7 @@
 # FDVT Data Sources
 
 Documented per the project brief's requirement to record data-source research and
-reasoning for key decisions. Last updated: 2026-08-14.
+reasoning for key decisions. Last updated: 2026-09-13.
 
 ## The core distinction: departments vs. stations
 
@@ -53,16 +53,22 @@ FDVT models **departments** as the primary content entity (Airtable), and uses
   points (Overpass API, fetched 2026-08-14), each matched by station name.
 - The backfill CSV's "Coordinate Source" column records E911 vs. OSM per row.
 
-### 4. VCGI town boundaries — the outline and the acreage
+### 4. VCGI town boundaries — the outline and the total area
 
 - Layer: `FS_VCGI_OPENDATA_Boundary_BNDHASH_poly_towns_SP_v1`, fetched by
   `scripts/sync-town-boundaries.mjs` into `src/data/towns.json` (all 256 towns,
   not only the ones on the roster — a county map needs the neighbours).
 - **The boundary does not stop at the shoreline.** A Vermont town's line runs
-  out into Lake Champlain, so the `acres`/`sqmi` here are the town's *total*
-  area, water included. Burlington is 15.3 sq mi by this measure and about 10.6
-  sq mi of land. Anywhere the page means "how much ground does this department
-  cover", that overstates it for the eight lakeside towns.
+  out into the lake, so `Shape__Area` is the town's *total* area, water
+  included. It is written out as `totalAcres`/`totalSqmi`, named for what it is;
+  the land comes from source 6 instead.
+- How far off the total is, for "how much ground does this department cover":
+  Burlington 15.35 sq mi against 10.31 of land, South Burlington 30.8 against
+  16.46, Colchester 60.41 against 36.24, and North Hero 46 against 13.45 — an
+  island town is mostly lake by this measure. Water is a twentieth or more of
+  33 of the 255 towns the Census carries, 28 of them on the roster, so this was
+  never a Champlain-only problem: Westmore is 8% water (Lake Willoughby) and
+  Castleton 8% (Lake Bomoseen).
 
 ### 5. VCGI hydrography — the lake
 
@@ -77,6 +83,38 @@ FDVT models **departments** as the primary content entity (Airtable), and uses
   "Narrows, The" (a reach in the middle of it). The script renames that one.
 - The unnamed features in the layer are wide reaches of river carried as
   polygons; they are skipped.
+
+### 6. Census county subdivisions — the land area
+
+- Layer: `FS_Census_County_Subdivision_Boundaries_2020_Vintage`, on the same
+  ArcGIS host as sources 4 and 5, fetched by `scripts/sync-town-boundaries.mjs`
+  into the `landAcres`/`landSqmi`/`waterSqmi` fields of `src/data/towns.json`.
+  Attributes only — no geometry is downloaded; the outline is still VCGI's.
+- Why this layer: a county subdivision *is* a Vermont town, and `ALAND`/`AWATER`
+  are the Census's own land/water split. It is the only source on the host that
+  carries the split as an attribute. The alternative — intersecting each
+  boundary with `src/data/water.json` — needs real polygon clipping, and would
+  measure only the 41 bodies that file keeps.
+- The join is on the name, normalised the same way the roster is (uppercase,
+  `SAINT`/`ST.` collapsed). The Census `NAME` is the bare town name, which is
+  ambiguous for the four city/town pairs — Barre, Newport, Rutland and
+  St. Albans — so `NAMELSAD` ("Barre city") is indexed alongside it, and that is
+  how VCGI spells those eight too. A normalised name that two subdivisions share
+  is dropped rather than guessed at.
+- 255 of the 256 towns get a land figure. The miss is **Essex Junction**, which
+  became a city in 2022 and so does not exist in the 2020 vintage; the Census
+  still carries its land inside Essex town. No station in the roster matches
+  either town's VCGI spelling today, so neither has a department page, but if
+  that changes: Essex's land figure is its land *plus* the Junction's, and Essex
+  Junction has none. A town with no land figure keeps its total, labelled "Area,
+  water included".
+- Census totals and VCGI's differ by 0.04 sq mi at the median (0.12 at the mean,
+  0.69 at the worst, Avery's Gore) — different generalisation of the same lines,
+  not a disagreement about where they run. So the water *share* that decides
+  whether a page shows both numbers is computed from `ALAND` and `AWATER`
+  together, within the one source, rather than by subtracting across the two.
+- The 2020 vintage is the newest on the host. Re-check when a 2030 one appears,
+  and when it does, Essex Junction is the town to look at first.
 
 ## Stale E911 records
 
