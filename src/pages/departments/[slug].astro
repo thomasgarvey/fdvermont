@@ -425,17 +425,32 @@ const description = dept
      than its neighbours. */
   .nb.none { stroke-dasharray: 3 2.5; }
   .me { fill: color-mix(in srgb, var(--red) 14%, transparent); stroke: var(--red); stroke-width: 1.8; }
-  /* Water is the page itself showing through: the land is what carries the
-     tint, so the shoreline needs no colour of its own to read as an edge. The
-     fill has to be opaque — it is covering the part of each town boundary that
-     lies in the lake, the subject town's red outline included. */
+  /* The fill has to be opaque — it is covering the part of each town boundary
+     that lies in the lake, the subject town's red outline included. */
   /* Water needs its own tone. Filled with --surface it differed from land by
      seven levels out of 255 in dark mode — the lake was drawn, clipped and
      labelled, and still invisible, so Burlington looked like it had land
-     between it and the shore. */
-  .water { fill: var(--water); stroke: var(--ink-3); stroke-width: 0.7; }
+     between it and the shore.
+     Giving it a tone tripled that to 21 levels, and it is now a lighter slate
+     again: against the land the fill went from 1.17:1 to 1.26:1 and, more to
+     the point, from 9.2 to 20.7 in CIELAB, because what separates water from
+     land here is colour and not lightness. 3:1 on the fills is not reachable
+     at all by going darker — dark mode would need negative luminance — and
+     reaching it by going lighter takes an L* around 43, at which the lake is
+     the brightest thing on a page about fire stations.
+     The stroke is a whole pixel wide because at 0.7 it fell under one pixel on
+     a scaled-down map and averaged away, and the shoreline is the cue that
+     survives scaling. Lightening the fill would have cost that stroke its
+     contrast — --ink-3 on this water is 2.64:1, against 3.87 on the tone it
+     replaced — so the shoreline and the lake's own label take --ink-2, which
+     reads 4.57:1 on it and beats what either managed before. */
+  .water { fill: var(--water); stroke: var(--ink-2); stroke-width: 1; }
+  /* Named on the water, so it takes --ink-2 rather than the --ink-3 every other
+     label on the map uses: on the water tone --ink-3 is 2.6:1 and this is
+     4.6:1. The one label not drawn on the land is the one that needs its own
+     colour. */
   .wl {
-    font-size: 8.5px; fill: var(--ink-3); letter-spacing: 0.14em;
+    font-size: 8.5px; fill: var(--ink-2); letter-spacing: 0.14em;
     text-transform: uppercase; font-style: italic;
   }
   .nbl { font-size: 8px; fill: var(--ink-3); letter-spacing: 0.02em; }
