@@ -1,7 +1,7 @@
 # FDVT Data Sources
 
 Documented per the project brief's requirement to record data-source research and
-reasoning for key decisions. Last updated: 2026-09-13.
+reasoning for key decisions. Last updated: 2026-09-22.
 
 ## The core distinction: departments vs. stations
 
@@ -86,35 +86,45 @@ FDVT models **departments** as the primary content entity (Airtable), and uses
 
 ### 6. Census county subdivisions — the land area
 
-- Layer: `FS_Census_County_Subdivision_Boundaries_2020_Vintage`, on the same
-  ArcGIS host as sources 4 and 5, fetched by `scripts/sync-town-boundaries.mjs`
-  into the `landAcres`/`landSqmi`/`waterSqmi` fields of `src/data/towns.json`.
+- Layer: `TIGERweb/Places_CouSub_ConCity_SubMCD/MapServer/1` on
+  `tigerweb.geo.census.gov` — the Census's own host, queried with `STATE='50'`
+  by `scripts/sync-town-boundaries.mjs` into the
+  `landAcres`/`landSqmi`/`waterSqmi` fields of `src/data/towns.json`.
   Attributes only — no geometry is downloaded; the outline is still VCGI's.
-- Why this layer: a county subdivision *is* a Vermont town, and `ALAND`/`AWATER`
-  are the Census's own land/water split. It is the only source on the host that
-  carries the split as an attribute. The alternative — intersecting each
-  boundary with `src/data/water.json` — needs real polygon clipping, and would
-  measure only the 41 bodies that file keeps.
+- Why this layer: a county subdivision *is* a Vermont town, and
+  `AREALAND`/`AREAWATER` are the Census's own land/water split. The alternative
+  — intersecting each boundary with `src/data/water.json` — needs real polygon
+  clipping, and would measure only the 41 bodies that file keeps.
+- **Why TIGERweb's current view and not a vintage.** This started on
+  `FS_Census_County_Subdivision_Boundaries_2020_Vintage`, a 2020-vintage copy on
+  VCGI's host. That layer carries 255 Vermont subdivisions where there are 256:
+  Essex Junction became a city in 2022, and a vintage does not learn that. So
+  the Junction had no land figure at all, and Essex town's *included* it — 38.93
+  sq mi of land against a whole-town total of 34.77, which is the tell, since
+  land cannot exceed the town. It was wrong on both pages from 2026-09-13 to
+  2026-09-22. A pinned vintage fails quietly and on a schedule nobody watches,
+  so the sync now asks for whatever the Census currently holds.
+- The trade is that a current endpoint can move without notice. The guard is the
+  script's own coverage line — `Land area from the Census for N of 256` — plus a
+  named warning for any town that comes back unmatched.
+- Switching vintages moved every other town by a median of 0.05 sq mi (mean
+  0.11, max 0.69 at Avery's Gore): ordinary TIGER refinement of the same lines,
+  not a disagreement about where they run. Essex was the only material change,
+  at −4.59.
 - The join is on the name, normalised the same way the roster is (uppercase,
-  `SAINT`/`ST.` collapsed). The Census `NAME` is the bare town name, which is
-  ambiguous for the four city/town pairs — Barre, Newport, Rutland and
-  St. Albans — so `NAMELSAD` ("Barre city") is indexed alongside it, and that is
-  how VCGI spells those eight too. A normalised name that two subdivisions share
-  is dropped rather than guessed at.
-- 255 of the 256 towns get a land figure. The miss is **Essex Junction**, which
-  became a city in 2022 and so does not exist in the 2020 vintage; the Census
-  still carries its land inside Essex town. No station in the roster matches
-  either town's VCGI spelling today, so neither has a department page, but if
-  that changes: Essex's land figure is its land *plus* the Junction's, and Essex
-  Junction has none. A town with no land figure keeps its total, labelled "Area,
-  water included".
-- Census totals and VCGI's differ by 0.04 sq mi at the median (0.12 at the mean,
-  0.69 at the worst, Avery's Gore) — different generalisation of the same lines,
-  not a disagreement about where they run. So the water *share* that decides
-  whether a page shows both numbers is computed from `ALAND` and `AWATER`
-  together, within the one source, rather than by subtracting across the two.
-- The 2020 vintage is the newest on the host. Re-check when a 2030 one appears,
-  and when it does, Essex Junction is the town to look at first.
+  `SAINT`/`ST.` collapsed). `BASENAME` is the bare town name, ambiguous for the
+  four city/town pairs — Barre, Newport, Rutland and St. Albans — so `NAME`
+  ("Barre city") is indexed alongside it; `NAME` is unique across all 256 and is
+  how VCGI spells those eight too. A normalised name two subdivisions share is
+  dropped rather than guessed at.
+- All 256 towns now carry a land figure. The department page still has a
+  fallback for one that does not — it states the total and labels it "Area,
+  water included" — which no page currently uses. Keep it: the last gap was not
+  foreseen either.
+- Census totals and VCGI's differ by 0.04 sq mi at the median — different
+  generalisation of the same lines — so the water *share* that decides whether a
+  page shows both numbers is computed from `AREALAND` and `AREAWATER` together,
+  within the one source, rather than by subtracting across the two.
 
 ## Stale E911 records
 

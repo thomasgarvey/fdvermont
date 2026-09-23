@@ -29,9 +29,19 @@ import { labelPoint, pointInRings, round } from './geo.mjs';
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const HOST = 'https://services1.arcgis.com/BkFxaEFNwHqX3tAw/arcgis/rest/services';
 const TOWNS = `${HOST}/FS_VCGI_OPENDATA_Boundary_BNDHASH_poly_towns_SP_v1/FeatureServer/0/query`;
-// The Census files land and water area separately, per county subdivision —
-// which in Vermont is the town. Nothing else on the host carries the split.
-const CENSUS = `${HOST}/FS_Census_County_Subdivision_Boundaries_2020_Vintage/FeatureServer/0/query`;
+/**
+ * The Census files land and water area separately, per county subdivision —
+ * which in Vermont is the town. This is TIGERweb's current view of them, not a
+ * vintage: the Census's own 2020-vintage copy is one town short, because Essex
+ * Junction became a city in 2022 and a vintage does not learn that. It cost
+ * Essex 4.59 square miles of land that are the Junction's. A pinned vintage
+ * goes wrong quietly and on a schedule nobody is watching, so this asks for
+ * whatever the Census currently holds and the coverage line below says how many
+ * towns came back matched. The trade is that it can move without notice.
+ */
+const CENSUS =
+  'https://tigerweb.geo.census.gov/arcgis/rest/services' +
+  '/TIGERweb/Places_CouSub_ConCity_SubMCD/MapServer/1/query';
 
 const SQM_PER_ACRE = 4046.8564224;
 const SQM_PER_SQMI = 2589988.110336;
@@ -39,9 +49,9 @@ const acresOf = (m2) => Math.round(m2 / SQM_PER_ACRE);
 const sqmiOf = (m2) => Math.round((m2 / SQM_PER_SQMI) * 100) / 100;
 
 /** One page of features, with the server's own limit treated as an error. */
-async function query(service, outFields, geometry = false) {
+async function query(service, outFields, geometry = false, where = '1=1') {
   const url = new URL(service);
-  url.searchParams.set('where', '1=1');
+  url.searchParams.set('where', where);
   url.searchParams.set('outFields', outFields);
   url.searchParams.set('returnGeometry', String(geometry));
   if (geometry) url.searchParams.set('outSR', '4326');
@@ -50,8 +60,9 @@ async function query(service, outFields, geometry = false) {
   if (!res.ok) throw new Error(`ArcGIS ${res.status} ${res.statusText}: ${url.pathname}`);
   const data = await res.json();
   if (data.error) throw new Error(`ArcGIS: ${JSON.stringify(data.error)}`);
-  // Vermont has 255 county subdivisions and 256 towns; both layers cap at 2,000.
-  // If that ever stops being true the answer is paging, not a short file.
+  // Vermont has 256 county subdivisions and 256 towns, well inside either
+  // layer's cap. If that stops being true the answer is paging, not a short
+  // file, so a truncated response is an error rather than a partial join.
   if (data.exceededTransferLimit) throw new Error(`ArcGIS truncated ${url.pathname}`);
   return data.features ?? [];
 }
@@ -96,18 +107,19 @@ for (const s of stations) if (s.town && s.county) rosterCounty.set(norm(s.town),
 const features = await query(TOWNS, 'TOWNNAMEMC,CNTY,FIPS6,Shape__Area', true);
 
 /**
- * Land area, by name. The Census NAME is the bare town name — "Barre" for both
- * the city and the town, and likewise Newport, Rutland and St. Albans — so the
- * name that tells them apart is NAMELSAD, "Barre city", which is how VCGI
- * spells those four pairs too. Both spellings are indexed, and a key that two
- * subdivisions share is dropped rather than resolved: a town with an ambiguous
- * name should come out with no land figure, not with its neighbour's.
+ * Land area, by name. TIGERweb's BASENAME is the bare town name — "Barre" for
+ * both the city and the town, and likewise Newport, Rutland and St. Albans — so
+ * the name that tells them apart is NAME, "Barre city", which is how VCGI
+ * spells those four pairs too and is unique across all 256. Both spellings are
+ * indexed, and a key that two subdivisions share is dropped rather than
+ * resolved: a town with an ambiguous name should come out with no land figure,
+ * not with its neighbour's.
  */
 const censusLand = new Map();
 const ambiguous = new Set();
-for (const f of await query(CENSUS, 'NAME,NAMELSAD,ALAND,AWATER')) {
+for (const f of await query(CENSUS, 'NAME,BASENAME,AREALAND,AREAWATER', false, "STATE='50'")) {
   const a = f.attributes;
-  for (const key of [norm(a.NAME), norm(a.NAMELSAD)]) {
+  for (const key of [norm(a.BASENAME), norm(a.NAME)]) {
     if (ambiguous.has(key)) continue;
     if (censusLand.has(key)) {
       ambiguous.add(key);
@@ -145,9 +157,9 @@ for (const f of features) {
     totalSqmi: sqmiOf(m2),
     // Land only, and the water that makes up the difference. Null where the
     // Census does not carry the town under a name we can match.
-    landAcres: land ? acresOf(land.ALAND) : null,
-    landSqmi: land ? sqmiOf(land.ALAND) : null,
-    waterSqmi: land ? sqmiOf(land.AWATER) : null,
+    landAcres: land ? acresOf(land.AREALAND) : null,
+    landSqmi: land ? sqmiOf(land.AREALAND) : null,
+    waterSqmi: land ? sqmiOf(land.AREAWATER) : null,
     // An interior point for the town's label — see scripts/geo.mjs. Keeping it
     // out of the water is a preference, not a rule: a town that is all water at
     // this resolution still needs its name somewhere.
