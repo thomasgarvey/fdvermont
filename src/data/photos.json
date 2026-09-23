@@ -24,6 +24,78 @@
     "esiteid": 98545
   },
   {
+    "id": "rec9fnp0wasWQWICl",
+    "src": "/photos/rec9fnp0wasWQWICl.jpg",
+    "thumb": "/photos/rec9fnp0wasWQWICl.thumb.jpg",
+    "width": 1514,
+    "height": 1344,
+    "thumbWidth": 577,
+    "thumbHeight": 512,
+    "caption": "Waterbury Fire Station",
+    "photographer": "Tom Garvey",
+    "dateTaken": "2026-09-19",
+    "featured": false,
+    "department": {
+      "name": "Waterbury Fire Department",
+      "city": "Waterbury",
+      "county": "Washington"
+    },
+    "town": "WATERBURY",
+    "lat": null,
+    "lng": null,
+    "stationAddress": "43 S Main St",
+    "placedBy": "station-link",
+    "esiteid": 274966
+  },
+  {
+    "id": "recMQwg1erJDIpFES",
+    "src": "/photos/recMQwg1erJDIpFES.jpg",
+    "thumb": "/photos/recMQwg1erJDIpFES.thumb.jpg",
+    "width": 1008,
+    "height": 1344,
+    "thumbWidth": 512,
+    "thumbHeight": 683,
+    "caption": "Bolton Fire Station",
+    "photographer": "Tom Garvey",
+    "dateTaken": "2026-09-19",
+    "featured": false,
+    "department": {
+      "name": "Bolton Volunteer Fire Department",
+      "city": "Waterbury",
+      "county": "Chittenden"
+    },
+    "town": "BOLTON",
+    "lat": null,
+    "lng": null,
+    "stationAddress": "3107 Theodore Roosevelt Hwy",
+    "placedBy": "station-link",
+    "esiteid": 25482
+  },
+  {
+    "id": "recxGEyimVzlfu0w3",
+    "src": "/photos/recxGEyimVzlfu0w3.jpg",
+    "thumb": "/photos/recxGEyimVzlfu0w3.thumb.jpg",
+    "width": 1792,
+    "height": 1344,
+    "thumbWidth": 683,
+    "thumbHeight": 512,
+    "caption": "Stowe Fire Station",
+    "photographer": "Tom Garvey",
+    "dateTaken": "2026-09-19",
+    "featured": false,
+    "department": {
+      "name": "Stowe Volunteer Fire Department",
+      "city": "Stowe",
+      "county": "Lamoille"
+    },
+    "town": null,
+    "lat": 44.462349000003,
+    "lng": -72.691438500001,
+    "stationAddress": "350 S Main St",
+    "placedBy": "station-link",
+    "esiteid": null
+  },
+  {
     "id": "rec3B33YEQh3qjlPZ",
     "src": "/photos/rec3B33YEQh3qjlPZ.jpg",
     "thumb": "/photos/rec3B33YEQh3qjlPZ.thumb.jpg",

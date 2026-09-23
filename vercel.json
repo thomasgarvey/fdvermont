@@ -1097,6 +1097,11 @@
       "permanent": true
     },
     {
+      "source": "/stations/stowe-350-s-main-st",
+      "destination": "/departments/stowe#stowe-350-s-main-st",
+      "permanent": true
+    },
+    {
       "source": "/stations/strafford-149-route-132",
       "destination": "/departments/strafford#strafford-149-route-132",
       "permanent": true

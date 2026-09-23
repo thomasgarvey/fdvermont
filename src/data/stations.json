@@ -2821,6 +2821,19 @@
     "updated": "2023-01-27"
   },
   {
+    "id": "recFKCyIFwRgQAUU0",
+    "esiteid": null,
+    "name": "Stowe Fire Station",
+    "address": "350 S Main St",
+    "town": "Stowe",
+    "county": "Lamoille",
+    "zip": "05672",
+    "lat": 44.462349,
+    "lng": -72.691439,
+    "mapped": "",
+    "updated": ""
+  },
+  {
     "id": "recSFSlF10juEpCxw",
     "esiteid": 252528,
     "name": null,
