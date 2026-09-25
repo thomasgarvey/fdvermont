@@ -1,6 +1,7 @@
 ---
 import LocationMap from "../components/islands/LocationMap.tsx";
 import photosData from "../data/photos.json";
+import photoFocus from "../data/photo-focus.json";
 import retiredStations from "../data/retired-stations.json";
 import { photographedCount, photoHref, stations } from "../lib/stations";
 import Analytics from "../components/Analytics.astro";
@@ -50,6 +51,15 @@ const place = (p: (typeof photosData)[number]) =>
   [p.department?.city, p.department?.county && `${titleCase(p.department.county)} County`]
     .filter(Boolean)
     .join(" · ");
+
+// A cropped plate shows a fixed slice of each photograph, and on a portrait shot
+// that slice can miss the sign over the doors. photo-focus.json names a crop
+// per photograph; it lives outside photos.json because the Airtable sync
+// rewrites that file.
+const focus = (p: (typeof photosData)[number]) => {
+  const at = (photoFocus as Record<string, string>)[p.id];
+  return at ? `;background-position:${at}` : "";
+};
 
 const HERO_ID = "recKofDfSCLcl7RG9"; // Isle La Motte Volunteer Fire Company
 const hero = photosData.find((p) => p.id === HERO_ID) ?? photosData[0];
@@ -147,7 +157,7 @@ const MARK_NEEDS = "#5C6469";
 
     <main>
       <section class="hero">
-        <div class="hero-photo" style={`background-image:url("${hero.src}")`} role="img"
+        <div class="hero-photo" style={`background-image:url("${hero.src}")${focus(hero)}`} role="img"
           aria-label={`${label(hero)}, ${place(hero)}`}></div>
         <div class="wrap hero-wrap">
           <div class="panel">
@@ -240,7 +250,7 @@ const MARK_NEEDS = "#5C6469";
 
           <div class="feature">
             <a class="feature-plate" href={photoHref(featured.id)}
-              style={`background-image:url("${featured.src}")`}
+              style={`background-image:url("${featured.src}")${focus(featured)}`}
               aria-label={`${featured.caption} — open the station record`}></a>
             <div class="feature-record">
               <dl class="record">
@@ -276,7 +286,7 @@ const MARK_NEEDS = "#5C6469";
             {plates.map((p) => (
               <figure class="plate">
                 <a href={photoHref(p.id)}
-                  style={`background-image:url("${p.thumb}")`}
+                  style={`background-image:url("${p.thumb}")${focus(p)}`}
                   aria-label={`${p.caption} — open the station record`}></a>
                 <figcaption>
                   <h3>{label(p)}</h3>
