@@ -248,6 +248,9 @@ const roster = stationRows
       lng: typeof f.Longitude === 'number' ? f.Longitude : null,
       mapped: f['E911 Mapped'] ?? '',
       updated: f['E911 Updated'] ?? '',
+      // The department the building belongs to, where somebody has said. Blank
+      // for most: a station is its town's unless linked to another department.
+      department: f.Department?.[0] ?? null,
     };
   })
   .filter((s) => s.lat != null && s.lng != null && s.address && s.town)
@@ -300,6 +303,34 @@ const str = (v) => {
   return s || null;
 };
 
+/**
+ * A department that is not its town's own gets a page of its own. Filed by
+ * town, the Vermont Air National Guard's fire department — the only fire
+ * service at the airport — read as South Burlington's, and its station as the
+ * third South Burlington station. Linking a station to a department in Airtable
+ * is what says otherwise, and the station moves to that department's page.
+ *
+ * A department named after the town its station stands in is that town's, and
+ * stays on the town page however it is linked: otherwise linking Richmond's
+ * station to Richmond Fire Department would move the Richmond page out from
+ * under its own address.
+ */
+const slugify = (s) =>
+  s.toLowerCase().normalize('NFKD').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+const plain = (s) => norm(s).replace(/\b(MOUNT|MT)\b/g, 'MT');
+const linkedTowns = new Map();
+for (const s of roster) {
+  if (!s.department) continue;
+  if (!linkedTowns.has(s.department)) linkedTowns.set(s.department, new Set());
+  linkedTowns.get(s.department).add(s.town);
+}
+const ownPage = (r) => {
+  const towns = linkedTowns.get(r.id);
+  const name = r.fields['Department Name'] ?? '';
+  if (!towns || !name) return null;
+  return [...towns].some((t) => plain(name).includes(plain(t))) ? null : slugify(name);
+};
+
 const departments = depts
   .filter((r) => r.fields.Status !== 'Retired')
   .map((r) => {
@@ -309,7 +340,13 @@ const departments = depts
       name: f['Department Name'] ?? '',
       town: f.City ?? '',
       county: f.County ?? '',
-      fdid: str(f.FDID),
+      // The page this department has to itself, or null for one listed on its
+      // town's page — which is nearly all of them.
+      ownPage: ownPage(r),
+      // The state assigns an FDID as a number. Anything else in the field is a
+      // note to whoever fills it in — "missing", "lookup", "?", and once a
+      // street address — and printing it would state it as the department's.
+      fdid: /^\d+$/.test(str(f.FDID) ?? '') ? str(f.FDID) : null,
       type: str(f['Department Type']),
       stations: num(f['Number of Stations']),
       founded: num(f['Year Founded']),
@@ -352,3 +389,16 @@ const detailed = departments.filter((d) => PROSE.some((k) => d[k])).length;
 console.log(
   `Departments: ${departments.length} -> src/data/departments.json  (${detailed} with written detail)`,
 );
+const apart = departments.filter((d) => d.ownPage);
+if (apart.length) {
+  console.log(`  With a page of their own: ${apart.map((d) => `${d.name} (/departments/${d.ownPage})`).join(', ')}`);
+}
+// A link to a department that is retired, or not in the table at all, leaves
+// the station on its town's page — say so, since nothing on the site will.
+const deptIds = new Set(departments.map((d) => d.id));
+const stray = roster.filter((s) => s.department && !deptIds.has(s.department));
+if (stray.length) {
+  console.warn(`\n  !! ${stray.length} station(s) linked to a department that is retired or missing:`);
+  for (const s of stray) console.warn(`     - ${s.address}, ${s.town}`);
+  console.warn('     They stay on their town pages.\n');
+}

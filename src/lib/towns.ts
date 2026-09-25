@@ -48,6 +48,24 @@ export interface Town {
   departments: Department[];
   stations: Station[];
   photographed: number;
+  /** Departments working from this town that are not its own, each on a page of its own. */
+  apart: Apart[];
+}
+
+/**
+ * A department that is not its town's own, with the stations linked to it —
+ * the Vermont Air National Guard's, at the airport in South Burlington. It has
+ * a page to itself, and its stations are off the town's page. Which departments
+ * these are is decided at sync time; see scripts/sync-airtable.mjs.
+ */
+export interface Apart {
+  slug: string;
+  department: Department;
+  /** The town it works from, which is not the same as the ground it covers. */
+  town: string;
+  county: string;
+  stations: Station[];
+  photographed: number;
 }
 
 const slugify = (s: string) =>
@@ -82,12 +100,31 @@ const boundaryKey = (name: string) => {
 const deptsByTown = new Map<string, Department[]>();
 for (const d of departmentsData as Department[]) {
   const key = normTown(d.town);
-  if (!key) continue;
+  if (!key || d.ownPage) continue;
   if (!deptsByTown.has(key)) deptsByTown.set(key, []);
   deptsByTown.get(key)!.push(d);
 }
 
 const townNames = [...new Set(stations.map((s) => s.town).filter(Boolean))].sort();
+
+// Placed by its stations rather than by the department's own City field: the
+// station is where the building is, and City is sometimes a village name.
+export const apart: Apart[] = (departmentsData as Department[])
+  .filter((d) => d.ownPage)
+  .map((d) => {
+    const own = stations.filter((s) => s.page === d.ownPage);
+    return {
+      slug: d.ownPage!,
+      department: d,
+      town: own[0]?.town ?? d.town,
+      county: own.find((s) => s.county)?.county ?? '',
+      stations: own,
+      photographed: own.filter((s) => s.photo).length,
+    };
+  })
+  .filter((a) => a.stations.length);
+
+export const apartBySlug = new Map(apart.map((a) => [a.slug, a]));
 
 /**
  * Which boundaries the roster actually has a station in. towns.json carries a
@@ -100,27 +137,44 @@ const townNames = [...new Set(stations.map((s) => s.town).filter(Boolean))].sort
  */
 const rosterBoundaries = new Set(townNames.map(boundaryKey));
 
-export const towns: Town[] = townNames.map((name) => {
-  const key = normTown(name);
-  const inTown = stations.filter((s) => s.town === name);
-  return {
-    slug: slugify(name),
-    name,
-    county: inTown.find((s) => s.county)?.county ?? '',
-    boundary: boundaryByTown.get(boundaryKey(name)) ?? null,
-    departments: deptsByTown.get(key) ?? [],
-    stations: inTown,
-    photographed: inTown.filter((s) => s.photo).length,
-  };
-});
+export const towns: Town[] = townNames
+  .map((name) => {
+    const key = normTown(name);
+    const slug = slugify(name);
+    // Only the stations listed here: a station belonging to a department with a
+    // page of its own is in the town but is not the town's.
+    const inTown = stations.filter((s) => s.town === name && s.page === slug);
+    return {
+      slug,
+      name,
+      county: inTown.find((s) => s.county)?.county ?? '',
+      boundary: boundaryByTown.get(boundaryKey(name)) ?? null,
+      departments: deptsByTown.get(key) ?? [],
+      stations: inTown,
+      photographed: inTown.filter((s) => s.photo).length,
+      apart: apart.filter((a) => a.town === name),
+    };
+  })
+  // A town whose every station belongs to a department with its own page has
+  // nothing left to show here.
+  .filter((t) => t.stations.length);
 
 export const townBySlug = new Map(towns.map((t) => [t.slug, t]));
+
+// Both kinds of page live under /departments, so a department named like a
+// town would take the town's address. Fail the build rather than let one page
+// silently replace the other.
+for (const a of apart) {
+  if (townBySlug.has(a.slug)) {
+    throw new Error(`/departments/${a.slug} is both a town and ${a.department.name}`);
+  }
+}
 
 /** The town page a station belongs to, for linking from the building. */
 export const townSlugForStation = (station: Station) => slugify(station.town);
 
-/** Members across every department in the town, or null when none are recorded. */
-export const memberCount = (t: Town) => {
+/** Members across the departments given, or null when none are recorded. */
+export const memberCount = (t: { departments: Department[] }) => {
   const each = t.departments.flatMap((d) =>
     [d.members.volunteer, d.members.paidPerCall, d.members.career].filter(
       (n): n is number => typeof n === 'number',
@@ -171,10 +225,26 @@ const NAME_PX = 4.6;
  * which is not a county anyone here would recognise. Covering the wet part of
  * each boundary puts the shoreline back without editing the boundaries.
  */
-export function countyMap(subject: Town, width = 680, maxHeight = 620, pad = 14) {
+export interface MapSubject {
+  county: string;
+  /** What to draw when there is no county on record. */
+  boundary: Boundary | null;
+  /**
+   * The town whose outline is the subject, or null. A department that is not
+   * its town's own draws none: the Guard works from South Burlington but does
+   * not cover it, and a red South Burlington on its page would say it did.
+   */
+  town: string | null;
+  /** The name written large over the subject, or null for none. */
+  label: string | null;
+  /** The stations drawn as the page's own. */
+  stations: Station[];
+}
+
+export function countyMap(subject: MapSubject, width = 680, maxHeight = 620, pad = 14) {
   const all = Object.values(townsData) as Boundary[];
-  // Fall back to the town alone when we have no county for it, so a page still
-  // renders rather than disappearing.
+  // Fall back to the subject's own boundary when we have no county for it, so a
+  // page still renders rather than disappearing.
   const inCounty = subject.county
     ? all.filter((t) => t.county === subject.county)
     : subject.boundary
@@ -206,11 +276,10 @@ export function countyMap(subject: Town, width = 680, maxHeight = 620, pad = 14)
     rings.map((r) => r.map(([lng, lat]) => project(lng, lat)));
 
   // Two different matches, because the roster's name for a town and VCGI's are
-  // not always the same string: a station is the subject's when it is filed
-  // under the subject's own name, a shape is when it is the boundary that name
-  // resolves to.
-  const subjectKey = normTown(subject.name);
-  const shapeKey = boundaryKey(subject.name);
+  // not always the same string: a station is the subject's when the page lists
+  // it, a shape is when it is the boundary the subject's town resolves to.
+  const own = new Set(subject.stations.map((s) => s.slug));
+  const shapeKey = subject.town ? boundaryKey(subject.town) : null;
   // Kept alongside the path string: the water label has to know where the
   // county actually is, since the lake is drawn clipped to it.
   const landRings: Point[][] = [];
@@ -245,7 +314,7 @@ export function countyMap(subject: Town, width = 680, maxHeight = 620, pad = 14)
       const [x, y] = project(s.lng, s.lat);
       return {
         x, y,
-        mine: normTown(s.town) === subjectKey,
+        mine: own.has(s.slug),
         photo: !!s.photo,
         label: `${s.name} — ${s.address}, ${s.town}`,
         slug: s.slug,
@@ -290,21 +359,24 @@ export function countyMap(subject: Town, width = 680, maxHeight = 620, pad = 14)
   // map that is certainly theirs. Before this it fell back to (0, -12) and the
   // name was drawn half off the top left corner of every one of those maps.
   const subjectShape = shapes.find((s) => s.isSubject);
-  const own = points.filter((p) => p.mine);
-  const label = subjectShape
-    ? { x: subjectShape.cx, y: subjectShape.cy - 12 }
-    : own.length
-      ? {
-          x: own.reduce((sum, p) => sum + p.x, 0) / own.length,
-          y: Math.min(...own.map((p) => p.y)) - 12,
-        }
-      : null;
+  const ownPoints = points.filter((p) => p.mine);
+  const label = !subject.label
+    ? null
+    : subjectShape
+      ? { x: subjectShape.cx, y: subjectShape.cy - 12, text: subject.label }
+      : ownPoints.length
+        ? {
+            x: ownPoints.reduce((sum, p) => sum + p.x, 0) / ownPoints.length,
+            y: Math.min(...ownPoints.map((p) => p.y)) - 12,
+            text: subject.label,
+          }
+        : null;
 
   // The subject's own label is drawn last and over everything else, so a
   // neighbour under it is as unreadable as one under a dot, and a neighbour
   // nudged under it would simply disappear. Same measure, at the 15px it is
   // drawn in.
-  const subjectBox = label ? labelBox(subject.name, label.x, label.y, 15) : null;
+  const subjectBox = label ? labelBox(label.text, label.x, label.y, 15) : null;
   const placed = subjectBox ? [subjectBox] : [];
   // Labels nothing touches stay on their town's own point, and are fixed before
   // anything moves, so a nudge has somewhere real to avoid.

@@ -25,6 +25,16 @@ const titleCase = (s) =>
   (s ?? '').toLowerCase().replace(/\b[a-z]/g, (c) => c.toUpperCase())
     .replace(/\bVt\b/g, 'VT').replace(/\bUs\b/g, 'US');
 
+// A station belonging to a department with a page of its own lives there, not
+// on its town's page. Which departments those are is decided at sync time and
+// written into departments.json, so this reads the answer rather than working
+// it out a second time.
+const ownPage = new Map(
+  JSON.parse(readFileSync(`${ROOT}/src/data/departments.json`, 'utf8'))
+    .filter((d) => d.ownPage)
+    .map((d) => [d.id, d.ownPage]),
+);
+
 // Rebuild the station slugs exactly as src/lib/stations.ts does, including the
 // duplicate-suffix rule, or a handful of redirects would point nowhere.
 const stations = JSON.parse(readFileSync(`${ROOT}/src/data/stations.json`, 'utf8'))
@@ -33,6 +43,7 @@ const stations = JSON.parse(readFileSync(`${ROOT}/src/data/stations.json`, 'utf8
     address: titleCase(f.address),
     esiteid: f.esiteid,
     id: f.id,
+    page: ownPage.get(f.department) ?? slugify(titleCase(f.town)),
   }))
   .sort((a, b) => a.town.localeCompare(b.town) || a.address.localeCompare(b.address));
 
@@ -48,7 +59,7 @@ for (const s of stations) {
   seen.add(slug);
   redirects.push({
     source: `/stations/${slug}`,
-    destination: `/departments/${slugify(s.town)}#${slug}`,
+    destination: `/departments/${s.page}#${slug}`,
     permanent: true,
   });
 }
