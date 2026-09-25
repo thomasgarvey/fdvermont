@@ -1,0 +1,79 @@
+---
+// After first sign-in: who are you and where do you serve? The request waits
+// here as 'pending' until a moderator approves it on /forum/admin.
+import ForumPage from "../../components/forum/ForumPage.astro";
+import { field } from "../../lib/forum";
+
+export const prerender = false;
+
+const { supabase, user } = Astro.locals;
+let { member } = Astro.locals;
+if (!user) return Astro.redirect("/forum/login");
+if (member?.status === "approved") return Astro.redirect("/forum");
+
+let error = "";
+if (Astro.request.method === "POST" && supabase && !member) {
+  const form = await Astro.request.formData();
+  const row = {
+    id: user.id,
+    display_name: field(form, "display_name"),
+    department: field(form, "department"),
+    role: field(form, "role"),
+  };
+  if (row.display_name.length < 2 || row.department.length < 2 || row.role.length < 2) {
+    error = "Fill in all three fields.";
+  } else {
+    const { data, error: err } = await supabase.from("members").insert(row).select().single();
+    if (err) error = "That didn't save. Check the fields and try again.";
+    else member = data;
+  }
+}
+---
+
+<ForumPage title="Join">
+  {!member && (
+    <>
+      <h1>Tell us where you serve.</h1>
+      <p class="lede">
+        The forum is for people in the Vermont fire service — career, call, volunteer,
+        auxiliary, or retired. A moderator checks each request by hand, usually against the
+        department roster, before it's approved.
+      </p>
+      <form class="fform card" method="post">
+        {error && <p class="error" role="alert">{error}</p>}
+        <label>
+          Name as other members will see it
+          <input name="display_name" required minlength="2" maxlength="60" autocomplete="name" />
+        </label>
+        <label>
+          Department
+          <input name="department" required minlength="2" maxlength="120" placeholder="e.g. Waterbury Fire Department" />
+        </label>
+        <label>
+          Role
+          <input name="role" required minlength="2" maxlength="60" placeholder="e.g. Firefighter, Lieutenant, Chief" />
+        </label>
+        <button class="btn" type="submit">Request to join</button>
+      </form>
+    </>
+  )}
+
+  {member?.status === "pending" && (
+    <>
+      <h1>Your request is in.</h1>
+      <p class="lede">
+        Thanks, {member.display_name}. A moderator will check {member.department} and approve
+        you — sign in again later and you'll go straight to the forum.
+      </p>
+    </>
+  )}
+
+  {(member?.status === "rejected" || member?.status === "suspended") && (
+    <>
+      <h1>This account can't use the forum.</h1>
+      <p class="lede">
+        If you think that's a mistake, <a href="/contact">get in touch</a>.
+      </p>
+    </>
+  )}
+</ForumPage>

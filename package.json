@@ -4,12 +4,15 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "astro build && node scripts/vercel-runtime.mjs",
     "preview": "astro preview",
     "astro": "astro"
   },
   "dependencies": {
     "@astrojs/preact": "^3.5.4",
+    "@astrojs/vercel": "^7.8.2",
+    "@supabase/ssr": "^0.12.7",
+    "@supabase/supabase-js": "^2.117.1",
     "@types/leaflet": "^1.9.21",
     "@types/leaflet.markercluster": "^1.5.4",
     "astro": "^4.16.19",

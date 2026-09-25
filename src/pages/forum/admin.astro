@@ -1,0 +1,87 @@
+---
+// Moderators approve or turn away membership requests, and can suspend or
+// reinstate members. The database enforces that only admins can do this.
+import ForumPage from "../../components/forum/ForumPage.astro";
+import { field, when, type Member } from "../../lib/forum";
+
+export const prerender = false;
+
+const { supabase, user, member } = Astro.locals;
+if (supabase) {
+  if (!user) return Astro.redirect("/forum/login");
+  if (!(member?.status === "approved" && member.is_admin)) return Astro.redirect("/forum");
+}
+
+const NEXT: Record<string, Member["status"]> = {
+  approve: "approved",
+  reject: "rejected",
+  suspend: "suspended",
+  reinstate: "approved",
+};
+
+if (Astro.request.method === "POST" && supabase && user) {
+  const form = await Astro.request.formData();
+  const status = NEXT[field(form, "action")];
+  const target = field(form, "member");
+  if (status && target && target !== user.id) {
+    await supabase
+      .from("members")
+      .update({ status, reviewed_at: new Date().toISOString(), reviewed_by: user.id })
+      .eq("id", target);
+  }
+  return Astro.redirect("/forum/admin");
+}
+
+const { data: all } = supabase
+  ? await supabase.from("members").select("*").order("created_at", { ascending: false }).returns<Member[]>()
+  : { data: [] as Member[] };
+const pending = all?.filter((m) => m.status === "pending") ?? [];
+const others = all?.filter((m) => m.status !== "pending") ?? [];
+const buttons: Record<Member["status"], string[]> = {
+  pending: ["approve", "reject"],
+  approved: ["suspend"],
+  suspended: ["reinstate"],
+  rejected: ["approve"],
+};
+---
+
+<ForumPage title="Members">
+  <h1>Members</h1>
+
+  <h2>Waiting for approval ({pending.length})</h2>
+  {pending.length === 0 && <p class="meta">Nobody waiting.</p>}
+  <ul class="mlist">
+    {[...pending, ...others].map((m, i) => (
+      <>
+        {i === pending.length && <li class="sep"><h2>Everyone else ({others.length})</h2></li>}
+        <li>
+          <div>
+            <strong>{m.display_name}</strong>{m.is_admin && " · admin"}
+            <div class="meta">
+              {m.role}, {m.department} · requested {when(m.created_at)} · {m.status}
+            </div>
+          </div>
+          {m.id !== user?.id && (
+            <form method="post">
+              <input type="hidden" name="member" value={m.id} />
+              {buttons[m.status].map((a) => (
+                <button class={`btn${a === "approve" || a === "reinstate" ? "" : " quiet"}`} name="action" value={a}>
+                  {a}
+                </button>
+              ))}
+            </form>
+          )}
+        </li>
+      </>
+    ))}
+  </ul>
+</ForumPage>
+
+<style>
+  .mlist { list-style: none; margin: 0; padding: 0; }
+  .mlist li:not(.sep) {
+    display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 0.8rem;
+    padding: 0.9rem 0; border-bottom: 1px solid var(--line);
+  }
+  .mlist form { display: flex; gap: 0.5rem; margin: 0; }
+</style>

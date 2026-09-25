@@ -1,0 +1,115 @@
+---
+// One thread: its posts in order, a reply box, and a remove/restore control
+// for admins. Post text is rendered as plain text (Astro escapes it), so no
+// member can inject markup.
+import ForumPage from "../../../components/forum/ForumPage.astro";
+import { field, when } from "../../../lib/forum";
+
+export const prerender = false;
+
+const { supabase, user, member } = Astro.locals;
+if (supabase) {
+  if (!user) return Astro.redirect("/forum/login");
+  if (member?.status !== "approved") return Astro.redirect("/forum/join");
+}
+const id = Number(Astro.params.id);
+if (!Number.isSafeInteger(id) || id < 1) return new Response(null, { status: 404 });
+const isAdmin = Boolean(member?.is_admin);
+
+let error = "";
+if (Astro.request.method === "POST" && supabase && user) {
+  const form = await Astro.request.formData();
+  const action = field(form, "action");
+  if (action === "reply") {
+    const body = field(form, "body");
+    if (!body) error = "Write something first.";
+    else {
+      const { error: err } = await supabase
+        .from("posts")
+        .insert({ thread_id: id, author_id: user.id, body });
+      if (!err) return Astro.redirect(`/forum/t/${id}#end`);
+      error = "The reply didn't save. Try again.";
+    }
+  } else if ((action === "remove" || action === "restore") && isAdmin) {
+    // The database refuses this for non-admins regardless.
+    await supabase
+      .from("posts")
+      .update({ removed: action === "remove" })
+      .eq("id", Number(field(form, "post")))
+      .eq("thread_id", id);
+    return Astro.redirect(`/forum/t/${id}`);
+  }
+}
+
+type Post = {
+  id: number;
+  body: string;
+  created_at: string;
+  removed: boolean;
+  author: { display_name: string; department: string; role: string } | null;
+};
+const [{ data: thread }, { data: posts }] = supabase
+  ? await Promise.all([
+      supabase.from("threads").select("id, title").eq("id", id).maybeSingle<{ id: number; title: string }>(),
+      supabase
+        .from("posts")
+        .select("id, body, created_at, removed, author:members(display_name, department, role)")
+        .eq("thread_id", id)
+        .order("created_at")
+        .returns<Post[]>(),
+    ])
+  : [{ data: null }, { data: [] as Post[] }];
+
+if (supabase && !thread) return new Response(null, { status: 404 });
+---
+
+<ForumPage title={thread?.title ?? "Thread"}>
+  <p class="meta"><a href="/forum">← All threads</a></p>
+  <h1>{thread?.title}</h1>
+
+  <ol class="posts">
+    {posts?.map((p) => (
+      <li class="card" id={`p${p.id}`}>
+        <div class="meta">
+          {/* Authors who were later suspended are hidden by the database. */}
+          {p.author
+            ? <><strong>{p.author.display_name}</strong> · {p.author.role}, {p.author.department}</>
+            : <strong>Former member</strong>} ·{" "}
+          <a href={`#p${p.id}`}>{when(p.created_at)}</a>
+        </div>
+        {p.removed && !isAdmin ? (
+          <p class="body meta"><em>Removed by a moderator.</em></p>
+        ) : (
+          <p class={`body${p.removed ? " removed" : ""}`}>{p.body}</p>
+        )}
+        {isAdmin && (
+          <form method="post" class="mod">
+            <input type="hidden" name="post" value={p.id} />
+            <button class="linkbtn meta" name="action" value={p.removed ? "restore" : "remove"}>
+              {p.removed ? "Restore post" : "Remove post"}
+            </button>
+          </form>
+        )}
+      </li>
+    ))}
+  </ol>
+
+  <h2 id="end">Reply</h2>
+  <form class="fform card" method="post" action="#end">
+    {error && <p class="error" role="alert">{error}</p>}
+    <input type="hidden" name="action" value="reply" />
+    <label>
+      Your reply
+      <textarea name="body" required maxlength="10000"></textarea>
+    </label>
+    <button class="btn" type="submit">Post reply</button>
+  </form>
+</ForumPage>
+
+<style>
+  .posts { list-style: none; margin: 1.4rem 0 0; padding: 0; display: grid; gap: 1rem; }
+  .posts .meta a { color: inherit; text-decoration: none; }
+  .posts .meta a:hover { text-decoration: underline; }
+  .removed { opacity: 0.5; text-decoration: line-through; }
+  .mod { margin: 0.6rem 0 0; }
+</style>
