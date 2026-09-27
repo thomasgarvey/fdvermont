@@ -38,11 +38,15 @@ does. These rules were checked against a local Postgres before this shipped.
    someone asks on one device and opens the email on another:
    ```html
    <h2>Sign in to the Vermont Fire Stations forum</h2>
-   <p><a href="{{ .SiteURL }}/forum/auth/confirm?token_hash={{ .TokenHash }}&type=email">Sign in</a></p>
+   <p><a href="{{ .RedirectTo }}?token_hash={{ .TokenHash }}&type=email">Sign in</a></p>
    <p>This link works once and expires in an hour. If you didn't ask for it, ignore this email.</p>
    ```
    Make the same change to the **Confirm signup** template, since a first-time
-   email gets that one instead.
+   email gets that one instead. Subject for both: "Your sign-in link for the
+   Vermont Fire Stations forum". `{{ .RedirectTo }}` is the confirm URL the
+   login page asked for, so the link returns to whichever site started the
+   sign-in (live, or localhost while testing). `{{ .SiteURL }}` would always
+   send it to the live site.
 5. **Custom SMTP (required before launch).** Supabase's built-in mailer only
    sends to the project's own team members and only a few emails an hour.
    Firefighters would never receive their links. Under Auth → SMTP Settings,

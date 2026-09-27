@@ -67,6 +67,12 @@ $$;
 create function public.guard_member_update() returns trigger
 language plpgsql security definer set search_path = '' as $$
 begin
+  -- No signed-in member means the Supabase dashboard or a service key, which
+  -- only the project owner has; the site never reaches members without a
+  -- session. This is how the first admin gets approved (docs/forum.md).
+  if auth.uid() is null then
+    return new;
+  end if;
   if not public.is_admin() then
     if new.status is distinct from old.status
        or new.is_admin is distinct from old.is_admin
