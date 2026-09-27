@@ -3,6 +3,7 @@
 // index and the detail pages cannot drift apart.
 import stationsData from '../data/stations.json';
 import photosData from '../data/photos.json';
+import departmentsData from '../data/departments.json';
 
 export type Photo = (typeof photosData)[number];
 
@@ -17,11 +18,20 @@ export interface Station {
   lng: number;
   mapped: string;
   updated: string;
-  /** Department name from Airtable when we have a photo linked to it. */
+  /**
+   * Department name from Airtable: the one the station is linked to, else the
+   * one its photograph is filed under, else null.
+   */
   department: string | null;
   photo: Photo | null;
   /** What to call the station in a heading. */
   name: string;
+  /**
+   * The department page this station is listed on, as a slug under
+   * /departments. Its town's page, unless it belongs to a department that has a
+   * page of its own — see scripts/sync-airtable.mjs.
+   */
+  page: string;
 }
 
 export const titleCase = (s: string | null | undefined) =>
@@ -83,6 +93,8 @@ function photoFor(townRaw: string, addrRaw: string): Photo | null {
   return townPhotos.get(townRaw)?.[0] ?? null;
 }
 
+const deptById = new Map(departmentsData.map((d) => [d.id, d]));
+
 const seen = new Set<string>();
 export const stations: Station[] = features.map((f) => {
   const town = titleCase(f.town);
@@ -93,7 +105,10 @@ export const stations: Station[] = features.map((f) => {
   if (seen.has(slug)) slug = `${slug}-${f.esiteid ?? f.id}`; // guarantees uniqueness
   seen.add(slug);
 
-  const department = photo?.department?.name ?? null;
+  // A link in Airtable says whose building this is outright; a photograph's
+  // department only says who was photographed.
+  const linked = f.department ? deptById.get(f.department) : undefined;
+  const department = linked?.name ?? photo?.department?.name ?? null;
   // A station's name used to come from its department record, which worked only
   // while departments were really stations ("Burlington Fire Department #3").
   // Consolidating those left five Burlington pages all called "Burlington Fire
@@ -115,6 +130,7 @@ export const stations: Station[] = features.map((f) => {
     department,
     photo,
     name,
+    page: linked?.ownPage ?? slugify(town),
   };
 }).sort((a, b) => a.town.localeCompare(b.town) || a.address.localeCompare(b.address));
 

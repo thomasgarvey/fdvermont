@@ -10,7 +10,8 @@
     "lat": 44.089247,
     "lng": -73.303311,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "rectzg7dqi7tC2c14",
@@ -23,7 +24,8 @@
     "lat": 44.730992,
     "lng": -72.379349,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recZClVcsdxo4U3tf",
@@ -36,7 +38,8 @@
     "lat": 44.977482,
     "lng": -73.300945,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recoBBySdPkoCkiZp",
@@ -49,7 +52,8 @@
     "lat": 43.060366,
     "lng": -73.141962,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recUAGv83Mm8BKdON",
@@ -62,7 +66,8 @@
     "lat": 43.102171,
     "lng": -73.20794,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recSdcZmhBk6nHb2y",
@@ -75,7 +80,8 @@
     "lat": 44.784594,
     "lng": -72.801417,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recCcLBIXXU6Wr1nv",
@@ -88,7 +94,8 @@
     "lat": 43.730564,
     "lng": -72.61772,
     "mapped": "2017-10-06",
-    "updated": "2023-08-09"
+    "updated": "2023-08-09",
+    "department": null
   },
   {
     "id": "recswpbByJga7bJnH",
@@ -101,7 +108,8 @@
     "lat": 43.743508,
     "lng": -72.542856,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "rec3HYP6amtjpXIwC",
@@ -114,7 +122,8 @@
     "lat": 44.29283,
     "lng": -72.05886,
     "mapped": "2003-06-17",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recmJd8DZhgraww5Z",
@@ -127,7 +136,8 @@
     "lat": 44.159886,
     "lng": -72.450208,
     "mapped": "1998-01-01",
-    "updated": "2023-07-13"
+    "updated": "2023-07-13",
+    "department": null
   },
   {
     "id": "recIWmLwvNplvQi2E",
@@ -140,7 +150,8 @@
     "lat": 44.172127,
     "lng": -72.507558,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recorP7b1E4TvhDPg",
@@ -153,7 +164,8 @@
     "lat": 44.747251,
     "lng": -72.175634,
     "mapped": "2022-06-29",
-    "updated": "2024-02-21"
+    "updated": "2024-02-21",
+    "department": null
   },
   {
     "id": "recZ9X5LrXBNj0BUX",
@@ -166,7 +178,8 @@
     "lat": 43.139047,
     "lng": -72.453578,
     "mapped": "2003-01-15",
-    "updated": "2023-03-28"
+    "updated": "2023-03-28",
+    "department": null
   },
   {
     "id": "reccc90waTJmuHPkn",
@@ -179,7 +192,8 @@
     "lat": 42.88238,
     "lng": -73.19995,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "rec6lkU9KyJICptDO",
@@ -192,7 +206,8 @@
     "lat": 42.899915,
     "lng": -73.202877,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "rec2bvsRfw0jkVSlZ",
@@ -205,7 +220,8 @@
     "lat": 42.8708,
     "lng": -73.176158,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recN0e6AIcC1xrTJi",
@@ -218,7 +234,8 @@
     "lat": 42.881461,
     "lng": -73.22911,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "rec5G19qSWVLtgeSz",
@@ -231,7 +248,8 @@
     "lat": 43.707281,
     "lng": -73.310164,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recGcnYcVxlMFsZ9b",
@@ -244,7 +262,8 @@
     "lat": 44.935215,
     "lng": -72.727604,
     "mapped": "1998-01-01",
-    "updated": "2025-04-18"
+    "updated": "2025-04-18",
+    "department": null
   },
   {
     "id": "recloH60zHMqvKdtN",
@@ -257,7 +276,8 @@
     "lat": 44.199896,
     "lng": -72.634539,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "rec7YTWD7JEAzj4dw",
@@ -270,7 +290,8 @@
     "lat": 44.21445,
     "lng": -72.573493,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recgtG7TBmoecw1ef",
@@ -283,7 +304,8 @@
     "lat": 43.836056,
     "lng": -72.646303,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recP1pqGMQkBfT2OB",
@@ -296,7 +318,8 @@
     "lat": 44.373454,
     "lng": -72.88505,
     "mapped": "1998-01-01",
-    "updated": "2023-03-28"
+    "updated": "2023-03-28",
+    "department": null
   },
   {
     "id": "recFSkZArgOmC28no",
@@ -309,7 +332,8 @@
     "lat": 43.989319,
     "lng": -72.121084,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recO0BW8azoY99MTW",
@@ -322,7 +346,8 @@
     "lat": 43.793685,
     "lng": -73.079943,
     "mapped": "1998-01-01",
-    "updated": "2023-03-28"
+    "updated": "2023-03-28",
+    "department": null
   },
   {
     "id": "recs3V0sKRXdMBm0n",
@@ -335,7 +360,8 @@
     "lat": 42.85171,
     "lng": -72.560726,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "reczWdRpwDm69gfLe",
@@ -348,7 +374,8 @@
     "lat": 42.852712,
     "lng": -72.599733,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "rec1HMXueJzHTkfHK",
@@ -361,7 +388,8 @@
     "lat": 43.588126,
     "lng": -72.623293,
     "mapped": "2021-01-07",
-    "updated": "2023-01-28"
+    "updated": "2023-01-28",
+    "department": null
   },
   {
     "id": "recYfVpw0tuJ1oimN",
@@ -374,7 +402,8 @@
     "lat": 43.984458,
     "lng": -73.31534,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "rec8ht3h8pOj8tgm1",
@@ -387,7 +416,8 @@
     "lat": 44.815708,
     "lng": -71.883366,
     "mapped": "1998-01-01",
-    "updated": "2025-04-18"
+    "updated": "2025-04-18",
+    "department": null
   },
   {
     "id": "recpHijvNxTowbA2q",
@@ -400,7 +430,8 @@
     "lat": 44.132547,
     "lng": -73.088798,
     "mapped": "1998-01-01",
-    "updated": "2023-03-28"
+    "updated": "2023-03-28",
+    "department": null
   },
   {
     "id": "rec9TaX6YcaEDhEEr",
@@ -413,7 +444,8 @@
     "lat": 44.029024,
     "lng": -72.571656,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recB6YyN71XSdn3EH",
@@ -426,7 +458,8 @@
     "lat": 44.585287,
     "lng": -71.948121,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "rec5PTEblNybvzyuy",
@@ -439,7 +472,8 @@
     "lat": 44.642046,
     "lng": -71.979234,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recxPnKaG23EU0Zd4",
@@ -452,7 +486,8 @@
     "lat": 44.485549,
     "lng": -73.222819,
     "mapped": "2009-10-20",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recNYqTRVMitmfGPz",
@@ -465,7 +500,8 @@
     "lat": 44.476576,
     "lng": -73.210556,
     "mapped": "2003-01-28",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recPzgncmFTJsg6zy",
@@ -478,7 +514,8 @@
     "lat": 44.512095,
     "lng": -73.252367,
     "mapped": "2003-01-27",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "rectW7bvUl78T5N4A",
@@ -491,7 +528,8 @@
     "lat": 44.481337,
     "lng": -73.198434,
     "mapped": "2003-01-28",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "rec1tYI16gweTsHiF",
@@ -504,7 +542,8 @@
     "lat": 44.454174,
     "lng": -73.2168,
     "mapped": "2003-01-28",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recuoAfl1DEQ12l1y",
@@ -517,7 +556,8 @@
     "lat": 44.408334,
     "lng": -72.308544,
     "mapped": "2023-10-31",
-    "updated": "2025-07-28"
+    "updated": "2025-07-28",
+    "department": null
   },
   {
     "id": "recJQr2i53uqJIizg",
@@ -530,7 +570,8 @@
     "lat": 44.643581,
     "lng": -72.832502,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recfBUJhie6yNDuxz",
@@ -543,7 +584,8 @@
     "lat": 45.010232,
     "lng": -71.504909,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recQ1odEa11inIuNe",
@@ -556,7 +598,8 @@
     "lat": 43.61123,
     "lng": -73.17724,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "rec9hq1iKwEfLfzJ2",
@@ -569,7 +612,8 @@
     "lat": 43.381464,
     "lng": -72.605499,
     "mapped": "1998-01-01",
-    "updated": "2025-07-02"
+    "updated": "2025-07-02",
+    "department": null
   },
   {
     "id": "rec4FyzVJcXeqWV3z",
@@ -582,7 +626,8 @@
     "lat": 43.382366,
     "lng": -72.606939,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recTpdQgnXjllLPOr",
@@ -595,7 +640,8 @@
     "lat": 43.383463,
     "lng": -72.638168,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "rech1Z43f5Gn3ZUo4",
@@ -608,7 +654,8 @@
     "lat": 44.838295,
     "lng": -71.989186,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recYNcMqQOzgqBsnZ",
@@ -621,7 +668,8 @@
     "lat": 44.311177,
     "lng": -73.250551,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recG35YUIMv9iTLSd",
@@ -634,7 +682,8 @@
     "lat": 43.991565,
     "lng": -72.446894,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recdXDSuRGaBOkOu5",
@@ -647,7 +696,8 @@
     "lat": 43.706357,
     "lng": -72.949087,
     "mapped": "1998-01-01",
-    "updated": "2023-03-28"
+    "updated": "2023-03-28",
+    "department": null
   },
   {
     "id": "recxxSn6NNQCBt31f",
@@ -660,7 +710,8 @@
     "lat": 43.521108,
     "lng": -73.013978,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recxCwt9rQf2LZf8z",
@@ -673,7 +724,8 @@
     "lat": 43.564225,
     "lng": -72.968015,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recho0NH5R6GEcloh",
@@ -686,7 +738,8 @@
     "lat": 44.492614,
     "lng": -73.166295,
     "mapped": "1998-01-01",
-    "updated": "2023-03-28"
+    "updated": "2023-03-28",
+    "department": null
   },
   {
     "id": "reck8CMCFeCSEp09W",
@@ -699,7 +752,8 @@
     "lat": 44.597741,
     "lng": -73.201054,
     "mapped": "1998-01-01",
-    "updated": "2023-03-28"
+    "updated": "2023-03-28",
+    "department": null
   },
   {
     "id": "recBuzDeoJpmyMBiE",
@@ -712,7 +766,8 @@
     "lat": 44.547276,
     "lng": -73.156301,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recspb9sqEfXm0yQ3",
@@ -725,7 +780,8 @@
     "lat": 44.53731,
     "lng": -73.207134,
     "mapped": "",
-    "updated": ""
+    "updated": "",
+    "department": null
   },
   {
     "id": "recYCfX7MJ3C4C1UA",
@@ -738,7 +794,8 @@
     "lat": 44.538703,
     "lng": -73.250736,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recBstDQtCKqkyInM",
@@ -751,7 +808,8 @@
     "lat": 44.428605,
     "lng": -71.888853,
     "mapped": "1998-01-01",
-    "updated": "2023-03-28"
+    "updated": "2023-03-28",
+    "department": null
   },
   {
     "id": "recsUxXd1aNg7csQ9",
@@ -764,7 +822,8 @@
     "lat": 44.023926,
     "lng": -72.290461,
     "mapped": "1998-01-01",
-    "updated": "2023-03-28"
+    "updated": "2023-03-28",
+    "department": null
   },
   {
     "id": "recFgwsXwVn1chEPI",
@@ -777,7 +836,8 @@
     "lat": 44.051852,
     "lng": -72.220744,
     "mapped": "2020-06-04",
-    "updated": "2023-03-28"
+    "updated": "2023-03-28",
+    "department": null
   },
   {
     "id": "rec0lXKaWE9kZUoq3",
@@ -790,7 +850,8 @@
     "lat": 44.065868,
     "lng": -72.221811,
     "mapped": "1998-01-01",
-    "updated": "2024-06-21"
+    "updated": "2024-06-21",
+    "department": null
   },
   {
     "id": "rechuzLqaFqPf2hbr",
@@ -803,7 +864,8 @@
     "lat": 43.970823,
     "lng": -73.206979,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recBwLVDcSI5hWkSE",
@@ -816,7 +878,8 @@
     "lat": 43.944639,
     "lng": -73.234824,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recCFDiTvHUPIHmW6",
@@ -829,7 +892,8 @@
     "lat": 43.355189,
     "lng": -72.997043,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "rec8HNwRiwuycAgmo",
@@ -842,7 +906,8 @@
     "lat": 44.460241,
     "lng": -72.099354,
     "mapped": "2005-04-29",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recqGsmsjI28JzHHm",
@@ -855,7 +920,8 @@
     "lat": 44.407609,
     "lng": -72.141288,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "rec4lAemt5XEXJ5Ab",
@@ -868,7 +934,8 @@
     "lat": 45.002113,
     "lng": -72.106006,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recauXqeoBy3esCEb",
@@ -881,7 +948,8 @@
     "lat": 45.00486,
     "lng": -72.099169,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "reckjEBZqBbfH0Ixg",
@@ -894,7 +962,8 @@
     "lat": 43.248079,
     "lng": -73.09218,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recwHDGxa7NoZnFna",
@@ -907,7 +976,8 @@
     "lat": 43.238948,
     "lng": -73.009552,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recexrZ5g0Ur7OAgx",
@@ -920,7 +990,8 @@
     "lat": 42.950347,
     "lng": -72.770088,
     "mapped": "2003-01-27",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recej2B7tr8xGeteg",
@@ -933,7 +1004,8 @@
     "lat": 42.948562,
     "lng": -72.872767,
     "mapped": "2003-01-24",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "rec6MsFEATUCrr8AC",
@@ -946,7 +1018,8 @@
     "lat": 42.936694,
     "lng": -72.572731,
     "mapped": "1998-01-01",
-    "updated": "2023-03-28"
+    "updated": "2023-03-28",
+    "department": null
   },
   {
     "id": "recKXJssFeSMopXM9",
@@ -959,7 +1032,8 @@
     "lat": 42.929994,
     "lng": -72.611868,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recSrud7K5IRuV5cq",
@@ -972,7 +1046,8 @@
     "lat": 44.659016,
     "lng": -71.891331,
     "mapped": "2002-10-15",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "rec0DWZlCdN20ZS5w",
@@ -985,7 +1060,8 @@
     "lat": 44.315706,
     "lng": -72.521148,
     "mapped": "1998-01-01",
-    "updated": "2023-03-28"
+    "updated": "2023-03-28",
+    "department": null
   },
   {
     "id": "recFxFUWdr6PftofU",
@@ -998,7 +1074,8 @@
     "lat": 44.540248,
     "lng": -72.531171,
     "mapped": "1998-01-01",
-    "updated": "2023-08-02"
+    "updated": "2023-08-02",
+    "department": null
   },
   {
     "id": "recp7pehwLyXQDmkT",
@@ -1011,7 +1088,8 @@
     "lat": 44.914895,
     "lng": -72.795654,
     "mapped": "1998-01-01",
-    "updated": "2023-05-08"
+    "updated": "2023-05-08",
+    "department": null
   },
   {
     "id": "recyWlGAGcyBBaDfD",
@@ -1024,7 +1102,8 @@
     "lat": 44.491125,
     "lng": -73.11179,
     "mapped": "1998-01-01",
-    "updated": "2023-03-28"
+    "updated": "2023-03-28",
+    "department": null
   },
   {
     "id": "recbxXYcsg74iL0CC",
@@ -1037,7 +1116,8 @@
     "lat": 44.50482,
     "lng": -73.05279,
     "mapped": "1998-01-01",
-    "updated": "2025-09-05"
+    "updated": "2025-09-05",
+    "department": null
   },
   {
     "id": "recRf0tycoSrahCuN",
@@ -1050,7 +1130,8 @@
     "lat": 44.669819,
     "lng": -73.016533,
     "mapped": "2003-01-29",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "rechG90Y0psNiarTM",
@@ -1063,7 +1144,8 @@
     "lat": 44.803013,
     "lng": -72.935931,
     "mapped": "2012-08-28",
-    "updated": "2023-07-26"
+    "updated": "2023-07-26",
+    "department": null
   },
   {
     "id": "recW64eIRKggkJJB8",
@@ -1076,7 +1158,8 @@
     "lat": 44.785231,
     "lng": -72.85852,
     "mapped": "1998-01-01",
-    "updated": "2023-01-28"
+    "updated": "2023-01-28",
+    "department": null
   },
   {
     "id": "recdE82tBhnoDc7kW",
@@ -1089,7 +1172,8 @@
     "lat": 43.906392,
     "lng": -72.152088,
     "mapped": "1998-01-01",
-    "updated": "2023-03-28"
+    "updated": "2023-03-28",
+    "department": null
   },
   {
     "id": "recjTdDopeDtYHq80",
@@ -1102,7 +1186,8 @@
     "lat": 44.216673,
     "lng": -73.242702,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recsMyH8wWIbyWIZU",
@@ -1115,7 +1200,8 @@
     "lat": 44.981437,
     "lng": -72.915128,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recdefxOROuJf5cFo",
@@ -1128,7 +1214,8 @@
     "lat": 44.731015,
     "lng": -73.116419,
     "mapped": "1998-01-01",
-    "updated": "2023-05-02"
+    "updated": "2023-05-02",
+    "department": null
   },
   {
     "id": "recsGi7kxXb1eMmTn",
@@ -1141,7 +1228,8 @@
     "lat": 44.704438,
     "lng": -72.189572,
     "mapped": "1998-01-01",
-    "updated": "2023-03-28"
+    "updated": "2023-03-28",
+    "department": null
   },
   {
     "id": "recsA50FFCWxP3CLp",
@@ -1154,7 +1242,8 @@
     "lat": 44.7069,
     "lng": -72.18862,
     "mapped": "2002-03-28",
-    "updated": "2023-03-28"
+    "updated": "2023-03-28",
+    "department": null
   },
   {
     "id": "recMjgwnv9ReICFXm",
@@ -1167,7 +1256,8 @@
     "lat": 43.174064,
     "lng": -72.59628,
     "mapped": "1998-01-01",
-    "updated": "2023-01-28"
+    "updated": "2023-01-28",
+    "department": null
   },
   {
     "id": "recY9j7yKbHWPkI70",
@@ -1180,7 +1270,8 @@
     "lat": 44.721891,
     "lng": -73.297183,
     "mapped": "2018-04-10",
-    "updated": "2023-03-28"
+    "updated": "2023-03-28",
+    "department": null
   },
   {
     "id": "recKGGgYczMpt8jeS",
@@ -1193,7 +1284,8 @@
     "lat": 43.980847,
     "lng": -72.843283,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "rec9yYQ2Nq72sTvGs",
@@ -1206,7 +1298,8 @@
     "lat": 44.566672,
     "lng": -72.304983,
     "mapped": "2013-08-05",
-    "updated": "2023-01-28"
+    "updated": "2023-01-28",
+    "department": null
   },
   {
     "id": "recnB6Kf1wwgcTr8m",
@@ -1219,7 +1312,8 @@
     "lat": 44.211614,
     "lng": -72.196949,
     "mapped": "2003-01-08",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recjs3QY3o6XJ4AWf",
@@ -1232,7 +1326,8 @@
     "lat": 42.816795,
     "lng": -72.576933,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recQBACfYY2rBCpY3",
@@ -1245,7 +1340,8 @@
     "lat": 42.7859,
     "lng": -72.770165,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recev5VxMsRinQhPO",
@@ -1258,7 +1354,8 @@
     "lat": 43.922708,
     "lng": -72.839326,
     "mapped": "2009-06-16",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "rec7qcrbJ00UEXfhc",
@@ -1271,7 +1368,8 @@
     "lat": 44.507866,
     "lng": -72.371869,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recF1AFZgzic0Ffi1",
@@ -1284,7 +1382,8 @@
     "lat": 43.650487,
     "lng": -72.421256,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "rec7Se1HTXLDxrHx7",
@@ -1297,7 +1396,8 @@
     "lat": 43.595191,
     "lng": -72.353735,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recHg924I7WzpMf6E",
@@ -1310,7 +1410,8 @@
     "lat": 43.54461,
     "lng": -72.407896,
     "mapped": "1998-01-01",
-    "updated": "2023-01-28"
+    "updated": "2023-01-28",
+    "department": null
   },
   {
     "id": "rec44wLaPet22VYzA",
@@ -1323,7 +1424,8 @@
     "lat": 44.938071,
     "lng": -73.046867,
     "mapped": "",
-    "updated": ""
+    "updated": "",
+    "department": null
   },
   {
     "id": "recYww46wSKZ3kye7",
@@ -1336,7 +1438,8 @@
     "lat": 44.333229,
     "lng": -73.112236,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recpN6rKAFSQC1SMn",
@@ -1349,7 +1452,8 @@
     "lat": 43.719927,
     "lng": -73.221999,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "rec8zUwXpW4prHlES",
@@ -1362,7 +1466,8 @@
     "lat": 43.709181,
     "lng": -73.130373,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recGPRLcDKaE8ltDU",
@@ -1375,7 +1480,8 @@
     "lat": 44.294965,
     "lng": -72.966156,
     "mapped": "2003-01-28",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recRxSHTS1PwGvgTf",
@@ -1388,7 +1494,8 @@
     "lat": 44.595278,
     "lng": -72.608985,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recdVqmUeKnU7jFsX",
@@ -1401,7 +1508,8 @@
     "lat": 44.674375,
     "lng": -72.596543,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "rec5H7QDukuTRc6YN",
@@ -1414,7 +1522,8 @@
     "lat": 43.524177,
     "lng": -73.07054,
     "mapped": "1998-01-01",
-    "updated": "2023-03-02"
+    "updated": "2023-03-02",
+    "department": null
   },
   {
     "id": "rec3ndbrEYtMOL2C0",
@@ -1427,7 +1536,8 @@
     "lat": 44.803665,
     "lng": -72.27602,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recgPgGxRPV2SuAeg",
@@ -1440,7 +1550,8 @@
     "lat": 44.877995,
     "lng": -73.337924,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recUaQbioIMdTifma",
@@ -1453,7 +1564,8 @@
     "lat": 43.098795,
     "lng": -72.782461,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "rececs7pqrAoCueXE",
@@ -1466,7 +1578,8 @@
     "lat": 44.951616,
     "lng": -72.436165,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recr4512er4gdWgV7",
@@ -1479,7 +1592,8 @@
     "lat": 44.930821,
     "lng": -72.496889,
     "mapped": "2010-08-04",
-    "updated": "2025-08-18"
+    "updated": "2025-08-18",
+    "department": null
   },
   {
     "id": "rec5K7bNJIObMQ2f9",
@@ -1492,7 +1606,8 @@
     "lat": 44.475865,
     "lng": -72.968869,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "rec7SwwmOHDy1D0U1",
@@ -1505,7 +1620,8 @@
     "lat": 44.636085,
     "lng": -72.684003,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recaeeMiGOxCTQlYs",
@@ -1518,7 +1634,8 @@
     "lat": 43.660023,
     "lng": -72.773251,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recxPWu55mluASIzo",
@@ -1531,7 +1648,8 @@
     "lat": 43.658434,
     "lng": -72.794553,
     "mapped": "2020-02-25",
-    "updated": "2023-03-28"
+    "updated": "2023-03-28",
+    "department": null
   },
   {
     "id": "reciqSSnNa57o3aV5",
@@ -1544,7 +1662,8 @@
     "lat": 44.105225,
     "lng": -72.997343,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "rec1ko9gQF6N8qBIp",
@@ -1557,7 +1676,8 @@
     "lat": 43.227741,
     "lng": -72.806477,
     "mapped": "1998-01-01",
-    "updated": "2023-03-31"
+    "updated": "2023-03-31",
+    "department": null
   },
   {
     "id": "reccqDE2w4PODhaIR",
@@ -1570,7 +1690,8 @@
     "lat": 43.191995,
     "lng": -72.81435,
     "mapped": "1998-01-01",
-    "updated": "2024-10-25"
+    "updated": "2024-10-25",
+    "department": null
   },
   {
     "id": "recrfx6tsw0y7Xev1",
@@ -1583,7 +1704,8 @@
     "lat": 44.800743,
     "lng": -72.448353,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "reczQxfKfnXTPW7bG",
@@ -1596,7 +1718,8 @@
     "lat": 43.401749,
     "lng": -72.706718,
     "mapped": "2003-01-27",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recUxoKsgQeD4iIEJ",
@@ -1609,7 +1732,8 @@
     "lat": 44.46126,
     "lng": -71.693317,
     "mapped": "2003-01-17",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "rec9BxBKPzduj2ix5",
@@ -1622,7 +1746,8 @@
     "lat": 44.412494,
     "lng": -71.718521,
     "mapped": "2003-01-17",
-    "updated": "2025-04-18"
+    "updated": "2025-04-18",
+    "department": null
   },
   {
     "id": "recrTHyLE1F0gQQGg",
@@ -1635,7 +1760,8 @@
     "lat": 44.538088,
     "lng": -72.002631,
     "mapped": "2004-02-09",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recRhWL4U4cdwoDBA",
@@ -1648,7 +1774,8 @@
     "lat": 43.162948,
     "lng": -73.071465,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recfiFLsY3x2gBpQn",
@@ -1661,7 +1788,8 @@
     "lat": 43.188837,
     "lng": -73.045655,
     "mapped": "2018-08-17",
-    "updated": "2023-01-28"
+    "updated": "2023-01-28",
+    "department": null
   },
   {
     "id": "recoahmhUzDe1fNIP",
@@ -1674,7 +1802,8 @@
     "lat": 42.856116,
     "lng": -72.724634,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "rec6y9QVzCtryncRp",
@@ -1687,7 +1816,8 @@
     "lat": 44.351539,
     "lng": -72.346431,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "reckRKYjj8rb0RbJq",
@@ -1700,7 +1830,8 @@
     "lat": 43.973568,
     "lng": -73.105123,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recrujaA5sOQUu4n0",
@@ -1713,7 +1844,8 @@
     "lat": 44.01532,
     "lng": -73.168291,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "rec7eqtEIahxZB74z",
@@ -1726,7 +1858,8 @@
     "lat": 44.350497,
     "lng": -72.606086,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "rec8M79zY0gZN3n7c",
@@ -1739,7 +1872,8 @@
     "lat": 44.299357,
     "lng": -72.694434,
     "mapped": "2014-04-03",
-    "updated": "2023-01-28"
+    "updated": "2023-01-28",
+    "department": null
   },
   {
     "id": "reccRIwO2Hr7PFnUo",
@@ -1752,7 +1886,8 @@
     "lat": 43.486471,
     "lng": -73.117365,
     "mapped": "2003-01-30",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recrZfGJhmGJThssR",
@@ -1765,7 +1900,8 @@
     "lat": 44.618636,
     "lng": -73.123139,
     "mapped": "1998-01-01",
-    "updated": "2023-02-21"
+    "updated": "2023-02-21",
+    "department": null
   },
   {
     "id": "recevYSFDOF9tP7I9",
@@ -1778,7 +1914,8 @@
     "lat": 44.255503,
     "lng": -73.111495,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recQIqKXk4EZulO52",
@@ -1791,7 +1928,8 @@
     "lat": 44.259447,
     "lng": -72.575381,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recOkDJpu6xkjiiSi",
@@ -1804,7 +1942,8 @@
     "lat": 44.249337,
     "lng": -72.762058,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recPpiHqxaP6ouIuf",
@@ -1817,7 +1956,8 @@
     "lat": 44.561452,
     "lng": -72.595123,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recq2fece4fwL2ygN",
@@ -1830,7 +1970,8 @@
     "lat": 43.446054,
     "lng": -72.825251,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recYvnxMpMbhD1eOP",
@@ -1843,7 +1984,8 @@
     "lat": 43.414522,
     "lng": -72.820145,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "rec0bpIUcav1Px8CD",
@@ -1856,7 +1998,8 @@
     "lat": 44.125208,
     "lng": -73.145417,
     "mapped": "1998-01-01",
-    "updated": "2025-04-18"
+    "updated": "2025-04-18",
+    "department": null
   },
   {
     "id": "recWnxVFquor4i387",
@@ -1869,7 +2012,8 @@
     "lat": 44.691198,
     "lng": -71.949334,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recEJAI6RLvfhClW7",
@@ -1882,7 +2026,8 @@
     "lat": 44.15434,
     "lng": -72.047401,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recgz39EZAyguMDMn",
@@ -1895,7 +2040,8 @@
     "lat": 44.063944,
     "lng": -72.118247,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recfovIv1TVwSQFbR",
@@ -1908,7 +2054,8 @@
     "lat": 44.07964,
     "lng": -72.058849,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recgL6htZ0uL1pOsa",
@@ -1921,7 +2068,8 @@
     "lat": 42.947158,
     "lng": -72.677781,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "rect3StjPoL9iTle7",
@@ -1934,7 +2082,8 @@
     "lat": 42.992931,
     "lng": -72.650233,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recK55Y46IpexdLkb",
@@ -1947,7 +2096,8 @@
     "lat": 44.939319,
     "lng": -72.198042,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recT1VT8Lk1D9qV21",
@@ -1960,7 +2110,8 @@
     "lat": 44.94954,
     "lng": -72.308921,
     "mapped": "2003-07-14",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "rec8d1dyBNr68pM3s",
@@ -1973,7 +2124,8 @@
     "lat": 42.928761,
     "lng": -73.241475,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recaQrLiJpUMwXdEN",
@@ -1986,7 +2138,8 @@
     "lat": 44.816851,
     "lng": -73.290652,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recEbOJH98d6pGsPa",
@@ -1999,7 +2152,8 @@
     "lat": 44.86347,
     "lng": -73.262184,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recKzg3UKgTsr8rXU",
@@ -2012,7 +2166,8 @@
     "lat": 44.148794,
     "lng": -72.658776,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "rec4PIe3DEcvsTT1e",
@@ -2025,7 +2180,8 @@
     "lat": 43.715951,
     "lng": -72.307876,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "rec6RsvBQRV1UigAR",
@@ -2038,7 +2194,8 @@
     "lat": 44.809516,
     "lng": -72.205141,
     "mapped": "1998-01-01",
-    "updated": "2023-03-28"
+    "updated": "2023-03-28",
+    "department": null
   },
   {
     "id": "recRfy8doozNVS5xI",
@@ -2051,7 +2208,8 @@
     "lat": 43.803838,
     "lng": -73.291752,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recsoi07MzObGy58B",
@@ -2064,7 +2222,8 @@
     "lat": 43.347776,
     "lng": -73.17453,
     "mapped": "1998-01-01",
-    "updated": "2023-02-23"
+    "updated": "2023-02-23",
+    "department": null
   },
   {
     "id": "recWyMnc1Mi3pYqjh",
@@ -2077,7 +2236,8 @@
     "lat": 44.326447,
     "lng": -72.174133,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recKZzbsH6ZvL11Id",
@@ -2090,7 +2250,8 @@
     "lat": 43.244378,
     "lng": -72.893407,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recYTrakqjhdsssrn",
@@ -2103,7 +2264,8 @@
     "lat": 43.772848,
     "lng": -72.812469,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recBAF5WdR7ZlWNcg",
@@ -2116,7 +2278,8 @@
     "lat": 43.704603,
     "lng": -73.020402,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recH5LKVAjUi2vMhn",
@@ -2129,7 +2292,8 @@
     "lat": 43.709672,
     "lng": -73.065014,
     "mapped": "2025-03-07",
-    "updated": "2025-06-23"
+    "updated": "2025-06-23",
+    "department": null
   },
   {
     "id": "recjvt1p9sJuhJAcX",
@@ -2142,7 +2306,8 @@
     "lat": 43.708499,
     "lng": -73.064081,
     "mapped": "2025-03-07",
-    "updated": "2025-06-23"
+    "updated": "2025-06-23",
+    "department": null
   },
   {
     "id": "rec1XPU2Wc7kYRwiC",
@@ -2155,7 +2320,8 @@
     "lat": 43.717213,
     "lng": -73.017465,
     "mapped": "1998-01-01",
-    "updated": "2023-03-28"
+    "updated": "2023-03-28",
+    "department": null
   },
   {
     "id": "reciaUxDB6sFiOHD8",
@@ -2168,7 +2334,8 @@
     "lat": 44.277869,
     "lng": -72.42243,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recap6UKqkPlVmayH",
@@ -2181,7 +2348,8 @@
     "lat": 43.665515,
     "lng": -72.537995,
     "mapped": "2003-05-28",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recUCoE7cOasBvhcQ",
@@ -2194,7 +2362,8 @@
     "lat": 43.71973,
     "lng": -72.487796,
     "mapped": "1998-01-01",
-    "updated": "2025-09-05"
+    "updated": "2025-09-05",
+    "department": null
   },
   {
     "id": "recgHqVsVpAtNpAfy",
@@ -2207,7 +2376,8 @@
     "lat": 43.520837,
     "lng": -73.234043,
     "mapped": "1998-01-01",
-    "updated": "2023-01-28"
+    "updated": "2023-01-28",
+    "department": null
   },
   {
     "id": "recVwmKokOpSgotzG",
@@ -2220,7 +2390,8 @@
     "lat": 43.518494,
     "lng": -73.236328,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recy7AZvUC5MCanaV",
@@ -2233,7 +2404,8 @@
     "lat": 42.765028,
     "lng": -73.236073,
     "mapped": "2003-01-27",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recxv2KklzWKtVYe8",
@@ -2246,7 +2418,8 @@
     "lat": 42.832006,
     "lng": -73.167133,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recfvqfqXDne9SaDh",
@@ -2259,7 +2432,8 @@
     "lat": 42.795492,
     "lng": -73.222823,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recTAvD075Ssukt0i",
@@ -2272,7 +2446,8 @@
     "lat": 42.798632,
     "lng": -73.266035,
     "mapped": "1998-01-01",
-    "updated": "2025-04-18"
+    "updated": "2025-04-18",
+    "department": null
   },
   {
     "id": "recTOnJLw4TlHYlmq",
@@ -2285,7 +2460,8 @@
     "lat": 42.771166,
     "lng": -73.24053,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "rec6RSpsKygflwyn7",
@@ -2298,7 +2474,8 @@
     "lat": 43.661348,
     "lng": -73.035952,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recUdxz9DqEdctHsL",
@@ -2311,7 +2488,8 @@
     "lat": 42.966437,
     "lng": -72.523072,
     "mapped": "1998-01-01",
-    "updated": "2023-01-28"
+    "updated": "2023-01-28",
+    "department": null
   },
   {
     "id": "rec95d0ilBKrDR0MC",
@@ -2324,7 +2502,8 @@
     "lat": 43.937514,
     "lng": -72.613549,
     "mapped": "2024-10-24",
-    "updated": "2025-08-06"
+    "updated": "2025-08-06",
+    "department": null
   },
   {
     "id": "recZ3B082UWD4RfIU",
@@ -2337,7 +2516,8 @@
     "lat": 43.9427,
     "lng": -72.605151,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recNcHgnuGOU54l8q",
@@ -2350,7 +2530,8 @@
     "lat": 43.938133,
     "lng": -72.553527,
     "mapped": "1998-01-01",
-    "updated": "2023-01-28"
+    "updated": "2023-01-28",
+    "department": null
   },
   {
     "id": "recWf5mBhhH0MDVGb",
@@ -2363,7 +2544,8 @@
     "lat": 43.927771,
     "lng": -72.665809,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recOFjrv7Jq0YEmXe",
@@ -2376,7 +2558,8 @@
     "lat": 43.46793,
     "lng": -72.532215,
     "mapped": "2004-06-08",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recsPE8nsYLKsxyfW",
@@ -2389,7 +2572,8 @@
     "lat": 42.771002,
     "lng": -72.947814,
     "mapped": "1998-01-01",
-    "updated": "2023-09-08"
+    "updated": "2023-09-08",
+    "department": null
   },
   {
     "id": "recAQTxFLfansMdQ8",
@@ -2402,7 +2586,8 @@
     "lat": 44.40205,
     "lng": -72.987246,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recvonbKG2iwq3vEu",
@@ -2415,7 +2600,8 @@
     "lat": 43.986198,
     "lng": -73.037325,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "reclfpg2DJx36ldfa",
@@ -2428,7 +2614,8 @@
     "lat": 43.877125,
     "lng": -72.807833,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recJAuktD9kFlrHCI",
@@ -2441,7 +2628,8 @@
     "lat": 43.201501,
     "lng": -72.5069,
     "mapped": "1998-01-01",
-    "updated": "2023-04-21"
+    "updated": "2023-04-21",
+    "department": null
   },
   {
     "id": "rec6QnrAgjJ0hlPM2",
@@ -2454,7 +2642,8 @@
     "lat": 44.090107,
     "lng": -72.734361,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recomS9lOnRlRSuXo",
@@ -2467,7 +2656,8 @@
     "lat": 43.818434,
     "lng": -72.519304,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recCYPSStNN8SQ9RY",
@@ -2480,7 +2670,8 @@
     "lat": 43.257227,
     "lng": -73.226881,
     "mapped": "1998-01-01",
-    "updated": "2023-08-10"
+    "updated": "2023-08-10",
+    "department": null
   },
   {
     "id": "recGwL0OAIfaiTGGI",
@@ -2493,7 +2684,8 @@
     "lat": 43.606956,
     "lng": -72.97286,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recnTPlullTjqMvKb",
@@ -2506,7 +2698,8 @@
     "lat": 43.635365,
     "lng": -72.98036,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recIix6QDrsWjXMka",
@@ -2519,7 +2712,8 @@
     "lat": 43.603109,
     "lng": -73.015774,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recY9oXObaSoVJ2KJ",
@@ -2532,7 +2726,8 @@
     "lat": 44.189325,
     "lng": -72.142881,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recrLMiO7FlZ05Rg7",
@@ -2545,7 +2740,8 @@
     "lat": 44.208091,
     "lng": -72.104777,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recFckGZ2C5YzEtSU",
@@ -2558,7 +2754,8 @@
     "lat": 44.807209,
     "lng": -73.087672,
     "mapped": "2003-09-02",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recqRSbNo909hVhM6",
@@ -2571,7 +2768,8 @@
     "lat": 44.811936,
     "lng": -73.113235,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recWCQVTVufwIZ68f",
@@ -2584,7 +2782,8 @@
     "lat": 43.923561,
     "lng": -73.11057,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recLBOFYdTYHzPJEz",
@@ -2597,7 +2796,8 @@
     "lat": 43.13827,
     "lng": -72.510201,
     "mapped": "1998-01-01",
-    "updated": "2023-03-28"
+    "updated": "2023-03-28",
+    "department": null
   },
   {
     "id": "rec1hqNOfZSjZTJy8",
@@ -2610,7 +2810,8 @@
     "lat": 42.945743,
     "lng": -73.20762,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recJYCZCjiUxJ4DhC",
@@ -2623,7 +2824,8 @@
     "lat": 43.010688,
     "lng": -73.189766,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recKzIp0EhqmUN6B0",
@@ -2636,7 +2838,8 @@
     "lat": 43.78112,
     "lng": -72.46866,
     "mapped": "1998-01-01",
-    "updated": "2024-10-31"
+    "updated": "2024-10-31",
+    "department": null
   },
   {
     "id": "recNMusK6XJThOnk1",
@@ -2649,7 +2852,8 @@
     "lat": 44.379547,
     "lng": -73.229227,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recoCeMOMVfLj2cy5",
@@ -2662,7 +2866,8 @@
     "lat": 44.90569,
     "lng": -72.975835,
     "mapped": "2011-10-13",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recd3v4HnAvXA6dj3",
@@ -2675,7 +2880,8 @@
     "lat": 43.892895,
     "lng": -73.313788,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recCWn8xLjiame8Pf",
@@ -2688,7 +2894,8 @@
     "lat": 43.49249,
     "lng": -72.880848,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recJv7K2oUzHLMboi",
@@ -2701,7 +2908,8 @@
     "lat": 43.529288,
     "lng": -72.828978,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recrjOqycvg9rhVgD",
@@ -2714,7 +2922,8 @@
     "lat": 44.433461,
     "lng": -73.212411,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recaukjshFs4FJSQC",
@@ -2727,7 +2936,8 @@
     "lat": 44.47604,
     "lng": -73.151264,
     "mapped": "2007-01-08",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": "recICpsMLdF10nrgv"
   },
   {
     "id": "reclyq7XXYWoq4zAd",
@@ -2740,7 +2950,8 @@
     "lat": 44.454351,
     "lng": -73.179468,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recJKKkYyVpoLXjEG",
@@ -2753,7 +2964,8 @@
     "lat": 44.647305,
     "lng": -73.296451,
     "mapped": "2018-12-14",
-    "updated": "2023-01-28"
+    "updated": "2023-01-28",
+    "department": null
   },
   {
     "id": "rec5IjOyp4vtjKJiM",
@@ -2766,7 +2978,8 @@
     "lat": 43.292513,
     "lng": -72.472848,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recPrlGw56AZhjrrj",
@@ -2779,7 +2992,8 @@
     "lat": 42.755729,
     "lng": -73.070896,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recuRRo5TLdXr0UFu",
@@ -2792,7 +3006,8 @@
     "lat": 44.227887,
     "lng": -73.057187,
     "mapped": "1998-01-01",
-    "updated": "2024-09-23"
+    "updated": "2024-09-23",
+    "department": null
   },
   {
     "id": "rec6Tpzr4ixosbYbD",
@@ -2805,7 +3020,8 @@
     "lat": 44.241216,
     "lng": -73.057852,
     "mapped": "1998-01-01",
-    "updated": "2025-04-18"
+    "updated": "2025-04-18",
+    "department": null
   },
   {
     "id": "recKB2fsdiqBpKCtH",
@@ -2818,7 +3034,8 @@
     "lat": 44.169592,
     "lng": -72.984984,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recFKCyIFwRgQAUU0",
@@ -2831,7 +3048,8 @@
     "lat": 44.462349,
     "lng": -72.691439,
     "mapped": "",
-    "updated": ""
+    "updated": "",
+    "department": null
   },
   {
     "id": "recSFSlF10juEpCxw",
@@ -2844,7 +3062,8 @@
     "lat": 43.83778,
     "lng": -72.350338,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recV4o2770SG4l6Fi",
@@ -2857,7 +3076,8 @@
     "lat": 43.867081,
     "lng": -72.377272,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recmoKTwNEYkEBU6F",
@@ -2870,7 +3090,8 @@
     "lat": 43.105984,
     "lng": -72.889022,
     "mapped": "1998-01-01",
-    "updated": "2025-04-18"
+    "updated": "2025-04-18",
+    "department": null
   },
   {
     "id": "rec9aHCdk4j1c74r7",
@@ -2883,7 +3104,8 @@
     "lat": 43.056563,
     "lng": -72.88301,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recvZ0MWFVJNK9uIU",
@@ -2896,7 +3118,8 @@
     "lat": 44.631518,
     "lng": -72.01247,
     "mapped": "2016-06-10",
-    "updated": "2023-03-28"
+    "updated": "2023-03-28",
+    "department": null
   },
   {
     "id": "recaEc9CoSmLaJecN",
@@ -2909,7 +3132,8 @@
     "lat": 44.920692,
     "lng": -73.112981,
     "mapped": "",
-    "updated": ""
+    "updated": "",
+    "department": null
   },
   {
     "id": "rec3eYMa76FtN9g0V",
@@ -2922,7 +3146,8 @@
     "lat": 43.821084,
     "lng": -72.233914,
     "mapped": "1998-01-01",
-    "updated": "2023-11-22"
+    "updated": "2023-11-22",
+    "department": null
   },
   {
     "id": "rec5Mvgqjlpv6Rftz",
@@ -2935,7 +3160,8 @@
     "lat": 43.886904,
     "lng": -72.253525,
     "mapped": "1998-01-01",
-    "updated": "2025-04-18"
+    "updated": "2025-04-18",
+    "department": null
   },
   {
     "id": "reckXPP1pNVZU040P",
@@ -2948,7 +3174,8 @@
     "lat": 43.448439,
     "lng": -73.050178,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recUpWjJdkw0F09QO",
@@ -2961,7 +3188,8 @@
     "lat": 44.122379,
     "lng": -72.236656,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recHiMZ7VXYaHhmXX",
@@ -2974,7 +3202,8 @@
     "lat": 44.11606,
     "lng": -72.310825,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "reccw6srQ3Ix1DLUp",
@@ -2987,7 +3216,8 @@
     "lat": 43.049104,
     "lng": -72.667221,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "rec5SvP1HXhARPB6i",
@@ -3000,7 +3230,8 @@
     "lat": 44.99764,
     "lng": -72.405322,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recJF8D4YM8iCUsME",
@@ -3013,7 +3244,8 @@
     "lat": 44.903247,
     "lng": -72.407077,
     "mapped": "1998-01-01",
-    "updated": "2023-09-06"
+    "updated": "2023-09-06",
+    "department": null
   },
   {
     "id": "recnizoLsLmFuQjQp",
@@ -3026,7 +3258,8 @@
     "lat": 43.899949,
     "lng": -72.487226,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "rec5tuA5TIyJhvzKV",
@@ -3039,7 +3272,8 @@
     "lat": 44.527567,
     "lng": -72.944338,
     "mapped": "1998-01-01",
-    "updated": "2023-01-28"
+    "updated": "2023-01-28",
+    "department": null
   },
   {
     "id": "recsykIpGkdmgmRFn",
@@ -3052,7 +3286,8 @@
     "lat": 44.166603,
     "lng": -73.251371,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recsrZu9e3kkFM4Ks",
@@ -3065,7 +3300,8 @@
     "lat": 42.761156,
     "lng": -72.503017,
     "mapped": "2003-01-22",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recrZ0DDqPNXwkQ9Y",
@@ -3078,7 +3314,8 @@
     "lat": 43.981708,
     "lng": -72.363307,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "rec86vfPQTSjz2OFg",
@@ -3091,7 +3328,8 @@
     "lat": 44.193083,
     "lng": -72.820346,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recTVMXjMNcDzm3pf",
@@ -3104,7 +3342,8 @@
     "lat": 43.472201,
     "lng": -72.97966,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recX6I9UQ0WCsXxhN",
@@ -3117,7 +3356,8 @@
     "lat": 43.450867,
     "lng": -72.879639,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recqLHa0VbcB1jHGx",
@@ -3130,7 +3370,8 @@
     "lat": 43.041209,
     "lng": -72.790332,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recnzgbio36h1cy5z",
@@ -3143,7 +3384,8 @@
     "lat": 44.138071,
     "lng": -72.892056,
     "mapped": "1998-01-01",
-    "updated": "2025-04-17"
+    "updated": "2025-04-17",
+    "department": null
   },
   {
     "id": "recLj3T5To5FMHE4C",
@@ -3156,7 +3398,8 @@
     "lat": 44.113483,
     "lng": -72.855553,
     "mapped": "1998-01-01",
-    "updated": "2025-04-17"
+    "updated": "2025-04-17",
+    "department": null
   },
   {
     "id": "recgHQc7VEM2HolL3",
@@ -3169,7 +3412,8 @@
     "lat": 44.107411,
     "lng": -72.434273,
     "mapped": "1998-01-01",
-    "updated": "2023-03-28"
+    "updated": "2023-03-28",
+    "department": null
   },
   {
     "id": "recK7oQ3LqfxCszHJ",
@@ -3182,7 +3426,8 @@
     "lat": 44.377531,
     "lng": -72.716191,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "reca74WjEznRSArQ7",
@@ -3195,7 +3440,8 @@
     "lat": 44.336635,
     "lng": -72.755736,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recBY3gV4bTnTXLE2",
@@ -3208,7 +3454,8 @@
     "lat": 44.379401,
     "lng": -71.954514,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "reciCUVLq3LAc0sN9",
@@ -3221,7 +3468,8 @@
     "lat": 43.401305,
     "lng": -72.416074,
     "mapped": "1998-01-01",
-    "updated": "2025-04-18"
+    "updated": "2025-04-18",
+    "department": null
   },
   {
     "id": "recC6K5RwDw6sltY4",
@@ -3234,7 +3482,8 @@
     "lat": 43.400922,
     "lng": -72.513513,
     "mapped": "1998-01-01",
-    "updated": "2023-10-04"
+    "updated": "2023-10-04",
+    "department": null
   },
   {
     "id": "recZjsKsWy59kRG1J",
@@ -3247,7 +3496,8 @@
     "lat": 43.416813,
     "lng": -73.210842,
     "mapped": "1998-01-01",
-    "updated": "2023-01-28"
+    "updated": "2023-01-28",
+    "department": null
   },
   {
     "id": "reclaJhxzXSJ2EgEm",
@@ -3260,7 +3510,8 @@
     "lat": 43.910529,
     "lng": -72.263228,
     "mapped": "2005-06-30",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recpyNAXgEanXnjCb",
@@ -3273,7 +3524,8 @@
     "lat": 43.652217,
     "lng": -73.346938,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recvw96lntZ6rtbRc",
@@ -3286,7 +3538,8 @@
     "lat": 43.353258,
     "lng": -73.250917,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recV5S4wZuRhM4HyY",
@@ -3299,7 +3552,8 @@
     "lat": 43.597151,
     "lng": -73.049589,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "rec3layDiOsdpr2n0",
@@ -3312,7 +3566,8 @@
     "lat": 43.467375,
     "lng": -72.46984,
     "mapped": "1998-01-01",
-    "updated": "2023-01-28"
+    "updated": "2023-01-28",
+    "department": null
   },
   {
     "id": "rec8Tlw0wVL7XX2iw",
@@ -3325,7 +3580,8 @@
     "lat": 44.61207,
     "lng": -73.005775,
     "mapped": "2003-01-29",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recyw3uCv7jprUZx2",
@@ -3338,7 +3594,8 @@
     "lat": 43.067416,
     "lng": -72.456943,
     "mapped": "1998-01-01",
-    "updated": "2025-04-18"
+    "updated": "2025-04-18",
+    "department": null
   },
   {
     "id": "recmkufckoMFk5E7T",
@@ -3351,7 +3608,8 @@
     "lat": 43.069392,
     "lng": -72.541642,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recxdpAC601g3WPGU",
@@ -3364,7 +3622,8 @@
     "lat": 44.780499,
     "lng": -72.080445,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recn8gDTwZOUOo722",
@@ -3377,7 +3636,8 @@
     "lat": 43.294919,
     "lng": -72.78923,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recyU5X3AI1cehhqS",
@@ -3390,7 +3650,8 @@
     "lat": 44.045274,
     "lng": -73.212965,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recQ18nh51m7wjsBx",
@@ -3403,7 +3664,8 @@
     "lat": 43.859048,
     "lng": -73.201546,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recvBDuZoqVTbAgEl",
@@ -3416,7 +3678,8 @@
     "lat": 42.798175,
     "lng": -72.822862,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "rec7d5obdqHHmaiZe",
@@ -3429,7 +3692,8 @@
     "lat": 42.789775,
     "lng": -72.885059,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "reckyHImO9PwhKGUi",
@@ -3442,7 +3706,8 @@
     "lat": 42.791909,
     "lng": -72.882057,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "reciPcmVK6T33eXVs",
@@ -3455,7 +3720,8 @@
     "lat": 44.122965,
     "lng": -72.536163,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recNbnG3rcFLm6fl6",
@@ -3468,7 +3734,8 @@
     "lat": 44.444885,
     "lng": -73.100003,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recEiCd12NfZF7lNV",
@@ -3481,7 +3748,8 @@
     "lat": 43.216188,
     "lng": -72.721982,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "rec0h66hA8jyLFHPm",
@@ -3494,7 +3762,8 @@
     "lat": 43.143628,
     "lng": -72.887174,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recxgtAHCWTf0cB4j",
@@ -3507,7 +3776,8 @@
     "lat": 44.493168,
     "lng": -73.186921,
     "mapped": "2003-01-30",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recCI1DgDlzzctUsG",
@@ -3520,7 +3790,8 @@
     "lat": 44.542278,
     "lng": -72.45833,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "rec7ZuvWsRz3h6QFP",
@@ -3533,7 +3804,8 @@
     "lat": 44.44065,
     "lng": -72.415476,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "reczS5tLYhMA2Ojiu",
@@ -3546,7 +3818,8 @@
     "lat": 43.558312,
     "lng": -72.532435,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   },
   {
     "id": "recgZJXlSVWNE7N5e",
@@ -3559,7 +3832,8 @@
     "lat": 43.630175,
     "lng": -72.505302,
     "mapped": "1998-01-01",
-    "updated": "2023-01-28"
+    "updated": "2023-01-28",
+    "department": null
   },
   {
     "id": "recTsuZ8vIHq0wB5O",
@@ -3572,6 +3846,7 @@
     "lat": 44.372314,
     "lng": -72.550093,
     "mapped": "1998-01-01",
-    "updated": "2023-01-27"
+    "updated": "2023-01-27",
+    "department": null
   }
 ]

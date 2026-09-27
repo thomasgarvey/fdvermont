@@ -1,25 +1,46 @@
 ---
 import Archive from "../../layouts/Archive.astro";
 import {
+  apart,
   BURN_RULE,
   countyMap,
   memberCount,
   towns,
+  type Apart,
   type Town,
 } from "../../lib/towns";
+import type { Station } from "../../lib/stations";
 
 export function getStaticPaths() {
-  return towns.map((town) => ({ params: { slug: town.slug }, props: { town } }));
+  return [
+    ...towns.map((town) => ({ params: { slug: town.slug }, props: { town } })),
+    ...apart.map((a) => ({ params: { slug: a.slug }, props: { standalone: a } })),
+  ];
 }
 
-const { town } = Astro.props as { town: Town };
-const dept = town.departments[0] ?? null;
-const members = memberCount(town);
+// Two kinds of page share this template: a town, with the departments and
+// stations filed under it, and a department that is not its town's own — the
+// Air National Guard's, at the airport — which has a page to itself. The
+// difference is what each can claim. A department's page claims no ground: it
+// states no area, draws no town as its own, and leaves burning to the town.
+const props = Astro.props as { town: Town } | { standalone: Apart };
+const town = "town" in props ? props.town : null;
+const standalone = "standalone" in props ? props.standalone : null;
+const subject = (town ?? standalone)!;
+const place = town ? town.name : standalone!.town;
+const county = subject.county;
+const stations = subject.stations;
+const departments = town ? town.departments : [standalone!.department];
+// The town a standalone department works from, when the town has a page.
+const home = standalone ? (towns.find((t) => t.name === standalone.town) ?? null) : null;
+
+const dept = departments[0] ?? null;
+const members = memberCount({ departments });
 
 // Each station's own record, rendered inline. 139 of 196 towns have exactly one
 // station, so a separate page per building said the same thing twice; the
 // station keeps its slug as an anchor here so old links still land on it.
-const stationRecord = (s: (typeof town.stations)[number]): [string, string][] =>
+const stationRecord = (s: Station): [string, string][] =>
   (
     [
       ["Street address", s.address],
@@ -38,8 +59,18 @@ const stationRecord = (s: (typeof town.stations)[number]): [string, string][] =>
 // The town drawn inside its county, with every station in the county plotted.
 // A lone outline says nothing; the neighbours are the point, because that is
 // who turns out on a mutual aid call.
-const map = countyMap(town);
-const neighbourStations = map ? map.points.filter((p) => !p.mine).length : 0;
+const map = countyMap(
+  town
+    ? { county, boundary: town.boundary, town: town.name, label: town.name, stations }
+    : { county, boundary: null, town: null, label: null, stations },
+);
+const others = map ? map.points.filter((p) => !p.mine).length : 0;
+// Stations inside this town's line that belong to a department with a page of
+// its own. They are drawn as someone else's, and counting them as a
+// neighbouring town's would be wrong in the other direction.
+const apartHere = town ? town.apart.flatMap((a) => a.stations).length : 0;
+const neighbourStations = others - apartHere;
+const apartNames = town ? town.apart.map((a) => `the ${a.department.name}`).join(" and ") : "";
 
 const num = (n: number) => n.toLocaleString("en-US");
 
@@ -49,8 +80,9 @@ const num = (n: number) => n.toLocaleString("en-US");
 // What this page asks is how much ground a department covers, so the land
 // leads. Neither number is quietly swapped for the other: every row says which
 // of the two it is, because an unlabelled "Area" is how the overstatement sat
-// here unnoticed.
-const area = town.boundary;
+// here unnoticed. A standalone department states none: the town's ground is
+// not what it covers.
+const area = town?.boundary ?? null;
 const acreage = (acres: number, sqmi: number) => `${num(acres)} acres · ${sqmi} sq mi`;
 const areaSplit =
   area && area.landAcres != null && area.landSqmi != null && area.waterSqmi != null
@@ -71,8 +103,8 @@ const areaSplit =
 // Only facts we hold. A row we cannot fill is left out rather than shown empty,
 // which would read as a claim that the answer is nothing.
 const facts: [string, string][] = [
-  ["Stations", String(town.stations.length)],
-  ["Photographed", `${town.photographed} of ${town.stations.length}`],
+  ["Stations", String(stations.length)],
+  ["Photographed", `${subject.photographed} of ${stations.length}`],
   // No land figure means the Census carries no row under a name that matches,
   // so the total is all there is — said as the total, not as "Area".
   areaSplit
@@ -90,19 +122,28 @@ const facts: [string, string][] = [
 
 // What is written up, and what is still blank. Drives both the page body and
 // the honest note at the bottom about what is missing.
-const written = [
-  ["History", dept?.history],
-  ["Joining", dept?.joining],
-  ["Burn permits", dept?.burnPermits],
-  ["Call volume", dept?.callsNote],
-  ["Budget", dept?.budgetNote],
-] as const;
+const written = (
+  [
+    ["History", dept?.history],
+    ["Joining", dept?.joining],
+    ["Burn permits", dept?.burnPermits],
+    ["Call volume", dept?.callsNote],
+    ["Budget", dept?.budgetNote],
+  ] as [string, string | null | undefined][]
+)
+  // Burning is the town's business, and the town's own page carries it.
+  .filter(([k]) => town || k !== "Burn permits");
 const missing = written.filter(([, v]) => !v).map(([k]) => k);
 
-const title = `${town.name} — fire stations, department and coverage – Vermont Fire Stations`;
-const description = dept
-  ? `${dept.name}: contact, coverage, joining, burn permits and history, with ${town.stations.length} station${town.stations.length === 1 ? "" : "s"} in ${town.name}, Vermont.`
-  : `Fire stations in ${town.name}, Vermont — ${town.stations.length} on record, with the town's boundary and area.`;
+const plural = (n: number, one: string) => `${n} ${one}${n === 1 ? "" : "s"}`;
+const title = town
+  ? `${town.name} — fire stations, department and coverage – Vermont Fire Stations`
+  : `${dept!.name}, ${place} – Vermont Fire Stations`;
+const description = standalone
+  ? `${dept!.name}, working from ${place}, Vermont: ${plural(stations.length, "station")}, with contact and what is on record about its calls.`
+  : dept
+    ? `${dept.name}: contact, coverage, joining, burn permits and history, with ${plural(stations.length, "station")} in ${place}, Vermont.`
+    : `Fire stations in ${place}, Vermont — ${stations.length} on record, with the town's boundary and area.`;
 ---
 
 <Archive title={title} description={description}>
@@ -110,26 +151,42 @@ const description = dept
     <nav class="crumbs" aria-label="Breadcrumb">
       <a href="/stations">All stations</a>
       <span aria-hidden="true">/</span>
-      <span>{town.name}</span>
+      {home ? <a href={`/departments/${home.slug}`}>{place}</a> : <span>{place}</span>}
     </nav>
 
     <header class="head">
       {/* The department is what the page is about; the town is where it is. With
           more than one department, or none on record, the town has to lead —
           there is no single name to put at the top. */}
-      {town.departments.length === 1 ? (
+      {departments.length === 1 ? (
         <>
-          <p class="stamp">{town.name}{town.county && `, ${town.county} County`}</p>
-          <h1>{town.departments[0].name}</h1>
+          <p class="stamp">{place}{county && `, ${county} County`}</p>
+          <h1>{departments[0].name}</h1>
         </>
       ) : (
         <>
-          <p class="stamp">{town.county && `${town.county} County`}</p>
-          <h1>{town.name}</h1>
-          {town.departments.length > 1 && (
-            <p class="sub">{town.departments.map((d) => d.name).join(" · ")}</p>
+          <p class="stamp">{county && `${county} County`}</p>
+          <h1>{place}</h1>
+          {departments.length > 1 && (
+            <p class="sub">{departments.map((d) => d.name).join(" · ")}</p>
           )}
         </>
+      )}
+      {/* Each kind of page points at the other, because a reader who came for
+          one is as likely to have wanted the other. */}
+      {standalone && home && (
+        <p class="also">
+          Works from {place}, apart from{" "}
+          <a href={`/departments/${home.slug}`}>{place}'s own fire department</a>.
+        </p>
+      )}
+      {town && town.apart.length > 0 && (
+        <p class="also">
+          Also in {place}, on a page of its own:{" "}
+          {town.apart.map((a, i) => (
+            <>{i > 0 && " · "}<a href={`/departments/${a.slug}`}>{a.department.name}</a></>
+          ))}.
+        </p>
       )}
     </header>
 
@@ -141,7 +198,7 @@ const description = dept
       </dl>
       {areaSplit?.showTotal && (
         <p class="fine">
-          {town.name}'s line runs out into the water, and {areaSplit.waterSqmi} of the
+          {place}'s line runs out into the water, and {areaSplit.waterSqmi} of the
           {" "}{areaSplit.totalSqmi} square miles inside it are water. The land figure is the
           Census count; the total is the boundary VCGI draws.
         </p>
@@ -151,12 +208,12 @@ const description = dept
 
     <section class="block" aria-labelledby="st-h">
       <h2 id="st-h">
-        {town.stations.length === 1 ? "The station" : `The ${town.stations.length} stations`}
+        {stations.length === 1 ? "The station" : `The ${stations.length} stations`}
       </h2>
 
-      {town.stations.length > 1 && (
+      {stations.length > 1 && (
         <ul class="jump">
-          {town.stations.map((s) => (
+          {stations.map((s) => (
             <li>
               <a href={`#${s.slug}`}>
                 <span class="dot" data-has={s.photo ? "yes" : "no"} aria-hidden="true"></span>
@@ -167,9 +224,9 @@ const description = dept
         </ul>
       )}
 
-      {town.stations.map((s) => (
+      {stations.map((s) => (
         <article class="station" id={s.slug}>
-          {town.stations.length > 1 && <h3>{s.name}</h3>}
+          {stations.length > 1 && <h3>{s.name}</h3>}
           <p class="staddr">{s.address}</p>
 
           {s.photo ? (
@@ -225,7 +282,9 @@ const description = dept
     {map && (
       <figure class="cmap">
         <svg viewBox={`0 0 ${map.width} ${map.height}`} role="img"
-             aria-label={`${town.name} within ${map.county} County, with every fire station in the county marked`}>
+             aria-label={town
+               ? `${place} within ${map.county} County, with every fire station in the county marked`
+               : `${dept!.name}'s ${stations.length === 1 ? "station" : "stations"} in ${place}, with every fire station in ${map.county} County marked`}>
           {/* Neighbours first, so the subject town draws over their shared edges.
               The id is the shape's own index either way, so the clip below can
               name every town without caring which order they were drawn in. */}
@@ -270,7 +329,7 @@ const description = dept
           ))}
 
           {map.label && (
-            <text x={map.label.x} y={map.label.y} class="mel" text-anchor="middle">{town.name}</text>
+            <text x={map.label.x} y={map.label.y} class="mel" text-anchor="middle">{map.label.text}</text>
           )}
 
           <g class="bar" transform={`translate(${map.width - map.scale.px - 16}, ${map.height - 18})`}>
@@ -280,14 +339,29 @@ const description = dept
             <text x={map.scale.px / 2} y="-7" text-anchor="middle">{map.scale.miles} miles</text>
           </g>
         </svg>
-        <figcaption>
-          {town.name} in {map.county} County. Every fire station in the county is marked —
-          {" "}{town.stations.length} here, {neighbourStations} in neighbouring towns, which is
-          who turns out on a mutual aid call. Boundaries and water from VCGI; fire district
-          lines are not town lines, and village districts and contracted coverage cross
-          them. A town line runs out into the lake, so the shoreline here is the water
-          drawn over the boundary, not the boundary itself.
-        </figcaption>
+        {town ? (
+          <figcaption>
+            {place} in {map.county} County. Every fire station in the county is marked —
+            {" "}{stations.length} here, {neighbourStations} in neighbouring towns, which is
+            who turns out on a mutual aid call.
+            {apartHere > 0 && (
+              ` The ${apartHere === 1 ? "one other station" : `${apartHere} other stations`} inside
+              the town line ${apartHere === 1 ? "belongs" : "belong"} to ${apartNames}.`
+            )}
+            {" "}Boundaries and water from VCGI; fire district lines are not town lines, and
+            village districts and contracted coverage cross them. A town line runs out into
+            the lake, so the shoreline here is the water drawn over the boundary, not the
+            boundary itself.
+          </figcaption>
+        ) : (
+          <figcaption>
+            The {dept!.name}'s {stations.length === 1 ? "station" : `${stations.length} stations`},
+            in {place}, with every other fire station in {map.county} County marked
+            — {others} of them. No town is drawn as its own, because the ground it covers is
+            not a town's. Boundaries and water from VCGI; a town line runs out into the lake,
+            so the shoreline here is the water drawn over the boundary, not the boundary itself.
+          </figcaption>
+        )}
       </figure>
     )}
 
@@ -360,12 +434,14 @@ const description = dept
       </section>
     )}
 
-    <section class="block" aria-labelledby="bp-h">
-      <h2 id="bp-h">Burning</h2>
-      {dept?.burnPermits
-        ? dept.burnPermits.split("\n\n").map((p) => <p>{p}</p>)
-        : <p>{BURN_RULE}</p>}
-    </section>
+    {town && (
+      <section class="block" aria-labelledby="bp-h">
+        <h2 id="bp-h">Burning</h2>
+        {dept?.burnPermits
+          ? dept.burnPermits.split("\n\n").map((p) => <p>{p}</p>)
+          : <p>{BURN_RULE}</p>}
+      </section>
+    )}
 
     {dept?.joining && (
       <section class="block join" aria-labelledby="j-h">
@@ -411,6 +487,8 @@ const description = dept
     font-size: clamp(1.8rem, 5vw, 2.6rem); line-height: 1.1; margin: 0 0 0.35rem;
   }
   .sub { margin: 0; color: var(--ink-2); font-size: 0.95rem; }
+  .also { margin: 0.7rem 0 0; color: var(--ink-2); font-size: 0.9rem; max-width: 58ch; }
+  .also a { color: var(--red); }
 
   .facts { margin-bottom: 2rem; }
 
@@ -488,7 +566,9 @@ const description = dept
     color: var(--ink-3); align-self: center;
   }
   dd { margin: 0; font-size: 0.94rem; }
-  dd a { color: var(--red); }
+  /* A Facebook page's address is sixty characters with nowhere to break, and
+     would push a phone-width page sideways. */
+  dd a { color: var(--red); overflow-wrap: anywhere; }
   .fine { font-size: 0.8rem; color: var(--ink-3); margin: 0.8rem 0 0; }
 
   /* Jump list only appears where there is more than one building to jump to. */

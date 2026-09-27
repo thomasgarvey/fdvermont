@@ -1,23 +1,29 @@
 ---
 import Archive from "../../layouts/Archive.astro";
-import { towns } from "../../lib/towns";
+import { apart, towns, type Department } from "../../lib/towns";
+import { photographedCount, stations } from "../../lib/stations";
 
-// Grouped by county, which is how mutual aid is organised and how the town
-// pages draw themselves.
-const byCounty = new Map<string, typeof towns>();
-for (const t of towns) {
-  const c = t.county || "Unrecorded";
-  if (!byCounty.has(c)) byCounty.set(c, []);
-  byCounty.get(c)!.push(t);
+// One row per page: a town, or a department with a page of its own, which sits
+// directly under the town it works from.
+interface Row {
+  href: string;
+  town: string;
+  county: string;
+  departments: Department[];
+  stations: number;
+  photographed: number;
+  /** The town, printed under the name — only where the name does not say it. */
+  in: string | null;
+  standalone: boolean;
 }
-const counties = [...byCounty.entries()].sort((a, b) => a[0].localeCompare(b[0]));
 
 // A town counts as written up when somebody has typed in any of the five prose
 // sections. That is the work Richmond models, and the gap is the point.
-// 162 of 169 departments are named after the town they serve, so printing both
-// is a stutter. The other 7 are worth the second line — Burlington Airport Fire
-// Department is in South Burlington, Bolton's is in Waterbury — and those are
-// exactly the rows where somebody would otherwise think we had it wrong.
+// Most departments are named after the town they serve, so printing both is a
+// stutter. The rest are worth the second line — Bolton's is in Waterbury — and
+// those are exactly the rows where somebody would otherwise think we had it
+// wrong. A department with a page of its own always gets it: it is on the list
+// because it is not the town's.
 // Punctuation has to go before the abbreviations, or "St." never matches
 // "Saint" — the word boundary after the full stop does not exist.
 const norm = (s: string) =>
@@ -31,11 +37,46 @@ const norm = (s: string) =>
 const townAdds = (t: (typeof towns)[number]) =>
   t.departments.length > 0 && !t.departments.some((d) => norm(d.name).includes(norm(t.name)));
 
-const isWritten = (t: (typeof towns)[number]) =>
-  t.departments.some((d) => d.history || d.joining || d.burnPermits || d.callsNote || d.budgetNote);
-const written = towns.filter(isWritten).length;
-const stationTotal = towns.reduce((n, t) => n + t.stations.length, 0);
-const photographed = towns.reduce((n, t) => n + t.photographed, 0);
+const rows: Row[] = [
+  ...towns.map((t) => ({
+    href: `/departments/${t.slug}`,
+    town: t.name,
+    county: t.county,
+    departments: t.departments,
+    stations: t.stations.length,
+    photographed: t.photographed,
+    in: townAdds(t) ? t.name : null,
+    standalone: false,
+  })),
+  ...apart.map((a) => ({
+    href: `/departments/${a.slug}`,
+    town: a.town,
+    county: a.county,
+    departments: [a.department],
+    stations: a.stations.length,
+    photographed: a.photographed,
+    in: a.town,
+    standalone: true,
+  })),
+].sort((a, b) => a.town.localeCompare(b.town) || Number(a.standalone) - Number(b.standalone));
+
+// Grouped by county, which is how mutual aid is organised and how the town
+// pages draw themselves.
+const byCounty = new Map<string, Row[]>();
+for (const r of rows) {
+  const c = r.county || "Unrecorded";
+  if (!byCounty.has(c)) byCounty.set(c, []);
+  byCounty.get(c)!.push(r);
+}
+const counties = [...byCounty.entries()].sort((a, b) => a[0].localeCompare(b[0]));
+
+const isWritten = (r: Row) =>
+  r.departments.some((d) => d.history || d.joining || d.burnPermits || d.callsNote || d.budgetNote);
+const written = rows.filter(isWritten).length;
+// Counted from the roster, not from the rows: a station on a standalone
+// department's page is off its town's.
+const stationTotal = stations.length;
+const photographed = photographedCount;
 ---
 
 <Archive
@@ -47,12 +88,12 @@ const photographed = towns.reduce((n, t) => n + t.photographed, 0);
       <h1>Fire departments</h1>
       <p class="sub">
         The departments that answer for Vermont's {stationTotal} stations, organised by the
-        town each one covers — {towns.length} towns across {counties.length} counties. Every
+        town each one works from — {towns.length} towns across {counties.length} counties. Every
         page carries the ground the department covers, its contact, and the stations it works
         out of.
         {written === 1
           ? " One has been written up in full so far: contact, budget, burn permits, joining and history."
-          : ` ${written} have been written up in full so far.`}
+          : ` ${written} have been written up so far.`}
         {" "}<a href="/contact">Help fill in the rest</a>.
       </p>
     </header>
@@ -65,22 +106,22 @@ const photographed = towns.reduce((n, t) => n + t.photographed, 0);
       <section class="county" id={`c-${county.toLowerCase().replace(/\s+/g, "-")}`}>
         <h2>{county === "Unrecorded" ? "County unrecorded" : `${county} County`}</h2>
         <ul>
-          {list.map((t) => (
+          {list.map((r) => (
             <li>
-              <a href={`/departments/${t.slug}`}>
+              <a href={r.href}>
                 <span class="nm">
                   {/* The department is the subject; the town is where to find it.
                       Towns with no department on record still get a row, because
                       the absence is worth seeing. */}
-                  {t.departments.length
-                    ? t.departments.map((d) => d.name).join(" · ")
-                    : `${t.name} — no department recorded`}
-                  {townAdds(t) && <span class="in">in {t.name}</span>}
+                  {r.departments.length
+                    ? r.departments.map((d) => d.name).join(" · ")
+                    : `${r.town} — no department recorded`}
+                  {r.in && <span class="in">in {r.in}</span>}
                 </span>
-                {isWritten(t) && <span class="badge">Written up</span>}
+                {isWritten(r) && <span class="badge">Written up</span>}
                 <span class="ct">
-                  {t.stations.length} station{t.stations.length === 1 ? "" : "s"}
-                  {t.photographed > 0 && ` · ${t.photographed} photographed`}
+                  {r.stations} station{r.stations === 1 ? "" : "s"}
+                  {r.photographed > 0 && ` · ${r.photographed} photographed`}
                 </span>
               </a>
             </li>

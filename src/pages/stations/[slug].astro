@@ -1,7 +1,7 @@
 ---
 import Archive from "../../layouts/Archive.astro";
 import { stations, titleCase, type Station } from "../../lib/stations";
-import { townBySlug, townSlugForStation } from "../../lib/towns";
+import { apartBySlug, townBySlug } from "../../lib/towns";
 
 export function getStaticPaths() {
   return stations.map((station) => ({ params: { slug: station.slug }, props: { station } }));
@@ -9,19 +9,21 @@ export function getStaticPaths() {
 
 const { station } = Astro.props as { station: Station };
 const p = station.photo;
-const townSlug = townSlugForStation(station);
-const townHref = `/departments/${townSlug}`;
+const townHref = `/departments/${station.page}`;
 // Name the department in the link where we know it — "Richmond Fire Department"
 // is a reason to click, "the town page" is not. Where the building carries the
 // same name as the department, repeating it under the heading reads as a
 // stutter, so fall back to naming the place instead.
-const deptName = townBySlug.get(townSlug)?.departments[0]?.name ?? null;
+const deptName =
+  apartBySlug.get(station.page)?.department.name ??
+  townBySlug.get(station.page)?.departments[0]?.name ??
+  null;
 const townDept =
   deptName && deptName !== station.name ? deptName : `The department in ${station.town}`;
 
 // Neighbouring stations in the same town, so a multi-station department is
 // navigable rather than a set of orphan pages.
-const siblings = stations.filter((s) => s.town === station.town && s.slug !== station.slug);
+const siblings = stations.filter((s) => s.page === station.page && s.slug !== station.slug);
 
 const record: [string, string][] = [
   ["Street address", station.address],
