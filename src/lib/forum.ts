@@ -14,10 +14,14 @@ export interface Member {
   created_at: string;
 }
 
-const url = import.meta.env.PUBLIC_SUPABASE_URL;
-const key = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
+// Both values are public by design (they ship to every visitor's browser on
+// any Supabase site), so they sit here as defaults and Vercel needs no setup.
+// Env vars still win, for pointing a local build at a different project.
+const url = import.meta.env.PUBLIC_SUPABASE_URL || "https://dqsadliehajbdxmgccsf.supabase.co";
+const key =
+  import.meta.env.PUBLIC_SUPABASE_ANON_KEY || "sb_publishable_NpbgOXWxvwpugCoSg6JsBA_jj2mDofm";
 
-/** False until the Supabase env vars are set; the forum then shows a notice. */
+/** False until the Supabase values are set; the forum then shows a notice. */
 export const forumConfigured = Boolean(url && key);
 
 export function forumClient(request: Request, cookies: AstroCookies) {
