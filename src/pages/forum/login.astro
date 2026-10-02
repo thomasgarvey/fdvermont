@@ -1,0 +1,59 @@
+---
+// Passwordless: a firefighter enters an email and gets a one-time sign-in
+// link. No passwords to store, reset or leak.
+import ForumPage from "../../components/forum/ForumPage.astro";
+import { field } from "../../lib/forum";
+
+export const prerender = false;
+
+const { supabase, user } = Astro.locals;
+if (user) return Astro.redirect("/forum");
+
+let sentTo = "";
+let error = Astro.url.searchParams.has("expired")
+  ? "That sign-in link has expired or was already used. Request a new one."
+  : "";
+if (Astro.request.method === "POST" && supabase) {
+  const email = field(await Astro.request.formData(), "email");
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    error = "That doesn't look like an email address.";
+  } else {
+    const { error: err } = await supabase.auth.signInWithOtp({
+      email,
+      options: { emailRedirectTo: new URL("/forum/auth/confirm", Astro.url).href },
+    });
+    if (err) error = err.status === 429
+      ? "Too many sign-in emails just now. Wait a minute and try again."
+      : "The sign-in email couldn't be sent. Try again shortly.";
+    else sentTo = email;
+  }
+}
+---
+
+<ForumPage title="Sign in">
+  <h1>A forum for Vermont firefighters.</h1>
+  <p class="lede">
+    A place for people in the fire service to talk shop — apparatus, stations, training,
+    what's working in other towns. Members are checked by hand before they can read or post.
+  </p>
+
+  {sentTo ? (
+    <div class="notice" role="status">
+      Check <strong>{sentTo}</strong> for a sign-in link. It works once and expires within
+      the hour. Nothing there? Look in spam, or try again below.
+    </div>
+  ) : (
+    <form class="fform card" method="post">
+      {error && <p class="error" role="alert">{error}</p>}
+      <label>
+        Email
+        <input type="email" name="email" required autocomplete="email" inputmode="email" />
+      </label>
+      <button class="btn" type="submit">Email me a sign-in link</button>
+      <p class="meta">
+        New here? Use the same button. After signing in you'll tell us your department,
+        and a moderator will approve you.
+      </p>
+    </form>
+  )}
+</ForumPage>

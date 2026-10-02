@@ -1,0 +1,84 @@
+---
+// Thread list, newest activity first, and the form to start a thread.
+import ForumPage from "../../components/forum/ForumPage.astro";
+import { field, when } from "../../lib/forum";
+
+export const prerender = false;
+
+const { supabase, user, member } = Astro.locals;
+if (supabase) {
+  if (!user) return Astro.redirect("/forum/login");
+  if (member?.status !== "approved") return Astro.redirect("/forum/join");
+}
+
+let error = "";
+if (Astro.request.method === "POST" && supabase) {
+  const form = await Astro.request.formData();
+  const title = field(form, "title");
+  const body = field(form, "body");
+  if (title.length < 3 || !body) {
+    error = "A thread needs a title and a first post.";
+  } else {
+    const { data, error: err } = await supabase.rpc("start_thread", { p_title: title, p_body: body });
+    if (!err) return Astro.redirect(`/forum/t/${data}`);
+    error = "The thread didn't save. Try again.";
+  }
+}
+
+type Row = {
+  id: number;
+  title: string;
+  post_count: number;
+  last_posted_at: string;
+  author: { display_name: string; department: string } | null;
+};
+const { data: threads } = supabase
+  ? await supabase
+      .from("threads")
+      .select("id, title, post_count, last_posted_at, author:members(display_name, department)")
+      .order("last_posted_at", { ascending: false })
+      .limit(100)
+      .returns<Row[]>()
+  : { data: [] as Row[] };
+---
+
+<ForumPage title="Threads">
+  <h1>Threads</h1>
+
+  {threads && threads.length > 0 ? (
+    <ol class="threads">
+      {threads.map((t) => (
+        <li>
+          <a href={`/forum/t/${t.id}`}>{t.title}</a>
+          <span class="meta">
+            {t.author ? `${t.author.display_name}, ${t.author.department}` : "Former member"} · {t.post_count}{" "}
+            {t.post_count === 1 ? "post" : "posts"} · last {when(t.last_posted_at)}
+          </span>
+        </li>
+      ))}
+    </ol>
+  ) : (
+    <p class="notice">No threads yet. Start the first one.</p>
+  )}
+
+  <h2 id="new">Start a thread</h2>
+  <form class="fform card" method="post" action="/forum#new">
+    {error && <p class="error" role="alert">{error}</p>}
+    <label>
+      Title
+      <input name="title" required minlength="3" maxlength="140" />
+    </label>
+    <label>
+      First post
+      <textarea name="body" required maxlength="10000"></textarea>
+    </label>
+    <button class="btn" type="submit">Post thread</button>
+  </form>
+</ForumPage>
+
+<style>
+  .threads { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+  .threads li { display: grid; gap: 0.15rem; padding: 0.9rem 0; border-bottom: 1px solid var(--line); }
+  .threads a { font-weight: 600; font-size: 1.08rem; text-decoration: none; }
+  .threads a:hover { color: var(--red); }
+</style>
