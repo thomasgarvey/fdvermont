@@ -293,14 +293,12 @@ const shown = stations.find((s: Station) => s.photo);
              aria-label={town
                ? `${place} within ${map.county} County, with every fire station in the county marked`
                : `${dept!.name}'s ${stations.length === 1 ? "station" : "stations"} in ${place}, with every fire station in ${map.county} County marked`}>
-          {/* Neighbours first, so the subject town draws over their shared edges.
-              The id is the shape's own index either way, so the clip below can
-              name every town without caring which order they were drawn in. */}
-          {map.shapes.map((s, i) => !s.isSubject && (
-            <path id={`t${i}`} d={s.d} class={s.onRoster ? "nb" : "nb none"} />
+          {/* Neighbours first, so the subject town draws over their shared edges. */}
+          {map.shapes.map((s) => !s.isSubject && (
+            <path d={s.d} class={s.onRoster ? "nb" : "nb none"} />
           ))}
-          {map.shapes.map((s, i) => s.isSubject && (
-            <path id={`t${i}`} d={s.d} class="me" />
+          {map.shapes.map((s) => s.isSubject && (
+            <path d={s.d} class="me" />
           ))}
 
           {/* The lake over the towns: a town boundary runs out into Lake
@@ -311,8 +309,11 @@ const shown = stations.find((s: Station) => s.photo);
               largest thing on the page. */}
           {map.water && (
             <>
+              {/* One path holding every town, not a <use> per town: a clip made
+                  of many shapes has to be merged first, and Chrome and Safari
+                  both gave up on the merge and drew almost no lake. */}
               <clipPath id="county">
-                {map.shapes.map((_, i) => <use href={`#t${i}`} />)}
+                <path d={map.shapes.map((s) => s.d).join("")} />
               </clipPath>
               <path d={map.water} class="water" fill-rule="evenodd" clip-path="url(#county)" />
             </>

@@ -287,7 +287,13 @@ export function countyMap(subject: MapSubject, width = 680, maxHeight = 620, pad
     const [cx, cy] = project(t.centre[0], t.centre[1]);
     const xsT = t.rings.flat().map((p) => p[0] * k);
     const widthPx = (Math.max(...xsT) - Math.min(...xsT)) * scale;
-    const projected = projectRings(t.rings);
+    // Thinned to a quarter pixel, like the water below. VCGI stores some lines
+    // at a metre — South Burlington's is 4,114 points — and at full detail the
+    // rounded outline has edges so short and near-coincident that browsers
+    // could not combine the towns into the lake's clip, and dropped the lake.
+    const projected = projectRings(t.rings)
+      .map((r) => simplify(r, 0.25))
+      .filter((r) => r.length);
     landRings.push(...projected);
     return {
       name: t.name,
