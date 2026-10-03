@@ -150,6 +150,11 @@ const stationById = new Map(stationRows.map((r) => [r.id, r.fields]));
 
 mkdirSync(`${ROOT}/public/photos`, { recursive: true });
 const out = [];
+// Photos whose Subject is "Apparatus" — engines, tankers, rescues — rather than
+// a building. They go to their own file so nothing that expects a station
+// photograph (the station's own photo, the map, the homepage) can pick one up,
+// and the department's page shows them in a gallery of their own.
+const apparatus = [];
 for (const r of photos) {
   const f = r.fields;
   const att = f.Photo?.[0];
@@ -167,7 +172,27 @@ for (const r of photos) {
     writeFileSync(`${ROOT}/public/${path}`, Buffer.from(await res.arrayBuffer()));
   }
 
-  const dept = deptById.get(f['Fire Department']?.[0]);
+  const deptId = f['Fire Department']?.[0] ?? null;
+  const dept = deptById.get(deptId);
+
+  if (f.Subject === 'Apparatus') {
+    apparatus.push({
+      id: r.id,
+      src: `/${fullPath}`,
+      thumb: `/${thumbPath}`,
+      width: att.width ?? null,
+      height: att.height ?? null,
+      thumbWidth: thumb.width ?? null,
+      thumbHeight: thumb.height ?? null,
+      caption: f.Caption ?? '',
+      photographer: f.Photographer ?? '',
+      dateTaken: f['Date Taken'] ?? null,
+      departmentId: dept ? deptId : null,
+      department: dept?.['Department Name'] ?? null,
+    });
+    continue;
+  }
+
   // The Station link is the authority once set (migration step 2); the address
   // join below stays as a fallback for photos not yet linked.
   const linkedStation = stationById.get(f.Station?.[0]);
@@ -224,6 +249,22 @@ for (const p of out) {
 out.sort((a, b) => (b.featured - a.featured) || String(b.dateTaken).localeCompare(String(a.dateTaken)));
 writeFileSync(`${ROOT}/src/data/photos.json`, JSON.stringify(out, null, 2) + '\n');
 console.log(`Synced ${out.length} photos (${photos.length} records total), ${geocoded} geocoded -> src/data/photos.json + public/photos/`);
+
+// By department, then by name with numbers in order, so Engine 2 precedes
+// Engine 10.
+apparatus.sort(
+  (a, b) =>
+    String(a.department).localeCompare(String(b.department)) ||
+    a.caption.localeCompare(b.caption, 'en', { numeric: true }),
+);
+writeFileSync(`${ROOT}/src/data/apparatus.json`, JSON.stringify(apparatus, null, 2) + '\n');
+console.log(`Synced ${apparatus.length} apparatus photos -> src/data/apparatus.json`);
+const unlinked = apparatus.filter((a) => !a.departmentId);
+if (unlinked.length) {
+  console.warn(`\n  !! ${unlinked.length} apparatus photograph(s) have no Fire Department linked and will NOT appear:`);
+  for (const a of unlinked) console.warn(`     - ${a.caption || a.id}`);
+  console.warn('');
+}
 
 // --- The station roster the site draws ------------------------------------
 // Airtable's Fire Stations table is the source of truth for which stations

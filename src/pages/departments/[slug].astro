@@ -10,6 +10,7 @@ import {
   type Town,
 } from "../../lib/towns";
 import type { Station } from "../../lib/stations";
+import apparatusData from "../../data/apparatus.json";
 
 export function getStaticPaths() {
   return [
@@ -35,6 +36,30 @@ const departments = town ? town.departments : [standalone!.department];
 const home = standalone ? (towns.find((t) => t.name === standalone.town) ?? null) : null;
 
 const dept = departments[0] ?? null;
+
+// Photographs of the department's engines, tankers and rescues — Subject
+// "Apparatus" in Airtable, synced apart from the station photographs. Named by
+// department too where a town has more than one. Typed by hand: until the first
+// one is synced the file is [], which TypeScript reads as never[].
+interface Rig {
+  id: string;
+  thumb: string;
+  thumbWidth: number | null;
+  thumbHeight: number | null;
+  caption: string;
+  photographer: string;
+  dateTaken: string | null;
+  departmentId: string | null;
+  department: string | null;
+}
+// One string, so JSX does not put a space between the name and the comma.
+const credit = (p: { photographer: string; dateTaken: string | null }) =>
+  (p.photographer ? `Photograph by ${p.photographer}` : "Photograph") +
+  (p.dateTaken ? `, ${p.dateTaken}` : "");
+
+const rigs = (apparatusData as Rig[]).filter((a) =>
+  departments.some((d) => d.id === a.departmentId),
+);
 const members = memberCount({ departments });
 
 // Each station's own record, rendered inline. 139 of 196 towns have exactly one
@@ -247,10 +272,7 @@ const shown = stations.find((s: Station) => s.photo);
                 {s.photo.caption && s.photo.caption !== s.name && (
                   <span class="cap">{s.photo.caption}</span>
                 )}
-                <span class="credit">
-                  {s.photo.photographer ? `Photograph by ${s.photo.photographer}` : "Photograph"}
-                  {s.photo.dateTaken && `, ${s.photo.dateTaken}`}
-                </span>
+                <span class="credit">{credit(s.photo)}</span>
               </figcaption>
             </figure>
           ) : (
@@ -286,6 +308,27 @@ const shown = stations.find((s: Station) => s.photo);
         </article>
       ))}
     </section>
+
+    {rigs.length > 0 && (
+      <section class="block" aria-labelledby="ap-h">
+        <h2 id="ap-h">Apparatus</h2>
+        <div class="rigs">
+          {rigs.map((a) => (
+            <figure class="rig">
+              <img src={a.thumb}
+                   alt={[a.caption || "Fire apparatus", a.department].filter(Boolean).join(", ")}
+                   width={a.thumbWidth ?? undefined} height={a.thumbHeight ?? undefined}
+                   loading="lazy" />
+              <figcaption>
+                {a.caption && <span class="cap">{a.caption}</span>}
+                {departments.length > 1 && a.department && <span class="cap">{a.department}</span>}
+                <span class="credit">{credit(a)}</span>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </section>
+    )}
 
     {map && (
       <figure class="cmap">
@@ -555,6 +598,10 @@ const shown = stations.find((s: Station) => s.photo);
   .shot { margin: 0 0 2.4rem; }
   .shot img { display: block; width: 100%; height: auto; border: 1px solid var(--line); box-shadow: var(--shadow); }
   .shot figcaption { margin-top: 0.6rem; font-size: 0.82rem; color: var(--ink-2); }
+  .rigs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.6rem 1.2rem; }
+  .rig { margin: 0; }
+  .rig img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border: 1px solid var(--line); box-shadow: var(--shadow); }
+  .rig figcaption { margin-top: 0.5rem; font-size: 0.82rem; color: var(--ink-2); }
   .cap { display: block; }
   .credit { display: block; color: var(--ink-3); }
 
@@ -637,6 +684,7 @@ const shown = stations.find((s: Station) => s.photo);
      and just noise. Drop them, and enlarge the two labels that still earn their
      place so they survive the scaling. */
   @media (max-width: 720px) {
+    .rigs { grid-template-columns: 1fr; }
     .nbl { display: none; }
     .mel { font-size: 26px; }
     .bar text { font-size: 17px; }
