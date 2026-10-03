@@ -256,6 +256,23 @@ console.log(`Synced ${out.length} photos (${photos.length} records total), ${geo
 // stay out, as with photos. Linked to a department and, where known, to the
 // station it runs from, by record id — the site matches on those ids.
 const ROLES = ['Front line', 'Reserve', 'Staff'];
+// Matched against the start of the unit's name ("Ladder 1", "Tanker 2").
+const KINDS = [
+  /^(ladder|truck|tower|aerial|quint|platform)/i,
+  /^(engine|pumper)/i,
+  /^(heavy )?rescue/i,
+  /^(tanker|tender)/i,
+  /^(brush|forestry|wildland)/i,
+  /^(ambulance|medic|ems)/i,
+  /^(marine|boat|fireboat)/i,
+  /^(haz ?mat)/i,
+  /^(utility|squad|service|support|hose|trailer)/i,
+  /^(car|chief|command|staff)/i,
+];
+const kindRank = (unit) => {
+  const i = KINDS.findIndex((re) => re.test(unit));
+  return i === -1 ? KINDS.length - 1.5 : i; // anything unrecognised: before the cars
+};
 const fleet = fleetRows
   .filter((r) => !HIDDEN_STATUSES.has(r.fields['Publication Status']) && r.fields.Unit)
   .map((r) => {
@@ -274,10 +291,14 @@ const fleet = fleetRows
       source: f.Source?.trim() || null,
     };
   })
-  // Front line, then reserve, then staff; by unit name within each, numbers in order.
+  // Front line, then reserve, then staff. Within each, by kind of apparatus in
+  // the order a department lists its fleet — ladders, engines, rescues, tankers,
+  // ambulances, boats, hazmat and utility, then cars — and by name within a
+  // kind, numbers in order.
   .sort(
     (a, b) =>
       (ROLES.indexOf(a.role) + 1 || 9) - (ROLES.indexOf(b.role) + 1 || 9) ||
+      kindRank(a.unit) - kindRank(b.unit) ||
       a.unit.localeCompare(b.unit, 'en', { numeric: true }),
   );
 writeFileSync(`${ROOT}/src/data/fleet.json`, JSON.stringify(fleet, null, 2) + '\n');
