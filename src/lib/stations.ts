@@ -95,6 +95,14 @@ function photoFor(townRaw: string, addrRaw: string): Photo | null {
 
 const deptById = new Map(departmentsData.map((d) => [d.id, d]));
 
+// "South Burlington Fire Station 1", "Burlington Fire Station #3": a numbered
+// station is listed in its number's order, ahead of any unnumbered one in the
+// same town, rather than by street address.
+const stationNumber = (name: string) => {
+  const m = name.match(/(?:station|#)\s*#?\s*(\d+)\b/i);
+  return m ? Number(m[1]) : Infinity;
+};
+
 const seen = new Set<string>();
 export const stations: Station[] = features.map((f) => {
   const town = titleCase(f.town);
@@ -132,7 +140,12 @@ export const stations: Station[] = features.map((f) => {
     name,
     page: linked?.ownPage ?? slugify(town),
   };
-}).sort((a, b) => a.town.localeCompare(b.town) || a.address.localeCompare(b.address));
+}).sort(
+  (a, b) =>
+    a.town.localeCompare(b.town) ||
+    stationNumber(a.name) - stationNumber(b.name) ||
+    a.address.localeCompare(b.address),
+);
 
 export const photographedCount = stations.filter((s) => s.photo).length;
 
