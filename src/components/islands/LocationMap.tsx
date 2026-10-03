@@ -28,25 +28,31 @@ const OSM_ATTR = '&copy; <a href="https://www.openstreetmap.org/copyright" targe
 type Photo = (typeof photosData)[number];
 
 /**
- * @param href Where the thumbnail should lead. Pass the station's page so a tap
+ * The photograph in a popup: a fixed 16:9 crop, so the popup stays short enough
+ * to sit inside the map with its heading in view. At full height a portrait
+ * photo made the popup taller than the map, and Leaflet could only show it with
+ * the station's name cut off above the top edge.
+ *
+ * @param href Where the photo should lead. Pass the station's record so a tap
  *   keeps the visitor on the site; omitted (supplemental pins, which have no
  *   page) the image is shown but not linked — opening a bare JPEG in a new tab
  *   just strands people outside the archive.
  */
 function photoBlockHtml(p: Photo, href?: string): string {
-  const credit = p.photographer ? `<div style="color:var(--fdvt-faint,#888);font-size:11px;margin-top:2px">📷 ${p.photographer}</div>` : '';
-  const caption = p.caption && p.caption !== p.department?.name
-    ? `<div style="color:var(--fdvt-muted,#555);font-size:12px;margin-top:2px">${p.caption}</div>` : '';
-  const img = `<img src="${p.thumb}" alt="${p.caption || 'Station photo'}" style="width:100%;max-width:340px;border-radius:8px;display:block" />`;
-  // Without a cue the thumbnail does not look tappable, and the station page is
-  // where the photograph is shown full size.
-  const cue = href
-    ? `<div style="color:var(--fdvt-link,#8B211E);font-size:11px;font-weight:600;margin-top:3px">Tap for the full record →</div>`
+  const credit = p.photographer
+    ? `<div style="color:var(--fdvt-faint,#888);font-size:11px;margin-top:3px">Photograph by ${p.photographer}</div>`
     : '';
+  const img = `<img src="${p.thumb}" alt="${p.caption || 'Station photo'}" style="width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:4px;display:block" />`;
   const block = href
-    ? `<a href="${href}" style="display:block;margin-top:6px;text-decoration:none">${img}${cue}</a>`
-    : `<div style="margin-top:6px">${img}</div>`;
-  return `${block}${caption}${credit}`;
+    ? `<a href="${href}" style="display:block;margin-top:8px">${img}</a>`
+    : `<div style="margin-top:8px">${img}</div>`;
+  return `${block}${credit}`;
+}
+
+/** Heading and the address beneath it: what the popup is about, first. */
+function headHtml(name: string, line: string): string {
+  const sub = line ? `<div style="color:var(--fdvt-muted,#555);font-size:12.5px;margin-top:1px">${line}</div>` : '';
+  return `<strong style="display:block;font-size:15px;line-height:1.3">${name}</strong>${sub}`;
 }
 
 
@@ -54,18 +60,11 @@ type StationRecord = (typeof stationRecords)[number];
 
 function buildPopup(st: StationRecord): string {
   const p = st.photo;
-  const page = `/stations/${st.slug}`;
-  const rows: [string, string][] = [
-    ['Address', st.address],
-    ['Town', st.town],
-    ['County', st.county ? `${st.county} County` : ''],
-    ['ZIP', st.zip],
-  ].filter(([, v]) => v) as [string, string][];
-  const table = rows
-    .map(([k, v]) => `<tr><td style="padding:2px 8px 2px 0;color:var(--fdvt-muted,#555)">${k}</td><td style="padding:2px 0">${v}</td></tr>`)
-    .join('');
-  const more = `<a href="${page}" style="display:inline-block;margin-top:6px;font-weight:600;color:var(--fdvt-link,#8B211E)">Station record →</a>`;
-  return `<strong>${st.name}</strong>${p ? photoBlockHtml(p, page) : ''}<table style="margin-top:4px;border-collapse:collapse">${table}</table>${more}`;
+  // Straight to the station on its department page; /stations/<slug> only
+  // redirects there.
+  const page = `/departments/${st.page}#${st.slug}`;
+  const more = `<a href="${page}" style="display:inline-block;margin-top:7px;font-weight:600;color:var(--fdvt-link,#8B211E)">Station record →</a>`;
+  return `${headHtml(st.name, [st.address, st.town].filter(Boolean).join(', '))}${p ? photoBlockHtml(p, page) : ''}${more}`;
 }
 
 const titleCase = (s: string) =>
@@ -91,12 +90,20 @@ const pinIcon = (color: string) =>
 // image set to width:100% cannot widen it — on a phone that left the photograph
 // at ~208px though the thumbnail we ship is 512px. Where there is a photograph,
 // pin min and max together to force the width; plain popups still shrink.
-const POPUP_W = Math.min(340, Math.max(240, Math.round(window.innerWidth * 0.86)));
-const POPUP_OPTS_PHOTO: L.PopupOptions = { maxWidth: POPUP_W, minWidth: POPUP_W };
-const POPUP_OPTS_PLAIN: L.PopupOptions = { maxWidth: POPUP_W };
+const POPUP_W = Math.min(360, Math.max(240, Math.round(window.innerWidth * 0.86)));
+// Auto-pan keeps a margin inside the map, and the bottom one clears the search pill.
+const POPUP_PAN: L.PopupOptions = { autoPanPaddingTopLeft: [16, 16], autoPanPaddingBottomRight: [16, 80] };
+const POPUP_OPTS_PHOTO: L.PopupOptions = { ...POPUP_PAN, maxWidth: POPUP_W, minWidth: POPUP_W };
+const POPUP_OPTS_PLAIN: L.PopupOptions = { ...POPUP_PAN, maxWidth: POPUP_W };
 
 const ICON_WITH_PHOTO = pinIcon(PHOTO_GREEN);
 const ICON_NO_PHOTO = pinIcon(NEEDS_BLUE);
+
+/** A town with more than one station, offered as "show them all". */
+interface TownHit {
+  town: string;      // raw TOWNNAME
+  markers: L.Marker[];
+}
 
 interface SearchEntry {
   town: string;      // raw TOWNNAME
@@ -121,16 +128,38 @@ export default function LocationMap({
 }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   const clusterRef = useRef<any>(null);
+  const mapRef = useRef<L.Map | null>(null);
+  // Stops the map re-fitting itself to Vermont as the page settles; see below.
+  const releaseRef = useRef<() => void>(() => {});
   const indexRef = useRef<SearchEntry[]>([]);
   const [query, setQuery] = useState('');
   const [results, setResults] = useState<SearchEntry[]>([]);
+  const [towns, setTowns] = useState<TownHit[]>([]);
 
   // Returns the results it just rendered, so callers outside the input (the
   // homepage hero search) can act on the top hit without waiting for state.
+  // A town with several stations comes first as one row that frames them all:
+  // searching "South Burlington" should show South Burlington, not open
+  // whichever of its stations happened to sort first.
+  const townsFor = (needle: string): TownHit[] => {
+    const byTown = new Map<string, L.Marker[]>();
+    for (const e of indexRef.current) {
+      if (!e.town.startsWith(needle)) continue;
+      if (!byTown.has(e.town)) byTown.set(e.town, []);
+      byTown.get(e.town)!.push(e.marker);
+    }
+    return [...byTown]
+      .filter(([, m]) => m.length > 1)
+      .sort(([a], [b]) => (a === needle ? -1 : b === needle ? 1 : a.localeCompare(b)))
+      .slice(0, 2)
+      .map(([town, markers]) => ({ town, markers }));
+  };
+
   const runSearch = (q: string): SearchEntry[] => {
     setQuery(q);
     const needle = q.toUpperCase().trim();
-    if (needle.length < 2) { setResults([]); return []; }
+    if (needle.length < 2) { setResults([]); setTowns([]); return []; }
+    setTowns(townsFor(needle));
     const scored = indexRef.current
       .filter((e) => e.haystack.includes(needle))
       .sort((a, b) => {
@@ -146,7 +175,44 @@ export default function LocationMap({
   const goTo = (e: SearchEntry) => {
     setQuery('');
     setResults([]);
+    setTowns([]);
+    releaseRef.current();
     clusterRef.current?.zoomToShowLayer(e.marker, () => e.marker.openPopup());
+  };
+
+  // Frame every station in the town, then zoom in until none of them is still
+  // folded into a cluster — in Burlington five stations sit within two miles.
+  const goToTown = (t: TownHit) => {
+    setQuery('');
+    setResults([]);
+    setTowns([]);
+    releaseRef.current();
+    const map = mapRef.current;
+    const cluster = clusterRef.current;
+    if (!map || !cluster) return;
+    map.closePopup();
+    const unfold = () => {
+      const folded = t.markers.some((m) => cluster.getVisibleParent(m) !== m);
+      if (folded && map.getZoom() < map.getMaxZoom()) {
+        map.once('moveend', unfold);
+        map.zoomIn(1);
+      }
+    };
+    map.once('moveend', unfold);
+    map.fitBounds(L.latLngBounds(t.markers.map((m) => m.getLatLng())), {
+      paddingTopLeft: [40, 70],
+      paddingBottomRight: [40, 100],
+      maxZoom: 15,
+    });
+  };
+
+  // Enter (or the homepage search) on a town's exact name frames the town;
+  // anything else goes to the best single match.
+  const goToBest = (q: string, top: SearchEntry[]) => {
+    const needle = q.toUpperCase().trim();
+    const town = townsFor(needle).find((t) => t.town === needle);
+    if (town) goToTown(town);
+    else if (top[0]) goTo(top[0]);
   };
 
   // The homepage hero search is the page's primary entry point; it hands the
@@ -156,7 +222,7 @@ export default function LocationMap({
     const onExternalSearch = (e: Event) => {
       const { q = '', go = false } = (e as CustomEvent).detail ?? {};
       const top = runSearch(q);
-      if (go && top[0]) goTo(top[0]);
+      if (go) goToBest(q, top);
     };
     window.addEventListener('fdvt:search', onExternalSearch);
     return () => window.removeEventListener('fdvt:search', onExternalSearch);
@@ -197,6 +263,7 @@ export default function LocationMap({
       }
     });
     L.tileLayer(tileUrl, { attribution }).addTo(map);
+    mapRef.current = map;
 
     const cluster = (L as any).markerClusterGroup({
       chunkedLoading: true,
@@ -249,9 +316,8 @@ export default function LocationMap({
     for (const p of photosData as Photo[]) {
       if (placed.has(p.id) || p.lat == null || p.lng == null) continue;
       const name = p.department?.name || p.caption || 'Station';
-      const addr = p.stationAddress ? `<div style="color:var(--fdvt-muted,#555);margin-top:2px">${p.stationAddress}</div>` : '';
       const marker = L.marker([p.lat, p.lng], { icon: ICON_WITH_PHOTO })
-        .bindPopup(`<strong>${name}</strong>${photoBlockHtml(p)}${addr}`, POPUP_OPTS_PHOTO);
+        .bindPopup(`${headHtml(name, p.stationAddress ?? '')}${photoBlockHtml(p)}`, POPUP_OPTS_PHOTO);
       cluster.addLayer(marker);
       // These pins sit outside the E911 town list, so fall back to the
       // department's city for the label the search results show.
@@ -303,8 +369,12 @@ export default function LocationMap({
     // yields a lower zoom — the whole north-east instead of Vermont — and
     // nothing corrected it. Refit whenever the container resizes, until the
     // visitor takes control of the view themselves.
+    // A search counts as taking control too: the homepage search lands while the
+    // page is still settling, and a late refit zoomed back out to Vermont and
+    // pushed the open popup off the top of the map.
     let userHasMoved = false;
     const release = () => { userHasMoved = true; ro.disconnect(); };
+    releaseRef.current = release;
     map.once('zoomstart dragstart', release);
     const ro = new ResizeObserver(() => { if (!userHasMoved) fitToStations(); });
     ro.observe(containerRef.current);
@@ -315,6 +385,7 @@ export default function LocationMap({
       map.remove();
       indexRef.current = [];
       clusterRef.current = null;
+      mapRef.current = null;
     };
   }, []);
 
@@ -328,7 +399,7 @@ export default function LocationMap({
           fontFamily: 'system-ui, sans-serif',
         }}
       >
-        {results.length > 0 && (
+        {(results.length > 0 || towns.length > 0) && (
           <ul
             style={{
               listStyle: 'none', margin: '0 0 -1px', padding: '4px 0',
@@ -337,6 +408,23 @@ export default function LocationMap({
               maxHeight: '300px', overflowY: 'auto',
             }}
           >
+            {towns.map((tw) => (
+              <li key={`town-${tw.town}`}>
+                <button
+                  onClick={() => goToTown(tw)}
+                  style={{
+                    display: 'block', width: '100%', textAlign: 'left', border: 'none',
+                    background: 'none', color: 'inherit', padding: '8px 14px', fontSize: '14px', cursor: 'pointer',
+                    borderBottom: '1px solid var(--fdvt-panel-rule, rgba(0,0,0,.08))',
+                  }}
+                  onMouseOver={(e) => ((e.currentTarget as HTMLElement).style.background = 'var(--fdvt-panel-hover, #f6efe7)')}
+                  onMouseOut={(e) => ((e.currentTarget as HTMLElement).style.background = 'none')}
+                >
+                  <strong>{titleCase(tw.town)}</strong>
+                  <span style={{ color: 'var(--fdvt-muted, #777)' }}> — all {tw.markers.length} stations</span>
+                </button>
+              </li>
+            ))}
             {results.map((r) => (
               <li key={`${r.town}-${r.address}`}>
                 <button
@@ -360,7 +448,7 @@ export default function LocationMap({
           action=""
           onSubmit={(e) => {
             e.preventDefault();
-            if (results[0]) goTo(results[0]);
+            goToBest(query, results);
           }}
         >
         <input
@@ -370,7 +458,7 @@ export default function LocationMap({
           onInput={(e) => runSearch((e.target as HTMLInputElement).value)}
           style={{
             width: '100%', padding: '10px 14px', fontSize: '15px', border: 'none',
-            borderRadius: results.length ? '0 0 12px 12px' : '999px',
+            borderRadius: results.length || towns.length ? '0 0 12px 12px' : '999px',
             boxShadow: '0 2px 8px rgba(0,0,0,.25)', outline: 'none', boxSizing: 'border-box',
           }}
         />
