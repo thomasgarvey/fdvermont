@@ -1,1 +1,58 @@
-[]
+[
+  {
+    "id": "recQdjxNu6tXnuvIW",
+    "src": "/photos/recQdjxNu6tXnuvIW.jpg",
+    "thumb": "/photos/recQdjxNu6tXnuvIW.thumb.jpg",
+    "width": 2136,
+    "height": 1602,
+    "thumbWidth": 683,
+    "thumbHeight": 512,
+    "caption": "Addison Hose Reel",
+    "photographer": "Tom Garvey",
+    "dateTaken": "2026-09-27",
+    "departmentId": "reczeDWIG8s4E9jb3",
+    "department": "Addison Volunteer Fire Department"
+  },
+  {
+    "id": "recb1VkPIpOwLBbBV",
+    "src": "/photos/recb1VkPIpOwLBbBV.jpg",
+    "thumb": "/photos/recb1VkPIpOwLBbBV.thumb.jpg",
+    "width": 2136,
+    "height": 1602,
+    "thumbWidth": 683,
+    "thumbHeight": 512,
+    "caption": "Addison Tanker 1",
+    "photographer": "Tom Garvey",
+    "dateTaken": "2026-09-27",
+    "departmentId": "reczeDWIG8s4E9jb3",
+    "department": "Addison Volunteer Fire Department"
+  },
+  {
+    "id": "recEqb1SSLQRqPJ5s",
+    "src": "/photos/recEqb1SSLQRqPJ5s.jpg",
+    "thumb": "/photos/recEqb1SSLQRqPJ5s.thumb.jpg",
+    "width": 2136,
+    "height": 1602,
+    "thumbWidth": 683,
+    "thumbHeight": 512,
+    "caption": "Addison Tanker 2",
+    "photographer": "Tom Garvey",
+    "dateTaken": "2026-09-27",
+    "departmentId": "reczeDWIG8s4E9jb3",
+    "department": "Addison Volunteer Fire Department"
+  },
+  {
+    "id": "recGa92CUHkOyS9TM",
+    "src": "/photos/recGa92CUHkOyS9TM.jpg",
+    "thumb": "/photos/recGa92CUHkOyS9TM.thumb.jpg",
+    "width": 2136,
+    "height": 1602,
+    "thumbWidth": 683,
+    "thumbHeight": 512,
+    "caption": "Addison Utility 1",
+    "photographer": "Tom Garvey",
+    "dateTaken": "2026-09-27",
+    "departmentId": "reczeDWIG8s4E9jb3",
+    "department": "Addison Volunteer Fire Department"
+  }
+]

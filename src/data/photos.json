@@ -24,6 +24,54 @@
     "esiteid": 98545
   },
   {
+    "id": "recSaRe6TqpmKbfbc",
+    "src": "/photos/recSaRe6TqpmKbfbc.jpg",
+    "thumb": "/photos/recSaRe6TqpmKbfbc.thumb.jpg",
+    "width": 1202,
+    "height": 1602,
+    "thumbWidth": 512,
+    "thumbHeight": 682,
+    "caption": "Vergennes Fire Department",
+    "photographer": "Tom Garvey",
+    "dateTaken": "2026-09-27",
+    "featured": false,
+    "department": {
+      "name": "Vergennes City Fire Department",
+      "city": "Vergennes",
+      "county": "Addison"
+    },
+    "town": "VERGENNES",
+    "lat": null,
+    "lng": null,
+    "stationAddress": "50 Green St",
+    "placedBy": "address-join",
+    "esiteid": null
+  },
+  {
+    "id": "recc6lbkbbuM9WTxl",
+    "src": "/photos/recc6lbkbbuM9WTxl.jpg",
+    "thumb": "/photos/recc6lbkbbuM9WTxl.thumb.jpg",
+    "width": 1202,
+    "height": 1602,
+    "thumbWidth": 512,
+    "thumbHeight": 682,
+    "caption": "Addison Fire Department",
+    "photographer": "Tom Garvey",
+    "dateTaken": "2026-09-27",
+    "featured": false,
+    "department": {
+      "name": "Addison Volunteer Fire Department",
+      "city": "Addison",
+      "county": "Addison"
+    },
+    "town": "ADDISON",
+    "lat": null,
+    "lng": null,
+    "stationAddress": "44 Vt Rte 17 West",
+    "placedBy": "address-join",
+    "esiteid": null
+  },
+  {
     "id": "rec9fnp0wasWQWICl",
     "src": "/photos/rec9fnp0wasWQWICl.jpg",
     "thumb": "/photos/rec9fnp0wasWQWICl.thumb.jpg",
