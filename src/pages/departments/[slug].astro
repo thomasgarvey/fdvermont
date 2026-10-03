@@ -11,6 +11,7 @@ import {
 } from "../../lib/towns";
 import type { Station } from "../../lib/stations";
 import apparatusData from "../../data/apparatus.json";
+import Lightbox from "../../components/Lightbox.astro";
 
 export function getStaticPaths() {
   return [
@@ -43,6 +44,7 @@ const dept = departments[0] ?? null;
 // one is synced the file is [], which TypeScript reads as never[].
 interface Rig {
   id: string;
+  src: string;
   thumb: string;
   thumbWidth: number | null;
   thumbHeight: number | null;
@@ -264,10 +266,14 @@ const shown = stations.find((s: Station) => s.photo);
 
           {s.photo ? (
             <figure class="shot">
-              <img src={s.photo.src}
-                   alt={`${s.name} at ${s.address}, ${s.town}, Vermont`}
-                   width={s.photo.width ?? undefined} height={s.photo.height ?? undefined}
-                   loading="lazy" />
+              <button type="button" data-full={s.photo.src}
+                      data-caption={s.name} data-credit={credit(s.photo)}
+                      aria-label={`View the photograph of ${s.name} full screen`}>
+                <img src={s.photo.src}
+                     alt={`${s.name} at ${s.address}, ${s.town}, Vermont`}
+                     width={s.photo.width ?? undefined} height={s.photo.height ?? undefined}
+                     loading="lazy" />
+              </button>
               <figcaption>
                 {s.photo.caption && s.photo.caption !== s.name && (
                   <span class="cap">{s.photo.caption}</span>
@@ -315,10 +321,14 @@ const shown = stations.find((s: Station) => s.photo);
         <div class="rigs">
           {rigs.map((a) => (
             <figure class="rig">
-              <img src={a.thumb}
-                   alt={[a.caption || "Fire apparatus", a.department].filter(Boolean).join(", ")}
-                   width={a.thumbWidth ?? undefined} height={a.thumbHeight ?? undefined}
-                   loading="lazy" />
+              <button type="button" data-full={a.src}
+                      data-caption={a.caption || "Fire apparatus"} data-credit={credit(a)}
+                      aria-label={`View the photograph of ${a.caption || "the apparatus"} full screen`}>
+                <img src={a.thumb}
+                     alt={[a.caption || "Fire apparatus", a.department].filter(Boolean).join(", ")}
+                     width={a.thumbWidth ?? undefined} height={a.thumbHeight ?? undefined}
+                     loading="lazy" />
+              </button>
               <figcaption>
                 {a.caption && <span class="cap">{a.caption}</span>}
                 {departments.length > 1 && a.department && <span class="cap">{a.department}</span>}
@@ -518,6 +528,7 @@ const shown = stations.find((s: Station) => s.photo);
     )}
 
     <p class="back"><a href="/#map">← Back to the map</a></p>
+    <Lightbox />
   </main>
 </Archive>
 

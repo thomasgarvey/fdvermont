@@ -1,0 +1,158 @@
+---
+// Full-screen viewer for the photographs on a page. Any element with
+// data-full="<image url>" opens it, with data-caption and data-credit shown
+// beneath; ← and → (or the on-screen arrows, or a swipe) step through every
+// such photo on the page in order. Esc, the close button or a click on the
+// dark surround closes it. The page's own markup carries the photo, so with
+// scripts off the image simply stays where it is.
+---
+
+<dialog class="lb" aria-label="Photograph">
+  <figure class="lb-fig">
+    <img class="lb-img" alt="" />
+    <figcaption class="lb-cap">
+      <span class="lb-title"></span>
+      <span class="lb-credit"></span>
+    </figcaption>
+  </figure>
+  <button class="lb-btn lb-close" type="button" aria-label="Close">×</button>
+  <button class="lb-btn lb-prev" type="button" aria-label="Previous photograph">‹</button>
+  <button class="lb-btn lb-next" type="button" aria-label="Next photograph">›</button>
+</dialog>
+
+<script>
+  const dialog = document.querySelector<HTMLDialogElement>("dialog.lb");
+  const triggers = [...document.querySelectorAll<HTMLElement>("[data-full]")];
+
+  if (dialog && triggers.length) {
+    const img = dialog.querySelector<HTMLImageElement>(".lb-img")!;
+    const title = dialog.querySelector<HTMLElement>(".lb-title")!;
+    const credit = dialog.querySelector<HTMLElement>(".lb-credit")!;
+    const prev = dialog.querySelector<HTMLButtonElement>(".lb-prev")!;
+    const next = dialog.querySelector<HTMLButtonElement>(".lb-next")!;
+    let at = 0;
+
+    const show = (i: number) => {
+      at = (i + triggers.length) % triggers.length;
+      const t = triggers[at];
+      img.src = t.dataset.full!;
+      img.alt = t.querySelector("img")?.alt ?? "";
+      title.textContent = t.dataset.caption ?? "";
+      credit.textContent = t.dataset.credit ?? "";
+    };
+
+    // One photograph on the page has nowhere to step to.
+    if (triggers.length < 2) {
+      prev.hidden = true;
+      next.hidden = true;
+    }
+
+    triggers.forEach((t, i) =>
+      t.addEventListener("click", () => {
+        show(i);
+        dialog.showModal();
+      }),
+    );
+    prev.addEventListener("click", () => show(at - 1));
+    next.addEventListener("click", () => show(at + 1));
+    dialog.querySelector(".lb-close")!.addEventListener("click", () => dialog.close());
+
+    // A click that lands on the surround rather than the photo or a button.
+    dialog.addEventListener("click", (e) => {
+      if (e.target === dialog || (e.target as Element).classList.contains("lb-fig")) dialog.close();
+    });
+
+    dialog.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowLeft") show(at - 1);
+      if (e.key === "ArrowRight") show(at + 1);
+    });
+
+    // Swipe left or right on a phone. Mostly-vertical drags are left alone.
+    let x0: number | null = null;
+    let y0 = 0;
+    dialog.addEventListener("touchstart", (e) => {
+      x0 = e.touches[0].clientX;
+      y0 = e.touches[0].clientY;
+    }, { passive: true });
+    dialog.addEventListener("touchend", (e) => {
+      if (x0 == null || triggers.length < 2) return;
+      const dx = e.changedTouches[0].clientX - x0;
+      const dy = e.changedTouches[0].clientY - y0;
+      x0 = null;
+      if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) show(at + (dx < 0 ? 1 : -1));
+    });
+
+    // Drop the image when closed, so a large photo is not held in the page.
+    dialog.addEventListener("close", () => img.removeAttribute("src"));
+  }
+</script>
+
+<style is:global>
+  [data-full] {
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: zoom-in;
+  }
+  [data-full]:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; }
+
+  dialog.lb {
+    width: 100vw;
+    max-width: none;
+    height: 100dvh;
+    max-height: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: rgba(12, 11, 10, 0.94);
+    color: #ece4d6;
+  }
+  dialog.lb::backdrop { background: rgba(12, 11, 10, 0.94); }
+  .lb-fig {
+    margin: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    padding: 3.5rem 4.5rem 1.5rem;
+    box-sizing: border-box;
+  }
+  .lb-img {
+    display: block;
+    max-width: 100%;
+    max-height: calc(100% - 3.5rem);
+    min-height: 0;
+    object-fit: contain;
+  }
+  .lb-cap { text-align: center; font-size: 0.9rem; line-height: 1.4; }
+  .lb-title { display: block; }
+  .lb-credit { display: block; color: #a9a093; font-size: 0.82rem; }
+  .lb-btn {
+    position: absolute;
+    width: 44px;
+    height: 44px;
+    border: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    color: #ece4d6;
+    font-size: 1.9rem;
+    line-height: 1;
+    cursor: pointer;
+  }
+  .lb-btn:hover, .lb-btn:focus-visible { background: rgba(255, 255, 255, 0.22); }
+  .lb-close { top: 0.75rem; right: 0.75rem; }
+  .lb-prev, .lb-next { top: 50%; transform: translateY(-50%); }
+  .lb-prev { left: 0.75rem; }
+  .lb-next { right: 0.75rem; }
+
+  @media (max-width: 720px) {
+    .lb-fig { padding: 3.5rem 0.75rem 1.25rem; }
+    /* Arrows sit low on a phone, out from over the photo; swiping works too. */
+    .lb-prev, .lb-next { top: auto; bottom: 0.75rem; transform: none; }
+    .lb-fig { padding-bottom: 4.5rem; }
+  }
+</style>
