@@ -217,8 +217,8 @@ const missing = written.filter(([, v]) => !v).map(([k]) => k);
 
 const plural = (n: number, one: string) => `${n} ${one}${n === 1 ? "" : "s"}`;
 const title = town
-  ? `${town.name} — fire stations, department and coverage – Vermont Fire Stations`
-  : `${dept!.name}, ${place} – Vermont Fire Stations`;
+  ? `${town.name} — fire stations, department and coverage – Vermont Fire Departments`
+  : `${dept!.name}, ${place} – Vermont Fire Departments`;
 const description = standalone
   ? `${dept!.name}, working from ${place}, Vermont: ${plural(stations.length, "station")}, with contact and what is on record about its calls.`
   : dept
