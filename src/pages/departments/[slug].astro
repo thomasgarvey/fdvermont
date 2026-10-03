@@ -12,6 +12,7 @@ import {
 import type { Station } from "../../lib/stations";
 import apparatusData from "../../data/apparatus.json";
 import Lightbox from "../../components/Lightbox.astro";
+import fleetData from "../../data/fleet.json";
 
 export function getStaticPaths() {
   return [
@@ -54,6 +55,58 @@ interface Rig {
   departmentId: string | null;
   department: string | null;
 }
+// The apparatus roster — Airtable's Apparatus table, one row per vehicle with
+// the source it was typed from. A unit is listed under the station it is
+// linked to; one linked only to the department is listed after the stations.
+interface Unit {
+  unit: string;
+  departmentId: string | null;
+  stationId: string | null;
+  role: string | null;
+  year: number | null;
+  make: string | null;
+  pumpGpm: number | null;
+  waterGal: number | null;
+  notes: string | null;
+  source: string | null;
+}
+const fleet = (fleetData as Unit[]).filter(
+  (u) =>
+    departments.some((d) => d.id === u.departmentId) ||
+    (u.stationId != null && stations.some((s) => s.id === u.stationId)),
+);
+const unitsAt = (s: Station) => fleet.filter((u) => u.stationId === s.id);
+const unplaced = fleet.filter((u) => !stations.some((s) => s.id === u.stationId));
+// "2012 Pierce · 1,500 GPM pump · 500 gal water · 75 ft aluminum ladder"
+const unitDetail = (u: Unit) =>
+  [
+    [u.year, u.make].filter(Boolean).join(" "),
+    u.pumpGpm != null && `${u.pumpGpm.toLocaleString("en-US")} GPM pump`,
+    u.waterGal != null && `${u.waterGal.toLocaleString("en-US")} gal water`,
+    u.notes,
+  ]
+    .filter(Boolean)
+    .join(" · ");
+// Units grouped by role, in the order the sync sorted them.
+const byRole = (units: Unit[]) => {
+  const groups = new Map<string, Unit[]>();
+  for (const u of units) {
+    const k = u.role ?? "Other";
+    if (!groups.has(k)) groups.set(k, []);
+    groups.get(k)!.push(u);
+  }
+  return [...groups];
+};
+// Each distinct source, shown as its site's name.
+const sourcesOf = (units: Unit[]) =>
+  [...new Set(units.map((u) => u.source).filter(Boolean) as string[])].map((href) => {
+    let label = href;
+    try {
+      label = new URL(href).hostname.replace(/^www\./, "");
+    } catch {}
+    return { href, label };
+  });
+
 // One string, so JSX does not put a space between the name and the comma.
 const credit = (p: { photographer: string; dateTaken: string | null }) =>
   (p.photographer ? `Photograph by ${p.photographer}` : "Photograph") +
@@ -296,6 +349,28 @@ const shown = stations.find((s: Station) => s.photo);
               <div class="row"><dt>{k}</dt><dd>{v}</dd></div>
             ))}
           </dl>
+
+          {unitsAt(s).length > 0 && (
+            <table class="fleet">
+              <caption>Apparatus</caption>
+              {byRole(unitsAt(s)).map(([role, units]) => (
+                <tbody>
+                  <tr class="grp"><th colspan="2" scope="rowgroup">{role}</th></tr>
+                  {units.map((u) => (
+                    <tr><th scope="row">{u.unit}</th><td>{unitDetail(u)}</td></tr>
+                  ))}
+                </tbody>
+              ))}
+            </table>
+          )}
+          {unitsAt(s).length > 0 && (
+            <p class="prov">
+              Apparatus as listed by{" "}
+              {sourcesOf(unitsAt(s)).map((src, i) => (
+                <>{i > 0 && ", "}<a href={src.href} target="_blank" rel="noopener">{src.label}</a></>
+              ))}.
+            </p>
+          )}
           <p class="prov">
             {s.esiteid != null ? (
               <>
@@ -315,9 +390,31 @@ const shown = stations.find((s: Station) => s.photo);
       ))}
     </section>
 
+    {unplaced.length > 0 && (
+      <section class="block" aria-labelledby="fl-h">
+        <h2 id="fl-h">Apparatus</h2>
+        <table class="fleet">
+          {byRole(unplaced).map(([role, units]) => (
+            <tbody>
+              <tr class="grp"><th colspan="2" scope="rowgroup">{role}</th></tr>
+              {units.map((u) => (
+                <tr><th scope="row">{u.unit}</th><td>{unitDetail(u)}</td></tr>
+              ))}
+            </tbody>
+          ))}
+        </table>
+        <p class="prov">
+          As listed by{" "}
+          {sourcesOf(unplaced).map((src, i) => (
+            <>{i > 0 && ", "}<a href={src.href} target="_blank" rel="noopener">{src.label}</a></>
+          ))}.
+        </p>
+      </section>
+    )}
+
     {rigs.length > 0 && (
       <section class="block" aria-labelledby="ap-h">
-        <h2 id="ap-h">Apparatus</h2>
+        <h2 id="ap-h">{fleet.length ? "Apparatus photographs" : "Apparatus"}</h2>
         <div class="rigs">
           {rigs.map((a) => (
             <figure class="rig">
@@ -609,6 +706,21 @@ const shown = stations.find((s: Station) => s.photo);
   .shot { margin: 0 0 2.4rem; }
   .shot img { display: block; width: 100%; height: auto; border: 1px solid var(--line); box-shadow: var(--shadow); }
   .shot figcaption { margin-top: 0.6rem; font-size: 0.82rem; color: var(--ink-2); }
+  .fleet { width: 100%; border-collapse: collapse; margin: 1.4rem 0 0; font-size: 0.88rem; }
+  .fleet caption {
+    text-align: left; font-size: 0.72rem; letter-spacing: 0.09em;
+    text-transform: uppercase; color: var(--ink-3); padding-bottom: 0.4rem;
+  }
+  .fleet .grp th {
+    text-align: left; padding: 0.9rem 0 0.3rem; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.06em;
+    text-transform: uppercase; color: var(--ink-2); border-bottom: 1px solid var(--line);
+  }
+  .fleet tbody:first-of-type .grp th { padding-top: 0.2rem; }
+  .fleet th[scope="row"] {
+    text-align: left; font-weight: 600; padding: 0.45rem 1rem 0.45rem 0;
+    border-bottom: 1px solid var(--line); white-space: nowrap; vertical-align: top; width: 1%;
+  }
+  .fleet td { padding: 0.45rem 0; border-bottom: 1px solid var(--line); color: var(--ink-2); }
   .rigs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.6rem 1.2rem; }
   .rig { margin: 0; }
   .rig img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border: 1px solid var(--line); box-shadow: var(--shadow); }

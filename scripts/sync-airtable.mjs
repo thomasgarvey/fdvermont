@@ -140,8 +140,8 @@ async function geocode(address, city) {
   return hit;
 }
 
-const [photos, depts, stationRows] = await Promise.all([
-  fetchAll('Photos'), fetchAll('Fire Departments'), fetchAll('Fire Stations'),
+const [photos, depts, stationRows, fleetRows] = await Promise.all([
+  fetchAll('Photos'), fetchAll('Fire Departments'), fetchAll('Fire Stations'), fetchAll('Apparatus'),
 ]);
 const deptById = new Map(depts.map((r) => [r.id, r.fields]));
 // Airtable's Fire Stations table, keyed by record id so a photo's Station link
@@ -249,6 +249,45 @@ for (const p of out) {
 out.sort((a, b) => (b.featured - a.featured) || String(b.dateTaken).localeCompare(String(a.dateTaken)));
 writeFileSync(`${ROOT}/src/data/photos.json`, JSON.stringify(out, null, 2) + '\n');
 console.log(`Synced ${out.length} photos (${photos.length} records total), ${geocoded} geocoded -> src/data/photos.json + public/photos/`);
+
+// --- The apparatus roster ---------------------------------------------------
+// Airtable's Apparatus table: one row per vehicle, typed in from a source the
+// row names (a department's own fleet page, usually). Drafts and Archived rows
+// stay out, as with photos. Linked to a department and, where known, to the
+// station it runs from, by record id — the site matches on those ids.
+const ROLES = ['Front line', 'Reserve', 'Staff'];
+const fleet = fleetRows
+  .filter((r) => !HIDDEN_STATUSES.has(r.fields['Publication Status']) && r.fields.Unit)
+  .map((r) => {
+    const f = r.fields;
+    return {
+      id: r.id,
+      unit: f.Unit.trim(),
+      departmentId: f['Fire Department']?.[0] ?? null,
+      stationId: f.Station?.[0] ?? null,
+      role: f.Role ?? null,
+      year: typeof f.Year === 'number' ? f.Year : null,
+      make: f['Make and Model']?.trim() || null,
+      pumpGpm: typeof f['Pump (GPM)'] === 'number' ? f['Pump (GPM)'] : null,
+      waterGal: typeof f['Water (gallons)'] === 'number' ? f['Water (gallons)'] : null,
+      notes: f.Notes?.trim() || null,
+      source: f.Source?.trim() || null,
+    };
+  })
+  // Front line, then reserve, then staff; by unit name within each, numbers in order.
+  .sort(
+    (a, b) =>
+      (ROLES.indexOf(a.role) + 1 || 9) - (ROLES.indexOf(b.role) + 1 || 9) ||
+      a.unit.localeCompare(b.unit, 'en', { numeric: true }),
+  );
+writeFileSync(`${ROOT}/src/data/fleet.json`, JSON.stringify(fleet, null, 2) + '\n');
+console.log(`Fleet: ${fleet.length} apparatus -> src/data/fleet.json`);
+const noDept = fleet.filter((a) => !a.departmentId);
+if (noDept.length) {
+  console.warn(`\n  !! ${noDept.length} apparatus row(s) have no Fire Department linked and will NOT appear:`);
+  for (const a of noDept) console.warn(`     - ${a.unit}`);
+  console.warn('');
+}
 
 // By department, then by name with numbers in order, so Engine 2 precedes
 // Engine 10.

@@ -8,6 +8,8 @@ import departmentsData from '../data/departments.json';
 export type Photo = (typeof photosData)[number];
 
 export interface Station {
+  /** Airtable's Fire Stations record id, which apparatus link to. */
+  id: string;
   slug: string;
   esiteid: number;
   address: string;      // title-cased
@@ -125,6 +127,7 @@ export const stations: Station[] = features.map((f) => {
   // yet — that is where this belongs.
   const name = f.name?.trim() || photo?.caption?.trim() || department || `${town} Fire Station`;
   return {
+    id: f.id,
     slug,
     esiteid: f.esiteid as number,
     address,
