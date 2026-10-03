@@ -21,18 +21,6 @@ const emptyCounties = [...new Set(stations.map((s) => s.county).filter(Boolean))
   .filter((c) => !stations.some((s) => s.county === c && s.photo))
   .sort();
 
-// The one town we have been through door to door, and the clearest evidence that
-// the state's list has to be checked on foot. Derived from the two data files so
-// the sentence in the About section cannot go stale as more are retired.
-// Count only stations that carry an E911 site id: the roster also holds
-// buildings we added from a photograph because the state file omits them, and
-// counting those would overstate what the state actually lists.
-const FIELD_TOWN = "Colchester";
-const fieldWrong = retiredStations.filter((s) => s.town === FIELD_TOWN).length;
-const fieldListed =
-  fieldWrong +
-  stations.filter((s) => s.town === FIELD_TOWN && s.esiteid != null).length;
-
 // Departments lead: the site is about Vermont's fire departments, and stations
 // (and apparatus) are what each one has. departments.json holds the active
 // Airtable records only, so retired departments are not counted.
@@ -312,35 +300,8 @@ const MARK_NEEDS = "#5C6469";
         <div class="wrap about">
           <div>
             <p class="stamp">About the record</p>
-            <p>
-              Almost no fire station in Vermont was designed to be admired. A concrete-block
-              bay behind the town office, a barn with the doors cut wider, a pole building with
-              the department's name stencilled over the bay — they are built to get a truck out
-              fast and to be paid for by a town of two thousand people. Set {stations.length} of
-              them side by side and that plainness becomes the point: a century of how small
-              places build when nobody is watching.
-            </p>
-            <p>
-              The service here is overwhelmingly volunteer — more than two hundred departments,
-              most of them staffed by neighbours, working out of buildings scattered across
-              {" "}{count("town")} towns. Nobody had ever put them all in one place.
-            </p>
-            <p>
-              Three of us build and keep this: Juan Carlos, Nicki and Tom, who was a junior firefighter in
-              high school on Long Island and has been interested in every part of the job since.
-            </p>
-            <p>
-              Going to look is the only way to be sure. The state lists {fieldListed} fire
-              stations in {FIELD_TOWN}; {fieldWrong} of them turned out to be a food shelf, the
-              water department and somebody's outbuilding. Swanton and Highgate run stations the
-              state file doesn't mention at all. Every correction here came from standing in
-              front of the building.
-            </p>
-            <p>
-              It is meant to give something back to the fire service, in whatever form turns out
-              to be useful — a record that didn't exist, a photograph of a station nobody had
-              taken, a correction to the state's file.
-            </p>
+            <p>fdvermont intends to bring to light our state's fire departments.</p>
+            <p>It is built and maintained by Juan Carlos, Nicki and Tom.</p>
             <p class="fine">
               Station locations come from VT E911 / VCGI and OpenStreetMap. Points the state still
               lists as fire stations but which no longer are get removed as they come to light —
