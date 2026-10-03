@@ -4,6 +4,7 @@ import photosData from "../data/photos.json";
 import photoFocus from "../data/photo-focus.json";
 import retiredStations from "../data/retired-stations.json";
 import { photographedCount, photoHref, stations } from "../lib/stations";
+import departmentsData from "../data/departments.json";
 import Analytics from "../components/Analytics.astro";
 import Seo from "../components/Seo.astro";
 
@@ -32,9 +33,12 @@ const fieldListed =
   fieldWrong +
   stations.filter((s) => s.town === FIELD_TOWN && s.esiteid != null).length;
 
+// Departments lead: the site is about Vermont's fire departments, and stations
+// (and apparatus) are what each one has. departments.json holds the active
+// Airtable records only, so retired departments are not counted.
 const ledger = [
-  { n: stations.length, label: "Stations recorded" },
-  { n: count("town"), label: "Towns" },
+  { n: departmentsData.length, label: "Departments" },
+  { n: stations.length, label: "Stations" },
   { n: count("county"), label: "Counties" },
   // Stations we hold a photograph of — not the number of photographs, which is
   // higher because some stations have more than one.
@@ -99,11 +103,11 @@ const MARK_NEEDS = "#5C6469";
     <title>Vermont Fire Departments</title>
     <meta
       name="description"
-      content="Every fire station in Vermont, town by town — a photographic record of the state's plainest, most useful architecture, with department and address for each."
+      content="Every fire department in Vermont, town by town: its stations, apparatus and photographs — a record of the state's plainest, most useful architecture."
     />
     <Seo
       title="Vermont Fire Departments"
-      description="Every fire station in Vermont, town by town — a photographic record of the state's plainest, most useful architecture, with department and address for each."
+      description="Every fire department in Vermont, town by town: its stations, apparatus and photographs — a record of the state's plainest, most useful architecture."
     />
     <script is:inline>
       try {
@@ -135,9 +139,9 @@ const MARK_NEEDS = "#5C6469";
           </span>
         </a>
         <nav class="nav" id="sitenav">
-          <a href="#stations">Stations</a>
-          <a href="#map">Map</a>
           <a href="/departments">Departments</a>
+          <a href="#map">Map</a>
+          <a href="#stations">Photographs</a>
           <a href="#about">About</a>
           <a href="/forum">Forum</a>
           <a href="/contact">Contact</a>
@@ -168,16 +172,16 @@ const MARK_NEEDS = "#5C6469";
         <div class="wrap hero-wrap">
           <div class="panel">
             <h1>Vermont's fire departments.</h1>
-            <p class="panel-sub">Explore the stations by town, department, or county.</p>
+            <p class="panel-sub">Explore every department by town or county: its stations, apparatus and photographs.</p>
 
             <form class="search" id="hero-search" autocomplete="off">
-              <label class="vh" for="q">Search Vermont fire stations</label>
+              <label class="vh" for="q">Search Vermont fire departments</label>
               <input id="q" type="search" placeholder="Search a town or department…" />
               <button type="submit">Search</button>
             </form>
             <p class="search-note" id="searchhint">Results open on the map below.</p>
 
-            <a class="btn" href="#map">Explore the stations →</a>
+            <a class="btn" href="/departments">Explore the departments →</a>
           </div>
         </div>
       </section>
@@ -224,11 +228,11 @@ const MARK_NEEDS = "#5C6469";
         <div class="wrap">
           <div class="sec-head">
             <p class="stamp">The record</p>
-            <h2>Fire stations of Vermont</h2>
+            <h2>Fire departments of Vermont</h2>
             <p class="sec-sub">
-              {stations.length} stations plotted from the state's E911 address points. Red marks a
-              station we have photographed; slate marks one still waiting. Select a marker for the
-              department, the photograph, and the address.
+              Every department's stations — {stations.length} of them — plotted from the state's
+              E911 address points. Red marks a station we have photographed; slate marks one still
+              waiting. Select a marker for the department, the photograph, and the address.
             </p>
           </div>
 
@@ -249,7 +253,7 @@ const MARK_NEEDS = "#5C6469";
       <section class="sec alt" id="featured">
         <div class="wrap">
           <div class="sec-head">
-            <p class="stamp">Station of the week</p>
+            <p class="stamp">Department of the week</p>
             <h2>{label(featured)}</h2>
             <p class="sec-sub">{place(featured)}</p>
           </div>
@@ -763,6 +767,9 @@ const MARK_NEEDS = "#5C6469";
     margin: 0 0 1.5rem;
     color: var(--ink-2);
     font-size: 1rem;
+    /* The panel takes the width of its longest line; a long subtitle would
+       stretch it across the photograph. Wrap it at the panel's usual width. */
+    max-width: 22rem;
   }
   .search {
     display: flex;
