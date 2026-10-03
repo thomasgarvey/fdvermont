@@ -144,9 +144,17 @@ const description = standalone
   : dept
     ? `${dept.name}: contact, coverage, joining, burn permits and history, with ${plural(stations.length, "station")} in ${place}, Vermont.`
     : `Fire stations in ${place}, Vermont — ${stations.length} on record, with the town's boundary and area.`;
+// The first photographed station is the link-preview image; pages with none
+// fall back to the homepage hero.
+const shown = stations.find((s: Station) => s.photo);
 ---
 
-<Archive title={title} description={description}>
+<Archive
+  title={title}
+  description={description}
+  image={shown?.photo?.src}
+  imageAlt={shown && `${shown.name} at ${shown.address}, ${shown.town}, Vermont`}
+>
   <main class="wrap page">
     <nav class="crumbs" aria-label="Breadcrumb">
       <a href="/stations">All stations</a>

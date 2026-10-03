@@ -1,5 +1,6 @@
 ---
 import Analytics from "../components/Analytics.astro";
+import Seo from "../components/Seo.astro";
 
 // The public-facing address. It's a Namecheap forwarding alias on
 // fdvermont.org, not a personal inbox, so it can be changed or retired
@@ -62,6 +63,10 @@ const ways = [
     <meta
       name="description"
       content="Send a station photo, a correction, or a question to the Vermont Fire Stations archive."
+    />
+    <Seo
+      title="Contact – Vermont Fire Stations"
+      description="Send a station photo, a correction, or a question to the Vermont Fire Stations archive."
     />
     <script is:inline>
       // Same key the homepage uses, so the theme carries across pages.

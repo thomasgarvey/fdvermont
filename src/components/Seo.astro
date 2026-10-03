@@ -1,0 +1,37 @@
+---
+// Canonical URL and link-preview tags, shared by every indexable page. The
+// canonical drops the trailing slash so it matches the internal links
+// ("/departments/addison") and the URLs in the sitemap.
+import photosData from "../data/photos.json";
+
+interface Props {
+  title: string;
+  description?: string;
+  /** Site-relative path of a photograph; defaults to the homepage hero. */
+  image?: string;
+  imageAlt?: string;
+  type?: "website" | "article";
+}
+
+// Isle La Motte Volunteer Fire Company, the homepage hero.
+const fallback = photosData.find((p) => p.id === "recKofDfSCLcl7RG9") ?? photosData[0];
+
+const { title, description, type = "website" } = Astro.props;
+const image = Astro.props.image ?? fallback.src;
+const imageAlt = Astro.props.image ? Astro.props.imageAlt : fallback.caption ?? undefined;
+
+const path = Astro.url.pathname.replace(/\/+$/, "") || "/";
+const canonical = new URL(path, Astro.site).href;
+const imageUrl = new URL(image, Astro.site).href;
+---
+
+<link rel="canonical" href={canonical} />
+<meta property="og:site_name" content="Vermont Fire Stations" />
+<meta property="og:type" content={type} />
+<meta property="og:url" content={canonical} />
+<meta property="og:title" content={title} />
+{description && <meta property="og:description" content={description} />}
+<meta property="og:image" content={imageUrl} />
+{imageAlt && <meta property="og:image:alt" content={imageAlt} />}
+<meta property="og:locale" content="en_US" />
+<meta name="twitter:card" content="summary_large_image" />

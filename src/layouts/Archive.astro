@@ -5,9 +5,13 @@
 interface Props {
   title: string;
   description?: string;
+  /** Site-relative photograph for link previews; see Seo.astro. */
+  image?: string;
+  imageAlt?: string;
 }
-const { title, description } = Astro.props;
+const { title, description, image, imageAlt } = Astro.props;
 import Analytics from "../components/Analytics.astro";
+import Seo from "../components/Seo.astro";
 ---
 
 <html lang="en">
@@ -20,6 +24,7 @@ import Analytics from "../components/Analytics.astro";
     <meta name="color-scheme" content="light dark" />
     <title>{title}</title>
     {description && <meta name="description" content={description} />}
+    <Seo title={title} description={description} image={image} imageAlt={imageAlt} />
     <script is:inline>
       // Same key the homepage uses, so the theme carries across pages.
       try {

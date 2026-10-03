@@ -5,6 +5,7 @@ import photoFocus from "../data/photo-focus.json";
 import retiredStations from "../data/retired-stations.json";
 import { photographedCount, photoHref, stations } from "../lib/stations";
 import Analytics from "../components/Analytics.astro";
+import Seo from "../components/Seo.astro";
 
 // Every figure on this page is computed at build time from the same roster the
 // map and the station pages use — Airtable's Fire Stations table, minus anything
@@ -99,6 +100,10 @@ const MARK_NEEDS = "#5C6469";
     <meta
       name="description"
       content="Every fire station in Vermont, town by town — a photographic record of the state's plainest, most useful architecture, with department and address for each."
+    />
+    <Seo
+      title="Vermont Fire Stations"
+      description="Every fire station in Vermont, town by town — a photographic record of the state's plainest, most useful architecture, with department and address for each."
     />
     <script is:inline>
       try {

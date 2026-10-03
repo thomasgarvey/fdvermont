@@ -2,6 +2,7 @@
 import { defineConfig } from 'astro/config';
 
 import preact from '@astrojs/preact';
+import sitemap from '@astrojs/sitemap';
 import vercel from '@astrojs/vercel/serverless';
 import { readFileSync } from 'node:fs';
 
@@ -17,8 +18,22 @@ const redirects = Object.fromEntries(
   ),
 );
 
+// Redirect sources as patterns (`/towns/[slug]` matches any one segment), so
+// the sitemap can leave out URLs that only redirect.
+const redirectPatterns = Object.keys(redirects).map(
+  (r) => new RegExp(`^${r.replace(/\[\w+\]/g, '[^/]+')}/?$`),
+);
+const isRedirect = (path) => redirectPatterns.some((re) => re.test(path));
+const withoutTrailingSlash = (url) => {
+  const u = new URL(url);
+  if (u.pathname !== '/') u.pathname = u.pathname.replace(/\/+$/, '');
+  return u.href;
+};
+
 // https://astro.build/config
 export default defineConfig({
+  // Absolute URLs for canonical tags, link previews and the sitemap.
+  site: 'https://www.fdvermont.org',
   // Everything stays prerendered and static, as before. Only the forum pages
   // opt out (`export const prerender = false`) and run as Vercel functions,
   // because they depend on who is signed in.
@@ -27,7 +42,19 @@ export default defineConfig({
   // Rejects cross-site form POSTs to the on-demand pages (CSRF).
   security: { checkOrigin: true },
   redirects,
-  integrations: [preact()],
+  integrations: [
+    preact(),
+    // The forum is members-only and noindex, so it stays out.
+    // Redirect sources (old /towns and /stations URLs) are left out, and the
+    // trailing slash is dropped to match each page's canonical tag.
+    sitemap({
+      filter: (page) => {
+        const path = new URL(page).pathname;
+        return !path.startsWith('/forum') && !isRedirect(path);
+      },
+      serialize: (item) => ({ ...item, url: withoutTrailingSlash(item.url) }),
+    }),
+  ],
   vite: {
     plugins: [{
       name: 'vite-plugin-geojson',
