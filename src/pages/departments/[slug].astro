@@ -216,9 +216,18 @@ const written = (
 const missing = written.filter(([, v]) => !v).map(([k]) => k);
 
 const plural = (n: number, one: string) => `${n} ${one}${n === 1 ? "" : "s"}`;
-const title = town
-  ? `${town.name} — fire stations, department and coverage – Vermont Fire Departments`
-  : `${dept!.name}, ${place} – Vermont Fire Departments`;
+// Short and department-first: Google cuts titles at about 60 characters, and
+// "South Burlington — fire stations, department and coverage – …" ran to 80.
+// Records that are each one numbered station of a single department (South
+// Burlington's "Fire Station 1" and "2") count as one department.
+const oneDept =
+  departments.length === 1 ||
+  (departments.length > 1 && departments.every((d) => /station\s*#?\s*\d+\s*$/i.test(d.name.trim())));
+const title = standalone
+  ? `${dept!.name} – Vermont Fire Departments`
+  : departments.length === 0
+    ? `Fire stations in ${place} – Vermont Fire Departments`
+    : `${place} Fire ${oneDept ? "Department" : "Departments"} – Vermont Fire Departments`;
 const description = standalone
   ? `${dept!.name}, working from ${place}, Vermont: ${plural(stations.length, "station")}, with contact and what is on record about its calls.`
   : dept
@@ -232,7 +241,7 @@ const shown = stations.find((s: Station) => s.photo);
 <Archive
   title={title}
   description={description}
-  image={shown?.photo?.src}
+  image={shown?.photo?.medium}
   imageAlt={shown && `${shown.name} at ${shown.address}, ${shown.town}, Vermont`}
 >
   <main class="wrap page">
@@ -322,9 +331,9 @@ const shown = stations.find((s: Station) => s.photo);
               <button type="button" data-full={s.photo.src}
                       data-caption={s.name} data-credit={credit(s.photo)}
                       aria-label={`View the photograph of ${s.name} full screen`}>
-                <img src={s.photo.src}
+                <img src={s.photo.medium}
                      alt={`${s.name} at ${s.address}, ${s.town}, Vermont`}
-                     width={s.photo.width ?? undefined} height={s.photo.height ?? undefined}
+                     width={s.photo.mediumWidth ?? undefined} height={s.photo.mediumHeight ?? undefined}
                      loading="lazy" />
               </button>
               <figcaption>

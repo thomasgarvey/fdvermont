@@ -71,8 +71,8 @@ const description = p
 
     {p ? (
       <figure class="shot">
-        <img src={p.src} alt={`${station.name} at ${station.address}, ${station.town}, Vermont`}
-             width={p.width ?? undefined} height={p.height ?? undefined} loading="eager" />
+        <img src={p.medium} alt={`${station.name} at ${station.address}, ${station.town}, Vermont`}
+             width={p.mediumWidth ?? undefined} height={p.mediumHeight ?? undefined} loading="eager" />
         <figcaption>
           {p.caption && p.caption !== station.name && <span class="cap">{p.caption}</span>}
           <span class="credit">

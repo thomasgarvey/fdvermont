@@ -7,12 +7,16 @@ import Seo from "../components/Seo.astro";
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
-    <title>Map of Vermont fire stations – Vermont Fire Departments</title>
+    <title>Fire department map – Vermont Fire Departments</title>
     <meta name="description" content="A full-screen map of every fire station in Vermont, marked by whether the archive has a photograph of it yet." />
-    <Seo title="Map of Vermont fire stations – Vermont Fire Departments" description="A full-screen map of every fire station in Vermont, marked by whether the archive has a photograph of it yet." />
+    <Seo title="Fire department map – Vermont Fire Departments" description="A full-screen map of every fire station in Vermont, marked by whether the archive has a photograph of it yet." />
     <Analytics />
   </head>
   <body style="margin:0">
+    <!-- The map is the whole page, so its heading is for screen readers and search only. -->
+    <h1 style="position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0">
+      Map of every fire department's stations in Vermont
+    </h1>
     <LocationMap client:only="preact" height="100vh" />
   </body>
 </html>

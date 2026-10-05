@@ -9,7 +9,6 @@
 
 <dialog class="lb" aria-label="Photograph">
   <figure class="lb-fig">
-    <img class="lb-img" alt="" />
     <figcaption class="lb-cap">
       <span class="lb-title"></span>
       <span class="lb-credit"></span>
@@ -25,7 +24,12 @@
   const triggers = [...document.querySelectorAll<HTMLElement>("[data-full]")];
 
   if (dialog && triggers.length) {
-    const img = dialog.querySelector<HTMLImageElement>(".lb-img")!;
+    // Made here rather than in the markup: an <img> with no src until a photo is
+    // opened is invalid HTML and counts as a broken image.
+    const img = document.createElement("img");
+    img.className = "lb-img";
+    img.alt = "";
+    dialog.querySelector(".lb-fig")!.prepend(img);
     const title = dialog.querySelector<HTMLElement>(".lb-title")!;
     const credit = dialog.querySelector<HTMLElement>(".lb-credit")!;
     const prev = dialog.querySelector<HTMLButtonElement>(".lb-prev")!;

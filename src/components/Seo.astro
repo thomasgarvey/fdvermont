@@ -17,7 +17,7 @@ interface Props {
 const fallback = photosData.find((p) => p.id === "recKofDfSCLcl7RG9") ?? photosData[0];
 
 const { title, description, type = "website" } = Astro.props;
-const image = Astro.props.image ?? fallback.src;
+const image = Astro.props.image ?? fallback.medium;
 const imageAlt = Astro.props.image ? Astro.props.imageAlt : fallback.caption ?? undefined;
 
 const path = Astro.url.pathname.replace(/\/+$/, "") || "/";

@@ -5,7 +5,8 @@
 // diff, and commit the result — the deployed build never needs the token.
 //
 // Usage:  node scripts/sync-airtable.mjs        (requires .env)
-import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync, existsSync, copyFileSync } from 'node:fs';
+import { execFileSync } from 'node:child_process';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -87,6 +88,24 @@ function townKey(dept) {
   }
   return null;
 }
+// A medium copy of each station photograph, for pages that show it at most 736px
+// wide: the original runs to 2,700px and a megabyte, and Burlington's page was
+// pulling 3.9 MB of photographs. The original stays for the full-screen viewer.
+// Made with sips, which ships with macOS — this sync runs on a Mac. Never
+// upscaled: a photo already small enough is copied as is.
+const MEDIUM_PX = 1100;
+function makeMedium(fullFile, mediumFile, w, h) {
+  const long = Math.max(w ?? 0, h ?? 0);
+  if (long && long <= MEDIUM_PX) {
+    copyFileSync(fullFile, mediumFile);
+    return { width: w, height: h };
+  }
+  execFileSync('sips', ['-Z', String(MEDIUM_PX), '-s', 'formatOptions', '70', fullFile, '--out', mediumFile], { stdio: 'ignore' });
+  if (!long) return { width: null, height: null };
+  const k = MEDIUM_PX / long;
+  return { width: Math.round(w * k), height: Math.round(h * k) };
+}
+
 const ext = (type, filename) =>
   ({ 'image/jpeg': 'jpg', 'image/png': 'png', 'image/webp': 'webp', 'image/gif': 'gif' }[type]
     ?? filename?.split('.').pop()?.toLowerCase() ?? 'jpg');
@@ -197,9 +216,14 @@ for (const r of photos) {
   // join below stays as a fallback for photos not yet linked.
   const linkedStation = stationById.get(f.Station?.[0]);
   const station = linkedStation && linkedStation.Status !== 'Retired' ? linkedStation : undefined;
+  const mediumPath = `photos/${r.id}.medium.${e}`;
+  const medium = makeMedium(`${ROOT}/public/${fullPath}`, `${ROOT}/public/${mediumPath}`, att.width, att.height);
   out.push({
     id: r.id,
     src: `/${fullPath}`,
+    medium: `/${mediumPath}`,
+    mediumWidth: medium.width,
+    mediumHeight: medium.height,
     thumb: `/${thumbPath}`,
     width: att.width ?? null,
     height: att.height ?? null,

@@ -1,0 +1,46 @@
+---
+// Shown for any address the site does not have, in place of Vercel's bare
+// "404: NOT_FOUND". Kept out of search results; points back into the record.
+import Archive from "../layouts/Archive.astro";
+---
+
+<Archive title="Page not found – Vermont Fire Departments">
+  <meta name="robots" content="noindex" slot="head" />
+  <main class="wrap page nf">
+    <p class="stamp">Error 404</p>
+    <h1>That page isn't here.</h1>
+    <p class="lead">
+      The address may be mistyped, or the page may have moved. Every department and station
+      is still on the record — start from one of these.
+    </p>
+    <ul class="go">
+      <li><a href="/departments">Every fire department, town by town</a></li>
+      <li><a href="/#map">The map of every station</a></li>
+      <li><a href="/stations">The list of stations</a></li>
+      <li><a href="/">The homepage</a></li>
+    </ul>
+    <p class="fine">
+      Followed a link here from elsewhere on the site? <a href="/contact">Tell us</a> and it will
+      be fixed.
+    </p>
+  </main>
+</Archive>
+
+<style>
+  .nf { padding: 3.2rem 0 4rem; max-width: 40rem; }
+  .stamp {
+    margin: 0 0 0.6rem; font-size: 0.72rem; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--ink-3);
+  }
+  h1 { margin: 0 0 1rem; font-family: "Source Serif 4", Georgia, serif; font-size: clamp(1.9rem, 4vw, 2.6rem); line-height: 1.15; }
+  .lead { margin: 0 0 1.6rem; color: var(--ink-2); line-height: 1.6; }
+  .go { list-style: none; margin: 0 0 2rem; padding: 0; border-top: 1px solid var(--line); }
+  .go li { border-bottom: 1px solid var(--line); }
+  .go a {
+    display: block; padding: 0.85rem 0; min-height: 44px; box-sizing: border-box;
+    color: var(--red); font-weight: 600; text-decoration: none;
+  }
+  .go a:hover { text-decoration: underline; }
+  .fine { font-size: 0.85rem; color: var(--ink-3); }
+  .fine a { color: var(--red); }
+</style>
