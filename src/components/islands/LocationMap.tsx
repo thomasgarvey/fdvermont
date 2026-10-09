@@ -103,6 +103,8 @@ const ICON_NO_PHOTO = pinIcon(NEEDS_BLUE);
 interface TownHit {
   town: string;      // raw TOWNNAME
   markers: L.Marker[];
+  /** The town's department page, under /departments. */
+  page?: string;
 }
 
 interface SearchEntry {
@@ -111,6 +113,7 @@ interface SearchEntry {
   haystack: string;  // uppercase text to match against
   hasPhoto: boolean;
   marker: L.Marker;
+  page?: string;
 }
 
 interface Props {
@@ -143,16 +146,18 @@ export default function LocationMap({
   // whichever of its stations happened to sort first.
   const townsFor = (needle: string): TownHit[] => {
     const byTown = new Map<string, L.Marker[]>();
+    const pageOf = new Map<string, string>();
     for (const e of indexRef.current) {
       if (!e.town.startsWith(needle)) continue;
       if (!byTown.has(e.town)) byTown.set(e.town, []);
       byTown.get(e.town)!.push(e.marker);
+      if (e.page && !pageOf.has(e.town)) pageOf.set(e.town, e.page);
     }
     return [...byTown]
       .filter(([, m]) => m.length > 1)
       .sort(([a], [b]) => (a === needle ? -1 : b === needle ? 1 : a.localeCompare(b)))
       .slice(0, 2)
-      .map(([town, markers]) => ({ town, markers }));
+      .map(([town, markers]) => ({ town, markers, page: pageOf.get(town) }));
   };
 
   const runSearch = (q: string): SearchEntry[] => {
@@ -307,6 +312,7 @@ export default function LocationMap({
         haystack: `${st.town} ${st.address} ${st.zip} ${st.name}`.toUpperCase(),
         hasPhoto: !!photo,
         marker,
+        page: st.page,
       });
     }
 
@@ -409,13 +415,12 @@ export default function LocationMap({
             }}
           >
             {towns.map((tw) => (
-              <li key={`town-${tw.town}`}>
+              <li key={`town-${tw.town}`} style={{ display: 'flex', alignItems: 'stretch', borderBottom: '1px solid var(--fdvt-panel-rule, rgba(0,0,0,.08))' }}>
                 <button
                   onClick={() => goToTown(tw)}
                   style={{
-                    display: 'block', width: '100%', textAlign: 'left', border: 'none',
+                    display: 'block', flex: 1, textAlign: 'left', border: 'none',
                     background: 'none', color: 'inherit', padding: '8px 14px', fontSize: '14px', cursor: 'pointer',
-                    borderBottom: '1px solid var(--fdvt-panel-rule, rgba(0,0,0,.08))',
                   }}
                   onMouseOver={(e) => ((e.currentTarget as HTMLElement).style.background = 'var(--fdvt-panel-hover, #f6efe7)')}
                   onMouseOut={(e) => ((e.currentTarget as HTMLElement).style.background = 'none')}
@@ -423,6 +428,17 @@ export default function LocationMap({
                   <strong>{titleCase(tw.town)}</strong>
                   <span style={{ color: 'var(--fdvt-muted, #777)' }}> — all {tw.markers.length} stations</span>
                 </button>
+                {tw.page && (
+                  <a
+                    href={`/departments/${tw.page}`}
+                    style={{
+                      display: 'flex', alignItems: 'center', padding: '8px 14px', fontSize: '13px',
+                      fontWeight: 600, color: 'var(--fdvt-link, #8B211E)', textDecoration: 'none', whiteSpace: 'nowrap',
+                    }}
+                  >
+                    Department page →
+                  </a>
+                )}
               </li>
             ))}
             {results.map((r) => (

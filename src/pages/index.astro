@@ -5,8 +5,39 @@ import photoFocus from "../data/photo-focus.json";
 import retiredStations from "../data/retired-stations.json";
 import { photographedCount, photoHref, stations } from "../lib/stations";
 import departmentsData from "../data/departments.json";
+import { towns, apart } from "../lib/towns";
 import Analytics from "../components/Analytics.astro";
 import Seo from "../components/Seo.astro";
+
+// Every department page, for the hero search: typing a town or a department
+// name should lead to that department, not to a spot on the map. Each entry
+// carries the names it answers to; the browser matches against those.
+// Records that are each one numbered station of a single department (South
+// Burlington's "Fire Station 1" and "2") are labelled as the one department.
+const numbered = (n: string) => /station\s*#?\s*\d+\s*$/i.test(n.trim());
+const deptIndex = [
+  ...towns
+    .filter((t) => t.departments.length || t.stations.length)
+    .map((t) => ({
+      slug: t.slug,
+      label:
+        t.departments.length === 1
+          ? t.departments[0].name
+          : t.departments.length > 1 && t.departments.every((d) => numbered(d.name))
+            ? `${t.name} Fire Department`
+            : t.departments.length > 1
+              ? `${t.name} fire departments`
+              : `Fire stations in ${t.name}`,
+      place: [t.name, t.county && `${t.county} County`].filter(Boolean).join(", "),
+      names: [t.name, ...t.departments.map((d) => d.name)],
+    })),
+  ...apart.map((a) => ({
+    slug: a.slug,
+    label: a.department.name,
+    place: a.town,
+    names: [a.department.name],
+  })),
+];
 
 // Every figure on this page is computed at build time from the same roster the
 // map and the station pages use — Airtable's Fire Stations table, minus anything
@@ -162,12 +193,15 @@ const MARK_NEEDS = "#5C6469";
             <h1>Vermont's fire departments.</h1>
             <p class="panel-sub">Explore every department by town or county: its stations, apparatus and photographs.</p>
 
-            <form class="search" id="hero-search" autocomplete="off">
+            <form class="search" id="hero-search" autocomplete="off" role="search">
               <label class="vh" for="q">Search Vermont fire departments</label>
-              <input id="q" type="search" placeholder="Search a town or department…" />
+              <input id="q" type="search" placeholder="Search a town or department…"
+                     role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="q-list" />
               <button type="submit">Search</button>
+              <ul class="suggest" id="q-list" role="listbox" hidden></ul>
             </form>
-            <p class="search-note" id="searchhint">Results open on the map below.</p>
+            <p class="search-note" id="searchhint">Go straight to a department, or search the map by address.</p>
+            <script type="application/json" id="dept-index" set:html={JSON.stringify(deptIndex)} />
 
             <a class="btn" href="/departments">Explore the departments →</a>
           </div>
@@ -354,18 +388,109 @@ const MARK_NEEDS = "#5C6469";
       const send = (q: string, go: boolean) =>
         window.dispatchEvent(new CustomEvent("fdvt:search", { detail: { q, go } }));
 
-      input?.addEventListener("input", () => {
+      // Department search. A town or department name goes straight to its page;
+      // anything else (an address, a road) still searches the map below.
+      type Entry = { slug: string; label: string; place: string; names: string[] };
+      const index: Entry[] = JSON.parse(document.getElementById("dept-index")?.textContent ?? "[]");
+      const list = document.getElementById("q-list") as HTMLUListElement | null;
+
+      // "St. Albans Fire Dept" and "saint albans" are the same search.
+      const norm = (s: string) =>
+        s
+          .toLowerCase()
+          .normalize("NFKD")
+          .replace(/[\u0300-\u036f]/g, "")
+          .replace(/\bsaint\b/g, "st")
+          .replace(/[^a-z0-9 ]/g, " ")
+          .replace(/\b(volunteer|fire|department|dept|fd|vfd|co|company|the|of)\b/g, " ")
+          .replace(/\s+/g, " ")
+          .trim();
+      const keyed = index.map((e) => ({ e, keys: e.names.map(norm).filter(Boolean) }));
+
+      const exact = (q: string) => {
+        const n = norm(q);
+        return n ? keyed.find((k) => k.keys.includes(n))?.e ?? null : null;
+      };
+      const suggestions = (q: string) => {
+        const n = norm(q);
+        if (n.length < 2) return [];
+        return keyed
+          .map((k) => ({ e: k.e, rank: k.keys.some((x) => x.startsWith(n)) ? 0 : k.keys.some((x) => x.includes(n)) ? 1 : 2 }))
+          .filter((r) => r.rank < 2)
+          .sort((a, b) => a.rank - b.rank || a.e.label.localeCompare(b.e.label))
+          .slice(0, 6)
+          .map((r) => r.e);
+      };
+
+      let shown: Entry[] = [];
+      let active = -1;
+      const go = (e: Entry) => { window.location.href = `/departments/${e.slug}`; };
+      const searchMap = (q: string) => {
+        close();
+        mapSection?.scrollIntoView({ behavior: "smooth", block: "start" });
+        send(q, true);
+      };
+      const close = () => {
+        if (!list || !input) return;
+        list.hidden = true;
+        input.setAttribute("aria-expanded", "false");
+        input.removeAttribute("aria-activedescendant");
+        active = -1;
+      };
+      const render = () => {
+        if (!list || !input) return;
         const q = input.value.trim();
-        send(q, false);
-        if (hint)
-          hint.textContent =
-            q.length >= 2 ? "Results are showing on the map below." : "Results open on the map below.";
+        shown = suggestions(q);
+        list.innerHTML = "";
+        shown.forEach((e, i) => {
+          const li = document.createElement("li");
+          li.id = `q-opt-${i}`;
+          li.setAttribute("role", "option");
+          li.innerHTML = `<b></b><span></span>`;
+          li.querySelector("b")!.textContent = e.label;
+          li.querySelector("span")!.textContent = e.place;
+          li.addEventListener("mousedown", (ev) => { ev.preventDefault(); go(e); });
+          list.appendChild(li);
+        });
+        if (q.length >= 2) {
+          const li = document.createElement("li");
+          li.id = `q-opt-${shown.length}`;
+          li.setAttribute("role", "option");
+          li.className = "map-opt";
+          li.textContent = `Search the map for \u201c${q}\u201d`;
+          li.addEventListener("mousedown", (ev) => { ev.preventDefault(); searchMap(q); });
+          list.appendChild(li);
+        }
+        const open = list.children.length > 0;
+        list.hidden = !open;
+        input.setAttribute("aria-expanded", String(open));
+        active = -1;
+      };
+      const highlight = (i: number) => {
+        if (!list || !input) return;
+        const items = [...list.children] as HTMLElement[];
+        active = (i + items.length) % items.length;
+        items.forEach((el, j) => el.setAttribute("aria-selected", String(j === active)));
+        input.setAttribute("aria-activedescendant", items[active].id);
+      };
+
+      input?.addEventListener("input", render);
+      input?.addEventListener("keydown", (ev) => {
+        if (!list || list.hidden) return;
+        if (ev.key === "ArrowDown") { ev.preventDefault(); highlight(active + 1); }
+        else if (ev.key === "ArrowUp") { ev.preventDefault(); highlight(active - 1); }
+        else if (ev.key === "Escape") close();
       });
+      input?.addEventListener("blur", () => setTimeout(close, 100));
 
       form?.addEventListener("submit", (e) => {
         e.preventDefault();
-        mapSection?.scrollIntoView({ behavior: "smooth", block: "start" });
-        send(input?.value.trim() ?? "", true);
+        const q = input?.value.trim() ?? "";
+        if (active >= 0 && active < shown.length) return go(shown[active]);
+        if (active === shown.length && q) return searchMap(q);
+        const hit = exact(q);
+        if (hit) return go(hit);
+        searchMap(q);
       });
 
       document.querySelectorAll<HTMLElement>("[data-find]").forEach((el) => {
@@ -763,6 +888,20 @@ const MARK_NEEDS = "#5C6469";
   .search button:hover {
     background: var(--red);
   }
+  /* Department suggestions under the hero search. The items are made by the
+     script, so they carry no scoping attribute: the rules reach them with :global. */
+  .search { position: relative; }
+  .suggest {
+    position: absolute; left: -1px; right: -1px; top: 100%; z-index: 20;
+    margin: 0; padding: 0.25rem 0; list-style: none;
+    background: var(--surface); border: 1px solid var(--line); border-top: 0;
+    box-shadow: var(--shadow);
+  }
+  .suggest :global(li) { padding: 0.55rem 0.9rem; cursor: pointer; min-height: 44px; box-sizing: border-box; }
+  .suggest :global(li b) { display: block; font-weight: 600; color: var(--ink); font-size: 0.94rem; }
+  .suggest :global(li span) { display: block; font-size: 0.78rem; color: var(--ink-3); }
+  .suggest :global(li:hover), .suggest :global(li[aria-selected="true"]) { background: color-mix(in srgb, var(--red) 10%, transparent); }
+  .suggest :global(.map-opt) { font-size: 0.84rem; color: var(--ink-2); border-top: 1px solid var(--line); display: flex; align-items: center; }
   .search-note {
     margin: 0.55rem 0 0;
     font-size: 0.78rem;
