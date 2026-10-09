@@ -13,6 +13,7 @@ import type { Station } from "../../lib/stations";
 import apparatusData from "../../data/apparatus.json";
 import Lightbox from "../../components/Lightbox.astro";
 import fleetData from "../../data/fleet.json";
+import { profiles, dollars } from "../../data/profiles";
 
 export function getStaticPaths() {
   return [
@@ -30,6 +31,10 @@ const props = Astro.props as { town: Town } | { standalone: Apart };
 const town = "town" in props ? props.town : null;
 const standalone = "standalone" in props ? props.standalone : null;
 const subject = (town ?? standalone)!;
+// Curated sections for this page, where someone has written them up — see
+// src/data/profiles.ts. Most pages have none and render as before.
+const profile = profiles[subject.slug] ?? null;
+const cite = (key: string) => profile?.sources[key];
 const place = town ? town.name : standalone!.town;
 const county = subject.county;
 const stations = subject.stations;
@@ -199,16 +204,27 @@ const facts: [string, string][] = [
   dept?.fdid ? ["FDID", dept.fdid] : null,
   dept?.founded ? ["Founded", String(dept.founded)] : null,
 ].filter(Boolean) as [string, string][];
+for (const [k, v] of profile?.facts ?? []) {
+  if (!facts.some(([fk]) => fk === k)) facts.push([k, v]);
+}
+
+// Airtable first; the profile only fills what the records leave blank.
+const contact = {
+  chief: dept?.chief ?? profile?.contact?.chief ?? null,
+  phone: dept?.phone ?? profile?.contact?.phone ?? null,
+  email: dept?.email ?? null,
+  website: dept?.website ?? profile?.contact?.website ?? null,
+};
 
 // What is written up, and what is still blank. Drives both the page body and
 // the honest note at the bottom about what is missing.
 const written = (
   [
-    ["History", dept?.history],
-    ["Joining", dept?.joining],
+    ["History", dept?.history || profile?.history.intro],
+    ["Joining", dept?.joining || profile?.careers.intro],
     ["Burn permits", dept?.burnPermits],
-    ["Call volume", dept?.callsNote],
-    ["Budget", dept?.budgetNote],
+    ["Call volume", dept?.callsNote || (profile?.history.events.some((e) => e.calls) ? "yes" : null)],
+    ["Budget", dept?.budgetNote || profile?.money.intro],
   ] as [string, string | null | undefined][]
 )
   // Burning is the town's business, and the town's own page carries it.
@@ -228,7 +244,9 @@ const title = standalone
   : departments.length === 0
     ? `Fire stations in ${place} – Vermont Fire Departments`
     : `${place} Fire ${oneDept ? "Department" : "Departments"} – Vermont Fire Departments`;
-const description = standalone
+const description = profile
+  ? profile.description
+  : standalone
   ? `${dept!.name}, working from ${place}, Vermont: ${plural(stations.length, "station")}, with contact and what is on record about its calls.`
   : dept
     ? `${dept.name}: contact, coverage, joining, burn permits and history, with ${plural(stations.length, "station")} in ${place}, Vermont.`
@@ -236,6 +254,31 @@ const description = standalone
 // The first photographed station is the link-preview image; pages with none
 // fall back to the homepage hero.
 const shown = stations.find((s: Station) => s.photo);
+
+// Structured data, so search engines can read each station as a fire station
+// with an address, a position and a phone number (schema.org/FireStation).
+const pageUrl = new URL(Astro.url.pathname.replace(/\/+$/, ""), Astro.site).href;
+const structured = {
+  "@context": "https://schema.org",
+  "@graph": stations.map((s) => ({
+    "@type": "FireStation",
+    "@id": `${pageUrl}#${s.slug}`,
+    name: s.name,
+    url: `${pageUrl}#${s.slug}`,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: s.address,
+      addressLocality: s.town,
+      addressRegion: "VT",
+      ...(s.zip ? { postalCode: String(s.zip) } : {}),
+      addressCountry: "US",
+    },
+    geo: { "@type": "GeoCoordinates", latitude: s.lat, longitude: s.lng },
+    ...(contact.phone ? { telephone: contact.phone } : {}),
+    ...(s.photo ? { image: new URL(s.photo.medium, Astro.site).href } : {}),
+    ...(s.department ? { parentOrganization: { "@type": "Organization", name: s.department } } : {}),
+  })),
+};
 ---
 
 <Archive
@@ -244,6 +287,7 @@ const shown = stations.find((s: Station) => s.photo);
   image={shown?.photo?.medium}
   imageAlt={shown && `${shown.name} at ${shown.address}, ${shown.town}, Vermont`}
 >
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(structured)} />
   <main class="wrap page">
     <nav class="crumbs" aria-label="Breadcrumb">
       <a href="/stations">All stations</a>
@@ -353,6 +397,14 @@ const shown = stations.find((s: Station) => s.photo);
             </div>
           )}
 
+          {profile?.stationNotes?.[s.slug] && (
+            <p class="stnote">
+              {profile.stationNotes[s.slug].text}
+              {cite(profile.stationNotes[s.slug].source) && (
+                <> <a class="src" href={cite(profile.stationNotes[s.slug].source)!.href} target="_blank" rel="noopener">Source</a></>
+              )}
+            </p>
+          )}
           <dl class="rec">
             {stationRecord(s).map(([k, v]) => (
               <div class="row"><dt>{k}</dt><dd>{v}</dd></div>
@@ -399,6 +451,27 @@ const shown = stations.find((s: Station) => s.photo);
       ))}
     </section>
 
+    {profile && (
+      <section class="block" aria-labelledby="hi-h">
+        <h2 id="hi-h">History</h2>
+        <p>{profile.history.intro}</p>
+        <ol class="tl">
+          {profile.history.events.map((e) => (
+            <li class={e.calls ? "tl-ev has-calls" : "tl-ev"}>
+              <span class="tl-yr">{e.year}</span>
+              <div class="tl-body">
+                <p>{e.text}</p>
+                {e.calls && (
+                  <p class="tl-calls">
+                    <b>{e.callsApprox ? "About " : ""}{e.calls.toLocaleString("en-US")}</b> calls that year
+                  </p>
+                )}
+              </div>
+            </li>
+          ))}
+        </ol>
+      </section>
+    )}
     {unplaced.length > 0 && (
       <section class="block" aria-labelledby="fl-h">
         <h2 id="fl-h">Apparatus</h2>
@@ -533,22 +606,86 @@ const shown = stations.find((s: Station) => s.photo);
       </figure>
     )}
 
-    {dept && (dept.chief || dept.phone || dept.email || dept.website) && (
+    {profile && (
+      <section class="block" aria-labelledby="cv-h">
+        <h2 id="cv-h">Who answers where</h2>
+        <p>{profile.coverage.intro}</p>
+        <table class="fleet districts">
+          <thead><tr><th scope="col">District</th><th scope="col">First due</th><th scope="col">From</th></tr></thead>
+          <tbody>
+            {profile.coverage.districts.map((d) => (
+              <tr>
+                <th scope="row">{d.name}</th>
+                <td>{d.firstDue}</td>
+                <td>{d.href ? <a href={d.href}>{d.from}</a> : d.from}<span class="dnote">{d.note}</span></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </section>
+    )}
+    {profile && (
+      <section class="block" aria-labelledby="m-h">
+        <h2 id="m-h">Money</h2>
+        <p>{profile.money.intro}</p>
+        <table class="lines">
+          <caption>{profile.money.year[0].toUpperCase() + profile.money.year.slice(1)}</caption>
+          <tbody>
+            {profile.money.lines.map((l) => (
+              <tr>
+                <th scope="row">{l.label}</th>
+                <td>
+                  {dollars(l.amount)}
+                  <span class="bar" style={`--w:${Math.round((l.amount / profile.money.lines[0].amount) * 100)}%`} aria-hidden="true"></span>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <p class="fine">{profile.money.linesNote}</p>
+        <table class="lines">
+          <caption>{profile.money.capital.title}</caption>
+          <tbody>
+            {profile.money.capital.lines.map((l) => (
+              <tr>
+                <th scope="row">{l.label}</th>
+                <td>
+                  {dollars(l.amount)}
+                  <span class="bar" style={`--w:${Math.round((l.amount / profile.money.capital.lines[0].amount) * 100)}%`} aria-hidden="true"></span>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <p class="fine">{profile.money.capital.note}</p>
+      </section>
+    )}
+    {profile && (
+      <section class="block join" aria-labelledby="w-h">
+        <h2 id="w-h">Working here</h2>
+        <p>{profile.careers.intro}</p>
+        <ul class="points">
+          {profile.careers.points.map((pt) => <li>{pt}</li>)}
+        </ul>
+        <p><a class="btn" href={profile.careers.applyUrl} target="_blank" rel="noopener">Jobs at the {departments.length === 1 ? departments[0].name : `${place} Fire Department`} →</a></p>
+      </section>
+    )}
+    {(contact.chief || contact.phone || contact.email || contact.website) && (
       <section class="block" aria-labelledby="c-h">
         <h2 id="c-h">Contact</h2>
         <dl>
-          {dept.chief && <div class="row"><dt>Chief</dt><dd>{dept.chief}</dd></div>}
-          {dept.phone && (
+          {contact.chief && <div class="row"><dt>Chief</dt><dd>{contact.chief}</dd></div>}
+          {contact.phone && (
             <div class="row"><dt>Telephone</dt>
-              <dd><a href={`tel:${dept.phone.replace(/[^0-9+]/g, "")}`}>{dept.phone}</a></dd></div>
+              <dd><a href={`tel:${contact.phone.replace(/[^0-9+]/g, "")}`}>{contact.phone}</a></dd></div>
           )}
-          {dept.email && (
+          {contact.email && (
             <div class="row"><dt>Email</dt>
-              <dd><a href={`mailto:${dept.email}`}>{dept.email}</a></dd></div>
+              <dd><a href={`mailto:${contact.email}`}>{contact.email}</a></dd></div>
           )}
-          {dept.website && (
+          {contact.website && (
             <div class="row"><dt>Website</dt>
-              <dd><a href={dept.website} target="_blank" rel="noopener">{dept.website.replace(/^https?:\/\//, "")}</a></dd></div>
+              <dd><a href={contact.website} target="_blank" rel="noopener">{contact.website.replace(/^https?:\/\//, "")}</a></dd></div>
           )}
         </dl>
         <p class="fine">
@@ -571,7 +708,8 @@ const shown = stations.find((s: Station) => s.photo);
       </section>
     )}
 
-    {(dept?.budgetNote || dept?.budgetLines?.length) && (
+    {/* A bare `length` here rendered a stray "0" on every page with no budget lines. */}
+    {(dept?.budgetNote || (dept?.budgetLines?.length ?? 0) > 0) && (
       <section class="block" aria-labelledby="b-h">
         <h2 id="b-h">Money</h2>
         {dept.budgetNote?.split("\n\n").map((p) => <p>{p}</p>)}
@@ -621,6 +759,27 @@ const shown = stations.find((s: Station) => s.photo);
       </section>
     )}
 
+    {profile && (
+      <section class="block" aria-labelledby="r-h">
+        <h2 id="r-h">For residents</h2>
+        <ul class="res">
+          {profile.residents.map((r) => (
+            <li><a href={r.href} target="_blank" rel="noopener">{r.label}</a><span>{r.text}</span></li>
+          ))}
+        </ul>
+      </section>
+    )}
+    {profile && (
+      <section class="block srcs" aria-labelledby="s-h">
+        <h2 id="s-h">Sources</h2>
+        <ul>
+          {Object.values(profile.sources).map((s) => (
+            <li><a href={s.href} target="_blank" rel="noopener">{s.label}</a>{s.note && <span> — {s.note}</span>}</li>
+          ))}
+        </ul>
+        <p class="fine">Read in October 2026. Spotted something out of date? <a href="/contact">Tell us</a>.</p>
+      </section>
+    )}
     {missing.length > 0 && (
       <section class="block gap" aria-labelledby="g-h">
         <h2 id="g-h">Not recorded yet</h2>
@@ -730,6 +889,49 @@ const shown = stations.find((s: Station) => s.photo);
     border-bottom: 1px solid var(--line); white-space: nowrap; vertical-align: top; width: 1%;
   }
   .fleet td { padding: 0.45rem 0; border-bottom: 1px solid var(--line); color: var(--ink-2); }
+  /* Profile sections (src/data/profiles.ts). */
+  .stnote { margin: 0.9rem 0 0; font-size: 0.9rem; color: var(--ink-2); }
+  .src { font-size: 0.78rem; color: var(--red); white-space: nowrap; }
+
+  /* The history as a rail: a year, a dot on the line, what happened. Years
+     with a published call count carry it in bold — the growth is the story. */
+  .tl { list-style: none; margin: 1.2rem 0 0; padding: 0; position: relative; }
+  .tl::before {
+    content: ""; position: absolute; left: 4.1rem; top: 0.4rem; bottom: 0.4rem;
+    width: 2px; background: var(--line);
+  }
+  .tl-ev { display: grid; grid-template-columns: 3.4rem 1fr; gap: 0 1.75rem; padding: 0 0 1.1rem; position: relative; }
+  .tl-ev::before {
+    content: ""; position: absolute; left: calc(4.1rem - 4px); top: 0.42rem;
+    width: 10px; height: 10px; border-radius: 50%; background: var(--paper, #fff);
+    border: 2px solid var(--ink-3); box-sizing: border-box;
+  }
+  .tl-ev.has-calls::before { background: var(--red); border-color: var(--red); }
+  .tl-yr { font-family: "Source Serif 4", Georgia, serif; font-weight: 600; font-variant-numeric: tabular-nums; text-align: right; }
+  .tl-body p { margin: 0; line-height: 1.5; }
+  .tl-calls { margin-top: 0.25rem !important; font-size: 0.88rem; color: var(--ink-2); }
+  .tl-calls b { color: var(--red); font-size: 1.05rem; }
+
+  .districts thead th {
+    text-align: left; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.06em;
+    text-transform: uppercase; color: var(--ink-3); padding: 0 1rem 0.4rem 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .districts td { padding-right: 1rem; vertical-align: top; }
+  .dnote { display: block; font-size: 0.8rem; color: var(--ink-3); }
+  .districts a { color: var(--red); }
+
+  .points { margin: 0.6rem 0 1rem; padding-left: 1.2rem; }
+  .points li { margin: 0.3rem 0; }
+  .res { list-style: none; margin: 0.6rem 0 0; padding: 0; border-top: 1px solid var(--line); }
+  .res li { padding: 0.7rem 0; border-bottom: 1px solid var(--line); }
+  .res a { font-weight: 600; color: var(--red); }
+  .res span { display: block; font-size: 0.88rem; color: var(--ink-2); margin-top: 0.15rem; }
+  .srcs ul { margin: 0.6rem 0; padding-left: 1.2rem; font-size: 0.86rem; }
+  .srcs li { margin: 0.35rem 0; }
+  .srcs a { color: var(--red); }
+  .srcs span { color: var(--ink-3); }
+
   .rigs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.6rem 1.2rem; }
   .rig { margin: 0; }
   .rig img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border: 1px solid var(--line); box-shadow: var(--shadow); }
@@ -816,6 +1018,9 @@ const shown = stations.find((s: Station) => s.photo);
      and just noise. Drop them, and enlarge the two labels that still earn their
      place so they survive the scaling. */
   @media (max-width: 720px) {
+    .tl::before { left: 3.3rem; }
+    .tl-ev { grid-template-columns: 2.6rem 1fr; gap: 0 1.6rem; }
+    .tl-ev::before { left: calc(3.3rem - 4px); }
     .rigs { grid-template-columns: 1fr; }
     .nbl { display: none; }
     .mel { font-size: 26px; }
