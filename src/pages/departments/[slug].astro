@@ -35,6 +35,10 @@ const subject = (town ?? standalone)!;
 // src/data/profiles.ts. Most pages have none and render as before.
 const profile = profiles[subject.slug] ?? null;
 const cite = (key: string) => profile?.sources[key];
+// Chart helpers. Column labels use thousands ("11.3k") so twelve years fit on a phone;
+// the exact figure is in each bar's title and in the screen-reader text.
+const kfmt = (n: number) => (n >= 1000 ? `${(n / 1000).toFixed(1)}k` : String(n));
+const maxOf = (bars: { value: number | null }[]) => Math.max(...bars.map((b) => b.value ?? 0)) || 1;
 const place = town ? town.name : standalone!.town;
 const county = subject.county;
 const stations = subject.stations;
@@ -223,7 +227,7 @@ const written = (
     ["History", dept?.history || profile?.history.intro],
     ["Joining", dept?.joining || profile?.careers.intro],
     ["Burn permits", dept?.burnPermits],
-    ["Call volume", dept?.callsNote || (profile?.history.events.some((e) => e.calls) ? "yes" : null)],
+    ["Call volume", dept?.callsNote || profile?.calls?.intro || (profile?.history.events.some((e) => e.calls) ? "yes" : null)],
     ["Budget", dept?.budgetNote || profile?.money.intro],
   ] as [string, string | null | undefined][]
 )
@@ -472,6 +476,44 @@ const structured = {
         </ol>
       </section>
     )}
+    {profile?.calls && (
+      <section class="block" aria-labelledby="cl-h">
+        <h2 id="cl-h">Calls</h2>
+        <p>{profile.calls.intro}</p>
+        {profile.calls.byYear && (
+          <figure class="chart">
+            <figcaption class="ctitle">{profile.calls.byYear.title}</figcaption>
+            <div class="cols" role="img"
+                 aria-label={profile.calls.byYear.bars.map((b) => `${b.label}: ${b.value == null ? "no figure" : (b.approx ? "over " : "") + b.value.toLocaleString("en-US")}`).join("; ")}>
+              {profile.calls.byYear.bars.map((b) => (
+                <div class={b.value == null ? "col nofig" : b.approx ? "col approx" : "col"}
+                     title={b.value == null ? `${b.label}: no figure published` : `${b.label}: ${b.approx ? "over " : ""}${b.value.toLocaleString("en-US")}`}>
+                  <span class="cval">{b.value == null ? "–" : `${b.approx ? "~" : ""}${kfmt(b.value)}`}</span>
+                  <span class="cbar" style={`--h:${b.value == null ? 0 : Math.round((b.value / maxOf(profile.calls!.byYear!.bars)) * 100)}%`}></span>
+                  <span class="clab">{b.label}</span>
+                </div>
+              ))}
+            </div>
+            <p class="fine">{profile.calls.byYear.note}</p>
+          </figure>
+        )}
+        {[profile.calls.byType, profile.calls.byUnit].filter(Boolean).map((c) => (
+          <figure class="chart">
+            <figcaption class="ctitle">{c!.title}</figcaption>
+            <ul class="hbars">
+              {c!.bars.map((b) => (
+                <li>
+                  <span class="hlab">{b.label}{b.sub && <span class="hsub">{b.sub}</span>}</span>
+                  <span class="htrack"><span class="hbar" style={`--w:${Math.round(((b.value ?? 0) / maxOf(c!.bars)) * 100)}%`}></span></span>
+                  <span class="hval">{b.value?.toLocaleString("en-US")}</span>
+                </li>
+              ))}
+            </ul>
+            <p class="fine">{c!.note}</p>
+          </figure>
+        ))}
+      </section>
+    )}
     {unplaced.length > 0 && (
       <section class="block" aria-labelledby="fl-h">
         <h2 id="fl-h">Apparatus</h2>
@@ -611,7 +653,7 @@ const structured = {
         <h2 id="cv-h">Who answers where</h2>
         <p>{profile.coverage.intro}</p>
         <table class="fleet districts">
-          <thead><tr><th scope="col">District</th><th scope="col">First due</th><th scope="col">From</th></tr></thead>
+          <thead><tr>{(profile.coverage.columns ?? ["District", "First due", "From"]).map((c) => <th scope="col">{c}</th>)}</tr></thead>
           <tbody>
             {profile.coverage.districts.map((d) => (
               <tr>
@@ -889,6 +931,30 @@ const structured = {
     border-bottom: 1px solid var(--line); white-space: nowrap; vertical-align: top; width: 1%;
   }
   .fleet td { padding: 0.45rem 0; border-bottom: 1px solid var(--line); color: var(--ink-2); }
+  /* Calls charts. Columns for a run of years; horizontal bars for categories. */
+  .chart { margin: 1.4rem 0 0; }
+  .ctitle {
+    font-size: 0.72rem; font-weight: 600; letter-spacing: 0.09em; text-transform: uppercase;
+    color: var(--ink-3); margin-bottom: 0.7rem;
+  }
+  .cols { display: flex; align-items: flex-end; gap: 4px; height: 190px; border-bottom: 1px solid var(--line); }
+  .col { flex: 1; min-width: 0; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; }
+  .cbar { display: block; width: 100%; max-width: 38px; height: var(--h); background: var(--red); border-radius: 2px 2px 0 0; }
+  .col.approx .cbar { background: color-mix(in srgb, var(--red) 45%, transparent); }
+  .col.nofig .cbar { height: 0; }
+  .cval { font-size: 0.68rem; color: var(--ink-2); font-variant-numeric: tabular-nums; margin-bottom: 3px; white-space: nowrap; }
+  .clab { position: relative; top: 1.3rem; height: 0; font-size: 0.68rem; color: var(--ink-3); white-space: nowrap; }
+  .cols + .fine { margin-top: 1.9rem; }
+  .hbars { list-style: none; margin: 0; padding: 0; }
+  .hbars li {
+    display: grid; grid-template-columns: minmax(8rem, 13rem) 1fr 3.6rem; gap: 0.8rem; align-items: center;
+    padding: 0.35rem 0; border-bottom: 1px solid var(--line); font-size: 0.88rem;
+  }
+  .hsub { display: block; font-size: 0.74rem; color: var(--ink-3); }
+  .htrack { display: block; height: 10px; }
+  .hbar { display: block; height: 100%; width: var(--w); background: var(--red); border-radius: 0 2px 2px 0; }
+  .hval { text-align: right; font-variant-numeric: tabular-nums; color: var(--ink-2); }
+
   /* Profile sections (src/data/profiles.ts). */
   .stnote { margin: 0.9rem 0 0; font-size: 0.9rem; color: var(--ink-2); }
   .src { font-size: 0.78rem; color: var(--red); white-space: nowrap; }
@@ -1018,6 +1084,9 @@ const structured = {
      and just noise. Drop them, and enlarge the two labels that still earn their
      place so they survive the scaling. */
   @media (max-width: 720px) {
+    .hbars li { grid-template-columns: 7.5rem 1fr 3.2rem; gap: 0.5rem; font-size: 0.82rem; }
+    .cval { font-size: 0.58rem; }
+    .clab { font-size: 0.6rem; }
     .tl::before { left: 3.3rem; }
     .tl-ev { grid-template-columns: 2.6rem 1fr; gap: 0 1.6rem; }
     .tl-ev::before { left: calc(3.3rem - 4px); }
