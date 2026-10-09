@@ -516,8 +516,9 @@ export const profiles: Record<string, Profile> = {
       },
       "burlington-1391-north-ave": {
         text:
-          "Completed in 1991 around the original 1950s station, which is now its gym. The city " +
-          "lists the address as 1397 North Avenue.",
+          "Completed in 1991 around the original 1950s station, which is now its gym. The city's " +
+          "page gives the address as 1397 North Avenue; the state's E911 record, which 911 " +
+          "dispatch uses, has the building at 1391.",
         source: "st4",
       },
       "burlington-23-ferguson-ave": {
