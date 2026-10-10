@@ -227,10 +227,10 @@ const contact = {
 const written = (
   [
     ["History", dept?.history || profile?.history.intro],
-    ["Joining", dept?.joining || profile?.careers.intro],
+    ["Joining", dept?.joining || profile?.careers?.intro],
     ["Burn permits", dept?.burnPermits],
     ["Call volume", dept?.callsNote || profile?.calls?.intro || (profile?.history.events.some((e) => e.calls) ? "yes" : null)],
-    ["Budget", dept?.budgetNote || profile?.money.intro],
+    ["Budget", dept?.budgetNote || profile?.money?.intro],
   ] as [string, string | null | undefined][]
 )
   // Burning is the town's business, and the town's own page carries it.
@@ -660,7 +660,7 @@ const structured = {
       </figure>
     )}
 
-    {profile && (
+    {profile?.coverage && (
       <section class="block" aria-labelledby="cv-h">
         <h2 id="cv-h">Who answers where</h2>
         <p>{profile.coverage.intro}</p>
@@ -678,7 +678,7 @@ const structured = {
         </table>
       </section>
     )}
-    {profile && (
+    {profile?.money && (
       <section class="block" aria-labelledby="m-h">
         <h2 id="m-h">Money</h2>
         <p>{profile.money.intro}</p>
@@ -714,7 +714,7 @@ const structured = {
         <p class="fine">{profile.money.capital.note}</p>
       </section>
     )}
-    {profile && (
+    {profile?.careers && (
       <section class="block join" aria-labelledby="w-h">
         <h2 id="w-h">Working here</h2>
         <p>{profile.careers.intro}</p>

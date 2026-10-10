@@ -61,7 +61,7 @@ export interface Profile {
   facts: [string, string][];
   contact?: { chief?: string; phone?: string; website?: string; source: string };
   history: { intro: string; events: Event[] };
-  money: {
+  money?: {
     intro: string;
     /** The year the lines below are for, e.g. "fiscal year 2027 (proposed)". */
     year: string;
@@ -70,7 +70,7 @@ export interface Profile {
     capital: { title: string; lines: MoneyLine[]; note: string };
     source: string;
   };
-  coverage: {
+  coverage?: {
     intro: string;
     /** Column headings for the table; default District / First due / From. */
     columns?: [string, string, string];
@@ -79,7 +79,7 @@ export interface Profile {
   };
   /** Notes printed under a station, keyed by the station's slug. */
   stationNotes?: Record<string, { text: string; source: string }>;
-  careers: { intro: string; points: string[]; applyUrl: string; source: string };
+  careers?: { intro: string; points: string[]; applyUrl: string; source: string };
   /** Calls charts: by year (columns), by type and by vehicle (horizontal bars). */
   calls?: { intro: string; byYear?: Chart; byYear2?: Chart; byType?: Chart; byUnit?: Chart };
   /** Buildings the state lists as fire stations that turned out not to be, checked on the ground. */
@@ -91,6 +91,10 @@ export interface Profile {
 const SB = "https://www.southburlingtonvt.gov";
 const BTV = "https://www.burlingtonvt.gov";
 const COL = "https://colchestervt.gov";
+const WIL = "https://www.willistonfire.com";
+const SHEL = "https://www.shelburnefire.org";
+const WIN = "https://www.winooskivt.gov";
+const WILT = "https://www.town.williston.vt.us/vertical/sites/%7BF506B13C-605B-4878-8062-87E5927E49F0%7D/uploads";
 
 export const profiles: Record<string, Profile> = {
   "south-burlington": {
@@ -726,6 +730,224 @@ export const profiles: Record<string, Profile> = {
       reports: { label: "Town of Colchester, Annual Town Reports", href: `${COL}/368/Town-Reports`, note: "Fire, Rescue and Technical Rescue sections, FY2020–FY2025" },
       tr2024: { label: "Town of Colchester, 2023–2024 Annual Town Report", href: `${COL}/Archive.aspx?ADID=1007`, note: "Technical Rescue, page 23" },
       tr2025: { label: "Town of Colchester, 2024–2025 Annual Town Report", href: `${COL}/DocumentCenter/View/11893`, note: "Fire, Rescue and Technical Rescue pages 22–24; budget pages 33–35" },
+    },
+  },
+  williston: {
+    description:
+      "Williston Fire Department: a career and paid-on-call fire and paramedic service, 2,681 calls " +
+      "in 2025, up 41% since 2021, with its history since 1949, apparatus, budget and burn permits.",
+    facts: [
+      ["Founded", "1949, by local volunteers"],
+      ["On duty every day", "An engine with 3 and a paramedic ambulance with 2"],
+      ["Calls for service", "2,681 in 2025, up 41% since 2021"],
+      ["Fire and EMS budget", "$4.37 million (FY2027, proposed)"],
+      ["Chief", "Aaron J. Collette"],
+    ],
+    contact: { chief: "Aaron J. Collette", phone: "(802) 878-5622", website: WIL, source: "wsite" },
+    history: {
+      intro:
+        "Williston started its own fire department in 1949, when a handful of local men offered their " +
+        "services after a serious fire. It now answers more than 2,600 calls a year, most of them medical, " +
+        "with career firefighter-paramedics backed by paid-on-call staff.",
+      events: [
+        { year: 1949, text: "Local volunteers, turned down at first by the Selectboard, organise the Williston Volunteer Fire Department; it answers five calls in its first year.", source: "whistory" },
+        { year: 2016, text: "More than 30 call staff on the roster.", source: "r2021" },
+        { year: 2021, text: "Call staff fall to an all-time low of eight, as demand rises; the town leans on career firefighter-paramedics.", calls: 1722, source: "r2021" },
+        { year: 2023, text: "Nearly 500 calls come in while the on-duty crew is already out on another.", calls: 2324, source: "r2023" },
+        { year: 2025, text: "2,681 calls, more than 750 of them overlapping; an American Heart Association Mission: Lifeline Gold award; a one-acre wildfire on Brownell Mountain needs a helicopter.", calls: 2681, source: "r2025" },
+      ],
+    },
+    calls: {
+      intro:
+        "Calls have risen 41% since 2021, and medical calls by 59% since 2020; two in three calls are " +
+        "medical. More and more arrive while the crew is already busy: over 750 overlapping calls in 2025.",
+      byYear: {
+        title: "Calls for service, by year",
+        bars: [
+          { label: "FY21", value: 1722 },
+          { label: "FY22", value: 2065 },
+          { label: "FY23", value: 2189 },
+          { label: "FY24", value: 2354 },
+          { label: "2025", value: 2681 },
+        ],
+        note: "From the incident tables in each year's town report: fiscal years to June, then calendar 2025 as the 2025 report gives it.",
+        source: "reports",
+      },
+      byType: {
+        title: "What the calls were, 2025",
+        bars: [
+          { label: "Medical and rescue", value: 1802 },
+          { label: "Alarm activations", value: 464 },
+          { label: "Good intent, nothing found", value: 200 },
+          { label: "Hazardous conditions", value: 75 },
+          { label: "Service calls", value: 69 },
+          { label: "Fires", value: 67 },
+        ],
+        note: "Calendar 2025, by national incident class; 2,681 in all, 4 others.",
+        source: "r2025",
+      },
+    },
+    money: {
+      intro:
+        "Fire and EMS spending has grown from $2.4 million in fiscal 2022 to $4.4 million proposed for " +
+        "2027. Ambulance billing is budgeted to bring back about $1 million.",
+      year: "fiscal year 2027, as proposed",
+      lines: [
+        { label: "Fire and EMS, spending", amount: 4365070 },
+        { label: "Ambulance billing, revenue", amount: 980000 },
+      ],
+      linesNote: "From the town's proposed FY2027 operating budget.",
+      capital: {
+        title: "Fire and EMS spending, by year",
+        lines: [
+          { label: "FY2027, proposed", amount: 4365070 },
+          { label: "FY2026, approved", amount: 3957925 },
+          { label: "FY2025, actual", amount: 3589557 },
+          { label: "FY2024, actual", amount: 3352382 },
+          { label: "FY2023, actual", amount: 3127957 },
+          { label: "FY2022, actual", amount: 2380326 },
+        ],
+        note: "Operating spending only; the 2021 ladder and engine purchase ($1.4 million) is on a bond to 2041.",
+      },
+      source: "r2025",
+    },
+    stationNotes: {
+      "williston-645-talcott-rd": {
+        text:
+          "Staffed around the clock with an engine company of three and an advanced life support " +
+          "ambulance of two. Fleet: two engines, a pumper-tanker for areas without hydrants, a 105-foot " +
+          "ladder, ambulances, a command vehicle and an off-road UTV for patient rescue.",
+        source: "r2025",
+      },
+    },
+    careers: {
+      intro:
+        "Williston hires career firefighter-EMTs and paramedics and runs a paid-on-call staff of about " +
+        "ten. Its call-staff application is closed until spring 2027.",
+      points: [
+        "Call staff: experienced firefighters and EMS providers who fill in on busy days and big incidents",
+        "About a third of the department's medical providers are paramedics; the rest are Advanced EMTs and EMTs",
+        "More than 3,000 hours of training in 2025",
+      ],
+      applyUrl: WIL,
+      source: "wsite",
+    },
+    residents: [
+      { label: "Burn permits online", href: "https://williston.burnpermits.com", text: "Brush piles need a same-day permit with a photo; campfires that meet the town's rules don't. 121 permits in 2025." },
+      { label: "Burn permits and campfires", href: `${WIL}/burn-permits--campfires.html`, text: "What counts as a campfire, what you can burn, and the 4 mph wind limit." },
+      { label: "Fire station", href: WIL, text: "645 Talcott Road; the department welcomes visitors with questions." },
+    ],
+    sources: {
+      wsite: { label: "Williston Fire Department", href: WIL },
+      whistory: { label: "Williston Fire Department, History", href: `${WIL}/history.html` },
+      reports: { label: "Town of Williston, Annual Town Reports 2021–2025", href: "https://www.town.williston.vt.us/index.asp?Type=B_BASIC&SEC=%7B0FDD35C4-979C-482B-B25F-B9A97AAFC2B1%7D", note: "Fire Department section, incident tables" },
+      r2021: { label: "Town of Williston, 2021 Annual Town Report", href: `${WILT}/2021_Annual_Town_Report.pdf`, note: "Pages 52–53" },
+      r2023: { label: "Town of Williston, 2023 Annual Town Report", href: `${WILT}/2023_Annual_Town_Report.pdf`, note: "Pages 54–57" },
+      r2025: { label: "Town of Williston, 2025 Annual Town Report", href: `${WILT}/Final_Town_Report_2025.pdf`, note: "Fire Department pages 54–57; budget pages 27 and 32" },
+    },
+  },
+  shelburne: {
+    description:
+      "Shelburne Fire Department: an all-volunteer fire, heavy rescue, marine rescue and hazmat " +
+      "department since 1941, about 30 members and nearly 300 emergencies a year, and how to join.",
+    facts: [
+      ["Founded", "1941; first town fire money voted in 1923"],
+      ["Members", "About 30, all volunteers"],
+      ["Emergencies", "Nearly 300 a year"],
+      ["Services", "Fire, heavy rescue, marine rescue, hazmat"],
+    ],
+    contact: { phone: "(802) 985-2366", website: SHEL, source: "contact" },
+    history: {
+      intro:
+        "Shelburne's fire service began with a town meeting vote in 1923 and became a chartered " +
+        "department in 1941. It still runs entirely on volunteers, from one station built in 1983.",
+      events: [
+        { year: 1923, text: "Town Meeting appropriates the first money for fire protection: a chemical engine on a Ford chassis.", source: "history" },
+        { year: 1924, text: "The first town fire committee is set up.", source: "about" },
+        { year: 1941, text: "The department is chartered and a station built for its new 1941 Buffalo pumper. In its first year members answer ten fire calls, taken by phone at the Shelburne Farms Inn's front desk, with a siren on the schoolhouse roof.", source: "about" },
+        { year: 1983, text: "The current station on Shelburne Road opens.", source: "contact" },
+        { year: 2016, text: "The department marks 75 years of service.", source: "about" },
+        { year: 2023, text: "A century since the town first paid for fire protection.", source: "about" },
+      ],
+    },
+    stationNotes: {
+      "shelburne-5380-shelburne-rd": {
+        text: "The volunteer station, built in 1983. Shelburne Rescue, a separate volunteer service, provides ambulance cover around the clock.",
+        source: "contact",
+      },
+    },
+    careers: {
+      intro:
+        "Shelburne's firefighters are all volunteers: lawyers, vets, contractors, parents and students. " +
+        "New members are onboarded twice a year; experienced firefighters can join any time.",
+      points: [
+        "Apply, then an interview, which is also your chance to ask questions",
+        "No experience needed: the department trains new firefighters from scratch",
+        "Applications to join@shelburnefire.org",
+      ],
+      applyUrl: `${SHEL}/join-our-department`,
+      source: "join",
+    },
+    residents: [
+      { label: "Burn permits", href: `${SHEL}/resources`, text: "Request online or through Shelburne Dispatch, (802) 985-8051. Same day only; out before dark; brush only." },
+      { label: "Reflective mailbox signs", href: `${SHEL}/resources`, text: "Help crews find your house; proceeds go to the Shelburne Firefighters' Association." },
+      { label: "Knox Box programme", href: `${SHEL}/resources`, text: "A locked key box for businesses, so crews can get in without forcing doors." },
+      { label: "Support the firefighters", href: `${SHEL}/about/donate-to-firefighters-association`, text: "The Shelburne Firefighters' Association, a 501(c)(3), buys equipment beyond the town budget." },
+    ],
+    sources: {
+      about: { label: "Shelburne Fire Department, About", href: `${SHEL}/about` },
+      history: { label: "Shelburne Fire Department, history by Tom Tompkins (2015)", href: `${SHEL}/about/shelburne-fire-history-by-tom-tompkins` },
+      join: { label: "Shelburne Fire Department, Join our department", href: `${SHEL}/join-our-department` },
+      contact: { label: "Shelburne Fire Department, Contact", href: `${SHEL}/contact` },
+    },
+  },
+  winooski: {
+    description:
+      "Winooski Fire Department: one station on Main Street, a new 100-foot ladder truck, its fleet, " +
+      "staffing, fire prevention and part-time on-call jobs.",
+    facts: [
+      ["Station", "120 Main Street"],
+      ["Staff listed by the city", "9: chief, officers, firefighters and fire inspectors"],
+      ["New ladder", "E-One 100-foot ladder truck"],
+      ["Chief", "John Audy"],
+    ],
+    contact: { chief: "John Audy", phone: "802-655-6420", website: `${WIN}/1687/Fire-Department`, source: "about" },
+    history: {
+      intro:
+        "Winooski's fire department covers a small, dense city from one station on Main Street. Recent " +
+        "years have brought a new 100-foot ladder truck, a Fire Marshal and a second fire inspector.",
+      events: [
+        { year: 2025, text: "A Fire Marshal is hired to lead community risk reduction, with a second fire inspector; new part-time on-call firefighters finish the county's basic firefighter class.", source: "budget" },
+        { year: 2026, text: "A new 100-foot ladder truck, bought with help from $500,000 of federal recovery (ARPA) money, is expected in service in fiscal 2027 after weeks of training; a station renovation is being planned to help with staffing.", source: "budget" },
+      ],
+    },
+    stationNotes: {
+      "winooski-120-main-st": {
+        text:
+          "Ladder 1, an E-One HR100 100-foot ladder; Engine 1, a 2014 Sutphen Monarch pumper (1,500 gpm, " +
+          "1,000 gallons, seats 8); Engine 2, a 1995 Sutphen (1,250 gpm); a utility truck and two command cars.",
+        source: "team",
+      },
+    },
+    careers: {
+      intro:
+        "The department is short-staffed, especially on weekday nights from 6 p.m. to 6 a.m., and is " +
+        "hiring part-time on-call firefighters, trained through the Chittenden County basic firefighter class.",
+      points: [
+        "Part-time, on-call firefighter positions, posted on the city's jobs page",
+        "Career staff include a battalion chief, captains, a lieutenant, firefighters and fire inspectors",
+      ],
+      applyUrl: `${WIN}/jobs`,
+      source: "budget",
+    },
+    residents: [
+      { label: "Fire safety resources", href: `${WIN}/348/Fire-Safety-Resources`, text: "Smoke and CO alarms, cooking and heating safety." },
+      { label: "Code enforcement", href: `${WIN}/1687/Fire-Department`, text: "The department's code enforcement team keeps rental housing and buildings safe." },
+    ],
+    sources: {
+      about: { label: "City of Winooski, Fire Department", href: `${WIN}/1700/About` },
+      team: { label: "City of Winooski, Our Team & Fleet", href: `${WIN}/347/Our-Team-Fleet` },
+      budget: { label: "City of Winooski, FY27 Budget Book", href: `${WIN}/DocumentCenter/View/10406/Fiscal-Year-2027-Budget-Book`, note: "Public Safety: Fire Department, page 28; reserves, page 23" },
     },
   },
 };
