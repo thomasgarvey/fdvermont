@@ -113,7 +113,7 @@ const UJFD: Profile = {
     "Underhill-Jericho Fire Department: a volunteer fire and first-response EMS department since 1913, " +
     "two stations, a weekday duty crew, backcountry rescue, burn permits and how to join.",
   facts: [
-    ["Formed", "1913"],
+    ["Founded", "1913"],
     ["Covers", "Underhill, Jericho and parts of Westford"],
     ["Stations", "2: Underhill Village (main) and Jericho Center"],
     ["EMS", "First response, 24/7, with over 10 EMT responders"],
@@ -1218,7 +1218,7 @@ export const profiles: Record<string, Profile> = {
       "Essex Junction Fire Department: a paid-on-call department since 1893, 666 calls in 2025, " +
       "a 105-foot ladder and two engines from one station, its history, its pay and how to join.",
     facts: [
-      ["Established", "4 March 1893, the day the village charter was approved"],
+      ["Founded", "1893"],
       ["Members", "About 30, paid on call"],
       ["Calls", "666 in 2025"],
       ["Area protected", "4.6 square miles"],

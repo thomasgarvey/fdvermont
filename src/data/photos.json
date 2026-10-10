@@ -16,7 +16,7 @@
     "featured": false,
     "department": {
       "name": "Essex Junction Fire Department",
-      "city": "Essex Junction",
+      "city": "Essex Junction City",
       "county": "Chittenden"
     },
     "town": "ESSEX JUNCTION CITY",
@@ -124,7 +124,7 @@
     "featured": false,
     "department": {
       "name": "Bolton Volunteer Fire Department",
-      "city": "Waterbury",
+      "city": "Bolton",
       "county": "Chittenden"
     },
     "town": "BOLTON",
@@ -1111,7 +1111,7 @@
     "featured": false,
     "department": {
       "name": "Essex Fire Department",
-      "city": "Essex Junction",
+      "city": "Essex Town",
       "county": "Chittenden"
     },
     "town": "ESSEX TOWN",
