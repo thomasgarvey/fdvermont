@@ -96,6 +96,82 @@ const SHEL = "https://www.shelburnefire.org";
 const WIN = "https://www.winooskivt.gov";
 const WILT = "https://www.town.williston.vt.us/vertical/sites/%7BF506B13C-605B-4878-8062-87E5927E49F0%7D/uploads";
 
+const MIL = "https://www.miltonvt.gov";
+const CVF = "https://www.cvfrs.com";
+const HIN = "https://www.hinesburg.org";
+const UJ = "https://www.ujfd.org";
+
+// One department, two town pages: Underhill and Jericho share the profile.
+const UJFD: Profile = {
+  description:
+    "Underhill-Jericho Fire Department: a volunteer fire and first-response EMS department since 1913, " +
+    "two stations, a weekday duty crew, backcountry rescue, burn permits and how to join.",
+  facts: [
+    ["Formed", "1913"],
+    ["Covers", "Underhill, Jericho and parts of Westford"],
+    ["Stations", "2: Underhill Village (main) and Jericho Center"],
+    ["EMS", "First response, 24/7, with over 10 EMT responders"],
+    ["ISO rating", "4/6/10, effective 1 March 2014"],
+  ],
+  contact: { chief: "Todd Fischer", phone: "802-899-4025", website: UJ, source: "home" },
+  history: {
+    intro:
+      "Townspeople worried about their homes and businesses formed the department in 1913. Jericho " +
+      "joined Underhill in paying for it in 1936, and it has served both towns since, today from " +
+      "two stations with six pieces of firefighting apparatus.",
+    events: [
+      { year: 1913, text: "The department is formed. Its first equipment is a chemical tank on two wagon wheels, kept in a shed beside the Elbridge Nealy furniture and jewelry store on Park Street.", source: "about" },
+      { year: 1936, text: "A fire station is built at Park Street and Route 15, housing a 1923 Model T Ford and a 1927 Packard coupe, each fitted with two 40-gallon chemical tanks. Jericho begins contributing, and the department covers both towns.", source: "about" },
+      { year: 1964, text: "The first factory-built fire truck, an International Model V196, arrives. Before it came a 1942 Army-surplus Chevrolet with a 500 gpm pump.", source: "about" },
+      { year: 1982, text: "The Jericho substation is built on Browns Trace Road, on land given by Don and Alice Rivers.", source: "about" },
+      { year: 1997, text: "The main station opens on Route 15 in Underhill Village, built as both a fire station and an emergency operations center.", source: "about" },
+      { year: 2014, text: "A new ISO rating of 4/6/10 takes effect on 1 March, which may lower homeowners' insurance premiums for many residents.", source: "about" },
+    ],
+  },
+  stationNotes: {
+    "underhill-420-vt-route-15": {
+      text:
+        "The main station and administrative offices, built in 1997: a 6,400 sq ft apparatus bay and a " +
+        "4,100 sq ft administrative section. Engine 11, the attack pumper sent first to large fires; " +
+        "Engine 8, a pumper-tanker; Squad 51 for EMS and mountain rescue, with the mountain rescue trailer and the Gator.",
+      source: "apparatus",
+    },
+    "jericho-288-browns-trce": {
+      text:
+        "The Jericho Center substation, built in 1982 and used mainly as a quick-response station for " +
+        "Jericho Center. Engine 2 responds from here as a pumper-tanker.",
+      source: "apparatus",
+    },
+  },
+  careers: {
+    intro:
+      "Members are volunteers from Underhill, Jericho and parts of Westford, joining as firefighters, " +
+      "EMS first responders or specialists. On weekdays a full-time duty crew runs Squad 52, the first " +
+      "vehicle out on every call.",
+    points: [
+      "An apprenticeship of about a year, after the free online NIMS 100, 200 and 700 courses",
+      "A medical exam with a department physician, paid for by the department",
+      "Firefighters: the Chittenden County basic course or Firefighter 1 within two years; under-18s need a parent's approval",
+      "EMS first responders: 18 or over, with a Vermont EMR, EMT or AEMT licence and a National Registry card",
+    ],
+    applyUrl: `${UJ}/join-the-ujfd`,
+    source: "apply",
+  },
+  residents: [
+    { label: "Burn permits", href: "https://ujfd.burnpermits.com/", text: "Apply online; the permit is issued at once and lasts a single 24-hour period." },
+    { label: "Homeowner information form", href: `${UJ}/fire-safety-new`, text: "Tell the department about your home ahead of an emergency, renters included." },
+    { label: "Reflective address signs", href: `${UJ}/fire-safety-new`, text: "Help crews find your house faster." },
+    { label: "Dry hydrants", href: `${UJ}/fire-safety-new`, text: "Have a pond a truck can reach? The department reimburses the strainer and coupling hardware." },
+    { label: "Community CPR", href: UJ, text: "Classes about every three months; call 802-899-4025." },
+  ],
+  sources: {
+    home: { label: "Underhill Jericho Fire Department", href: UJ },
+    about: { label: "Underhill Jericho Fire Department, About", href: `${UJ}/about-ujfd` },
+    apparatus: { label: "Underhill Jericho Fire Department, Apparatus", href: `${UJ}/apparatus` },
+    apply: { label: "Underhill Jericho Fire Department, Membership application", href: `${UJ}/membership-application`, note: "Requirements for members" },
+  },
+};
+
 export const profiles: Record<string, Profile> = {
   "south-burlington": {
     description:
@@ -950,6 +1026,189 @@ export const profiles: Record<string, Profile> = {
       budget: { label: "City of Winooski, FY27 Budget Book", href: `${WIN}/DocumentCenter/View/10406/Fiscal-Year-2027-Budget-Book`, note: "Public Safety: Fire Department, page 28; reserves, page 23" },
     },
   },
+  milton: {
+    description:
+      "Milton Fire Department: 40 volunteer firefighters and 10 cadets, about 240 calls a year from the " +
+      "Bombardier Road station, Milton Rescue's ambulance service, burn permits and how to join.",
+    facts: [
+      ["Members", "40 volunteer firefighters, 10 cadets and one part-time employee"],
+      ["Calls", "About 240 a year"],
+      ["Station", "47 Bombardier Road, opened 2003"],
+      ["Also handles", "Hazmat, water rescue and basic vehicle extrication"],
+      ["Ambulance", "Milton Rescue, advanced life support, about 1,700 calls a year"],
+    ],
+    contact: { chief: "Chris Poirier", phone: "802-891-8080", website: `${MIL}/180/Fire`, source: "fire" },
+    history: {
+      intro:
+        "For 66 years Milton's fire department was run by the village, with money from the town. In 2003 " +
+        "it moved into a new station and became a town department when the two governments merged.",
+      events: [
+        { year: 2003, text: "On 27 January the department moves into its new station at 47 Bombardier Road: 12,000 sq ft, finished on time and within budget.", source: "fire" },
+        { year: 2003, text: "On 30 June the village and town governments merge, ending 66 years of the village running the fire department.", source: "fire" },
+      ],
+    },
+    stationNotes: {
+      "milton-47-bombardier-rd": {
+        text:
+          "Home to eight pieces of apparatus, two boats and a hazmat trailer. Milton Rescue, the town's " +
+          "advanced life support ambulance, works from the same address.",
+        source: "fire",
+      },
+    },
+    careers: {
+      intro:
+        "The fire department is volunteer and paid on call; Milton Rescue has more than 50 volunteers, " +
+        "per-diem and full-time members, certified up to paramedic.",
+      points: [
+        "Firefighters: fill in the volunteer application and the membership committee will set up an interview",
+        "The department meets Monday evenings at 7: a business meeting on the first Monday, training on the second and third",
+        "Rescue volunteers work one 12-hour shift a week and one 12-hour weekend shift a month",
+        "Milton Rescue is hiring per-diem AEMT and paramedic crew chiefs",
+      ],
+      applyUrl: `${MIL}/180/Fire`,
+      source: "fire",
+    },
+    residents: [
+      { label: "Burn permits", href: `${MIL}/197/Burn-Permit`, text: "State law requires a permit from the Town Forest Fire Warden to burn natural wood or debris outdoors." },
+      { label: "Green 911 address signs", href: `${MIL}/251/Rescue`, text: "Order a sign so crews, and deliveries, can find your address." },
+      { label: "Ambulance billing", href: `${MIL}/375/Billing`, text: "Milton Rescue's billing page." },
+    ],
+    sources: {
+      fire: { label: "Town of Milton, Fire", href: `${MIL}/180/Fire` },
+      rescue: { label: "Town of Milton, Rescue", href: `${MIL}/251/Rescue` },
+    },
+  },
+  charlotte: {
+    description:
+      "Charlotte Volunteer Fire & Rescue Services: a nonprofit fire department and paramedic ambulance " +
+      "serving Charlotte since 1950, its fleet, its staffing and current openings.",
+    facts: [
+      ["Founded", "1950"],
+      ["Run by", "Charlotte Volunteer Fire & Rescue Services, Inc., a nonprofit"],
+      ["Ambulance", "Two-person paid crew around the clock; paramedic level since 2011"],
+      ["Rescue calls", "Over 500 a year"],
+      ["Chief", "Jamie Valyou, Director of Emergency Services"],
+    ],
+    contact: { chief: "Jamie Valyou", website: CVF, source: "members" },
+    history: {
+      intro:
+        "Charlotte's fire and rescue services are run by a private, not-for-profit corporation with two " +
+        "agencies, the Charlotte Volunteer Fire Department and the Charlotte Volunteer Rescue Squad. The " +
+        "town provides most of its money; private gifts pay for extras the town budget doesn't.",
+      events: [
+        { year: 1950, text: "Charlotte Volunteer Fire & Rescue Services is founded.", source: "about" },
+        { year: 2011, text: "In March, Charlotte Rescue begins paramedic coverage.", source: "ems" },
+      ],
+    },
+    stationNotes: {
+      "charlotte-170-ferry-rd": {
+        text:
+          "Engine 1, a 2004 Seagrave, and Engine 2, a 2019 KME, both 2,000 gpm with compressed-air foam; " +
+          "Engine 4, a 2008 GMC; a 1993 International tanker (1,500 gallons); Rescue 3, a 2012 Spartan heavy " +
+          "rescue; ambulances A-1 (2014 Ford F450) and A-2 (2020 Ford F-550); two boats and a Kawasaki Mule.",
+        source: "fleet",
+      },
+    },
+    careers: {
+      intro:
+        "The rescue squad keeps a two-person crew at the station 24 hours a day, about 17,472 shift hours " +
+        "a year, with permanent staff, 12 per-diem providers and volunteers. Firefighters train every " +
+        "Tuesday at 6:30 p.m.",
+      points: [
+        "Openings: full-time and part-time AEMT or paramedic crew chief, part-time firefighter, per-diem crew chief",
+        "Volunteer EMS providers and volunteer firefighters are welcome",
+        "Send a cover letter and application to admin@cvfrs.org",
+      ],
+      applyUrl: `${CVF}/join-us`,
+      source: "join",
+    },
+    residents: [
+      { label: "Station tours", href: `${CVF}/the-membership-1`, text: "Stop by to see the station and meet the members." },
+      { label: "Ambulance billing", href: `${CVF}/rescue-1`, text: "Handled by ECP Services, the squad's billing partner." },
+      { label: "Form 990", href: `${CVF}/about-cvfrs`, text: "The corporation's public inspection copy of its tax return." },
+    ],
+    sources: {
+      about: { label: "CVFRS, About", href: `${CVF}/about-cvfrs` },
+      ems: { label: "CVFRS, EMS", href: `${CVF}/rescue-1` },
+      members: { label: "CVFRS, Fire members", href: `${CVF}/the-membership-1` },
+      fleet: { label: "CVFRS, Apparatus", href: `${CVF}/apparatus-1`, note: "Ambulances from the rescue fleet page, /apparatus" },
+      join: { label: "CVFRS, Join our team", href: `${CVF}/join-us`, note: "Staffing from the EMS members page, /the-membership" },
+    },
+  },
+  hinesburg: {
+    description:
+      "Hinesburg Fire Department: fire, rescue and advanced EMT first response for Hinesburg and St. George, " +
+      "641 calls in 2025, three full-time staff and 35 on call, and the budget.",
+    facts: [
+      ["Staff", "3 full-time, 35 paid on call"],
+      ["Calls", "641 in 2025, up 3.7%; 73% rescue and EMS"],
+      ["Covers", "Hinesburg and St. George"],
+      ["EMS", "Non-transport licence at the Advanced EMT level"],
+    ],
+    contact: { chief: "Prescott Nadeau", phone: "802-482-2455", website: `${HIN}/1236/Hinesburg-Fire-Department-First-Response`, source: "dept" },
+    history: {
+      intro:
+        "Hinesburg's department answers fire, medical, hazmat and rescue calls from one station on Route 116, " +
+        "with paid on-call members and a small full-time staff that the town has been adding to.",
+      events: [
+        { year: 2024, text: "In September the town hires a full-time chief, Prescott Nadeau; Nick Baker stays on as Deputy Chief.", source: "meeting" },
+        {
+          year: 2025,
+          text:
+            "641 calls, 22 of them fires. The department sells Tanker 1, buys a new air compressor and builds a gym in the " +
+            "station, partly with donations, and staffs 24-hour shifts with a full-time member four days a week.",
+          calls: 641,
+          source: "report",
+        },
+      ],
+    },
+    calls: {
+      intro:
+        "Rescue and EMS made up 73% of 2025's calls; Tuesday, Monday and Thursday were the busiest days, and " +
+        "10 to 11 a.m. the busiest hour. Calls overlapped 69 times. On 109 calls (17%) the department could not " +
+        "respond and mutual aid took over; it gave mutual aid 24 times and received fire mutual aid 26 times.",
+    },
+    stationNotes: {
+      "hinesburg-10340-vt-route-116": {
+        text:
+          "The department's one station. Its page lists three engines, a tanker, a first-response medical unit " +
+          "and a command vehicle; the 2025 report records Tanker 1 being sold.",
+        source: "dept",
+      },
+    },
+    money: {
+      intro:
+        "Hinesburg votes the fire budget as its own article at Town Meeting. For fiscal 2027 the town proposed " +
+        "$140,993 (24%) more for fire and rescue, $108,000 of it for a full-time firefighter/EMT to staff six " +
+        "days a week around the clock, partly offset by $30,000 less on-call pay.",
+      year: "fiscal year 2026, approved at Town Meeting 2025",
+      lines: [
+        { label: "Fire Department budget", amount: 693775 },
+        { label: "Raised through taxes", amount: 625275 },
+      ],
+      linesNote: "Article VII of the 2025 Town Meeting, as recorded in the minutes.",
+      capital: {
+        title: "Added to the fiscal 2027 capital budget (proposed)",
+        lines: [
+          { label: "Set aside to replace Med 1", amount: 20000 },
+          { label: "Fire equipment", amount: 5000 },
+          { label: "Facilities, increase", amount: 4000 },
+        ],
+        note: "The main fire additions named in the budget overview.",
+      },
+      source: "report",
+    },
+    residents: [
+      { label: "Impact fee: fire protection analysis", href: `${HIN}/1254/Fire-Protection-Analysis`, text: "The study behind the fire share of the town's development impact fee." },
+    ],
+    sources: {
+      dept: { label: "Town of Hinesburg, Fire Department & First Response", href: `${HIN}/1236/Hinesburg-Fire-Department-First-Response` },
+      report: { label: "Town of Hinesburg, Annual Report FY2025", href: `${HIN}/DocumentCenter/View/3679/Hinesburg-Annual-Report-FY2025`, note: "Fire Department, pages 62-63; FY2027 budget overview, pages 8-12" },
+      meeting: { label: "Town of Hinesburg, Annual Report FY2025: minutes of the 2025 Town Meeting", href: `${HIN}/DocumentCenter/View/3679/Hinesburg-Annual-Report-FY2025` },
+    },
+  },
+  jericho: UJFD,
+  underhill: UJFD,
 };
 
 /** Thousands separators, no decimals: 7528864 → "7,528,864". */
