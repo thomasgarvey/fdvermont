@@ -39,6 +39,8 @@ const cite = (key: string) => profile?.sources[key];
 // the exact figure is in each bar's title and in the screen-reader text.
 const kfmt = (n: number) => (n >= 1000 ? `${(n / 1000).toFixed(1)}k` : String(n));
 const maxOf = (bars: { value: number | null }[]) => Math.max(...bars.map((b) => b.value ?? 0)) || 1;
+// Yearly charts in one section share a scale, so two services' bars compare honestly.
+const yearScale = maxOf([...(profile?.calls?.byYear?.bars ?? []), ...(profile?.calls?.byYear2?.bars ?? [])]);
 const place = town ? town.name : standalone!.town;
 const county = subject.county;
 const stations = subject.stations;
@@ -313,7 +315,7 @@ const structured = {
           <p class="stamp">{county && `${county} County`}</p>
           <h1>{place}</h1>
           {departments.length > 1 && (
-            <p class="sub">{departments.map((d) => d.name).join(" · ")}</p>
+            <p class="sub">{profile?.subtitle ?? departments.map((d) => d.name).join(" · ")}</p>
           )}
         </>
       )}
@@ -480,23 +482,23 @@ const structured = {
       <section class="block" aria-labelledby="cl-h">
         <h2 id="cl-h">Calls</h2>
         <p>{profile.calls.intro}</p>
-        {profile.calls.byYear && (
+        {[profile.calls.byYear, profile.calls.byYear2].filter(Boolean).map((c) => (
           <figure class="chart">
-            <figcaption class="ctitle">{profile.calls.byYear.title}</figcaption>
+            <figcaption class="ctitle">{c!.title}</figcaption>
             <div class="cols" role="img"
-                 aria-label={profile.calls.byYear.bars.map((b) => `${b.label}: ${b.value == null ? "no figure" : (b.approx ? "over " : "") + b.value.toLocaleString("en-US")}`).join("; ")}>
-              {profile.calls.byYear.bars.map((b) => (
+                 aria-label={c!.bars.map((b) => `${b.label}: ${b.value == null ? "no figure" : (b.approx ? "over " : "") + b.value.toLocaleString("en-US")}`).join("; ")}>
+              {c!.bars.map((b) => (
                 <div class={b.value == null ? "col nofig" : b.approx ? "col approx" : "col"}
                      title={b.value == null ? `${b.label}: no figure published` : `${b.label}: ${b.approx ? "over " : ""}${b.value.toLocaleString("en-US")}`}>
                   <span class="cval">{b.value == null ? "–" : `${b.approx ? "~" : ""}${kfmt(b.value)}`}</span>
-                  <span class="cbar" style={`--h:${b.value == null ? 0 : Math.round((b.value / maxOf(profile.calls!.byYear!.bars)) * 100)}%`}></span>
+                  <span class="cbar" style={`--h:${b.value == null ? 0 : Math.round((b.value / yearScale) * 100)}%`}></span>
                   <span class="clab">{b.label}</span>
                 </div>
               ))}
             </div>
-            <p class="fine">{profile.calls.byYear.note}</p>
+            <p class="fine">{c!.note}</p>
           </figure>
-        )}
+        ))}
         {[profile.calls.byType, profile.calls.byUnit].filter(Boolean).map((c) => (
           <figure class="chart">
             <figcaption class="ctitle">{c!.title}</figcaption>
@@ -512,6 +514,16 @@ const structured = {
             <p class="fine">{c!.note}</p>
           </figure>
         ))}
+      </section>
+    )}
+    {profile?.corrections && (
+      <section class="block" aria-labelledby="co-h">
+        <h2 id="co-h">What the state's list gets wrong</h2>
+        <p>{profile.corrections.intro}</p>
+        <ul class="res">
+          {profile.corrections.items.map((c) => <li><b>{c.address}</b><span>{c.finding}</span></li>)}
+        </ul>
+        <p class="fine">Checked on the ground for fdvermont.org. Know of another? <a href="/contact">Tell us</a>.</p>
       </section>
     )}
     {unplaced.length > 0 && (

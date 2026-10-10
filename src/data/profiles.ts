@@ -55,6 +55,8 @@ export interface Chart {
 export interface Profile {
   /** Search description, written for this department. */
   description: string;
+  /** Replaces the list of Airtable record names under the heading, where those are a muddle. */
+  subtitle?: string;
   /** Rows added to the facts at the top of the page. */
   facts: [string, string][];
   contact?: { chief?: string; phone?: string; website?: string; source: string };
@@ -79,13 +81,16 @@ export interface Profile {
   stationNotes?: Record<string, { text: string; source: string }>;
   careers: { intro: string; points: string[]; applyUrl: string; source: string };
   /** Calls charts: by year (columns), by type and by vehicle (horizontal bars). */
-  calls?: { intro: string; byYear?: Chart; byType?: Chart; byUnit?: Chart };
+  calls?: { intro: string; byYear?: Chart; byYear2?: Chart; byType?: Chart; byUnit?: Chart };
+  /** Buildings the state lists as fire stations that turned out not to be, checked on the ground. */
+  corrections?: { intro: string; items: { address: string; finding: string }[] };
   residents: { label: string; href: string; text: string }[];
   sources: Record<string, Source>;
 }
 
 const SB = "https://www.southburlingtonvt.gov";
 const BTV = "https://www.burlingtonvt.gov";
+const COL = "https://colchestervt.gov";
 
 export const profiles: Record<string, Profile> = {
   "south-burlington": {
@@ -575,6 +580,152 @@ export const profiles: Record<string, Profile> = {
       ar2025: { label: "City of Burlington, Annual Report 2025", href: `${BTV}/DocumentCenter/View/11639/Annual-Report-2025`, note: "Pages 39–41" },
       budget: { label: "City of Burlington, FY27 budget, 15 – Fire", href: `${BTV}/DocumentCenter/View/12153/15---Fire`, note: "Draft budget documents, Mayor's recommended" },
       hire: { label: "City of Burlington, How to Become a Burlington Firefighter", href: `${BTV}/180/How-to-Become-a-Burlington-Firefighter`, note: "With the Fire Department Employment page for pay" },
+    },
+  },
+  colchester: {
+    subtitle: "Colchester Fire · Colchester Rescue · Colchester Technical Rescue",
+    description:
+      "Colchester's fire department, rescue squad and technical rescue team: four fire stations, " +
+      "about 3,300 calls a year, history since 1961, how to volunteer and the town's own figures.",
+    facts: [
+      ["Services", "Fire, Rescue (paramedic) and Technical Rescue, all town departments"],
+      ["Calls, FY2025", "Fire 1,091 · Rescue 2,181 · Technical Rescue 28"],
+      ["People", "38+ call firefighters, 6 fire staff, 50+ EMS providers, 24 rescue technicians"],
+      ["Fire and rescue chief", "Scott Crady"],
+    ],
+    contact: {
+      chief: "Scott Crady",
+      phone: "802-862-4415",
+      website: `${COL}/3245/Fire-Department`,
+      source: "fire",
+    },
+    history: {
+      intro:
+        "Colchester's emergency services grew out of the Malletts Bay Fire Department, one of the " +
+        "first volunteer departments in the area. Its members started the town's ambulance squad " +
+        "in 1961; the town brought fire, rescue and technical rescue together as its own departments.",
+      events: [
+        { year: 1955, text: "Around the mid-1950s, the volunteer Malletts Bay Fire Department forms to cover the Malletts Bay part of town.", source: "rhistory" },
+        { year: 1961, text: "Its association founds the Malletts Bay Rescue Squad, one of the first volunteer ambulance squads in the area.", source: "rhistory" },
+        { year: 1962, text: "The squad's first call comes early in the year; 20 that year, 33 the next, in a town of under 5,000.", calls: 20, source: "rhistory" },
+        { year: 1970, text: "The town takes over funding the squad, as its own budget line.", source: "rhistory" },
+        { year: 1977, text: "Renamed Colchester Rescue Squad, to make clear it covers the whole town.", source: "rhistory" },
+        { year: 1984, text: "Rescue moves from the fire station on Church Road to Blakely Road, near the middle of town.", source: "rhistory" },
+        { year: 1990, text: "Rescue starts a dive team with the police and harbormaster, the start of today's Technical Rescue Team (the team's own page dates it to 1989).", source: "tech" },
+        { year: 2020, text: "Colchester Fire begins as a town department: career staff supporting mostly volunteer firefighters.", source: "fire" },
+        { year: 2023, text: "Fourteen Technical Rescue members deploy for ten days, around the clock, in the July floods.", source: "tr2024" },
+        { year: 2025, text: "Rescue answers 2,181 calls; the town proposes paying its fire volunteers on call.", calls: 2181, source: "tr2025" },
+      ],
+    },
+    calls: {
+      intro:
+        "Rescue answers about twice as many calls as Fire, and a fifth of them are outside its own " +
+        "area, helping neighbouring towns. Both have grown since the town fire department began.",
+      byYear: {
+        title: "Colchester Rescue, calls by fiscal year",
+        bars: [
+          { label: "FY20", value: 1607 },
+          { label: "FY21", value: 1914 },
+          { label: "FY22", value: 1990 },
+          { label: "FY23", value: 2219 },
+          { label: "FY24", value: 2279 },
+          { label: "FY25", value: 2181 },
+        ],
+        note: "From each year's town report. In FY25, 449 calls (20%) were outside Colchester Rescue's primary area.",
+        source: "reports",
+      },
+      byYear2: {
+        title: "Colchester Fire, calls by fiscal year",
+        bars: [
+          { label: "FY21", value: 975 },
+          { label: "FY22", value: 1049 },
+          { label: "FY23", value: 1152 },
+          { label: "FY24", value: null },
+          { label: "FY25", value: 1091 },
+        ],
+        note: "From each year's town report, starting with the department's first year; the FY24 report gives no total.",
+        source: "reports",
+      },
+    },
+    corrections: {
+      intro:
+        "The state's E911 file lists seven fire stations in Colchester. Going to look found that " +
+        "three are not fire stations at all, so they are not on this map:",
+      items: [
+        { address: "245 Main St", finding: "Now a food shelf." },
+        { address: "838 Church Rd", finding: "The Colchester Water Department, Fire District No. 2 — a water utility named like a fire department." },
+        { address: "282 Ethan Allen Ave", finding: "A small single-bay building with nothing fire-related around it." },
+      ],
+    },
+    money: {
+      intro:
+        "Fire, Rescue, Technical Rescue, Police and Dispatch together take 44% of Colchester's town " +
+        "budget. The town says it now has to pay its volunteers to keep stations staffed.",
+      year: "fiscal year 2027, as proposed",
+      lines: [
+        { label: "Municipal services budget", amount: 18163756 },
+        { label: "Public safety: police, fire, rescue, technical rescue, dispatch", amount: 7967487 },
+      ],
+      linesNote: "A 7.2% increase, including paid on-call staffing for the Fire Department.",
+      capital: {
+        title: "What it costs the town when someone leaves",
+        lines: [
+          { label: "Police officer", amount: 134870 },
+          { label: "Career firefighter", amount: 112751 },
+          { label: "Volunteer EMS provider", amount: 51727 },
+        ],
+        note: "The town's own estimates of hiring, outfitting and a first year of training.",
+      },
+      source: "tr2025",
+    },
+    coverage: {
+      intro:
+        "Three town services answer different calls, and partners fill the gaps. Colchester Rescue " +
+        "covers the whole town except the Route 15 corridor, which St. Michael's Rescue covers.",
+      columns: ["Service", "Answers", "From"],
+      districts: [
+        { name: "Colchester Fire", firstDue: "Fires, alarms, crashes, hazmat, marine and medical first response", from: "Four stations across town", note: "In partnership with St. Michael's College Fire & Rescue" },
+        { name: "Colchester Rescue", firstDue: "Ambulance, at paramedic level", from: "687 Blakely Road", note: "Also answers 1 in 5 calls in neighbouring towns" },
+        { name: "Technical Rescue", firstDue: "Water, ice, rope, confined space and collapse rescue", from: "687 Blakely Road", note: "Called across Vermont; part of the state's urban search and rescue team" },
+      ],
+      source: "tr2025",
+    },
+    stationNotes: {
+      "colchester-687-blakely-rd": {
+        text: "Home of Colchester Rescue since May 1984, and of the Technical Rescue Team and its five boats.",
+        source: "rhistory",
+      },
+      "colchester-844-church-rd": {
+        text: "On Church Road, where the Malletts Bay Fire Department housed the town's first ambulance squad until 1984.",
+        source: "rhistory",
+      },
+    },
+    careers: {
+      intro:
+        "All three services rely on volunteers, and the town now pays fire volunteers on call. Rescue " +
+        "has a waiting list; Fire is recruiting all the time.",
+      points: [
+        "Fire: call firefighters, paid on call, with two hours of training a week",
+        "Rescue: volunteer and paid EMTs and paramedics; the squad runs its own CPR training centre",
+        "Technical Rescue: at least 24 training sessions a year; divers need advanced open water certification, 50 logged dives and dry-suit certification",
+      ],
+      applyUrl: `${COL}/3249/Volunteer-Information`,
+      source: "fire",
+    },
+    residents: [
+      { label: "Burn permit", href: `${COL}/FormCenter/Police-8/Permit-to-Burn-49`, text: "Request a permit to burn online. Check the state's fire danger first." },
+      { label: "911 house sign", href: "https://form.jotform.com/253363968514062", text: "Order a reflective sign so crews can find your house, through Colchester Rescue." },
+      { label: "CPR training", href: `${COL}/297/CPR-Training-Center`, text: "Courses from Colchester Rescue's CPR Training Center." },
+      { label: "Volunteer with Fire", href: `${COL}/FormCenter/Fire-Department-15/Fire-Volunteer-Application-79`, text: "The town's application for call firefighters." },
+    ],
+    sources: {
+      fire: { label: "Town of Colchester, Fire Department", href: `${COL}/3245/Fire-Department` },
+      rescue: { label: "Town of Colchester, Colchester Rescue Squad", href: `${COL}/295/Rescue-Squad` },
+      rhistory: { label: "Town of Colchester, Colchester Rescue history", href: `${COL}/300/History` },
+      tech: { label: "Town of Colchester, Technical Rescue Team", href: `${COL}/306/Technical-Rescue` },
+      reports: { label: "Town of Colchester, Annual Town Reports", href: `${COL}/368/Town-Reports`, note: "Fire, Rescue and Technical Rescue sections, FY2020–FY2025" },
+      tr2024: { label: "Town of Colchester, 2023–2024 Annual Town Report", href: `${COL}/Archive.aspx?ADID=1007`, note: "Technical Rescue, page 23" },
+      tr2025: { label: "Town of Colchester, 2024–2025 Annual Town Report", href: `${COL}/DocumentCenter/View/11893`, note: "Fire, Rescue and Technical Rescue pages 22–24; budget pages 33–35" },
     },
   },
 };
