@@ -101,6 +101,12 @@ const CVF = "https://www.cvfrs.com";
 const HIN = "https://www.hinesburg.org";
 const UJ = "https://www.ujfd.org";
 
+const EJ = "https://www.essexjctfire.org";
+const ET = "https://www.essexvt.gov";
+const WF = "https://www.westfordfire.org";
+const WT = "https://westfordvt.us";
+const HUN = "https://www.huntingtonvt.org";
+
 // One department, two town pages: Underhill and Jericho share the profile.
 const UJFD: Profile = {
   description:
@@ -1205,6 +1211,305 @@ export const profiles: Record<string, Profile> = {
       dept: { label: "Town of Hinesburg, Fire Department & First Response", href: `${HIN}/1236/Hinesburg-Fire-Department-First-Response` },
       report: { label: "Town of Hinesburg, Annual Report FY2025", href: `${HIN}/DocumentCenter/View/3679/Hinesburg-Annual-Report-FY2025`, note: "Fire Department, pages 62-63; FY2027 budget overview, pages 8-12" },
       meeting: { label: "Town of Hinesburg, Annual Report FY2025: minutes of the 2025 Town Meeting", href: `${HIN}/DocumentCenter/View/3679/Hinesburg-Annual-Report-FY2025` },
+    },
+  },
+  "essex-junction-city": {
+    description:
+      "Essex Junction Fire Department: a paid-on-call department since 1893, 666 calls in 2025, " +
+      "a 105-foot ladder and two engines from one station, its history, its pay and how to join.",
+    facts: [
+      ["Established", "4 March 1893, the day the village charter was approved"],
+      ["Members", "About 30, paid on call"],
+      ["Calls", "666 in 2025"],
+      ["Area protected", "4.6 square miles"],
+      ["Station address used by the department", "2 Lincoln Street"],
+    ],
+    contact: { phone: "802-878-6958", website: EJ, source: "contact" },
+    history: {
+      intro:
+        "Essex Junction's department began as a bucket brigade on the day the village was chartered. " +
+        "It is still paid on call: its members work full time as teachers, electricians, nurses, " +
+        "carpenters and engineers, and answer the tones when neighbours need help.",
+      events: [
+        { year: 1893, text: "On 4 March voters approve the village charter, and the department begins the same day as a volunteer bucket brigade.", source: "about" },
+        { year: 1895, text: "In December the department buys its first chemical engine, for $750. No fire calls are recorded that year; three are in 1896.", source: "about" },
+        { year: 1909, text: "The first alarm box: a rope tied to the striker on the Congregational Church. Break the glass, and pull hard and fast.", source: "about" },
+        { year: 1927, text: "The first motorised rig, a Foamite-Childs pumper. In 1929 it helps Burlington twice, the first recorded mutual aid to the city.", source: "about" },
+        { year: 1948, text: "An American-LaFrance pumper arrives in July; it serves the village until 1987.", source: "about" },
+        { year: 1960, text: "The first recorded operating budget: $6,429.", source: "about" },
+        { year: 1962, text: "On 30 November a tank truck carrying 3,000 gallons of vinyl acetate overturns and burns near the Green Mountain Power station on Park Street. The NFPA calls it the first fire of its kind in the country.", source: "about" },
+        { year: 1984, text: "On 7 July the department answers the Amtrak derailment in Williston: 35 members, 559 hours of rescue work, and national praise.", source: "about" },
+        { year: 2006, text: "In June the station is dedicated to former Assistant Chief Ernie Martin, after his 65 years of service.", source: "about" },
+        { year: 2024, text: "The roster stands at 39, six of them new that year. The city starts paying members for training.", calls: 584, source: "review24" },
+        { year: 2025, text: "Calls rise 14% in a year.", calls: 666, source: "review25" },
+      ],
+    },
+    calls: {
+      intro:
+        "Essex Rescue is the city's ambulance; the fire department's first responders are sent when Essex " +
+        "Rescue is already on a call and a second one comes in. In 2024 the department gave mutual aid 110 " +
+        "times, 84 of them to the Town of Essex, and received it 24 times.",
+      byYear: {
+        title: "Calls for service by year",
+        bars: [
+          { label: "2024", value: 584 },
+          { label: "2025", value: 666 },
+        ],
+        note: "Calendar years. The 2025 review gives 2024 as 572; the bar uses the 584 in the department's own 2024 review.",
+        source: "review25",
+      },
+      byType: {
+        title: "Calls by type, 2025",
+        bars: [
+          { label: "First response and medical", value: 217 },
+          { label: "Minor fires and fire alarms", value: 145 },
+          { label: "Public assistance", value: 120 },
+          { label: "Assists to Essex Police and Rescue", value: 51 },
+          { label: "Miscellaneous", value: 51 },
+          { label: "Fires", value: 45 },
+          { label: "Motor vehicle crashes", value: 37 },
+        ],
+        note: "666 calls in all.",
+        source: "review25",
+      },
+    },
+    stationNotes: {
+      "essex-junction-city-3-pearl-st": {
+        text:
+          "The department's one station, which it gives as 2 Lincoln Street. Ladder 3, a 2013 Pierce Arrow XT " +
+          "with a 105-foot aerial; Engine 5, a 2008 KME carrying the extrication gear; Engine 7, a 2018 Pierce " +
+          "Arrow XT, first due to fires; and Car 9, a 2019 Ford F-150 for command, first response and wildland " +
+          "fires. The three big rigs carry the names of the old companies that became Essex Junction Fire: " +
+          "Five Corners Hook & Ladder, Hubbells Falls Engine and Painesville Hose.",
+        source: "fleet",
+      },
+    },
+    careers: {
+      intro:
+        "Members are paid on call, starting at $17.50 an hour with a two-hour minimum on every call and " +
+        "$1 an hour more for each certification: Firefighter I and II, EMT, Advanced EMT. Gear and classes are paid for.",
+      points: [
+        "18 or over, living within responding distance of the station; no experience needed",
+        "New members take the Chittenden County Basic Course, which runs each February and October",
+        "Respond to about 10% of fire calls, roughly 40 a year, and train 10 hours a quarter",
+        "Experienced firefighters who meet the interior requirements can be hired any time of year",
+      ],
+      applyUrl: `${EJ}/become-a-member`,
+      source: "join",
+    },
+    residents: [
+      { label: "Knox Box programme", href: `${EJ}/key-access-box`, text: "Required for new and changing commercial and apartment buildings; available for homes too." },
+      { label: "Fire prevention visits", href: `${EJ}/fire-prevention`, text: "Presentations, extinguisher training and station tours on request." },
+      { label: "Recent calls", href: `${EJ}/recent-calls`, text: "The department writes up its working fires." },
+    ],
+    sources: {
+      home: { label: "Essex Junction Fire Department", href: EJ },
+      about: { label: "Essex Junction Fire Department, About", href: `${EJ}/about` },
+      fleet: { label: "Essex Junction Fire Department, Apparatus", href: `${EJ}/apparatus` },
+      join: { label: "Essex Junction Fire Department, Become a member", href: `${EJ}/become-a-member` },
+      contact: { label: "Essex Junction Fire Department, Contact", href: `${EJ}/contact` },
+      review24: { label: "Essex Junction Fire Department, 2024 Year in Review", href: `${EJ}/single-post/2024-year-in-review` },
+      review25: { label: "Essex Junction Fire Department, 2025 Year in Review", href: `${EJ}/single-post/2025-year-in-review-a-closer-look-at-call-volume` },
+    },
+  },
+  "essex-town": {
+    description:
+      "Essex Fire Department: the Town of Essex's paid-on-call department, about 37 members and 2,034 calls " +
+      "in 2025 from the Sand Hill Road station, plans for a new station, and how to join.",
+    facts: [
+      ["Staffing", "Paid on call, with per-diem staff; no full- or part-time employees"],
+      ["Members", "About 37"],
+      ["Calls", "2,034 dispatched in 2025"],
+      ["Services", "Fire protection and EMS first response"],
+      ["Chief", "Charles Cole"],
+    ],
+    contact: { chief: "Charles Cole", phone: "802-878-5308", website: `${ET}/616/ESSEX-TOWN-FIRE`, source: "fire" },
+    history: {
+      intro:
+        "The Town of Essex runs its fire department with paid on-call members and per-diem staff, and no " +
+        "full-time employees. In 2025 it was dispatched to 2,034 calls; the chief notes it is busier than " +
+        "many Vermont departments that do have full-time staff.",
+      events: [
+        { year: 2022, text: "The Village of Essex Junction separates from the Town of Essex and becomes a city, with its own fire department.", source: "report" },
+        { year: 2023, text: "The town buys 80–90 Upper Main Street for $3 million, using federal ARPA money, for a future municipal complex. Among the reasons: the existing fire station has become small and outdated.", source: "report" },
+        { year: 2025, text: "The Selectboard adopts a conceptual master plan for the site, with room for a new fire station, and in June picks a fire impact fee that leaves out new-station costs. The department is dispatched to 2,034 calls.", calls: 2034, source: "report" },
+        { year: 2026, text: "The fire budget proposed for fiscal 2027 is 10.9% lower than the year before, with capital equipment moved to the capital budget. Town Meeting's ballot carries advisory questions on designing the Upper Main Street site.", source: "report" },
+      ],
+    },
+    stationNotes: {
+      "essex-town-188-sand-hill-rd": {
+        text:
+          "The town gives the station's address as 190 Sand Hill Road. It shares its site with the Water and " +
+          "Sewer building and the Highway Garage, and is not usually staffed: for urgent questions that aren't " +
+          "emergencies, call Essex Police dispatch on 802-878-8331. If a new station is built, this one would " +
+          "become space for Public Works.",
+        source: "fire",
+      },
+    },
+    careers: {
+      intro:
+        "About 37 volunteer and per-diem members, many cross-trained as EMTs, hazmat technicians, police " +
+        "officers or nurses. New members with little experience are trained from the ground up.",
+      points: [
+        "Start with station duties, radio, hydrant hook-ups, tanker fills and hose; responsibilities grow with rank and certifications",
+        "The department provides all training and equipment",
+        "Employers in Essex are asked to let staff leave work to answer calls",
+        "Ask about joining or the cadet programme on 802-878-5308",
+      ],
+      applyUrl: `${ET}/1410/Volunteer-Join-the-Team`,
+      source: "join",
+    },
+    residents: [
+      { label: "Open house", href: `${ET}/1580/FIRE-DEPARTMENT-OPEN-HOUSE`, text: "Every October, closing Fire Prevention Week: demos, the trucks and free food." },
+      { label: "Fireworks permits", href: `${ET}/947/Fireworks-Permitting`, text: "How to get a permit for a display in town." },
+      { label: "Commercial fire safety", href: `${ET}/1405/Commercial-Fire-Safety-Guidelines`, text: "Guidelines for businesses." },
+      { label: "Essex Firefighters' Association", href: `${ET}/1412/Essex-Firefighters-Association`, text: "A nonprofit that buys equipment and supports members beyond what taxes cover." },
+    ],
+    sources: {
+      fire: { label: "Town of Essex, Essex Town Fire", href: `${ET}/616/ESSEX-TOWN-FIRE` },
+      join: { label: "Town of Essex, Volunteer & Join the Team", href: `${ET}/1410/Volunteer-Join-the-Team` },
+      report: { label: "Town of Essex, Annual Report 2025", href: `${ET}/Archive.aspx?ADID=10415`, note: "Fire Department, page 59; Upper Main Street, pages 10–12" },
+    },
+  },
+  westford: {
+    description:
+      "Westford Volunteer Fire Department: founded in 1982, about 35 to 45 calls a year from the Cambridge Road " +
+      "station, its four trucks, its budget and how to volunteer.",
+    facts: [
+      ["Founded", "1982"],
+      ["Calls", "33 in fiscal 2025; 35 to 45 in a usual year"],
+      ["Station", "35 Cambridge Road, joined to the town highway garage"],
+      ["Chief", "Garrett Bartlett, also the Town Fire Warden"],
+    ],
+    contact: { chief: "Garrett Bartlett", phone: "(802) 879-6505", website: WF, source: "town" },
+    history: {
+      intro:
+        "Westford's volunteers organised in 1982 to give the town fire protection and mutual aid for its " +
+        "neighbours. Members come from Westford, Cambridge, Essex and Jericho.",
+      events: [
+        { year: 1982, text: "The Westford Volunteer Fire Department is established by community members.", source: "home" },
+        { year: 2025, text: "33 calls in the fiscal year, motor vehicle crashes the largest share. Joint training with Fairfax and Essex, including a live burn in a donated building. The paid-on-call programme, giving volunteers modest pay, is in its second year, and a new pumper-tanker is being built, expected in spring 2026.", source: "report" },
+      ],
+    },
+    calls: {
+      intro:
+        "A rural town with few hydrants: the department drafts from ponds and dry hydrants and shuttles water " +
+        "by tanker, and is often called to tanker task forces in neighbouring towns.",
+      byType: {
+        title: "Calls by type, fiscal 2025",
+        bars: [
+          { label: "Motor vehicle crashes", value: 11 },
+          { label: "Carbon monoxide alarms", value: 4 },
+          { label: "EMS and rescue assists", value: 4 },
+          { label: "Cancelled en route", value: 4 },
+          { label: "Chimney fires", value: 2 },
+          { label: "Mutual aid", value: 2 },
+          { label: "Structure fire", value: 1 },
+          { label: "Smoke or gas in a building", value: 1 },
+          { label: "Fire alarm", value: 1 },
+          { label: "Tree down", value: 1 },
+          { label: "Goodwill call", value: 1 },
+        ],
+        note: "July 2024 to June 2025. The report gives 33 calls; its list adds up to 32.",
+        source: "report",
+      },
+    },
+    stationNotes: {
+      "westford-35-cambridge-rd": {
+        text:
+          "Engine 10, a 2017 E-One pumper (1,250 gpm, 1,280 gallons), first out to alarms and fires; Engine 11, " +
+          "a 1995 Desorcie pumper that supplies water; Tanker 12, a 1992 Desorcie with 1,800 gallons; and Rescue " +
+          "14, a 2008 E-One rescue carrying the Jaws of Life.",
+        source: "apparatus",
+      },
+    },
+    money: {
+      intro:
+        "The fire budget for fiscal 2027 was proposed unchanged from fiscal 2026. The capital plan puts money " +
+        "aside each year for the next engine, air packs, extrication tools, turnout gear and the rescue truck.",
+      year: "fiscal year 2027 (proposed)",
+      lines: [
+        { label: "Fire Department, total", amount: 137668 },
+        { label: "Operations", amount: 69086 },
+        { label: "Capital reserve", amount: 39730 },
+        { label: "Loan payment, pumper truck", amount: 28852 },
+      ],
+      linesNote: "Fiscal 2025 actual spending was $147,204.",
+      capital: {
+        title: "Fire capital plan, fiscal 2027–2031",
+        lines: [
+          { label: "FY2029", amount: 61704 },
+          { label: "FY2030", amount: 47704 },
+          { label: "FY2028", amount: 43100 },
+          { label: "FY2027", amount: 39730 },
+          { label: "FY2031", amount: 32604 },
+        ],
+        note: "Largest year first. The plan replaces the 1995 tanker in 2026, at $675,000.",
+      },
+      source: "report",
+    },
+    careers: {
+      intro:
+        "Westford Fire is recruiting firefighters, fire police and auxiliary support. Training is provided " +
+        "and no experience is needed.",
+      points: [
+        "16 or over; under-18s need a parent's permission",
+        "Apply by email, at the town office or at Monday training, 7 to 8:30 p.m. at the station",
+        "About six months' probation, then full membership",
+        "CPR/AED and the free online ICS 100 and 700 courses within a year",
+      ],
+      applyUrl: `${WF}/join/`,
+      source: "join",
+    },
+    residents: [
+      { label: "Burn permits", href: `${WT}/administration/fire-warden/`, text: "Apply online. The Fire Warden opens or closes the system each day, and closes it when strong winds are forecast." },
+      { label: "Ambulance", href: `${WT}/emergency/`, text: "Essex Rescue and Fairfax Rescue, which covers the north of town." },
+    ],
+    sources: {
+      home: { label: "Westford Volunteer Fire Department", href: WF },
+      apparatus: { label: "Westford Volunteer Fire Department, Apparatus", href: `${WF}/apparatus/` },
+      join: { label: "Westford Volunteer Fire Department, Join", href: `${WF}/join/` },
+      town: { label: "Town of Westford, Emergency", href: `${WT}/emergency/` },
+      report: { label: "Town of Westford, 2026 Annual Town Report", href: `${WT}/wp-content/uploads/2026/02/Town-Report-2026.pdf`, note: "Fire Department, pages 51–53; budget, pages 16–17; capital plan, page 27" },
+    },
+  },
+  huntington: {
+    description:
+      "Huntington Fire Department: about 18 volunteers answering fire, medical first response and backcountry " +
+      "search and rescue calls, around 100 a year, and how burn permits work.",
+    facts: [
+      ["Members", "About 18 active volunteers, all from town"],
+      ["Calls", "About 100 a year"],
+      ["Services", "Fire, medical first response, backcountry search and rescue"],
+      ["Station", "4960 Main Road, Upper Village"],
+      ["Chief", "Ben Roll"],
+    ],
+    contact: { chief: "Ben Roll", website: `${HUN}/fire-department/`, source: "dept" },
+    history: {
+      intro:
+        "Huntington has no ambulance of its own, so the department's licensed first responders treat patients " +
+        "at medical calls and crashes until an ambulance arrives. Its members also run a backcountry search and " +
+        "rescue team.",
+      events: [
+        { year: 2001, text: "In October the town adopts its ordinance regulating outdoor burning, which the Fire Warden enforces.", source: "warden" },
+      ],
+    },
+    careers: {
+      intro: "Every member is a volunteer from Huntington, serving as a firefighter, first responder or EMT, or on the search and rescue team.",
+      points: [
+        "Firefighters train the first three Mondays of the month at 7 p.m.",
+        "EMS members meet on the fourth Monday at 7 p.m.",
+        "The backcountry search and rescue team meets once or twice a month, evenings or Saturdays",
+      ],
+      applyUrl: `${HUN}/fire-department/`,
+      source: "dept",
+    },
+    residents: [
+      { label: "Burn permits", href: `${HUN}/fire-warden/`, text: "Needed for brush and for campfires over 36 inches across; the Fire Warden can issue one over the phone. Burning garbage is illegal." },
+    ],
+    sources: {
+      dept: { label: "Town of Huntington, Fire Department", href: `${HUN}/fire-department/` },
+      warden: { label: "Town of Huntington, Fire Warden", href: `${HUN}/fire-warden/` },
     },
   },
   jericho: UJFD,
