@@ -135,6 +135,12 @@ const SHF = "https://southherofire.com";
 const SHT = "https://southherovt.org";
 const ILM = "https://islelamotte.us";
 
+const MPL = "https://www.montpelier-vt.org";
+const BAC = "https://www.barrecity.org";
+const BAT = "https://www.barretown.org";
+const WFD = "https://www.waterburyvtfire.com/WFD";
+const NFD = "https://www.northfield-vt.gov";
+
 // One department, two town pages: Underhill and Jericho share the profile.
 const UJFD: Profile = {
   description:
@@ -2489,6 +2495,192 @@ export const profiles: Record<string, Profile> = {
     sources: {
       page: { label: "Town of Isle La Motte, Fire & Rescue", href: `${ILM}/firerescue/` },
       shfleet: { label: "South Hero Volunteer Fire Department, Apparatus", href: `${SHF}/apparatus/` },
+    },
+  },
+  montpelier: {
+    description:
+      "Montpelier Fire & Ambulance: the capital's career fire and ambulance department, firefighter-EMTs on Main " +
+      "Street, ambulance service for three neighbouring towns, and its fleet.",
+    facts: [
+      ["Services", "Fire and ambulance, from one station"],
+      ["Staff", "Career firefighters, all dual-trained as EMTs"],
+      ["Ambulance", "Also serves three surrounding towns under contract"],
+      ["Chief", "Derek Libby"],
+    ],
+    contact: { chief: "Derek Libby", phone: "802-229-4913", website: `${MPL}/200/Fire-Ambulance`, source: "dept" },
+    history: {
+      intro:
+        "Montpelier's department runs both the fire service and the ambulance for Vermont's capital. Its staff are " +
+        "trained as both firefighters and EMTs, and ambulance fees and contracts cover more than 20% of the budget.",
+      events: [],
+    },
+    stationNotes: {
+      "montpelier-61-main-st": {
+        text: "The city's one fire station, on Main Street: two pumpers, a tower truck, two ambulances and two utility vehicles. The department also keeps a training area.",
+        source: "dept",
+      },
+    },
+    residents: [
+      { label: "Ambulance billing", href: `${MPL}/200/Fire-Ambulance`, text: "The department's ambulance billing specialist, 802-262-6010." },
+    ],
+    sources: {
+      dept: { label: "City of Montpelier, Fire & Ambulance", href: `${MPL}/200/Fire-Ambulance` },
+    },
+  },
+  // Barre City's station is missing from the E911 file, so this has no page until
+  // a Fire Stations record is added for 15 Fourth Street.
+  "barre-city": {
+    description:
+      "Barre City Fire & EMS: a career fire and ambulance department answering over 2,000 calls a year in four square " +
+      "miles, through two floods, with code enforcement and a needle disposal programme.",
+    facts: [
+      ["Calls", "2,559 in fiscal 2023: 2,045 EMS, 514 fire"],
+      ["Services", "Fire, ambulance and code enforcement"],
+      ["Station", "15 Fourth Street"],
+      ["Chief", "Keith Cushman, since 2023"],
+    ],
+    contact: { chief: "Keith Cushman", phone: "802-476-0254", website: `${BAC}/fire/`, source: "dept" },
+    history: {
+      intro:
+        "Barre City's department answers fire and medical calls, and runs the ambulance, in a coverage area of about four " +
+        "square miles. About a fifth of its calls overlap with another, which means calling in off-duty staff.",
+      events: [
+        { year: 2023, text: "Keith Cushman becomes chief. In April a fire destroys a downtown building; mutual aid keeps it from spreading to neighbours as close as two feet away. In July the city floods, and crews answer more than 50 calls in 12 hours.", source: "r2023" },
+        { year: 2024, text: "The department reaches full staffing for the first time in over a year, buys new rescue tools to replace a 20-year-old set, and orders a new ambulance.", source: "r2024" },
+      ],
+    },
+    calls: {
+      intro:
+        "Most calls are medical. The department also runs a sharps disposal programme, collecting about 1,000 gallons " +
+        "of needles a year from five sites around the city.",
+      byYear: {
+        title: "Calls for service by fiscal year",
+        bars: [
+          { label: "FY2020", value: 2314 },
+          { label: "FY2021", value: 2177 },
+          { label: "FY2022", value: 2270 },
+          { label: "FY2023", value: 2559 },
+        ],
+        note: "Fiscal years end in June. From the fire department's section of each city annual report.",
+        source: "r2023",
+      },
+    },
+    stationNotes: {
+      "barre-city-15-fourth-st": {
+        text: "The city's fire station, on Fourth Street.",
+        source: "dept",
+      },
+    },
+    residents: [
+      { label: "Code enforcement", href: `${BAC}/fire/`, text: "Rental registry, complaints, and the codes the department enforces; 1,736 inspections in 2024." },
+      { label: "Burn permits", href: `${BAC}/fire/`, text: "The city's guidance on open burning and outdoor burn permit rules." },
+      { label: "E911 address signs", href: `${BAC}/fire/`, text: "Help crews find your house." },
+    ],
+    sources: {
+      dept: { label: "City of Barre, Fire, EMS & Code Enforcement", href: `${BAC}/fire/` },
+      r2023: { label: "City of Barre, 2023 Annual Report", href: `${BAC}/client_media/files/CityMgr/Annual.Reports/2023%20Barre%20City%20Annual%20Report%20-%20Online.pdf`, note: "Fire department section. FY2020–2022 from the 2020, 2021 and 2022 reports on barrecity.org" },
+      r2024: { label: "City of Barre, 2024 Annual Report", href: `${BAC}/client_media/files/CityMgr/Annual.Reports/2024%20Annual%20Report%20-%20Online%20Version.pdf`, note: "Barre City Fire Department, pages 99–105" },
+    },
+  },
+  "barre-town": {
+    description:
+      "Barre Town Fire Department: a call/paid department with about 30 firefighters, two stations in East Barre and " +
+      "South Barre, about 200 calls a year, and burn permits.",
+    facts: [
+      ["Staffing", "Call/paid, about 30 firefighters"],
+      ["Calls", "About 200 a year"],
+      ["Covers", "Barre Town and parts of Orange"],
+      ["Chief", "Andy Lange"],
+    ],
+    contact: { chief: "Andy Lange", website: `${BAT}/departments/emergency_services/fire/index.php`, source: "dept" },
+    history: {
+      intro:
+        "Barre Town's firefighters work from two stations in the unincorporated villages of East Barre and South Barre, " +
+        "each assigned to one. Each station has an assistant chief.",
+      events: [],
+    },
+    stationNotes: {
+      "barre-town-119-mill-st": {
+        text: "East Barre: two pumpers, a tanker and a pickup, plus the heavy rescue with its air-bottle filling system, a side-by-side off-road rescue vehicle and a trailer.",
+        source: "dept",
+      },
+      "barre-town-528-s-barre-rd": {
+        text: "South Barre, which the town lists at 529 South Barre Road: two pumpers, two tankers and a pickup with a wildland skid.",
+        source: "dept",
+      },
+    },
+    residents: [
+      { label: "Burn permits", href: `${BAT}/departments/emergency_services/fire/index.php`, text: "From the town's fire warden; see the Fire Warden page." },
+    ],
+    sources: {
+      dept: { label: "Town of Barre, Fire Department", href: `${BAT}/departments/emergency_services/fire/index.php` },
+    },
+  },
+  waterbury: {
+    description:
+      "Waterbury Fire Department: a volunteer department since 1882, two stations in Waterbury and Waterbury Center, a " +
+      "95-foot tower ladder, and a roster with members of 25 and 50 years.",
+    facts: [
+      ["Founded", "1882"],
+      ["Stations", "Main Street, Waterbury, and Maple Street, Waterbury Center"],
+      ["Chief Engineer", "Gary Dillon, chief since 2009"],
+    ],
+    contact: { chief: "Gary Dillon", phone: "802-244-8856", website: "https://www.waterburyvtfire.com/", source: "roster" },
+    history: {
+      intro:
+        "The Waterbury Village Fire Department was formed on 20 December 1882, and the village was divided into four " +
+        "fire wards. Today's department works from two stations, with members who have served 25 and even 50 years.",
+      events: [
+        { year: 1882, text: "The Waterbury Village Fire Department is formed on 20 December.", source: "history" },
+        { year: 1965, text: "Bob Grace joins; he is still on the roster, a half-century member.", source: "roster" },
+        { year: 2009, text: "Gary Dillon, a member since 1981, becomes chief.", source: "roster" },
+      ],
+    },
+    stationNotes: {
+      "waterbury-43-s-main-st": {
+        text: "The larger station, downtown: Engines 1 and 2, Rescue 1, the 95-foot Tower 1, Tanker 1 and Engine 11, with a radio room, offices, kitchen, meeting room and gym.",
+        source: "stations",
+      },
+      "waterbury-158-maple-st": {
+        text: "Waterbury Center: Engines 3 and 4, Tanker 2, Engine 12 (the brush truck) and a boat.",
+        source: "stations",
+      },
+    },
+    careers: {
+      intro: "Members train in two companies, with interior, exterior, probationary and junior members.",
+      points: ["Contact the department at waterburyfd@waterburyvt.com or 802-244-8856"],
+      applyUrl: "https://www.waterburyvtfire.com/WFD/ContactUs.html",
+      source: "companies",
+    },
+    residents: [],
+    sources: {
+      history: { label: "Waterbury Fire Department, History", href: `${WFD}/History.html` },
+      roster: { label: "Waterbury Fire Department, Roster", href: `${WFD}/Roster.html` },
+      stations: { label: "Waterbury Fire Department, Stations", href: `${WFD}/Stations.html` },
+      companies: { label: "Waterbury Fire Department, Training Companies 2026", href: `${WFD}/Companies.html` },
+    },
+  },
+  northfield: {
+    description:
+      "Northfield Fire Department: the Wall Street station, its role in Capital Fire Mutual Aid, and burn permits from " +
+      "the town's fire wardens.",
+    facts: [
+      ["Station", "128 Wall Street"],
+      ["Mutual aid", "Capital Fire Mutual Aid"],
+      ["Chief", "Peter J. DeMasi"],
+    ],
+    contact: { chief: "Peter J. DeMasi", website: `${NFD}/fire-department`, source: "dept" },
+    history: {
+      intro:
+        "Northfield's department fights fires and protects life and property in town, gives and receives mutual aid " +
+        "through Capital Fire Mutual Aid, reviews fire protection plans with the state, and helps the fire warden prevent wildfires.",
+      events: [],
+    },
+    residents: [
+      { label: "Burn permits", href: `${NFD}/fire-department`, text: "Required in Northfield: contact the Fire Warden or Assistant Fire Warden before you burn." },
+    ],
+    sources: {
+      dept: { label: "Town of Northfield, Fire Department", href: `${NFD}/fire-department` },
     },
   },
   jericho: UJFD,
