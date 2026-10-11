@@ -120,6 +120,12 @@ const RIP = "https://www.riptonvermont.org";
 const BRP = "https://bridportvt.org";
 const ORW = "https://townoforwellvt.org";
 
+const ENO = "https://www.enosburghvt.org";
+const FFD = "https://fairfieldvermont.us";
+const FFX = "https://www.fairfax-vt.gov";
+const SAT = "https://www.stalbanstown.com";
+const SWA = "https://www.swantonvt.gov";
+
 // One department, two town pages: Underhill and Jericho share the profile.
 const UJFD: Profile = {
   description:
@@ -2024,6 +2030,209 @@ export const profiles: Record<string, Profile> = {
     residents: [],
     sources: {
       report: { label: "Town of Orwell, 2025 Town Report", href: `${ORW}/wp-content/uploads/2015/09/orwell-town-report-2025.pdf`, note: "Orwell Volunteer Fire Department annual and financial reports, pages 42–45. A scanned report, read with text recognition" },
+    },
+  },
+  enosburgh: {
+    description:
+      "Enosburgh Fire Department: volunteers answering 138 calls in 2025 from Sampsonville Road, a fleet " +
+      "from 1991 to 2017, a used pumper bought from Colchester, and a call for daytime volunteers.",
+    facts: [
+      ["Calls", "138 in 2025"],
+      ["Hours", "2,793 hours of training and calls by volunteers in 2025"],
+      ["Certified", "11 at Firefighter 1, 3 at Firefighter 2"],
+      ["Chief", "Mark LaRose"],
+    ],
+    contact: { chief: "Mark LaRose", phone: "802-933-4345", website: `${ENO}/fire`, source: "dept" },
+    history: {
+      intro:
+        "Enosburgh's volunteers fight fires and also handle search and rescue, vehicle extrication and medical " +
+        "help for the Enosburgh Ambulance Service. The fleet is ageing, and the department has started replacing it.",
+      events: [
+        {
+          year: 2025,
+          text:
+            "138 calls. Rather than wait two to three years for a new truck, the department buys a Ford F550 4x4 " +
+            "pumper that Colchester was retiring: about an 80% match for what it would have ordered, at a saving of " +
+            "about $300,000. The 1995 Engine 2 goes up for sale. Five recruits join, including high school students " +
+            "and transfers from other towns.",
+          calls: 138,
+          source: "report",
+        },
+      ],
+    },
+    stationNotes: {
+      "enosburgh-83-sampsonville-rd": {
+        text:
+          "The fire station. In service at the start of 2026: Engine 1, a 2017 HME/Arens custom engine; Rescue 1, a " +
+          "2001 Freightliner; Tanker 1, a 2006 Freightliner; Ladder 1, a 1991 Spartan/Smeal; and Engine 2 (M), a 2015 Ford/HME.",
+        source: "report",
+      },
+    },
+    careers: {
+      intro:
+        "Overall numbers are good, but the department is short of people in the daytime. A structure fire can " +
+        "need 20 to 25 people, which is why three, four or five departments often turn up.",
+      points: [
+        "Firefighting or a support role: there is something for everyone",
+        "Three training evenings a month and a fourth for vehicle and equipment maintenance",
+        "The station phone, 933-4345, is answered on Tuesday evenings, 7 to 9",
+        "Or email fire@enosburghvt.org",
+      ],
+      applyUrl: `${ENO}/fire`,
+      source: "report",
+    },
+    residents: [
+      { label: "Station visits", href: `${ENO}/fire`, text: "School groups visit the station for fire prevention lessons." },
+    ],
+    sources: {
+      dept: { label: "Town of Enosburgh, Fire Department", href: `${ENO}/fire` },
+      report: { label: "Town of Enosburgh, 2025 Town Report", href: `${ENO}/_files/ugd/0cacb0_46276147a3034200952e9bceb0f550b2.pdf`, note: "Fire Department year-end report, PDF pages 15–16. A scanned report, read with text recognition" },
+    },
+  },
+  fairfield: {
+    description:
+      "Fairfield Volunteer Fire Department: 64 calls in 2025, a new pumper-tanker for Station 2, members with 50 " +
+      "and 65 years of service, a cadet programme in the works, and the budget.",
+    facts: [
+      ["Calls", "64 in 2025, many of them mutual aid"],
+      ["Stations", "2"],
+      ["New in 2025", "A pumper-tanker for Station 2"],
+      ["Town appropriation", "$120,000"],
+    ],
+    contact: { website: FFD, source: "report" },
+    history: {
+      intro:
+        "Fairfield's volunteers stay a long time: in 2025 one member passed 65 years of service and two reached 50, " +
+        "and the department mourned a member of 60 years.",
+      events: [
+        {
+          year: 2025,
+          text:
+            "64 calls. The department buys its first new pumper-tanker for Station 2, updates its by-laws and starts " +
+            "a cadet programme. Training includes solar panel safety, Narcan and roof ventilation, much of it with " +
+            "neighbouring departments.",
+          calls: 64,
+          source: "report",
+        },
+      ],
+    },
+    money: {
+      intro:
+        "The department's own accounts show what a new truck takes: in 2025 it spent $419,151 on the pumper-tanker, " +
+        "with the help of a $116,000 loan, alongside the town's $120,000 appropriation.",
+      year: "2025, income",
+      lines: [
+        { label: "Town appropriation", amount: 120000 },
+        { label: "Loan for the truck", amount: 116000 },
+        { label: "Miscellaneous", amount: 10087 },
+        { label: "Interest", amount: 4549 },
+      ],
+      linesNote: "From the department's 2025 financial report, rounded to the dollar. It proposed $120,000 again for 2026, including $50,000 for the truck and equipment fund.",
+      capital: {
+        title: "Largest spending, 2025",
+        lines: [
+          { label: "New pumper-tanker", amount: 419151 },
+          { label: "Insurance", amount: 17254 },
+          { label: "Loan payments", amount: 17116 },
+          { label: "Fuel and oil", amount: 8763 },
+        ],
+        note: "Total spending was $477,707; the department's balances fell from $436,429 to $209,358.",
+      },
+      source: "report",
+    },
+    residents: [
+      { label: "Fire Safety Day", href: FFD, text: "An annual day of demonstrations and safety education." },
+      { label: "9/11 Remembrance Walk", href: FFD, text: "Held by the department each year." },
+    ],
+    sources: {
+      report: { label: "Town of Fairfield, 2025 Annual Report", href: "https://img1.wsimg.com/blobby/go/bcfe7f6a-21a0-4365-83b2-ca876176b0e8/downloads/99ffbda2-4059-43c0-8424-05732c5d0e0e/2025%20Annual%20Report.pdf", note: "Fairfield Volunteer Fire Department, pages 32–33. A scanned report, read with text recognition" },
+    },
+  },
+  fairfax: {
+    description:
+      "Fairfax Fire Department: a full-time chief and on-call firefighters at the James Field station on Goodall " +
+      "Street, its trucks, and how burn permits work.",
+    facts: [
+      ["Staffing", "A full-time chief and on-call firefighters"],
+      ["Station", "James Field Fairfax Fire Station, 15 Goodall Street"],
+      ["Chief", "Micah Genzlinger"],
+    ],
+    contact: { chief: "Micah Genzlinger", phone: "802-849-6075", website: `${FFX}/departments/fire/index.php`, source: "dept" },
+    history: {
+      intro: "Fairfax has a full-time fire chief leading an on-call department from one station.",
+      events: [
+        { year: 1991, text: "The four-bay James Field Fairfax Fire Station is built on Goodall Street.", source: "dept" },
+        { year: 2024, text: "The town's fire page says the station is to get a fifth bay this year.", source: "dept" },
+      ],
+    },
+    stationNotes: {
+      "fairfax-15-goodall-st": {
+        text: "The James Field Fairfax Fire Station: two engines, two tankers, a ladder truck, a utility truck and an ATV.",
+        source: "dept",
+      },
+    },
+    careers: {
+      intro: "On-call firefighters work under the full-time chief.",
+      points: ["Ask Chief Genzlinger about joining on 802-849-6075, or email fire@fairfax-vt.gov"],
+      applyUrl: `${FFX}/departments/fire/index.php`,
+      source: "dept",
+    },
+    residents: [
+      { label: "Burn permits", href: `${FFX}/departments/fire/burn_permits___open_burning/index.php`, text: "Free, needed for brush and leaf piles but not small campfires; call 802-849-6075, and a permit can often be given over the phone. Natural wood only." },
+      { label: "Building inspection", href: `${FFX}/departments/fire/building_inspection___code_enforcement/index.php`, text: "Building inspection and code enforcement." },
+    ],
+    sources: {
+      dept: { label: "Town of Fairfax, Fire", href: `${FFX}/departments/fire/index.php` },
+    },
+  },
+  "saint-albans-town": {
+    description:
+      "St. Albans Town Fire Department: a volunteer department chartered in 1975, with marine and ice rescue on " +
+      "Lake Champlain, crashes, hazmat and mutual aid, from the Lake Road station.",
+    facts: [
+      ["Founded", "1975"],
+      ["Staffing", "Volunteer, with a full-time firefighter"],
+      ["Station", "428 Lake Road"],
+      ["Chief", "Matt Mulheron"],
+    ],
+    contact: { chief: "Matt Mulheron", phone: "(802) 527-7646", website: `${SAT}/departments/fire/index.php`, source: "dept" },
+    history: {
+      intro:
+        "Chartered in 1975 to fight fires in the town, the department has taken on far more since: marine " +
+        "emergencies and ice rescue on Lake Champlain, crashes, hazardous materials and mutual aid.",
+      events: [
+        { year: 1975, text: "The St. Albans Town Fire Department is chartered.", source: "dept" },
+      ],
+    },
+    residents: [
+      { label: "Department by-laws", href: `${SAT}/Document_Center/Departments/Fire/Final-Signed-FD-Bylaws-2.1.2016.pdf`, text: "The volunteer department's by-laws." },
+    ],
+    sources: {
+      dept: { label: "Town of St. Albans, Fire Department", href: `${SAT}/departments/fire/index.php` },
+    },
+  },
+  swanton: {
+    description:
+      "Swanton Village Fire Department: a paid-on-call department for fire, hazardous materials and water rescue, " +
+      "and the village's forest fire wardens.",
+    facts: [
+      ["Staffing", "Paid on call"],
+      ["Specialties", "Fire, prevention and education, hazmat, water rescue"],
+      ["Chief", "Daniel Chevalier, also the village hydro plant supervisor"],
+    ],
+    contact: { chief: "Daniel Chevalier", phone: "802-868-4200", website: `${SWA}/services/fire`, source: "dept" },
+    history: {
+      intro:
+        "Swanton Village's paid-on-call firefighters handle fires, hazardous materials and water rescue, and teach " +
+        "fire prevention. Its motto spells the department's initials: Safety, Vigilance, Family, Dedication.",
+      events: [],
+    },
+    residents: [
+      { label: "Burn permits", href: `${SWA}/services/forest-fire-warden`, text: "Contact the Forest Fire Warden, Chief Chevalier, or one of the two deputy wardens." },
+    ],
+    sources: {
+      dept: { label: "Village of Swanton, Swanton Village Fire Department", href: `${SWA}/services/fire` },
+      warden: { label: "Village of Swanton, Forest Fire Warden", href: `${SWA}/services/forest-fire-warden` },
     },
   },
   jericho: UJFD,
