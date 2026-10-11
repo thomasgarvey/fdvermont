@@ -126,6 +126,9 @@ const FFX = "https://www.fairfax-vt.gov";
 const SAT = "https://www.stalbanstown.com";
 const SWA = "https://www.swantonvt.gov";
 
+const RCH = "https://www.richfordvt.org";
+const FRK = "https://www.franklinvermont.org";
+
 // One department, two town pages: Underhill and Jericho share the profile.
 const UJFD: Profile = {
   description:
@@ -2233,6 +2236,77 @@ export const profiles: Record<string, Profile> = {
     sources: {
       dept: { label: "Village of Swanton, Swanton Village Fire Department", href: `${SWA}/services/fire` },
       warden: { label: "Village of Swanton, Forest Fire Warden", href: `${SWA}/services/forest-fire-warden` },
+    },
+  },
+  // Richford has no station in the E911 file or Airtable's Fire Stations table yet,
+  // so there is no page for this to appear on until one is added.
+  richford: {
+    description:
+      "Richford Fire Department: a volunteer department since 1889, 142 calls in 2025, new hose and a tower truck " +
+      "repaired, Breakfast with Santa, and how to join.",
+    facts: [
+      ["Founded", "1889"],
+      ["Calls", "142 in 2025"],
+      ["Staffing", "Volunteer, with cadets"],
+      ["Chief", "Andy Pond"],
+    ],
+    contact: { chief: "Andy Pond", phone: "802-848-7443", website: `${RCH}/richford-fire-department.html`, source: "dept" },
+    history: {
+      intro:
+        "Richford's volunteer department dates from 1889. Its members also run community traditions: Breakfast with " +
+        "Santa, the Christmas parade, the Harvest Festival and the Easter egg hunt.",
+      events: [
+        { year: 1889, text: "The Richford Fire Department is founded.", source: "dept" },
+        {
+          year: 2025,
+          text:
+            "142 calls. At Town Meeting the department sets up a special fund to save for future equipment. More than 1,500 feet of hose, most of it over 20 years old, is replaced, and the tower truck gets " +
+            "hydraulic repairs. About 180 children come to Breakfast with Santa. Two members start Firefighter 1 training.",
+          calls: 142,
+          source: "report",
+        },
+      ],
+    },
+    careers: {
+      intro: "The department welcomes new members, and has a cadet application for those under 18.",
+      points: [
+        "Training every Tuesday at 6 p.m.",
+        "Ask through the Town Clerk's office, contact the department, or come to a Tuesday meeting",
+      ],
+      applyUrl: `${RCH}/richford-fire-department.html`,
+      source: "dept",
+    },
+    residents: [],
+    sources: {
+      dept: { label: "Town of Richford, Richford Fire Department", href: `${RCH}/richford-fire-department.html` },
+      report: { label: "Town of Richford, 2025 Town Report", href: `${RCH}/uploads/1/2/0/4/120478017/town_report_2025.pdf`, note: "Fire Department Report, page 33" },
+    },
+  },
+  franklin: {
+    description:
+      "Franklin Fire Department: the volunteer department on Main Street, its Monday meetings, and burn permits " +
+      "from the fire warden.",
+    facts: [
+      ["Station", "5154 Main Street"],
+      ["Meets", "Monday nights, 6:30 p.m."],
+      ["Chief", "Mike Lawyer, also the Fire Warden"],
+    ],
+    contact: { chief: "Mike Lawyer", phone: "285-2050", website: `${FRK}/boards-commissions-departments/franklin-fire-department`, source: "dept" },
+    history: {
+      intro: "Franklin's department meets every Monday night at the station on Main Street. Its chief is also the town's fire warden.",
+      events: [],
+    },
+    careers: {
+      intro: "Anyone interested can come to a Monday meeting or call the chief.",
+      points: ["Mondays at 6:30 p.m. at the station; Chief Mike Lawyer, 285-2050"],
+      applyUrl: `${FRK}/boards-commissions-departments/franklin-fire-department`,
+      source: "dept",
+    },
+    residents: [
+      { label: "Burn permits", href: `${FRK}/boards-commissions-departments/franklin-fire-department`, text: "From Fire Warden Michael Lawyer, on 285-2050." },
+    ],
+    sources: {
+      dept: { label: "Town of Franklin, Franklin Fire Department", href: `${FRK}/boards-commissions-departments/franklin-fire-department` },
     },
   },
   jericho: UJFD,
