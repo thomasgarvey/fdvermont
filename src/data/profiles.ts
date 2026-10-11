@@ -107,6 +107,12 @@ const WF = "https://www.westfordfire.org";
 const WT = "https://westfordvt.us";
 const HUN = "https://www.huntingtonvt.org";
 
+const MFD = "https://www.middleburyfiredept.org";
+const MIDT = "https://www.townofmiddlebury.org";
+const VERG = "https://www.vergennes.org";
+const BFD = "https://www.bristolfiredepartment.org";
+const BRT = "https://bristolvt.org/wp-content/uploads";
+
 // One department, two town pages: Underhill and Jericho share the profile.
 const UJFD: Profile = {
   description:
@@ -1510,6 +1516,199 @@ export const profiles: Record<string, Profile> = {
     sources: {
       dept: { label: "Town of Huntington, Fire Department", href: `${HUN}/fire-department/` },
       warden: { label: "Town of Huntington, Fire Warden", href: `${HUN}/fire-warden/` },
+    },
+  },
+  middlebury: {
+    description:
+      "Middlebury Fire Department: a paid on-call department since 1920, 262 calls in 2025, a technical " +
+      "rescue team for water, rope and ice, Middlebury College student firefighters, and burn permits.",
+    facts: [
+      ["Calls", "262 in 2025, of 50 different kinds"],
+      ["Staffing", "Paid on call; residents and selected Middlebury College students"],
+      ["Technical rescue", "Swift water, rope, ice and land search"],
+      ["Chief", "David Shaw, a member since 1980"],
+    ],
+    contact: { chief: "David Shaw", phone: "802-388-4462", website: MFD, source: "contact" },
+    history: {
+      intro:
+        "Middlebury's fire department took its current name on 7 May 1920, though fire protection in the " +
+        "town is much older. It is paid on call, and its own technical rescue team handles water, rope and " +
+        "ice rescue.",
+      events: [
+        { year: 1920, text: "The Middlebury Fire Department is established under its current name on 7 May.", source: "history" },
+        {
+          year: 2025,
+          text:
+            "262 calls, 1,825 hours on calls and more than 2,260 hours of training. A $19,500 grant pays for two " +
+            "new dry hydrants, in Otter Creek and the East Middlebury River, put in with the highway " +
+            "department. A $30,000 campaign, led by G. Stone Motors and three other donors, renews the " +
+            "technical rescue team's equipment.",
+          calls: 262,
+          source: "report",
+        },
+        { year: 2028, text: "A new utility truck is expected early in the year.", source: "report" },
+      ],
+    },
+    stationNotes: {
+      "middlebury-5-seymour-st": {
+        text:
+          "Station 1, on Seymour Street. The technical rescue team keeps two motorised Zodiac boats here and " +
+          "a rescue truck with a winch and lighting. The non-emergency line, 802-388-4462, is answered only " +
+          "when members are at the station.",
+        source: "rescue",
+      },
+    },
+    careers: {
+      intro:
+        "Membership has dipped slightly and the department is looking for people with the time to give. " +
+        "No fire or EMT experience is needed.",
+      points: [
+        "Live in Middlebury and be 18 or over; cadets from 16",
+        "Contact the membership coordinator at mfdvtmembership@gmail.com",
+        "Middlebury College students apply through the department's student, faculty and staff liaisons",
+        "Any member can train with and join the technical rescue team",
+      ],
+      applyUrl: `${MFD}/apply-now`,
+      source: "apply",
+    },
+    residents: [
+      { label: "Burn permits", href: `${MFD}/your-safety`, text: "Always required. Burning only from 1 November to the third Sunday of April, 8 a.m. to 4 p.m.; permits issued on the day, at the police station or from Chief Shaw." },
+      { label: "Technical rescue", href: `${MFD}/technical-rescue`, text: "For water, ice or rope emergencies call 911, or the department's dispatch on 802-388-2217." },
+      { label: "Fire safety for kids", href: `${MFD}/your-safety`, text: "Links to Sparky and the U.S. Fire Administration." },
+    ],
+    sources: {
+      history: { label: "Middlebury Fire Department, Our History", href: `${MFD}/our-history` },
+      contact: { label: "Middlebury Fire Department, Contact", href: `${MFD}/contact-us` },
+      rescue: { label: "Middlebury Fire Department, Technical Rescue Team", href: `${MFD}/technical-rescue` },
+      apply: { label: "Middlebury Fire Department, Become a Firefighter", href: `${MFD}/apply-now` },
+      report: { label: "Town of Middlebury, 2025 Town Report", href: `${MIDT}/Document/Government/Selectboard/Town%20Meeting/2026/2025%20Town%20Report.pdf`, note: "Middlebury Fire Department, pages 14–15. A scanned report, read with text recognition" },
+    },
+  },
+  vergennes: {
+    description:
+      "Vergennes Fire Department: 40 volunteers serving Vergennes, Panton, Waltham and Ferrisburgh, " +
+      "185+ calls in 2025, a newly bought 100-foot tower ladder, and plans for the ageing station.",
+    facts: [
+      ["Members", "40 active volunteers, a full roster"],
+      ["Calls", "More than 185 in 2025"],
+      ["Covers", "Vergennes, Panton, Waltham and Ferrisburgh"],
+      ["Out the door", "Typically under five minutes"],
+      ["Chief", "David DiBiase"],
+    ],
+    contact: { chief: "David DiBiase", phone: "802-877-3201", website: `${VERG}/departments/accessor.php`, source: "fire" },
+    history: {
+      intro:
+        "Vergennes' volunteer department answers for the city and three neighbouring towns, and keeps a full " +
+        "roster at a time when many departments can't. Its station, renovated in 1978, is the big question now.",
+      events: [
+        { year: 2023, text: "A Dubois & King assessment of the fire station, with mould, asbestos and lead surveys.", source: "fire" },
+        { year: 2024, text: "VIA produces concept designs and budget options for renovating or replacing the station.", source: "fire" },
+        {
+          year: 2025,
+          text:
+            "More than 185 calls. The department buys two used trucks in excellent condition, a 100-foot tower " +
+            "ladder and a pumper-tanker, and dedicates the ladder to Michael Collette, a member for more than " +
+            "60 years. Deputy Chief Matt Fraley is named Chief Officer of the Year by the state and county " +
+            "firefighters' associations.",
+          calls: 185,
+          callsApprox: true,
+          source: "report",
+        },
+        { year: 2026, text: "In February the city manager sets up a committee from the four towns to weigh renovating the station, building a new one or adding a satellite station; in March the city applies for congressionally directed spending. The department also begins a community risk reduction programme with Fire Safe 802.", source: "fire" },
+      ],
+    },
+    stationNotes: {
+      "vergennes-50-green-st": {
+        text:
+          "The department's one station, renovated in 1978. The 2025 annual report says it has deteriorated " +
+          "and no longer meets the department's needs; studies, concept designs and the committee's meetings " +
+          "are posted on the city's fire page.",
+        source: "fire",
+      },
+    },
+    residents: [
+      { label: "Fire station plans", href: `${VERG}/departments/accessor.php`, text: "The committee's agendas, minutes and videos, and the station studies." },
+      { label: "Knox Box", href: `${VERG}/departments/accessor.php`, text: "How to buy a key box for your property." },
+    ],
+    sources: {
+      fire: { label: "City of Vergennes, Fire Department", href: `${VERG}/departments/accessor.php` },
+      report: { label: "City of Vergennes, 2026 Annual Report", href: "https://www.dropbox.com/scl/fi/6nexrlvrr71dfvy1naqld/2026-Annual-Report-Corrected-ver.1.pdf?rlkey=sx1tpjd6iz5y06omf8zp1icoz&dl=0", note: "Fire Department annual report for 2025, pages 19–20" },
+    },
+  },
+  bristol: {
+    description:
+      "Bristol Fire Department: paid on-call firefighters answering about 130 calls a year, six years of call " +
+      "figures, the engines, the cadet programme, Knox Boxes and burn permits.",
+    facts: [
+      ["Calls", "127 in 2025, 1,784 hours of work"],
+      ["Staffing", "Paid on call"],
+      ["Station address used by the department", "62 Firehouse Drive"],
+      ["Mutual aid", "One of 17 departments in the Addison County system"],
+    ],
+    contact: { chief: "Brett LaRose", phone: "802-453-3201", website: BFD, source: "contact" },
+    history: {
+      intro:
+        "Bristol's firefighters are paid on call: everyone holds a full-time job elsewhere, carries a pager and " +
+        "responds when they can. The department is part of the Addison County Fire Mutual Aid System of 17 departments.",
+      events: [
+        { year: 2024, text: "133 incidents. Gifts from a local business, a nonprofit and memorial donations buy a turnout-gear dryer, cutting drying time from about 36 hours to 4.", calls: 133, source: "r2024" },
+        { year: 2025, text: "127 incidents, 1,020 hours of training. Peter Bouvier marks 40 years of service, John \"Peeker\" Heffernan 35, and Chief Brett LaRose and Matthew Lathrop 30 each.", calls: 127, source: "r2025" },
+      ],
+    },
+    calls: {
+      intro:
+        "Bristol's call volume has held between about 110 and 150 a year. In 2024 the hours behind those " +
+        "calls came to 1,698, plus about 1,900 hours of training, inspections and station upkeep.",
+      byYear: {
+        title: "Calls for service by year",
+        bars: [
+          { label: "2020", value: 108 },
+          { label: "2021", value: 132 },
+          { label: "2022", value: 146 },
+          { label: "2023", value: 125 },
+          { label: "2024", value: 133 },
+          { label: "2025", value: 127 },
+        ],
+        note: "Calendar years, from the fire chief's report in each year's town report.",
+        source: "r2025",
+      },
+    },
+    stationNotes: {
+      "bristol-79-west-st": {
+        text:
+          "The department gives its address as 62 Firehouse Drive; the state's E911 file lists 79 West St. " +
+          "Engine 1, a 2023 pumper-tanker (1,500 gpm, 1,000 gallons), is first due; Engine 2, a 2007 Spartan " +
+          "pumper-tanker (2,000 gpm, 3,000 gallons), brings water and answers mutual aid calls; plus a 2001 " +
+          "Ford heavy rescue for crashes and technical rescue.",
+        source: "fleet",
+      },
+    },
+    careers: {
+      intro:
+        "Paid on call at the state minimum wage for calls, training, inspections and station duties. The " +
+        "average firefighter answers about 30% of calls.",
+      points: [
+        "18 or over, a high school diploma or GED, and a Vermont driver's licence",
+        "Live within 10 minutes of the station",
+        "About 230 hours of training for Firefighter 1, within two years",
+        "Answer at least 15% of calls a year",
+        "Cadets aged 15 to 18 train with the department, with a parent's consent",
+      ],
+      applyUrl: `${BFD}/paidoncall.html`,
+      source: "join",
+    },
+    residents: [
+      { label: "Burn permits", href: `${BFD}/open-burning.html`, text: "Free, same-day only, issued after 8 a.m. once the morning fire danger rating is out. Natural wood only." },
+      { label: "Knox Box programme", href: `${BFD}/knox-box-program.html`, text: "A key box keyed to the department's master key, so crews can get in without forcing doors." },
+      { label: "Car seat checks", href: `${BFD}/car-seats.html`, text: "Free child safety seat inspections by a certified technician." },
+      { label: "Cadet programme", href: `${BFD}/bfd-Cadet-firefighter-program.html`, text: "For 15- to 18-year-olds interested in the fire service." },
+    ],
+    sources: {
+      contact: { label: "Bristol Fire Department, Contact", href: `${BFD}/contact-us.html` },
+      fleet: { label: "Bristol Fire Department, Apparatus", href: `${BFD}/apparatus.html` },
+      join: { label: "Bristol Fire Department, Paid on-call firefighter", href: `${BFD}/paidoncall.html` },
+      r2024: { label: "Town of Bristol, 2024 Annual Town Report", href: `${BRT}/2025/02/Town_of_Bristol_FY2024_Annual_Report_web.pdf`, note: "Fire Department report, pages 70–71" },
+      r2025: { label: "Town of Bristol, 2025 Annual Town Report", href: `${BRT}/2026/02/Town_of_Bristol_FY2025_Annual_Report_web.pdf`, note: "Fire Department report, page 77. Earlier years from the 2020–2023 town reports on bristolvt.org" },
     },
   },
   jericho: UJFD,
