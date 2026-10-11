@@ -129,6 +129,12 @@ const SWA = "https://www.swantonvt.gov";
 const RCH = "https://www.richfordvt.org";
 const FRK = "https://www.franklinvermont.org";
 
+const GIF = "https://grandislefire.org";
+const GIT = "https://grandislevt.org";
+const SHF = "https://southherofire.com";
+const SHT = "https://southherovt.org";
+const ILM = "https://islelamotte.us";
+
 // One department, two town pages: Underhill and Jericho share the profile.
 const UJFD: Profile = {
   description:
@@ -2307,6 +2313,182 @@ export const profiles: Record<string, Profile> = {
     ],
     sources: {
       dept: { label: "Town of Franklin, Franklin Fire Department", href: `${FRK}/boards-commissions-departments/franklin-fire-department` },
+    },
+  },
+  "grand-isle": {
+    description:
+      "Grand Isle Volunteer Fire Department: a record 148 calls in 2025 with 22 active members, serving since 1951 " +
+      "from the Hyde Road station, with marine and ice rescue, its budget and how to join.",
+    facts: [
+      ["Founded", "1951"],
+      ["Calls", "148 in 2025, a record"],
+      ["Active members", "22, plus an auxiliary"],
+      ["Station", "7,400 sq ft, on Hyde Road"],
+      ["Chief", "Adam White"],
+    ],
+    contact: { chief: "Adam White", phone: "802-372-5012", website: GIF, source: "join" },
+    history: {
+      intro:
+        "Grand Isle's department began in 1951 with a 1928 Chevrolet truck carrying a portable pump, and someone's " +
+        "garage for a station. Calls have climbed in recent years, and 2025 set a new record.",
+      events: [
+        { year: 1951, text: "The department starts with a 1928 Chevrolet truck with a portable pump on the back, kept in a member's garage.", source: "about" },
+        {
+          year: 2025,
+          text:
+            "148 calls, a record, with July averaging nearly one a day: structure fires, crashes, alarms, hazardous " +
+            "materials, medical assists, and marine and ice rescues. The department proposes a level budget for the " +
+            "second year running, at the Selectboard's request.",
+          calls: 148,
+          source: "report",
+        },
+      ],
+    },
+    stationNotes: {
+      "grand-isle-17-hyde-rd": {
+        text:
+          "The 7,400 sq ft station on Hyde Road. Engine 1, a 2018 Freightliner/Ferrara, and Engine 2, a 1993 " +
+          "Freightliner/E-One, each carry 1,250 gallons; plus a tanker, a heavy rescue, a brush truck, a trailer and a boat.",
+        source: "fleet",
+      },
+    },
+    money: {
+      intro:
+        "About three-quarters of the operating budget comes from the town and a quarter from fundraising and " +
+        "donations. With the town's share held level, the auxiliary has been asked to raise more in 2026.",
+      year: "fiscal year 2027 (proposed)",
+      lines: [
+        { label: "Town appropriation", amount: 105000 },
+        { label: "Fundraising and events", amount: 26000 },
+      ],
+      linesNote: "A proposed total of $131,000, up from $127,500 for fiscal 2026.",
+      capital: {
+        title: "Town appropriation by year",
+        lines: [
+          { label: "FY2027 (proposed)", amount: 105000 },
+          { label: "FY2026", amount: 105000 },
+          { label: "FY2025", amount: 105000 },
+          { label: "FY2024", amount: 90000 },
+          { label: "FY2023", amount: 75000 },
+        ],
+        note: "From the department's budget page in the 2025 town report.",
+      },
+      source: "report",
+    },
+    careers: {
+      intro:
+        "With 22 active members covering the town around the clock, the department wants more volunteers, for " +
+        "interior firefighting, traffic control, driving and pumping, exterior support and more.",
+      points: [
+        "Junior firefighters at 16 and 17; firefighters from 18",
+        "Training at your own pace and level",
+        "Training nights are Tuesdays at 6:30 p.m., per the 2025 report (the website still says Wednesdays)",
+        "Stop by the station, call 802-372-5012, or email Chief White at awhite@grandislefire.org",
+      ],
+      applyUrl: `${GIF}/join-us`,
+      source: "report",
+    },
+    residents: [
+      { label: "Address signs", href: GIF, text: "The department's reflective 911 address signs help crews find your house." },
+      { label: "Fireworks", href: `${GIF}/fireworks`, text: "The department's fireworks information." },
+    ],
+    sources: {
+      about: { label: "Grand Isle Fire Department, About Us", href: `${GIF}/about-us` },
+      fleet: { label: "Grand Isle Fire Department, Apparatus", href: `${GIF}/apparatus` },
+      join: { label: "Grand Isle Fire Department, Join Us", href: `${GIF}/join-us` },
+      report: { label: "Town of Grand Isle, 2025 Town Report", href: `${GIT}/wp-content/uploads/2026/02/2025-Town-Report.pdf`, note: "Fire Department letter and budget, pages 37–38. A scanned report, read with text recognition" },
+    },
+  },
+  "south-hero": {
+    description:
+      "South Hero Volunteer Fire Department: serving since 1953, calls by year, a new E-One engine, a landing-craft " +
+      "fire boat, first response, and members from age 14.",
+    facts: [
+      ["Founded", "1953"],
+      ["Calls", "211 in fiscal 2023, down from 259 in fiscal 2021"],
+      ["Services", "Fire, first response EMS, water rescue"],
+      ["Chief", "Patrick Robinson"],
+    ],
+    contact: { chief: "Patrick Robinson", website: SHF, source: "personnel" },
+    history: {
+      intro:
+        "South Hero's volunteers have served the town since 1953 and are part of the Grand Isle County mutual aid group " +
+        "with Alburgh, Grand Isle and North Hero. Members include certified EMTs who run the town's first response service.",
+      events: [
+        { year: 1953, text: "The South Hero Volunteer Fire Department begins.", source: "report" },
+        { year: 2019, text: "A landing-craft fire boat is built, able to launch around the county and pull up to islands' shores.", source: "fleet" },
+        { year: 2023, text: "The department's old fire boat, from the Coast Guard and known as \"the Titanic\", goes to Isle La Motte. A new E-One engine goes into service.", source: "fleet" },
+      ],
+    },
+    calls: {
+      intro: "Call volume has fallen over the years the town report covers.",
+      byYear: {
+        title: "Calls by fiscal year",
+        bars: [
+          { label: "FY2021", value: 259 },
+          { label: "FY2022", value: 217 },
+          { label: "FY2023", value: 211 },
+        ],
+        note: "Fiscal years end in June. From the chief's report in the town report labelled 2024.",
+        source: "report",
+      },
+    },
+    stationNotes: {
+      "south-hero-131-community-ln": {
+        text:
+          "Engine 2, a 2023 E-One with a 1,250 gpm pump and 1,250 gallons, is first due; Engine 1, a 2007 HME, " +
+          "supplies water; Water 1 carries 2,300 gallons; Squad 3 leads first response; and Fire Boat 1, built in 2019, " +
+          "has twin 115 hp motors.",
+        source: "fleet",
+      },
+    },
+    careers: {
+      intro: "There's a job for everyone: interior firefighting, pumping, water supply, traffic, EMS, and support roles from graphics to supplies.",
+      points: [
+        "Cadets at 14 and 15: training, fire prevention and equipment upkeep",
+        "Junior members at 16 and 17: training with air packs and most calls",
+        "Regular members from 18, after a probation period",
+        "Fill in the form on the Join page for a call and a station tour",
+      ],
+      applyUrl: `${SHF}/join/`,
+      source: "cadets",
+    },
+    residents: [
+      { label: "Burn permits", href: `${SHF}/burn-permits/`, text: "Through the Town Clerk, 372-5552. Campfires under 4 feet in a ring don't need one; no permits during red flag warnings or moderate fire danger." },
+      { label: "Fire safety", href: `${SHF}/fire-safety-and-prevention/`, text: "Smoke and CO alarms, extinguishers, emergency access and boater safety." },
+    ],
+    sources: {
+      personnel: { label: "South Hero Volunteer Fire Department, Personnel", href: `${SHF}/personnel/` },
+      fleet: { label: "South Hero Volunteer Fire Department, Apparatus", href: `${SHF}/apparatus/` },
+      cadets: { label: "South Hero Volunteer Fire Department, Become a Cadet or Junior Member", href: `${SHF}/2025/04/10/become-a-cadet-or-junior-member/` },
+      report: { label: "Town of South Hero, Annual Report 2024", href: `${SHT}/wp-content/uploads/2025/12/South-HeroTown-Report-2024.pdf`, note: "Fire Department, page 55. A scanned report, read with text recognition" },
+    },
+  },
+  "isle-la-motte": {
+    description:
+      "Isle La Motte Volunteer Fire Company: an independent, all-volunteer company with a marine rescue boat, EMT-trained " +
+      "members, and mutual aid reaching New York and Canada.",
+    facts: [
+      ["Run by", "An independent company of volunteers, partly town-funded"],
+      ["Station", "2241 Main Road"],
+      ["Marine rescue", "A rescue boat docked at Lakehurst Campground"],
+      ["Chief", "Bill Johnson IV"],
+    ],
+    contact: { chief: "Bill Johnson IV", website: `${ILM}/firerescue/`, source: "page" },
+    history: {
+      intro:
+        "Isle La Motte's fire company is independent and staffed entirely by volunteers, with town money voted at each " +
+        "Town Meeting. Five members are trained in emergency medical care and answer 911 medical calls; ambulances come from Alburgh.",
+      events: [
+        { year: 2023, text: "South Hero's former fire boat, a one-time Coast Guard boat known as \"the Titanic\", comes to Isle La Motte.", source: "shfleet" },
+      ],
+    },
+    residents: [
+      { label: "Burn permits", href: `${ILM}/firerescue/`, text: "Contact the Forest Fire Warden before lighting any open fire." },
+    ],
+    sources: {
+      page: { label: "Town of Isle La Motte, Fire & Rescue", href: `${ILM}/firerescue/` },
+      shfleet: { label: "South Hero Volunteer Fire Department, Apparatus", href: `${SHF}/apparatus/` },
     },
   },
   jericho: UJFD,
