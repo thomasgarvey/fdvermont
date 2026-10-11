@@ -50,8 +50,8 @@
     "lat": null,
     "lng": null,
     "stationAddress": "50 Green St",
-    "placedBy": "address-join",
-    "esiteid": null
+    "placedBy": "station-link",
+    "esiteid": 264655
   },
   {
     "id": "recc6lbkbbuM9WTxl",
@@ -76,9 +76,9 @@
     "town": "ADDISON",
     "lat": null,
     "lng": null,
-    "stationAddress": "44 Vt Rte 17 West",
-    "placedBy": "address-join",
-    "esiteid": null
+    "stationAddress": "44 VT Route 17 W",
+    "placedBy": "station-link",
+    "esiteid": 542
   },
   {
     "id": "rec9fnp0wasWQWICl",
