@@ -113,6 +113,10 @@ const VERG = "https://www.vergennes.org";
 const BFD = "https://www.bristolfiredepartment.org";
 const BRT = "https://bristolvt.org/wp-content/uploads";
 
+const STK = "https://www.starksborovt.org";
+const HAN = "https://www.hancockvt.org";
+const RIP = "https://www.riptonvermont.org";
+
 // One department, two town pages: Underhill and Jericho share the profile.
 const UJFD: Profile = {
   description:
@@ -1709,6 +1713,172 @@ export const profiles: Record<string, Profile> = {
       join: { label: "Bristol Fire Department, Paid on-call firefighter", href: `${BFD}/paidoncall.html` },
       r2024: { label: "Town of Bristol, 2024 Annual Town Report", href: `${BRT}/2025/02/Town_of_Bristol_FY2024_Annual_Report_web.pdf`, note: "Fire Department report, pages 70–71" },
       r2025: { label: "Town of Bristol, 2025 Annual Town Report", href: `${BRT}/2026/02/Town_of_Bristol_FY2025_Annual_Report_web.pdf`, note: "Fire Department report, page 77. Earlier years from the 2020–2023 town reports on bristolvt.org" },
+    },
+  },
+  starksboro: {
+    description:
+      "Starksboro Volunteer Fire Department: about 50 to 65 calls a year from two stations, a new Engine 1 " +
+      "in 2025, plans for a new Station 2 in South Starksboro, and the town's volunteer first responders.",
+    facts: [
+      ["Calls", "54 in 2025"],
+      ["Stations", "Main station off Route 116; Station 2 in South Starksboro"],
+      ["Run by", "Starksboro Volunteer Fire Department, Inc., with a $24,000 town appropriation"],
+      ["First response", "Volunteer EMTs, 108 calls in 2025"],
+      ["Chief", "Tom Estey"],
+    ],
+    contact: { chief: "Tom Estey", phone: "802-373-6529", website: `${STK}/fire-department`, source: "dept" },
+    history: {
+      intro:
+        "Starksboro's firefighters are volunteers, organised as a nonprofit the town helps fund. A separate " +
+        "volunteer first response team of EMTs, unpaid and without even a stipend, answers medical calls in town.",
+      events: [
+        { year: 2022, text: "48 calls, 536 hours on calls and 399 hours of training. The department asks Town Meeting to approve a new fire truck.", calls: 48, source: "r2023" },
+        { year: 2023, text: "The Development Review Board approves the site plan for a new two-bay Station 2 beside the 1874 Jerusalem Schoolhouse, replacing a deteriorating 1970s addition.", source: "station2" },
+        { year: 2024, text: "64 calls, 17 more than the year before, with 672 hours on calls and 629 of training. Three new members join.", calls: 64, source: "r2024" },
+        { year: 2025, text: "The new Engine 1 arrives in June and goes into service at the end of July, once the pump operators are trained. 54 calls, 426 hours on calls, 251 of training.", calls: 54, source: "r2025" },
+      ],
+    },
+    calls: {
+      intro:
+        "Firefighters answer building fires, crashes, carbon monoxide calls, medical assists and mutual aid. " +
+        "The first responders logged 158 calls in 2024 and 108 in 2025, most of them medical.",
+      byYear: {
+        title: "Fire department calls by year",
+        bars: [
+          { label: "2022", value: 48 },
+          { label: "2023", value: 47 },
+          { label: "2024", value: 64 },
+          { label: "2025", value: 54 },
+        ],
+        note: "Calendar years, from the chief's report in each town report. 2023 is worked out from the 2024 report's \"17 more calls than last year\".",
+        source: "r2025",
+      },
+    },
+    stationNotes: {
+      "starksboro-397-jerusalem-rd": {
+        text:
+          "Station 2, a small 1970s addition to the 1874 Jerusalem Schoolhouse, houses one truck for South " +
+          "Starksboro. The town plans a stand-alone two-bay station here and a renovated schoolhouse as a " +
+          "community centre; approvals are in place and the town is seeking funding.",
+        source: "station2",
+      },
+    },
+    money: {
+      intro:
+        "The department is a nonprofit corporation. The town appropriates $24,000 a year; donations and the " +
+        "coin drop make up much of the rest. Fiscal 2025 included a down payment on the new truck.",
+      year: "fiscal year 2025 (July 2024 to June 2025), receipts",
+      lines: [
+        { label: "Town appropriation", amount: 24000 },
+        { label: "Donations", amount: 5579 },
+        { label: "Coin drop", amount: 3508 },
+        { label: "Other income", amount: 2216 },
+      ],
+      linesNote: "The treasurer's report, rounded to the dollar.",
+      capital: {
+        title: "Largest spending, fiscal 2025",
+        lines: [
+          { label: "Down payment on the new truck", amount: 4620 },
+          { label: "Heating, Station 1", amount: 3737 },
+          { label: "Fire equipment", amount: 3117 },
+          { label: "Radios, pagers and repairs", amount: 2959 },
+        ],
+        note: "Total spending that year was $31,035.",
+      },
+      source: "r2025",
+    },
+    careers: {
+      intro: "The department is always looking for new members.",
+      points: [
+        "Business meetings the first Monday of the month; drills the third Monday and the last Wednesday",
+        "Stop by the station, or contact the chief",
+        "First response members must have lived in town a year and hold a Vermont EMS certification",
+      ],
+      applyUrl: `${STK}/fire-department`,
+      source: "r2025",
+    },
+    residents: [
+      { label: "Burn permits", href: `${STK}/fire-department`, text: "For grass, leaves, brush or untreated natural wood: call Chief Tom Estey or Assistant Chief Tony Porter. All other burning is illegal." },
+      { label: "Station 2 project", href: `${STK}/schoolhouse-fire-station-2-project`, text: "Plans, assessments and approvals for the Jerusalem Community Center and fire station." },
+    ],
+    sources: {
+      dept: { label: "Town of Starksboro, Fire Department", href: `${STK}/fire-department` },
+      station2: { label: "Town of Starksboro, Jerusalem Community Center & Fire Station Project", href: `${STK}/schoolhouse-fire-station-2-project` },
+      r2023: { label: "Town of Starksboro, Town Report 2022–23", href: `${STK}/sites/default/files/uploads/town%20reports/2022-2023-town-report-final.pdf`, note: "Fire Department, page 61" },
+      r2024: { label: "Town of Starksboro, Town Report 2023–24", href: `${STK}/sites/default/files/uploads/town%20reports/town-report-2023-2024-final.pdf`, note: "Fire Department, page 63; First Response, page 61" },
+      r2025: { label: "Town of Starksboro, Town Report 2024–25", href: `${STK}/sites/default/files/uploads/content/web_starksboro.pdf`, note: "Fire Department, pages 58–59; First Response, page 56" },
+    },
+  },
+  hancock: {
+    description:
+      "Hancock Volunteer Fire Department: a small volunteer department answering about 20 calls " +
+      "a year, mostly crashes, and looking for volunteers and a first responder team.",
+    facts: [
+      ["Calls", "19 in fiscal 2025"],
+      ["Budget", "Raised to $15,000 by Town Meeting 2025"],
+      ["Chief", "Jacques Veilleux"],
+    ],
+    contact: { chief: "Jacques Veilleux", website: HAN, source: "report" },
+    history: {
+      intro:
+        "Hancock's volunteer department answers the town's emergencies and helps run its community " +
+        "events, from the summer concerts on the green to Trunk or Treat and the tree lighting.",
+      events: [
+        { year: 2025, text: "On 4 March Town Meeting adds $3,000 to the fire department's budget, and agrees to roll any surplus into the Fire Department Equipment Fund for future trucks. Ryan Veilleux leaves after 15 years of service.", source: "report" },
+      ],
+    },
+    calls: {
+      intro: "Motor vehicle crashes were nearly half of the year's calls.",
+      byType: {
+        title: "Calls by type, fiscal 2025",
+        bars: [
+          { label: "Motor vehicle crashes", value: 9 },
+          { label: "Trees on power lines", value: 3 },
+          { label: "Rescues", value: 2 },
+          { label: "Phone crash alert", value: 1 },
+          { label: "Fire alarm", value: 1 },
+          { label: "Chimney fire (in Granville)", value: 1 },
+          { label: "Car or garage fire", value: 1 },
+          { label: "Lift assist", value: 1 },
+        ],
+        note: "July 2024 to June 2025; 19 calls in all.",
+        source: "report",
+      },
+    },
+    careers: {
+      intro: "The department is looking for more volunteers, and for people to start a first responder team.",
+      points: ["Get in touch through the town office or any member"],
+      applyUrl: HAN,
+      source: "report",
+    },
+    residents: [],
+    sources: {
+      report: { label: "Town of Hancock, 2026 Town Report", href: `${HAN}/wp-content/uploads/2026/02/Town-Report-2026-Hancock.pdf`, note: "Fire Department Report, page 27; 2025 Town Meeting minutes. A scanned report, read with text recognition" },
+    },
+  },
+  ripton: {
+    description:
+      "Ripton Fire & First Response: a volunteer fire and first response department on Dugway Road, with cadets, " +
+      "members from Salisbury, a search and rescue call list, and burn permits.",
+    facts: [
+      ["Services", "Fire and first response"],
+      ["Members", "18 listed, plus 4 cadets; three live in Salisbury"],
+      ["Station", "25 Dugway Road, near Lincoln Road"],
+      ["Chief", "Chris Pike"],
+    ],
+    contact: { chief: "Chris Pike", phone: "(802) 388-4506", website: `${RIP}/fire-rescue`, source: "page" },
+    history: {
+      intro:
+        "Ripton's volunteers answer fire and medical calls, backed by a search and rescue " +
+        "call list and members who live over the line in Salisbury.",
+      events: [],
+    },
+    residents: [
+      { label: "Burn permits", href: `${RIP}/fire-rescue`, text: "Required when there is no snow cover; call 388-4506 or the Fire Warden. The town's page says no permits are being issued from October 2025 until further notice." },
+      { label: "Medical wishes", href: `${RIP}/fire-rescue`, text: "Keep a DNR/COLST form, filled out with your doctor, somewhere easy for responders to find." },
+    ],
+    sources: {
+      page: { label: "Town of Ripton, Fire & Rescue", href: `${RIP}/fire-rescue` },
     },
   },
   jericho: UJFD,
