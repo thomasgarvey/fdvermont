@@ -117,6 +117,9 @@ const STK = "https://www.starksborovt.org";
 const HAN = "https://www.hancockvt.org";
 const RIP = "https://www.riptonvermont.org";
 
+const BRP = "https://bridportvt.org";
+const ORW = "https://townoforwellvt.org";
+
 // One department, two town pages: Underhill and Jericho share the profile.
 const UJFD: Profile = {
   description:
@@ -1879,6 +1882,148 @@ export const profiles: Record<string, Profile> = {
     ],
     sources: {
       page: { label: "Town of Ripton, Fire & Rescue", href: `${RIP}/fire-rescue` },
+    },
+  },
+  bridport: {
+    description:
+      "Bridport Volunteer Fire Department: 110 calls in 2025, 24 active members, two engines and three tankers, " +
+      "75 years of service, and how the department raises most of its own budget.",
+    facts: [
+      ["Calls", "110 in 2025, with 607 firefighter responses"],
+      ["Members", "24 active, 2 auxiliary, 7 life members"],
+      ["Fleet", "Two engines, three tankers and a utility/response vehicle"],
+      ["Chief", "Dusty Huestis"],
+    ],
+    contact: { chief: "Dusty Huestis", website: BRP, source: "report" },
+    history: {
+      intro:
+        "Bridport's volunteers marked 75 years in 2024. The department raises most of its budget itself, " +
+        "with help from its Ladies Auxiliary, and answers more medical calls than fires.",
+      events: [
+        { year: 2024, text: "The department celebrates its 75th anniversary in June with a party at the station on Crown Point Road: a helicopter, live music, a street dance and fireworks.", source: "anniv" },
+        {
+          year: 2025,
+          text:
+            "110 calls and 1,166 hours of training, including live fire training in a building in town. Tanker 2 " +
+            "gets a 2010 Mack chassis from the town in place of its 1985 Ford. The department says farewell to " +
+            "longtime members Bruce Stocker and Edgar \"Bub\" Crosby.",
+          calls: 110,
+          source: "report",
+        },
+      ],
+    },
+    calls: {
+      intro:
+        "Medical calls were well over half of 2025's total: the department gives first response alongside " +
+        "Town Line First Response, Middlebury Regional EMS and Vergennes Rescue. Six fire calls were mutual aid " +
+        "to Addison, Shoreham and Crown Point, New York.",
+      byType: {
+        title: "Calls by type, 2025",
+        bars: [
+          { label: "Medical", value: 65 },
+          { label: "Motor vehicle crashes", value: 25 },
+          { label: "Fires and alarms, incl. 4 carbon monoxide", value: 18 },
+          { label: "Public service", value: 2 },
+        ],
+        note: "110 calls in all.",
+        source: "report",
+      },
+    },
+    money: {
+      intro:
+        "The town gave $30,000 in 2025; members and the Ladies Auxiliary raised another $43,613, 59% of the " +
+        "budget, through the Father's Day barbecue, a poker series, a gun raffle, bingo and donations. A set of " +
+        "turnout gear costs $4,854 and an air pack $12,000; the department replaces about three sets of gear " +
+        "and one air pack a year.",
+      year: "2025, income",
+      lines: [
+        { label: "Raised by members and the Ladies Auxiliary", amount: 43613 },
+        { label: "Town appropriation", amount: 30000 },
+      ],
+      linesNote: "From the chief's 2025 report. Total spending that year was $67,913; the department asked for $30,000 again for 2026.",
+      capital: {
+        title: "What it costs to equip a firefighter",
+        lines: [
+          { label: "Planned yearly replacement: 3 sets of gear and 1 air pack", amount: 26562 },
+          { label: "One self-contained breathing apparatus", amount: 12000 },
+          { label: "One set of protective gear", amount: 4854 },
+        ],
+        note: "A gear set is jacket, pants, boots, helmet, hood and gloves.",
+      },
+      source: "report",
+    },
+    stationNotes: {
+      "bridport-82-crown-point-rd": {
+        text: "The fire station on Crown Point Road, where the department meets at 6:30 p.m. on the first Monday of each month.",
+        source: "report",
+      },
+    },
+    careers: {
+      intro: "Volunteers fill a range of firefighting, first response and support roles, and new members are always welcome.",
+      points: [
+        "Come to the monthly meeting, first Monday at 6:30 p.m. at the station",
+        "Or ask Corey Pratt at the store, or email bridportfire1@yahoo.com",
+      ],
+      applyUrl: BRP,
+      source: "report",
+    },
+    residents: [
+      { label: "Burn permits", href: `${BRP}/s/2025-Town-Report-Website.pdf`, text: "Required for any open burning in town; contact the Fire Warden. The department helps with large burns of brush piles and fallow fields." },
+    ],
+    sources: {
+      report: { label: "Town of Bridport, 2025 Town Report", href: `${BRP}/s/2025-Town-Report-Website.pdf`, note: "Bridport Volunteer Fire Department annual and financial reports, pages 47–49 (scanned, read with text recognition); Fire Warden, page 37" },
+      anniv: { label: "Town of Bridport, Fire Department 75th Anniversary Celebration", href: `${BRP}/town-events/2024/6/15/bridport-fire-department-75th-anniversary-celebration` },
+    },
+  },
+  orwell: {
+    description:
+      "Orwell Volunteer Fire Department: 55 calls in 2025, mostly crashes and brush fires, new battery-powered " +
+      "rescue tools and thermal cameras, and a welcome for new volunteers.",
+    facts: [
+      ["Calls", "55 in 2025"],
+      ["Largest share", "Motor vehicle crashes, 20"],
+      ["Chief", "Alex Kansky"],
+    ],
+    contact: { chief: "Alex Kansky", website: ORW, source: "report" },
+    history: {
+      intro:
+        "Orwell's volunteers answer fires, crashes, rescues and mutual aid calls, often in bad weather and remote " +
+        "parts of town. The department also holds the fund for the Champlain Large Animal Technical Rescue team.",
+      events: [
+        { year: 2025, text: "55 calls. The department buys battery-powered extrication tools and two thermal imaging cameras, and puts up new signs at the firehouse and the roadside.", calls: 55, source: "report" },
+      ],
+    },
+    calls: {
+      intro: "A year with many crashes and seasonal brush fires.",
+      byType: {
+        title: "Calls by type, 2025",
+        bars: [
+          { label: "Motor vehicle crashes", value: 20 },
+          { label: "Brush fires", value: 8 },
+          { label: "Structure fires, incl. mutual aid", value: 5 },
+          { label: "Utility emergencies", value: 4 },
+          { label: "Rescue assists", value: 3 },
+          { label: "Vehicle fires", value: 3 },
+          { label: "Fire alarms", value: 3 },
+          { label: "Other fires", value: 3 },
+          { label: "Public assists", value: 2 },
+          { label: "Cancelled", value: 2 },
+          { label: "Chimney fire", value: 1 },
+          { label: "Odour investigation", value: 1 },
+        ],
+        note: "55 calls in all.",
+        source: "report",
+      },
+    },
+    careers: {
+      intro: "New volunteers are welcome: no experience is needed, and training is provided.",
+      points: ["Get in touch with any member, or through the town office"],
+      applyUrl: ORW,
+      source: "report",
+    },
+    residents: [],
+    sources: {
+      report: { label: "Town of Orwell, 2025 Town Report", href: `${ORW}/wp-content/uploads/2015/09/orwell-town-report-2025.pdf`, note: "Orwell Volunteer Fire Department annual and financial reports, pages 42–45. A scanned report, read with text recognition" },
     },
   },
   jericho: UJFD,
