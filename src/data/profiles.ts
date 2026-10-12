@@ -203,6 +203,9 @@ const ROCKINGHAM: Profile = {
   },
 };
 
+const NPT = "https://www.newportvermont.org";
+const TRY = "https://www.troyvt.gov";
+
 // One department, two town pages: Underhill and Jericho share the profile.
 const UJFD: Profile = {
   description:
@@ -3461,6 +3464,116 @@ export const profiles: Record<string, Profile> = {
   rockingham: ROCKINGHAM,
   "bellows-falls": ROCKINGHAM,
   "saxtons-river": ROCKINGHAM,
+  "newport-city": {
+    description:
+      "City of Newport Fire Department: 24 members, marine and ice rescue, an 85-foot " +
+      "tower and a rescue airboat, 2024 calls by type, and a junior programme from age 14.",
+    facts: [
+      ["Members", "24, with over 300 combined years of experience, plus 3 juniors"],
+      ["Services", "Fire, heavy rescue and extrication, marine and ice rescue, hazmat, risk reduction"],
+      ["Station", "350 Western Avenue, built 1998"],
+      ["Chief", "Kevin Lacoss, appointed 2024"],
+    ],
+    contact: { chief: "Kevin Lacoss", phone: "(802) 334-7919", website: `${NPT}/city-information/fire-department/`, source: "dept" },
+    history: {
+      intro:
+        "Newport's department protects the city and part of Coventry. It meets on Tuesday evenings, and all training " +
+        "and gear are paid for.",
+      events: [
+        {
+          year: 2024,
+          text:
+            "Kevin Lacoss, a member since 2002, is appointed chief, and a full-time administrative firefighter is hired. " +
+            "Coventry shrinks the area Newport covers, though its share of capital costs stays the same. New Holmatro " +
+            "rescue tools free a trapped driver on Pine Hill Road within days of arriving. Longtime member Lucius " +
+            "\"Butch\" Provencher dies after more than 40 years.",
+          source: "r2024",
+        },
+        { year: 2025, text: "A new engine, ordered in 2023, is due in September.", source: "r2024" },
+      ],
+    },
+    calls: {
+      intro:
+        "Alarms and crashes made up most of 2024's calls. The report gives a total of 184; its list also counts 26 " +
+        "trainings and 11 outreach events, which the chart leaves out, and adds up to more than that total.",
+      byType: {
+        title: "Calls by type, 2024",
+        bars: [
+          { label: "Fire alarms", value: 62 },
+          { label: "Crashes", value: 32 },
+          { label: "Fires, other", value: 12 },
+          { label: "Agency assists", value: 11 },
+          { label: "Carbon monoxide alarms", value: 8 },
+          { label: "Medical assists", value: 6 },
+          { label: "Burning complaints", value: 5 },
+          { label: "Vehicle fires", value: 4 },
+          { label: "Power line incidents", value: 4 },
+          { label: "Smoke investigations", value: 4 },
+          { label: "Structure fires", value: 3 },
+          { label: "Illegal burning", value: 3 },
+          { label: "Brush or grass fires", value: 2 },
+          { label: "Mutual aid fires", value: 2 },
+          { label: "Ice or water rescues", value: 2 },
+          { label: "Flooding", value: 2 },
+        ],
+        note: "Calendar 2024. Five types with one call each (cooking fire, traffic detail, gas, sprinkler, odour) are left off.",
+        source: "r2024",
+      },
+    },
+    stationNotes: {
+      "newport-city-350-western-ave": {
+        text:
+          "The 1998 station: Engine 1 (1998 Ferrara), Engine 2 (2010 Smeal), Tower 1 (a 2001 Smeal 85-foot platform), " +
+          "Rescue 5 (a 2014 RescueOne heavy rescue), Brush 23, a Rivercraft rescue airboat and a UTV.",
+        source: "r2024",
+      },
+    },
+    careers: {
+      intro: "Roles include interior firefighter, driver/operator and support. All training and gear are funded by the department.",
+      points: [
+        "18 or over, with a driver's licence and a background check",
+        "Junior firefighters aged 14 to 17",
+        "Stop by the station on a Tuesday evening, or call",
+      ],
+      applyUrl: `${NPT}/city-information/fire-department/`,
+      source: "r2024",
+    },
+    residents: [
+      { label: "Burn permits", href: `${NPT}/city-information/fire-department/`, text: "Request online or call 802-334-7919; allow two to three business days." },
+      { label: "Open house", href: `${NPT}/city-information/fire-department/`, text: "An annual fire prevention and safety open house each October, with live-fire extinguisher training." },
+    ],
+    sources: {
+      dept: { label: "City of Newport, Fire Department", href: `${NPT}/city-information/fire-department/` },
+      r2024: { label: "City of Newport, 2024 Annual Report", href: `${NPT}/wp-content/uploads/2025/02/2024-Newport-City-Annual-Report.pdf`, note: "Newport City Fire Department, pages 50–52" },
+    },
+  },
+  troy: {
+    description:
+      "Troy Volunteer Fire Department: unpaid volunteers on Route 100, a 1999 75-foot ladder bought in 2025 to replace a " +
+      "105-foot truck, and the town's fire funding; North Troy has its own department.",
+    facts: [
+      ["Staffing", "100% volunteer, with no pay or stipends"],
+      ["Town funding", "$33,974.77 requested for 2026, the same as 2025"],
+      ["Chief", "Bobby Jacobs"],
+    ],
+    contact: { chief: "Bobby Jacobs", phone: "802-673-4144", website: `${TRY}/services/ambulance-and-fire`, source: "town" },
+    history: {
+      intro:
+        "Troy's volunteers answer fires, crashes, medical assists, hazardous conditions and water rescues. The village of " +
+        "North Troy has its own fire department, with its own chief, which the town also helps fund.",
+      events: [
+        { year: 2025, text: "The department sells its 105-foot ladder truck to another Vermont department and buys a used 1999 E-One 75-foot Cyclone: shorter, more manoeuvrable, and able to work as an engine with its 500-gallon tank and 1,500 gpm pump.", source: "report" },
+      ],
+    },
+    residents: [
+      { label: "Clear your driveway", href: `${TRY}/services/ambulance-and-fire`, text: "Trim trees and branches along driveways so trucks can reach you." },
+      { label: "Burn permits", href: `${TRY}/services/ambulance-and-fire`, text: "From the Fire Warden, who covers both Troy and North Troy." },
+    ],
+    sources: {
+      town: { label: "Town of Troy, Ambulance and Fire", href: `${TRY}/services/ambulance-and-fire` },
+      report: { label: "Town of Troy, 2025 Annual Report", href: `${TRY}/fileadmin/files/General/Troy_Annual_Report_2025.pdf`, note: "Troy Volunteer Fire Department, page 18; appropriations, pages 5–9. A scanned report, read with text recognition" },
+    },
+  },
   jericho: UJFD,
   underhill: UJFD,
 };
