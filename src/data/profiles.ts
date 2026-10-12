@@ -153,6 +153,13 @@ const HYP = "https://www.hydeparkvt.com";
 const EDN = "https://www.edenvt.org";
 const ELM = "https://elmorevt.org";
 
+const SJB = "https://www.stjvt.com";
+const BRK = "https://www.burkevermont.org";
+const NWK = "https://www.newarkvtfire.org";
+const RYE = "https://ryegatevt.org";
+const HWK = "https://hardwickvt.gov";
+const PCH = "https://peachamfiredepartment.com";
+
 // One department, two town pages: Underhill and Jericho share the profile.
 const UJFD: Profile = {
   description:
@@ -3005,6 +3012,236 @@ export const profiles: Record<string, Profile> = {
     sources: {
       dept: { label: "Town of Elmore, Elmore Fire Department", href: `${ELM}/community/elmore-fire-department/` },
       permit: { label: "Elmore Fire Department, Burn Permit", href: "https://sites.google.com/elmorefire.org/elmorefire/burn-permit" },
+    },
+  },
+  // St. Johnsbury's station is missing from the E911 file, so this has no page
+  // until a Fire Stations record is added for 1187 Main Street.
+  "saint-johnsbury": {
+    description:
+      "St. Johnsbury Fire Department: a combination department since 1843, 12 full-time and 6 paid on-call firefighters " +
+      "in one downtown firehouse, protecting the Northeast Kingdom's largest community.",
+    facts: [
+      ["Founded", "1843"],
+      ["Staffing", "12 full-time, 6 paid on call"],
+      ["Area", "All 37 square miles of St. Johnsbury"],
+      ["Services", "Fire, EMS first response, extrication, hazmat, technical rescue, prevention"],
+    ],
+    contact: { phone: "802-748-8925", website: `${SJB}/st-johnsbury-vt-fire-department`, source: "dept" },
+    history: {
+      intro:
+        "St. Johnsbury's department dates from 1843 and is known for large, destructive fires that have taken out parts " +
+        "of downtown and cost lives; the tightly packed 19th-century brick blocks make fire protection hard. Two " +
+        "interstates, two US routes and a freight railroad run through town.",
+      events: [
+        { year: 1843, text: "On 31 October the department is established with its first hose company, \"The Torrent\", in Fairbanks Village.", source: "dept" },
+      ],
+    },
+    stationNotes: {
+      "saint-johnsbury-1187-main-st": {
+        text: "The single downtown firehouse that replaced five volunteer companies spread around town.",
+        source: "dept",
+      },
+    },
+    residents: [],
+    sources: {
+      dept: { label: "Town of St. Johnsbury, Fire Department", href: `${SJB}/st-johnsbury-vt-fire-department` },
+    },
+  },
+  burke: {
+    description:
+      "Burke's two volunteer fire departments: the East Burke Volunteer Fire Brigade, a record 115 incidents in 2025, and " +
+      "the West Burke Volunteer Fire Department, 89 calls, its most ever.",
+    subtitle: "East Burke Volunteer Fire Brigade · West Burke Volunteer Fire Department",
+    facts: [
+      ["East Burke Fire Brigade", "115 incidents in 2025, 21 members; Chief Joshua M. Willey"],
+      ["West Burke VFD", "89 calls, its most ever; Chief Tom Villeneuve"],
+      ["Staffing", "Both all-volunteer"],
+    ],
+    contact: { website: `${BRK}/fire-departments`, source: "town" },
+    history: {
+      intro:
+        "Burke has two fire departments, one on each side of town, and both are busier than ever. East Burke answered " +
+        "about 35 calls a year in the early 2000s; in 2025 it set a record for the third year running.",
+      events: [
+        {
+          year: 2025,
+          text:
+            "East Burke answers 115 incidents, including remote rescues and eight calls in four hours during the summer " +
+            "flooding, when it helped bring in state swift-water teams. Its main engine suffers a catastrophic mechanical " +
+            "failure. For 2026 it asks the town for $50,000 to keep operating, buy modern gear, train and maintain its trucks.",
+          calls: 115,
+          source: "town",
+        },
+      ],
+    },
+    calls: {
+      intro:
+        "East Burke's 2025 response: 8 minutes 53 seconds from dispatch to the first truck leaving, 13:13 to the first " +
+        "arriving, six members on an average call, and 58 minutes on scene. Its 21 members trained 544 hours. West Burke, 100% " +
+        "volunteer, answered 89 calls in its latest year, its most ever; its budget covers running costs but not major repairs.",
+      byType: {
+        title: "West Burke VFD calls by type",
+        bars: [
+          { label: "Alarm activations", value: 26 },
+          { label: "Motor vehicle crashes", value: 19 },
+          { label: "Medical assists", value: 12 },
+          { label: "Fires, structure and chimney", value: 9 },
+          { label: "Grass and wildland", value: 9 },
+          { label: "Trees or power lines down", value: 6 },
+          { label: "Investigations", value: 3 },
+          { label: "Service calls", value: 2 },
+          { label: "Vehicle fires", value: 2 },
+          { label: "Station coverage", value: 1 },
+        ],
+        note: "89 calls, from the department's most recent year-end report.",
+        source: "town",
+      },
+    },
+    careers: {
+      intro: "Both departments want volunteers.",
+      points: ["West Burke meets every other week", "Contact either department through the town's fire departments page"],
+      applyUrl: `${BRK}/fire-departments`,
+      source: "town",
+    },
+    residents: [],
+    sources: {
+      town: { label: "Town of Burke, Fire Departments", href: `${BRK}/fire-departments` },
+    },
+  },
+  newark: {
+    description:
+      "Newark Volunteer Fire Department: a nonprofit with twelve volunteer firefighters, three of them EMTs, four " +
+      "apparatus in two bays of the town garage, and plans for a new station.",
+    facts: [
+      ["Run by", "Newark Volunteer Fire Department, Inc., a 501(c)(3) nonprofit"],
+      ["Members", "12 firefighters (3 also EMTs) and a junior"],
+      ["Serves", "About 581 residents, more in summer"],
+    ],
+    contact: { phone: "802-467-0003", website: NWK, source: "join" },
+    history: {
+      intro:
+        "Newark's volunteers are unpaid, independent of the town but funded by a town appropriation and donations. They " +
+        "answer fire and medical calls, with Lyndon Rescue providing the ambulance.",
+      events: [
+        { year: 2011, text: "Tanker 51, a 1977 Maxim rebuilt in 1997, is donated by Georgetown, Connecticut.", source: "station" },
+        { year: 2017, text: "Rescue 55 is bought from Waterford, Vermont.", source: "station" },
+        { year: 2019, text: "The town forms a committee and hires a consultant to plan a renovated or new station.", source: "station" },
+      ],
+    },
+    stationNotes: {
+      "newark-1558-newark-st": {
+        text:
+          "The department shares the town highway garage, using two of its five bays. Three vehicles fit in two bays, " +
+          "so Rescue 55 can only leave after a truck in front is moved, and the bays limit trucks to 25 feet. Engine 52, " +
+          "a 2005 E-One/International, is first due.",
+        source: "station",
+      },
+    },
+    careers: {
+      intro: "No experience is needed; training and certifications are provided.",
+      points: [
+        "Live or work near Newark",
+        "Apply online, with Vermont criminal record and abuse registry checks",
+        "After a few department events, the members vote on your application",
+        "Benefits include training, NVFC and VSFA membership and line-of-duty insurance",
+      ],
+      applyUrl: `${NWK}/recruitment/`,
+      source: "join",
+    },
+    residents: [
+      { label: "Fire safety", href: `${NWK}/fire-safety/`, text: "The department's fire safety pages." },
+      { label: "Support the station project", href: `${NWK}/support-us/`, text: "Donations towards the department's share of a new or renovated station." },
+    ],
+    sources: {
+      about: { label: "Newark Volunteer Fire Department, About Us", href: `${NWK}/about-us/` },
+      station: { label: "Newark Volunteer Fire Department, Fire Station and Apparatus", href: `${NWK}/about-us/fire-station/` },
+      join: { label: "Newark Volunteer Fire Department, Recruitment", href: `${NWK}/recruitment/` },
+    },
+  },
+  ryegate: {
+    description:
+      "Ryegate Fire Department: established in 1974, a paid department since Town Meeting 2023, with a main station on " +
+      "Witherspoon Road and a substation on Scott Highway.",
+    facts: [
+      ["Established", "1974"],
+      ["Staffing", "Paid, since 2023; 24 on the roster, 16 active"],
+      ["Chief", "Greg Murray"],
+    ],
+    contact: { chief: "Greg Murray", phone: "(802) 584-4300", website: `${RYE}/departments/fire`, source: "dept" },
+    history: {
+      intro: "Ryegate's department was all-volunteer for almost fifty years, until the town voted to pay its firefighters.",
+      events: [
+        { year: 1974, text: "The Ryegate Fire Department is established.", source: "dept" },
+        { year: 2023, text: "On 7 March Town Meeting votes to make it a paid department.", source: "dept" },
+      ],
+    },
+    stationNotes: {
+      "ryegate-57-witherspoon-rd": {
+        text: "The main station: a 1996 pumper (1,500 gpm, 1,250 gallons), a 2005 tanker (3,000 gallons) and a 1987 equipment truck and command centre. The substation, which the town lists at 2360 Scott Highway, has a 1980 pumper/forestry truck.",
+        source: "dept",
+      },
+    },
+    residents: [],
+    sources: {
+      dept: { label: "Town of Ryegate, Fire Department", href: `${RYE}/departments/fire` },
+    },
+  },
+  hardwick: {
+    description:
+      "Hardwick Fire Department: its officers, from chief to foreman, pipeman and axe man, and burn permits from the " +
+      "forest fire wardens.",
+    facts: [
+      ["Chief", "Perley Allen, also the forest fire warden"],
+      ["Officers", "Including the traditional foreman, pipeman and axe man"],
+    ],
+    contact: { chief: "Perley Allen", phone: "802-472-5482", website: `${HWK}/government/services/hardwick-fire-department/`, source: "dept" },
+    history: {
+      intro:
+        "Hardwick's officer list keeps old fire-company ranks alongside the modern ones: a foreman and assistant foreman, " +
+        "a pipeman and assistant pipeman, and an axe man. The station phone isn't staffed regularly.",
+      events: [],
+    },
+    residents: [
+      { label: "Burn permits", href: `${HWK}/government/services/hardwick-fire-department/`, text: "From the forest fire warden, Chief Perley Allen, or one of two deputies." },
+    ],
+    sources: {
+      dept: { label: "Town of Hardwick, Hardwick Fire Department", href: `${HWK}/government/services/hardwick-fire-department/` },
+    },
+  },
+  peacham: {
+    description:
+      "Peacham Volunteer Fire Department: founded in 1950, unpaid volunteers protecting about 772 people over 36 square " +
+      "miles, one chief since 1986, and how to join.",
+    facts: [
+      ["Founded", "1950"],
+      ["Serves", "About 772 people over 36 square miles"],
+      ["Services", "Fire, prevention, medical first response, all hazards"],
+      ["Chief", "Jeffrey Berwick, since 1986"],
+    ],
+    contact: { chief: "Jeffrey Berwick", phone: "802-592-3392", website: PCH, source: "contact" },
+    history: {
+      intro:
+        "Peacham's department has always been all volunteer; its members are unpaid. Jeff Berwick has been chief since 1986.",
+      events: [
+        { year: 1950, text: "The Peacham Fire Department is founded.", source: "history" },
+        { year: 1986, text: "Jeff Berwick becomes chief.", source: "history" },
+        { year: 2026, text: "Under a new state law, Act 162, the fire chief becomes Peacham's forest fire warden from 1 July.", source: "permits" },
+      ],
+    },
+    careers: {
+      intro: "The department is recruiting firefighters and EMS medical first responders.",
+      points: ["Stop by the station any Monday at 7:30 p.m.", "Roles include firefighter, EMT, building upkeep and office work"],
+      applyUrl: PCH,
+      source: "home",
+    },
+    residents: [
+      { label: "Burn permits", href: `${PCH}/burn-permits/`, text: "Needed whenever there's no snow on the ground; from Chief Berwick or a deputy warden." },
+    ],
+    sources: {
+      home: { label: "Peacham Volunteer Fire Department", href: PCH },
+      history: { label: "Peacham Volunteer Fire Department, History", href: `${PCH}/history/` },
+      permits: { label: "Peacham Volunteer Fire Department, Burn Permits", href: `${PCH}/burn-permits/` },
+      contact: { label: "Peacham Volunteer Fire Department, Contact", href: `${PCH}/contact/` },
     },
   },
   jericho: UJFD,
