@@ -160,6 +160,49 @@ const RYE = "https://ryegatevt.org";
 const HWK = "https://hardwickvt.gov";
 const PCH = "https://peachamfiredepartment.com";
 
+const BRA = "https://brattleboro.gov";
+const GVF = "https://www.gvfd90.org";
+const NBF = "https://www.newbrookfire.org";
+const RKM = "https://www.rockinghamvt.org";
+const WMS = "https://www.westminstervt.org";
+const VER = "https://vernonvt.org/vernon-volunteer-fire-department";
+
+// One department since 2025 for the whole town of Rockingham, shown on the three
+// pages that cover it: Rockingham, Bellows Falls and Saxtons River.
+const ROCKINGHAM: Profile = {
+  description:
+    "Rockingham Fire & Rescue: the Town of Rockingham's unified fire and EMS department since 2025, carrying on the " +
+    "Bellows Falls Fire Department (1825), Rockingham and Saxtons River volunteers and Saxtons River First Response.",
+  subtitle: "Rockingham Fire & Rescue",
+  facts: [
+    ["Department", "Rockingham Fire & Rescue, one municipal department since 2025"],
+    ["Roots", "Bellows Falls Fire Department, founded 1825"],
+    ["EMS", "Advanced EMT-level first response"],
+    ["Chief", "Shaun McGinnis"],
+  ],
+  contact: { chief: "Shaun McGinnis", phone: "802-463-4343", website: `${RKM}/firedepartment`, source: "rfr" },
+  history: {
+    intro:
+      "Fire protection in Rockingham goes back nearly two centuries, to the Bellows Falls Fire Department in a dense " +
+      "mill, railroad and river village. In 2025 the town brought its fire and rescue organisations together into one " +
+      "municipal department, working from several stations.",
+    events: [
+      { year: 1825, text: "The Bellows Falls Fire Department is founded.", source: "rfr" },
+      { year: 1907, text: "The Island House fire.", source: "rfr" },
+      { year: 1912, text: "In March the Great Bellows Falls Fire devastates part of the downtown business district.", source: "rfr" },
+      { year: 1970, text: "The Rockingham Volunteer Fire Department is formed on 16 August.", source: "rfr" },
+      { year: 1981, text: "On 29 December Bellows Falls firefighters Terry Brown and Dana Fuller die in the line of duty at the Star Hotel fire.", source: "rfr" },
+      { year: 1989, text: "Saxtons River First Response Rescue begins on 1 January, giving Advanced EMT-level care.", source: "rfr" },
+      { year: 2024, text: "The Vermont Department of Health names Saxtons River First Response Rescue the state's First Responder Service of the Year.", source: "rfr" },
+      { year: 2025, text: "On 1 March Town Meeting approves a consolidated fire and rescue model, after an AP Triton feasibility study. Saxtons River First Response ends on 31 October and the Rockingham VFD on 1 November, as Rockingham Fire & Rescue takes over.", source: "rfr" },
+    ],
+  },
+  residents: [],
+  sources: {
+    rfr: { label: "Town of Rockingham, Rockingham Fire & Rescue", href: `${RKM}/firedepartment` },
+  },
+};
+
 // One department, two town pages: Underhill and Jericho share the profile.
 const UJFD: Profile = {
   description:
@@ -3244,6 +3287,180 @@ export const profiles: Record<string, Profile> = {
       contact: { label: "Peacham Volunteer Fire Department, Contact", href: `${PCH}/contact/` },
     },
   },
+  brattleboro: {
+    description:
+      "Brattleboro Fire Department: founded in 1831, 33 career firefighter-EMTs on duty around the clock, more than 4,500 " +
+      "emergencies a year, inspections, burn permits and careers.",
+    facts: [
+      ["Founded", "1831"],
+      ["Staff", "33 career firefighters and EMS providers, on duty 24/7"],
+      ["Emergencies", "More than 4,500 a year"],
+      ["EMS", "Every firefighter is a nationally registered EMS provider"],
+    ],
+    contact: { phone: "802-254-4831", website: `${BRA}/brattleboro-fire-department`, source: "dept" },
+    history: {
+      intro:
+        "Founded in 1831, Brattleboro's department is a career service answering fires, medical emergencies, crashes, " +
+        "hazardous materials, technical rescues and wildland fires.",
+      events: [
+        { year: 1831, text: "The Brattleboro Fire Department is founded.", source: "dept" },
+      ],
+    },
+    stationNotes: {
+      "brattleboro-103-elliot-st": { text: "The department's headquarters on Elliot Street.", source: "dept" },
+    },
+    careers: {
+      intro: "The department is hiring career firefighters.",
+      points: ["See the Careers page for openings"],
+      applyUrl: `${BRA}/brattleboro-fire-department`,
+      source: "dept",
+    },
+    residents: [
+      { label: "Community Connect", href: `${BRA}/brattleboro-fire-department`, text: "Share details about your household that help responders at your address; free and secure." },
+      { label: "Burn permits and inspections", href: `${BRA}/brattleboro-fire-department`, text: "Burn permits, building inspections and rental housing registration." },
+      { label: "EMS billing", href: `${BRA}/brattleboro-fire-department`, text: "The department's EMS billing programme." },
+    ],
+    sources: {
+      dept: { label: "Town of Brattleboro, Brattleboro Fire Department", href: `${BRA}/brattleboro-fire-department` },
+    },
+  },
+  guilford: {
+    description:
+      "Guilford Volunteer Fire Department: a nonprofit since 1949, more than 300 fire and EMS calls a year, 25 members, " +
+      "the town's first response service since 2004, and a junior programme.",
+    facts: [
+      ["Founded", "1949"],
+      ["Calls", "More than 300 fire and EMS calls a year"],
+      ["Members", "25 active firefighters, EMTs and first responders"],
+      ["EMS", "The town's first response service since 2004"],
+    ],
+    contact: { phone: "(802) 254-4413", website: GVF, source: "home" },
+    history: {
+      intro:
+        "Guilford's first fire truck was a 1949 Chevrolet with a 500-gallon tank that used to be an oil tank; strangers " +
+        "were sometimes surprised to see a truck that seemed to be pumping oil onto a fire.",
+      events: [
+        { year: 1949, text: "Residents form the Broad Brook Fire Control; two weeks later it becomes the Guilford Volunteer Fire Department. The truck lives in a barn.", source: "history" },
+        { year: 1957, text: "A firehouse is finished on Guilford Center Road, begun in 1954.", source: "history" },
+        { year: 1999, text: "The department starts helping Rescue Inc. on medical calls in town.", source: "history" },
+        { year: 2004, text: "With enough members certified, it becomes the town's EMS service; Rescue Inc. still transports.", source: "history" },
+        { year: 2006, text: "A new station is finished after the old one, too small for new trucks (Tanker 1 stood three inches taller than its doors), was demolished in 2005.", source: "history" },
+      ],
+    },
+    stationNotes: {
+      "guilford-108-guilford-center-rd": {
+        text:
+          "The station finished in 2006: Engine 1, a 2008 Pierce, and Engine 2, a 2019 Pierce (both 1,500 gpm, 1,000 " +
+          "gallons); Tanker 1, a 2006 KME/International with 2,500 gallons; a utility pickup, a brush truck, an off-road " +
+          "rescue unit and a water rescue trailer.",
+        source: "apparatus",
+      },
+    },
+    careers: {
+      intro: "Firefighters and EMTs need Vermont certification and annual training hours.",
+      points: [
+        "Training every Tuesday evening",
+        "Juniors from 16, living in or near Guilford, with at least a learner's permit; not on interstate or mutual aid calls, or after 9:30 p.m. on school nights",
+        "Call (802) 254-4413 or email guilford.fire@gmail.com",
+      ],
+      applyUrl: `${GVF}/membership-information/`,
+      source: "join",
+    },
+    residents: [],
+    sources: {
+      home: { label: "Guilford Volunteer Fire Department", href: GVF },
+      history: { label: "Guilford Volunteer Fire Department, History", href: `${GVF}/history/` },
+      apparatus: { label: "Guilford Volunteer Fire Department, Apparatus", href: `${GVF}/apparatus/` },
+      join: { label: "Guilford Volunteer Fire Department, Membership Information", href: `${GVF}/membership-information/` },
+    },
+  },
+  newfane: {
+    description:
+      "NewBrook Fire & Rescue: the volunteer fire and EMS service for Newfane and Brookline since 1948, about 240 calls a " +
+      "year, a 1942 Army truck still in service, and no bills, ever.",
+    facts: [
+      ["Founded", "1948, for Newfane and Brookline"],
+      ["Members", "About 60 volunteers: 20 firefighters, 8 EMS responders, about 25 support staff"],
+      ["Calls", "About 240 in an average year"],
+      ["Run by", "The NewBrook Volunteer Fire Association, a nonprofit"],
+    ],
+    contact: { website: NBF, source: "home" },
+    history: {
+      intro:
+        "NewBrook began in 1948 with a dozen volunteers, no firehouse, no trucks and some used hose. It owns its firehouse " +
+        "and trucks outright, takes most of its money from donations and fundraising, and never sends a bill.",
+      events: [
+        { year: 1948, text: "The combined Newfane-Brookline fire district is formed.", source: "home" },
+        { year: 1950, text: "The first firehouse is built on Route 30, half a mile south of the village; around then the department turns a 1942 Army surplus 4WD truck into a 500-gallon pumper. It's still in service as the brush truck.", source: "home" },
+        { year: 1968, text: "Membership reaches about 100.", source: "home" },
+        { year: 1984, text: "NewBrook becomes a principal EMS provider for the district.", source: "home" },
+        { year: 1993, text: "The present firehouse opens, half a mile north of the village on Route 30.", source: "home" },
+        { year: 2014, text: "FEMA designates the firehouse a Disaster Recovery Center.", source: "home" },
+      ],
+    },
+    careers: {
+      intro: "Every member is a volunteer, including firefighters, EMS responders and support staff; a 45-member auxiliary raises money and feeds crews at scenes.",
+      points: ["Juniors are welcome", "Get in touch through the department's website"],
+      applyUrl: NBF,
+      source: "home",
+    },
+    residents: [
+      { label: "Bingo and benefit events", href: NBF, text: "Saturday bingo, the Fourth of July open house and barbecue, the Hunters' Breakfast and more." },
+      { label: "Emergency shelter", href: NBF, text: "The firehouse, with a generator and full kitchen, has served as a public shelter." },
+    ],
+    sources: {
+      home: { label: "NewBrook Volunteer Fire and Rescue", href: NBF },
+    },
+  },
+  westminster: {
+    description:
+      "Westminster Volunteer Fire and Rescue: Westminster Fire District #3, fire protection for the town and mutual aid " +
+      "for its neighbours, and burn permits.",
+    facts: [["Run by", "Westminster Fire District #3"], ["Station", "103 Grout Avenue"]],
+    contact: { website: `${WMS}/services/fire/`, source: "dept" },
+    history: {
+      intro: "Westminster Volunteer Fire and Rescue, run by Westminster Fire District #3, protects the town and gives mutual aid to its neighbours.",
+      events: [],
+    },
+    residents: [
+      { label: "Burn permits", href: `${WMS}/services/fire/`, text: "Call one of the two permit contacts listed on the town's fire page." },
+    ],
+    sources: {
+      dept: { label: "Town of Westminster, Fire Department", href: `${WMS}/services/fire/` },
+    },
+  },
+  vernon: {
+    description:
+      "Vernon Volunteer Fire Department: serving since its first meeting in July 1951, fire, EMS, hazmat and alarms, its " +
+      "chiefs over seventy years, and its volunteers today.",
+    facts: [
+      ["Founded", "1951"],
+      ["Services", "Fire, EMS, hazardous materials, alarms, carbon monoxide"],
+      ["Chief", "Alex Dunklee"],
+    ],
+    contact: { chief: "Alex Dunklee", website: VER, source: "dept" },
+    history: {
+      intro:
+        "Vernon's volunteers have gone from a phone tree to a siren, pagers and now text alerts, and from fires and " +
+        "crashes to medical calls, hazmat, alarms and carbon monoxide. Thirteen chiefs led the department before Alex Dunklee.",
+      events: [
+        { year: 1951, text: "On 5 July the department holds its first meeting and limits membership to \"25 men, plus several call men\". On 9 July its fire truck is tested; the pump has to go for repairs.", source: "dept" },
+      ],
+    },
+    careers: {
+      intro: "Members serve as firefighters, EMS providers or support personnel.",
+      points: ["Contact the chief at firechief@vernonvt.org"],
+      applyUrl: VER,
+      source: "dept",
+    },
+    residents: [],
+    sources: {
+      dept: { label: "Town of Vernon, Vernon Volunteer Fire Department", href: VER },
+    },
+  },
+  rockingham: ROCKINGHAM,
+  "bellows-falls": ROCKINGHAM,
+  "saxtons-river": ROCKINGHAM,
   jericho: UJFD,
   underhill: UJFD,
 };
