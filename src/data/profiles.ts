@@ -2742,10 +2742,14 @@ export const profiles: Record<string, Profile> = {
     },
     stationNotes: {
       "east-montpelier-365-templeton-rd": {
+        text: "The first station, built in the 1960s and expanded in the 1980s: a 2003 International/V-Tec engine and a 2007 Freightliner/V-Tec 2,000-gallon tanker.",
+        source: "home",
+      },
+      "east-montpelier-54-village-acres": {
         text:
-          "The first station, built in the 1960s and expanded in the 1980s, with a 2003 engine and a 2,000-gallon tanker. " +
-          "The second, at 54 Village Acres (built 2014, not yet on our map), holds the 2024 engine, a rescue-pumper, two " +
-          "ambulances, a pickup, a UTV and a trailer.",
+          "The second station, built in 2014, where would-be members can drop in on Tuesday evenings: a 2024 Freightliner/Toyne engine, a 2013 KME " +
+          "rescue-pumper, two ambulances (a 2024 Ford/Medix and a 2016 Ford/McCoy Miller), a pickup, a UTV and a special " +
+          "operations trailer.",
         source: "home",
       },
     },
