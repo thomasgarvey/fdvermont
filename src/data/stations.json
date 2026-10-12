@@ -126,6 +126,20 @@
     "department": null
   },
   {
+    "id": "rec3Es8unGd4P8Oos",
+    "esiteid": null,
+    "name": null,
+    "address": "15 Fourth St",
+    "town": "Barre City",
+    "county": "Washington",
+    "zip": "05641",
+    "lat": 44.2089,
+    "lng": -72.512789,
+    "mapped": "",
+    "updated": "",
+    "department": null
+  },
+  {
     "id": "recmJd8DZhgraww5Z",
     "esiteid": 13103,
     "name": null,
