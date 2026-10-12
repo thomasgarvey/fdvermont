@@ -141,6 +141,13 @@ const BAT = "https://www.barretown.org";
 const WFD = "https://www.waterburyvtfire.com/WFD";
 const NFD = "https://www.northfield-vt.gov";
 
+const WRN = "https://www.warrenvt.org";
+const EMF = "https://www.emfd.org";
+const EMT = "https://eastmontpeliervt.org";
+const CAB = "https://cabotvt.us";
+const ROX = "https://roxburyvt.org";
+const MOR = "https://www.moretownvt.org";
+
 // One department, two town pages: Underhill and Jericho share the profile.
 const UJFD: Profile = {
   description:
@@ -2681,6 +2688,172 @@ export const profiles: Record<string, Profile> = {
     ],
     sources: {
       dept: { label: "Town of Northfield, Fire Department", href: `${NFD}/fire-department` },
+    },
+  },
+  warren: {
+    description:
+      "Warren Volunteer Fire Department: serving since 1947 from stations in Warren Village and at Sugarbush's " +
+      "Lincoln Peak, 48 to 90 calls a year, burn permits and fire alarm registration.",
+    facts: [
+      ["Founded", "1947"],
+      ["Calls", "48 to 90 a year over the past five years"],
+      ["Stations", "Warren Village and Sugarbush Resort's Lincoln Peak base area"],
+      ["Chief", "Jeff Campbell, also the town's public safety officer and emergency management director"],
+    ],
+    contact: { chief: "Jeff Campbell", website: `${WRN}/departments/volunteer-fire-department/`, source: "dept" },
+    history: {
+      intro:
+        "Warren's volunteers have protected the town since 1947, working with Waitsfield, Moretown and Fayston in " +
+        "mutual aid. Ambulance service comes from Mad River Valley Ambulance.",
+      events: [
+        { year: 1947, text: "The Warren Volunteer Fire Department is founded.", source: "dept" },
+      ],
+    },
+    residents: [
+      { label: "Burn permits", href: `${WRN}/departments/volunteer-fire-department/`, text: "From the Forest Fire Warden, Garrett Swann." },
+      { label: "Fire alarm registration", href: `${WRN}/documents/fire-alarm-registration-fomr/`, text: "Register your fire alarm with the department, free, in addition to the state police." },
+      { label: "911 addresses", href: `${WRN}/departments/volunteer-fire-department/`, text: "Make sure your address sign can be seen from the road." },
+    ],
+    sources: {
+      dept: { label: "Town of Warren, Volunteer Fire Department", href: `${WRN}/departments/volunteer-fire-department/` },
+    },
+  },
+  "east-montpelier": {
+    description:
+      "East Montpelier Volunteer Fire Department: a nonprofit since 1964 giving fire and rescue to East Montpelier and " +
+      "Calais, ambulance service to four towns, two stations and how to volunteer.",
+    facts: [
+      ["Founded", "1964"],
+      ["Run by", "East Montpelier Volunteer Fire Department, Inc., a 501(c)(3) nonprofit"],
+      ["Covers", "Fire for East Montpelier and Calais; ambulance also for Plainfield and Marshfield"],
+      ["Members", "More than 20 active volunteers and more than a dozen EMTs"],
+      ["Chief", "Troy Seckington, also the fire warden"],
+    ],
+    contact: { chief: "Troy Seckington", phone: "(802) 225-6245", website: EMF, source: "home" },
+    history: {
+      intro:
+        "Volunteers founded the department in 1964. Today it runs a 24-hour ambulance staffed by licensed EMTs; the town " +
+        "posts its interlocal agreement and the joint meetings of the towns it serves.",
+      events: [
+        { year: 1964, text: "East Montpelier Volunteer Fire Department, Inc. is founded.", source: "home" },
+        { year: 2014, text: "A second station is built at 54 Village Acres.", source: "home" },
+        { year: 2024, text: "A new Ford F-450/Medix ambulance and a Freightliner/Toyne engine join the fleet.", source: "home" },
+      ],
+    },
+    stationNotes: {
+      "east-montpelier-365-templeton-rd": {
+        text:
+          "The first station, built in the 1960s and expanded in the 1980s, with a 2003 engine and a 2,000-gallon tanker. " +
+          "The second, at 54 Village Acres (built 2014, not yet on our map), holds the 2024 engine, a rescue-pumper, two " +
+          "ambulances, a pickup, a UTV and a trailer.",
+        source: "home",
+      },
+    },
+    careers: {
+      intro:
+        "Volunteers fight fires, and also help with organisation, technical work and fundraising. Licensed BLS, ALS and " +
+        "paramedic providers can ask about paid ambulance work.",
+      points: ["Come by the station at 54 Village Acres any Tuesday evening"],
+      applyUrl: EMF,
+      source: "home",
+    },
+    residents: [
+      { label: "Burn permits", href: EMF, text: "From the Town Fire Warden, (802) 229-1153." },
+      { label: "Emergency shelter", href: `${EMT}/east-montpelier-fire-department/`, text: "The fire station can serve as a cooling, warming, charging or overnight shelter in an emergency." },
+      { label: "Support the department", href: EMF, text: "A nonprofit; donations by post to PO Box 146, East Montpelier." },
+    ],
+    sources: {
+      home: { label: "East Montpelier Volunteer Fire Department", href: EMF },
+      town: { label: "Town of East Montpelier, East Montpelier Fire Department", href: `${EMT}/east-montpelier-fire-department/` },
+    },
+  },
+  cabot: {
+    description:
+      "Cabot Volunteer Fire Department: an all-volunteer, unpaid town department at work since at least 1908, its " +
+      "monthly meeting, and burn permits.",
+    facts: [
+      ["Staffing", "100% volunteer; members are unpaid"],
+      ["On record since", "1908 or earlier"],
+      ["Chief", "Dean Deasy"],
+    ],
+    contact: { chief: "Dean Deasy", website: `${CAB}/volunteer-fire-dept/`, source: "dept" },
+    history: {
+      intro:
+        "Nobody knows exactly when Cabot's department began. Marshfield's town records show it helping fight a fire there " +
+        "in 1908. It is a town department; its budget is voted as a separate line at Town Meeting, and its members are " +
+        "Cabot residents who are paid nothing.",
+      events: [
+        { year: 1908, text: "Marshfield's records note \"the Cabot Fire Department\" helping at a fire in that town, the earliest mention found.", source: "dept" },
+      ],
+    },
+    careers: {
+      intro: "Active firefighters are welcome, and so is help with administration or weekly equipment checks.",
+      points: ["The department meets the second Wednesday of each month at the fire station", "Contact Chief Dean Deasy"],
+      applyUrl: `${CAB}/volunteer-fire-dept/`,
+      source: "dept",
+    },
+    residents: [
+      { label: "Burn permits", href: `${CAB}/volunteer-fire-dept/`, text: "Required whenever there's no snow on the ground; from Chief Deasy." },
+      { label: "Key box ordinance", href: `${CAB}/volunteer-fire-dept/`, text: "The town's key box rules." },
+    ],
+    sources: {
+      dept: { label: "Town of Cabot, Volunteer Fire Department", href: `${CAB}/volunteer-fire-dept/` },
+    },
+  },
+  roxbury: {
+    description:
+      "Roxbury Volunteer Fire Department: nine volunteers, a three-bay station, automatic response with Northfield, " +
+      "five dry hydrants, and burn permits.",
+    facts: [
+      ["Members", "9 active volunteers, 6 with state fire certification"],
+      ["Mutual aid", "Capital Fire Mutual Aid (27 towns); automatic response with Northfield"],
+      ["Chief", "Clarence Baker, also the forest fire warden"],
+    ],
+    contact: { chief: "Clarence Baker", phone: "(802) 485-6707", website: `${ROX}/our-roxbury-vt/roxbury-vt-fire-department/`, source: "dept" },
+    history: {
+      intro:
+        "Roxbury's nine volunteers answer fires and assist the ambulance, with automatic help from Northfield and the " +
+        "27-town Capital Fire Mutual Aid district behind them.",
+      events: [],
+    },
+    stationNotes: {
+      "roxbury-1726-roxbury-rd": {
+        text: "The three-bay station, built in 1960 and 2000. The town has five dry hydrants, the newest on Bull Run Road.",
+        source: "dept",
+      },
+    },
+    careers: {
+      intro: "The department is always looking for volunteers to join its meetings and emergency responses.",
+      points: ["Meetings on Sunday evenings at the station", "Contact Don Randall, (802) 485-8341"],
+      applyUrl: `${ROX}/our-roxbury-vt/roxbury-vt-fire-department/`,
+      source: "dept",
+    },
+    residents: [
+      { label: "Burn permits", href: `${ROX}/our-roxbury-vt/roxbury-vt-fire-department/`, text: "Needed unless there's snow on the ground; from the deputy forest fire wardens, or at Tim Martin's Auto during office hours." },
+    ],
+    sources: {
+      dept: { label: "Town of Roxbury, Roxbury Volunteer Fire Department", href: `${ROX}/our-roxbury-vt/roxbury-vt-fire-department/` },
+    },
+  },
+  moretown: {
+    description:
+      "Moretown Fire Department: the Route 100B station, twice-monthly meetings, its officers, and burn permits from " +
+      "the fire warden.",
+    facts: [
+      ["Station", "1049 Route 100B"],
+      ["Meets", "1st and 3rd Tuesdays, 7 p.m."],
+      ["Chief", "Stefan Pratt, also the fire warden"],
+    ],
+    contact: { chief: "Stefan Pratt", phone: "(802) 496-3254", website: `${MOR}/town-departments/fire/`, source: "dept" },
+    history: {
+      intro: "Moretown's department meets twice a month at the station on Route 100B. Its chief also serves as the town's fire warden.",
+      events: [],
+    },
+    residents: [
+      { label: "Burn permits", href: `${MOR}/town-departments/fire/`, text: "From the Fire Warden, Stefan Pratt." },
+    ],
+    sources: {
+      dept: { label: "Town of Moretown, Fire Department", href: `${MOR}/town-departments/fire/` },
     },
   },
   jericho: UJFD,
