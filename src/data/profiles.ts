@@ -148,6 +148,11 @@ const CAB = "https://cabotvt.us";
 const ROX = "https://roxburyvt.org";
 const MOR = "https://www.moretownvt.org";
 
+const STW = "https://www.stowevt.gov";
+const HYP = "https://www.hydeparkvt.com";
+const EDN = "https://www.edenvt.org";
+const ELM = "https://elmorevt.org";
+
 // One department, two town pages: Underhill and Jericho share the profile.
 const UJFD: Profile = {
   description:
@@ -2858,6 +2863,148 @@ export const profiles: Record<string, Profile> = {
     ],
     sources: {
       dept: { label: "Town of Moretown, Fire Department", href: `${MOR}/town-departments/fire/` },
+    },
+  },
+  stowe: {
+    description:
+      "Stowe Fire & Rescue: a fire and paramedic-level ambulance service with more than a century of history, a " +
+      "per-diem crew, Stowe Mountain Rescue for Smugglers' Notch and the backcountry, and online burn permits.",
+    facts: [
+      ["Services", "Fire and EMS, licensed at the paramedic level"],
+      ["Serves", "Over 5,200 residents and thousands of daily visitors"],
+      ["Staffing", "Full-time officers and staff, with per-diem firefighters and EMS"],
+      ["Mountain rescue", "Stowe Mountain Rescue, 45 to 55 calls a year"],
+      ["Chief", "Ed Webster Jr."],
+    ],
+    contact: { chief: "Ed Webster Jr.", website: `${STW}/Departments/Fire-Rescue`, source: "dept" },
+    history: {
+      intro:
+        "Stowe's fire service goes back more than 100 years. It covers Vermont's second-largest town by land area, " +
+        "and works in mutual aid with Waterbury, Morristown and Cambridge.",
+      events: [
+        { year: 1975, text: "The Stowe Rescue Squad is established.", source: "dept" },
+        { year: 1980, text: "Stowe Mountain Rescue is founded for technical rescue on the Smugglers' Notch cliffs, popular with rock and ice climbers.", source: "mtn" },
+        { year: 2008, text: "Stowe Fire takes over EMS from the Stowe Rescue Squad.", source: "dept" },
+        { year: 2026, text: "Burn permits move online.", source: "dept" },
+      ],
+    },
+    stationNotes: {
+      "stowe-350-s-main-st": {
+        text: "The Stowe firehouse on South Main Street.",
+        source: "dept",
+      },
+    },
+    careers: {
+      intro:
+        "Part-time firefighters are per diem: paid when they respond to calls and for their training every two weeks. " +
+        "No experience is needed, just a positive attitude and a strong work ethic.",
+      points: [
+        "Firefighters: complete an employment application and contact Chief Ed Webster",
+        "EMS: complete the Stowe EMS application",
+        "Stowe Mountain Rescue: open enrolment in November and December, then a nine-month observation and probation programme",
+        "Junior firefighters are on the roster",
+      ],
+      applyUrl: `${STW}/Departments/Fire-Rescue`,
+      source: "dept",
+    },
+    residents: [
+      { label: "Burn permits", href: "https://townofstowe.burnpermits.com", text: "Online, since 2026." },
+      { label: "Mountain rescue is free", href: `${STW}/Departments/Mountain-Rescue`, text: "Stowe Mountain Rescue doesn't charge; it's funded mainly by the town, with grants and donations." },
+      { label: "Lock box and address markers", href: `${STW}/Departments/Fire-Rescue`, text: "The town's lock box application and reflective address markers." },
+    ],
+    sources: {
+      dept: { label: "Town of Stowe, Fire & Rescue", href: `${STW}/Departments/Fire-Rescue` },
+      mtn: { label: "Town of Stowe, Mountain Rescue", href: `${STW}/Departments/Mountain-Rescue` },
+    },
+  },
+  "hyde-park": {
+    description:
+      "Hyde Park's fire departments: the Hyde Park Town Fire Department, 87 calls in fiscal 2025 and a new truck, and " +
+      "the North Hyde Park/Eden Fire Department, 83 calls in 2025, plus the volunteer FAST Squad.",
+    subtitle: "Hyde Park Town Fire Department · North Hyde Park/Eden Fire Department",
+    facts: [
+      ["Hyde Park Town FD", "87 calls in fiscal 2025; Chief Ryan Nolan"],
+      ["North Hyde Park/Eden FD", "83 calls in 2025; Chief Brent Lanpher"],
+      ["First aid", "Hyde Park FAST Squad, volunteer EMRs and EMTs"],
+    ],
+    contact: { chief: "Ryan Nolan", website: `${HYP}/department/fire_departments.php`, source: "dept" },
+    history: {
+      intro:
+        "Hyde Park has two volunteer fire departments: the town department on Centerville Road, and the North Hyde " +
+        "Park/Eden Fire Department, which also covers the town of Eden. The FAST Squad, once part of the town fire " +
+        "department, has been separate since 2009.",
+      events: [
+        { year: 2009, text: "The Selectboard makes the Hyde Park FAST Squad a stand-alone service, outside the fire department.", source: "r2025" },
+        { year: 2024, text: "North Hyde Park/Eden receives its new Engine 2, a 2024 Ford F-550 Alexis mini-pumper, in September, and renovates its bathrooms so the station can serve as an emergency shelter. Captain Scott Audet retires after 35 years.", source: "r2024" },
+        { year: 2025, text: "The Hyde Park Town FD takes delivery of a new truck ordered two and a half years earlier; construction of a voter-approved station addition is set to start in May.", source: "r2025" },
+      ],
+    },
+    calls: {
+      intro: "Automatic alarms were the town department's most common call.",
+      byType: {
+        title: "Hyde Park Town FD calls by type, fiscal 2025",
+        bars: [
+          { label: "Automatic alarms", value: 26 },
+          { label: "Motor vehicle crashes", value: 13 },
+          { label: "Other", value: 12 },
+          { label: "Mutual aid", value: 10 },
+          { label: "Chimney fires", value: 8 },
+          { label: "Medical assists", value: 5 },
+          { label: "CO alarms", value: 4 },
+          { label: "Structure fires", value: 3 },
+          { label: "Hazardous materials", value: 2 },
+          { label: "Vehicle fires", value: 2 },
+          { label: "Brush fires", value: 2 },
+        ],
+        note: "July 2024 to June 2025: 87 calls, against 88 the year before.",
+        source: "r2025",
+      },
+    },
+    stationNotes: {
+      "hyde-park-212-centerville-rd": {
+        text: "The Hyde Park Town Fire Department's station, where it meets on the first three Tuesdays of the month at 6:30 p.m.",
+        source: "dept",
+      },
+    },
+    careers: {
+      intro: "Both departments, and the FAST Squad, are short of members and recruiting.",
+      points: [
+        "Hyde Park Town FD: talk to any officer or member",
+        "North Hyde Park/Eden FD: meets on the first, second and third Tuesdays of each month",
+        "FAST Squad: email Brad Carriere at hpfsems1@yahoo.com",
+      ],
+      applyUrl: `${HYP}/department/fire_departments.php`,
+      source: "r2025",
+    },
+    residents: [
+      { label: "Burn permits", href: `${HYP}/department/fire_departments.php`, text: "From Fire Warden Ryan Nolan, weekdays 4 to 8 p.m. only; none issued at weekends, or for more than three days in a row." },
+      { label: "Fireworks", href: `${HYP}/department/fire_departments.php`, text: "Consumer displays need a permit; the town doesn't issue commercial display permits." },
+    ],
+    sources: {
+      dept: { label: "Town of Hyde Park, Fire Departments", href: `${HYP}/department/fire_departments.php` },
+      eden: { label: "Town of Eden, Fire Department", href: `${EDN}/community/fire-department/` },
+      r2024: { label: "Town of Hyde Park, 2024 Town Report", href: `${HYP}/Documents/Resources/Town%20Plans%20&%20Reports/1%20-%20FINAL%20Web%20Ready%202025%20Town%20Report.pdf`, note: "North Hyde Park Eden Fire Department, page 41" },
+      r2025: { label: "Town of Hyde Park, 2025 Town Report", href: `${HYP}/Documents/Department/Finance/1%20REPRO_web_hyde-park.pdf`, note: "Fire departments, pages 31–33; FAST Squad, page 36" },
+    },
+  },
+  elmore: {
+    description:
+      "Elmore Fire Department: the Lake Elmore firehouse on Beach Road, weekly Thursday meetings, and online burn permits.",
+    facts: [
+      ["Station", "343 Beach Road, Lake Elmore"],
+      ["Meets", "Thursdays, 7 p.m."],
+    ],
+    contact: { phone: "802-888-0311", website: `${ELM}/community/elmore-fire-department/`, source: "dept" },
+    history: {
+      intro: "Elmore's department meets every Thursday evening at the firehouse on Beach Road, and new members are always welcome.",
+      events: [],
+    },
+    residents: [
+      { label: "Burn permits", href: "https://sites.google.com/elmorefire.org/elmorefire/burn-permit", text: "Apply online for a reply within 24 hours, or call the fire warden." },
+    ],
+    sources: {
+      dept: { label: "Town of Elmore, Elmore Fire Department", href: `${ELM}/community/elmore-fire-department/` },
+      permit: { label: "Elmore Fire Department, Burn Permit", href: "https://sites.google.com/elmorefire.org/elmorefire/burn-permit" },
     },
   },
   jericho: UJFD,
