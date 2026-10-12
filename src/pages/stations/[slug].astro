@@ -31,7 +31,7 @@ const record: [string, string][] = [
   ["County", station.county ? `${station.county} County` : ""],
   ["ZIP", String(station.zip || "")],
   ["Coordinates", `${station.lat.toFixed(5)}, ${station.lng.toFixed(5)}`],
-  // Stations added from a photograph have no E911 record. String(null) is
+  // Stations added by hand have no E911 record. String(null) is
   // "null", which is truthy, so this has to be emptied before the filter.
   ["E911 site ID", station.esiteid != null ? String(station.esiteid) : ""],
   ["E911 first mapped", station.mapped],
@@ -110,8 +110,8 @@ const description = p
         ) : (
           <>
             This station is <strong>not</strong> in the{" "}
-            <a href="https://geodata.vermont.gov/" target="_blank" rel="noopener">Vermont E911 site file</a>; it
-            was added here from a photograph taken at the building.{" "}
+            <a href="https://geodata.vermont.gov/" target="_blank" rel="noopener">Vermont E911 site file</a>; we
+            added it by hand, from the town's own records or a photograph of the building.{" "}
           </>
         )}
         Spotted something wrong? <a href="/contact">Send a correction</a>.

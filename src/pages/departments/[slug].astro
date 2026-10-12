@@ -139,7 +139,7 @@ const stationRecord = (s: Station): [string, string][] =>
       ["County", s.county ? `${s.county} County` : ""],
       ["ZIP", String(s.zip || "")],
       ["Coordinates", `${s.lat.toFixed(5)}, ${s.lng.toFixed(5)}`],
-      // A station added from a photograph has no E911 record, and String(null)
+      // A station added by hand has no E911 record, and String(null)
       // is "null" — truthy — so it has to be emptied before the filter.
       ["E911 site ID", s.esiteid != null ? String(s.esiteid) : ""],
       ["E911 first mapped", s.mapped],
@@ -448,7 +448,7 @@ const structured = {
               <>
                 This station is <strong>not</strong> in the{" "}
                 <a href="https://geodata.vermont.gov/" target="_blank" rel="noopener">Vermont
-                E911 site file</a>; it was added from a photograph taken at the building.{" "}
+                E911 site file</a>; we added it by hand, from the town's own records or a photograph of the building.{" "}
               </>
             )}
             Spotted something wrong? <a href="/contact">Send a correction</a>.
