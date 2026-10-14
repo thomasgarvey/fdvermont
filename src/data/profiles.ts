@@ -206,6 +206,11 @@ const ROCKINGHAM: Profile = {
 const NPT = "https://www.newportvermont.org";
 const TRY = "https://www.troyvt.gov";
 
+const RUC = "https://www.rutlandcity.org";
+const RUT = "https://www.rutlandtown.com";
+const PAW = "https://pawletfire.org";
+const PIT = "https://www.pittsfordvermont.com";
+
 // One department, two town pages: Underhill and Jericho share the profile.
 const UJFD: Profile = {
   description:
@@ -3572,6 +3577,280 @@ export const profiles: Record<string, Profile> = {
     sources: {
       town: { label: "Town of Troy, Ambulance and Fire", href: `${TRY}/services/ambulance-and-fire` },
       report: { label: "Town of Troy, 2025 Annual Report", href: `${TRY}/fileadmin/files/General/Troy_Annual_Report_2025.pdf`, note: "Troy Volunteer Fire Department, page 18; appropriations, pages 5–9. A scanned report, read with text recognition" },
+    },
+  },
+  "rutland-city": {
+    description:
+      "City of Rutland Fire Department: a career department since 1894, from the 1829 Rutland Fire Society to Vermont's " +
+      "first paramedic programme, with 30 full-time firefighters, a call force and the city's FY2027 fire budget.",
+    subtitle: "City of Rutland Fire Department",
+    facts: [
+      ["Staffing", "30 full-time firefighters on three shifts, plus a call force of 18"],
+      ["Career since", "1 January 1894"],
+      ["Apparatus", "Three engines, a 102-foot aerial platform, a 75-foot quint and a 48-foot bucket truck"],
+      ["Union", "IAFF Local 2323, since 1974"],
+      ["FY2027 budget", "$4,628,606"],
+    ],
+    contact: { chief: "William Lovett", phone: "802-773-1812", website: `${RUC}/departments/fire-department/`, source: "dept" },
+    history: {
+      intro:
+        "Rutland's department works from one central station on Center Street. It answers fires in homes, businesses and " +
+        "industry, crashes, hazardous materials, confined-space and high-angle rope rescues, and natural disasters.",
+      events: [
+        { year: 1829, text: "The Rutland Fire Society is organised by Act of the Vermont Legislature and buys a used hand-pump engine, the Torrent.", source: "history" },
+        { year: 1858, text: "Nickwackett Engine Company No. 1 forms and builds a house at Center and Nickwackett Streets for $1,200.", source: "history" },
+        { year: 1860, text: "Washington Engine Company No. 2 and Union Hook & Ladder Company No. 1 are organised; they later move into the new city hall on Washington Street.", source: "history" },
+        { year: 1868, text: "Fires burn the west side of Main Street, the north side of Center Street and both sides of Merchants Row. The town buys an Amoskeag steamer, the first in Vermont, and forms the Killington Steamer Company.", source: "history" },
+        { year: 1874, text: "Between 1874 and 1886 five hose companies are formed, at the height of Rutland's volunteer era.", source: "history" },
+        { year: 1894, calls: 100, text: "With 225 volunteers and insurance rates climbing, the new city starts a paid department on 1 January: eight full-time men and 32 call men, with horse-drawn hose wagons at two stations. It answers 100 calls in its first year.", source: "history" },
+        { year: 1916, text: "The first motorised apparatus arrives from American LaFrance. The last horses are gone by 1929.", source: "history" },
+        { year: 1970, text: "A new central station opens on Center Street, approved by voters in 1969 for $500,000, replacing the two old stations.", source: "history" },
+        { year: 1973, text: "The Berwick Hotel fire on 7 January kills five residents. The city calls in eight towns for mutual aid in sub-zero cold.", source: "rtown" },
+        { year: 1974, text: "Firefighters join the International Association of Fire Fighters as Local 2323.", source: "history" },
+        { year: 1975, text: "The department has 36 full-time firefighters and 24 call members, and begins answering medical emergencies.", source: "history" },
+        { year: 1981, text: "Rutland starts the first paramedic programme in Vermont.", source: "history" },
+      ],
+    },
+    money: {
+      intro:
+        "The fire department's budget for fiscal 2027 is $4.6 million of the city's $27.5 million, up $290,027 on the " +
+        "year, most of it in salaries.",
+      year: "fiscal year 2027, as approved",
+      lines: [
+        { label: "Salaries", amount: 2424182 },
+        { label: "Health insurance", amount: 599846 },
+        { label: "Workers' compensation", amount: 350000 },
+        { label: "Pensions (VMERS and city)", amount: 258081 },
+        { label: "Social Security and Medicare", amount: 208889 },
+        { label: "Overtime, training and events", amount: 198000 },
+      ],
+      linesNote: "The six largest lines in the fire department's budget detail; the department total is $4,628,606.",
+      capital: {
+        title: "Fire department budget, by year",
+        lines: [
+          { label: "FY2027", amount: 4628606 },
+          { label: "FY2026", amount: 4338579 },
+        ],
+        note: "The general fund also moves $175,000 a year to the fire equipment fund, in both years.",
+      },
+      source: "budget",
+    },
+    residents: [
+      { label: "Fire safety", href: `${RUC}/departments/fire-department/`, text: "The department's guides on smoke alarms, woodstoves, holiday safety and reducing risks for older adults." },
+      { label: "Non-emergency line", href: `${RUC}/departments/fire-department/`, text: "802-773-1812, at 104 Center Street. Dial 911 for emergencies." },
+    ],
+    sources: {
+      dept: { label: "City of Rutland, Fire Department", href: `${RUC}/departments/fire-department/` },
+      history: { label: "City of Rutland, Fire Department history", href: `${RUC}/departments/fire-department/history/`, note: "By Deputy Chief Michael J. Walsh" },
+      rtown: { label: "Rutland Town Fire Department, a look back (1976)", href: `${RUT}/town-departments/rutland-town-fire-department/` },
+      budget: { label: "City of Rutland, FY2027 budget detail", href: `${RUC}/wp-content/uploads/2026/04/Budget-Detail-for-Website.pdf`, note: "Fire Department, pages 6–7; summary by department; voter approved March 2026" },
+    },
+  },
+  "rutland-town": {
+    description:
+      "Rutland Town Fire Department: volunteers since 1968, when the town stopped buying protection from the city; " +
+      "two stations, a new Public Safety Building on McKinley Avenue, calls by year and type, and the fire budget.",
+    facts: [
+      ["Founded", "1968"],
+      ["Members", "34 active firefighters, 22 certified Level 1 or higher (2025)"],
+      ["Stations", "McKinley Avenue (Public Safety Building, 2025) and Center Rutland"],
+      ["Chief", "Chris Clark, term to January 2029"],
+    ],
+    contact: { chief: "Chris Clark", phone: "(802) 773-2528, option 2", website: `${RUT}/town-departments/rutland-town-fire-department/`, source: "dept" },
+    history: {
+      intro:
+        "Until 1968 Rutland Town bought its fire protection from the City of Rutland. When the city's price rose sharply, " +
+        "voters chose to form their own department, and sixty men turned out to volunteer.",
+      events: [
+        { year: 1967, text: "Selectmen fail to agree a price with the city's aldermen; a special town vote backs a town department. C. John Morse is appointed the first chief, every volunteer takes a 45-hour course, and Pumper 1 arrives from Ward LaFrance on 2 November.", source: "dept" },
+        { year: 1968, text: "Stations go up on McKinley Avenue and in Center Rutland. The town takes over from the city on 1 October under Chief Richard Spicer, and answers its first official fire eleven days later.", source: "dept" },
+        { year: 1969, text: "The department joins the Rutland County Mutual Aid Association, then sixteen departments, and answers its first mutual aid call, to a barn fire in Clarendon, on 16 January.", source: "dept" },
+        { year: 1973, text: "Town firefighters help the city at the Berwick Hotel fire. Cleto DelBianco, an original volunteer who helped design the tankers' quick-dump system, is named Vermont State Fireman of the Year.", source: "dept" },
+        { year: 2020, calls: 173, text: "Calls for service.", source: "r2021" },
+        { year: 2021, calls: 192, text: "Training moves outdoors during the pandemic, including at the Pittsford fire academy and on a roof prop built at the stations.", source: "r2021" },
+        { year: 2022, calls: 189, text: "Calls for service.", source: "r2023" },
+        { year: 2023, calls: 190, text: "The 1960s McKinley Avenue station is demolished in September to make way for a $5.5 million Public Safety Building approved by voters.", source: "r2024" },
+        { year: 2024, calls: 186, text: "Calls for service.", source: "r2024" },
+        { year: 2025, calls: 194, text: "Fire and police move into the new Public Safety Building in February; an open house follows on 17 May. A new air cascade system, paid for largely by local businesses, arrives in September.", source: "r2025" },
+      ],
+    },
+    calls: {
+      intro: "Medical assists and crashes, cancelled or unfounded calls, and alarm malfunctions make up most of the work.",
+      byYear: {
+        title: "Calls for service, by year",
+        bars: [
+          { label: "2020", value: 173 },
+          { label: "2021", value: 192 },
+          { label: "2022", value: 189 },
+          { label: "2023", value: 190 },
+          { label: "2024", value: 186 },
+          { label: "2025", value: 194 },
+        ],
+        note: "As the chief reports them in each year's town report.",
+        source: "r2025",
+      },
+      byType: {
+        title: "Calls by type, 2025",
+        bars: [
+          { label: "Rescue and crashes", value: 48 },
+          { label: "Good intent (cancelled, nothing found, smoke scares)", value: 45 },
+          { label: "False alarms", value: 43 },
+          { label: "Fires", value: 17 },
+          { label: "Hazardous conditions", value: 17 },
+          { label: "Service calls", value: 7 },
+        ],
+        note: "The incidents listed by type add up to 177 of the 194 the report states.",
+        source: "r2025",
+      },
+    },
+    money: {
+      intro:
+        "The fire budget is small because the firefighters are volunteers: $266,444 proposed for fiscal 2027. Voters " +
+        "are also asked to raise the fire depreciation fund rate from 1.75 to 2 cents per $100 of property value.",
+      year: "fiscal year 2027, as proposed",
+      lines: [
+        { label: "Salaries", amount: 75028 },
+        { label: "New equipment", amount: 40000 },
+        { label: "Vehicle maintenance and equipment", amount: 28000 },
+        { label: "Administrative salaries", amount: 24239 },
+        { label: "Daytime wage", amount: 20600 },
+      ],
+      linesNote: "The five largest lines in the fire budget.",
+      capital: {
+        title: "Fire budget, total expenses",
+        lines: [
+          { label: "FY2027, proposed", amount: 266444 },
+          { label: "FY2026, budget", amount: 262538 },
+          { label: "FY2025, budget", amount: 250038 },
+          { label: "FY2025, actual", amount: 222953 },
+        ],
+        note: "Paid for by property taxes.",
+      },
+      source: "r2025",
+    },
+    stationNotes: {
+      "rutland-town-272-mckinley-ave": { text: "The Public Safety Building, shared with the town police, opened in 2025 on the site of the 1968 station.", source: "r2025" },
+      "rutland-town-619-business-route-4": { text: "The Center Rutland station, one of the department's two original 1968 stations.", source: "dept" },
+    },
+    careers: {
+      intro: "Open to residents of Rutland Town, Rutland City and Mendon. Training night is Wednesday at either station.",
+      points: [
+        "Cadet firefighters aged 14 and 15",
+        "Junior firefighters aged 16 and 17",
+        "Senior firefighters 18 and over",
+        "Fill in the short form on the town's page, or stop by on a Wednesday evening",
+      ],
+      applyUrl: `${RUT}/town-departments/rutland-town-fire-department/`,
+      source: "dept",
+    },
+    residents: [
+      { label: "Burn permits", href: `${RUT}/town-departments/rutland-town-fire-department/`, text: "Call the chief for a permit; a voicemail or email is not enough. Fires out by dusk, none on Sundays, yard waste and clean wood only." },
+      { label: "Fireworks permits", href: `${RUT}/town-departments/rutland-town-fire-department/`, text: "From the fire chief; approved displays are listed on the town's page." },
+    ],
+    sources: {
+      dept: { label: "Town of Rutland, Fire Department", href: `${RUT}/town-departments/rutland-town-fire-department/`, note: "Including the department's 1976 history by Michael R. McCarthy" },
+      r2021: { label: "Town of Rutland, 2021 Town Report", href: `${RUT}/wp-content/uploads/2022/02/2021-Town-Report.pdf`, note: "Fire Department report" },
+      r2023: { label: "Town of Rutland, 2023 Town Report", href: `${RUT}/wp-content/uploads/2024/03/2023-Town-Report-Final.pdf`, note: "Fire Department report" },
+      r2024: { label: "Town of Rutland, 2024 Town Report", href: `${RUT}/wp-content/uploads/2025/02/2024-Town-Report.pdf`, note: "Select Board report, page 4; Fire Department report" },
+      r2025: { label: "Town of Rutland, FY2025 Town Report", href: `${RUT}/wp-content/uploads/2026/02/FY-2025-Town-report.pdf`, note: "Fire Department report, calls and fire budget, pages 22–25; warning article 21" },
+    },
+  },
+  pawlet: {
+    description:
+      "Pawlet Volunteer Fire Department: an all-volunteer nonprofit covering 25 square miles of eastern Pawlet, " +
+      "from an 1895 fire to a 2023 Ahrens-Fox engine, dispatched from Washington County, New York.",
+    facts: [
+      ["Staffing", "All volunteer, unpaid; a 501(c)(3) nonprofit funded mainly by the town"],
+      ["District", "25 square miles, the eastern half of Pawlet"],
+      ["ISO rating", "Class 8B"],
+      ["Dispatch", "Washington County (NY) Department of Public Safety, since the mid-1990s"],
+      ["Incorporated", "1967"],
+      ["Chief", "Jon Weiss"],
+    ],
+    contact: { chief: "Jon Weiss", phone: "(802) 325-3222", website: `${PAW}/`, source: "contact" },
+    history: {
+      intro:
+        "Pawlet's volunteers answer fires, crashes, hazardous materials, gas and carbon monoxide calls and wildland fires, " +
+        "assist the Vermont State Police and the Granville Rescue Squad, and train more than 70 hours a year at home. " +
+        "West Pawlet has its own department.",
+      events: [
+        { year: 1895, text: "A fire in West Pawlet kills three people and destroys almost all of the downtown; the village has no means of fighting it.", source: "history" },
+        { year: 1904, text: "The Crescent Valley Hotel burns. The town buys a horse-drawn, gasoline-powered pump, kept in the shed by the Mill Pond, which still stands.", source: "history" },
+        { year: 1950, text: "In the early 1950s young men in town organise the Pawlet Volunteer Fire Department, with a 1947 ex-Army tanker kept in a barn on Route 133.", source: "history" },
+        { year: 1967, text: "The department is formally incorporated, and holds its first game supper the next autumn.", source: "history" },
+        { year: 1973, text: "Today's firehouse is built, just before the temporary one burns down; the trucks are saved.", source: "history" },
+        { year: 1979, text: "The Methodist Church on Route 133 is lost to fire in February despite many departments' work.", source: "history" },
+        { year: 1990, text: "In the early 1990s radio pagers replace the fire phones, a ten-phone party line answered by firefighters. Mid-decade, dispatch moves to Washington County, New York, for better radio reach past the Taconics.", source: "history" },
+        { year: 1998, text: "An E-One on a Freightliner chassis becomes Pawlet's first brand-new fire truck.", source: "history" },
+        { year: 2023, text: "ETA 542, an HME Ahrens-Fox pumper-tanker built for Pawlet, enters service in October.", source: "today" },
+        { year: 2025, text: "Members build Attack 543, a small initial-attack and wildland truck, on a Ford F350 chassis.", source: "today" },
+        { year: 2026, text: "Under Act 162, signed in June, the Pawlet and West Pawlet departments take over issuing burn permits.", source: "burn" },
+      ],
+    },
+    stationNotes: {
+      "pawlet-155-vt-route-133": {
+        text:
+          "The firehouse, built in 1973: ETA 542 (2023 HME Ahrens-Fox, 1,500 gpm, 1,000 gallons), ETA 541 (2001 E-One, " +
+          "1,250 gpm, 1,250 gallons) and Attack 543. Members meet Tuesdays at 7 pm.",
+        source: "today",
+      },
+    },
+    careers: {
+      intro:
+        "No experience needed: the department trains every week and pays for any fire service course a member takes. " +
+        "Not every role is structural firefighting.",
+      points: [
+        "18 or over, with a background check",
+        "Juniors from 16, training alongside adults but not responding to calls",
+        "At least 24 training hours a year, 6 each quarter",
+        "A one-month probation, then a vote at the next monthly meeting",
+        "Fill in the form, call the station, or drop by on a Tuesday at 7 pm",
+      ],
+      applyUrl: `${PAW}/volunteer/`,
+      source: "volunteer",
+    },
+    residents: [
+      { label: "Burn permits", href: `${PAW}/fire-safety-information/burn-permits/`, text: "Request online, or call 325-3222 (Pawlet) or 645-0276 (West Pawlet). No permit is needed for a fire pit 36 inches or less." },
+      { label: "Pool fills", href: `${PAW}/frequently-asked-questions/`, text: "In the Pawlet fire district, $30 per 1,000 gallons; call the station a few weeks ahead." },
+      { label: "Address markers", href: `${PAW}/address-marker-program/`, text: "Green reflective 911 address signs made by the department for homes and businesses." },
+      { label: "Dry hydrants", href: `${PAW}/non-emergency-services/`, text: "Have a pond? The department installs dry hydrants with landowners, often at little or no cost." },
+      { label: "Home safety visits", href: `${PAW}/non-emergency-services/`, text: "Fire safety evaluations and free smoke and CO detectors." },
+    ],
+    sources: {
+      contact: { label: "Pawlet Volunteer Fire Department, Contact", href: `${PAW}/contact/` },
+      today: { label: "Pawlet Volunteer Fire Department, Today", href: `${PAW}/today/` },
+      history: { label: "Pawlet Volunteer Fire Department, History", href: `${PAW}/history/` },
+      volunteer: { label: "Pawlet Volunteer Fire Department, Volunteer", href: `${PAW}/volunteer/` },
+      burn: { label: "Pawlet Volunteer Fire Department, Burn permits", href: `${PAW}/fire-safety-information/burn-permits/` },
+    },
+  },
+  pittsford: {
+    description:
+      "Pittsford Fire Department: 44 members serving Pittsford and Florence since 1948 from two stations, with eight " +
+      "pieces of apparatus and a 45-square-mile first-due area.",
+    facts: [
+      ["Founded", "1948"],
+      ["Members", "44"],
+      ["Stations", "2"],
+      ["Apparatus", "3 engines, a ladder, a tanker, a medium rescue, a brush truck and an off-road utility vehicle"],
+      ["Area", "About 45 square miles and 3,000 residents, in Pittsford and Florence"],
+      ["Chief", "Bill Hemple, since 2017"],
+    ],
+    contact: { chief: "Bill Hemple", website: `${PIT}/fire-department/`, source: "town" },
+    history: {
+      intro:
+        "Pittsford's department is a member of the Rutland County Fire Mutual Aid Association; when called for mutual aid " +
+        "its area grows to nearly 300 square miles and 56,000 people.",
+      events: [
+        { year: 1948, text: "The Pittsford Fire Department begins serving Pittsford and Florence.", source: "town" },
+        { year: 2017, text: "Bill Hemple becomes chief.", source: "town" },
+      ],
+    },
+    residents: [
+      { label: "Join", href: `${PIT}/fire-department/`, text: "Pick up an application at the town clerk's office, or stop by the firehouse on the 2nd or 4th Tuesday of the month." },
+    ],
+    sources: {
+      town: { label: "Town of Pittsford, Fire Department", href: `${PIT}/fire-department/` },
     },
   },
   jericho: UJFD,
