@@ -326,6 +326,19 @@ footer {
     color: var(--red);
   }
 
+/* The masthead is charcoal in both themes, so its text cannot follow the page
+   ink: in the light theme --ink is a dark grey, which on charcoal read at about
+   1.5:1. Cream, as on the homepage, in both themes. */
+.masthead { --mast-ink: #efe7d9; --mast-ink-2: rgba(239, 231, 217, 0.78); --mast-ink-3: rgba(239, 231, 217, 0.55); --mast-line: rgba(239, 231, 217, 0.28); }
+.masthead .brand { color: var(--mast-ink); }
+.masthead .brand-txt span { color: var(--mast-ink-3); }
+.masthead .nav a { color: var(--mast-ink-2); }
+.masthead .nav a:hover { color: var(--mast-ink); }
+.masthead .themetoggle,
+.masthead .navtoggle { color: var(--mast-ink-2); border-color: var(--mast-line); }
+.masthead .themetoggle:hover,
+.masthead .navtoggle:hover { color: var(--mast-ink); }
+
 /* --- Responsive chrome ------------------------------------------------- */
 /* The nav is the only way around the site, so on small screens it becomes a
    disclosure panel rather than disappearing. */
@@ -355,10 +368,17 @@ footer {
 }
 
 @media (max-width: 780px) {
-  .mast-in { flex-wrap: wrap; gap: 0.6rem 1rem; }
-  .brand { flex: 1 1 auto; min-width: 0; }
-  .themetoggle { margin-left: auto; }
-  .navtoggle { display: inline-flex; }
+  .mast-in { flex-wrap: wrap; gap: 0.6rem 0.5rem; }
+  .brand { flex: 1 1 0; min-width: 0; }
+  /* On a phone the brand, the theme switch and the menu share one row: the
+     switch drops its word and becomes a square icon button the size of the
+     menu button, instead of wrapping onto a second row of its own. */
+  .themetoggle {
+    order: 1; margin-left: auto;
+    width: 44px; height: 44px; padding: 0; justify-content: center; border-radius: 3px;
+  }
+  .themetoggle .tt-label { display: none; }
+  .navtoggle { display: inline-flex; order: 2; margin-left: 0; }
   .nav {
     display: none;
     order: 10;

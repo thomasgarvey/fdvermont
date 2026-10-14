@@ -49,6 +49,9 @@ const departments = town ? town.departments : [standalone!.department];
 const home = standalone ? (towns.find((t) => t.name === standalone.town) ?? null) : null;
 
 const dept = departments[0] ?? null;
+// Two buildings with the same name ("Rutland Town Fire Station" twice) are told
+// apart in the jump list by their street address.
+const sharedNames = new Set(stations.map((s) => s.name).filter((n, i, all) => all.indexOf(n) !== i));
 
 // Photographs of the department's engines, tankers and rescues — Subject
 // "Apparatus" in Airtable, synced apart from the station photographs. Named by
@@ -365,6 +368,7 @@ const structured = {
               <a href={`#${s.slug}`}>
                 <span class="dot" data-has={s.photo ? "yes" : "no"} aria-hidden="true"></span>
                 {s.name}
+                {sharedNames.has(s.name) && <span class="jaddr">{s.address}</span>}
               </a>
             </li>
           ))}
@@ -483,7 +487,7 @@ const structured = {
         <h2 id="cl-h">Calls</h2>
         <p>{profile.calls.intro}</p>
         {[profile.calls.byYear, profile.calls.byYear2].filter(Boolean).map((c) => (
-          <figure class="chart">
+          <figure class={c!.bars.length <= 8 ? "chart few" : "chart"}>
             <figcaption class="ctitle">{c!.title}</figcaption>
             <div class="cols" role="img"
                  aria-label={c!.bars.map((b) => `${b.label}: ${b.value == null ? "no figure" : (b.approx ? "over " : "") + b.value.toLocaleString("en-US")}`).join("; ")}>
@@ -1046,6 +1050,8 @@ const structured = {
     text-decoration: none; color: var(--ink-2); font-size: 0.88rem;
   }
   .jump a:hover { color: var(--red); }
+  .jaddr { color: var(--ink-3); }
+  .jaddr::before { content: "· "; }
   .station { margin-bottom: 2.6rem; scroll-margin-top: 1rem; }
   .station:last-child { margin-bottom: 0; }
   .station h3 {
@@ -1109,6 +1115,19 @@ const structured = {
     .pt { r: 5; }
     .pt.mine { r: 9; }
     .row { grid-template-columns: 1fr; gap: 0.1rem; }
+    /* The E911 record is eight short fields; stacked one per line it is a
+       screen and a half of scrolling per station. Two to a line halves it. */
+    .rec { display: grid; grid-template-columns: 1fr 1fr; column-gap: 1rem; }
+    .rec dd { overflow-wrap: anywhere; }
+    /* With eight bars or fewer there is room for labels a phone can read. */
+    .few .cval { font-size: 0.72rem; }
+    .few .clab { font-size: 0.74rem; }
+    .few .cols + .fine { margin-top: 2.4rem; }
+    /* Three text columns at 320px leave no room for a long word to sit in. */
+    .districts td { padding-right: 0.6rem; overflow-wrap: anywhere; }
+    .fleet td, .fleet th { overflow-wrap: anywhere; }
+    .jump { flex-direction: column; gap: 0; }
+    .jump a { min-height: 44px; }
     .stations a { grid-template-columns: auto 1fr; }
     .ad { grid-column: 2; }
   }
