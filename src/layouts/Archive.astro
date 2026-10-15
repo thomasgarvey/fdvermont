@@ -90,18 +90,15 @@ import Seo from "../components/Seo.astro";
 
     <footer>
       <div class="wrap foot">
-        <span>© {new Date().getFullYear()} Vermont Fire Departments</span>
-        <span aria-hidden="true">·</span>
-        <a href="/privacy">Privacy Policy</a>
-        <span aria-hidden="true">·</span>
-        <a href="/contact">Contact</a>
-        <span aria-hidden="true">·</span>
-        <span>
-          Data:
-          <a href="https://geodata.vermont.gov/" target="_blank" rel="noopener">VT E911 (VCGI)</a>
-          &amp;
-          <a href="https://www.openstreetmap.org/" target="_blank" rel="noopener">OpenStreetMap</a>
-        </span>
+        <p class="foot-name">© {new Date().getFullYear()} Vermont Fire Departments</p>
+        <nav class="foot-links" aria-label="Footer">
+          <a href="/privacy">Privacy Policy</a>
+          <a href="/contact">Contact</a>
+        </nav>
+        <p class="foot-data">
+          Data: <a href="https://geodata.vermont.gov/" target="_blank" rel="noopener">VT E911 (VCGI)</a>
+          &amp; <a href="https://www.openstreetmap.org/" target="_blank" rel="noopener">OpenStreetMap</a>
+        </p>
       </div>
     </footer>
 
@@ -313,11 +310,14 @@ footer {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 0.5rem;
+    align-items: center;
+    gap: 0.5rem 2rem;
     font-family: inherit;
     font-size: 0.8rem;
     color: var(--ink-2);
   }
+.foot p { margin: 0; }
+.foot-links { display: flex; gap: 1.5rem; }
 .foot a {
     color: inherit;
     text-decoration: underline;
@@ -363,7 +363,7 @@ footer {
 
 /* Comfortable touch targets everywhere (44px is the usual minimum). */
 @media (pointer: coarse) {
-  .nav a, footer a, .foot a { min-height: 44px; display: inline-flex; align-items: center; }
+  .nav a, .foot-links a { min-height: 44px; display: inline-flex; align-items: center; }
   .themetoggle { min-height: 44px; }
 }
 
@@ -396,6 +396,8 @@ footer {
     font-size: 0.85rem;
   }
   .nav a:last-child { border-bottom: 0; }
-  .foot { flex-direction: column; gap: 0.15rem; text-align: center; }
+  /* Phones: name, links and data credit stacked and centred; the two links
+     share a row rather than each taking a line of their own. */
+  .foot { flex-direction: column; gap: 0.35rem; text-align: center; }
 }
 </style>

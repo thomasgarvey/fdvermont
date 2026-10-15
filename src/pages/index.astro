@@ -373,18 +373,15 @@ const MARK_NEEDS = "#5C6469";
 
     <footer>
       <div class="wrap foot">
-        <span>© {new Date().getFullYear()} Vermont Fire Departments</span>
-        <span aria-hidden="true">·</span>
-        <a href="/privacy">Privacy Policy</a>
-        <span aria-hidden="true">·</span>
-        <a href="/contact">Contact</a>
-        <span aria-hidden="true">·</span>
-        <span>
-          Data:
-          <a href="https://geodata.vermont.gov/" target="_blank" rel="noopener">VT E911 (VCGI)</a>
-          &amp;
-          <a href="https://www.openstreetmap.org/" target="_blank" rel="noopener">OpenStreetMap</a>
-        </span>
+        <p class="foot-name">© {new Date().getFullYear()} Vermont Fire Departments</p>
+        <nav class="foot-links" aria-label="Footer">
+          <a href="/privacy">Privacy Policy</a>
+          <a href="/contact">Contact</a>
+        </nav>
+        <p class="foot-data">
+          Data: <a href="https://geodata.vermont.gov/" target="_blank" rel="noopener">VT E911 (VCGI)</a>
+          &amp; <a href="https://www.openstreetmap.org/" target="_blank" rel="noopener">OpenStreetMap</a>
+        </p>
       </div>
     </footer>
 
@@ -772,7 +769,7 @@ const MARK_NEEDS = "#5C6469";
   /* Comfortable touch targets where there is no mouse. */
   @media (pointer: coarse) {
     .nav a,
-    .foot a,
+    .foot-links a,
     .themetoggle {
       min-height: 44px;
       display: inline-flex;
@@ -1346,8 +1343,23 @@ const MARK_NEEDS = "#5C6469";
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 0.5rem;
+    align-items: center;
+    gap: 0.5rem 2rem;
     font-size: 0.8rem;
+  }
+  .foot p {
+    margin: 0;
+  }
+  .foot-links {
+    display: flex;
+    gap: 1.5rem;
+  }
+  @media (max-width: 820px) {
+    .foot {
+      flex-direction: column;
+      gap: 0.35rem;
+      text-align: center;
+    }
   }
   .foot a {
     color: inherit;
