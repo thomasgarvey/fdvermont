@@ -2254,6 +2254,20 @@
     "department": null
   },
   {
+    "id": "recvw96lntZ6rtbRc",
+    "esiteid": 185557,
+    "name": null,
+    "address": "2806 VT Route 153",
+    "town": "Pawlet",
+    "county": "Rutland",
+    "zip": "05775",
+    "lat": 43.353258,
+    "lng": -73.250917,
+    "mapped": "1998-01-01",
+    "updated": "2023-01-27",
+    "department": null
+  },
+  {
     "id": "recWyMnc1Mi3pYqjh",
     "esiteid": 186270,
     "name": null,
@@ -3565,20 +3579,6 @@
     "zip": "05743",
     "lat": 43.652217,
     "lng": -73.346938,
-    "mapped": "1998-01-01",
-    "updated": "2023-01-27",
-    "department": null
-  },
-  {
-    "id": "recvw96lntZ6rtbRc",
-    "esiteid": 185557,
-    "name": null,
-    "address": "2806 VT Route 153",
-    "town": "West Pawlet",
-    "county": "Rutland",
-    "zip": "05775",
-    "lat": 43.353258,
-    "lng": -73.250917,
     "mapped": "1998-01-01",
     "updated": "2023-01-27",
     "department": null
