@@ -211,6 +211,12 @@ const RUT = "https://www.rutlandtown.com";
 const PAW = "https://pawletfire.org";
 const PIT = "https://www.pittsfordvermont.com";
 
+const POU = "https://www.poultneyvt.gov";
+const CAS = "https://www.castletonvermont.org/sites/g/files/vyhlif376/f";
+const FH = "https://fairhavenvt.gov";
+const PRO = "https://proctorvermont.com";
+const WAL = "https://www.wallingfordvt.com";
+
 // One department, two town pages: Underhill and Jericho share the profile.
 const UJFD: Profile = {
   description:
@@ -3851,6 +3857,313 @@ export const profiles: Record<string, Profile> = {
     ],
     sources: {
       town: { label: "Town of Pittsford, Fire Department", href: `${PIT}/fire-department/` },
+    },
+  },
+  poultney: {
+    description:
+      "Poultney Fire Department, the volunteer Poultney Hose Company No. 1: calls by year and type for 2023–2025, " +
+      "a new 4x4 mini pumper, a trail-rescue UTV, and the town's fire budget.",
+    facts: [
+      ["Known as", "Poultney Hose Company No. 1"],
+      ["Staffing", "Volunteer: 19 senior members at the end of 2025, down from 24 in 2023"],
+      ["Station", "55 Firehouse Lane, since 1998"],
+      ["Chief", "Aaron Kerber"],
+      ["Meets", "Tuesday evenings, 6:30 to 8:30"],
+    ],
+    contact: { chief: "Aaron Kerber", website: `${POU}/services/police-fire-emergencies`, source: "town" },
+    history: {
+      intro:
+        "Poultney's volunteers answer crashes, structure fires, EMS assists, alarms and wilderness rescues. On calls alone " +
+        "they gave 1,518.5 hours in 2025, and the department logs about 1,500 hours of training a year.",
+      events: [
+        { year: 1998, text: "The department moves into its new building at 55 Firehouse Lane.", source: "town" },
+        { year: 2023, calls: 159, text: "A gift from the Conine Family Foundation buys a UTV for off-road rescues as the Slate Valley Trails grow. Nate Bourn, a junior firefighter who rose to assistant chief and town fire warden, leaves after 14 years to become a full-time firefighter.", source: "r2023" },
+        { year: 2024, calls: 167, text: "A 2022 Ford F-550 4x4 mini pumper, ordered in 2022, arrives in April to replace a 1994 International as the first truck out to crashes and rescues. Fifteen members train at a Vermont Fire Academy live-burn day.", source: "r2024" },
+        { year: 2025, calls: 150, text: "Town meeting is asked for $20,000 to start a length-of-service award for members of 5, 10, 15 and 20 years. Ten members attend the academy's live-burn day.", source: "r2025" },
+      ],
+    },
+    calls: {
+      intro: "Crashes are the largest single call type every year, followed by EMS assists, structure fires and alarms.",
+      byYear: {
+        title: "Calls for service, by year",
+        bars: [
+          { label: "2023", value: 159 },
+          { label: "2024", value: 167 },
+          { label: "2025", value: 150 },
+        ],
+        note: "Calendar years, from the chief's report in each town report.",
+        source: "r2025",
+      },
+      byType: {
+        title: "Calls by type, 2025",
+        bars: [
+          { label: "Motor vehicle crashes", value: 31 },
+          { label: "EMS assists", value: 20 },
+          { label: "Structure fires", value: 19 },
+          { label: "Fire alarms", value: 18 },
+          { label: "Grass and brush fires", value: 12 },
+          { label: "Good intent", value: 12 },
+          { label: "Carbon monoxide alarms", value: 7 },
+          { label: "Hazmat", value: 6 },
+          { label: "Utility calls", value: 6 },
+          { label: "Service calls", value: 5 },
+          { label: "Vehicle fires", value: 4 },
+          { label: "Smell of propane", value: 3 },
+          { label: "Rescues", value: 3 },
+          { label: "Smoke conditions", value: 3 },
+          { label: "Rubbish fire", value: 1 },
+        ],
+        note: "Calendar 2025; the types add up to the 150 calls reported.",
+        source: "r2025",
+      },
+    },
+    money: {
+      intro:
+        "The town funds the department, a truck payment, an equipment fund and firehouse repairs: $341,283 in all " +
+        "proposed for fiscal 2027.",
+      year: "fiscal year 2027, as proposed",
+      lines: [
+        { label: "Fire Department", amount: 173550 },
+        { label: "Fire equipment fund", amount: 130000 },
+        { label: "Firehouse capital repair", amount: 20483 },
+        { label: "Fire truck payment", amount: 17250 },
+      ],
+      linesNote: "From the town's general government budget.",
+      capital: {
+        title: "Fire Department line, by year",
+        lines: [
+          { label: "FY2027, proposed", amount: 173550 },
+          { label: "FY2026, budget", amount: 166350 },
+          { label: "FY2025, spent", amount: 128050 },
+        ],
+        note: "The town's appropriation for the department's running costs.",
+      },
+      source: "r2025b",
+    },
+    stationNotes: {
+      "poultney-55-firehouse-ln": { text: "The firehouse since 1998, and the town's polling place.", source: "town" },
+    },
+    residents: [
+      { label: "Join", href: `${POU}/services/police-fire-emergencies`, text: "Stop by the firehouse any Tuesday night, 6:30 to 8:30. Roles range from scene support to firefighting; juniors are welcome." },
+    ],
+    sources: {
+      town: { label: "Town of Poultney, Police, Fire & Emergencies", href: `${POU}/services/police-fire-emergencies` },
+      r2023: { label: "Town of Poultney, 2023 Town Report", href: `${POU}/fileadmin/files/Selectboard/Town_Reports/2023_Poultney_Report.pdf`, note: "Fire Department report, PDF page 43. A scanned report, read with text recognition" },
+      r2024: { label: "Town of Poultney, 2024 Town Report", href: `${POU}/fileadmin/files/Selectboard/Town_Reports/Poultney_2024_VermontMunicipalReport.pdf`, note: "Fire Department report, PDF page 41. A scanned report, read with text recognition; its listed types add up to 161 of the 167 calls" },
+      r2025: { label: "Town of Poultney, 2025 Town Report", href: `${POU}/fileadmin/files/Selectboard/Town_Reports/2025_Poultney_Report.pdf`, note: "Fire Department report, PDF page 41; 2025 town meeting minutes, PDF page 9" },
+      r2025b: { label: "Town of Poultney, 2025 Town Report: proposed budget", href: `${POU}/fileadmin/files/Selectboard/Town_Reports/2025_Poultney_Report.pdf`, note: "General government budget, PDF page 24" },
+    },
+  },
+  castleton: {
+    description:
+      "Castleton Volunteer Fire Department: established 1946, calls from the town reports, the Gilmore's Home Center " +
+      "fire, a refurbished tower truck and a 35% budget increase proposed for 2025.",
+    facts: [
+      ["Founded", "1946"],
+      ["Chief", "Heath Goyette"],
+      ["Town fire budget", "$262,807 proposed for FY2025, up 35% from $194,288"],
+      ["Meets", "Wednesday nights, around six"],
+    ],
+    contact: { chief: "Heath Goyette", phone: "802-468-5060", source: "r2024" },
+    history: {
+      intro:
+        "Castleton's volunteers answer vehicle crashes, fire alarms, carbon monoxide alarms, downed lines and storm calls, " +
+        "and help neighbouring towns at structure fires through the Rutland County mutual aid group.",
+      events: [
+        { year: 1946, text: "The Castleton Fire Department is established.", source: "r2021" },
+        { year: 2021, calls: 133, text: "Emergency calls reported for the 2020–21 town year.", source: "r2021" },
+        { year: 2023, text: "In the year to June, fire destroys the Gilmore's Home Center hardware store. Nine departments and Rutland Regional assist, with over 100 firefighters on scene and only minor injuries. Castleton also helps at eight structure fires through mutual aid.", source: "r2023" },
+        { year: 2024, calls: 145, text: "A refurbished tower truck is about to enter service, a new mini pumper is on order, and a 50% state grant pays for lightweight wildland gear. The fire warden issues 97 burn permits.", source: "r2024" },
+      ],
+    },
+    residents: [
+      { label: "Join", href: `${CAS}/news/final_2023-2024_town_report_0.pdf`, text: "Stop by the firehouse any Wednesday night around six for an application. A junior programme is open to ages 16 to 18." },
+      { label: "Burn permits", href: `${CAS}/news/final_2023-2024_town_report_0.pdf`, text: "From the town fire warden." },
+    ],
+    sources: {
+      r2021: { label: "Town of Castleton, Annual Report 2020–21", href: `${CAS}/uploads/town_report_2020_21.pdf`, note: "Fire Department report, PDF page 32" },
+      r2023: { label: "Town of Castleton, Annual Report 2022–23", href: `${CAS}/news/2022-2023_town_report_master.pdf`, note: "Fire Department report, PDF pages 33–34" },
+      r2024: { label: "Town of Castleton, Annual Report 2023–24", href: `${CAS}/news/final_2023-2024_town_report_0.pdf`, note: "Directory, page 3; budget, PDF page 9; Fire Department and Fire Warden reports, PDF pages 33–36" },
+    },
+  },
+
+  "fair-haven": {
+    description:
+      "Fair Haven Fire Department: on-call volunteers in the old high school on the town park, calls by type for " +
+      "2018–19 and 2023–24, a new Alexis pumper-tanker, and weekday automatic aid from Poultney.",
+    facts: [
+      ["Staffing", "On-call volunteers, paid minimum wage for alarms and training (policy of July 2025)"],
+      ["Station", "In the town building at the north end of the park, with the town offices and police"],
+      ["Chief", "Jim Heller, also emergency management coordinator"],
+      ["Meets", "Tuesdays at 6:30 pm: officers, two training nights, then the monthly meeting"],
+    ],
+    contact: { chief: "Jim Heller", phone: "802-265-3125", website: `${FH}/fire-department/`, source: "dept" },
+    history: {
+      intro:
+        "Fair Haven's firehouse is in a two-and-a-half-storey building that was once the town's high school. The " +
+        "department averages about 100 calls a year in town and on mutual aid with Benson, Castleton, Hubbardton, West " +
+        "Haven, and Hampton and Whitehall, New York.",
+      events: [
+        { year: 2019, calls: 109, text: "79 calls in the district and 30 on mutual aid, including 11 structure fires in other towns. Lt. Steve Marcoux leaves for a career post with the Rutland City Fire Department.", source: "r2019" },
+        { year: 2024, calls: 90, text: "70 calls in the district and 20 on mutual aid; members log 363 training hours. In March voters approve up to $600,000 for a new pumper-tanker, $236,000 from the fire equipment reserve and the rest borrowed from the town's general fund at 1%. It replaces a 1996 International/E-One, with a Freightliner chassis and an Alexis body due in late 2025.", source: "r2024" },
+        { year: 2025, text: "The selectboard adopts a pay policy: members earn the state minimum wage from dispatch to release on alarms and at sanctioned training, with a one-hour minimum.", source: "pay" },
+      ],
+    },
+    calls: {
+      intro: "Crashes and EMS assists lead in town; structure fires were all on mutual aid in both years shown.",
+      byType: {
+        title: "Calls by type, 2023–24",
+        bars: [
+          { label: "EMS assists", value: 25, sub: "24 in town, 1 mutual aid" },
+          { label: "Crashes", value: 21, sub: "12 in town, 9 mutual aid" },
+          { label: "Alarms", value: 17, sub: "16 in town, 1 mutual aid" },
+          { label: "Hazardous conditions", value: 10 },
+          { label: "Structure fires", value: 6, sub: "All mutual aid" },
+          { label: "Good intent", value: 6 },
+          { label: "Grass and brush fires", value: 4 },
+          { label: "Other responses", value: 4 },
+          { label: "Vehicle fires", value: 1 },
+          { label: "Other fires", value: 1 },
+        ],
+        note: "Fiscal year July 2023 to June 2024; 90 calls in all.",
+        source: "r2024",
+      },
+    },
+    residents: [
+      { label: "Join", href: `${FH}/fire-department/`, text: "Download the application from the town's page, or stop in on a Tuesday evening. Junior and cadet membership from age 15." },
+      { label: "Burn permits", href: `${FH}/fire-department/`, text: "Required; Fair Haven has an open burning ordinance." },
+      { label: "Detectors", href: `${FH}/fire-department/`, text: "Change smoke and CO detector batteries each spring; replace detectors more than 5 to 10 years old." },
+    ],
+    sources: {
+      dept: { label: "Town of Fair Haven, Fire Department", href: `${FH}/fire-department/` },
+      r2019: { label: "Town of Fair Haven, 2019 Annual Report", href: "http://www.fairhavenvt.org/wp-content/uploads/2020/03/2019-Annual-Report.pdf", note: "Fire Department report, PDF pages 39–40" },
+      r2024: { label: "Town of Fair Haven, 2024 Annual Report", href: `${FH}/wp-content/uploads/2025/02/WEB-Fair-Haven.pdf`, note: "Fire Department report and roster, PDF pages 30–31; March 2024 town meeting, article 4, PDF page 23" },
+      pay: { label: "Town of Fair Haven, compensation policy for fire department members", href: `${FH}/wp-content/uploads/2025/07/FD-compensation-Policy.pdf`, note: "Adopted 8 July 2025; a scanned page, read with text recognition" },
+    },
+  },
+  proctor: {
+    description:
+      "Proctor Volunteer Fire Department, the Sutherland Falls Hose Company: formed 1898, a restored 1923 American " +
+      "LaFrance, incidents by type, a junior programme and a new engine-tanker.",
+    facts: [
+      ["Founded", "1898"],
+      ["Known as", "Sutherland Falls Hose Company"],
+      ["Members", "24, including 4 junior firefighters"],
+      ["Chief", "Joshua Webb"],
+    ],
+    contact: { chief: "Joshua Webb", phone: "(802) 459-3640", website: `${PRO}/fire/`, source: "r2023" },
+    history: {
+      intro:
+        "Proctor's volunteers work from the station on Main Street. Beyond calls, the department meets more than a hundred " +
+        "times a year for training, maintenance, cadet nights and community events.",
+      events: [
+        { year: 1898, text: "The Proctor Volunteer Fire Department is formed.", source: "dept" },
+        { year: 1923, text: "The department's first motorised truck, an American LaFrance, arrives. It has never left the department.", source: "r2023" },
+        { year: 2020, calls: 47, text: "Incidents from December 2019 to November 2020, among 112 meetings and events. Three members finish Firefighter I and II despite Covid.", source: "r2020" },
+        { year: 2022, calls: 39, text: "Incidents from November 2021 to November 2022. A truck committee starts planning one truck to replace Engine 2 and Tanker 1, and a Mortimer Proctor Fund grant pays for a communications tower on the east mountain water tank building.", source: "r2022" },
+        { year: 2023, calls: 80, text: "Incidents from November 2022 to November 2023, a large increase. The department marks its 125th anniversary and shows off the 1923 American LaFrance after motor restoration. A new engine-tanker is ordered: 1,800 gallons and 1,500 gpm, due April 2025.", source: "r2023" },
+      ],
+    },
+    calls: {
+      intro: "False alarms are the largest single type in both years the town broke down.",
+      byType: {
+        title: "Incidents by type, Nov 2021 – Nov 2022",
+        bars: [
+          { label: "False alarms", value: 12 },
+          { label: "Medical assists", value: 5 },
+          { label: "Special type", value: 5 },
+          { label: "Good intent", value: 4 },
+          { label: "Fires, other", value: 3 },
+          { label: "Building fires", value: 2 },
+          { label: "Carbon monoxide", value: 2 },
+          { label: "Vehicle crashes", value: 2 },
+          { label: "Severe weather", value: 2 },
+          { label: "Flammable liquid spill", value: 1 },
+          { label: "Animal rescue", value: 1 },
+        ],
+        note: "39 incidents, 7 November 2021 to 17 November 2022.",
+        source: "r2022",
+      },
+    },
+    residents: [
+      { label: "Burn permits", href: `${PRO}/fire/`, text: "Required for any open burning unless there is snow cover; free, from the town fire warden." },
+      { label: "Fireworks", href: `${PRO}/fire/`, text: "A display needs a permit from the fire department; get the form from the town and return it 15 days ahead." },
+      { label: "Juniors", href: `${PRO}/fire/`, text: "Students aged 14 to 17 can join the junior programme: support roles on the fireground and monthly training." },
+    ],
+    sources: {
+      dept: { label: "Town of Proctor, Fire Department", href: `${PRO}/fire/` },
+      r2020: { label: "Town of Proctor, 2020 Annual Report", href: `${PRO}/wp-content/uploads/Final-from-Printer.pdf`, note: "Fire Department report, PDF page 40. A scanned report, read with text recognition" },
+      r2022: { label: "Town of Proctor, 2022 Annual Report", href: `${PRO}/wp-content/uploads/Annual-Report-PDF.pdf`, note: "Fire Department report, PDF page 43. A scanned report, read with text recognition" },
+      r2023: { label: "Town of Proctor, Annual Report 2022–23", href: `${PRO}/wp-content/uploads/web-proctor-Final-Report.pdf`, note: "Fire Department report, PDF page 2. A scanned report, read with text recognition" },
+    },
+  },
+  wallingford: {
+    description:
+      "Wallingford Fire Department, run by Fire District No. 1 since its 1906 charter: volunteers training 288 hours " +
+      "a year, juniors from 13, the Lights on for Safety programme and the fire protection budget.",
+    facts: [
+      ["Run by", "Wallingford Fire District No. 1, chartered by the Legislature in 1906"],
+      ["Station", "17 Railroad Street"],
+      ["Training", "About 288 hours per firefighter a year"],
+      ["Chief", "Michael Hughes"],
+      ["Fire protection fund", "$182,330 for 2025–26; $188,967.75 proposed for 2026–27"],
+    ],
+    contact: { chief: "Michael Hughes", phone: "802-446-2295", website: `${WAL}/boards-minutes/fire-district-1/`, source: "fd1" },
+    history: {
+      intro:
+        "Fire District No. 1 is separate from the town: it runs the fire department along with water and sewer, and its " +
+        "voters elect the fire chief each year. East Wallingford has its own department, Wallingford Fire District #2, on " +
+        "Route 140.",
+      events: [
+        { year: 1906, text: "The Legislature charters Fire District No. 1; its charter is amended six times, last in 1929.", source: "fd1" },
+        { year: 2020, text: "Just under 100 calls, from structure fires and crashes to elevator rescues and lift assists for Wallingford Rescue. Firefighters meet the goal of 24 training hours a month, the same as a full-time department.", source: "r2020" },
+        { year: 2025, text: "Nearly 100 calls. The department keeps up its Lights on for Safety campaign, asking residents to turn on lights, if safe, while firefighters are on the way.", source: "b2025" },
+      ],
+    },
+    residents: [
+      { label: "Join", href: `${WAL}/boards-minutes/fire-district-1/`, text: "No experience needed; full training. Junior programme for ages 13 to 17. Stop by the station any Tuesday evening." },
+      { label: "Lights on for Safety", href: `${WAL}/boards-minutes/fire-district-1/`, text: "In an emergency, and only if safe, turn on as many lights as you can so crews find you." },
+      { label: "House numbers", href: `${WAL}/boards-minutes/fire-district-1/`, text: "Make sure your number is visible from the road." },
+    ],
+    sources: {
+      fd1: { label: "Town of Wallingford, Fire District No. 1", href: `${WAL}/boards-minutes/fire-district-1/` },
+      r2020: { label: "Town of Wallingford, 2020 Town Report", href: `${WAL}/wp-content/uploads/2021/02/Town-Report-Rev.pdf`, note: "Fire Chief's Report, PDF page 25" },
+      b2025: { label: "Wallingford Fire District No. 1, 2025 annual meeting booklet", href: `${WAL}/wp-content/uploads/2026/03/2025-Annual-Meeting-Booklet.pdf`, note: "Fire Chief's Report, PDF page 10; warning, PDF page 4; 2025 meeting minutes, PDF page 16. A scanned booklet, read with text recognition" },
+      neris: { label: "NERIS, Wallingford Fire District #2", href: "https://neris.fsri.org/departments/FD50021837" },
+    },
+  },
+  killington: {
+    description:
+      "Killington Fire and Rescue Services: founded in 1955 as the Sherburne Volunteer Fire Department, a town " +
+      "department since 2022, working from the Public Safety Building on Killington Road.",
+    facts: [
+      ["Founded", "1955, as the Sherburne Volunteer Fire Department"],
+      ["Town department since", "2022, with the first full-time staff from January 2023"],
+      ["Station", "Public Safety Building, 800 Killington Road, opened 2020"],
+    ],
+    contact: { phone: "802-855-5775", website: "https://www.killingtonfirerescue.com/", source: "assoc" },
+    history: {
+      intro:
+        "Killington's department, volunteer and career, answers fire, rescue and emergency medical calls. The Killington " +
+        "Firefighters Association, formed in 2024, supports it with training, help for fire victims and free CPR classes.",
+      events: [
+        { year: 1955, text: "The Sherburne Volunteer Fire Department is formed.", source: "history" },
+        { year: 2020, text: "The department moves into the new Public Safety Building, shared with the police: 14,000 square feet, five apparatus bays, a hose tower and a community room.", source: "history" },
+        { year: 2022, text: "In March voters make fire and rescue a town department, replacing the private volunteer company.", source: "mt2022" },
+        { year: 2023, text: "The first full-time paid staff start in January, under the name Killington Fire and Rescue Services.", source: "history" },
+        { year: 2026, text: "The town advertises for a full-time fire chief in September.", source: "notice" },
+      ],
+    },
+    residents: [
+      { label: "Knox-Box", href: "https://www.killingtonfirerescue.com/knox-box-program", text: "The town requires a Knox-Box for homes and businesses, so firefighters can get in without forcing doors." },
+      { label: "Burn permits", href: "https://www.killingtonfirerescue.com/", text: "Needed for brush and leaf piles; not for a small campfire. From the town fire warden." },
+      { label: "Join", href: "https://www.killingtonfirerescue.com/join-us", text: "Stop in on the first or third Tuesday of the month at 6 pm." },
+    ],
+    sources: {
+      assoc: { label: "Killington Firefighters Association", href: "https://www.killingtonfirerescue.com/" },
+      history: { label: "Killington Fire and Rescue, About us", href: "https://www.killingtonfirerescue.com/blank-1" },
+      mt2022: { label: "Mountain Times, June 2022", href: "https://mountaintimes.info/?p=38457" },
+      notice: { label: "Rutland Herald, legal notice: Seeking Full Time Fire Chief", href: "https://www.rutlandherald.com/legals/seeking-full-time-fire-chief/article_152f6666-48f7-5b01-9a77-84a4867dc5ae.html", note: "5 September 2026" },
     },
   },
   jericho: UJFD,
