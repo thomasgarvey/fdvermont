@@ -122,12 +122,21 @@ const MARK_NEEDS = "#5C6469";
     <title>Vermont Fire Departments</title>
     <meta
       name="description"
-      content="Every fire department in Vermont, town by town: its stations, apparatus and photographs — a record of the state's plainest, most useful architecture."
+      content="Every fire department in Vermont, town by town: its history, calls, stations, apparatus and photographs."
     />
     <Seo
       title="Vermont Fire Departments"
-      description="Every fire department in Vermont, town by town: its stations, apparatus and photographs — a record of the state's plainest, most useful architecture."
+      description="Every fire department in Vermont, town by town: its history, calls, stations, apparatus and photographs."
     />
+    <!-- The site's name for search results. Google takes it from WebSite
+         structured data first, then the title; both say Vermont Fire Departments. -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      name: "Vermont Fire Departments",
+      alternateName: ["fdvermont.org", "FD Vermont"],
+      url: "https://www.fdvermont.org/",
+    })} />
     <script is:inline>
       try {
         if (localStorage.getItem("fdvt-theme") === "dark") {
