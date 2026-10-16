@@ -217,6 +217,12 @@ const FH = "https://fairhavenvt.gov";
 const PRO = "https://proctorvermont.com";
 const WAL = "https://www.wallingfordvt.com";
 
+const WRT = "https://www.westrutlandvt.org";
+const CLA = "https://www.clarendonvt.gov";
+const MHO = "https://www.mounthollyvt.org";
+const SHR = "https://www.shrewsburyvt.org";
+const MSP = "https://middletownsprings.vt.gov";
+
 // One department, two town pages: Underhill and Jericho share the profile.
 const UJFD: Profile = {
   description:
@@ -4164,6 +4170,347 @@ export const profiles: Record<string, Profile> = {
       history: { label: "Killington Fire and Rescue, About us", href: "https://www.killingtonfirerescue.com/blank-1" },
       mt2022: { label: "Mountain Times, June 2022", href: "https://mountaintimes.info/?p=38457" },
       notice: { label: "Rutland Herald, legal notice: Seeking Full Time Fire Chief", href: "https://www.rutlandherald.com/legals/seeking-full-time-fire-chief/article_152f6666-48f7-5b01-9a77-84a4867dc5ae.html", note: "5 September 2026" },
+    },
+  },
+  "west-rutland": {
+    description:
+      "West Rutland Fire Department: protecting the town without a break since 1891, with calls for 2021–2025, a new " +
+      "Pierce rescue pumper, free smoke detectors, and a river dry hydrant in Whipple Hollow.",
+    facts: [
+      ["Founded", "1891"],
+      ["Staffing", "About 20 volunteer firefighters"],
+      ["Chief", "Michael Skaza, since 2020"],
+      ["Non-emergency", "802-438-2433"],
+    ],
+    contact: { chief: "Michael Skaza", phone: "802-438-2433", website: `${WRT}/fire-department/`, source: "dept" },
+    history: {
+      intro:
+        "West Rutland's department has given the town fire protection continuously since 1891; 2026 is its 135th year. " +
+        "Each October it brings West Rutland School's youngest classes to the station for Fire Prevention Week.",
+      events: [
+        { year: 1891, text: "The West Rutland Fire Department is established.", source: "dept" },
+        { year: 2019, text: "Joseph Skaza retires as chief at the end of the year after 28 years, staying on as a member after 47 years of service. Michael Skaza becomes chief for 2020.", source: "r2020" },
+        { year: 2021, calls: 85, text: "Firefighters hand out or install 172 smoke and 55 carbon monoxide detectors in 32 homes, from a state programme. A dry hydrant goes into the river at the end of Pleasant Street, in Whipple Hollow, with a conservation districts grant.", source: "r2021" },
+        { year: 2022, calls: 72, text: "A new rescue pumper is ordered to replace Engine 3, a mini-pumper.", source: "r2022" },
+        { year: 2023, calls: 87, text: "New battery-powered extrication tools are ordered to replace a set about 25 years old, and the radios are upgraded, all from capital savings.", source: "r2023" },
+        { year: 2024, calls: 81, text: "A 2025 Freightliner-Pierce rescue pumper arrives, replacing the 2006 Ford mini-pumper, with a new radio repeater at the station.", source: "r2024" },
+        { year: 2025, calls: 88, text: "Members pay for a monument and an engraved board at the station listing every known member, past and present. Three new members join.", source: "r2025" },
+      ],
+    },
+    calls: {
+      intro: "Calls have held between 72 and 88 a year.",
+      byYear: {
+        title: "Emergency calls, by year",
+        bars: [
+          { label: "2021", value: 85 },
+          { label: "2022", value: 72 },
+          { label: "2023", value: 87 },
+          { label: "2024", value: 81 },
+          { label: "2025", value: 88 },
+        ],
+        note: "Each figure is from the fire chief's report in the following year's town report, which describes the past year.",
+        source: "r2025",
+      },
+    },
+    careers: {
+      intro: "No experience needed: the department provides all the training and equipment.",
+      points: [
+        "18 or over",
+        "A West Rutland resident and citizen in good standing",
+        "A valid Vermont driver's licence",
+        "Able to do the physical work of a firefighter",
+        "Contact the fire chief",
+      ],
+      applyUrl: `${WRT}/fire-department/`,
+      source: "dept",
+    },
+    residents: [
+      { label: "Burn permits", href: `${WRT}/fire-department/`, text: "Required for outdoor burning; from the town's forest fire warden. See the town's 2019 fire ordinance." },
+      { label: "Key boxes", href: `${WRT}/fire-department/`, text: "Required with a new or upgraded fire alarm or sprinkler system, except in single-family homes." },
+    ],
+    sources: {
+      dept: { label: "Town of West Rutland, Fire Department", href: `${WRT}/fire-department/` },
+      r2020: { label: "West Rutland Fire Department, 2019–2020 annual report of the fire chief", href: `${WRT}/wp-content/uploads/2020/05/fire-chief-report.pdf`, note: "A scanned page, read with text recognition" },
+      r2021: { label: "Town of West Rutland, town report (fire chief's report 2021–2022)", href: `${WRT}/wp-content/uploads/2022/08/TownofWestRutland-2021-VermontM.pdf`, note: "PDF page 39, read with text recognition" },
+      r2022: { label: "Town of West Rutland, town report published 2023", href: `${WRT}/wp-content/uploads/2023/02/TownofWestRutland-2022-VermontM.pdf`, note: "Fire chief's report, PDF page 39" },
+      r2023: { label: "Town of West Rutland, town report published 2024", href: `${WRT}/wp-content/uploads/2024/02/TownofWestRutland-2023-VermontM.pdf`, note: "Fire chief's report, PDF page 41" },
+      r2024: { label: "Town of West Rutland, town report published 2025", href: `${WRT}/wp-content/uploads/2025/02/TownofWestRutland-2024-VermontM.pdf`, note: "Fire chief's report, PDF page 42" },
+      r2025: { label: "Town of West Rutland, town report published 2026", href: `${WRT}/wp-content/uploads/2026/02/TownofWestRutland-2025-VermontM.pdf`, note: "Fire chief's report 2025–2026, PDF page 40, read with text recognition" },
+    },
+  },
+  clarendon: {
+    description:
+      "Clarendon Fire Association: two stations and four trucks, a 2024 tanker-pumper dedicated to a 35-year member, " +
+      "94 calls, a new dry hydrant on Route 133, and the town's appropriation.",
+    facts: [
+      ["Stations", "Two, with four trucks"],
+      ["Chief", "Matthew Jakubowski"],
+      ["Town funding", "$82,000 for the association plus $50,000 toward its 2020 pumper; $90,000 proposed for FY2027"],
+    ],
+    contact: { chief: "Matthew Jakubowski", website: `${CLA}/fire-department/`, source: "dept" },
+    history: {
+      intro:
+        "Clarendon's volunteers answer calls in town and give mutual aid to Rutland Town, Ira, West Rutland and " +
+        "Wallingford. They also fill pools, water the Mill River football fields, and turn out for parades and school " +
+        "fire prevention days.",
+      events: [
+        { year: 2020, text: "A new E-One pumper arrives; a yearly $50,000 town article pays it off.", source: "r2025" },
+        { year: 2025, calls: 94, text: "Tanker 2, a 2024 BME tanker-pumper carrying 2,000 gallons that can pump while creeping along a roadside fire, is delivered in March and dedicated to Steve Hill, a member for over 35 years. A new dry hydrant at Casella Construction on Route 133, from the Vermont Rural Fire Protection Task Force, serves Clarendon, West Rutland and Ira.", source: "r2025" },
+      ],
+    },
+    residents: [
+      { label: "Burn permits", href: `${CLA}/fire-department/`, text: "From the town fire warden, listed on the town's fire department page." },
+      { label: "Pool fills", href: `${CLA}/fire-department/`, text: "One of the association's summer fundraisers." },
+    ],
+    sources: {
+      dept: { label: "Town of Clarendon, Fire Department", href: `${CLA}/fire-department/` },
+      r2025: { label: "Town of Clarendon, Annual Report, fiscal year ending June 30, 2025", href: `${CLA}/wp-content/uploads/2025/02/annual-report-fy2025.pdf`, note: "Fire Association report, PDF page 37; votes, PDF page 9; warning, PDF page 12; budget, PDF page 25. A scanned report, read with text recognition" },
+    },
+  },
+  danby: {
+    description:
+      "Danby-Mt. Tabor Volunteer Fire Department: one department for two towns, 65 calls in 2025 by type, a station " +
+      "addition built by its own members, and the 80/20 split of its capital request.",
+    subtitle: "Danby-Mt. Tabor Volunteer Fire Department",
+    facts: [
+      ["Serves", "Danby and Mount Tabor"],
+      ["Stations", "590 North Main Street, and the #2 station at the Four Corners"],
+      ["Chief", "Kenneth G. Abbott"],
+      ["Capital request", "$42,636 for 2025: 80% from Danby, 20% from Mount Tabor"],
+    ],
+    contact: { chief: "Kenneth G. Abbott", source: "r2025" },
+    history: {
+      intro:
+        "The department serves Danby and Mount Tabor together, and the two towns share its costs four to one. Its members " +
+        "put about 5,000 hours a year into calls, drills, administration and building their own station addition.",
+      events: [
+        { year: 2024, calls: 71, text: "Members build an addition to the station, paying as they go to stay out of debt; Danby marble countertops are donated by Vermont Quarries. The communications system moves to the #2 station at the Four Corners.", source: "r2024" },
+        { year: 2025, calls: 65, text: "The addition's heating and wiring are finished. The towns are asked for $42,636 in capital spending and $31,000 for a savings fund for equipment, communications and vehicle replacement.", source: "r2025" },
+      ],
+    },
+    calls: {
+      intro: "Rescues and assists, crashes and mutual aid made up over half of 2025's calls.",
+      byType: {
+        title: "Calls by type, 2025",
+        bars: [
+          { label: "Rescue and assist", value: 14 },
+          { label: "Vehicle", value: 12 },
+          { label: "Mutual aid", value: 12 },
+          { label: "Alarms", value: 8 },
+          { label: "Miscellaneous", value: 8 },
+          { label: "Structure fires", value: 6 },
+          { label: "Grass fires", value: 5 },
+        ],
+        note: "Calendar 2025; the types add up to the 65 calls reported.",
+        source: "r2025",
+      },
+    },
+    residents: [
+      { label: "Fundraisers", href: "https://www.danbyvt.org/annual-report", text: "The community calendar, the summer lawn party, the tractor pull and bingo all support the department." },
+    ],
+    sources: {
+      r2024: { label: "Town of Danby, Annual Report 2024", href: "https://www.danbyvt.org/_files/ugd/f9b078_d57aa6c2455f41d6b12873ca95238fb5.pdf", note: "Fire department letter, PDF page 28. A scanned report, read with text recognition" },
+      r2025: { label: "Town of Danby, Annual Report 2025", href: "https://www.danbyvt.org/_files/ugd/f9b078_998234b13f6048af95a8694db8088898.pdf", note: "Fire department letter and request, PDF pages 29–30; property article, PDF page 14. A scanned report, read with text recognition" },
+    },
+  },
+  "mount-holly": {
+    description:
+      "Mount Holly Volunteer Fire Department: two stations, on School Street and in Belmont village, with first " +
+      "response for medical calls since June 2024.",
+    facts: [
+      ["Stations", "School Street, and the Belmont station on Church Street"],
+      ["Chief", "Bill Austin"],
+      ["First response", "Licensed for non-transporting first response since 1 June 2024"],
+    ],
+    contact: { chief: "Bill Austin", phone: "(802) 259-2700", website: `${MHO}/emergency-services/fire-rescue/`, source: "dept" },
+    history: {
+      intro:
+        "Mount Holly's volunteers work from the main station on School Street and a substation in Belmont village.",
+      events: [
+        { year: 2024, text: "Licensed for first response, the department starts answering medical calls on 1 June, and asks the selectboard to let it sell the former rescue squad's ambulance to buy a pickup.", source: "may2024" },
+      ],
+    },
+    residents: [
+      { label: "Meetings", href: `${MHO}/wp-content/uploads/2026/02/1-January-2026.pdf`, text: "The business meeting is on the first of the month at 7 pm at the Belmont station; drills and work nights follow on Thursdays." },
+      { label: "Burn permits", href: `${MHO}/emergency-services/fire-rescue/`, text: "From the town fire warden, listed on the town's fire and rescue page." },
+    ],
+    sources: {
+      dept: { label: "Town of Mount Holly, Fire and Rescue", href: `${MHO}/emergency-services/fire-rescue/` },
+      may2024: { label: "Mount Holly Select Board minutes, 14 May 2024", href: `${MHO}/wp-content/uploads/2024/05/05-May-14-2024-Minutes.pdf`, note: "Fire Department update" },
+      plan: { label: "Mount Holly Town Plan, 2018", href: `${MHO}/wp-content/uploads/2020/07/TOWN-PLAN-2018-new-draftSB.pdf`, note: "Emergency services" },
+      news: { label: "Mount Holly town newsletter, January 2026", href: `${MHO}/wp-content/uploads/2026/02/1-January-2026.pdf`, note: "Calendar" },
+    },
+  },
+
+  shrewsbury: {
+    description:
+      "Shrewsbury Volunteer Fire Department: founded 1952, working from the Cuttingsville station, with calls for " +
+      "2023–2025, a new Rescue 1 mini pumper paid for from a reserve saved since 2013, and its finances.",
+    facts: [
+      ["Founded", "1952"],
+      ["Station", "Cuttingsville"],
+      ["Chief", "Phil Severy"],
+      ["Town appropriation", "$35,000 a year"],
+      ["Meets", "Most Thursday evenings, to train and maintain the trucks"],
+    ],
+    contact: { chief: "Phil Severy", website: `${SHR}/fire-department/`, source: "r2025" },
+    history: {
+      intro:
+        "Shrewsbury's all-volunteer department answers crashes, alarms, chimney and brush fires, trail rescues and " +
+        "mutual aid calls. Membership is stable but ageing, and the Cuttingsville station, built about seventy years " +
+        "ago, is too small for most modern trucks.",
+      events: [
+        { year: 1952, text: "The Shrewsbury Volunteer Fire Department is founded.", source: "r2023" },
+        { year: 2023, calls: 24, text: "20 calls in town and 4 on mutual aid. During July's flooding the Cuttingsville station opens as a temporary shelter and members check on homes. New defibrillators and thermal imaging cameras arrive.", source: "r2023" },
+        { year: 2024, calls: 45, text: "Crashes lead with 16. A night search for a missing hunter off Gaynor Road ends well, and extrication tools practised one evening free a trapped operator the next day. Members begin looking at options for the station with NBF Architects.", source: "r2024" },
+        { year: 2025, calls: 46, text: "Three structure fires, eleven alarm responses and nine crashes. In October Rescue 1 arrives: a 4x4 Ford F-550 mini pumper built by Fouts Fire, small enough for the station, bought for $415,309 from the town's equipment reserve.", source: "r2025" },
+      ],
+    },
+    calls: {
+      intro: "Calls nearly doubled from 2023 to 2024 and held there in 2025.",
+      byYear: {
+        title: "Emergency calls, by year",
+        bars: [
+          { label: "2023", value: 24 },
+          { label: "2024", value: 45 },
+          { label: "2025", value: 46 },
+        ],
+        note: "Calendar years, from the department's report in each town report.",
+        source: "r2025",
+      },
+      byType: {
+        title: "Calls by type, 2025",
+        bars: [
+          { label: "Alarm responses", value: 11 },
+          { label: "Vehicle crashes", value: 9 },
+          { label: "Downed trees and lines", value: 5 },
+          { label: "Structure fires", value: 3 },
+          { label: "Chimney fires", value: 3 },
+          { label: "Vehicle fires", value: 3 },
+          { label: "Brush fires", value: 3 },
+          { label: "Smoke investigations", value: 3 },
+          { label: "Other fires", value: 2 },
+          { label: "Injured hikers", value: 2 },
+          { label: "Medical assists", value: 2 },
+        ],
+        note: "Calendar 2025; the types add up to the 46 calls reported.",
+        source: "r2025",
+      },
+    },
+    money: {
+      intro:
+        "The town gives $35,000 a year; donations, break-open tickets and endowments do the rest. Spending jumped in 2025 " +
+        "with new equipment, part of it drawn from the department's replacement fund.",
+      year: "calendar 2025, actual",
+      lines: [
+        { label: "New equipment", amount: 54763 },
+        { label: "Communications", amount: 7945 },
+        { label: "Fundraising", amount: 4497 },
+        { label: "Stations", amount: 3282 },
+        { label: "Maintenance", amount: 3117 },
+        { label: "Operating", amount: 3114 },
+      ],
+      linesNote: "The six largest lines in the department's 2025 operating statement; total spending was $84,356.",
+      capital: {
+        title: "Operating spending, by year",
+        lines: [
+          { label: "2025", amount: 84356 },
+          { label: "2024", amount: 50691 },
+        ],
+        note: "Rescue 1 ($415,309) was paid from the town's separate equipment reserve, not from these accounts.",
+      },
+      source: "r2025b",
+    },
+    residents: [
+      { label: "Burn permits", href: `${SHR}/fire-department/`, text: "Call one of the town's fire wardens, listed on the town's fire department page." },
+      { label: "Join", href: `${SHR}/fire-department/`, text: "The department welcomes new members; volunteers meet most Thursday evenings." },
+    ],
+    sources: {
+      r2023: { label: "Town of Shrewsbury, 2023 Annual Report", href: `${SHR}/wp-content/uploads/2024/02/2023-Annual-Report-FINAL.pdf`, note: "Fire department report, PDF page 42; dedication, PDF page 2" },
+      r2024: { label: "Town of Shrewsbury, 2024 Annual Report", href: `${SHR}/wp-content/uploads/2025/02/2024-ANNUAL-REPORT-FINAL.pdf`, note: "Fire department report, PDF page 43" },
+      r2025: { label: "Town of Shrewsbury, 2025 Annual Report", href: `${SHR}/wp-content/uploads/2026/02/2025-Shrewsbury-Annual-Report.pdf`, note: "Fire department report, PDF page 44" },
+      r2025b: { label: "Town of Shrewsbury, 2025 Annual Report: department finances", href: `${SHR}/wp-content/uploads/2026/02/2025-Shrewsbury-Annual-Report.pdf`, note: "Operating statement, PDF page 45; town equipment reserve, PDF page 17" },
+    },
+  },
+  "middletown-springs": {
+    description:
+      "Middletown Springs Volunteer Fire Department: five apparatus from 1973 to 1995, a certified ice-water rescue " +
+      "team, federal grants for air packs and hose, and the town's appropriation.",
+    facts: [
+      ["Staffing", "100% volunteer"],
+      ["Station", "8 Firehouse Lane: a 1950 two-bay block building with a 1984 addition"],
+      ["Apparatus", "Ladder truck, engine/rescue, attack truck, engine/tanker and heavy rescue"],
+      ["Chief", "Joe Castle"],
+      ["Town appropriation", "$86,000 for FY2026 and FY2027, the first rise since 2019"],
+    ],
+    contact: { chief: "Joe Castle", phone: "802-235-2300", website: `${MSP}/fire-department-fire-warden`, source: "r2026" },
+    history: {
+      intro:
+        "The department answers crashes, structure and chimney fires, alarms, EMS assists, brush fires and hazardous " +
+        "materials calls, and gives mutual aid to Poultney, Ira and Wallingford. A nonprofit board of trustees oversees " +
+        "its finances and fundraising.",
+      events: [
+        { year: 1950, text: "The first firehouse, a two-bay concrete block building, goes up.", source: "study" },
+        { year: 1984, text: "A large addition joins the firehouse.", source: "study" },
+        { year: 2021, text: "A feasibility study for rebuilding the firehouse puts the total cost at about $2.1 million. A 2018 plan for a new building on the same site had preceded it.", source: "study" },
+        { year: 2024, text: "Assistant Chief Deryk Knipes qualifies as an ice-water rescue technician and instructor; with six more certified technicians, the department becomes a certified ice-water rescue team. A federal grant of $59,357 pays for new hose for every truck.", source: "r2024" },
+        { year: 2025, text: "The new hose goes into service. The fleet, 1973 to 1995 and fully paid off, would cost about $5.5 million to replace.", source: "r2026" },
+      ],
+    },
+    stationNotes: {
+      "middletown-springs-8-firehouse-ln": { text: "The firehouse: the 1950 block building and its 1984 addition. The 2021 rebuilding study noted that the ladder truck is kept off site.", source: "study" },
+    },
+    residents: [
+      { label: "Burn permits", href: `${MSP}/fire-department-fire-warden`, text: "Free verbal permits from the forest fire warden: brush and branches only, attended, and out before dark." },
+      { label: "Join", href: `${MSP}/fire-department-fire-warden`, text: "Training is on Tuesday evenings at the firehouse; community members are welcome to stop in." },
+    ],
+    sources: {
+      r2026: { label: "Town of Middletown Springs, 2026 Town Report (covering 2025)", href: "https://storage.googleapis.com/juniper-media-library/359/2026/02/2026%20Town%20Report%20Full%202.2.26.pdf", note: "Fire department report, PDF pages 45–46; appropriations, PDF page 36" },
+      r2024: { label: "Town of Middletown Springs, FY2024 Town Report", href: "https://storage.googleapis.com/juniper-media-library/359/2025/07/FY%202024%20Town%20Report.pdf", note: "Fire department report, PDF page 47" },
+      study: { label: "Middletown Springs Firehouse Reconstruction study, Centerline Architects", href: "https://storage.googleapis.com/juniper-media-library/359/2025/08/Middletown-Springs_Firehouse-Reconstruction_Final_01202021.pdf", note: "January 2021; pages 4–6" },
+    },
+  },
+  chittenden: {
+    description:
+      "Chittenden Volunteer Fire Department: formed in 1957 by 52 residents after a barn fire, with a $50 surplus " +
+      "1941 American LaFrance, First Response since 1980, and today's trucks.",
+    facts: [
+      ["Founded", "1957, with 52 original members"],
+      ["Station", "266 Chittenden Road, on the original site"],
+      ["Chief", "Gary Rowe, a member since 1982 and chief since 2017"],
+      ["Also runs", "Chittenden First Response, for medical calls, since 1980"],
+    ],
+    contact: { chief: "Gary Rowe", phone: "(802) 483-6200 (Tuesdays at 7 pm)", website: "https://sites.google.com/view/cvfdvt", source: "chief" },
+    history: {
+      intro:
+        "Chittenden's volunteers built their own firehouse on land, money, materials and labour given by the town's " +
+        "residents, and it still stands on the same piece of land.",
+      events: [
+        { year: 1956, text: "A barn is lost to fire, and townspeople vote to create a volunteer fire department and buy an engine.", source: "history" },
+        { year: 1957, text: "The department forms with 52 members and buys a military-surplus 1941 American LaFrance from the Ethan Allen Air Force Base for $50.", source: "history" },
+        { year: 1980, text: "Chittenden First Response is founded to provide medical coverage; a response vehicle follows in 1983.", source: "history" },
+        { year: 1993, text: "An addition gives the firehouse a second-floor meeting room and three more apparatus bays.", source: "history" },
+        { year: 2024, text: "Capt. Charley Parker, a member for over 40 years, collapses at the firehouse after returning from a barn fire on 8 July and dies. The department unveils a marble memorial to him in July 2025.", source: "memorial" },
+        { year: 2025, text: "A Freightliner pumper-tanker with 1,500 gallons and a 1,250 gpm pump joins the fleet.", source: "trucks" },
+      ],
+    },
+    stationNotes: {
+      "chittenden-266-chittenden-rd": {
+        text:
+          "The firehouse: Brush 44 (2006 Ford F-450), Engine 1 (2006 Ford F-550, ex-West Rutland, 500 gpm, 300 gallons), " +
+          "Engine 2 (2025 Freightliner pumper-tanker, 1,250 gpm, 1,500 gallons) and Engine 4 (2019 Kenworth, 1,250 gpm, " +
+          "1,000 gallons), plus a 6x6 utility vehicle.",
+        source: "trucks",
+      },
+    },
+    residents: [
+      { label: "Call the firehouse", href: "https://sites.google.com/view/cvfdvt/contact", text: "(802) 483-6200, answered Tuesdays at 7 pm. Dial 911 for emergencies." },
+    ],
+    sources: {
+      history: { label: "Chittenden Volunteer Fire Department, History", href: "https://sites.google.com/view/cvfdvt/history" },
+      chief: { label: "Chittenden Volunteer Fire Department, Meet the Chief", href: "https://sites.google.com/view/cvfdvt/chief" },
+      trucks: { label: "Chittenden Volunteer Fire Department, Trucks", href: "https://sites.google.com/view/cvfdvt/trucks" },
+      memorial: { label: "WCAX, 13 July 2025", href: "https://www.wcax.com/2025/07/13/fallen-chittenden-fire-captain-honored-with-memorial/", note: "With Firehouse.com, 9 July 2024" },
     },
   },
   jericho: UJFD,
