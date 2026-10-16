@@ -223,6 +223,10 @@ const MHO = "https://www.mounthollyvt.org";
 const SHR = "https://www.shrewsburyvt.org";
 const MSP = "https://middletownsprings.vt.gov";
 
+const HFD = "https://www.hartford-vt.org";
+const WIN2 = "https://www.windsorvt.org";
+const NOR = "https://norwich.vt.us";
+
 // One department, two town pages: Underhill and Jericho share the profile.
 const UJFD: Profile = {
   description:
@@ -4511,6 +4515,305 @@ export const profiles: Record<string, Profile> = {
       chief: { label: "Chittenden Volunteer Fire Department, Meet the Chief", href: "https://sites.google.com/view/cvfdvt/chief" },
       trucks: { label: "Chittenden Volunteer Fire Department, Trucks", href: "https://sites.google.com/view/cvfdvt/trucks" },
       memorial: { label: "WCAX, 13 July 2025", href: "https://www.wcax.com/2025/07/13/fallen-chittenden-fire-captain-honored-with-memorial/", note: "With Firehouse.com, 9 July 2024" },
+    },
+  },
+  hartford: {
+    description:
+      "Hartford Fire Department: a career department of 38 for White River Junction, Quechee and Wilder, the first in " +
+      "New England to be accredited, with nearly 3,000 calls a year, a rebuilt Quechee station and its budget.",
+    subtitle: "Hartford Fire Department",
+    facts: [
+      ["Staffing", "38 full-time, plus about 3 call firefighters; fire and advanced life support"],
+      ["Accreditation", "The first department in New England accredited by the Commission on Fire Accreditation International; held since 2004"],
+      ["Stations", "Station 1, 812 VA Cutoff Road, White River Junction; Station 2, 131 Willard Road, Quechee"],
+      ["Area", "38 square miles, five villages, about 10,000 people"],
+      ["Chief", "Scott D. Cooney"],
+    ],
+    contact: { chief: "Scott D. Cooney", phone: "802-295-3232", website: `${HFD}/2440/Fire-Department`, source: "dept" },
+    history: {
+      intro:
+        "Hartford's department provides fire protection and paramedic-level ambulance service, and is an all-hazards " +
+        "team: confined space, heights, structural collapse, swift water and trench rescue, plus a mobile support unit " +
+        "for Vermont Emergency Management.",
+      events: [
+        { year: 1982, text: "The Quechee station, Station 2, opens and is dedicated.", source: "st2" },
+        { year: 2004, text: "Hartford becomes the first fire department in New England to be accredited by the Commission on Fire Accreditation International.", source: "about" },
+        { year: 2024, calls: 2694, text: "47 fires, 1,879 EMS and rescue calls, and 768 service calls and alarms. The swift water team rescues more than 24 people and pets in Barre, Groton and Lyndonville during the storms.", source: "r2024" },
+        { year: 2024, text: "On Town Meeting Day voters approve a $1.3 million bond to expand Station 2.", source: "st2" },
+        { year: 2025, calls: 2967, text: "The expanded Station 2 reopens on 30 July, staffed around the clock by two firefighters with an engine and an ambulance. A community nurse programme, begun in December 2024, is running; three firefighters are hired, a new ambulance arrives, and 1,012 building inspections are carried out.", source: "r2025" },
+      ],
+    },
+    calls: {
+      intro: "Seven in ten calls are medical or rescue; fires are under 2%.",
+      byType: {
+        title: "Calls by type, FY2024",
+        bars: [
+          { label: "EMS and rescue", value: 1879 },
+          { label: "Service calls and alarms", value: 768 },
+          { label: "Fires", value: 47 },
+        ],
+        note: "2,694 calls in the year reported in 2024. The 2025 report gives 2,967, \"an increase of 419\", which would put the year before at 2,548; the reports do not explain the difference.",
+        source: "r2024",
+      },
+    },
+    money: {
+      intro:
+        "Hartford's department is mostly payroll: firefighters' salaries, overtime and benefits. Ambulance billing " +
+        "brings back about $800,000 a year.",
+      year: "fiscal year 2026, budget",
+      lines: [
+        { label: "Firefighter salaries", amount: 1097984 },
+        { label: "Health insurance", amount: 582398 },
+        { label: "Overtime", amount: 410000 },
+        { label: "Retirement", amount: 289101 },
+        { label: "Workers' compensation", amount: 267755 },
+        { label: "Fire chief's salary", amount: 137738 },
+      ],
+      linesNote: "Six of the fire department's lines in the town's general fund; captains' and lieutenants' pay are budgeted separately.",
+      capital: {
+        title: "Ambulance billing revenue",
+        lines: [
+          { label: "FY2027, recommended", amount: 825000 },
+          { label: "FY2026, budget", amount: 700000 },
+          { label: "FY2025, actual", amount: 854834 },
+          { label: "FY2024, actual", amount: 821069 },
+        ],
+        note: "Money the town collects for ambulance transports.",
+      },
+      source: "r2025b",
+    },
+    stationNotes: {
+      "hartford-131-willard-rd": { text: "Station 2, Quechee: the 1982 garage plus a 3,102-square-foot expansion with quarters for four, reopened in July 2025.", source: "st2" },
+    },
+    residents: [
+      { label: "Non-emergency", href: `${HFD}/2440/Fire-Department`, text: "802-295-3232, or Station 2 in Quechee at 802-295-9679. Dial 911 for emergencies." },
+    ],
+    sources: {
+      dept: { label: "Town of Hartford, Fire Department", href: `${HFD}/2440/Fire-Department` },
+      about: { label: "Town of Hartford, About the Fire Department", href: `${HFD}/3774/About-the-Department` },
+      st2: { label: "Town of Hartford, Fire Station 2", href: `${HFD}/3860/Fire-Station-2` },
+      r2024: { label: "Town of Hartford, 2024 Annual Report", href: `${HFD}/DocumentCenter/View/12050/2024-Town-and-School-District-Annual-Report-compressed`, note: "Fire Department report, PDF pages 90–92" },
+      r2025: { label: "Town of Hartford, 2025 Annual Report", href: `${HFD}/DocumentCenter/View/13209/2025-Hartford-Town-and-School-District-Annual-Report`, note: "Fire Department report, PDF pages 148–149" },
+      r2025b: { label: "Town of Hartford, 2025 Annual Report: FY2027 budget", href: `${HFD}/DocumentCenter/View/13209/2025-Hartford-Town-and-School-District-Annual-Report`, note: "Fire department lines, PDF pages 47–49; ambulance revenue, PDF page 21" },
+    },
+  },
+  windsor: {
+    description:
+      "Windsor Fire Department: fire and paramedic ambulance from 29 Union Street, four ambulances covering six towns in " +
+      "Vermont and New Hampshire, calls by type, swiftwater and technical rescue teams, and its budget.",
+    facts: [
+      ["Services", "Fire and EMS, with an advanced life support ambulance service"],
+      ["Station", "29 Union Street"],
+      ["Ambulances", "Four, covering six contracted towns: four in Vermont, two in New Hampshire"],
+      ["Chief", "Kevin McAllister"],
+      ["Fire and ambulance budget", "$1,630,300 for FY2025; $1,622,830 proposed for FY2026"],
+    ],
+    contact: { chief: "Kevin McAllister", phone: "802-674-9043", website: `${WIN2}/1224/Fire-EMS`, source: "dept" },
+    history: {
+      intro:
+        "Windsor's department answers 911 calls in town and in its contracted towns, but most of its ambulance work is " +
+        "transfers between hospitals; ambulance revenue covers most of its budget. It also runs swiftwater and technical " +
+        "rescue teams.",
+      events: [
+        { year: 2023, text: "In the year to June the department's incident categories add up to 1,705, including two swiftwater rescues.", source: "r2023" },
+        { year: 2024, text: "In the year to June the incident categories add up to 1,714. The 1999 ladder truck is taken out of service for good and a search for a replacement begins; a federal grant buys a pumper-tanker to replace a 30-year-old engine and a 33-year-old tanker. Two van-style ambulances replace the old ones. The swiftwater team works the floods, and the technical rescue team stands by for ice rescues at the April eclipse in Pittsburg, New Hampshire.", source: "r2024" },
+      ],
+    },
+    calls: {
+      intro: "Ambulance calls make up most of the work: about seven in ten incidents in fiscal 2024.",
+      byType: {
+        title: "Incidents by type, FY2024",
+        bars: [
+          { label: "ALS emergency (level 1)", value: 400 },
+          { label: "BLS emergency", value: 395 },
+          { label: "BLS non-emergency", value: 384 },
+          { label: "Other", value: 129 },
+          { label: "Service calls", value: 109 },
+          { label: "Motor vehicle crashes", value: 68 },
+          { label: "Fire alarms", value: 58 },
+          { label: "False alarms", value: 58 },
+          { label: "Mutual aid to other towns", value: 38 },
+          { label: "ALS emergency (level 2)", value: 21 },
+          { label: "Hazardous materials", value: 19 },
+          { label: "Structure fires", value: 16 },
+          { label: "Vehicle fires", value: 10 },
+          { label: "Technical rescues", value: 4 },
+          { label: "Vegetation fires", value: 3 },
+          { label: "ALS non-emergency", value: 2 },
+        ],
+        note: "Year to June 2024. The report lists categories without a total; they add up to 1,714, and include calls in the contracted towns.",
+        source: "r2024",
+      },
+    },
+    residents: [
+      { label: "Burn permits", href: `${WIN2}/1224/Fire-EMS`, text: "Call the fire station; a permit is issued when the weather allows." },
+      { label: "Join", href: `${WIN2}/1224/Fire-EMS`, text: "The department is always looking for call personnel: stop in or call." },
+    ],
+    sources: {
+      dept: { label: "Town of Windsor, Fire / EMS", href: `${WIN2}/1224/Fire-EMS` },
+      r2023: { label: "Town of Windsor, FY2022–23 Annual Report", href: `${WIN2}/DocumentCenter/View/1954/FY22-23--Town-of-Windsor-Annual-Report`, note: "Fire Department report, PDF pages 27–29" },
+      r2024: { label: "Town of Windsor, FY2023–24 Annual Report", href: `${WIN2}/DocumentCenter/View/1956/FY23-24-Town-of-Windsor-Annual-Report`, note: "Fire Department report and incidents, PDF pages 30–32; fire and ambulance budget, PDF page 70" },
+    },
+  },
+  norwich: {
+    description:
+      "Norwich Fire Department: volunteers protecting Norwich since 1920, first-response medical care through the " +
+      "F.A.S.T. Squad since 2001, and the town's fire and EMS budget.",
+    facts: [
+      ["Founded", "1920"],
+      ["Staffing", "Volunteers from Norwich and nearby towns"],
+      ["EMS", "First-responder (non-transport) medical care through the F.A.S.T. Squad, a state-licensed EMS agency, since 2001"],
+      ["Chief", "Alex Northern"],
+    ],
+    contact: { chief: "Alex Northern", phone: "802-649-1133", website: `${NOR}/fire-department/`, source: "r2025" },
+    history: {
+      intro:
+        "Norwich's volunteers provide fire protection and first-response medical care; the town buys ambulance transport " +
+        "under contract. Each October the department takes fire safety programmes to the town's nursery school and " +
+        "childcare centre.",
+      events: [
+        { year: 1920, text: "The Norwich Fire Department begins protecting the town.", source: "dept" },
+        { year: 2001, text: "The department starts providing emergency medical services, through its F.A.S.T. Squad.", source: "r2025" },
+        { year: 2025, text: "Three members are promoted, one to captain and two to lieutenant, and six firefighters enrol in the Vermont Fire Academy's recruit school.", source: "r2025" },
+      ],
+    },
+    money: {
+      intro:
+        "The town's Fire/FAST budget covers the department and the ambulance contract; $639,195 is requested for " +
+        "fiscal 2027, up 5.1%.",
+      year: "fiscal year 2027, as requested",
+      lines: [
+        { label: "Ambulance contract", amount: 188783 },
+        { label: "Fire chief's wages", amount: 88138 },
+        { label: "Firefighters' wages", amount: 32000 },
+      ],
+      linesNote: "Three of the Fire/FAST lines in the town's budget.",
+      capital: {
+        title: "Fire/FAST budget, by year",
+        lines: [
+          { label: "FY2027, requested", amount: 639195 },
+          { label: "FY2026, budget", amount: 608294 },
+          { label: "FY2025, budget", amount: 588765 },
+          { label: "FY2025, actual", amount: 533386 },
+        ],
+        note: "The Norwich Fire District is a separate body that runs the village water system; its budget is not included.",
+      },
+      source: "r2025b",
+    },
+    residents: [
+      { label: "Burn permits", href: "https://norwichfire.com/burnpermit", text: "Required for any outdoor fire without enough snow cover; campfire rings and enclosed stoves are exempt. Request by text, phone or online from the fire warden." },
+      { label: "Statistics", href: `${NOR}/fire-department/`, text: "The department's call statistics and roster are available on request." },
+    ],
+    sources: {
+      dept: { label: "Town of Norwich, Fire Department", href: `${NOR}/fire-department/` },
+      r2025: { label: "Town of Norwich, Annual Report 2025", href: `${NOR}/wp-content/uploads/2026/02/Norwich-Annual-Report-2025.pdf`, note: "Fire & EMS Department and Fire Warden reports, PDF page 123" },
+      r2025b: { label: "Town of Norwich, Annual Report 2025: budget", href: `${NOR}/wp-content/uploads/2026/02/Norwich-Annual-Report-2025.pdf`, note: "Budget summary, PDF page 20; Fire/FAST detail" },
+    },
+  },
+
+  woodstock: {
+    description:
+      "Woodstock Fire/EMS: fire and ambulance for Woodstock since 1975, a crew on duty around the clock in a rebuilt " +
+      "emergency services building, 1,352 calls in fiscal 2024, and fire calls by type.",
+    facts: [
+      ["Services", "Fire and EMS; ice rescue, vehicle extrication and wildland search and rescue teams"],
+      ["Staffing", "10 full-time and 30 call members (FY2026 plan)"],
+      ["Station One", "454 Woodstock Road, shared with the police"],
+      ["Chief", "David Green"],
+      ["Fire budget", "$703,814 recommended for FY2026; the ambulance is budgeted separately"],
+    ],
+    contact: { chief: "David Green", phone: "(802) 457-2337", website: "https://fire-ems.townofwoodstock.org/fire-ems", source: "town" },
+    history: {
+      intro:
+        "Woodstock Fire/EMS is the town's fire department and its primary ambulance, with contracts to cover parts of " +
+        "Pomfret, Plymouth, Reading, Hartland and Bridgewater. It also runs inspection programmes for short-term rentals " +
+        "and rooftop solar.",
+      events: [
+        { year: 1975, text: "The ambulance service is established.", source: "town" },
+        { year: 2016, text: "Woodstock loses a grade on its ISO fire-protection rating, raising some insurance premiums by up to $500; the department sets out to win back two grades.", source: "r2023" },
+        { year: 2022, calls: 271, text: "Fire calls in the calendar year, plus 826 EMS calls and 84 building inspections. The remodelled and enlarged emergency services building nears completion: with two to four people on duty around the clock, a truck now leaves in under two minutes, where it once could take up to twenty.", source: "r2023" },
+        { year: 2024, calls: 308, text: "Fire calls in fiscal 2024, among 1,352 calls in all including 964 EMS events. The department buys a new ambulance and three cardiac monitors, certifies a full-time member as a paramedic, and trains 40 residents in CPR.", source: "r2024" },
+      ],
+    },
+    calls: {
+      intro: "Fire alarms and calls for other departments lead the fire calls; the ambulance answers three times as many again.",
+      byType: {
+        title: "Fire calls by type, 2022",
+        bars: [
+          { label: "Other department calls", value: 99 },
+          { label: "Fire alarms", value: 96 },
+          { label: "Motor vehicle crashes", value: 22 },
+          { label: "Power lines", value: 14 },
+          { label: "Brush or grass fires", value: 8 },
+          { label: "EMS assists", value: 8 },
+          { label: "Electrical fires", value: 5 },
+          { label: "Chimney fires", value: 4 },
+          { label: "Fuel spills, hazmat, propane", value: 4 },
+          { label: "CO alarm malfunctions", value: 4 },
+          { label: "Carbon monoxide incidents", value: 3 },
+          { label: "Building fires", value: 2 },
+          { label: "Vehicle fires", value: 2 },
+        ],
+        note: "Calendar 2022; the types add up to the 271 fire calls reported. EMS calls (826) are counted separately.",
+        source: "r2023",
+      },
+    },
+    stationNotes: {
+      "woodstock-454-woodstock-rd": { text: "Station One, the emergency services building, remodelled and enlarged in 2022 and shared with the police.", source: "r2023" },
+    },
+    residents: [
+      { label: "Burn permits", href: "https://townofwoodstock.org/wp-content/uploads/2023/02/2023-Town-Report.pdf", text: "Needed for any outdoor fire, all year, even with snow on the ground. Get the first at the fire station; after that a phone call will do. Natural brush and wood only." },
+      { label: "Short-term rentals", href: "https://townofwoodstock.org/wp-content/uploads/2023/02/2023-Town-Report.pdf", text: "Every short-term rental in the town and village needs an annual fire department permit and inspection." },
+      { label: "Smoke and CO alarms", href: "https://townofwoodstock.org/wp-content/uploads/2023/02/2023-Town-Report.pdf", text: "Free checks on request. CO alarms expire after 5 years, smoke alarms after 10." },
+      { label: "Join", href: "https://fire-ems.townofwoodstock.org/fire-ems", text: "Always looking for residents to become firefighters or EMTs, part-time or on call. Ask at the fire station." },
+    ],
+    sources: {
+      town: { label: "Town of Woodstock, Emergency Services", href: "https://townofwoodstock.org/departments/emergency-services/" },
+      dept: { label: "Woodstock Fire/EMS", href: "https://fire-ems.townofwoodstock.org/fire-ems" },
+      r2023: { label: "Town of Woodstock, 2023 Town Report", href: "https://townofwoodstock.org/wp-content/uploads/2023/02/2023-Town-Report.pdf", note: "Fire/EMS report and calls, PDF pages 46–47" },
+      r2024: { label: "Town of Woodstock, 2024 Town Report", href: "https://www.townofwoodstock.org/fileadmin/files/Fire-EMS/TownReport2024.pdf", note: "Fire/EMS, PDF page 26; budget summary, PDF page 14; fire budget, PDF page 43" },
+    },
+  },
+  chester: {
+    description:
+      "Chester Fire Department: a state-endorsed technical rescue team, a 2024 swiftwater deployment to Fayston and " +
+      "Moretown, calls for 2024–2025, a grant-funded pumper-tanker, and the ambulance joining in 2025.",
+    facts: [
+      ["Serves", "Chester and Andover"],
+      ["Station", "Yosemite Fire House, 716 Depot Street"],
+      ["Technical rescue", "One of 11 teams endorsed and supported by Vermont Urban Search and Rescue"],
+      ["Chief", "Scott Richardson, since 1 September 2024"],
+      ["EMS", "Chester Ambulance Service became part of the fire department in 2025"],
+    ],
+    contact: { chief: "Scott Richardson", website: "https://www.chestervt.gov/fire-department.html", source: "r2024" },
+    history: {
+      intro:
+        "Chester's firefighters train at least three times a month, and the department is equipped for swiftwater, ice, " +
+        "and low- and high-angle rope rescue. The Yosemite Engine Company, a nonprofit of current and past firefighters, " +
+        "raises money for training and equipment.",
+      events: [
+        { year: 2024, calls: 190, text: "Chief Wilson retires in January; acting chief Ben Whalen leaves in May to become Ludlow's first full-time chief, and Scott Richardson, a former Springfield deputy chief with 45 years in public safety, takes over in September. On 10 July the swiftwater team is sent north for the floods, making three rescues in Fayston, one of them a dog, and a rescue and two evacuations in Moretown over 24 hours.", source: "r2024" },
+        { year: 2025, calls: 209, text: "The fire department and the Chester Ambulance Service become one, with the ambulance chief as deputy chief for EMS; together they answer 1,074 calls. A 2023 International/E-One pumper-tanker carrying 3,000 gallons arrives in May, bought largely with a $475,000 federal grant the members wrote. Five members train in Oregon for Rope Technician certification.", source: "r2025" },
+      ],
+    },
+    calls: {
+      intro: "Calls rose about 10% in 2025. The department went to Andover 18 times that year.",
+      byYear: {
+        title: "Fire calls, by year",
+        bars: [
+          { label: "2024", value: 190 },
+          { label: "2025", value: 209 },
+        ],
+        note: "Calendar years, from the fire chief's report. Ambulance calls are counted separately.",
+        source: "r2025",
+      },
+    },
+    residents: [
+      { label: "Yosemite Engine Company", href: "https://www.chestervt.gov/fire-department.html", text: "The department's nonprofit support group runs fundraisers through the year for its equipment and training." },
+    ],
+    sources: {
+      r2024: { label: "Town of Chester, 2024 Annual Report", href: "https://www.chestervt.gov/uploads/1/1/9/4/119456679/chester_2024_vermontmunicipalreport.pdf", note: "Report of the Fire Chief, PDF pages 55–56; town property list (Yosemite Fire House, 716 Depot St), PDF page 11. A scanned report, read with text recognition" },
+      r2025: { label: "Town of Chester, 2025 Annual Report", href: "https://www.chestervt.gov/uploads/1/1/9/4/119456679/2025_town_report.pdf", note: "Report of the Fire Chief, PDF page 55. A scanned report, read with text recognition" },
     },
   },
   jericho: UJFD,
