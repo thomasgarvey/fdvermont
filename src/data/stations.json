@@ -602,6 +602,20 @@
     "department": null
   },
   {
+    "id": "rec4cefRCqOPYcdJV",
+    "esiteid": null,
+    "name": null,
+    "address": "273 VT Route 30 N",
+    "town": "Castleton",
+    "county": "Rutland",
+    "zip": "05735",
+    "lat": 43.61279,
+    "lng": -73.20798,
+    "mapped": "",
+    "updated": "",
+    "department": null
+  },
+  {
     "id": "recQ1odEa11inIuNe",
     "esiteid": 60429,
     "name": null,
@@ -1145,6 +1159,20 @@
     "lng": -73.05279,
     "mapped": "1998-01-01",
     "updated": "2025-09-05",
+    "department": null
+  },
+  {
+    "id": "recQ5dSXa6U7OzMFu",
+    "esiteid": null,
+    "name": null,
+    "address": "5 N Park Pl",
+    "town": "Fair Haven",
+    "county": "Rutland",
+    "zip": "05743",
+    "lat": 43.595298,
+    "lng": -73.266912,
+    "mapped": "",
+    "updated": "",
     "department": null
   },
   {
