@@ -714,6 +714,20 @@
     "department": null
   },
   {
+    "id": "recbe5FMpGqNsb2Ux",
+    "esiteid": null,
+    "name": null,
+    "address": "716 Depot St",
+    "town": "Chester",
+    "county": "Windsor",
+    "zip": "05143",
+    "lat": 43.270092,
+    "lng": -72.589167,
+    "mapped": "",
+    "updated": "",
+    "department": null
+  },
+  {
     "id": "recdXDSuRGaBOkOu5",
     "esiteid": 67928,
     "name": null,
@@ -1439,6 +1453,20 @@
     "lng": -72.421256,
     "mapped": "1998-01-01",
     "updated": "2023-01-27",
+    "department": null
+  },
+  {
+    "id": "recudJG7RZLYMEqQp",
+    "esiteid": null,
+    "name": null,
+    "address": "812 VA Cutoff Rd",
+    "town": "Hartford",
+    "county": "Windsor",
+    "zip": "05001",
+    "lat": 43.653132,
+    "lng": -72.345542,
+    "mapped": "",
+    "updated": "",
     "department": null
   },
   {
@@ -3819,6 +3847,20 @@
     "lng": -72.721982,
     "mapped": "1998-01-01",
     "updated": "2023-01-27",
+    "department": null
+  },
+  {
+    "id": "rec2jbd4eVqIkZ4Tq",
+    "esiteid": null,
+    "name": null,
+    "address": "29 Union St",
+    "town": "Windsor",
+    "county": "Windsor",
+    "zip": "05089",
+    "lat": 43.476624,
+    "lng": -72.392553,
+    "mapped": "",
+    "updated": "",
     "department": null
   },
   {
