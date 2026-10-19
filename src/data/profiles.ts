@@ -227,6 +227,11 @@ const HFD = "https://www.hartford-vt.org";
 const WIN2 = "https://www.windsorvt.org";
 const NOR = "https://norwich.vt.us";
 
+const ROY = "https://royaltonvt.gov";
+const WEA = "https://weathersfieldvt.org";
+const POM = "https://pomfretvt.us";
+const ROC = "https://rochestervermont.org";
+
 // One department, two town pages: Underhill and Jericho share the profile.
 const UJFD: Profile = {
   description:
@@ -4814,6 +4819,260 @@ export const profiles: Record<string, Profile> = {
     sources: {
       r2024: { label: "Town of Chester, 2024 Annual Report", href: "https://www.chestervt.gov/uploads/1/1/9/4/119456679/chester_2024_vermontmunicipalreport.pdf", note: "Report of the Fire Chief, PDF pages 55–56; town property list (Yosemite Fire House, 716 Depot St), PDF page 11. A scanned report, read with text recognition" },
       r2025: { label: "Town of Chester, 2025 Annual Report", href: "https://www.chestervt.gov/uploads/1/1/9/4/119456679/2025_town_report.pdf", note: "Report of the Fire Chief, PDF page 55. A scanned report, read with text recognition" },
+    },
+  },
+  royalton: {
+    description:
+      "South Royalton Fire Department: Royalton's volunteer department, run by Fire District #1, with 145 calls in 2022 " +
+      "by type, mutual aid, and the town's appropriation; the South Royalton Rescue Squad answers medical calls.",
+    facts: [
+      ["Run by", "Royalton Fire District #1, separate from the town; it also runs the water system"],
+      ["Staffing", "Volunteer"],
+      ["Station", "53 Safford Street, South Royalton"],
+      ["Meets", "2nd and 4th Thursdays, 7 pm, at the firehouse"],
+      ["Town appropriation", "$132,515 requested for 2023, up from $106,340"],
+    ],
+    contact: { website: `${ROY}/services/south_royalton_fire_department.php`, source: "dept" },
+    history: {
+      intro:
+        "The South Royalton Fire Department serves the whole town of Royalton and helps its neighbours through mutual aid. " +
+        "The South Royalton Rescue Squad, staffed around the clock since the 1960s, covers medical calls for Royalton, " +
+        "Sharon and Tunbridge.",
+      events: [
+        { year: 2022, calls: 145, text: "Crashes lead with 44 calls. Of 14 structure fires, 5 are in Royalton and 9 in other towns; the department gives mutual aid 12 times and receives it 9 times. Members put 863 hours into calls. Chief Paul Brock.", source: "r2022" },
+      ],
+    },
+    calls: {
+      intro: "Crashes, alarms and medical assists made up more than half of 2022's calls.",
+      byType: {
+        title: "Calls by type, 2022",
+        bars: [
+          { label: "Motor vehicle crashes", value: 44 },
+          { label: "Alarm activations", value: 28 },
+          { label: "Medical assists", value: 17 },
+          { label: "Power line or utility calls", value: 15 },
+          { label: "Structure fires", value: 14, sub: "5 in Royalton, 9 elsewhere" },
+          { label: "Mutual aid to other towns", value: 12 },
+          { label: "Service calls", value: 7 },
+          { label: "Chimney fires", value: 5 },
+          { label: "Illegal burns", value: 4 },
+          { label: "Wildland fires", value: 3 },
+          { label: "Car fires", value: 3 },
+          { label: "Miscellaneous", value: 2 },
+          { label: "Hazmat", value: 1 },
+          { label: "Water rescue", value: 1 },
+        ],
+        note: "Calendar 2022. The report states 145 calls; the types it lists add up to 156, or 144 without the mutual aid calls.",
+        source: "r2022",
+      },
+    },
+    residents: [
+      { label: "Join", href: `${ROY}/services/south_royalton_fire_department.php`, text: "New members are welcome: come to a meeting on the 2nd or 4th Thursday at 7 pm at the firehouse." },
+      { label: "Burn permits", href: `${ROY}/services/south_royalton_fire_department.php`, text: "From the town fire warden, listed on the town's fire department page." },
+    ],
+    sources: {
+      dept: { label: "Town of Royalton, South Royalton Fire Department", href: `${ROY}/services/south_royalton_fire_department.php` },
+      fd1: { label: "Town of Royalton, Fire District #1 Prudential Committee", href: `${ROY}/committees/fire_district_1_prudential_committee.php` },
+      r2022: { label: "Town of Royalton, 2023 Town Report (year 2022)", href: `${ROY}/Document_Center/2023%20Town%20Report.pdf`, note: "Fire Department and Rescue Squad reports, PDF pages 51–52; appropriations, PDF pages 8 and 23" },
+    },
+  },
+
+  weathersfield: {
+    description:
+      "Weathersfield Fire Department: Ascutney and West Weathersfield joined in August 2025 to form one municipal " +
+      "department with two stations on Route 131, with each department's calls, the fire budget and its history.",
+    subtitle: "Weathersfield Fire Department",
+    facts: [
+      ["Formed", "August 2025, from the Ascutney and West Weathersfield volunteer departments"],
+      ["Stations", "Station 1, 540 Route 131, Ascutney; Station 2, 7259 Route 131, Perkinsville"],
+      ["Chief", "Josh Compo, the town's first municipal fire chief"],
+      ["Fire budget", "$315,964 proposed for FY2026"],
+    ],
+    contact: { chief: "Josh Compo", phone: "(802) 674-6869", website: `${WEA}/246/Fire-Department`, source: "dept" },
+    history: {
+      intro:
+        "Until 2025 Weathersfield was protected by two nonprofit volunteer departments under contract to the town, " +
+        "Ascutney and West Weathersfield. They now form a single town department, with Mychael Spaulding as deputy chief " +
+        "and Josh Dauphin, West Weathersfield's chief for 15 years, as assistant chief and fire warden.",
+      events: [
+        { year: 1956, text: "The Ascutney Volunteer Fire Department is founded; Rodney Spaulding is among its first members, and serves as chief from 1976 to 1995.", source: "r2024" },
+        { year: 1995, text: "Darrin Spaulding succeeds his father as Ascutney's chief.", source: "r2024" },
+        { year: 2023, text: "In the year to June, Ascutney answers 397 calls and West Weathersfield 160. West Weathersfield's auxiliary is dissolved after 55 years.", source: "r2023" },
+        { year: 2024, text: "Chief Darrin Spaulding dies on 9 April, aged 59, after 44 years with Ascutney; his sons Mychael and Jackson serve on the department. In the year to June, Ascutney answers 353 calls and West Weathersfield 218. Ascutney takes delivery of a 2,000-gallon Dingee tanker, and a $51,000 federal grant buys West Weathersfield new extrication tools.", source: "r2024" },
+        { year: 2025, text: "In August the two departments merge into the Weathersfield Fire Department, and Josh Compo is appointed its first municipal chief. Its rescue licence is extended to the whole town.", source: "r2025" },
+      ],
+    },
+    money: {
+      intro: "The town's Fire & Emergency Services line funds both stations; most of it comes from property taxes.",
+      year: "fiscal year 2026, as proposed",
+      lines: [
+        { label: "Debt service (principal and interest)", amount: 46284 },
+        { label: "Maintenance and repairs", amount: 31220 },
+        { label: "Vehicle maintenance", amount: 31000 },
+        { label: "Supplies", amount: 29105 },
+        { label: "Dispatching", amount: 27988 },
+        { label: "Protective equipment", amount: 24490 },
+        { label: "Golden Cross Ambulance", amount: 22308 },
+      ],
+      linesNote: "The largest lines in the proposed Fire & Emergency Services budget.",
+      capital: {
+        title: "Fire & Emergency Services, by year",
+        lines: [
+          { label: "FY2026, proposed", amount: 315964 },
+          { label: "FY2025, approved", amount: 325898 },
+          { label: "FY2024, estimated", amount: 285414 },
+          { label: "FY2023, actual", amount: 211786 },
+          { label: "FY2022, actual", amount: 234664 },
+        ],
+        note: "As printed in the FY2024 town report.",
+      },
+      source: "r2024b",
+    },
+    residents: [
+      { label: "Burn permits", href: `${WEA}/250/Fire-Warden`, text: "Required all year, verbal or written, from the fire warden. Clean untreated wood, brush, weeds and grass only; no household trash." },
+      { label: "Non-emergency", href: `${WEA}/246/Fire-Department`, text: "Station 1, (802) 674-6869; Station 2, (802) 295-9425. Dial 911 for emergencies." },
+    ],
+    sources: {
+      dept: { label: "Town of Weathersfield, Fire Department", href: `${WEA}/246/Fire-Department` },
+      r2023: { label: "Town of Weathersfield, FY2023 Town Report", href: `${WEA}/DocumentCenter/View/417/FY2023-Town-Report`, note: "Ascutney and West Weathersfield reports, PDF pages 105–106; auxiliary, PDF page 55. A scanned report, read with text recognition; Ascutney's page gives both 376 and 397 calls, the table 397" },
+      r2024: { label: "Town of Weathersfield, FY2024 Town Report", href: `${WEA}/DocumentCenter/View/418/FY2024-Town-Report`, note: "In memoriam, PDF page 84; department reports, PDF pages 135–136" },
+      r2024b: { label: "Town of Weathersfield, FY2024 Town Report: budget", href: `${WEA}/DocumentCenter/View/418/FY2024-Town-Report`, note: "Fire & Emergency Services, PDF page 100" },
+      r2025: { label: "Town of Weathersfield, FY2025 Town Report", href: `${WEA}/DocumentCenter/View/419/FY2025-Town-Report`, note: "Selectboard report, PDF page 140; fire department, PDF page 170" },
+    },
+  },
+  pomfret: {
+    description:
+      "Pomfret-Teago Volunteer Fire Department: two departments merged in 2012, two stations on Pomfret Road, 43 calls " +
+      "in 2024, response times, the Pomfret Pull, and the town's fire budget and vehicle reserve.",
+    facts: [
+      ["Formed", "November 2012, when the Pomfret and Teago departments merged"],
+      ["Stations", "Teago Station, 2026 Pomfret Road; Pomfret Station, 7373 Pomfret Road"],
+      ["Members", "21 firefighters and 1 cadet (2024); 12 certified Firefighter I or higher, 5 also EMTs"],
+      ["Chief", "Jacob Astbury, since January 2025"],
+      ["Average response", "8.86 minutes in 2024"],
+    ],
+    contact: { chief: "Jacob Astbury", phone: "(802) 457-1125", website: `${POM}/index.php/dep/em/f/`, source: "dept" },
+    history: {
+      intro:
+        "Pomfret-Teago's volunteers work from two stations and roll an average of six people and almost three trucks to " +
+        "each call. Five members are EMTs who also respond with the Pomfret FAST Squad.",
+      events: [
+        { year: 2012, text: "In November the members of the Pomfret Volunteer Fire Department and the Teago Fire Department vote to merge.", source: "dept" },
+        { year: 2023, calls: 40, text: "Average response falls to 9.43 minutes, from 10.79 the year before.", source: "r2023" },
+        { year: 2024, calls: 43, text: "Average response 8.86 minutes. Fundraising pays for a wildland truck, a rescue UTV and a trailer. Kevin Rice retires as chief after 16 years, staying on as a member.", source: "r2024" },
+      ],
+    },
+    money: {
+      intro: "Most of the town's fire budget goes into a reserve for replacing fire trucks.",
+      year: "fiscal year 2026, as proposed",
+      lines: [
+        { label: "Fire vehicle reserve", amount: 60000 },
+        { label: "Insurance", amount: 20055 },
+        { label: "Non-vehicle reserve", amount: 7600 },
+        { label: "Equipment", amount: 6900 },
+      ],
+      linesNote: "The largest lines in the town's Fire Department budget.",
+      capital: {
+        title: "Fire Department budget, by year",
+        lines: [
+          { label: "FY2026, proposed", amount: 129435 },
+          { label: "FY2025, budget", amount: 138957 },
+          { label: "FY2024, actual", amount: 137454 },
+        ],
+        note: "Earlier years' figures leave out the reserve transfers, so they are not comparable.",
+      },
+      source: "r2024b",
+    },
+    residents: [
+      { label: "Join", href: `${POM}/index.php/dep/em/f/`, text: "Stop by either station on a Tuesday night. Volunteers who can respond from North Pomfret are especially wanted." },
+      { label: "Pomfret Pull and Pancake Breakfast", href: `${POM}/index.php/dep/em/f/`, text: "The August ox pull and October breakfast are the department's two fundraisers." },
+    ],
+    sources: {
+      dept: { label: "Town of Pomfret, Fire Department", href: `${POM}/index.php/dep/em/f/` },
+      r2023: { label: "Town of Pomfret, Annual Report for 2023", href: `${POM}/index.php/download_file/view/2368/1`, note: "Fire department report, PDF pages 43–44" },
+      r2024: { label: "Town of Pomfret, Annual Report for 2024", href: `${POM}/index.php/download_file/view/2584/1`, note: "Fire department report, PDF pages 42–43; department accounts, PDF page 45" },
+      r2024b: { label: "Town of Pomfret, Annual Report for 2024: budget", href: `${POM}/index.php/download_file/view/2584/1`, note: "Fire Department budget, PDF pages 30–31" },
+    },
+  },
+  rochester: {
+    description:
+      "Rochester Volunteer Fire Department: an all-volunteer department in a station built in 2013, calls for 2023–2025, " +
+      "a new first response team, and the town's fire budget.",
+    facts: [
+      ["Staffing", "All volunteer: 26 members including 1 junior (2025); half are in their 60s"],
+      ["Station", "Built in 2013"],
+      ["First response", "A first response and rescue team since 16 October 2025, with White River Valley Ambulance"],
+      ["Chief", "Terry Severy"],
+    ],
+    contact: { chief: "Terry Severy", phone: "(802) 767-1136", website: `${ROC}/rfd/`, source: "dept" },
+    history: {
+      intro:
+        "Rochester's volunteers meet twice a month, once to plan and once to train and work on the trucks. The Easter " +
+        "pancake breakfast is their biggest fundraiser.",
+      events: [
+        { year: 2013, text: "The current fire station is built.", source: "dept" },
+        { year: 2023, calls: 45, text: "Members drill with Killington Rescue, State Police and a trail group for rescues on the Velomont Trail.", source: "r2023" },
+        { year: 2024, calls: 45, text: "Donations from a fundraising letter buy new jaws of life and cordless tools; less than a week after training, members use them at a call.", source: "r2024" },
+        { year: 2025, calls: 54, text: "Calls rise 18%. In October the department starts a first response and rescue team, which answers 12 calls in its first six weeks.", source: "r2025" },
+      ],
+    },
+    calls: {
+      intro: "Crashes and alarms lead, with house and chimney fires a steady share.",
+      byType: {
+        title: "Calls by type, 2025",
+        bars: [
+          { label: "Motor vehicle crashes", value: 12 },
+          { label: "Fire alarms", value: 8 },
+          { label: "Mutual aid", value: 6 },
+          { label: "House fires", value: 5 },
+          { label: "False alarms", value: 4 },
+          { label: "Chimney fires", value: 3 },
+          { label: "Auto fires", value: 3 },
+          { label: "Downed power lines", value: 3 },
+          { label: "Search and rescue", value: 3 },
+          { label: "Carbon monoxide", value: 2 },
+          { label: "Trees down", value: 2 },
+          { label: "DHART helicopter", value: 2 },
+          { label: "Brush fire", value: 1 },
+        ],
+        note: "Calendar 2025; the types add up to the 54 calls reported.",
+        source: "r2025",
+      },
+    },
+    money: {
+      intro: "The fire budget is modest: $63,200 proposed for fiscal 2027, plus $11,800 for the new rescue team.",
+      year: "fiscal year 2027, as proposed",
+      lines: [
+        { label: "Salaries", amount: 10000 },
+        { label: "Supplies and repair", amount: 8000 },
+        { label: "Property and auto insurance", amount: 7500 },
+        { label: "Bunker gear", amount: 7000 },
+        { label: "Hoses", amount: 4000 },
+        { label: "Radios and pagers", amount: 4000 },
+      ],
+      linesNote: "The largest lines in the town's fire department budget.",
+      capital: {
+        title: "Fire department expenses, by year",
+        lines: [
+          { label: "FY2027, proposed", amount: 63200 },
+          { label: "FY2026, budget", amount: 58350 },
+          { label: "FY2025, actual", amount: 90473 },
+          { label: "FY2025, budget", amount: 58050 },
+        ],
+        note: "FY2025 ran over on truck maintenance: $44,871 against $2,500 budgeted.",
+      },
+      source: "r2025b",
+    },
+    residents: [
+      { label: "Burn permits", href: `${ROC}/rfd/`, text: "Call the fire warden at 767-3241." },
+      { label: "Join", href: `${ROC}/rfd/`, text: "Contact the chief or any member. The new first response team aims for 15 to 20 members." },
+    ],
+    sources: {
+      dept: { label: "Town of Rochester, Fire Department", href: `${ROC}/rfd/` },
+      r2023: { label: "Town of Rochester, Town Report, year ending June 2023", href: `${ROC}/wp-content/uploads/2024/03/Rochester-TR-Yr-2023-FOR-WEBSITE.pdf`, note: "Fire department report, PDF page 26" },
+      r2024: { label: "Town of Rochester, Town Report published 2025", href: `${ROC}/wp-content/uploads/2025/03/93180-Rochester-Town-Report-for-web-225-002.pdf`, note: "Fire department report, PDF page 26. A scanned report, read with text recognition" },
+      r2025: { label: "Town of Rochester, Town Report FY2025", href: `${ROC}/wp-content/uploads/2026/02/Rochester-Town-Report-FY-2025.pdf`, note: "Fire & Rescue report, PDF page 22" },
+      r2025b: { label: "Town of Rochester, Town Report FY2025: budget", href: `${ROC}/wp-content/uploads/2026/02/Rochester-Town-Report-FY-2025.pdf`, note: "Fire department expenses, PDF page 30" },
     },
   },
   jericho: UJFD,
