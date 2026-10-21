@@ -232,6 +232,15 @@ const WEA = "https://weathersfieldvt.org";
 const POM = "https://pomfretvt.us";
 const ROC = "https://rochestervermont.org";
 
+const CAN = "https://canaan-vt.org";
+const BEN = "https://benningtonvt.org";
+const SHF2 = "https://shaftsburyvt.gov";
+const RDB = "https://readsborovt.org";
+const CHE = "https://www.chelseavt.org/wp/wp-content/uploads";
+const TUN = "https://tunbridgevt.org";
+const STR = "https://www.straffordvt.org";
+const WMT = "https://williamstownvt.org";
+
 // One department, two town pages: Underhill and Jericho share the profile.
 const UJFD: Profile = {
   description:
@@ -5073,6 +5082,485 @@ export const profiles: Record<string, Profile> = {
       r2024: { label: "Town of Rochester, Town Report published 2025", href: `${ROC}/wp-content/uploads/2025/03/93180-Rochester-Town-Report-for-web-225-002.pdf`, note: "Fire department report, PDF page 26. A scanned report, read with text recognition" },
       r2025: { label: "Town of Rochester, Town Report FY2025", href: `${ROC}/wp-content/uploads/2026/02/Rochester-Town-Report-FY-2025.pdf`, note: "Fire & Rescue report, PDF page 22" },
       r2025b: { label: "Town of Rochester, Town Report FY2025: budget", href: `${ROC}/wp-content/uploads/2026/02/Rochester-Town-Report-FY-2025.pdf`, note: "Fire department expenses, PDF page 30" },
+    },
+  },
+  canaan: {
+    description:
+      "Beecher Falls Volunteer Fire Department, Canaan: 33 volunteers at the Quebec and New Hampshire border, 94 calls " +
+      "in its 2025 year including the June Ethan Allen fire, ageing trucks and the cost of a new engine.",
+    subtitle: "Beecher Falls Volunteer Fire Department",
+    facts: [
+      ["Members", "33 named on the 2025 roster; five joined that year"],
+      ["Town contract", "$50,000 a year (FY2025 and FY2026)"],
+      ["Chief", "Steve Young"],
+      ["Meets", "Most Wednesday evenings, for training or work sessions"],
+    ],
+    contact: { chief: "Steve Young", phone: "802-266-3422", website: `${CAN}/publicsafety/firedepartment.html`, source: "r2025" },
+    history: {
+      intro:
+        "Beecher Falls's volunteers protect Canaan, in Vermont's north-east corner on the New Hampshire line. In 2025 " +
+        "the town hosted a firefighter appreciation day in its park with the departments of Stratford, Errol, Colebrook " +
+        "and Pittsburg, New Hampshire.",
+      events: [
+        { year: 2025, calls: 94, text: "Calls for the year to November, six fewer than the year before, including six structure fires. In June, on a day near 100 degrees, members and mutual aid crews fight the Ethan Allen fire and contain it, saving many jobs. Members train with United Fire Company of Manchester, New Hampshire, on breathing apparatus, search and rescue and firefighter survival.", source: "r2025" },
+      ],
+    },
+    stationNotes: {
+      "canaan-1252-vt-route-253": {
+        text:
+          "Engine 1 was bought in 1973 and upgraded twice; Engine 2, the tanker and the small rescue are 19 years old; " +
+          "Engine 3, the newest, is nine. A new engine would cost $750,000 to $800,000, with a three-year wait.",
+        source: "r2025",
+      },
+    },
+    residents: [
+      { label: "Burn permits", href: `${CAN}/publicsafety/firedepartment.html`, text: "From the Canaan fire warden." },
+      { label: "Fundraisers", href: `${CAN}/publicsafety/firedepartment.html`, text: "A bocce tournament, a cornhole tournament and the annual wood raffle support the department; ten new sets of turnout gear are expected to cost nearly $40,000." },
+    ],
+    sources: {
+      r2025: { label: "Town of Canaan, 2025 Town Report", href: `${CAN}/images/2025_Town_Report.Reduced.pdf`, note: "Beecher Falls Volunteer Fire Department report, PDF page 57; selectboard report, PDF page 11; budget, PDF page 22" },
+    },
+  },
+  lunenburg: {
+    description:
+      "Lunenburg Volunteer Fire Department: stations in Lunenburg village and Gilman, its trucks, the department's " +
+      "2025 accounts, and grants for the fire department and the Gilman Lunenburg Rescue Squad.",
+    facts: [
+      ["Stations", "291 West Main Street (the town barn and fire station) and the Gilman Fire & Rescue Station, 41 Treatment Plant Road"],
+      ["Apparatus", "Engine 2 (1997), Engine 4 (2009 KME International), tankers from 1994 and 1986, a 1986 forestry truck, a support van and a 2005 Ranger ATV"],
+      ["Chief", "Stephen Colby, also the department's treasurer"],
+    ],
+    contact: { chief: "Stephen Colby", website: "https://www.lunenburg-gilmanvt.gov/reports---plans", source: "r2025" },
+    history: {
+      intro:
+        "Lunenburg's volunteers serve the town and the village of Gilman. The Gilman Lunenburg Rescue Squad, also " +
+        "volunteer, answers medical calls, and the town budgets separately for ambulance coverage from Lancaster.",
+      events: [
+        { year: 2025, text: "Grants bring $26,500 to the fire department. The town gives the department $20,000 for its running costs, of which $8,591 goes on gear and equipment and $7,996 on truck repairs. Energy-efficiency work at the Gilman fire station, funded by a $397,321 state grant to the town, continues.", source: "r2025" },
+      ],
+    },
+    residents: [
+      { label: "Town report", href: "https://www.lunenburg-gilmanvt.gov/reports---plans", text: "The department's accounts and equipment list are printed in the town's annual report each year." },
+    ],
+    sources: {
+      r2025: { label: "Town of Lunenburg, 2025 Annual Auditors' Report", href: "https://irp.cdn-website.com/cefd8893/files/uploaded/2025+Annual+Auditors+Report+-+Lunenburg-+VT+-+FINAL.pdf", note: "Fire department accounts, PDF page 11; rescue squad and grants, PDF page 20; property and equipment, PDF pages 33–34; grant summary, PDF page 37" },
+    },
+  },
+  bennington: {
+    description:
+      "Bennington's fire departments: the volunteer Village Fire Department, founded in 1850 with four companies on " +
+      "River Street, and the Bennington Rural Fire Department, founded by the Grange in 1953.",
+    facts: [
+      ["Village Fire Department", "Founded 1850; four companies in one firehouse at 130 River Street; Chief Nathan Berres"],
+      ["Rural Fire Department", "Founded 1953 as Bennington Fire District No. 1; stations on Orchard Road, West Road and Gore Road; Chief Steven Waters"],
+      ["Staffing", "Both all volunteer"],
+    ],
+    contact: { chief: "Nathan Berres (Village); Steven Waters (Rural)", phone: "802-442-1051 (Village); 802-447-7765 (Rural)", website: `${BEN}/services/fire.php`, source: "town" },
+    history: {
+      intro:
+        "Two volunteer departments protect Bennington: the Village Fire Department in the centre, and the Rural Fire " +
+        "Department, a separate fire district, across the rest of the town and, by contract, Woodford. North Bennington " +
+        "has its own department and fire warden.",
+      events: [
+        { year: 1850, text: "On 18 March the village trustees establish the Bennington Fire Department, with two firehouses: Spartan Engine Company No. 1 on Pleasant Street and Protection Engine Company No. 2 on East Main Street.", source: "r180" },
+        { year: 1866, text: "The W.H. Bradford Hook and Ladder Company No. 1 is established.", source: "r180" },
+        { year: 1871, text: "Spartan Engine Company becomes the General Stark Steamer Company, ancestor of today's Stark Hose Company No. 1.", source: "r180" },
+        { year: 1887, text: "The H.W. Putnam Company No. 3 is organised; the Eagle Hose Company No. 4 follows in 1894. All four companies are now at the central station on River Street.", source: "r180" },
+        { year: 1953, text: "The Bennington Pomona Grange founds the Bennington Rural Fire District, with T. Howard Mattison as chief; by the end of its first year 35 volunteers answer every call. It later reorganises as Bennington Fire District No. 1.", source: "hcr111" },
+        { year: 1959, text: "Rural firefighters build their first firehouse on Willow Road, enlarged in 1976 and 1992; more follow on Beech Street (1966) and at Fairdale Farms (1969, rebuilt 1985).", source: "hcr111" },
+        { year: 2000, text: "The Vermont State Firefighters' Association names Rural Chief Walt Sweet its Chief of the Year; Rural members serve as the association's president in 1985 and 2000.", source: "hcr111" },
+        { year: 2024, text: "The General Assembly congratulates the Rural Fire Department on its 70th anniversary; it now has five companies, each with its own officers.", source: "hcr111" },
+        { year: 2025, text: "The General Assembly commemorates the Village Fire Department's 175th anniversary.", source: "r180" },
+      ],
+    },
+    stationNotes: {
+      "bennington-130-river-st": { text: "The Village Fire Department's central station, home to all four companies.", source: "r180" },
+    },
+    residents: [
+      { label: "Burn permits", href: `${BEN}/services/fire.php`, text: "All outdoor burning needs a town permit: $10 for a campfire permit good for the rest of the year, $5 for a two-week brush permit. Call the town office at 802-442-1037. North Bennington has its own fire warden." },
+      { label: "Join", href: `${BEN}/services/fire.php`, text: "The Village Fire Department is run entirely by volunteers: download an application, call, or stop by." },
+    ],
+    sources: {
+      town: { label: "Town of Bennington, Fire", href: `${BEN}/services/fire.php` },
+      r180: { label: "Vermont General Assembly, Resolution R-180 (2025)", href: "https://legislature.vermont.gov/Documents/2026/Docs/ACTS/ACTR180/ACTR180%20As%20Adopted.pdf", note: "Commemorating the 175th anniversary of the Bennington Fire Department" },
+      hcr111: { label: "Vermont House, H.C.R. 111 (2024)", href: "https://legislature.vermont.gov/Documents/2024/Docs/RESOLUTN/HCR111/HCR111%20As%20Introduced.pdf", note: "Congratulating the Bennington Rural Fire Department on its 70th anniversary" },
+    },
+  },
+  arlington: {
+    description:
+      "Arlington Fire Department: two firehouses serving Arlington, Sunderland and Sandgate, 190 calls in 2025, " +
+      "1,291 training hours, and a town budget that now includes the firehouses.",
+    subtitle: "Arlington Fire Department",
+    facts: [
+      ["Serves", "Arlington, and by agreement Sunderland and Sandgate"],
+      ["Stations", "East Station, 184 Old Mill Road; West Station, 41 Berwal Road"],
+      ["Chief", "Brian Hawley, with assistant chiefs Eric Marko and Vince Thompson"],
+      ["Fire budget", "$324,000 proposed for 2026, up from $272,286 spent in 2025"],
+    ],
+    contact: { chief: "Brian Hawley", phone: "(802) 375-2323", website: "https://arlingtonvermont.org/", source: "r2025" },
+    history: {
+      intro:
+        "Arlington's department answers calls in three towns and gives mutual aid to its neighbours. The town has long " +
+        "paid for its operations; the Arlington Fire Protection Company, a nonprofit, used to own and run the two " +
+        "firehouses.",
+      events: [
+        { year: 2025, calls: 190, text: "72 calls in Arlington, 64 in Sunderland and 15 in Sandgate, the rest mutual aid. Members log 1,291 training hours, adding joint drills on interior attack and water supply. The fire wardens issue 67 burn permits. The Fire Protection Company hands both firehouses to the town, which takes on about $40,000 a year to run them.", source: "r2025" },
+      ],
+    },
+    money: {
+      intro:
+        "The town pays for the department, with contributions from Sunderland and Sandgate, and puts $100,000 a year " +
+        "into a fire truck reserve.",
+      year: "2025, actual",
+      lines: [
+        { label: "Fire truck capital reserve", amount: 100000 },
+        { label: "New equipment", amount: 65983 },
+        { label: "Truck maintenance", amount: 31110 },
+        { label: "Volunteer stipends", amount: 13750 },
+        { label: "Communications and WiFi", amount: 12040 },
+        { label: "Insurance", amount: 11090 },
+      ],
+      linesNote: "The largest lines in the town's 2025 fire department spending.",
+      capital: {
+        title: "Fire department, by year",
+        lines: [
+          { label: "2026, proposed", amount: 324000 },
+          { label: "2025, actual", amount: 272286 },
+          { label: "2025, budget", amount: 275430 },
+        ],
+        note: "2026 adds the firehouses' upkeep and utilities, and grant writing.",
+      },
+      source: "r2025b",
+    },
+    residents: [
+      { label: "Burn permits", href: "https://arlingtonvermont.org/", text: "From the town's fire wardens; 67 were issued in 2025." },
+      { label: "Join", href: "https://arlingtonvermont.org/", text: "Stop by the firehouse any time: the department is always looking for volunteers." },
+    ],
+    sources: {
+      r2025: { label: "Town of Arlington, 2025 Town Report", href: "https://arlingtonvermont.org/wp-content/uploads/2026/02/2025-ARL-Town-Report-Master.pdf", note: "Fire Department report, PDF page 43; Select Board, PDF pages 36–37; budget notes, PDF page 18; fire wardens, PDF page 44" },
+      r2025b: { label: "Town of Arlington, 2025 Town Report: budget", href: "https://arlingtonvermont.org/wp-content/uploads/2026/02/2025-ARL-Town-Report-Master.pdf", note: "Fire department revenue and spending, PDF pages 27–28" },
+    },
+  },
+  shaftsbury: {
+    description:
+      "Shaftsbury Fire Company: 32 volunteers in two stations, now an independent fire company, with 2024 calls by " +
+      "type and plans for a new wildland truck.",
+    facts: [
+      ["Members", "32 volunteer firefighters"],
+      ["Stations", "Station 1, 166 Buck Hill Road; Station 2, 364 Old Depot Road"],
+      ["Status", "An independent, tax-exempt fire company, funded by taxes, donations and fundraisers"],
+      ["Chief", "Joseph Vadakin, with assistant chiefs Mike Taylor and Ed Shewell"],
+    ],
+    contact: { chief: "Joseph Vadakin", phone: "802-442-4226", website: `${SHF2}/town-officials/fire-department`, source: "dept" },
+    history: {
+      intro:
+        "Shaftsbury's main station is in the centre of town on Buck Hill Road, with a sub-station in the north on Old " +
+        "Depot Road near Route 7A. The department recently became its own tax-exempt fire company.",
+      events: [
+        { year: 2024, calls: 102, text: "Crashes and extrications lead with 31, with 18 mutual aid calls and 6 structure fires. The 40-year-old furnace at Station 2 is being replaced, and with wildland fires on the rise the department plans to replace its 20-year-old brush truck. Former chief Ron Lindsey dies.", source: "r2024" },
+      ],
+    },
+    calls: {
+      intro: "Crashes, mutual aid and good-intent calls made up two thirds of 2024's calls.",
+      byType: {
+        title: "Calls by type, 2024",
+        bars: [
+          { label: "Car accidents and extrication", value: 31 },
+          { label: "Good intent", value: 18 },
+          { label: "Mutual aid", value: 18 },
+          { label: "Wildland fires", value: 8 },
+          { label: "Structure fires", value: 6 },
+          { label: "Weather related", value: 6 },
+          { label: "Search and rescue", value: 5 },
+          { label: "Hazardous materials", value: 4 },
+          { label: "EMS assists", value: 4 },
+          { label: "Vehicle fire", value: 1 },
+          { label: "Chimney or pellet stove", value: 1 },
+        ],
+        note: "Calendar 2024. The table totals 102; the chief's letter says 100.",
+        source: "r2024",
+      },
+    },
+    residents: [
+      { label: "Non-emergency", href: `${SHF2}/town-officials/fire-department`, text: "Station 1, 802-442-4226; Station 2, 802-375-9308. Dial 911 for emergencies." },
+      { label: "Burn permits", href: `${SHF2}/town-officials/fire-department`, text: "Call the town's forest fire warden 24 hours ahead." },
+    ],
+    sources: {
+      dept: { label: "Town of Shaftsbury, Fire Department", href: `${SHF2}/town-officials/fire-department` },
+      r2024: { label: "Town of Shaftsbury, Annual Report 2024", href: `${SHF2}/all-docs/archived-docs/town-reports/2024/Shaftsbury-Annual-Report-2024.pdf`, note: "Fire Department report, PDF page 57; directory" },
+    },
+  },
+  readsboro: {
+    description:
+      "Readsboro Fire Department: an all-volunteer fire and ambulance department with 22 members, 79 calls in 2025, " +
+      "a new Engine 3, and the town's fire budget.",
+    facts: [
+      ["Services", "Fire and ambulance, all volunteer"],
+      ["Members", "22 active (2025)"],
+      ["Chief", "Adam Codogni; EMS director Andrew Massari"],
+      ["Fire budget", "$60,368 proposed for FY2027"],
+    ],
+    contact: { chief: "Adam Codogni", website: `${RDB}/pages/emergency-services`, source: "dept" },
+    history: {
+      intro:
+        "Readsboro's volunteers answer fire and rescue calls in town and give mutual aid to neighbouring towns. The " +
+        "Readsboro Fire Fighters Association, a nonprofit, and the Firemen's Auxiliary raise money for the members.",
+      events: [
+        { year: 2025, calls: 79, text: "19 fire calls, many on mutual aid, 49 rescue calls, 3 false alarms, a weather call and 7 others. The department takes delivery of a new fire truck, 92 Engine 3, and adds two members. The association spends $13,830 on a computer for the firehouse and fittings for the new truck; the auxiliary buys turnout gear and signs for the town's dry hydrants.", source: "r2025" },
+      ],
+    },
+    money: {
+      intro: "The town's fire department budget has held near $60,000.",
+      year: "fiscal year 2025, actual",
+      lines: [
+        { label: "Membership dues", amount: 15806 },
+        { label: "New equipment", amount: 7290 },
+        { label: "Equipment repairs", amount: 5044 },
+        { label: "Equipment testing", amount: 3431 },
+        { label: "Radio repairs", amount: 2978 },
+        { label: "Office supplies", amount: 2067 },
+      ],
+      linesNote: "The largest lines in the town's fire department accounts.",
+      capital: {
+        title: "Fire department budget, by year",
+        lines: [
+          { label: "FY2027, proposed", amount: 60368 },
+          { label: "FY2026, budget", amount: 58467 },
+          { label: "FY2025, actual", amount: 51825 },
+          { label: "FY2025, budget", amount: 60203 },
+        ],
+        note: "From the town's budget report.",
+      },
+      source: "r2025b",
+    },
+    residents: [
+      { label: "Open house", href: `${RDB}/pages/emergency-services`, text: "The department plans an open house in 2026 to show the new truck and firehouse improvements." },
+    ],
+    sources: {
+      dept: { label: "Town of Readsboro, Emergency Services", href: `${RDB}/pages/emergency-services` },
+      r2025: { label: "Town of Readsboro, 2025 Town Report", href: `${RDB}/uploads/2025-town-report-final.pdf`, note: "Readsboro Fire Department report, PDF page 33" },
+      r2025b: { label: "Town of Readsboro, 2025 Town Report: budget", href: `${RDB}/uploads/2025-town-report-final.pdf`, note: "Fire Department accounts, PDF pages 15–16" },
+    },
+  },
+  chelsea: {
+    description:
+      "Chelsea Fire Department: volunteers of the Chelsea Fire District, calls by type for 2024 and 2025, new pagers, " +
+      "radios and turnout gear, and a fire tax that roughly doubles for 2026.",
+    facts: [
+      ["Run by", "The Chelsea Fire District and its Prudential Committee"],
+      ["Chief", "Ed Coburn"],
+      ["Meets", "Monday evenings, 7 to 9 pm, at the fire station"],
+      ["Fire tax", "$174,520 proposed for 2026, up from $88,250 in 2025"],
+    ],
+    contact: { chief: "Ed Coburn", phone: "802-685-3112", source: "r2025" },
+    history: {
+      intro:
+        "Chelsea's volunteers answer fires, crashes, alarms and ambulance assists, and give mutual aid to neighbouring " +
+        "towns. Like its neighbours, the district has seen its membership fall.",
+      events: [
+        { year: 2024, calls: 38, text: "Eight structure fires, nine crashes and ten alarm calls. John R. Champney Sr., in his first year as chief, begins assessing the ageing equipment, trucks and station.", source: "r2024" },
+        { year: 2025, calls: 48, text: "The department starts replacing its pagers and portable radios and buys three sets of turnout gear; the Prudential Committee plans for new or refurbished apparatus.", source: "r2025" },
+      ],
+    },
+    calls: {
+      intro: "Alarms and mutual aid led 2025; in 2024 structure fires and crashes had led.",
+      byType: {
+        title: "Calls by type, 2025",
+        bars: [
+          { label: "CO detectors and fire alarms", value: 13 },
+          { label: "Mutual aid", value: 8 },
+          { label: "Ambulance assists", value: 7 },
+          { label: "Motor vehicle crashes", value: 7 },
+          { label: "Smoke investigations", value: 4 },
+          { label: "Trees down", value: 3 },
+          { label: "Structure fire", value: 1 },
+          { label: "Chimney fire", value: 1 },
+          { label: "Gas spill", value: 1 },
+          { label: "Propane smell", value: 1 },
+          { label: "Lawnmower fire", value: 1 },
+          { label: "Citizen assist", value: 1 },
+        ],
+        note: "Calendar 2025; the types add up to the 48 calls reported.",
+        source: "r2025",
+      },
+    },
+    money: {
+      intro: "The district's budget is funded mostly by its fire tax, plus rent from the ambulance service.",
+      year: "2025, as adopted",
+      lines: [
+        { label: "Insurance", amount: 23000 },
+        { label: "Building utilities", amount: 16600 },
+        { label: "Communications", amount: 13700 },
+        { label: "Equipment", amount: 12000 },
+        { label: "Firefighter reimbursement", amount: 12000 },
+        { label: "Apparatus", amount: 11500 },
+      ],
+      linesNote: "The largest lines in the 2025 budget, which totalled $97,550.",
+      capital: {
+        title: "Fire tax, by year",
+        lines: [
+          { label: "2026, proposed", amount: 174520 },
+          { label: "2025, budget", amount: 88250 },
+        ],
+        note: "Proposed 2026 spending is $107,320.",
+      },
+      source: "r2025",
+    },
+    residents: [
+      { label: "Join", href: `${CHE}/2025/02/2025-Town-Report-Final.pdf`, text: "Stop by the fire station any Monday evening between 7 and 9 pm, or talk to a member." },
+      { label: "Burn permits", href: `${CHE}/2025/02/2025-Town-Report-Final.pdf`, text: "From the town fire warden, listed in the town report." },
+    ],
+    sources: {
+      r2024: { label: "Town of Chelsea, Town Report (year 2024)", href: `${CHE}/2025/02/2025-Town-Report-Final.pdf`, note: "Fire Department report, PDF page 34" },
+      r2025: { label: "Town of Chelsea, Town Report (year 2025)", href: `${CHE}/2026/02/2025-Chelsea-Town-Report-FINAL-comp-2.pdf`, note: "Fire Department and Prudential Committee reports, PDF pages 34–35; budget, PDF page 36" },
+    },
+  },
+  tunbridge: {
+    description:
+      "Tunbridge Volunteer Fire Department: weekly Thursday training, 36 calls in its 2025 year by type, a new Alexis " +
+      "engine due in 2026, and the department's budget and reserve funds.",
+    facts: [
+      ["Station", "2 Monarch Hill Road"],
+      ["Chief", "Simon Bradford"],
+      ["Meets", "Every Thursday at 7 pm: training on the 1st and 3rd, business on the 2nd, maintenance on the last"],
+      ["Reserves", "$274,364 across the department's funds at 30 June 2025"],
+    ],
+    contact: { chief: "Simon Bradford", phone: "802-889-3212", website: `${TUN}/fire-department/`, source: "dept" },
+    history: {
+      intro: "Tunbridge's department is an independent volunteer organisation that the town funds; it raises money with a coin drop at the Tunbridge Fair and a Memorial Day chicken barbecue.",
+      events: [
+        { year: 2025, calls: 36, text: "Two structure fires, 11 mutual aid responses, 11 service calls, 8 medical assists, 3 wildland fires and a hazmat incident. A new engine from Alexis Fire Apparatus nears completion after almost two years in production. One firefighter earns Firefighter I and another qualifies as a pump operator, and the whole department trains in hazmat awareness and operations.", source: "r2025" },
+      ],
+    },
+    calls: {
+      intro: "Mutual aid and service calls made up most of the 2025 year.",
+      byType: {
+        title: "Calls by type, 2025",
+        bars: [
+          { label: "Mutual aid", value: 11 },
+          { label: "Service calls", value: 11 },
+          { label: "Medical assists", value: 8 },
+          { label: "Wildland fires", value: 3 },
+          { label: "Structure fires", value: 2 },
+          { label: "Hazmat", value: 1 },
+        ],
+        note: "The types add up to the 36 calls reported.",
+        source: "r2025",
+      },
+    },
+    money: {
+      intro: "The town pays the department; it keeps separate funds for trucks and equipment.",
+      year: "fiscal year to June 2025, actual",
+      lines: [
+        { label: "Radio and equipment maintenance", amount: 13410 },
+        { label: "Insurance", amount: 10771 },
+        { label: "Compensation", amount: 7000 },
+        { label: "Truck maintenance", amount: 4710 },
+        { label: "Building gas", amount: 3387 },
+      ],
+      linesNote: "The largest lines in the department's spending.",
+      capital: {
+        title: "Department spending, by year",
+        lines: [
+          { label: "FY2027, proposed", amount: 70000 },
+          { label: "FY2026, budget", amount: 82094 },
+          { label: "FY2025, actual", amount: 56242 },
+          { label: "FY2025, budget", amount: 49500 },
+        ],
+        note: "Fiscal years July to June.",
+      },
+      source: "r2025b",
+    },
+    residents: [
+      { label: "Join", href: `${TUN}/fire-department/`, text: "Contact any officer or come to the station on a Thursday evening." },
+    ],
+    sources: {
+      dept: { label: "Town of Tunbridge, Fire Department", href: `${TUN}/fire-department/` },
+      r2025: { label: "Town of Tunbridge, 2025 Town Report", href: `${TUN}/wp-content/uploads/2026/02/2025-town-report-tunbridge-vt.pdf`, note: "Fire Department report, PDF page 48" },
+      r2025b: { label: "Town of Tunbridge, 2025 Town Report: fire budget", href: `${TUN}/wp-content/uploads/2026/02/2025-town-report-tunbridge-vt.pdf`, note: "Fire department budget and fund balances, PDF pages 48–49" },
+    },
+  },
+  strafford: {
+    description:
+      "Strafford Fire & Rescue: the volunteer fire department and FAST Squad of the Strafford Firemen's Association, " +
+      "85 calls in 2025, a grant-funded cardiac monitor, and its spending line by line.",
+    facts: [
+      ["Run by", "The Strafford Firemen's Association, which elects the fire chief"],
+      ["Services", "Fire, and first-aid response through the FAST Squad"],
+      ["Chief", "Aaron Dotter; EMS chief John Lloyd"],
+      ["Spending", "$79,919 in 2025, against a budget of $74,025"],
+    ],
+    contact: { chief: "Aaron Dotter", website: `${STR}/emergency-services`, source: "r2025" },
+    history: {
+      intro:
+        "Strafford's volunteers provide fire protection and first-aid response. The town keeps a fire truck fund, which " +
+        "carries the loan for the department's 2019 International engine.",
+      events: [
+        { year: 2019, text: "The department's International 4400 fire truck is bought, financed with a $288,806 loan.", source: "r2025b" },
+        { year: 2025, calls: 85, text: "Fire and FAST Squad calls combined, in keeping with recent years. With a Mascoma Bank grant the squad buys a used cardiac monitor for $7,500, where a new one would cost over $30,000. Two members take the Vermont Fire Academy's Firefighter I/II course.", source: "r2025" },
+      ],
+    },
+    money: {
+      intro: "Dispatch is the department's largest single cost.",
+      year: "2025, actual",
+      lines: [
+        { label: "Dispatch", amount: 19671 },
+        { label: "Insurance", amount: 12942 },
+        { label: "Utilities", amount: 10847 },
+        { label: "Equipment purchase and maintenance", amount: 9722 },
+        { label: "Vehicle repairs", amount: 9649 },
+        { label: "EMS supplies", amount: 8078 },
+      ],
+      linesNote: "The largest lines in the department's 2025 report.",
+      capital: {
+        title: "Department spending, 2025",
+        lines: [
+          { label: "Actual", amount: 79919 },
+          { label: "Budget", amount: 74025 },
+        ],
+        note: "EMS supplies include the cardiac monitor.",
+      },
+      source: "r2025",
+    },
+    residents: [
+      { label: "Burn permits", href: `${STR}/fire-warden`, text: "Free, from the town fire warden, usually within 24 hours." },
+      { label: "Contact", href: `${STR}/emergency-services`, text: "Non-emergency questions by email to the chief; dial 911 for emergencies." },
+    ],
+    sources: {
+      dept: { label: "Town of Strafford, Emergency Services", href: `${STR}/emergency-services` },
+      r2025: { label: "Town of Strafford, 2025 Town Report", href: `${STR}/_files/ugd/0580b2_de7d1acc95e948dcbd8d8e838fc753b3.pdf`, note: "Strafford Fire and Rescue report and budget, PDF pages 127–128; town officers, PDF page 7" },
+      r2025b: { label: "Town of Strafford, 2025 Town Report: fire truck fund", href: `${STR}/_files/ugd/0580b2_de7d1acc95e948dcbd8d8e838fc753b3.pdf`, note: "Loan schedule, PDF pages 101–107" },
+    },
+  },
+  williamstown: {
+    description:
+      "Williamstown Fire Department: a town department at the Public Safety Building on Meadow Street, 155 calls in " +
+      "fiscal 2025, a refurbished Engine 1, a FAST Squad since 2024, and 12 Pro-Board firefighters.",
+    subtitle: "Williamstown Fire Department",
+    facts: [
+      ["Station", "Public Safety Building, Meadow Street"],
+      ["Apparatus", "Three engines and a tanker, including an HME 1,000-gallon rescue pumper"],
+      ["Chief", "William Graham, since January 2015"],
+      ["Certified", "12 firefighters with Pro-Board Firefighter I certification"],
+    ],
+    contact: { chief: "William Graham", phone: "802-433-5907", website: `${WMT}/fire-department/`, source: "dept" },
+    history: {
+      intro:
+        "Williamstown's department is sanctioned by the selectboard and shares the Public Safety Building with the " +
+        "town's FAST Squad, which began answering medical calls in April 2024.",
+      events: [
+        { year: 2015, text: "William Graham, a volunteer since 2008, becomes chief.", source: "dept" },
+        { year: 2024, text: "The FAST Squad is established.", source: "r2025" },
+        { year: 2025, calls: 155, text: "Calls in the fiscal year to June. Engine 1, built in 1996, returns after a year-long refurbishment by Har-Rob Fire Apparatus, for a little over $300,000 against $800,000 to $1 million for a new truck. Assistant Chief Norwood Southworth retires after 27 years, and Tanker 1 is dedicated to him. Three new firefighters join.", source: "r2025" },
+      ],
+    },
+    residents: [
+      { label: "Burn permits", href: `${WMT}/fire-department/`, text: "From the fire warden, with 24 hours' notice." },
+      { label: "Join", href: `${WMT}/fire-department/`, text: "An application is on the town's fire department page." },
+    ],
+    sources: {
+      dept: { label: "Town of Williamstown, Fire Department", href: `${WMT}/fire-department/` },
+      r2025: { label: "Town of Williamstown, 2025 Town Report", href: `${WMT}/wp-content/uploads/2026/02/2025-town-report-williamstown-vt.pdf`, note: "Fire Department and FAST Squad reports, PDF pages 38–39. A scanned report, read with text recognition" },
     },
   },
   jericho: UJFD,
