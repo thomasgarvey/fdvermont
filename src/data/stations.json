@@ -1192,7 +1192,7 @@
   {
     "id": "recRf0tycoSrahCuN",
     "esiteid": 103885,
-    "name": null,
+    "name": "Fairfax James A Field Fire Station",
     "address": "15 Goodall St",
     "town": "Fairfax",
     "county": "Franklin",
@@ -2671,6 +2671,20 @@
     "lng": -72.947814,
     "mapped": "1998-01-01",
     "updated": "2023-09-08",
+    "department": null
+  },
+  {
+    "id": "recgF8T1RKEXLIM7W",
+    "esiteid": null,
+    "name": null,
+    "address": "48 Main St",
+    "town": "Richford",
+    "county": "Franklin",
+    "zip": "05476",
+    "lat": 44.995833,
+    "lng": -72.673034,
+    "mapped": "",
+    "updated": "",
     "department": null
   },
   {
