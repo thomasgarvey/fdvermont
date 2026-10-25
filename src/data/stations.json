@@ -2214,13 +2214,13 @@
   {
     "id": "recaQrLiJpUMwXdEN",
     "esiteid": 179513,
-    "name": null,
-    "address": "3559 US Route 2",
+    "name": "North Hero Oman Station",
+    "address": "3549 US Route 2",
     "town": "North Hero",
     "county": "Grand Isle",
     "zip": "05474",
-    "lat": 44.816851,
-    "lng": -73.290652,
+    "lat": 44.816599,
+    "lng": -73.29041,
     "mapped": "1998-01-01",
     "updated": "2023-01-27",
     "department": null
@@ -2228,7 +2228,7 @@
   {
     "id": "recEbOJH98d6pGsPa",
     "esiteid": 179159,
-    "name": null,
+    "name": "North Hero Fire House",
     "address": "7444 US Route 2",
     "town": "North Hero",
     "county": "Grand Isle",
