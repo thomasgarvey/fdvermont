@@ -422,9 +422,9 @@
     "town": "HUNTINGTON",
     "lat": null,
     "lng": null,
-    "stationAddress": "4930 Main Rd",
-    "placedBy": "address-join",
-    "esiteid": null
+    "stationAddress": "4960 Main Rd",
+    "placedBy": "station-link",
+    "esiteid": 131592
   },
   {
     "id": "recdwPKd1wnt3dAAn",
@@ -442,12 +442,12 @@
     "dateTaken": "2026-09-04",
     "featured": false,
     "department": null,
-    "town": null,
+    "town": "MONKTON",
     "lat": null,
     "lng": null,
-    "stationAddress": null,
-    "placedBy": "unplaced",
-    "esiteid": null
+    "stationAddress": "3747 States Prison Hollow Rd",
+    "placedBy": "station-link",
+    "esiteid": 162742
   },
   {
     "id": "recf93em2ZU9vjsBO",
