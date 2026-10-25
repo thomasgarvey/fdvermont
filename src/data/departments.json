@@ -392,34 +392,6 @@
     "budgetNote": null
   },
   {
-    "id": "reczGqrILkE1x8Urs",
-    "name": "North Bennington Fire Department",
-    "town": "Bennington",
-    "county": "Bennington",
-    "ownPage": null,
-    "fdid": "2443",
-    "type": "Volunteer",
-    "stations": 1,
-    "founded": null,
-    "chief": null,
-    "phone": null,
-    "email": null,
-    "website": null,
-    "joinUrl": null,
-    "members": {
-      "volunteer": 52,
-      "paidPerCall": 0,
-      "career": 0
-    },
-    "budget": null,
-    "budgetLines": [],
-    "joining": null,
-    "burnPermits": null,
-    "history": null,
-    "callsNote": null,
-    "budgetNote": null
-  },
-  {
     "id": "recEN74EpdTxRaiz4",
     "name": "Berkshire Volunteer Fire Department",
     "town": "Berkshire",
@@ -884,6 +856,34 @@
     "joinUrl": null,
     "members": {
       "volunteer": 12,
+      "paidPerCall": 0,
+      "career": 0
+    },
+    "budget": null,
+    "budgetLines": [],
+    "joining": null,
+    "burnPermits": null,
+    "history": null,
+    "callsNote": null,
+    "budgetNote": null
+  },
+  {
+    "id": "recGO7vYUCEAMAJKw",
+    "name": "Cambridge Fire Company",
+    "town": "Cambridge",
+    "county": "Lamoille",
+    "ownPage": null,
+    "fdid": "8123",
+    "type": "Volunteer",
+    "stations": 1,
+    "founded": null,
+    "chief": null,
+    "phone": null,
+    "email": null,
+    "website": null,
+    "joinUrl": null,
+    "members": {
+      "volunteer": 28,
       "paidPerCall": 0,
       "career": 0
     },
@@ -1680,34 +1680,6 @@
     "budgetNote": null
   },
   {
-    "id": "recmvxbtnvNHMR3Yp",
-    "name": "East Fairfield Volunteer Fire Department",
-    "town": "East Fairfield",
-    "county": "Franklin",
-    "ownPage": null,
-    "fdid": "6194",
-    "type": "Volunteer",
-    "stations": 0,
-    "founded": null,
-    "chief": null,
-    "phone": null,
-    "email": null,
-    "website": null,
-    "joinUrl": null,
-    "members": {
-      "volunteer": 13,
-      "paidPerCall": 0,
-      "career": 0
-    },
-    "budget": null,
-    "budgetLines": [],
-    "joining": null,
-    "burnPermits": null,
-    "history": null,
-    "callsNote": null,
-    "budgetNote": null
-  },
-  {
     "id": "rec1js3Hep6IlVozh",
     "name": "East Haven Volunteer Fire Department",
     "town": "East Haven",
@@ -1932,6 +1904,34 @@
     "budgetNote": null
   },
   {
+    "id": "recmvxbtnvNHMR3Yp",
+    "name": "East Fairfield Volunteer Fire Department",
+    "town": "Fairfield",
+    "county": "Franklin",
+    "ownPage": null,
+    "fdid": "6194",
+    "type": "Volunteer",
+    "stations": 0,
+    "founded": null,
+    "chief": null,
+    "phone": null,
+    "email": null,
+    "website": null,
+    "joinUrl": null,
+    "members": {
+      "volunteer": 13,
+      "paidPerCall": 0,
+      "career": 0
+    },
+    "budget": null,
+    "budgetLines": [],
+    "joining": null,
+    "burnPermits": null,
+    "history": null,
+    "callsNote": null,
+    "budgetNote": null
+  },
+  {
     "id": "rec3BDYC4xaSZAock",
     "name": "Fairfield Fire Department",
     "town": "Fairfield",
@@ -1990,7 +1990,7 @@
   {
     "id": "recagFFZwsJ7lLYnR",
     "name": "Ferrisburgh Volunteer Fire Department",
-    "town": "Ferrisburg",
+    "town": "Ferrisburgh",
     "county": "Addison",
     "ownPage": null,
     "fdid": "1421",
@@ -2382,7 +2382,7 @@
   {
     "id": "rec91zQb9PkIcHgib",
     "name": "Highgate Volunteer Fire Department",
-    "town": "Highgate Center",
+    "town": "Highgate",
     "county": "Franklin",
     "ownPage": null,
     "fdid": "6291",
@@ -2676,34 +2676,6 @@
     "joinUrl": null,
     "members": {
       "volunteer": 15,
-      "paidPerCall": 0,
-      "career": 0
-    },
-    "budget": null,
-    "budgetLines": [],
-    "joining": null,
-    "burnPermits": null,
-    "history": null,
-    "callsNote": null,
-    "budgetNote": null
-  },
-  {
-    "id": "recGO7vYUCEAMAJKw",
-    "name": "Cambridge Fire Company",
-    "town": "Jeffersonville",
-    "county": "Lamoille",
-    "ownPage": null,
-    "fdid": "8123",
-    "type": "Volunteer",
-    "stations": 1,
-    "founded": null,
-    "chief": null,
-    "phone": null,
-    "email": null,
-    "website": null,
-    "joinUrl": null,
-    "members": {
-      "volunteer": 28,
       "paidPerCall": 0,
       "career": 0
     },
@@ -3194,7 +3166,7 @@
   {
     "id": "reclCmMAZUiGhqRTe",
     "name": "Montgomery Fire Department",
-    "town": "Montgomery Center",
+    "town": "Montgomery",
     "county": "Franklin",
     "ownPage": null,
     "fdid": "6402",
@@ -3278,7 +3250,7 @@
   {
     "id": "recQGjjjND3WXmnSe",
     "name": "Morrisville Fire Department",
-    "town": "Morrisville",
+    "town": "Morristown",
     "county": "Lamoille",
     "ownPage": null,
     "fdid": "8414",
@@ -3574,6 +3546,34 @@
       "volunteer": null,
       "paidPerCall": null,
       "career": null
+    },
+    "budget": null,
+    "budgetLines": [],
+    "joining": null,
+    "burnPermits": null,
+    "history": null,
+    "callsNote": null,
+    "budgetNote": null
+  },
+  {
+    "id": "reczGqrILkE1x8Urs",
+    "name": "North Bennington Fire Department",
+    "town": "North Bennington",
+    "county": "Bennington",
+    "ownPage": null,
+    "fdid": "2443",
+    "type": "Volunteer",
+    "stations": 1,
+    "founded": null,
+    "chief": null,
+    "phone": null,
+    "email": null,
+    "website": null,
+    "joinUrl": null,
+    "members": {
+      "volunteer": 52,
+      "paidPerCall": 0,
+      "career": 0
     },
     "budget": null,
     "budgetLines": [],
@@ -4607,7 +4607,7 @@
   {
     "id": "recsVhPGC8ajnc0un",
     "name": "St. Albans City Fire Department",
-    "town": "Saint Albans",
+    "town": "Saint Albans City",
     "county": "Franklin",
     "ownPage": null,
     "fdid": null,

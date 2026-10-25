@@ -678,7 +678,7 @@
     "featured": false,
     "department": {
       "name": "Highgate Volunteer Fire Department",
-      "city": "Highgate Center",
+      "city": "Highgate",
       "county": "Franklin"
     },
     "town": null,
@@ -813,7 +813,7 @@
     "featured": false,
     "department": {
       "name": "St. Albans City Fire Department",
-      "city": "Saint Albans",
+      "city": "Saint Albans City",
       "county": "Franklin"
     },
     "town": "SAINT ALBANS CITY",
@@ -867,7 +867,7 @@
     "featured": false,
     "department": {
       "name": "St. Albans City Fire Department",
-      "city": "Saint Albans",
+      "city": "Saint Albans City",
       "county": "Franklin"
     },
     "town": "SAINT ALBANS CITY",
@@ -1549,7 +1549,7 @@
     "featured": false,
     "department": {
       "name": "Ferrisburgh Volunteer Fire Department",
-      "city": "Ferrisburg",
+      "city": "Ferrisburgh",
       "county": "Addison"
     },
     "town": "FERRISBURGH",
