@@ -6,6 +6,7 @@ import 'leaflet.markercluster/dist/MarkerCluster.Default.css';
 import 'leaflet.markercluster';
 import photosData from '../../data/photos.json';
 import { stations as stationRecords } from '../../lib/stations';
+import photoFocus from '../../data/photo-focus.json';
 
 // Slugs come from the same module that generates /stations/[slug], so a popup
 // link can never point at a page that was not built.
@@ -38,11 +39,20 @@ type Photo = (typeof photosData)[number];
  *   page) the image is shown but not linked — opening a bare JPEG in a new tab
  *   just strands people outside the archive.
  */
+// Where to crop a photograph: its set focus point, else toward the top third for a
+// portrait shot (station signs sit above the bay doors), else the centre.
+const cropAt = (p: Photo) =>
+  (photoFocus as Record<string, string>)[p.id] ?? ((p.height ?? 0) > (p.width ?? 0) ? '50% 28%' : '50% 50%');
+
 function photoBlockHtml(p: Photo, href?: string): string {
   const credit = p.photographer
     ? `<div style="color:var(--fdvt-faint,#888);font-size:11px;margin-top:3px">Photograph by ${p.photographer}</div>`
     : '';
-  const img = `<img src="${p.thumb}" alt="${p.caption || 'Station photo'}" style="width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:4px;display:block" />`;
+  // Portrait photographs get a taller window, and every photo is cropped at its
+  // focus point (photo-focus.json) or, for portraits, toward the sign above the doors.
+  const portrait = (p.height ?? 0) > (p.width ?? 0);
+  const pos = cropAt(p);
+  const img = `<img src="${p.thumb}" alt="${p.caption || 'Station photo'}" style="width:100%;aspect-ratio:${portrait ? '4/3' : '16/9'};object-fit:cover;object-position:${pos};border-radius:4px;display:block" />`;
   const block = href
     ? `<a href="${href}" style="display:block;margin-top:8px">${img}</a>`
     : `<div style="margin-top:8px">${img}</div>`;

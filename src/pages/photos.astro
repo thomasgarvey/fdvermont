@@ -24,7 +24,8 @@ const label = (p: P) => p.caption?.trim() || p.department?.name || "Fire station
 const credit = (p: P) =>
   (p.photographer ? `Photograph by ${p.photographer}` : "Photograph") + (p.dateTaken ? `, ${p.dateTaken}` : "");
 const focus = (p: P) => {
-  const at = (photoFocus as Record<string, string>)[p.id];
+  // A set focus point wins; a portrait shot otherwise crops toward the sign above the doors.
+  const at = (photoFocus as Record<string, string>)[p.id] ?? ((p.height ?? 0) > (p.width ?? 0) ? "50% 28%" : null);
   return at ? `;background-position:${at}` : "";
 };
 

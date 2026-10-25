@@ -81,7 +81,8 @@ const place = (p: (typeof photosData)[number]) =>
 // per photograph; it lives outside photos.json because the Airtable sync
 // rewrites that file.
 const focus = (p: (typeof photosData)[number]) => {
-  const at = (photoFocus as Record<string, string>)[p.id];
+  // A set focus point wins; a portrait shot otherwise crops toward the sign above the doors.
+  const at = (photoFocus as Record<string, string>)[p.id] ?? ((p.height ?? 0) > (p.width ?? 0) ? "50% 28%" : null);
   return at ? `;background-position:${at}` : "";
 };
 
