@@ -1,0 +1,164 @@
+---
+// Every published station photograph in one place: filter by county, sort by
+// date or town, and open any of them full screen (the shared Lightbox steps
+// through the whole grid). Each card links to the department page the station
+// sits on. Built from photos.json, so a sync is all a new photograph needs.
+import Archive from "../layouts/Archive.astro";
+import Lightbox from "../components/Lightbox.astro";
+import photosData from "../data/photos.json";
+import photoFocus from "../data/photo-focus.json";
+import { stations, titleCase } from "../lib/stations";
+
+type P = (typeof photosData)[number];
+// A station's main photograph is on the station; any others (a second angle,
+// a close-up) are found through the same station link, by E911 id or address.
+const stationByPhoto = new Map(stations.filter((s) => s.photo).map((s) => [s.photo!.id, s]));
+const stationByEsite = new Map(stations.filter((s) => s.esiteid != null).map((s) => [s.esiteid, s]));
+const stationFor = (p: P) =>
+  stationByPhoto.get(p.id) ??
+  (p.esiteid != null ? stationByEsite.get(p.esiteid) : undefined) ??
+  stations.find((s) => p.stationAddress && s.address === p.stationAddress && s.town.toUpperCase() === (p.town ?? "").toUpperCase()) ??
+  null;
+
+const label = (p: P) => p.caption?.trim() || p.department?.name || "Fire station";
+const credit = (p: P) =>
+  (p.photographer ? `Photograph by ${p.photographer}` : "Photograph") + (p.dateTaken ? `, ${p.dateTaken}` : "");
+const focus = (p: P) => {
+  const at = (photoFocus as Record<string, string>)[p.id];
+  return at ? `;background-position:${at}` : "";
+};
+
+const cards = photosData
+  .map((p) => {
+    const st = stationFor(p);
+    const county = titleCase(st?.county ?? p.department?.county ?? "") || "Vermont";
+    const town = st?.town ?? titleCase(p.department?.city ?? p.town ?? "");
+    return {
+      p,
+      county,
+      town,
+      href: st ? `/departments/${st.page}#${st.slug}` : null,
+      date: p.dateTaken ?? "",
+    };
+  })
+  .sort((a, b) => b.date.localeCompare(a.date) || a.town.localeCompare(b.town));
+
+const counties = [...new Set(cards.map((c) => c.county))].sort();
+const stationsShown = new Set(cards.map((c) => c.href).filter(Boolean)).size;
+const title = "Photographs – Vermont Fire Departments";
+const description = `${cards.length} photographs of Vermont fire stations, by county and town.`;
+---
+
+<Archive title={title} description={description} image={cards[0]?.p.medium}>
+  <main class="wrap page gal">
+    <p class="stamp">The photographs</p>
+    <h1>Vermont's fire stations, photographed</h1>
+    <p class="lead">
+      {cards.length} photographs of {stationsShown} stations so far, out of {stations.length} on the map.
+      Have one of a station that's missing? <a href="/contact">Send it in</a> — it will be credited to you.
+    </p>
+
+    <div class="controls" role="group" aria-label="Filter and sort">
+      <label>
+        <span>County</span>
+        <select id="county">
+          <option value="">All counties</option>
+          {counties.map((c) => <option value={c}>{c}</option>)}
+        </select>
+      </label>
+      <label>
+        <span>Sort</span>
+        <select id="sort">
+          <option value="new">Newest first</option>
+          <option value="town">Town, A–Z</option>
+        </select>
+      </label>
+      <p class="count" id="count" aria-live="polite">{cards.length} photographs</p>
+    </div>
+
+    <ul class="grid" id="grid">
+      {cards.map((c) => (
+        <li class="card" data-county={c.county} data-town={c.town} data-date={c.date}>
+          <button type="button" class="shot"
+            data-full={c.p.src} data-caption={`${label(c.p)} · ${c.town}`} data-credit={credit(c.p)}
+            style={`background-image:url("${c.p.thumb}")${focus(c.p)}`}
+            aria-label={`View ${label(c.p)}, ${c.town}, full screen`}></button>
+          <div class="meta">
+            <h2>{label(c.p)}</h2>
+            <p>{c.town}{c.town && " · "}{c.county} County</p>
+            <p class="by">{credit(c.p)}</p>
+            {c.href && <a class="go" href={c.href}>Department page →</a>}
+          </div>
+        </li>
+      ))}
+    </ul>
+  </main>
+  <Lightbox />
+</Archive>
+
+<script>
+  const grid = document.getElementById("grid")!;
+  const county = document.getElementById("county") as HTMLSelectElement;
+  const sort = document.getElementById("sort") as HTMLSelectElement;
+  const count = document.getElementById("count")!;
+  const cards = [...grid.querySelectorAll<HTMLLIElement>(".card")];
+
+  // Remember the reader's choices for this browser only; the page works without it.
+  try {
+    county.value = localStorage.getItem("fdvt-gal-county") ?? "";
+    sort.value = localStorage.getItem("fdvt-gal-sort") ?? "new";
+  } catch (e) {}
+
+  function apply() {
+    const c = county.value;
+    const order = [...cards].sort((a, b) =>
+      sort.value === "town"
+        ? a.dataset.town!.localeCompare(b.dataset.town!)
+        : b.dataset.date!.localeCompare(a.dataset.date!) || a.dataset.town!.localeCompare(b.dataset.town!),
+    );
+    let n = 0;
+    for (const el of order) {
+      const show = !c || el.dataset.county === c;
+      el.hidden = !show;
+      if (show) n++;
+      grid.appendChild(el);
+    }
+    count.textContent = `${n} photograph${n === 1 ? "" : "s"}${c ? ` in ${c} County` : ""}`;
+    try {
+      localStorage.setItem("fdvt-gal-county", c);
+      localStorage.setItem("fdvt-gal-sort", sort.value);
+    } catch (e) {}
+  }
+  county.addEventListener("change", apply);
+  sort.addEventListener("change", apply);
+  apply();
+</script>
+
+<style>
+  .gal { padding: 2.6rem 0 4rem; }
+  .stamp { margin: 0 0 0.6rem; font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-3); }
+  h1 { margin: 0 0 0.8rem; font-family: "Source Serif 4", Georgia, serif; font-size: clamp(1.8rem, 4vw, 2.5rem); line-height: 1.15; }
+  .lead { margin: 0 0 1.6rem; color: var(--ink-2); max-width: 60ch; }
+  .lead a { color: var(--red); }
+  .controls { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 0.8rem 1.4rem; margin: 0 0 1.4rem;
+    padding: 0.9rem 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .controls label { display: flex; flex-direction: column; gap: 0.25rem; font-size: 0.72rem; letter-spacing: 0.09em; text-transform: uppercase; color: var(--ink-3); }
+  .controls select { min-height: 44px; min-width: 11rem; padding: 0 0.6rem; font: inherit; font-size: 0.95rem; letter-spacing: 0; text-transform: none;
+    color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 4px; }
+  .count { margin: 0 0 0 auto; font-size: 0.85rem; color: var(--ink-3); }
+  .grid { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.6rem 1.4rem; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+  .card[hidden] { display: none; }
+  .shot { display: block; width: 100%; aspect-ratio: 4 / 3; border: 0; padding: 0; cursor: zoom-in;
+    background-color: var(--line); background-size: cover; background-position: center; border-radius: 3px; }
+  .shot:focus-visible { outline: 3px solid var(--red); outline-offset: 2px; }
+  .meta h2 { margin: 0.6rem 0 0.15rem; font-family: "Source Serif 4", Georgia, serif; font-size: 1.02rem; line-height: 1.3; }
+  .meta p { margin: 0; font-size: 0.82rem; color: var(--ink-2); }
+  .meta .by { color: var(--ink-3); font-size: 0.75rem; margin-top: 0.15rem; }
+  .go { display: inline-flex; align-items: center; min-height: 36px; font-size: 0.85rem; font-weight: 600; color: var(--red); text-decoration: none; }
+  .go:hover { text-decoration: underline; }
+  @media (max-width: 560px) {
+    .count { margin-left: 0; width: 100%; }
+    .controls select { min-width: 0; width: 100%; }
+    .controls label { flex: 1 1 140px; }
+  }
+</style>
