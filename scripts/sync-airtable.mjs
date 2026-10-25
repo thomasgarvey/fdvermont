@@ -400,9 +400,15 @@ writeFileSync(`${ROOT}/src/data/retired-stations.json`, JSON.stringify(retired, 
 // A photograph whose station has been retired has nowhere to land and simply
 // vanishes from the map. Retiring is a one-click action in Airtable, so say so
 // loudly rather than letting the picture disappear quietly.
+// A photo linked to a station we added by hand (no ESITEID) lands through that
+// link, so it is not an orphan just because it has no E911 id.
 const rosterIds = new Set(roster.map((s) => s.esiteid));
+const rosterAddrs = new Set(roster.map((s) => `${s.town}|${s.address}`.toLowerCase()));
 const orphaned = out.filter(
-  (p) => !(p.esiteid != null && rosterIds.has(p.esiteid)) && p.lat == null,
+  (p) =>
+    !(p.esiteid != null && rosterIds.has(p.esiteid)) &&
+    p.lat == null &&
+    !(p.placedBy === 'station-link' && p.stationAddress && [...rosterAddrs].some((k) => k.endsWith(`|${p.stationAddress}`.toLowerCase()))),
 );
 if (orphaned.length) {
   console.warn(`\n  !! ${orphaned.length} photograph(s) have nowhere to land and will NOT appear:`);
