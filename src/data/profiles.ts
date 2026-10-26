@@ -254,6 +254,12 @@ const GRBR = "https://greensborovt.gov/wp-content/uploads/town-office-documents/
 const CHA = "https://charlestonvt.org/wp-content/uploads";
 const NWT = "https://townofnewport.org/wp-content/uploads/2025/03/ANNUAL-REPORT-2024.pdf";
 
+const TIN = "https://www.tinmouthvt.gov/volunteer-fire-department";
+const TINR = "https://storage.googleapis.com/juniper-media-library/611/2026/06/2025-Tinmouth-Town-Report.pdf";
+const IRAR = "https://img1.wsimg.com/blobby/go/630ba3dc-3b66-416f-813c-e6ad9997a9cb/downloads/189898f3-bcbc-4374-9486-780df8f7cf33/2025%20Town%20Report%20e-copy.pdf";
+const PTF = "https://www.pittsfieldvt.com";
+const HUBP = "https://www.rutlandrpc.org/wp-content/uploads/2023/07/2024-Hubbardton-Town-Plan-Amended.pdf";
+
 // One department, two town pages: Underhill and Jericho share the profile.
 const UJFD: Profile = {
   description:
@@ -6059,6 +6065,176 @@ export const profiles: Record<string, Profile> = {
     ],
     sources: {
       r2024: { label: "Town of Newport, 2024 Annual Report", href: NWT, note: "Newport Center Volunteer Fire Department report, PDF pages 27–28; warning, page 8" },
+    },
+  },
+  tinmouth: {
+    description:
+      "Tinmouth Volunteer Fire Department: formed in 1967, over twenty volunteers, a firehouse on the site of the " +
+      "old church, two pumper tankers, the Wild Game Supper and the department's finances.",
+    facts: [
+      ["Founded", "1967"],
+      ["Members", "Over twenty active volunteers"],
+      ["Apparatus", "Two pumper tankers, a tanker pickup for wildland fires and a utility truck"],
+      ["Meets", "First Thursday of the month, at the fire house"],
+      ["Mutual aid", "Automatic, with Danby"],
+    ],
+    contact: { chief: "Marshall Squier", phone: "802-446-2460", website: TIN, source: "dept" },
+    history: {
+      intro:
+        "Tinmouth's volunteers answer structure, wildland and chimney fires, crashes and entrapments, and support " +
+        "law enforcement and area rescue squads. If 9-1-1 is down, someone is at the fire station on 802-446-2460.",
+      events: [
+        { year: 1967, text: "The department is formed. Its first truck is an old 750-gallon oil truck with a portable pump; its first pumper, a 1947 model, came from Connecticut.", source: "dept" },
+        { year: 1969, text: "The Community Church burns on the corner of Route 140 and Mountain View Road. The church is rebuilt on the green across the road, and in the 1970s a new firehouse goes up where it stood; the old Grange building, the first firehouse, becomes the \"Old Firehouse\".", source: "dept" },
+        { year: 1998, text: "The firehouse gets a small addition and a new shell.", source: "dept" },
+        { year: 2025, text: "A hard start to the year, with several structure fires in Danby. Two grants, for wildland fire gear and a gear washing station, and a Tinmouth Community Fund grant for a commercial warming oven. The department joins a statewide emergency management drill.", source: "r2025" },
+      ],
+    },
+    money: {
+      intro: "The department is a nonprofit with its own books; the town gives it $25,000 a year, and the supper, raffle and tag sale bring in much of the rest.",
+      year: "the year to 30 September 2025",
+      lines: [
+        { label: "Town allotment", amount: 25000 },
+        { label: "Game supper", amount: 6270 },
+        { label: "Donations", amount: 5594 },
+        { label: "Tag sale", amount: 4926 },
+        { label: "Interest", amount: 4563 },
+        { label: "Raffle", amount: 4015 },
+      ],
+      linesNote: "Income of $51,262 in all; spending was $31,253, the largest share ($10,755) on small tools.",
+      capital: {
+        title: "Fund balances, 30 September 2025",
+        lines: [
+          { label: "Truck fund (restricted)", amount: 80000 },
+          { label: "Unrestricted", amount: 90781 },
+        ],
+        note: "The truck fund held $70,000 a year earlier. In 2024 the department spent $29,520 on building improvements, helped by $25,000 of the town's ARPA money.",
+      },
+      source: "r2025",
+    },
+    careers: {
+      intro: "Anyone interested in joining is welcome at a meeting, or can talk to any member.",
+      points: ["Meetings on the first Thursday of the month at 7 pm, at the fire house"],
+      applyUrl: TIN,
+      source: "dept",
+    },
+    residents: [
+      { label: "Wild Game Supper", href: TIN, text: "The department's big fundraiser, the Saturday before Thanksgiving at the Community Center." },
+      { label: "Burn permits", href: TINR, text: "Needed unless there is snow on the ground; from the fire warden or the town's permit administrator." },
+    ],
+    sources: {
+      dept: { label: "Town of Tinmouth, Volunteer Fire Department", href: TIN },
+      r2025: { label: "Town of Tinmouth, 2025 Town Report", href: TINR, note: "Volunteer Fire Department report and finances, PDF pages 23–25" },
+    },
+  },
+  ira: {
+    description:
+      "Ira Volunteer Fire Department: 20 calls by type in 2025, a 1993 tanker bought from Clarendon, " +
+      "plans for a new station, and a truck fund built up year by year.",
+    facts: [
+      ["Calls", "20 in 2025"],
+      ["Members", "14, including officers, a mechanic and the board"],
+      ["Chief", "Dan Perry"],
+      ["New station", "Proposed; options under review with state fire safety officials"],
+    ],
+    contact: { chief: "Dan Perry", source: "r2025" },
+    history: {
+      intro:
+        "A small incorporated volunteer department with its own board, always looking for firefighters, helpers " +
+        "and grant writers.",
+      events: [
+        { year: 2025, calls: 20, text: "Seven of the calls are crashes. The department buys a 1993 International tanker from Clarendon Volunteer Fire Department for $5,000 and spends $10,000 from its truck fund to equip it; Clarendon houses it free at the Chippenhook station. A probationary firefighter joins.", source: "r2025" },
+      ],
+    },
+    calls: {
+      intro: "Crashes and medical calls made up more than half of 2025's calls.",
+      byType: {
+        title: "Calls by type, 2025",
+        bars: [
+          { label: "Motor vehicle accidents", value: 7 },
+          { label: "Medical", value: 5 },
+          { label: "Mutual aid", value: 2 },
+          { label: "Wildland fires", value: 2 },
+          { label: "Structure fire", value: 1 },
+          { label: "Unpermitted burn", value: 1 },
+          { label: "Carbon monoxide", value: 1 },
+          { label: "Lost hiker", value: 1 },
+        ],
+        note: "The types add up to the 20 calls reported.",
+        source: "r2025",
+      },
+    },
+    residents: [
+      { label: "Join", href: "https://townofira.com/activities-organizations", text: "Contact the chief; the department welcomes firefighters, helpers and grant writers." },
+    ],
+    sources: {
+      r2025: { label: "Town of Ira, 2025 Town Report", href: IRAR, note: "Ira Volunteer Fire Department report, PDF page 16. A scanned report, read with text recognition" },
+    },
+  },
+  pittsfield: {
+    description:
+      "Pittsfield Volunteer Fire & Rescue: the Eugene E. Martin Memorial Fire House, new vehicle rescue tools, " +
+      "first-responder training with White River Valley Ambulance, and the department's funds.",
+    facts: [
+      ["Station", "Eugene E. Martin Memorial Fire House"],
+      ["Chief", "David Colton, an elected two-year office"],
+      ["Meets", "2nd Tuesday of the month, 7:30 pm, at the firehouse"],
+      ["Ambulance", "White River Valley Ambulance, Bethel"],
+    ],
+    contact: { chief: "David Colton", website: `${PTF}/emergency-services.html`, source: "dept" },
+    history: {
+      intro:
+        "Pittsfield's volunteers handle fire and vehicle rescue, and assist White River Valley Ambulance's crews " +
+        "at medical scenes. With the town's fire fleet modernised, the town now puts smaller sums into reserve.",
+      events: [
+        { year: 2025, text: "New stabilisation struts and an air-bag lift system for vehicle rescues. Three members take the one-day Vermont First Responder course. The 2008 Ford rescue truck is sold for $35,000, which goes back to the town for a new capital reserve fund. ARPA money buys the department a snowmobile.", source: "r2025" },
+      ],
+    },
+    money: {
+      intro: "Pittsfield Volunteer Fire & Rescue has its own fund in the town budget, supported by town taxes and the department's fundraising.",
+      year: "2025",
+      lines: [
+        { label: "Bazaar food and silent auction (profit)", amount: 5580.69 },
+        { label: "Annual coin drop", amount: 3913.12 },
+      ],
+      linesNote: "The department's two fundraisers in 2025.",
+      capital: {
+        title: "Sale of the 2008 rescue truck",
+        lines: [{ label: "Returned to the town as a new capital reserve fund", amount: 35000 }],
+        note: "Not earmarked: kept for unexpected building repairs or equipment failures.",
+      },
+      source: "r2025",
+    },
+    residents: [
+      { label: "Burn permits", href: `${PTF}/emergency-services.html`, text: "From the town fire warden." },
+      { label: "Smoke and CO alarms", href: `${PTF}/emergency-services.html`, text: "The department's reminder: change the batteries, and have chimneys cleaned at least once a year." },
+    ],
+    sources: {
+      dept: { label: "Town of Pittsfield, Emergency Services", href: `${PTF}/emergency-services.html` },
+      r2025: { label: "Town of Pittsfield, 2025 Town Report", href: `${PTF}/uploads/2/7/3/2/27322481/2025_pittsfield_town_report_final_feb_11.pdf`, note: "Pittsfield Volunteer Fire and Rescue report, PDF page 37" },
+    },
+  },
+  hubbardton: {
+    description:
+      "Hubbardton Fire Department: 16 volunteers, two stations within five miles of every home, " +
+      "a four-bay fire house approved in 2009, and a mutual aid pact with six towns.",
+    facts: [
+      ["Members", "16 volunteers"],
+      ["Stations", "2: Hortonia and West Roads, and Monument Hill Road near the Hubbardton Battlefield"],
+      ["Apparatus", "4: three pumpers and a tanker"],
+      ["Mutual aid", "Castleton, Fair Haven, Benson, Sudbury, Pittsford and West Rutland"],
+    ],
+    history: {
+      intro:
+        "Hubbardton's volunteers work from two stations placed so that every home in town is within five miles " +
+        "of one. The department is funded through the town budget, local fundraisers, and the HVFD Boosters, who also bring food and water to firefighters on calls.",
+      events: [
+        { year: 2009, text: "Residents approve a new four-bay fire house and training facility, with room for four trucks, a dispatch room and a training and meeting room.", source: "plan" },
+      ],
+    },
+    residents: [],
+    sources: {
+      plan: { label: "Town of Hubbardton, 2024 Town Plan (amended)", href: HUBP, note: "Fire department, page 16" },
     },
   },
   jericho: UJFD,
