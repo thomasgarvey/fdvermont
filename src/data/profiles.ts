@@ -249,6 +249,11 @@ const TSH = "https://www.townshendvtfire.org";
 const TSHR = "https://www.townshendvt.gov/fileadmin/files/Boards_and_Committees/Selectboard/Town_Reports/2026_Twn_Report.Final.pdf";
 const JAM = "https://www.jamaicavermont.org/wp-content/uploads/2025/11/2025-Town-Report.pdf";
 
+const GRB = "https://greensborovt.gov";
+const GRBR = "https://greensborovt.gov/wp-content/uploads/town-office-documents/Town-Report";
+const CHA = "https://charlestonvt.org/wp-content/uploads";
+const NWT = "https://townofnewport.org/wp-content/uploads/2025/03/ANNUAL-REPORT-2024.pdf";
+
 // One department, two town pages: Underhill and Jericho share the profile.
 const UJFD: Profile = {
   description:
@@ -5891,6 +5896,169 @@ export const profiles: Record<string, Profile> = {
     ],
     sources: {
       r2024: { label: "Town of Jamaica, 2024 Annual Report", href: JAM, note: "Jamaica Volunteer Fire & Rescue letter, PDF page 31; budget, page 16" },
+    },
+  },
+  greensboro: {
+    description:
+      "Greensboro Volunteer Fire Department: first response for Greensboro and Stannard, 44 calls by type, " +
+      "a new E-One engine, the firehouse loan and the fire budget.",
+    facts: [
+      ["Covers", "Greensboro and Stannard"],
+      ["Calls", "44 in fiscal 2025; 43 in fiscal 2024"],
+      ["Mutual aid", "Given 14 times, received twice (fiscal 2025)"],
+      ["Station", "765 Breezy Avenue"],
+      ["Fire budget", "$66,139.50 proposed for fiscal 2027"],
+    ],
+    contact: { chief: "Dave Brochu Jr.", website: `${GRB}/government/contact/`, source: "contact" },
+    history: {
+      intro:
+        "Greensboro's volunteers are first response for a wide range of 911 calls, from structure fires to " +
+        "assists for Hardwick Rescue, and work closely with Hardwick and their other mutual aid partners.",
+      events: [
+        { year: 2024, calls: 43, text: "Calls in the fiscal year to June. After the July 2023 flooding, the department helps clear culverts and report road closures.", source: "r2025" },
+        { year: 2025, calls: 44, text: "Calls in the fiscal year to June, 3 of them in Stannard. A new E-One truck is bought, financed over 10 years.", source: "r2026" },
+      ],
+    },
+    calls: {
+      intro: "Cancelled dispatches, crashes and structure fires led fiscal 2025.",
+      byType: {
+        title: "Calls by type, July 2024 – June 2025",
+        bars: [
+          { label: "Dispatched but cancelled", value: 9 },
+          { label: "Car accidents", value: 8 },
+          { label: "Structure fires", value: 7 },
+          { label: "Hardwick Rescue assists", value: 6 },
+          { label: "False alarms and detector faults", value: 4 },
+          { label: "Car fires", value: 2 },
+          { label: "Electrical wiring", value: 2 },
+          { label: "Smoke or odor removal", value: 1 },
+          { label: "Propane or flammable liquid", value: 1 },
+          { label: "Water or steam leak", value: 1 },
+          { label: "Cell phone 911 activation", value: 1 },
+          { label: "CO alarm", value: 1 },
+          { label: "Grass fire", value: 1 },
+        ],
+        note: "The types add up to the 44 calls reported.",
+        source: "r2026",
+      },
+    },
+    money: {
+      intro: "The fire department is a line in the town budget; its building and trucks are in the town's capital plan.",
+      year: "fiscal year 2027 (proposed)",
+      lines: [
+        { label: "Payroll", amount: 13000 },
+        { label: "New equipment", amount: 13000 },
+        { label: "Dispatch", amount: 7600 },
+        { label: "Property and casualty insurance", amount: 7025 },
+        { label: "Equipment repairs", amount: 5000 },
+        { label: "Truck repair", amount: 4000 },
+        { label: "Heating fuel", amount: 3000 },
+      ],
+      linesNote: "The largest lines of $66,139.50 in all, 3.15% less than fiscal 2026.",
+      capital: {
+        title: "Capital plan",
+        lines: [
+          { label: "Firehouse roof, 2029", amount: 100000 },
+          { label: "Engine #1 replacement, fiscal 2030", amount: 830000 },
+        ],
+        note: "The firehouse's 20-year loan is paid off in fiscal 2029. Engine #1 is nearly 25 years old; its replacement would be financed over 10 years.",
+      },
+      source: "r2026",
+    },
+    residents: [
+      { label: "911 address signs", href: `${GRB}/government/contact/`, text: "The department's sign program for Greensboro and Stannard homes." },
+      { label: "Fireworks permits", href: `${GRB}/government/contact/`, text: "From the fire department; burn permits come from the forest fire warden." },
+    ],
+    sources: {
+      contact: { label: "Town of Greensboro, Contact", href: `${GRB}/government/contact/` },
+      r2026: { label: "Town of Greensboro, 2026 Town Report", href: `${GRBR}/2026-Town-Report.pdf`, note: "Fire Department report for FY 2025, PDF page 45; budget, page 17; capital plan, pages 21–22" },
+      r2025: { label: "Town of Greensboro, 2025 Town Report", href: `${GRBR}/2025-Town-Report.pdf`, note: "Fire Department report for FY 2024, PDF pages 37–38. A scanned report, read with text recognition" },
+    },
+  },
+  charleston: {
+    description:
+      "Charleston Volunteer Fire Department: 70 years of unpaid volunteers serving Charleston and Morgan, " +
+      "45 calls in 2024, 26 members, a new tracked Argo and the oyster supper.",
+    facts: [
+      ["Covers", "Charleston and Morgan"],
+      ["Members", "26 regular members, all unpaid"],
+      ["Calls", "45 in 2024; 29 in 2023"],
+      ["Town appropriation", "$55,609, level for 2025"],
+    ],
+    contact: { phone: "802-723-5029", source: "r2023" },
+    history: {
+      intro:
+        "No member is paid for their time; every dollar the department receives goes to running it. Calls " +
+        "include structure and chimney fires, ambulance assists, crashes, alarms and mutual aid.",
+      events: [
+        { year: 2023, calls: 29, text: "The department's 69th year. Membership rises to 26 regular and 2 junior members, and the August barbecue and October oyster supper both set records.", source: "r2023" },
+        { year: 2024, calls: 45, text: "The 70th year. A tracked, eight-wheeled Argo joins the fleet for back-country rescue, ice rescue and brush fires.", source: "r2024" },
+        { year: 2025, text: "The oyster supper returns, to be held at the fire station from now on.", source: "r2024" },
+      ],
+    },
+    calls: {
+      intro: "Calls rose by more than half from 2023 to 2024.",
+      byYear: {
+        title: "Emergency calls by year",
+        bars: [
+          { label: "2023", value: 29 },
+          { label: "2024", value: 45 },
+        ],
+        note: "Calendar years, from the department's reports to the town.",
+        source: "r2024",
+      },
+    },
+    residents: [
+      { label: "Oyster supper", href: `${CHA}/2025/02/2024CharlestonTownReport-1-27-Final.pdf`, text: "The department's October fundraiser, at the fire station." },
+    ],
+    sources: {
+      r2023: { label: "Town of Charleston, 2023 Town Report", href: `${CHA}/2024/02/2023CharlestonTownReportFINALReduced.pdf`, note: "Fire department report, PDF page 41" },
+      r2024: { label: "Town of Charleston, 2024 Town Report", href: `${CHA}/2025/02/2024CharlestonTownReport-1-27-Final.pdf`, note: "Fire department report, PDF page 40. A scanned page, read with text recognition" },
+    },
+  },
+  "newport-town": {
+    description:
+      "Newport Center Volunteer Fire Department: 23 volunteers serving the Town of Newport, a new fire pond " +
+      "with dry hydrants, the town appropriation and the equipment fund.",
+    facts: [
+      ["Members", "23: six officers and 17 firefighters (2024)"],
+      ["Chief", "Jason Willis"],
+      ["Training", "At least once a month"],
+      ["Town appropriation", "$45,000 requested for 2025, plus $30,000 for the equipment fund"],
+    ],
+    contact: { chief: "Jason Willis", source: "r2024" },
+    history: {
+      intro:
+        "The Town of Newport's volunteer department, separate from the City of Newport's. It trains at least " +
+        "monthly and raises money through a July chicken barbecue and a year-long raffle.",
+      events: [
+        { year: 2024, text: "The town's new fire pond, with dry hydrants, proves itself at a business fire off Vance Hill, where tankers shuttle water and the scene never runs out, and again at a structure fire on Route 100 in the fall. The department adds a breakfast with Santa in December.", source: "r2024" },
+      ],
+    },
+    money: {
+      intro: "The town appropriates money each year for operations and dispatch, and a separate sum for an equipment and vehicle reserve.",
+      year: "2025 (requested)",
+      lines: [
+        { label: "General", amount: 41081.53 },
+        { label: "Dispatching", amount: 3918.47 },
+      ],
+      linesNote: "$45,000 in all, up $4,321.87 from the $40,678.13 approved for 2024.",
+      capital: {
+        title: "Equipment fund, 2024",
+        lines: [
+          { label: "Town deposit", amount: 30000 },
+          { label: "SCBA gear", amount: 7487.19 },
+          { label: "Protective gear", amount: 6707.5 },
+        ],
+        note: "The deposit and the two purchases made from the fund in 2024; voters are asked for another $30,000 for 2025.",
+      },
+      source: "r2024",
+    },
+    residents: [
+      { label: "Breakfast with Santa", href: NWT, text: "Added in December 2024, alongside the July chicken barbecue." },
+    ],
+    sources: {
+      r2024: { label: "Town of Newport, 2024 Annual Report", href: NWT, note: "Newport Center Volunteer Fire Department report, PDF pages 27–28; warning, page 8" },
     },
   },
   jericho: UJFD,
