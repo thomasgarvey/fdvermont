@@ -264,6 +264,10 @@ const BAR = "https://barnetvt.org/wp-content/uploads/2026/02/Barnet_2025_Vermont
 const GLV = "https://townofglover.com/wp-content/uploads/2023-Annual-Report-Electronic.pdf";
 const WSM = "https://irp.cdn-website.com/2728571a/files/uploaded/Westmore_2025.F.pdf";
 
+const HFX = "https://halifaxvt.com/wp-content/uploads";
+const MRB = "https://marlborovt.us/wp-content/uploads/2026/01/Marlboro_2025_Vermont-Municipal-Report.pdf";
+const WHT = "https://whitinghamvt.org";
+
 // One department, two town pages: Underhill and Jericho share the profile.
 const UJFD: Profile = {
   description:
@@ -6412,6 +6416,169 @@ export const profiles: Record<string, Profile> = {
     ],
     sources: {
       r2025: { label: "Town of Westmore, 2025 Annual Report", href: WSM, note: "Westmore Fire & Rescue budget request and call log, PDF pages 43–44" },
+    },
+  },
+  halifax: {
+    description:
+      "Halifax Fire Company: volunteers who answer medical calls for their neighbours, 97 calls in 2023, " +
+      "a new chief after more than 50 years, and the clambake and auction that pay most of the bills.",
+    facts: [
+      ["Run by", "Halifax Fire Company, Inc."],
+      ["Calls", "97 in 2023; 103 in 2022"],
+      ["Chief", "Dennis M. Annear, since January 2023"],
+      ["Meets", "1st and 3rd Monday evenings, at the station"],
+    ],
+    contact: { chief: "Dennis M. Annear", source: "r2023" },
+    history: {
+      intro:
+        "The company raises most of its own money through donations, a monthly 50/50 raffle, an annual auction " +
+        "and a clambake. It is not a licensed first-response agency, but its members answer medical calls " +
+        "\"because you are our neighbors\", and help Whitingham Rescue and Deerfield Valley Ambulance find houses.",
+      events: [
+        { year: 2021, calls: 70, callsApprox: true, text: "Over 70 calls, 43 of them assisting Rescue and 16 mutual aid. The auction and clambake go well.", source: "r2021" },
+        { year: 2022, calls: 103, text: "64 calls assist ambulances; mutual aid is given 18 times and received 7. A bad year for brush fires.", source: "r2022" },
+        { year: 2023, calls: 97, text: "Wayne Courser retires after more than 50 years as chief and stays a member. The company elects Dennis Annear, with over 45 years in the fire service, 23 of them as full-time chief in Orange, Massachusetts. The company begins replacing protective gear at two sets a year.", source: "r2023" },
+      ],
+    },
+    calls: {
+      intro: "Medical emergencies were the largest share of calls in 2023, followed by mutual aid.",
+      byYear: {
+        title: "Calls by year",
+        bars: [
+          { label: "2021", value: 70, approx: true },
+          { label: "2022", value: 103 },
+          { label: "2023", value: 97 },
+        ],
+        note: "As reported by the company each year; 2021 is \"over 70\".",
+        source: "r2023",
+      },
+      byType: {
+        title: "Calls by type, 2023",
+        bars: [
+          { label: "Medical emergencies", value: 44 },
+          { label: "Mutual aid", value: 15, sub: "13 to fire scenes, 2 covering a town" },
+          { label: "Motor vehicle crashes", value: 10 },
+          { label: "Wires and trees down", value: 5 },
+          { label: "Fire alarms", value: 4 },
+        ],
+        note: "The types the company names; they account for 78 of the 97 calls.",
+        source: "r2023",
+      },
+    },
+    money: {
+      intro: "The town budget pays dispatching and ambulance service and gives the company money for equipment and gear.",
+      year: "fiscal year 2026 (proposed)",
+      lines: [
+        { label: "Contracted ambulance", amount: 21137 },
+        { label: "Dispatching", amount: 17474 },
+      ],
+      linesNote: "Part of the town's $55,211 line for the fire company and ambulance, up 11.35%.",
+      capital: { title: "Protective gear", lines: [{ label: "One full set of turnout gear, about", amount: 5000 }], note: "Gear must be replaced every 10 years; the company buys at least two sets a year." },
+      source: "r2024",
+    },
+    residents: [
+      { label: "Reflective house numbers", href: `${HFX}/2024/02/TOWN-MEETING-REPORT-FY23_FINAL.pdf`, text: "A fundraiser that also helps crews and ambulances find you; order with the form at the town office." },
+      { label: "Auction and clambake", href: `${HFX}/2024/02/TOWN-MEETING-REPORT-FY23_FINAL.pdf`, text: "The company's main fundraisers." },
+    ],
+    sources: {
+      r2021: { label: "Town of Halifax, Annual Town Report FYE 2021", href: `${HFX}/2022/04/Halifax-Annual-Town-Report-FYE-2021.pdf`, note: "Halifax Fire Company report, PDF page 32" },
+      r2022: { label: "Town of Halifax, Town Report (2022)", href: `${HFX}/2023/02/Halifax-Town-Report-FY24-pages.pdf`, note: "Halifax Fire Co. report, PDF page 30" },
+      r2023: { label: "Town of Halifax, Town Meeting Report FY23", href: `${HFX}/2024/02/TOWN-MEETING-REPORT-FY23_FINAL.pdf`, note: "Report of the Halifax Fire Company for 2023, PDF pages 40–41" },
+      r2024: { label: "Town of Halifax, Town Meeting Book FY2024", href: `${HFX}/2025/02/2024_Halifax-TOWN-MEETING-BOOK_FY2024_FINAL_20250207.pdf`, note: "Budget, PDF page 11" },
+    },
+  },
+  marlboro: {
+    description:
+      "Marlboro Volunteer Fire Company: 16 first responders, 116 calls last year and 106 in five months, " +
+      "the firehouse on South Road, and what the company asks of the town.",
+    facts: [
+      ["Run by", "Marlboro Volunteer Fire Company, a nonprofit"],
+      ["Responders", "16, including 2 juniors; 4 are trained to enter a burning building"],
+      ["Calls", "116 last year; 106 from July to November 2025"],
+      ["Station", "779 South Road"],
+      ["Meets", "6 pm, 2nd and 4th Wednesdays; EMT training the 3rd Wednesday"],
+    ],
+    contact: { chief: "Dan Elliott", source: "r2025" },
+    history: {
+      intro:
+        "Marlboro's responders answer structure and car fires, downed wires, crashes, medical emergencies and " +
+        "checks on elderly residents. Five of them live outside Marlboro.",
+      events: [
+        { year: 2025, text: "The IRS grants the company 501(c)(3) status. Three fire safety talks at Marlboro Elementary in January introduce its mascot, Phoenix; the State Fire Marshal's office gives extinguisher demonstrations at the Town Fair. Brush fires along Route 9 keep the company \"crazy busy\" in the fall, and by 30 November it has answered 106 calls in five months.", source: "r2025" },
+      ],
+    },
+    money: {
+      intro: "The town appropriates money each year; donations and grants, including an annual one from the Marlboro Alliance, cover the rest.",
+      year: "fiscal year 2026 (requested by the company)",
+      lines: [
+        { label: "Operating", amount: 42000 },
+        { label: "Capital: turnout gear, SCBA and firehouse heating", amount: 48000 },
+      ],
+      linesNote: "The capital request is $2,000 less than last year's. The operating request includes a new stipend of $5 per call for each responder, toward fuel, and an incident-reporting software upgrade of over $4,000.",
+      capital: { title: "Town appropriation", lines: [{ label: "Fiscal 2025 (actual)", amount: 86400.51 }, { label: "Fiscal 2026 (proposed)", amount: 90000 }], note: "The town budget line for the fire company." },
+      source: "r2025",
+    },
+    careers: {
+      intro: "No experience is needed, and there are jobs for everyone: running hoses, directing traffic, looking after equipment, checking on elders. The company also needs board members and help with building and fundraising.",
+      points: [
+        "Drop by a training at 6 pm on the 2nd or 4th Wednesday, at the firehouse",
+        "Email MVFC.recruitment@gmail.com with questions",
+      ],
+      applyUrl: MRB,
+      source: "r2025",
+    },
+    residents: [
+      { label: "Burn permits", href: MRB, text: "From the town fire wardens, for the day of the burn only." },
+    ],
+    sources: {
+      r2025: { label: "Town of Marlboro, 2025 Annual Report", href: MRB, note: "Marlboro Volunteer Fire Company report, PDF pages 41–42; budget, page 23" },
+    },
+  },
+  whitingham: {
+    description:
+      "Whitingham Volunteer Fire Department: two stations, Jacksonville and Whitingham, 207 calls, " +
+      "a new brush truck, new air packs, and the town's fire budget.",
+    facts: [
+      ["Stations", "2: Jacksonville and Whitingham"],
+      ["Calls", "207 last year, down from 333"],
+      ["Chief", "Stanley Janovsky Jr."],
+      ["Meets", "Second Monday, 6 pm, Jacksonville Station"],
+      ["Town budget", "$193,425 for fiscal 2025, plus $60,000 to the equipment fund"],
+    ],
+    contact: { chief: "Stanley Janovsky Jr.", phone: "802-368-2900", website: `${WHT}/departments/fire-department`, source: "dept" },
+    history: {
+      intro:
+        "Whitingham's volunteers cover the town from two stations and give mutual aid to neighbours in Vermont " +
+        "and Massachusetts, from Dover and Readsboro to Rowe and Monroe.",
+      events: [
+        { year: 2024, calls: 207, text: "A new GMC brush truck, Brush 1, replaces the Suburban and is housed at the Whitingham station. Capt. Dennis Pike wins a grant for a new air pack, alongside six more the department buys; three more will complete the replacement.", source: "r2024" },
+      ],
+    },
+    money: {
+      intro: "The fire department is run by the town, which votes its operating money and an equipment fund each March.",
+      year: "fiscal year 2025 (voted March 2024)",
+      lines: [
+        { label: "Operation of the town fire department", amount: 193425 },
+      ],
+      linesNote: "Voted at the 5 March 2024 town meeting.",
+      capital: { title: "Equipment fund", lines: [{ label: "Fiscal 2025 deposit", amount: 60000 }], note: "Saved toward apparatus and equipment." },
+      source: "r2024",
+    },
+    careers: {
+      intro: "\"We need volunteers. We will train you.\"",
+      points: [
+        "Come to a meeting, every second Monday at 6 pm at the Jacksonville Station",
+        "The Whitingham Firemen's Association holds first-responder training on the third Monday, 7 pm",
+      ],
+      applyUrl: `${WHT}/departments/fire-department`,
+      source: "r2024",
+    },
+    residents: [
+      { label: "Burn permits", href: `${WHT}/departments/fire-warden`, text: "From the town fire warden; no permit form, no burning." },
+    ],
+    sources: {
+      dept: { label: "Town of Whitingham, Fire Department", href: `${WHT}/departments/fire-department` },
+      r2024: { label: "Town of Whitingham, Annual Town Report FYE 30 June 2024", href: `${WHT}/sites/default/files/Annual%20Town%20Report%20fye%2006.30.24.pdf`, note: "Fire Department report, PDF page 46; town meeting votes, page 10. A scanned report, read with text recognition" },
     },
   },
   jericho: UJFD,
