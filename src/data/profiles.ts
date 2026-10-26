@@ -260,6 +260,10 @@ const IRAR = "https://img1.wsimg.com/blobby/go/630ba3dc-3b66-416f-813c-e6ad9997a
 const PTF = "https://www.pittsfieldvt.com";
 const HUBP = "https://www.rutlandrpc.org/wp-content/uploads/2023/07/2024-Hubbardton-Town-Plan-Amended.pdf";
 
+const BAR = "https://barnetvt.org/wp-content/uploads/2026/02/Barnet_2025_VermontMunicipalReport.pdf";
+const GLV = "https://townofglover.com/wp-content/uploads/2023-Annual-Report-Electronic.pdf";
+const WSM = "https://irp.cdn-website.com/2728571a/files/uploaded/Westmore_2025.F.pdf";
+
 // One department, two town pages: Underhill and Jericho share the profile.
 const UJFD: Profile = {
   description:
@@ -6235,6 +6239,179 @@ export const profiles: Record<string, Profile> = {
     residents: [],
     sources: {
       plan: { label: "Town of Hubbardton, 2024 Town Plan (amended)", href: HUBP, note: "Fire department, page 16" },
+    },
+  },
+  barnet: {
+    description:
+      "Barnet Fire & Rescue: 172 incidents in 2025, most of them medical, 20 members including EMTs, " +
+      "a new brush truck on the way, and the fire and rescue budget line by line.",
+    facts: [
+      ["Calls", "172 in 2025; 210 in 2024"],
+      ["Members", "20: 4 EMTs, 1 VEFR, 4 firefighter/VERs and 9 firefighters, with 2 awaiting EMS training"],
+      ["Stations", "Bimson Road and West Barnet"],
+      ["Meets", "1st and 3rd Tuesdays of the month, at the station"],
+    ],
+    contact: { chief: "Ronald L. Morse", website: "https://barnetvt.org/town-information/town-report/", source: "r2025" },
+    history: {
+      intro:
+        "A combined fire and rescue department: in 2025 seven in ten of its incidents were medical, and every " +
+        "crash brought both an EMS and a fire response. Volunteers are paid minimum wage for time at fires.",
+      events: [
+        { year: 2024, calls: 210, text: "A new four-wheel-drive Dodge Ram chassis arrives to replace the 1984 GMC forestry truck.", source: "r2025" },
+        { year: 2025, calls: 172, text: "121 medical emergencies, 22 crashes and 29 fire calls. The new chassis goes to the builder in December for an aluminium fire body, due in service for the spring brush fire season. Assistant Chief David Shields, with 50 years of service, is honoured on the cover of the town report.", source: "r2025" },
+      ],
+    },
+    calls: {
+      intro: "Medical emergencies made up 70% of 2025's incidents.",
+      byType: {
+        title: "Incidents by type, 2025",
+        bars: [
+          { label: "Medical emergencies", value: 121 },
+          { label: "Fire-related calls", value: 29 },
+          { label: "Motor vehicle accidents", value: 22 },
+        ],
+        note: "Calendar 2025; the types add up to the 172 incidents reported.",
+        source: "r2025",
+      },
+    },
+    money: {
+      intro: "Fire & Rescue's operating costs are a line in the town budget; a separate fund saves toward the next fire truck.",
+      year: "2025 (actual)",
+      lines: [
+        { label: "Volunteers' reimbursement", amount: 12278.3 },
+        { label: "Equipment and supplies", amount: 11425.37 },
+        { label: "Mutual aid dues and dispatching", amount: 5308.44 },
+        { label: "Vehicle maintenance", amount: 3110.33 },
+        { label: "Insurance claim expense", amount: 1815 },
+        { label: "Annual equipment testing", amount: 1780.82 },
+        { label: "Rescue squad expenses", amount: 1421.43 },
+      ],
+      linesNote: "$37,450.83 spent of a $42,000 budget; $41,400 is budgeted for 2026. Mutual aid dues go to Twin State Mutual Aid and Grafton County Sheriff dispatch.",
+      capital: {
+        title: "Barnet Fire and Rescue association, 2025",
+        lines: [
+          { label: "Barbecue", amount: 3530 },
+          { label: "Donations", amount: 1010 },
+          { label: "911 sign sales", amount: 476 },
+        ],
+        note: "The members' association's own income, $5,042.05 in all.",
+      },
+      source: "r2025",
+    },
+    careers: {
+      intro: "Barnet Fire & Rescue is always looking for members.",
+      points: [
+        "Stop by the station on the first or third Tuesday of the month",
+        "Or register interest at Makemeafirefighter.org",
+      ],
+      applyUrl: "https://makemeafirefighter.org/",
+      source: "r2025",
+    },
+    residents: [
+      { label: "Burn permits", href: BAR, text: "From the local fire warden. Burning construction or commercial waste also needs a state permit (802-661-8937)." },
+      { label: "911 address signs", href: BAR, text: "Sold by the fire and rescue association." },
+    ],
+    sources: {
+      r2025: { label: "Town of Barnet, 2025 Annual Report", href: BAR, note: "Report of Barnet Fire & Rescue, PDF pages 40–41; budget, page 57. Read with text recognition" },
+    },
+  },
+  glover: {
+    description:
+      "Glover Volunteer Fire Department: 32 calls in 2023, the Barton River flash flood, a new chief, " +
+      "donated Jaws of Life, and Turkey BINGO.",
+    facts: [
+      ["Calls", "32 in 2023"],
+      ["Chief", "Job Breitmeyer, since May 2023"],
+      ["Governed by", "A board of trustees, as at its founding in 1959"],
+      ["Town budget", "$35,000 for the fire department in 2024"],
+    ],
+    contact: { chief: "Job Breitmeyer", source: "r2023" },
+    history: {
+      intro: "Glover's volunteers recruit continuously; any member can tell you how to join.",
+      events: [
+        { year: 1959, text: "The department is founded, governed by a board of trustees.", source: "r2023" },
+        { year: 2023, calls: 32, text: "Long-time Chief Allen Matthews retires in May and First Assistant Chief Job Breitmeyer succeeds him. On 10 July the Barton River floods: the department answers 12 locations in three hours, opens an overnight shelter at the fire station and spends days pumping basements. In the fall the bylaws, unchanged since 1999, are revised. The Terry Farrell Fund donates hydraulic Jaws of Life, used a week later to free a crash victim, and Underhill-Jericho Fire Department gives stabilisation jacks.", source: "r2023" },
+      ],
+    },
+    money: {
+      intro: "The fire department is funded through the town's emergency services budget.",
+      year: "2023 (budget)",
+      lines: [
+        { label: "Fire department", amount: 27500 },
+      ],
+      linesNote: "The fire department spent $23,728.70 in 2023; its 2024 budget is $35,000.",
+      capital: { title: "Reserve", lines: [{ label: "Fire department reserve fund, 2023", amount: 7500 }], note: "Paid into the reserve in full." },
+      source: "r2023",
+    },
+    residents: [
+      { label: "Turkey BINGO", href: GLV, text: "The department's November fundraiser, so popular it borrowed extra tables." },
+    ],
+    sources: {
+      r2023: { label: "Town of Glover, 2023 Annual Report", href: GLV, note: "Glover Fire Department report, PDF page 25; budget, page 11" },
+    },
+  },
+  westmore: {
+    description:
+      "Westmore Fire & Rescue: the Lake Willoughby department, with boat rescues, a 2025 call log, " +
+      "dry hydrants and its 2026 budget request.",
+    facts: [
+      ["Run by", "Westmore Fireman's Association, Inc."],
+      ["Station", "5712 Willoughby Lake Road"],
+      ["Calls", "20 logged in 2025"],
+      ["Apparatus", "Engine 1, two more vehicles and a rescue boat"],
+    ],
+    history: {
+      intro:
+        "Westmore's volunteers cover Lake Willoughby and the mountains around it, so their calls include boats in " +
+        "distress and mountain rescues as well as alarms and fires. Glover Ambulance or Lyndon Rescue provides the ambulance, by zone.",
+      events: [
+        { year: 2025, calls: 20, text: "Two boats in distress on one July day and a sinking pontoon in October; a dog rescued on Mount Pisgah; a rockslide on Route 5A. Members train at the NEIMA fire school in April and in boat operation in September.", source: "r2025" },
+      ],
+    },
+    calls: {
+      intro: "Smoke alarms were the most common call in 2025.",
+      byType: {
+        title: "Calls by type, 2025",
+        bars: [
+          { label: "Smoke alarms", value: 9 },
+          { label: "Fires", value: 5, sub: "Oven, campfire, brush, underground and one at the south end of Willoughby" },
+          { label: "Lake: boats in distress or sinking", value: 3 },
+          { label: "Mountain rescue", value: 1 },
+          { label: "Vehicle rescue", value: 1 },
+          { label: "Rockslide", value: 1 },
+        ],
+        note: "Counted from the department's call log, January to 8 December 2025.",
+        source: "r2025",
+      },
+    },
+    money: {
+      intro: "The association asks the town for an appropriation each year, and plans to seek about $30,000 more in state and private grants for equipment and apparatus.",
+      year: "2026 (requested)",
+      lines: [
+        { label: "Insurance, vehicle and liability", amount: 8600 },
+        { label: "Vehicle replacement matching funds", amount: 7500 },
+        { label: "Stipends", amount: 5200 },
+        { label: "Dispatch", amount: 3650 },
+        { label: "Large washing machine", amount: 3000 },
+        { label: "Training", amount: 2860 },
+        { label: "Pontoon sled for ice rescue", amount: 2500 },
+      ],
+      linesNote: "The largest lines of a $44,660 request.",
+      capital: {
+        title: "Dry hydrants, 2026 (requested)",
+        lines: [
+          { label: "New dry hydrant at Willoughby South End", amount: 1750 },
+          { label: "Servicing, and moving two for better access", amount: 875 },
+        ],
+        note: "From the same request.",
+      },
+      source: "r2025",
+    },
+    residents: [
+      { label: "Westmore Fall Festival", href: WSM, text: "The department takes part each October, and lights the town Christmas tree." },
+    ],
+    sources: {
+      r2025: { label: "Town of Westmore, 2025 Annual Report", href: WSM, note: "Westmore Fire & Rescue budget request and call log, PDF pages 43–44" },
     },
   },
   jericho: UJFD,
