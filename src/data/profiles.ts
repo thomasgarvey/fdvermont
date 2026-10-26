@@ -241,6 +241,14 @@ const TUN = "https://tunbridgevt.org";
 const STR = "https://www.straffordvt.org";
 const WMT = "https://williamstownvt.org";
 
+const PUT = "https://putneyvt.gov";
+const PUTR = "https://putneyvt.gov/Documents/Department/Clerk/Town%20Reports";
+const DUM = "https://dummerston.org/gov/2023%20Town%20Report.pdf";
+const GRA = "https://graftonvt.org";
+const TSH = "https://www.townshendvtfire.org";
+const TSHR = "https://www.townshendvt.gov/fileadmin/files/Boards_and_Committees/Selectboard/Town_Reports/2026_Twn_Report.Final.pdf";
+const JAM = "https://www.jamaicavermont.org/wp-content/uploads/2025/11/2025-Town-Report.pdf";
+
 // One department, two town pages: Underhill and Jericho share the profile.
 const UJFD: Profile = {
   description:
@@ -5561,6 +5569,328 @@ export const profiles: Record<string, Profile> = {
     sources: {
       dept: { label: "Town of Williamstown, Fire Department", href: `${WMT}/fire-department/` },
       r2025: { label: "Town of Williamstown, 2025 Town Report", href: `${WMT}/wp-content/uploads/2026/02/2025-town-report-williamstown-vt.pdf`, note: "Fire Department and FAST Squad reports, PDF pages 38–39. A scanned report, read with text recognition" },
+    },
+  },
+  putney: {
+    description:
+      "Putney Fire and Rescue: the town's fire and EMS department since 1903, 564 requests for service by type, " +
+      "its apparatus, the 2006 fire station and the fire and EMS budgets.",
+    facts: [
+      ["Serving Putney", "Since 1903"],
+      ["Run by", "The Town of Putney: a municipal fire and EMS department"],
+      ["Responders", "35, plus 3 junior members (fiscal 2026 plan)"],
+      ["Station", "21 Carl Snyder Drive, built 2006"],
+      ["Requests for service", "An average of 529 a year"],
+    ],
+    contact: { chief: "Brian Harlow (interim)", phone: "802-387-4372", website: `${PUT}/departments/fire.php`, source: "dept" },
+    history: {
+      intro:
+        "Putney's department answers fires, alarms, storms and medical calls; its first responders handle medical " +
+        "emergencies and Rescue Inc. provides the ambulance. The department was reorganised in 2024 under an " +
+        "interim chief, and a town advisory committee has been studying its long-term model.",
+      events: [
+        { year: 1903, text: "The department's own page dates its service to Putney from 1903.", source: "dept" },
+        { year: 2006, text: "The present fire station is built on Carl Snyder Drive.", source: "r2024" },
+        { year: 2024, calls: 564, text: "Requests for service from July 2023 to 3 April 2024, a shortened year: members also logged over 5,114 hours of training, maintenance and public education. Brian Harlow becomes interim chief; fire service resumes on 25 May and EMS on 24 July.", source: "r2024" },
+        { year: 2025, text: "A new cardiac monitor and defibrillator, helped by a $10,000 gift from the Putney Volunteer Firefighters Association. Plans for fiscal 2026 include finishing the fire house's second floor and planning Engine 1's replacement.", source: "fy26" },
+      ],
+    },
+    calls: {
+      intro: "Medical calls were nearly half of all requests in 2023–24.",
+      byType: {
+        title: "Requests for service by type, July 2023 – April 2024",
+        bars: [
+          { label: "Emergency medical", value: 265 },
+          { label: "Alarm activation", value: 77 },
+          { label: "Public assist", value: 67 },
+          { label: "Fire", value: 40 },
+          { label: "Mutual aid given", value: 35 },
+          { label: "Hazardous materials", value: 29 },
+          { label: "Good intent", value: 28 },
+          { label: "Storm event", value: 14 },
+          { label: "Special incident", value: 9 },
+        ],
+        note: "1 July 2023 to 3 April 2024; the types add up to the 564 requests reported.",
+        source: "r2024",
+      },
+      byUnit: {
+        title: "Apparatus, by model year",
+        bars: [
+          { label: "Engine 3", value: 1999, sub: "E-One" },
+          { label: "Engine 1", value: 2006, sub: "E-One pumper" },
+          { label: "Ladder truck", value: 1994 },
+          { label: "Rescue", value: 2004, sub: "Ford" },
+          { label: "Squad 1", value: 2019, sub: "Fire rescue vehicle" },
+        ],
+        note: "Model years from the town's capital asset schedule, which also lists three pickups (2009 Ford F350, 2016 and 2019 Chevrolet Silverado) and a 2017 Polaris ATV.",
+        source: "r2024",
+      },
+    },
+    money: {
+      intro: "Fire and EMS are paid for in the town budget. For fiscal 2026 the town split EMS into its own section.",
+      year: "fiscal year 2026 (proposed)",
+      lines: [
+        { label: "Fire on-call pay", amount: 32500 },
+        { label: "Fire training", amount: 15000 },
+        { label: "Equipment and supplies", amount: 5500 },
+        { label: "Radio", amount: 5000 },
+        { label: "Medical exams", amount: 3500 },
+        { label: "Special detail", amount: 3500 },
+        { label: "Fire prevention", amount: 2500 },
+      ],
+      linesNote: "Firefighting, $67,500 in all. Fire station maintenance is a further $42,200.",
+      capital: {
+        title: "EMS, fiscal year 2026 (proposed)",
+        lines: [
+          { label: "EMS on-call pay", amount: 42500 },
+          { label: "EMS training", amount: 20000 },
+          { label: "EMS equipment", amount: 10000 },
+        ],
+        note: "$72,500 in all. The Rescue Inc. ambulance contract is $64,771.",
+      },
+      source: "r2024",
+    },
+    residents: [
+      { label: "Burn permits", href: `${PUT}/departments/fire.php`, text: "Call the department's non-emergency line, 802-387-4372." },
+      { label: "Fire and Rescue Advisory Committee", href: `${PUT}/government/boards_and_committees/fire_and_rescue_advisory_committee.php`, text: "The committee's reports on the department's future model." },
+    ],
+    sources: {
+      dept: { label: "Town of Putney, Fire Department", href: `${PUT}/departments/fire.php` },
+      r2024: { label: "Town of Putney, 2024 Annual Town Report", href: `${PUTR}/2024%20Putney%20Annual%20Town%20Report%20Final.pdf`, note: "Fire and EMS report, PDF pages 15–16; budget, pages 35–38; capital assets, page 46" },
+      fy26: { label: "Town of Putney, FY26 Town Report Supplement", href: `${PUTR}/Town%20Report%20Sup/FY26%20Supplement%20FINAL.pdf`, note: "Fire department objectives, PDF pages 34–35" },
+    },
+  },
+  dummerston: {
+    description:
+      "West Dummerston Volunteer Fire Department: all-volunteer since 1950, two stations, 239 calls by type, " +
+      "the 2017 Center Station, budgets and how to join.",
+    facts: [
+      ["Founded", "1950, 100% volunteer"],
+      ["Members", "About 20, on fire, rescue or both, plus an auxiliary"],
+      ["Stations", "2: Center Station (built 2017) and West Station"],
+      ["Calls", "239 (December 2022 – November 2023)"],
+      ["Chief", "Larry Pratt Jr., elected October 2023"],
+    ],
+    contact: { chief: "Larry Pratt Jr.", phone: "802-579-9494", source: "r2023" },
+    history: {
+      intro:
+        "A nonprofit volunteer department serving Dummerston and, through mutual aid, its neighbours. Its members " +
+        "carry pagers around the clock, and its rescue side answers medical calls alongside the fire side.",
+      events: [
+        { year: 1950, text: "The West Dummerston Volunteer Fire Department is founded.", source: "r2023" },
+        { year: 2017, text: "The new Center Station is built after a fundraising drive led by Chief Rick Looman.", source: "r2023" },
+        { year: 2022, calls: 264, text: "A record year for calls.", source: "r2023" },
+        { year: 2023, calls: 239, text: "Calls from December 2022 to November 2023, including a record 38 crashes. Larry Pratt Jr. is elected chief in October, and seven members take two days of emergency medical training in December. A new partnership with Dummerston Cares installs smoke detectors in homes.", source: "r2023" },
+      ],
+    },
+    calls: {
+      intro: "Medical calls were well over half the total.",
+      byType: {
+        title: "Calls by type, December 2022 – November 2023",
+        bars: [
+          { label: "Medical", value: 138 },
+          { label: "Motor vehicle crashes", value: 38 },
+          { label: "Trees and wires", value: 22 },
+          { label: "Mutual aid given", value: 22 },
+          { label: "Automatic fire alarms", value: 11 },
+          { label: "Carbon monoxide", value: 4 },
+          { label: "Brush and illegal burns", value: 2 },
+          { label: "Chimney fire", value: 1 },
+          { label: "Structure fire", value: 1 },
+        ],
+        note: "The types add up to the 239 calls reported. Mutual aid was received 4 times.",
+        source: "r2023",
+      },
+    },
+    money: {
+      intro: "The town pays most of the department's operating budget; fundraisers, a golf tournament and an annual fund drive among them, cover much of the rest.",
+      year: "fiscal year 2024–25 (proposed)",
+      lines: [
+        { label: "Town appropriation to the department", amount: 101968 },
+        { label: "Mutual aid assessment", amount: 33500 },
+        { label: "Insurance", amount: 13195 },
+      ],
+      linesNote: "The department's proposed budget is $154,748 of income in all; the mutual aid and insurance lines are its two largest costs.",
+      capital: {
+        title: "Fundraising, fiscal year 2022–23 (actual)",
+        lines: [
+          { label: "Golf tournament", amount: 23395 },
+          { label: "Fund drive", amount: 18572.75 },
+          { label: "Pancake breakfast", amount: 4545 },
+          { label: "Barbecue", amount: 3216.5 },
+        ],
+        note: "From the department's operating budget printed in the town report.",
+      },
+      source: "r2023",
+    },
+    careers: {
+      intro: "New volunteers are welcome on the fire or rescue side, and non-responding auxiliary members help with bookkeeping, fundraising and events.",
+      points: [
+        "Fire volunteers typically complete the 184-hour State Fire Academy course, then several dozen hours a year of continuing education",
+        "Rescue volunteers complete similar training and keep their certifications each year",
+        "Drop by a station on a Tuesday evening, or call Chief Pratt",
+      ],
+      applyUrl: DUM,
+      source: "r2023",
+    },
+    residents: [
+      { label: "Smoke detectors", href: DUM, text: "Installed in homes around town through the department's partnership with Dummerston Cares." },
+    ],
+    sources: {
+      r2023: { label: "Town of Dummerston, 2023 Town Report", href: DUM, note: "Fire department report, PDF pages 53–56; town fire budget, page 37" },
+    },
+  },
+  grafton: {
+    description:
+      "Grafton Volunteer Fire Department: a hundred years of service since 1924, 49 emergency calls, " +
+      "its engine and 75-foot ladder, the Stanley Mack firehouse and coverage of Athens.",
+    facts: [
+      ["Founded", "1924, approved at Town Meeting"],
+      ["Members", "18 active volunteers"],
+      ["Covers", "Grafton, and Athens by contract"],
+      ["Apparatus", "58 Engine One (2015 Pierce) and 58 Ladder One (2002 American LaFrance, 75 ft aerial)"],
+      ["Calls", "A three-year average of 53 a year"],
+    ],
+    contact: { chief: "Robbie Sprague", phone: "802-843-2401", website: `${GRA}/?p=146`, source: "town" },
+    history: {
+      intro:
+        "Grafton's fire company and its Rescue Squad are separate volunteer organisations that share members and " +
+        "the firehouse east of the village. Both cover Athens by contract and raise most of their own operating money.",
+      events: [
+        { year: 1847, text: "Newspapers report firefighting efforts in Grafton.", source: "town" },
+        { year: 1924, text: "The Grafton Fire Company is officially approved at Town Meeting. Its first fundraiser is a square dance.", source: "town" },
+        { year: 1925, text: "A garage on Kidder Hill Road houses a hand-drawn pumper, built around 1830, and a hand-drawn chemical tank; both are now at the Grafton Historical Society.", source: "town" },
+        { year: 1933, text: "The first motorised fire truck: a converted Cadillac touring car.", source: "town" },
+        { year: 1938, text: "The old schoolhouse on Main Street becomes the firehouse.", source: "town" },
+        { year: 1981, text: "The Fire and Rescue Auxiliary holds its first October tag sale for the department.", source: "town" },
+        { year: 1992, text: "The present firehouse on Route 121 East opens, named for longtime Chief Stanley Mack.", source: "town" },
+        { year: 2024, calls: 49, text: "Emergency calls in the fiscal year to June: 34 in Grafton, 10 in Athens and 5 mutual aid. A grant buys a brush insert for the UTV. The department marks 100 years with a community square dance.", source: "r2024" },
+      ],
+    },
+    stationNotes: {
+      "grafton-711-route-121-e": {
+        text: "The firehouse, built in 1992 and named for Chief Stanley Mack, shared with the Grafton Rescue Squad.",
+        source: "town",
+      },
+    },
+    careers: {
+      intro: "New members may join at any time. The company is headed by a chief, assistant chief, captain and two lieutenants, under the Grafton Firefighters Association.",
+      points: [
+        "In-house training monthly, at 7 pm on the third Wednesday: a good time to come and learn more",
+        "Monthly training with other West River area departments",
+      ],
+      applyUrl: `${GRA}/?p=146`,
+      source: "town",
+    },
+    residents: [
+      { label: "Burn permits", href: `${GRA}/?p=146`, text: "From the forest fire warden; 63 were issued in 2024." },
+      { label: "Fire and Rescue tag sale", href: `${GRA}/?p=146`, text: "Every October since 1981, run by the auxiliary." },
+    ],
+    sources: {
+      town: { label: "Town of Grafton, Fire and Rescue", href: `${GRA}/?p=146` },
+      r2024: { label: "Town of Grafton, 2024 Town Report", href: `${GRA}/wp-content/uploads/2025/01/Town-Report-2024-Digital-2025.pdf`, note: "Fire Department annual report, PDF page 48; permits, page 35" },
+    },
+  },
+  townshend: {
+    description:
+      "Townshend Fire Department: volunteers working from a 1952 firehouse beside Grace Cottage Hospital, " +
+      "a new pumper due in 2026, fire ponds, budgets and how to join.",
+    facts: [
+      ["Run by", "Townshend Volunteer Fire Association, Inc.; the town owns the firehouse and vehicles"],
+      ["Station", "208 Grafton Road, built 1952"],
+      ["Apparatus", "Engines 1, 2 and 4, Brush 1 and 2, Utility 1 and an ATV"],
+      ["Meets", "Business meeting 2nd Thursday, 7 pm; work detail 4th Monday, 6 pm"],
+    ],
+    contact: { phone: "802-365-4017", website: TSH, source: "dept" },
+    history: {
+      intro:
+        "Most of Townshend's calls are crashes, DHART helicopter landings at Grace Cottage Hospital, and assists " +
+        "for odors, alarms and people needing help. The department also builds and tests the town's fire ponds.",
+      events: [
+        { year: 1952, text: "The Townshend fire house is built.", source: "house" },
+        { year: 2018, text: "A truck committee forms to replace a 32-year-old engine, and finds a standard chassis will not fit the old station; a building committee follows.", source: "house" },
+        { year: 2025, text: "Another fire pond is established with the Trousdell family, and every pond in town is tested. A second brush truck is bought by bid from the Town of Bradford.", source: "r2026" },
+        { year: 2026, text: "A new pumper, ordered three years earlier, is due by September.", source: "r2026" },
+      ],
+    },
+    money: {
+      intro: "The town's budget carries the fire house and fire vehicles; voters also put money aside for a truck and for fire ponds.",
+      year: "fiscal year 2027 (proposed)",
+      lines: [
+        { label: "Mutual aid district dues", amount: 25000 },
+        { label: "Fire house equipment", amount: 10000 },
+        { label: "Communications", amount: 6000 },
+        { label: "Fuel oil", amount: 5000 },
+        { label: "Fire house repair", amount: 2000 },
+      ],
+      linesNote: "Fire house and department, $52,900 in all; fire vehicles are a further $8,800.",
+      capital: {
+        title: "Reserves asked of voters, 2026 warning",
+        lines: [
+          { label: "Fire truck capital fund, toward a future pumper", amount: 20000 },
+          { label: "Fire department reserve, for vehicle repair", amount: 15000 },
+          { label: "Fire pond reserve", amount: 4000 },
+        ],
+        note: "Articles XIII to XV of the town meeting warning.",
+      },
+      source: "r2026",
+    },
+    careers: {
+      intro: "The department provides all equipment and training. Like most volunteer departments, it is always looking for members.",
+      points: [
+        "Training in-house or through the West River Training Group, with support for formal courses such as Firefighter I",
+        "Two meetings a month plus training",
+      ],
+      applyUrl: `${TSH}/join-our-team`,
+      source: "join",
+    },
+    residents: [
+      { label: "Burn permits", href: `${TSH}/obtain-burn-permit`, text: "From the town clerk or the fire warden; call mutual aid dispatch, 603-352-1291, before burning." },
+      { label: "Fire ponds", href: TSHR, text: "Know of a good spot for a pond? Tell any officer." },
+    ],
+    sources: {
+      dept: { label: "Townshend Fire Department", href: TSH },
+      house: { label: "Townshend Fire Department, Fire House", href: `${TSH}/fire-house` },
+      join: { label: "Townshend Fire Department, Join our team", href: `${TSH}/join-our-team` },
+      r2026: { label: "Town of Townshend, 2026 Town Report", href: TSHR, note: "Fire Department report, PDF page 36; budget, pages 15–16; warning, page 5" },
+    },
+  },
+  jamaica: {
+    description:
+      "Jamaica Volunteer Fire & Rescue: a 14-member fire and rescue squad, 148 calls in 2024, " +
+      "over 3,000 volunteer hours and a $110,000 operating budget.",
+    facts: [
+      ["Members", "14 volunteers, five of them new in 2024"],
+      ["Calls", "148 in 2024, about 60% medical"],
+      ["Operating budget", "About $110,000, mostly from the town"],
+      ["Chief", "Scott Gordon"],
+    ],
+    history: {
+      intro:
+        "A combined fire and rescue squad answering medical emergencies, fires, crashes and wellness checks, " +
+        "and giving mutual aid to neighbouring towns.",
+      events: [
+        { year: 2024, calls: 148, text: "Over 3,000 volunteer hours. Two members certify as Emergency Medical Responders and two begin Firefighter 1. The squad replaces gas-powered tools with a cordless battery system, new lights, fans, heaters and chainsaws, and puts new furnaces in the truck bays.", source: "r2024" },
+      ],
+    },
+    money: {
+      intro: "The operating budget is financed largely by the town of Jamaica.",
+      year: "2024, as described by the department",
+      lines: [
+        { label: "Regional dispatch membership", amount: 23700 },
+        { label: "Fire department building", amount: 20000 },
+        { label: "Equipment maintenance", amount: 17000 },
+        { label: "Insurance", amount: 10000 },
+      ],
+      linesNote: "Of a $110,000 operating budget; the department notes little is left to replace worn-out equipment.",
+      capital: { title: "Town appropriation", lines: [{ label: "Fiscal 2025–26 (proposed)", amount: 109725 }], note: "The same as the amount voted for 2024–25." },
+      source: "r2024",
+    },
+    residents: [
+      { label: "Community events", href: JAM, text: "Santa lands at the fire station each year; the squad joins Jamaica Day and Halloween." },
+    ],
+    sources: {
+      r2024: { label: "Town of Jamaica, 2024 Annual Report", href: JAM, note: "Jamaica Volunteer Fire & Rescue letter, PDF page 31; budget, page 16" },
     },
   },
   jericho: UJFD,
