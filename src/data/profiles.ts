@@ -268,6 +268,14 @@ const HFX = "https://halifaxvt.com/wp-content/uploads";
 const MRB = "https://marlborovt.us/wp-content/uploads/2026/01/Marlboro_2025_Vermont-Municipal-Report.pdf";
 const WHT = "https://whitinghamvt.org";
 
+const GRT = "https://grotonvt.com/fire-department";
+const GRTR = "https://storage.googleapis.com/juniper-media-library/243/2025/03/2024%20Town%20Report.pdf";
+const SUT = "https://irp.cdn-website.com/e7d9f92e/files/uploaded/2025+Town+Report.pdf";
+const WTF = "https://waterfordvt.gov/services_1";
+const WTFD = "https://0201.nccdn.net/1_2";
+const BER = "https://www.berlinvt.gov/s/2021-Berlin-Town-Report-FINAL-compressed.pdf";
+const WFF = "https://www.waitsfieldvt.gov";
+
 // One department, two town pages: Underhill and Jericho share the profile.
 const UJFD: Profile = {
   description:
@@ -6579,6 +6587,212 @@ export const profiles: Record<string, Profile> = {
     sources: {
       dept: { label: "Town of Whitingham, Fire Department", href: `${WHT}/departments/fire-department` },
       r2024: { label: "Town of Whitingham, Annual Town Report FYE 30 June 2024", href: `${WHT}/sites/default/files/Annual%20Town%20Report%20fye%2006.30.24.pdf`, note: "Fire Department report, PDF page 46; town meeting votes, page 10. A scanned report, read with text recognition" },
+    },
+  },
+  groton: {
+    description:
+      "Groton Volunteer Fire Department: 22 volunteers protecting 984 people over 54 square miles, " +
+      "an engine, a tanker and a rescue, the FAST Squad shared with Ryegate, and how to join.",
+    facts: [
+      ["Protects", "984 people over 54 square miles, from one station"],
+      ["Members", "22 active, firefighters and EMTs (2024)"],
+      ["Apparatus", "An engine, a tanker and a rescue vehicle"],
+      ["Meets", "Tuesday nights, for meetings and training"],
+    ],
+    contact: { chief: "Aaron Smith", phone: "802-584-3855", website: GRT, source: "dept" },
+    history: {
+      intro:
+        "Groton's members are certified firefighters and EMTs. The town also runs the Groton/Ryegate FAST Squad " +
+        "for medical calls, and the department joins Ryegate and Wells River for an annual prevention program at Blue Mountain Union School.",
+      events: [
+        { year: 2024, calls: 40, callsApprox: true, text: "\"40 plus\" calls. The July flood washes out two dry hydrants, at Cold Water Brook and behind Clark's Landing. The fire station gets a new roof, extended over the east entry and the generator. Eight members certify as traffic control flaggers, and others train in CPR and ice rescue.", source: "r2024" },
+        { year: 2025, text: "Wayne Knott, chief through 2024, is named Honorary Fire Chief.", source: "dept" },
+      ],
+    },
+    careers: {
+      intro: "Members can train as firefighters or help with non-firefighting work.",
+      points: [
+        "18 or older, or 16 for a junior membership",
+        "Live or work full time in Groton",
+        "Come to a Tuesday night meeting and training, or contact the chief",
+      ],
+      applyUrl: GRT,
+      source: "dept",
+    },
+    residents: [
+      { label: "Green 911 address signs", href: GRTR, text: "Reflective signs, available from any member, that save minutes finding your house." },
+    ],
+    sources: {
+      dept: { label: "Town of Groton, Fire Department", href: GRT },
+      r2024: { label: "Town of Groton, 2024 Town Report", href: GRTR, note: "Groton Volunteer Fire Department annual report, PDF page 46. A scanned report, read with text recognition" },
+    },
+  },
+  sutton: {
+    description:
+      "Sutton Fire Department: 32 calls in 2025, a 22-member roster, a compact mini pumper for steep " +
+      "driveways, and meetings at the Burke Road station.",
+    facts: [
+      ["Calls", "32 in 2025"],
+      ["Members", "22, including a junior firefighter and four lifetime members"],
+      ["Station", "691 Burke Road"],
+      ["Meets", "Training 1st and 3rd Tuesdays, 7 pm; business meeting 2nd Tuesday, 7:30 pm"],
+    ],
+    contact: { chief: "Kyle Seymour", source: "r2025" },
+    history: {
+      intro: "A small volunteer department working Sutton's long, steep driveways and narrow roads, which the weather keeps testing.",
+      events: [
+        { year: 2025, calls: 32, text: "For the third year running, a major rain storm on 10 July damages the town's roads. The pump on Tanker 43 is rebuilt. The 1988 Engine 41 is sold and replaced by a 2001 E-One mini pumper on an F550 chassis, with a 300-gallon tank and 750 gpm pump, small enough for driveways the big engines can't reach. A few new members join.", source: "r2025" },
+      ],
+    },
+    residents: [
+      { label: "Smoke and CO detectors", href: SUT, text: "The chief's reminder: test them monthly, and have furnaces and chimneys serviced every year." },
+    ],
+    sources: {
+      r2025: { label: "Town of Sutton, 2025 Town Report", href: SUT, note: "Chief's report and roster, PDF pages 52–53; meeting times, page 3. A scanned report, read with text recognition" },
+    },
+  },
+  waterford: {
+    description:
+      "Waterford Volunteer Fire Department: founded in 1985, 30 members and a cadet program, 127 calls " +
+      "in 2022, and the new tanker voters approved in 2024.",
+    facts: [
+      ["Founded", "1985; bylaws adopted 16 October 1985"],
+      ["Members", "30, including cadets (2023)"],
+      ["Calls", "127 in 2022"],
+      ["Station", "2661 Duck Pond Road"],
+    ],
+    contact: { website: WTF, source: "dept" },
+    history: {
+      intro:
+        "Waterford's volunteers train almost every Tuesday night and respond around the clock, to structure and " +
+        "brush fires, crashes, hazmat, extrications and medical calls, alongside their mutual aid partners and the ambulance service.",
+      events: [
+        { year: 1985, text: "The department is founded; its charter members joined between September 1985 and September 1986. One of them, Howard Jones, is still active 38 years later.", source: "update" },
+        { year: 2022, calls: 127, text: "Members log about 780 hours on calls, 685 in fire and EMS training and 420 on maintenance and meetings.", source: "update" },
+        { year: 2023, text: "Three high school students move up from the cadet program to probationary membership. The bylaws are revised in August.", source: "update" },
+        { year: 2024, text: "On 5 March voters approve a new tanker, up to $495,865, by 203 to 96: $220,865 in cash and $275,000 financed over up to seven years.", source: "vote" },
+      ],
+    },
+    careers: {
+      intro: "The department welcomes members from Waterford and neighbouring towns, and runs a cadet program for younger members.",
+      points: [
+        "16 or older, with a driver's licence",
+        "Live or work in Waterford or a neighbouring town",
+        "Mail an application to PO Box 56, Lower Waterford, VT 05848",
+      ],
+      applyUrl: WTF,
+      source: "dept",
+    },
+    residents: [],
+    sources: {
+      dept: { label: "Town of Waterford, Fire Department", href: WTF },
+      update: { label: "Waterford Fire Department, Town Meeting Update, 7 March 2023", href: `${WTFD}/000/000/13f/cb7/mx-m2651_20230323_150138.pdf`, note: "A scanned statement, read with text recognition; founding dates also from the department's bylaws" },
+      vote: { label: "Town of Waterford, Official Return, Australian ballot of 5 March 2024", href: `${WTFD}/000/000/139/f85/fire.pdf` },
+    },
+  },
+  berlin: {
+    description:
+      "Berlin Volunteer Fire Department: 661 calls in a year, most of them medical, a six-vehicle fleet, " +
+      "a Fast Squad, and a community survey that shaped its plans.",
+    facts: [
+      ["Calls", "661 in 2021: 237 fire service and 424 medical"],
+      ["Fleet", "Six vehicles, from a 1979 tower truck to a 2011 pickup"],
+      ["Meets", "Every Tuesday, 6:30 to 9:30 pm"],
+      ["Phone", "802-223-5531 (business)"],
+    ],
+    contact: { phone: "802-223-5531", website: "https://www.berlinfiredepartment.org", source: "r2021" },
+    history: {
+      intro:
+        "Berlin's department covers the interstate, commercial buildings, the hospital, and back-country and " +
+        "cold-water rescue around Irish Hill and Berlin Pond. More volunteers can respond on nights and weekends than on weekdays.",
+      events: [
+        { year: 2021, calls: 661, text: "Two structure fires, eight car fires, four outside fires and one extrication, plus seven fires in neighbouring towns. Battery-powered extrication tools replace an obsolete hose-powered tool. A community survey finds residents value training (29%), response times (27%) and equipment (18.9%) most, and the department plans paid weekend staffing and an overnight bunk-in program.", source: "r2021" },
+      ],
+    },
+    calls: {
+      intro: "Nearly two in three calls were medical.",
+      byType: {
+        title: "Calls by type, 2021",
+        bars: [
+          { label: "Medical", value: 424 },
+          { label: "Fire service", value: 237 },
+        ],
+        note: "The two add up to the 661 calls reported.",
+        source: "r2021",
+      },
+    },
+    careers: {
+      intro: "Berlin is looking for firefighters, EMTs and corporation support members.",
+      points: ["Weekly meetings every Tuesday, 6:30 to 9:30 pm: training, maintenance and business"],
+      applyUrl: "https://www.berlinfiredepartment.org",
+      source: "r2021",
+    },
+    residents: [],
+    sources: {
+      r2021: { label: "Town of Berlin, 2021 Town Report", href: BER, note: "Berlin Volunteer Fire Department report, PDF pages 56–58" },
+    },
+  },
+  waitsfield: {
+    description:
+      "Waitsfield-Fayston Fire Department: one volunteer department for two towns, 126 calls by town and type, " +
+      "the 60/40 cost split, and its budget.",
+    subtitle: "Waitsfield-Fayston Volunteer Fire Department",
+    facts: [
+      ["Covers", "Waitsfield and Fayston"],
+      ["Cost split", "Waitsfield 60%, Fayston 40%, by historical share of calls"],
+      ["Calls", "126 in 2023: 73 in Waitsfield, 44 in Fayston, 9 mutual aid"],
+      ["Town budget", "$191,648 for fiscal 2025 (proposed), 7% of Waitsfield's general fund"],
+    ],
+    contact: { chief: "Jared Young", phone: "802-496-2404", website: `${WFF}/departments/public-safety/fire`, source: "dept" },
+    history: {
+      intro:
+        "A volunteer department shared by two towns, with mutual aid agreements with its neighbours. Its main goal for " +
+        "2024 was a decontamination space in the fire house, with a gear extractor, to protect firefighters from cancer.",
+      events: [
+        { year: 2023, calls: 126, text: "23 training sessions. Five members attend the Franklin Fire School and one completes Firefighter One; about six more plan to take the 220-hour course in 2024.", source: "r2023" },
+      ],
+    },
+    calls: {
+      intro: "Alarms with no fire were over a third of 2023's calls; crashes came next.",
+      byType: {
+        title: "Calls by type, 2023",
+        bars: [
+          { label: "Smoke or fire alarm, no fire", value: 45 },
+          { label: "Motor vehicle accidents", value: 22 },
+          { label: "Good intent", value: 9 },
+          { label: "Chemical or propane smell", value: 7 },
+          { label: "Power lines or trees down", value: 6 },
+          { label: "Medical assists", value: 5 },
+          { label: "Structure fires", value: 4 },
+          { label: "CO alarm, no CO", value: 4 },
+          { label: "Vehicle fires", value: 3 },
+          { label: "Appliance fires", value: 3 },
+          { label: "CO in building", value: 3 },
+          { label: "Wildland fires", value: 3 },
+          { label: "Service calls", value: 3 },
+          { label: "Other", value: 9, sub: "Unpermitted burns, rekindle, pole fire and others" },
+        ],
+        note: "The types add up to the 126 calls reported.",
+        source: "r2023",
+      },
+    },
+    money: {
+      intro: "Waitsfield carries the department in its budget and bills Fayston for 40%.",
+      year: "fiscal year 2025 (proposed)",
+      lines: [
+        { label: "Fire department, Waitsfield budget", amount: 191648 },
+        { label: "Fayston's 40% share (revenue)", amount: 76659 },
+      ],
+      linesNote: "Up $16,814 (9.6%) from fiscal 2024, partly for new tires for every vehicle.",
+      capital: { title: "Reserves", lines: [{ label: "Vehicle reserve (estimated, start of fiscal 2025)", amount: 172085.13 }, { label: "Building and equipment reserve", amount: 34962.84 }], note: "From the town's reserve fund schedules." },
+      source: "r2023",
+    },
+    residents: [
+      { label: "Burn permits", href: `${WFF}/departments/public-safety/fire`, text: "From the fire warden, one day ahead." },
+    ],
+    sources: {
+      dept: { label: "Town of Waitsfield, Fire", href: `${WFF}/departments/public-safety/fire` },
+      r2023: { label: "Town of Waitsfield, 2023 Annual Report", href: `${WFF}/fileadmin/files/Departments/Town_Clerk/Annual_Reports/2023_Waitsfield_Annual_Report.pdf`, note: "Chief's report and calls by type, PDF pages 57–58; budget, pages 19 and 29; reserves, pages 35–36" },
     },
   },
   jericho: UJFD,
