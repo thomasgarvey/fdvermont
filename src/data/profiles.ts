@@ -281,6 +281,11 @@ const CWR = "https://cornwallvt.com/wp-content/uploads/2022/08/THE-Final-Town-Re
 const MKR = "https://monktonvt.com/wp-content/uploads/2023/02/93bcef0fb7ab61d9e2c88e72e5be49f0.pdf";
 const SHMR = "https://shorehamvt.us/_files/ugd/d53131_33c17627411d4d2ab8ed4eb677d4812a.pdf";
 
+const BRKF = "https://www.brookfieldvt.org/wp/wp-content/uploads";
+const WSHR = "https://www.washingtonvt.org/s/Annual-Town-Report-2026-Final.pdf";
+const VSHR = "https://vershirevt.org/wp-content/uploads/2026/02/Town-Report-2026-Final-Draft-02.23.26-compressed.pdf";
+const WSTN = "https://www.westonvt.org";
+
 // One department, two town pages: Underhill and Jericho share the profile.
 const UJFD: Profile = {
   description:
@@ -6976,6 +6981,214 @@ export const profiles: Record<string, Profile> = {
     sources: {
       r2023: { label: "Town of Shoreham, 2023 Annual Report", href: SHMR, note: "Shoreham Fire Department report, PDF page 19; reserve fund, page 63" },
       r2022: { label: "Town of Shoreham, 2022 Annual Report", href: "https://shorehamvt.us/_files/ugd/d53131_28b58702dd36420a99dcb302a37e856a.pdf", note: "Fire department report, PDF page 37; meetings, page 2" },
+    },
+  },
+  brookfield: {
+    description:
+      "Brookfield Volunteer Fire Department: 75 years in 2023, crashes the most common call, new bunker gear, " +
+      "an air fill station and battery-powered jaws of life.",
+    facts: [
+      ["Anniversary", "75 years, celebrated in 2023"],
+      ["Most common call", "Motor vehicle accidents: 21 in each of 2023 and 2024"],
+      ["Town budget", "$58,400 for fiscal 2025"],
+    ],
+    history: {
+      intro:
+        "Most of Brookfield's calls are crashes, so vehicle rescue tools are a priority. The department says it needs more young people: " +
+        "anyone can visit and get involved.",
+      events: [
+        { year: 2023, text: "The department celebrates its 75th anniversary, and mourns Ed Koren, a member for 35 years. The July flood keeps it busy checking on neighbours, closing roads and pumping basements.", source: "r2023" },
+        { year: 2024, text: "Three more sets of bunker gear put every member in new protective equipment. Two neighbouring departments give an air compressor and storage bottles, and the department buys a fill station for its own air tanks. A Genesis battery-powered jaws of life is added. Kevin Wheatley steps down after ten years as chief and stays on as a member.", source: "r2024" },
+      ],
+    },
+    calls: {
+      intro: "Crashes made up nearly half of the calls the department listed for 2024.",
+      byType: {
+        title: "Calls by type, 2024",
+        bars: [
+          { label: "Motor vehicle accidents", value: 21 },
+          { label: "Trees and power lines down", value: 6 },
+          { label: "Mutual aid and assists", value: 5 },
+          { label: "CO and fire alarms", value: 5 },
+          { label: "Miscellaneous", value: 5 },
+          { label: "Grass and brush fires", value: 3 },
+          { label: "Vehicle fires", value: 2 },
+          { label: "Structure fire", value: 1 },
+        ],
+        note: "The department's call log for 2024; it gives no total.",
+        source: "r2024",
+      },
+    },
+    money: {
+      intro: "The fire department is a line in the town's general fund.",
+      year: "fiscal year 2025 (budget)",
+      lines: [{ label: "Fire department", amount: 58400 }],
+      linesNote: "Fiscal 2024's budget was $47,050; actual spending was $56,875.07.",
+      capital: { title: "Recent years", lines: [{ label: "Fiscal 2023 (actual)", amount: 41889.76 }, { label: "Fiscal 2024 (actual)", amount: 56875.07 }], note: "From the town reports' general fund tables." },
+      source: "r2024",
+    },
+    residents: [],
+    sources: {
+      r2023: { label: "Town of Brookfield, 2023 Town Report", href: `${BRKF}/2024/02/87963-Brookfield-Report-2023.pdf`, note: "Fire department report, PDF page 30; budget, page 18" },
+      r2024: { label: "Town of Brookfield, 2024 Town Report", href: `${BRKF}/2025/02/Final-93258-Brookfield-Report-2024_3.pdf`, note: "Fire department report, PDF page 36; budget, page 24" },
+    },
+  },
+  washington: {
+    description:
+      "Washington Fire Department and Fast Squad: 57 calls and 556 personnel hours in 2025, 17 members, " +
+      "weekly Wednesday meetings, and the department's budget.",
+    facts: [
+      ["Calls", "57 in 2025, above the usual average"],
+      ["Hours", "95 hours on calls, 556 personnel hours (2025)"],
+      ["Members", "17, including seven officers"],
+      ["Meets", "Every Wednesday, 7 pm, at the fire station"],
+    ],
+    contact: { chief: "Ryan Bresette", source: "r2025" },
+    history: {
+      intro: "Washington's volunteers give mutual aid to crashes across the area, and the town pays down the loan on a fire truck.",
+      events: [
+        { year: 2025, calls: 57, text: "A busier year than usual, including 18 mutual aid calls to crashes and 10 for trees and wires.", source: "r2025" },
+      ],
+    },
+    calls: {
+      intro: "Mutual aid to crashes was the largest group of calls.",
+      byType: {
+        title: "Calls by type, 2025",
+        bars: [
+          { label: "Mutual aid: motor vehicle crashes", value: 18 },
+          { label: "Trees and wires", value: 10 },
+          { label: "Medical assists", value: 6 },
+          { label: "Service and miscellaneous", value: 5 },
+          { label: "Fire alarms", value: 4 },
+          { label: "Good intent", value: 2 },
+          { label: "Structure fire", value: 1 },
+          { label: "Chimney fire", value: 1 },
+          { label: "Brush or grass fire", value: 1 },
+          { label: "Vehicle fire", value: 1 },
+        ],
+        note: "The types the department lists; they account for 49 of the 57 calls.",
+        source: "r2025",
+      },
+    },
+    money: {
+      intro: "Voters approve the department's operating budget as a town meeting article.",
+      year: "fiscal year 2025 (actual)",
+      lines: [
+        { label: "Long-term debt", amount: 23070 },
+        { label: "Apparatus replacement fund", amount: 15000 },
+        { label: "Firefighting", amount: 10300 },
+        { label: "Dispatch", amount: 9742 },
+        { label: "Protective gear", amount: 8148.81 },
+      ],
+      linesNote: "The largest lines of $87,639.01 spent against an $86,250 budget. $87,070 is budgeted for fiscal 2026 and $92,523 proposed for 2027.",
+      capital: { title: "Fire truck loan", lines: [{ label: "Balance, 30 June 2025", amount: 42727 }], note: "Town long-term debt for the fire truck." },
+      source: "r2025",
+    },
+    careers: {
+      intro: "\"The hardest step is the first step through the door.\" New members are welcome, especially younger ones.",
+      points: ["Come by on a Wednesday at 7 pm, or talk to any member"],
+      applyUrl: WSHR,
+      source: "r2025",
+    },
+    residents: [],
+    sources: {
+      r2025: { label: "Town of Washington, 2026 Annual Town Report", href: WSHR, note: "Fire department report and budget, PDF pages 57–60" },
+    },
+  },
+  vershire: {
+    description:
+      "Vershire Fire & Rescue: firefighters and EMTs answering 225 calls with West Fairlee in 2025, five AEDs, " +
+      "a debt-free truck fund and a neighbours' support team.",
+    facts: [
+      ["Calls", "225 in 2025, in mutual aid with West Fairlee"],
+      ["Station", "9111 VT Route 113"],
+      ["AEDs", "Five: one on the rescue truck, the rest in EMTs' jump kits"],
+      ["Town appropriation", "$84,525 asked for fiscal 2027"],
+    ],
+    history: {
+      intro:
+        "Most calls are medical: Vershire's EMTs stabilise and monitor patients until the ambulance arrives. Fundraising from Vershire Day " +
+        "and coin drops goes into a capital fund, so trucks can be replaced without debt.",
+      events: [
+        { year: 2025, text: "The department and West Fairlee Volunteer Fire Department answer 225 calls. Voters exempt the station from property tax for five years. A grant writer is engaged to replace the breathing apparatus.", source: "r2025" },
+      ],
+    },
+    money: {
+      intro: "Voters set the department's appropriation each year by Australian ballot.",
+      year: "fiscal year 2027 (warned)",
+      lines: [{ label: "Vershire Fire & Rescue", amount: 84525 }],
+      linesNote: "Article 21 of the town meeting warning. Fundraising goes separately into a capital equipment fund.",
+      capital: { title: "Earlier appropriations", lines: [{ label: "Fiscal 2024", amount: 66608 }, { label: "Fiscal 2025", amount: 68675 }, { label: "Fiscal 2026", amount: 70735 }], note: "From the town report's appropriations table." },
+      source: "r2025",
+    },
+    careers: {
+      intro: "The department needs firefighters and first responders to train and certify, and also truck drivers, first aid providers, traffic controllers and good communicators.",
+      points: [
+        "A support team of neighbours helps at scenes: moving cars, spreading sand, taking notes, comforting a child",
+      ],
+      applyUrl: VSHR,
+      source: "r2025",
+    },
+    residents: [
+      { label: "Burn permits", href: VSHR, text: "All outdoor burning needs a permit; call Steve Ward, 802-685-2238." },
+      { label: "Used motor oil", href: VSHR, text: "The department will collect it to heat the station." },
+    ],
+    sources: {
+      r2025: { label: "Town of Vershire, 2025 Annual Report", href: VSHR, note: "Vershire Fire & Rescue report, PDF pages 84–85; appropriations, page 21; station exemption, page 52" },
+    },
+  },
+  weston: {
+    description:
+      "Weston Volunteer Fire Department: an all-hazards volunteer department in a flood-prone firehouse on Route 100, " +
+      "51 calls by type, and its push for a safer station.",
+    facts: [
+      ["Station", "734 Main Street, on Route 100 just north of the village"],
+      ["Meets", "Business meeting 1st Thursday, 7 pm; training other Thursdays, 6:30 pm"],
+      ["Town appropriation", "$51,000 (2025)"],
+    ],
+    contact: { chief: "Brian Lundberg", phone: "802-824-3539", website: `${WSTN}/fire`, source: "dept" },
+    history: {
+      intro:
+        "The town leases the firehouse to the department. It sits in the West River flood hazard area and has flooded several times, " +
+        "most recently in July 2023, damaging the building, vehicles and equipment.",
+      events: [
+        { year: 2021, calls: 51, text: "Training in ventilation, extrication and tanker shuttles; the department marches in Londonderry's Fourth of July parade and brings Santa to Christmas in Weston.", source: "r2021" },
+        { year: 2023, text: "The July flood damages the firehouse, trucks and equipment.", source: "pc" },
+        { year: 2024, text: "The department seeks federal funding for a new, flood-resilient fire station, backed by the town's planning commission.", source: "pc" },
+        { year: 2025, text: "The firehouse gets a new roof.", source: "r2025" },
+      ],
+    },
+    calls: {
+      intro: "Crashes, alarms and mutual aid made up most of 2021's calls.",
+      byType: {
+        title: "Calls by type, 2021",
+        bars: [
+          { label: "Motor vehicle accidents", value: 15 },
+          { label: "Automatic fire alarms", value: 13 },
+          { label: "Mutual aid, including structure fires", value: 12 },
+          { label: "Trees on wires", value: 4 },
+          { label: "Public assists", value: 4 },
+          { label: "Brush fires and investigations", value: 2 },
+          { label: "Lift assist", value: 1 },
+        ],
+        note: "The types add up to the 51 calls reported.",
+        source: "r2021",
+      },
+    },
+    careers: {
+      intro: "With roles in response and public education, the department welcomes visitors to stop by the station for a tour and consider joining.",
+      points: ["Business meeting on the first Thursday at 7 pm; training most other Thursdays at 6:30 pm"],
+      applyUrl: `${WSTN}/fire`,
+      source: "r2021",
+    },
+    residents: [
+      { label: "Burn permits", href: `${WSTN}/fire`, text: "Call the fire warden before burning." },
+    ],
+    sources: {
+      dept: { label: "Town of Weston, Fire", href: `${WSTN}/fire` },
+      r2021: { label: "Town of Weston, 2021 Town Report", href: `${WSTN}/s/2021-Town-Report.pdf`, note: "Weston Fire Department letter, PDF page 62" },
+      pc: { label: "Weston Planning Commission, letter supporting the WVFD's new station request, 6 May 2024", href: `${WSTN}/s/PC-Support-Letter-for-WVFD-Earmark-Bid.pdf` },
+      r2025: { label: "Town of Weston, 2025 Town Report", href: `${WSTN}/s/25-Digital-TR.pdf`, note: "Selectboard report and appropriations" },
     },
   },
   jericho: UJFD,
