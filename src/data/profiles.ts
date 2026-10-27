@@ -276,6 +276,11 @@ const WTFD = "https://0201.nccdn.net/1_2";
 const BER = "https://www.berlinvt.gov/s/2021-Berlin-Town-Report-FINAL-compressed.pdf";
 const WFF = "https://www.waitsfieldvt.gov";
 
+const ADDR = "https://addisonvt.gov/wp-content/uploads/sites/12/2025/02/Town-of-Addison-2024-Town-Report.pdf";
+const CWR = "https://cornwallvt.com/wp-content/uploads/2022/08/THE-Final-Town-Report-2021-February-11-2022.pdf";
+const MKR = "https://monktonvt.com/wp-content/uploads/2023/02/93bcef0fb7ab61d9e2c88e72e5be49f0.pdf";
+const SHMR = "https://shorehamvt.us/_files/ugd/d53131_33c17627411d4d2ab8ed4eb677d4812a.pdf";
+
 // One department, two town pages: Underhill and Jericho share the profile.
 const UJFD: Profile = {
   description:
@@ -6793,6 +6798,184 @@ export const profiles: Record<string, Profile> = {
     sources: {
       dept: { label: "Town of Waitsfield, Fire", href: `${WFF}/departments/public-safety/fire` },
       r2023: { label: "Town of Waitsfield, 2023 Annual Report", href: `${WFF}/fileadmin/files/Departments/Town_Clerk/Annual_Reports/2023_Waitsfield_Annual_Report.pdf`, note: "Chief's report and calls by type, PDF pages 57–58; budget, pages 19 and 29; reserves, pages 35–36" },
+    },
+  },
+  addison: {
+    description:
+      "Addison Volunteer Fire Department: established in 1961, a record 126 calls in 2024, 32 members " +
+      "averaging 23 years of service, a water rescue boat and new FEMA-funded air packs.",
+    facts: [
+      ["Established", "1961"],
+      ["Calls", "126 in 2024, the most in the department's history"],
+      ["Members", "32, with an average of 23 years of service"],
+      ["Meets", "Second Monday of the month, 7 pm, at the fire house"],
+    ],
+    contact: { chief: "Brad Clark", source: "r2024" },
+    history: {
+      intro:
+        "Addison's volunteers stay a long time: the chief has 42 years in, and a charter member nearly 64. " +
+        "The department raises money through pancake breakfasts and an annual fundraising letter.",
+      events: [
+        { year: 1961, text: "The department is established.", source: "r2024" },
+        { year: 2024, calls: 126, text: "A record year. Charter member Buster Grant has the Addison County Firefighters Association's Senior Firefighter award named for him. Five junior members join, the most in years. Fifteen new MSA air packs go into service, bought with a $114,000 FEMA grant and about $6,000 from the department; some of those they replace were over 20 years old. Larry Blacklock, a 53-year member and former first assistant chief, dies in October.", source: "r2024" },
+      ],
+    },
+    calls: {
+      intro: "The department's apparatus at the end of 2024.",
+      byUnit: {
+        title: "Apparatus, by model year",
+        bars: [
+          { label: "Tanker 1", value: 1986, sub: "Marmon, 3,500 gal" },
+          { label: "Hose Reel 1", value: 1987, sub: "International mini-pumper, 1,600 ft of 4-inch hose" },
+          { label: "Tanker 2", value: 1991, sub: "Ford, 2,600 gal" },
+          { label: "Engine 1", value: 2002, sub: "Freightliner/Smeal, 1,500 gpm" },
+          { label: "Water Rescue 1", value: 2008, sub: "22 ft Glassmaster boat" },
+          { label: "Utility 1", value: 2014, sub: "Freightliner/Hackney" },
+        ],
+        note: "From the chief's report.",
+        source: "r2024",
+      },
+    },
+    money: {
+      intro: "The town pays the department an assessment and saves toward a new pumper; the department's own budget covers operations and gear.",
+      year: "2025 (town budget)",
+      lines: [
+        { label: "Fire department assessment", amount: 41000 },
+        { label: "Firehouse maintenance", amount: 15000 },
+        { label: "Fire department fund (pumper)", amount: 12000 },
+        { label: "Insurance", amount: 9000 },
+        { label: "Dispatching", amount: 1400 },
+        { label: "Fire alarm annual fee", amount: 1000 },
+      ],
+      linesNote: "$79,900 in all, up from $69,900 in 2024, mostly for firehouse maintenance.",
+      capital: { title: "FEMA air pack grant, 2024", lines: [{ label: "SCBA purchase (actual)", amount: 120663.36 }], note: "Paid for with a $114,000 Assistance to Firefighters grant and a 5% department match." },
+      source: "r2024",
+    },
+    careers: {
+      intro: "Addison is always looking for people to help protect their neighbours, juniors included.",
+      points: ["Meetings on the second Monday of the month, 7 pm, at the fire house", "See any member"],
+      applyUrl: ADDR,
+      source: "r2024",
+    },
+    residents: [
+      { label: "911 address signs", href: ADDR, text: "$10 from any member." },
+      { label: "Clear the road", href: ADDR, text: "Your road needs room for a truck 11 feet wide and 13 feet tall, clear of branches and signs." },
+      { label: "Burn permits", href: ADDR, text: "From the town fire warden; 66 were issued in 2024." },
+    ],
+    sources: {
+      r2024: { label: "Town of Addison, 2024 Town Report", href: ADDR, note: "Addison Volunteer Fire Department report, PDF pages 65–67; town fire budget, page 46" },
+    },
+  },
+  cornwall: {
+    description:
+      "Cornwall Volunteer Fire Department: 85 calls by type in 2021, EMT members, a new Engine 1 from Dingee, " +
+      "the 46-acre West Street fire, and the fire budget.",
+    facts: [
+      ["Calls", "85 in 2021, within the normal range"],
+      ["Experience", "More than 525 combined years"],
+      ["Town appropriation", "$67,950 for fiscal 2023"],
+    ],
+    history: {
+      intro:
+        "Cornwall's volunteers include several EMTs, who answer medical calls and in 2021 volunteered at vaccination clinics. " +
+        "To join, ask the town clerk; at 50, the department says, you are still young in the volunteer service.",
+      events: [
+        { year: 2021, calls: 85, text: "A 46-acre spring wildfire west of West Street at Sunset Orchard Road, fought with help from Middlebury. A drive-thru chicken dinner fundraiser. A new Engine 1 is designed with Dingee Machine Company of Cornish, New Hampshire, builders of the department's Utility and Brush trucks, due in 2022.", source: "r2021" },
+      ],
+    },
+    calls: {
+      intro: "Medical calls were more than half of 2021's total.",
+      byType: {
+        title: "Calls by type, 2021",
+        bars: [
+          { label: "Medical and MREMS assists", value: 46 },
+          { label: "Fire, smoke and CO investigations", value: 13 },
+          { label: "Motor vehicle incidents", value: 7 },
+          { label: "Grass, brush and agricultural fires", value: 7 },
+          { label: "Fallen wires and trees", value: 7 },
+          { label: "Structure fires", value: 3 },
+          { label: "Mutual aid given", value: 2 },
+          { label: "Other", value: 2 },
+        ],
+        note: "The types add up to the 85 calls reported.",
+        source: "r2021",
+      },
+    },
+    residents: [
+      { label: "Join", href: CWR, text: "Contact the town clerk, who will point you in the right direction." },
+    ],
+    sources: {
+      r2021: { label: "Town of Cornwall, 2021 Annual Report", href: CWR, note: "Cornwall Volunteer Fire Department report and budget, PDF pages 38–40" },
+    },
+  },
+  monkton: {
+    description:
+      "Monkton Volunteer Fire Department: 57 emergency calls in 2022, 12 active members, five vehicles " +
+      "averaging 20 years old, and a truck replacement fund.",
+    facts: [
+      ["Calls", "57 in 2022"],
+      ["Members", "12 active, training weekly"],
+      ["Station", "3747 States Prison Hollow Road"],
+      ["Apparatus", "Five vehicles, averaging 20 years old"],
+    ],
+    contact: { chief: "Curtis Layn", source: "r2022" },
+    history: {
+      intro:
+        "Monkton's volunteers answer fires, crashes, CO alarms, medical assists and downed lines, working with " +
+        "Monkton First Response and the Bristol, Vergennes and Charlotte rescue squads.",
+      events: [
+        { year: 2022, calls: 57, text: "The truck committee begins specifying a new truck, and finds prices sharply higher and a build time of nearly two years. Mike New retires after almost twenty years and is made a life member; Dan Reinhart is voted Outstanding Firefighter.", source: "r2022" },
+      ],
+    },
+    calls: {
+      intro: "The department's fleet.",
+      byUnit: {
+        title: "Apparatus, by model year",
+        bars: [
+          { label: "Engine #2", value: 1992, sub: "GMC TopKick mini-pumper" },
+          { label: "Utility #1", value: 1994, sub: "GMC S8500 heavy rescue" },
+          { label: "Engine #1", value: 1999, sub: "Freightliner pumper" },
+          { label: "Brush #1", value: 2002, sub: "Ford F250" },
+          { label: "Tanker", value: 2006, sub: "Freightliner M2" },
+        ],
+        note: "From the department's vehicle list.",
+        source: "r2022",
+      },
+    },
+    careers: {
+      intro: "There is a place for everyone.",
+      points: ["Stop by the station on a Wednesday night, or talk to any member"],
+      applyUrl: MKR,
+      source: "r2022",
+    },
+    residents: [],
+    sources: {
+      r2022: { label: "Town of Monkton, 2022 Annual Report", href: MKR, note: "Monkton Volunteer Fire Department report, PDF pages 67–69. A scanned report, read with text recognition" },
+    },
+  },
+  shoreham: {
+    description:
+      "Shoreham Fire Department: 35 calls in 2023, Operation Mayday and other outreach, Firefighter I " +
+      "graduates, electric-vehicle extrication training and a cold-water rescue program.",
+    facts: [
+      ["Calls", "35 in 2023"],
+      ["Meets", "1st and 3rd Tuesdays, 7 pm, at the firehouse (2022)"],
+      ["Equipment reserve", "$94,812.64 at the end of 2023"],
+    ],
+    history: {
+      intro: "Shoreham's volunteers answer fires, crashes, alarms and mutual aid, and assist Shoreham First Response. Their meetings are open to anyone thinking of joining.",
+      events: [
+        { year: 2022, text: "Dispatch moves from Shelburne to MREMS. A 1996 Freightliner utility truck is bought, and ARPA money buys battery-powered extrication tools.", source: "r2022" },
+        { year: 2023, calls: 35, text: "The department opens its doors for Operation Mayday with a free pancake breakfast, holds its annual barbecue and visits Shoreham Elementary for Fire Awareness Week. Ryan Fitzsimmons and Jesse Wing complete Firefighter I, and members train with Orwell and Bridport on extrication from electric and hybrid vehicles.", source: "r2023" },
+        { year: 2024, text: "Plans for a cold-water rescue program, and for replacing air packs that are nearly 20 years old.", source: "r2023" },
+      ],
+    },
+    residents: [
+      { label: "Burn permits", href: SHMR, text: "From the town fire warden; 75 were issued in 2023." },
+    ],
+    sources: {
+      r2023: { label: "Town of Shoreham, 2023 Annual Report", href: SHMR, note: "Shoreham Fire Department report, PDF page 19; reserve fund, page 63" },
+      r2022: { label: "Town of Shoreham, 2022 Annual Report", href: "https://shorehamvt.us/_files/ugd/d53131_28b58702dd36420a99dcb302a37e856a.pdf", note: "Fire department report, PDF page 37; meetings, page 2" },
     },
   },
   jericho: UJFD,
