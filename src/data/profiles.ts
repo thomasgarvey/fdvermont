@@ -298,6 +298,19 @@ const PLFD = "https://www.plainfieldvt.gov";
 const WDBY = "https://woodburyvt.org/2026/05/27/town-meeting-feb-28-draft-minutes-2/";
 const WRCS = "https://www.worcestervt.org/wp/public_html/wp/wp-content/uploads/2023/02/109956-ToW_2022-Town-Report_REV2-PROOF-2.pdf";
 
+const DRST = "https://dorsetvt.org/fire-districts--water-systems.html";
+const DFDP = "https://cdn.prod.website-files.com/60f6d459e35277644593b943/69f77b6966330c2ead14d290_DFD%20Packet%205.4.26.pdf";
+const DR25 = "https://www.dorsetvt.org/uploads/3/5/3/5/35356792/2025_town_report_final.pdf";
+const MVT24 = "https://manchester-vt.gov/uploads/dm/21809/2024_Town_Report_including_Fiscal_Year_2025_Budget__Financial_Reports_";
+const PERU = "https://peruvt.org/wp-content/uploads/2025/13/2025%20PERU%20TOWN%20REPORT.pdf";
+const PWNL = "https://www.townofpownal.org/uploads/1/3/7/4/137413037/town_report_2025.pdf";
+const RUPT = "https://rupert.vt.gov/wp-content/uploads/2026/03/Town-of-Rupert-TR-2024-2025.pdf";
+const STMF = "https://www.stamfordvt.net/mediaItems/Town%20Report%202023.pdf";
+const WNHL = "https://www.winhallfire.org";
+const DOVTP = "https://outside.vermont.gov/agency/ACCD/bylaws/Bylaws%20and%20Plans%20Approved/Dover_Proposed_TownPlan_March_2024.pdf";
+const LDRY = "https://www.londonderryvt.gov";
+const WNDM = "https://townofwindhamvt.org/wp-content/uploads/2023/05/Town-of-Windham_Town-Report-2022.pdf";
+
 // One department, two town pages: Underhill and Jericho share the profile.
 const UJFD: Profile = {
   description:
@@ -7667,6 +7680,379 @@ export const profiles: Record<string, Profile> = {
     sources: {
       r2022: { label: "Town of Worcester, 2022 Town Report", href: WRCS, note: "Fire & rescue report, PDF page 40; other items, pages 5, 27" },
       page: { label: "Town of Worcester, Fire", href: "https://worcestervt.org/wp/town-government/fire/" },
+    },
+  },
+  dorset: {
+    description:
+      "Dorset's two fire districts: Dorset Fire Department, with a record 144 calls in 2024 and a new tanker, " +
+      "and East Dorset Fire Department, with 148 calls in 2025, plus both budgets.",
+    subtitle: "Dorset Fire District #1 and East Dorset Fire District #1",
+    facts: [
+      ["Departments", "Two fire districts, each run by a five-member Prudential Committee that also runs a water system"],
+      ["Dorset FD calls", "144 in 2024, a record"],
+      ["East Dorset FD calls", "148 in 2025"],
+      ["Meets", "Both departments meet Tuesdays, 7 pm, at their stations"],
+    ],
+    history: {
+      intro:
+        "Dorset is covered by two departments, each a fire district of its own: Dorset Fire Department on Route 30 and East Dorset Fire Department on Village Street. " +
+        "Fire district taxes now appear on the town's property tax bill.",
+      events: [
+        { year: 2024, calls: 144, text: "Dorset Fire Department has its busiest year on record, adds a new attack truck and starts building a 3,000-gallon tanker. Manchester's police begin dispatching for East Dorset.", source: "dfd" },
+        { year: 2025, text: "East Dorset answers 148 calls, puts in 550 hours of in-house training and 1,480 firefighter-hours on calls, and holds monthly winter pancake breakfasts toward a side-by-side to replace a 20-year-old six-wheeler.", source: "r2025" },
+      ],
+    },
+    money: {
+      intro: "Each district sets its own budget.",
+      year: "fiscal year 2027 (budget)",
+      lines: [
+        { label: "Dorset Fire District, fire budget", amount: 215503 },
+        { label: "East Dorset Fire District", amount: 167537 },
+      ],
+      linesNote: "Dorset's fire budget was $209,250 for fiscal 2026; East Dorset's was $157,537.",
+      capital: { title: "East Dorset's largest lines, fiscal 2027", lines: [{ label: "Truck payment", amount: 36237 }, { label: "Firehouse maintenance and repair", amount: 13500 }, { label: "Apparatus maintenance and repair", amount: 11500 }], note: "From the district's budget in the town report." },
+      source: "dfd",
+    },
+    careers: {
+      intro: "Dorset Fire Department is recruiting firefighters, drivers and firehouse helpers. Training, gear and expenses are covered, with a stipend based on involvement.",
+      points: ["Weekly meetings on Tuesdays at 7 pm at each station"],
+      applyUrl: "https://www.dorsetfiredistrict.org",
+      source: "site",
+    },
+    residents: [
+      { label: "Burn permits", href: "https://www.dorsetfiredistrict.org", text: "When burning is allowed, you need a written permit from a fire department official." },
+    ],
+    sources: {
+      town: { label: "Town of Dorset, Fire Districts & Water Systems", href: DRST },
+      site: { label: "Dorset Fire District", href: "https://www.dorsetfiredistrict.org" },
+      dfd: { label: "Dorset Fire District #1, 2026 annual meeting packet", href: DFDP, note: "2025 meeting minutes and FY27 budgets, PDF pages 12 and 18" },
+      r2025: { label: "Town of Dorset, 2025 Town Report", href: DR25, note: "East Dorset Fire District report and budget, PDF page 22" },
+      mvt: { label: "Town of Manchester, 2024 Town Report", href: MVT24, note: "Dispatch, PDF page 56" },
+    },
+  },
+  manchester: {
+    description:
+      "Manchester Fire Department: an all-volunteer department of about 40, 319 calls in fiscal 2024, " +
+      "and its home at the Public Safety Facility.",
+    facts: [
+      ["Calls", "319 in fiscal year 2024"],
+      ["Members", "About 40 volunteers"],
+      ["Station", "Public Safety Facility, Jeff Williams Way"],
+    ],
+    contact: { chief: "Chris Towslee", phone: "802-362-2121", website: "https://manchester-vt.gov/fire", source: "page" },
+    history: {
+      intro: "Manchester's volunteers answer fires, rescues on the roads, on the water and in the wilderness, and mutual aid across the area. Fundraising pays for much of their equipment.",
+      events: [
+        { year: 2024, calls: 319, text: "The fiscal year's calls include 70 rescues and 34 mutual aid requests.", source: "r2024" },
+      ],
+    },
+    calls: {
+      intro: "Most calls are fire-related, including false alarms and standbys.",
+      byType: {
+        title: "Calls by type, fiscal year 2024",
+        bars: [
+          { label: "Fire-related", value: 197, sub: "working fires, false alarms, hazmat, standbys" },
+          { label: "Rescue", value: 70, sub: "crashes, water and wilderness rescues" },
+          { label: "Mutual aid given", value: 34 },
+          { label: "Carbon monoxide", value: 16 },
+          { label: "Brush and grass fires", value: 2 },
+        ],
+        note: "The types add up to the 319 calls reported.",
+        source: "r2024",
+      },
+    },
+    residents: [],
+    sources: {
+      page: { label: "Town of Manchester, Fire Department", href: "https://manchester-vt.gov/fire" },
+      r2024: { label: "Town of Manchester, 2024 Town Report", href: MVT24, note: "Fire Department report, PDF page 55" },
+    },
+  },
+  "north-bennington": {
+    description:
+      "North Bennington Fire Department: established in 1834 and recognised as Vermont's oldest active volunteer fire department, " +
+      "with an ice and cold-water rescue team.",
+    facts: [
+      ["Established", "1834"],
+      ["Recognised as", "Vermont's oldest active volunteer fire department"],
+      ["Special team", "Ice and cold-water rescue"],
+    ],
+    contact: { chief: "Ed Myers Jr.", source: "banner" },
+    history: {
+      intro:
+        "Besides firefighting and emergency response, the village department keeps a team trained and equipped for rescues from frigid water and unstable ice.",
+      events: [
+        { year: 1834, text: "The North Bennington Fire Department is established.", source: "banner" },
+      ],
+    },
+    residents: [],
+    sources: {
+      banner: { label: "Bennington Banner, \"Fire departments honored in Bennington\" (20 October 2026)", href: "https://www.benningtonbanner.com/local-news/fire-departments-honored-in-bennington/5039932" },
+    },
+  },
+  peru: {
+    description:
+      "Peru Fire Department: 58 incidents in 2025, a new chief after Chuck Black's 40 years, $22,215 of donated equipment " +
+      "and 41 burn permits.",
+    facts: [
+      ["Calls", "58 incidents in 2025"],
+      ["Donated equipment", "$22,215 bought by the Fire Company and given to the town in 2025"],
+      ["Burn permits", "41 issued in 2025"],
+    ],
+    contact: { chief: "Mike Gayda", source: "r2025" },
+    history: {
+      intro: "Peru's Fire Company raises money to equip the town's department. Half its incidents are automatic alarms.",
+      events: [
+        { year: 2025, calls: 58, text: "Chuck Black retires as fire chief after 40 years and stays on as treasurer; Mike Gayda takes over. A September wildland fire on National Forest land spreads underground from a campfire ring, and a statewide burn ban follows.", source: "r2025" },
+      ],
+    },
+    calls: {
+      intro: "Automatic alarms were nearly half of 2025's incidents.",
+      byType: {
+        title: "Incidents by type, 2025",
+        bars: [
+          { label: "Automatic alarms", value: 28 },
+          { label: "Agency assist or mutual aid", value: 7 },
+          { label: "Motor vehicle accidents", value: 6 },
+          { label: "CO alarms", value: 4 },
+          { label: "Wildland fires", value: 4 },
+          { label: "Odor investigations", value: 2 },
+          { label: "Structure fire", value: 1 },
+        ],
+        note: "The types add up to the 58 incidents reported.",
+        source: "r2025",
+      },
+    },
+    residents: [
+      { label: "Burn permits", href: PERU, text: "Needed for debris burning when there is no snow on the ground; only unpainted, untreated wood may be burned." },
+    ],
+    sources: {
+      r2025: { label: "Town of Peru, 2025 Town Report", href: PERU, note: "Fire department and fire warden reports, PDF page 13" },
+    },
+  },
+  pownal: {
+    description:
+      "Pownal's two fire departments: Pownal Valley Fire Department, with three stations and a push to replace its Center Station, " +
+      "and the Pownal Fire Protective Association, with over 140 calls in 2025.",
+    subtitle: "Pownal Valley Fire Department and Pownal Fire Protective Association",
+    facts: [
+      ["Departments", "Two: Pownal Valley Fire Department and Pownal Fire Protective Association"],
+      ["Pownal Valley", "Three stations: Center, East and North"],
+      ["Protective Association calls", "Over 140 in 2025"],
+    ],
+    history: {
+      intro:
+        "Pownal Valley spends its town funds on operations, maintenance and the upkeep of its three stations, and teaches fire prevention at the elementary school. " +
+        "The Protective Association uses a UTV for rescues off Pownal's mountains.",
+      events: [
+        { year: 2025, calls: 140, callsApprox: true, text: "The Protective Association's new truck arrives in February; it adds thermal imaging cameras and another AED, and wins grants for protective and wildland gear. Pownal Valley applies for Congressional project funding to replace its Center Station.", source: "r2025" },
+      ],
+    },
+    careers: {
+      intro: "The Protective Association makes training a top priority and hosts classes for departments across the area.",
+      points: ["The Protective Association meets most Monday nights at 7 pm"],
+      applyUrl: PWNL,
+      source: "r2025",
+    },
+    residents: [],
+    sources: {
+      r2025: { label: "Town of Pownal, Annual Report for the year ending 30 June 2025", href: PWNL, note: "Department reports, PDF pages 83–84; firehouse tax exemption, page 92" },
+    },
+  },
+  rupert: {
+    description:
+      "Rupert Volunteer Fire Department: 42 calls in 2025, half of them helping neighbouring towns, its officers, " +
+      "and why it asked voters for $50,000.",
+    facts: [
+      ["Calls", "42 in 2025: 21 in town, 21 for neighbours"],
+      ["Town funding asked", "$50,000"],
+      ["Dispatch", "911, or dispatch directly at 1-518-747-3325"],
+    ],
+    contact: { chief: "Jimmy Joe Lewis", source: "r2025" },
+    history: {
+      intro:
+        "Rupert's volunteers help their neighbours as often as they work at home, including Salem and Hebron across the New York line.",
+      events: [
+        { year: 2025, calls: 42, text: "The department asks to raise its town funding to $50,000. Gear now expires after five years instead of ten, and air packs after ten: a set of gear costs almost $5,000, an air pack with two bottles about $10,000.", source: "r2025" },
+      ],
+    },
+    calls: {
+      intro: "Calls in town and to neighbouring communities, 2025.",
+      byType: {
+        title: "Calls in town, 2025",
+        bars: [
+          { label: "EMS assists", value: 7 },
+          { label: "Alarm activations", value: 6 },
+          { label: "False alarms", value: 3 },
+          { label: "Motor vehicle accidents", value: 2 },
+          { label: "Lines down", value: 2 },
+          { label: "Water emergency", value: 1 },
+        ],
+        note: "The 21 in-town calls; another 21 went to Salem (5), Arlington, Hebron, Wells and Dorset (3 each), West Pawlet (2), Pawlet and Manchester (1 each).",
+        source: "r2025",
+      },
+    },
+    residents: [
+      { label: "Burn permits", href: RUPT, text: "Needed whenever there is no snow cover." },
+    ],
+    sources: {
+      r2025: { label: "Town of Rupert, Town Report 2024–2025", href: RUPT, note: "Fire chief's report, PDF page 33 (scanned; read by OCR); fire warden, page 32" },
+    },
+  },
+  stamford: {
+    description:
+      "Stamford Volunteer Fire Company: 86 calls in 2023 including 37 medical, an 11-minute average response, " +
+      "Appalachian Trail rescues and a week of pumping basements.",
+    facts: [
+      ["Calls", "86 in 2023"],
+      ["Average response", "11 minutes, with about 7 members per call (2023)"],
+      ["Mutual aid", "Readsboro, and Clarksburg, Monroe and New Ashford in Massachusetts"],
+    ],
+    history: {
+      intro:
+        "Medical calls are the biggest share. Rescues on the Appalachian Trail are long: the only way out is to hike in and carry the patient.",
+      events: [
+        { year: 2022, text: "The Seth Warner Shelter moves two miles north, stretching a rescue there from 1½ to 4½ hours; the company sets up a tiered response with Southern Vermont search and rescue.", source: "r2023" },
+        { year: 2023, calls: 86, text: "Trees felled by a 30-inch snowstorm damage the station. After the July floods, crews pump 10 basements around the clock for six days. A new truck is ordered, with a 650-day wait.", source: "r2023" },
+      ],
+    },
+    calls: {
+      intro: "Medical emergencies were 37 of 2023's 86 calls.",
+      byType: {
+        title: "Calls by type, 2023",
+        bars: [
+          { label: "Medical emergencies", value: 37 },
+          { label: "Car accidents", value: 14 },
+          { label: "Weather-related", value: 10 },
+          { label: "Searches", value: 7 },
+          { label: "Power lines", value: 5 },
+          { label: "Structure fires", value: 3 },
+          { label: "Chimney fires", value: 3 },
+          { label: "Illegal burning", value: 3 },
+          { label: "Alarm activations", value: 2 },
+          { label: "Vehicle fire", value: 1 },
+          { label: "Service call", value: 1 },
+        ],
+        note: "The types add up to the 86 calls reported.",
+        source: "r2023",
+      },
+    },
+    residents: [],
+    sources: {
+      r2023: { label: "Town of Stamford, 2023 Town Report", href: STMF, note: "Stamford Volunteer Fire Company report, PDF page 36" },
+    },
+  },
+  winhall: {
+    description:
+      "Winhall Fire Department in Bondville: more than 60 years of volunteer service, the town's fire equipment fund, " +
+      "and how to join.",
+    facts: [
+      ["Service", "More than 60 years"],
+      ["Station", "107 Vermont Route 30, Bondville"],
+      ["Equipment fund", "$175,000 set aside by the town (fiscal 2025)"],
+    ],
+    history: {
+      intro:
+        "Winhall's volunteers answer fires, accidents and natural disasters in Winhall and the surrounding towns. " +
+        "The Winhall-Stratton Fire District is a water and sewer district, not part of the fire department.",
+      events: [
+        { year: 2025, text: "Voters are asked to set up a Fire Equipment Maintenance Fund, and the selectboard continues to study the future of the firehouse property.", source: "r2025" },
+      ],
+    },
+    careers: {
+      intro: "The department takes new members through a membership form on its website.",
+      points: [],
+      applyUrl: `${WNHL}/members.html`,
+      source: "members",
+    },
+    residents: [],
+    sources: {
+      dept: { label: "Winhall Fire Department", href: WNHL },
+      members: { label: "Winhall Fire Department, Members", href: `${WNHL}/members.html` },
+      r2025: { label: "Town of Winhall, 2025 Town Report (draft)", href: "https://www.winhall.org/TownReportDraftFull.pdf", note: "Warning article 4; selectboard report; fund appropriations" },
+    },
+  },
+  dover: {
+    description:
+      "Dover's two fire departments: the East Dover Volunteer Fire Company, protecting the town since 1948, " +
+      "and the town-run West Dover Fire Department, with a firehouse built in 1995.",
+    subtitle: "East Dover Volunteer Fire Company and West Dover Fire Department",
+    facts: [
+      ["Departments", "Two: East Dover (independent, since 1948) and West Dover (run by the town)"],
+      ["West Dover", "Firehouse completed 1995; includes a search and rescue team"],
+      ["Trucks", "Each station has two engines and a tanker"],
+    ],
+    history: {
+      intro:
+        "Because of rapid growth on the west side of Dover, the town took over the West Dover Fire Department. East Dover's company stayed independent, " +
+        "with yearly allocations from the town. West Dover's search and rescue team finds lost and injured people in remote recreation areas.",
+      events: [
+        { year: 1948, text: "The East Dover Volunteer Fire Company begins protecting the community.", source: "edfd" },
+        { year: 1995, text: "West Dover's new firehouse is completed across Route 100 from the original, which becomes the police station.", source: "tp" },
+        { year: 2013, text: "West Dover celebrates its 50th anniversary with an open house, a parade on Route 100 and the dedication of an antique 1927 Seagrave truck.", source: "fma" },
+      ],
+    },
+    residents: [],
+    sources: {
+      edfd: { label: "East Dover Volunteer Fire Department", href: "https://eastdoverfd.com/" },
+      tp: { label: "Town of Dover, Town Plan (March 2024)", href: DOVTP, note: "Fire protection, PDF pages 11 and 50–51" },
+      fma: { label: "Fire Mutual Aid news, \"West Dover FD celebrates 50 years\" (2013)", href: "https://firemutualaid.com/news/story/west-dover-fd-celebrates-50-years" },
+    },
+  },
+  londonderry: {
+    description:
+      "Londonderry's two volunteer fire companies: Champion Fire Company #5 in South Londonderry, with 47 calls in 2025 and a junior program, " +
+      "and Phoenix Fire Company #6.",
+    subtitle: "Champion Fire Company #5 and Phoenix Fire Company #6",
+    facts: [
+      ["Companies", "Champion #5 (South Londonderry Fire Department) and Phoenix #6 (Londonderry Fire Department)"],
+      ["Champion calls", "47 in 2025, plus 16 mutual aid calls"],
+      ["Juniors", "Three active junior firefighters at Champion"],
+    ],
+    history: {
+      intro:
+        "The town is served by two volunteer companies. Both receive money from trust funds held for them by the town: the Tyler Fund for Champion and the Boynton Fund for Phoenix.",
+      events: [
+        { year: 2024, text: "The town's trustees pay $37,511.65 from the Tyler Fund to Champion and $14,619.46 from the Boynton Fund to Phoenix, after street lighting costs.", source: "r2026" },
+        { year: 2025, calls: 47, text: "Champion's calls fall from 2024; it gives mutual aid in eight towns. Assistant Chief Matthew Mosher, with Champion since 2003, retires.", source: "r2026" },
+      ],
+    },
+    careers: {
+      intro: "Champion asks only for \"the desire to help your friends and neighbors in times of crisis\": no experience is necessary.",
+      points: ["Juniors train, attend meetings and go to calls in a support role"],
+      applyUrl: `${LDRY}/services/fire_and_rescue/index.php`,
+      source: "r2026",
+    },
+    residents: [],
+    sources: {
+      page: { label: "Town of Londonderry, Fire and Rescue", href: `${LDRY}/services/fire_and_rescue/index.php` },
+      r2026: { label: "Town of Londonderry, Town Report 2026 (fiscal year 2025)", href: `${LDRY}/Documents/Departments/Town%20Clerk/Annual%20Town%20Meeting/Town%20Reports/Londonderry%20Town%20Report%202026.pdf`, note: "Champion report, PDF page 40; trust funds, page 18" },
+    },
+  },
+  windham: {
+    description:
+      "Windham Volunteer Fire Company: 28 calls in 2022, a pie auction and chicken barbecue, monthly meetings, " +
+      "and plans for the firehouse.",
+    facts: [
+      ["Calls", "28 in 2022: 20 in town, 8 mutual aid"],
+      ["Meets", "First Thursday of the month, 6 pm, at the fire station"],
+      ["Firehouse", "802-875-5332"],
+    ],
+    history: {
+      intro:
+        "Windham's company is funded partly by its own events: a basket party, a chicken barbecue and a pie auction. It visits the school for fire prevention.",
+      events: [
+        { year: 2022, calls: 28, text: "The company starts planning an equipment replacement schedule and the firehouse's future: an update or a complete rebuild. Every pupil gets a Windham fire shirt at the school visit.", source: "r2022" },
+      ],
+    },
+    careers: {
+      intro: "The company is looking for new members.",
+      points: ["Meetings the first Thursday of the month at 6 pm; call the firehouse with questions"],
+      applyUrl: WNDM,
+      source: "r2022",
+    },
+    residents: [],
+    sources: {
+      r2022: { label: "Town of Windham, 2022 Town Report", href: WNDM, note: "Windham Volunteer Fire Company report, PDF page 41" },
     },
   },
   jericho: UJFD,
