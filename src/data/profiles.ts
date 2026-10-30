@@ -286,6 +286,18 @@ const WSHR = "https://www.washingtonvt.org/s/Annual-Town-Report-2026-Final.pdf";
 const VSHR = "https://vershirevt.org/wp-content/uploads/2026/02/Town-Report-2026-Final-Draft-02.23.26-compressed.pdf";
 const WSTN = "https://www.westonvt.org";
 
+const BRAD = "https://bradford-vt.us/services/emergency_services_dial_911/fire/index.php";
+const TRORC = "https://www.trorc.org/wp-content/uploads";
+const FRLE = "https://fairleevt.gov/uploads/dm/7108/2025_Fairlee_Town_Report";
+const NWBY = "https://www.newburyvt.org/DocumentCenter/View/934/Newbury-2025-Town-Report";
+const RAND = "https://randolphtownvt.org";
+const THET = "https://www.thetfordfire.org";
+const WFLE = "https://westfairleevt.gov/vertical/sites/%7B11C05066-8FAE-4AAC-9EBF-DC9E04E9CB00%7D/uploads/WestFairleeVT_2025TownReport.pdf";
+const MSHF = "https://marshfieldvt.gov/vertical/Sites/%7BDE838A07-5D57-4E6F-95DF-7C05B7FB1126%7D/uploads/Town_Report_Final_from_L._Brown.pdf";
+const PLFD = "https://www.plainfieldvt.gov";
+const WDBY = "https://woodburyvt.org/2026/05/27/town-meeting-feb-28-draft-minutes-2/";
+const WRCS = "https://www.worcestervt.org/wp/public_html/wp/wp-content/uploads/2023/02/109956-ToW_2022-Town-Report_REV2-PROOF-2.pdf";
+
 // One department, two town pages: Underhill and Jericho share the profile.
 const UJFD: Profile = {
   description:
@@ -7189,6 +7201,472 @@ export const profiles: Record<string, Profile> = {
       r2021: { label: "Town of Weston, 2021 Town Report", href: `${WSTN}/s/2021-Town-Report.pdf`, note: "Weston Fire Department letter, PDF page 62" },
       pc: { label: "Weston Planning Commission, letter supporting the WVFD's new station request, 6 May 2024", href: `${WSTN}/s/PC-Support-Letter-for-WVFD-Earmark-Bid.pdf` },
       r2025: { label: "Town of Weston, 2025 Town Report", href: `${WSTN}/s/25-Digital-TR.pdf`, note: "Selectboard report and appropriations" },
+    },
+  },
+  bradford: {
+    description:
+      "Bradford Fire Department: a six-bay station on Carson Lane built in 1998, 206 calls in 2022, " +
+      "two mutual aid networks, and how to get a burn permit.",
+    facts: [
+      ["Station", "135 Carson Lane, completed 1998: six bays, a chief's office and a large meeting room"],
+      ["Calls", "206 in 2022"],
+      ["Mutual aid", "Part of two mutual aid networks"],
+    ],
+    contact: { chief: "Nate Brooks", phone: "802-222-5224", website: BRAD, source: "dept" },
+    history: {
+      intro:
+        "Bradford's firefighters answer structure and chimney fires and every automobile rescue call in town. " +
+        "The phone at the station is not staffed around the clock: for an emergency, call 911.",
+      events: [
+        { year: 1998, text: "The new fire station at 135 Carson Lane is completed, with six bays for fire and rescue vehicles.", source: "lhmp" },
+        { year: 2022, calls: 206, text: "The department answers 206 calls.", source: "lhmp" },
+      ],
+    },
+    residents: [
+      { label: "Burn permits", href: BRAD, text: "Get one from the forest fire warden. Have ready your name, mailing and 911 addresses, and what you will burn." },
+    ],
+    sources: {
+      dept: { label: "Town of Bradford, Fire Department", href: BRAD, note: "Station, officers, non-emergency number, burn permits" },
+      lhmp: { label: "Town of Bradford Local Hazard Mitigation Plan (TRORC, adopted 2024)", href: `${TRORC}/2013/11/Bradford_LHMP_FINAL.pdf`, note: "Fire station and calls, PDF page 7" },
+    },
+  },
+  corinth: {
+    description:
+      "Corinth Volunteer Fire Department: about 20 volunteers, a new four-bay station on Fairground Road " +
+      "approved by voters in 2018, and stations in East Corinth and Cookeville.",
+    facts: [
+      ["Members", "An average of 20, many trained in Fire 1 and 2, hazmat and cold water rescue (2019 town plan)"],
+      ["Organisation", "A nonprofit, separate from the town"],
+      ["Burn permits", "By permit only, from the fire warden"],
+    ],
+    history: {
+      intro:
+        "Since at least 1980 the department worked out of two stations, in East Corinth village and in Cookeville. " +
+        "Corinth often gives mutual aid to Bradford.",
+      events: [
+        { year: 2017, text: "The town's hazard plan lists two engines, an engine-tanker, a heavy rescue, a wildland truck and two defibrillators.", source: "lhmp" },
+        { year: 2018, text: "On 24 July voters approve, 221 to 156, an $850,000 bond for a four-bay station on donated land on Fairground Road. The village station is to close; Cookeville stays. The department then had 23 members.", source: "vn18" },
+        { year: 2020, text: "The new station is under construction, with running water, which neither old station had.", source: "vn20" },
+      ],
+    },
+    residents: [
+      { label: "Burn permits", href: `${TRORC}/2013/10/Town-of-Corinth-TP-Adopted-10.21.19-small.pdf`, text: "Open burning is by permit only, from the town's fire warden." },
+    ],
+    sources: {
+      tp: { label: "Town of Corinth Town Plan, adopted 21 October 2019 (TRORC)", href: `${TRORC}/2013/10/Town-of-Corinth-TP-Adopted-10.21.19-small.pdf`, note: "Fire protection, PDF page 13" },
+      lhmp: { label: "Town of Corinth Hazard Mitigation Plan, 2017 (TRORC)", href: `${TRORC}/2013/10/Corinth_FinalAdopted.pdf`, note: "Equipment, PDF page 8" },
+      vn18: { label: "Valley News, \"Corinth Fire Station a Long Time Coming\" (August 2018)", href: "https://www.vnews.com/Corinth-Fire-Station-a-Long-Time-Coming-19179187" },
+      vn20: { label: "Valley News, Corinth fire station (28 August 2020)", href: "https://vnews.com/2020/08/28/corinth-fire-station-35930151/" },
+    },
+  },
+  fairlee: {
+    description:
+      "Fairlee Fire Department and FAST Squad: 128 calls in 2025, a new E-ONE engine, the fire and rescue budget " +
+      "and meeting nights.",
+    facts: [
+      ["Calls", "128 in 2025, fire department and FAST Squad together"],
+      ["Newest engine", "Engine 6, a 2025 International HV built by E-ONE"],
+      ["Meets", "First Thursday, 7:30 pm; drill third Thursday, 6 pm"],
+    ],
+    contact: { chief: "Andrew Godfrey", source: "r2025" },
+    history: {
+      intro:
+        "Fairlee's firefighters and FAST Squad answer fires, crashes and medical calls, and help neighbouring departments at structure, silo and brush fires.",
+      events: [
+        { year: 1995, text: "A donation of stock sets up the Firemen's Stock Fund.", source: "r2025" },
+        { year: 2025, calls: 128, text: "Engine 6 arrives in October and is in service just over a month later, with a bigger pump and 75 gallons more water. Mike Moore retires after 35 years on the department.", source: "r2025" },
+      ],
+    },
+    money: {
+      intro: "Fire and rescue is a department of the town's general fund.",
+      year: "2026 (proposed)",
+      lines: [
+        { label: "Dispatch", amount: 14500 },
+        { label: "Salaries and wages", amount: 13000 },
+        { label: "New equipment", amount: 12000 },
+        { label: "Insurance", amount: 10500 },
+        { label: "Vehicle operation and maintenance", amount: 10000 },
+        { label: "Computer, internet and software", amount: 10000 },
+      ],
+      linesNote: "The largest lines of $82,740 proposed for 2026. The 2025 budget was $87,771; $69,404 was spent.",
+      capital: { title: "Engine and equipment, 2026 (proposed)", lines: [{ label: "Fire engine debt service", amount: 54789 }, { label: "Emergency equipment reserve", amount: 27500 }], note: "Separate from the department budget." },
+      source: "r2025",
+    },
+    careers: {
+      intro: "The department and FAST Squad are always looking for help, even from people who can't make every call.",
+      points: ["Regular meeting first Thursday at 7:30 pm; drill third Thursday at 6 pm"],
+      applyUrl: FRLE,
+      source: "r2025",
+    },
+    residents: [],
+    sources: {
+      r2025: { label: "Town of Fairlee, 2025 Annual Town Report", href: FRLE, note: "Fire department and FAST Squad letter, PDF page 54; budget, page 25; reserves, page 14" },
+    },
+  },
+  newbury: {
+    description:
+      "Newbury's fire department: Newbury Village, Wells River and West Newbury stations, a new village station in 2025, " +
+      "79 calls for Wells River and the fire budget.",
+    subtitle: "Newbury Village, Wells River and West Newbury stations",
+    facts: [
+      ["Stations", "Newbury Village, Wells River and West Newbury"],
+      ["New station", "Newbury Village, occupied October 2025"],
+      ["Wells River", "79 calls and over 611 hours in 2025; 14 members"],
+      ["Burn permits", "150 issued in 2025"],
+    ],
+    history: {
+      intro:
+        "The town's fire department works from three stations. Newbury Village and Wells River share coverage of the town, and all of Newbury's structure fires " +
+        "draw help from surrounding departments. Many of Wells River's crashes are on I-91.",
+      events: [
+        { year: 2025, calls: 79, text: "The 90-year-old Newbury Village station at 60 Chapel Street is demolished in May; the trucks wait in a farm barn, and the new three-bay station, with a community space for meetings and voting, is approved for occupancy on 22 October. The 79 calls are Wells River's.", source: "r2025" },
+      ],
+    },
+    money: {
+      intro: "The fire department is a line in the town budget.",
+      year: "2026 (budget)",
+      lines: [
+        { label: "Non-recurring fire equipment", amount: 125000 },
+        { label: "Transfer to equipment reserve", amount: 60000 },
+        { label: "Station bond payment", amount: 41000 },
+        { label: "Payroll", amount: 35000 },
+        { label: "Equipment", amount: 17400 },
+      ],
+      linesNote: "The largest lines of $331,910 budgeted for 2026. In 2025, $145,846.77 was spent against a $170,520 budget.",
+      capital: { title: "New village station", lines: [{ label: "20-year bond applied for", amount: 500000 }], note: "The figure in the town report. A Valley News report before the 2025 vote gave $700,000." },
+      source: "r2025",
+    },
+    careers: {
+      intro: "Being a firefighter is \"a very rewarding way to give back to your community\". Any member can give you an application.",
+      points: ["Wells River meets the first Monday at 7 pm and trains the third Monday at 6 pm"],
+      applyUrl: NWBY,
+      source: "r2025",
+    },
+    residents: [
+      { label: "Burn permits", href: NWBY, text: "Permits for brush, grass, leaves and clean wood come from the town's permit issuers." },
+      { label: "No power?", href: NWBY, text: "The Newbury Village station has backup power and heat. Contact any firefighter if you are in a cold house without power." },
+    ],
+    sources: {
+      r2025: { label: "Town of Newbury, 2025 Annual Report", href: NWBY, note: "Station reports, PDF pages 23 and 26–27; budget, page 14; burn permits, page 25" },
+      dir: { label: "Town of Newbury, Fire Department directory", href: "https://newburyvt.org/Directory.aspx?DID=19" },
+      vn: { label: "Valley News, \"Newbury voters consider funding new fire station\" (20 February 2025)", href: "https://vnews.com/2025/02/20/newbury-voters-consider-funding-new-fire-station-59495693/" },
+    },
+  },
+  randolph: {
+    description:
+      "Randolph's three volunteer fire departments, Randolph Village, Randolph Center and East Randolph: why there are three, " +
+      "their stations and their trucks.",
+    subtitle: "Randolph Village, Randolph Center and East Randolph fire departments",
+    facts: [
+      ["Departments", "Three, all volunteer: Randolph Village, Randolph Center and East Randolph"],
+      ["Why three", "A high ridge runs through the middle of the town"],
+      ["Non-emergency", "802-728-5433 (town)"],
+    ],
+    history: {
+      intro:
+        "Each of the three stations can hold a roster of 20 firefighters (25 at the village), and all three give mutual aid to neighbouring towns. " +
+        "Randolph Village also provides contracted fire protection to Braintree.",
+      events: [
+        { year: 2015, text: "Fire destroys the Randolph Village fire station and a rescue pumper.", source: "vn" },
+        { year: 2018, text: "A new Randolph Village station is complete on the same site.", source: "vn" },
+      ],
+    },
+    residents: [],
+    sources: {
+      town: { label: "Town of Randolph, Fire Departments", href: `${RAND}/fire` },
+      village: { label: "Town of Randolph, Randolph Village Fire Department", href: `${RAND}/fire-department-randolph-village` },
+      center: { label: "Town of Randolph, Randolph Center Fire Department", href: `${RAND}/fire-department-randolph-center` },
+      east: { label: "Town of Randolph, East Randolph Fire Department", href: `${RAND}/fire-department-east-randolph` },
+      rvfd: { label: "Randolph Village Fire Department", href: "https://www.rvfdvt.com/" },
+      vn: { label: "Valley News, \"Randolph Sues to Recover Expense of New Fire Station\" (15 May 2018)", href: "https://vnews.com/2018/05/15/randolph-sues-truck-companies-over-blaze-that-destroyed-fire-station-17457560/" },
+    },
+  },
+  thetford: {
+    description:
+      "Thetford Volunteer Fire Department: incorporated in 1960, about 18 volunteers aged 15 to over 65, " +
+      "stations on Thetford Hill and in Post Mills, and its trucks.",
+    facts: [
+      ["Founded", "Incorporated 1960"],
+      ["Members", "About 18 volunteers, aged 15 to more than 65"],
+      ["Stations", "Thetford Hill (main) and Post Mills"],
+      ["Organisation", "A private nonprofit, under contract as the town's sole fire protection"],
+      ["Trucks", "Three E-One engines (2009, 2014, 2018), a 2015 rescue, a 2008 forestry truck and two six-wheelers"],
+    ],
+    contact: { chief: "Chad Whitcomb", phone: "802-785-2412", website: THET, source: "contact" },
+    history: {
+      intro:
+        "Residents formed the department after some large fires in town. Its first station stood where Interstate 91 now runs, " +
+        "and was rebuilt on Thetford Hill after the highway came through.",
+      events: [
+        { year: 1960, text: "The Thetford Volunteer Fire Department is incorporated.", source: "history" },
+        { year: 1995, text: "Volunteers build an office, kitchen, bathroom and training room onto the Thetford Hill station.", source: "stations" },
+        { year: 2005, text: "Volunteers add another truck bay, so every truck is housed indoors.", source: "stations" },
+        { year: 2025, text: "A silo fire at Pompanoosuc Mills in October goes to a second alarm after a dust explosion.", source: "press" },
+        { year: 2026, text: "A silo fire on Route 5 in East Thetford on 26 March draws mutual aid from New Hampshire and Vermont; no one is hurt.", source: "press" },
+      ],
+    },
+    residents: [
+      { label: "Burn permits", href: `${THET}/burn-permits.html`, text: "Free. Call the department or use its online form; permits aren't given by text." },
+    ],
+    sources: {
+      contact: { label: "Thetford Volunteer Fire Department, Contact", href: `${THET}/contact.html` },
+      history: { label: "Thetford Volunteer Fire Department, History", href: `${THET}/history.html` },
+      stations: { label: "Thetford Volunteer Fire Department, Stations", href: `${THET}/stations.html` },
+      about: { label: "Thetford Volunteer Fire Department, About Us", href: `${THET}/about-us.html` },
+      apparatus: { label: "Thetford Volunteer Fire Department, Apparatus", href: `${THET}/apparatus.html` },
+      press: { label: "Thetford Volunteer Fire Department, Press releases", href: `${THET}/press-releases.html` },
+    },
+  },
+  topsham: {
+    description:
+      "Tri-Village Fire Association in Topsham: all-volunteer, about 10 firefighters at each of the East and West Topsham stations, " +
+      "and mutual aid across 28 towns.",
+    subtitle: "Tri-Village Fire Association: East Topsham and West Topsham stations",
+    facts: [
+      ["Department", "Tri-Village Fire Association, which also includes the Orange Volunteer Fire Department"],
+      ["Firefighters", "About 10 at each Topsham station (2023 town plan)"],
+      ["Mutual aid", "Formal agreements covering 28 towns, as far north as Stowe"],
+    ],
+    history: {
+      intro:
+        "The association is a private organisation, not run by the town, though the town contributes to it. It gives Topsham round-the-clock volunteer coverage; " +
+        "the town plan notes it is short of firefighters in the daytime.",
+      events: [
+        { year: 1976, text: "The three-bay East Topsham station is built in the village on Powder Spring Road.", source: "tp" },
+        { year: 2014, text: "The association installs a water supply at the East Topsham station, which had none.", source: "tp" },
+      ],
+    },
+    residents: [],
+    sources: {
+      tp: { label: "Topsham Town Plan, adopted 21 August 2023 (TRORC)", href: `${TRORC}/2023/09/Topsham-2023-Final-Plan-adopted-8-21-23.pdf`, note: "Fire protection services, PDF page 21" },
+    },
+  },
+  "west-fairlee": {
+    description:
+      "West Fairlee Volunteer Fire Department: over 200 calls in 2025, mostly medical, 14 members, a FEMA radio grant, " +
+      "and the department's budget.",
+    facts: [
+      ["Calls", "202 in 2025: 133 EMS and 69 fire"],
+      ["Members", "14, seven of them certified interior firefighters"],
+      ["Requested for 2026", "$94,000"],
+    ],
+    contact: { chief: "Cory Austin", source: "r2025" },
+    history: {
+      intro:
+        "Medical calls are most of the work: the department's EMS crew is usually first on scene and starts care before the ambulance arrives. " +
+        "Calls are up 50% since 2020 and more than double 2015's.",
+      events: [
+        { year: 2025, calls: 202, text: "A $107,000 FEMA grant buys 14 new radios. The 1999 Rescue I catches fire on the way to a call; the crew treats the patient and puts out the truck. A 2003 replacement is bought for $30,000.", source: "r2025" },
+      ],
+    },
+    calls: {
+      intro: "Two in three calls in 2025 were medical.",
+      byType: {
+        title: "Calls by type, 2025",
+        bars: [
+          { label: "EMS", value: 133 },
+          { label: "Fire", value: 69, sub: "including 10 building fires" },
+        ],
+        note: "The department also attended 20 auto accidents.",
+        source: "r2025",
+      },
+    },
+    money: {
+      intro: "The department reports its spending to the town and asks voters for its appropriation.",
+      year: "2025 (actual)",
+      lines: [
+        { label: "Capital reserve, equipment", amount: 20000 },
+        { label: "Insurance", amount: 10144 },
+        { label: "Capital reserve, truck", amount: 10000 },
+        { label: "Air pack, mask and bottles (one set)", amount: 9255 },
+        { label: "Truck loan", amount: 7593.67 },
+      ],
+      linesNote: "The largest lines of $89,020.32 spent in 2025. The department estimates $93,900 for 2026.",
+      capital: { title: "Reserves, end of 2025", lines: [{ label: "Equipment", amount: 40000 }, { label: "Truck", amount: 31200 }], note: "After matching the radio grant and buying a generator and the replacement rescue truck." },
+      source: "r2025",
+    },
+    careers: {
+      intro: "Monthly meetings and trainings keep members ready, and firefighters train further at regional and state academies, including swiftwater and ice rescue.",
+      points: ["EMS crew in 2025: one EMT, three Vermont First Responders and one paramedic"],
+      applyUrl: WFLE,
+      source: "r2025",
+    },
+    residents: [],
+    sources: {
+      r2025: { label: "Town of West Fairlee, 2025 Town Report", href: WFLE, note: "Fire department report and budget, PDF page 40" },
+    },
+  },
+  marshfield: {
+    description:
+      "Marshfield Volunteer Fire Department: 116 years old in 2025, 105 calls by type, an all-unpaid crew, " +
+      "the fire budget and meeting nights.",
+    facts: [
+      ["Founded", "116th birthday in 2025"],
+      ["Calls", "105 in 2025, substantially above average"],
+      ["Pay", "None: a 100% volunteer department"],
+      ["Meets", "Second and fourth Tuesdays, 7 pm, at the fire station"],
+    ],
+    contact: { chief: "Will Schwarz", source: "r2025" },
+    history: {
+      intro:
+        "Apart from alarm activations, crashes lead every year in both number and severity. The department keeps three trucks, including a brush truck; " +
+        "the two larger ones were refurbished to save the town money.",
+      events: [
+        { year: 2025, calls: 105, text: "Three new members join. At town meeting the chief explains a reluctant budget increase, including $4,000 for new turnout gear, since older gear contains PFAS.", source: "r2025" },
+      ],
+    },
+    calls: {
+      intro: "Crashes were 42 of the 105 calls.",
+      byType: {
+        title: "Calls by type, 2025",
+        bars: [
+          { label: "Crashes, no injuries", value: 26 },
+          { label: "Crashes with injuries", value: 16 },
+          { label: "Alarm activations", value: 10 },
+          { label: "Medical assists", value: 9 },
+          { label: "Structure fires", value: 7 },
+          { label: "Brush, grass and illegal burns", value: 7 },
+          { label: "Smoke and hazardous conditions", value: 6 },
+          { label: "Service calls", value: 4 },
+          { label: "Chimney fires", value: 3 },
+          { label: "Heating and appliance fires", value: 3 },
+          { label: "Unfounded", value: 3 },
+          { label: "Other", value: 3 },
+          { label: "Vehicle fires", value: 2 },
+          { label: "Wires, trees and pole fires", value: 2 },
+          { label: "Search and rescue", value: 2 },
+          { label: "Lithium-ion battery", value: 1 },
+          { label: "Traffic control", value: 1 },
+        ],
+        note: "The types add up to the 105 calls reported.",
+        source: "r2025",
+      },
+    },
+    money: {
+      intro: "The fire department is a line in the town's general fund.",
+      year: "2026 (budget)",
+      lines: [{ label: "Fire department", amount: 123740 }],
+      linesNote: "In 2025, $91,620 was spent against a $98,649 budget. The pumper will need replacing in 10 to 15 years, at about $500,000 to $600,000.",
+      capital: { title: "Fire department budget over time", lines: [{ label: "2019", amount: 69082 }, { label: "2024", amount: 80023 }, { label: "2025", amount: 98649 }], note: "From the town's net budget history." },
+      source: "r2025",
+    },
+    careers: {
+      intro: "The department is \"ALWAYS looking for new members\".",
+      points: ["Training and meetings on the second and fourth Tuesdays at 7 pm at the fire station"],
+      applyUrl: MSHF,
+      source: "r2025",
+    },
+    residents: [],
+    sources: {
+      r2025: { label: "Town of Marshfield, 2025 Annual Report", href: MSHF, note: "Fire department report, PDF page 48; town meeting, page 12; budget, pages 25–26" },
+    },
+  },
+  plainfield: {
+    description:
+      "Plainfield Fire & Rescue: 113 years of service, 20 members, a new rescue truck, CPR classes for about 100 people, " +
+      "and the department's budget.",
+    facts: [
+      ["Service", "113 years, as of 2025"],
+      ["Members", "20"],
+      ["Station", "169 Main Street"],
+    ],
+    contact: { chief: "Johnathan Matthew", website: `${PLFD}/fire--rescue-department.html`, source: "r2025" },
+    history: {
+      intro: "Plainfield's department answers fire and rescue calls in town and helps its neighbours.",
+      events: [
+        { year: 2025, text: "A new rescue truck goes into service, the firemen's club buys six handheld radios, and about 100 people are certified in CPR through classes the department arranged.", source: "r2025" },
+      ],
+    },
+    money: {
+      intro: "The fire department is a line in the town's selectboard budget.",
+      year: "2026–27 (proposed)",
+      lines: [
+        { label: "Dispatch", amount: 25100 },
+        { label: "Protective equipment fund", amount: 12500 },
+        { label: "Equipment fund", amount: 10000 },
+        { label: "Building fund", amount: 10000 },
+        { label: "Heating", amount: 7000 },
+      ],
+      linesNote: "Lines of the $100,100 proposed, up from $98,150. Firefighter and EMT stipends are $6,150 each.",
+      capital: { title: "Loans, 2026–27", lines: [{ label: "Fire truck note", amount: 20000 }], note: "Plus $2,960 interest. Ambulance service is a separate line." },
+      source: "r2025",
+    },
+    careers: {
+      intro: "The department pays for all the training to get certified, on the fire side or the rescue side; you don't have to do both.",
+      points: ["Apply by email to the chief"],
+      applyUrl: `${PLFD}/fire--rescue-department.html`,
+      source: "r2025",
+    },
+    residents: [
+      { label: "Burn permits", href: `${PLFD}/burn-permits.html`, text: "Free from the fire warden. Call before you burn." },
+    ],
+    sources: {
+      r2025: { label: "Town of Plainfield, Annual Report 2025", href: `${PLFD}/uploads/8/1/0/6/81063668/plainfield_town_report_2025.pdf`, note: "Fire and rescue report, PDF page 81; budget, pages 48–49" },
+      page: { label: "Town of Plainfield, Fire & Rescue Department", href: `${PLFD}/fire--rescue-department.html` },
+    },
+  },
+  woodbury: {
+    description:
+      "Woodbury Volunteer Fire Department: about 220 calls a year, a new station on Route 14 since January 2025, " +
+      "cost sharing with Calais, and what voters fund.",
+    facts: [
+      ["Calls", "About 220 in 2025"],
+      ["New station", "On Route 14, moved in 25 January 2025"],
+      ["Shared with Calais", "Calais pays half of capital and a third of operating costs"],
+      ["Fire station", "802-472-5050"],
+    ],
+    contact: { chief: "Paul Cerutti", phone: "802-472-5050", source: "minutes" },
+    history: {
+      intro:
+        "The department is a nonprofit serving Woodbury and Calais; Calais has slightly more of its calls. Members are paid a stipend of $12.50 a call, however long it lasts.",
+      events: [
+        { year: 2025, text: "Equipment moves into the new station on Route 14 on 25 January.", source: "gazette" },
+        { year: 2026, text: "At town meeting members report about 220 calls the year before. The new station, planned at 7,000 square feet, was cut to 4,100 to fit the funding; the old one, flooded in 2023 and 2024, couldn't be saved.", source: "minutes" },
+      ],
+    },
+    money: {
+      intro: "Woodbury voters fund the department by article at town meeting.",
+      year: "2026 (voted)",
+      lines: [
+        { label: "Fire and Emergency Operations Center loan", amount: 100100 },
+        { label: "Operating expenses", amount: 99990.88 },
+        { label: "Capital replacement fund", amount: 35000 },
+      ],
+      linesNote: "Articles 6, 7 and 8 of the February 2026 town meeting, all passed.",
+      capital: { title: "Truck", lines: [{ label: "Truck loan payment", amount: 23888 }, { label: "Truck maintenance reserve", amount: 2000 }], note: "Article 6. A station addition is paid for entirely by a Congressional earmark." },
+      source: "minutes",
+    },
+    residents: [],
+    sources: {
+      minutes: { label: "Town of Woodbury, town meeting 28 February 2026, draft minutes", href: WDBY },
+      gazette: { label: "Hardwick Gazette, Woodbury fire department move (28 January 2025)", href: "https://hardwickgazette.org/2025/01/28/woodbury-fire-department-move/" },
+    },
+  },
+  worcester: {
+    description:
+      "Worcester Volunteer Fire & Rescue: about 30 fire and 60 Fast Squad calls a year, a new tanker in 2022, " +
+      "and meeting and training times.",
+    facts: [
+      ["Calls", "About 30 fire and 60 Fast Squad a year (2022)"],
+      ["Trucks", "2009 and 2013 engines; 2022 tanker"],
+      ["Meets", "Fourth Wednesday, 7 pm; training second Sunday, 9 am"],
+    ],
+    history: {
+      intro: "Worcester's department combines firefighting and a Fast Squad for medical calls, and works within the Central Vermont mutual aid community.",
+      events: [
+        { year: 2022, text: "The new Mid-West Fire tanker arrives after an 18-month build and a 1,600-mile drive home. The town sets aside $100,000 to repair the station floor and $10,000 for six AEDs. Ten active firefighters and one EMT.", source: "r2022" },
+      ],
+    },
+    careers: {
+      intro: "The department says it is struggling with membership and welcomes anyone interested in community service.",
+      points: ["Business meeting the fourth Wednesday at 7 pm; training the second Sunday at 9 am"],
+      applyUrl: "https://worcestervt.org/wp/town-government/fire/",
+      source: "r2022",
+    },
+    residents: [],
+    sources: {
+      r2022: { label: "Town of Worcester, 2022 Town Report", href: WRCS, note: "Fire & rescue report, PDF page 40; other items, pages 5, 27" },
+      page: { label: "Town of Worcester, Fire", href: "https://worcestervt.org/wp/town-government/fire/" },
     },
   },
   jericho: UJFD,
