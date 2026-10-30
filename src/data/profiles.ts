@@ -311,6 +311,20 @@ const DOVTP = "https://outside.vermont.gov/agency/ACCD/bylaws/Bylaws%20and%20Pla
 const LDRY = "https://www.londonderryvt.gov";
 const WNDM = "https://townofwindhamvt.org/wp-content/uploads/2023/05/Town-of-Windham_Town-Report-2022.pdf";
 
+const BRND = "https://barnardvt.us";
+const BR25 = "https://barnardvt.us/vertical/sites/%7B5E566B10-782A-4449-B2FB-B76A35FC79A5%7D/uploads/2026_Barnard_Town_Report.pdf";
+const BR24 = "https://barnardvt.us/vertical/sites/%7B5E566B10-782A-4449-B2FB-B76A35FC79A5%7D/uploads/Barnard_Town_Report_2025.pdf";
+const BTHL = "https://townofbethelvt.com/vertical/sites/%7B46C5C479-45BC-4485-9BD0-06530D0ACFB2%7D/uploads/PDF_Town_Report.pdf";
+const BRGW = "https://www.bridgewater.vt.gov";
+const BRGU = "https://www.bridgewater.vt.gov/vertical/sites/%7B562C3348-6A49-4470-9BE0-69A4BB072D18%7D/uploads";
+const HRTL = "https://hartlandvt.gov";
+const HR25 = "https://hartlandvt.gov/vertical/sites/%7B47DC8B4F-778B-408C-BB00-EA7AC4E090E5%7D/uploads/Hartland_Town_Report_2026(1).pdf";
+const HR24 = "https://hartlandvt.gov/vertical/sites/%7B47DC8B4F-778B-408C-BB00-EA7AC4E090E5%7D/uploads/Hartland_Town_Report_2025(1).pdf";
+const LDLW = "https://ludlow.vt.us";
+const SHRN = "https://www.sharonvt.gov/Documents/Annual%20Reports/2025%20Digital%20Town%20Report.pdf";
+const SPFD = "https://springfieldvt.gov/fire";
+const WWSR = "https://westwindsorvt.govoffice2.com/vertical/sites/%7BD8CDCAEE-6783-4071-AE03-8A27DD92A280%7D/uploads/West_Windsor_Town_Report_2025.pdf";
+
 // One department, two town pages: Underhill and Jericho share the profile.
 const UJFD: Profile = {
   description:
@@ -8053,6 +8067,321 @@ export const profiles: Record<string, Profile> = {
     residents: [],
     sources: {
       r2022: { label: "Town of Windham, 2022 Town Report", href: WNDM, note: "Windham Volunteer Fire Company report, PDF page 41" },
+    },
+  },
+  barnard: {
+    description:
+      "Barnard's two volunteer fire departments: Barnard Volunteer Fire & Rescue, founded 1951, with 81 calls in fiscal 2025, " +
+      "and the Broad Brook Volunteer Fire Association in East Barnard, founded 1955.",
+    subtitle: "Barnard Volunteer Fire & Rescue and Broad Brook Volunteer Fire Association",
+    facts: [
+      ["Departments", "Barnard Volunteer Fire & Rescue (since 1951) and Broad Brook Volunteer Fire Association (since 1955)"],
+      ["Barnard calls", "81 in fiscal 2025 (July 2024 to June 2025)"],
+      ["Barnard volunteers", "24 on the roster; 9 answer both fire and first-response calls"],
+      ["Meets", "Barnard Fire & Rescue, Tuesdays, 7 pm, at the firehouse"],
+    ],
+    contact: { chief: "Stuart Hull Jr.", source: "r2024" },
+    history: {
+      intro:
+        "Barnard Fire & Rescue works from the Emergency Services Building on North Road and answers fire and first-response calls. " +
+        "Broad Brook serves East Barnard and the Broad Brook watershed, which reaches into Pomfret, South Royalton and Sharon.",
+      events: [
+        { year: 1951, text: "Barnard Volunteer Fire & Rescue is founded.", source: "page" },
+        { year: 1955, text: "The Broad Brook Volunteer Fire Association is founded to serve East Barnard.", source: "page" },
+        { year: 2024, calls: 67, text: "Barnard's calls for fiscal 2024.", source: "r2024" },
+        { year: 2025, calls: 81, text: "Voters raise $62,500 for a breathing-air compressor and filling station. The department trains in large animal rescue, live fire and water rescue, and wins the Philip D. Levesque Memorial Community Award for its outreach. Broad Brook switches its station heat from oil to propane.", source: "r2025" },
+      ],
+    },
+    money: {
+      intro: "The town supports both departments by appropriation.",
+      year: "fiscal year 2027 (requested)",
+      lines: [
+        { label: "Barnard Volunteer Fire & Rescue", amount: 70500 },
+        { label: "Broad Brook Volunteer Fire Association", amount: 18000 },
+      ],
+      linesNote: "Up from $65,000 and $15,000 in fiscal 2026.",
+      capital: { title: "Special article, 2025", lines: [{ label: "Breathing-air compressor and filling station", amount: 62500 }], note: "Article 8 of the 2025 town meeting." },
+      source: "r2025",
+    },
+    residents: [],
+    sources: {
+      page: { label: "Town of Barnard, Fire", href: `${BRND}/fire` },
+      r2025: { label: "Town of Barnard, 2026 Town Report (fiscal year 2025)", href: BR25, note: "Fire department reports, PDF pages 35–37; appropriations, page 64; article 8, page 18" },
+      r2024: { label: "Town of Barnard, 2025 Town Report (fiscal year 2024)", href: BR24, note: "Fire department report, PDF page 54" },
+    },
+  },
+  bethel: {
+    description:
+      "Bethel Fire Department: volunteers trained as emergency first responders with White River Valley Ambulance, " +
+      "Monday training nights and a new engine on the way.",
+    facts: [
+      ["Training", "Monday nights"],
+      ["Medical calls", "Many members are Vermont Emergency First Responders and assist White River Valley Ambulance in Bethel"],
+      ["New engine", "Expected by March 2026"],
+    ],
+    contact: { chief: "Paul Feeney", source: "r2025" },
+    history: {
+      intro:
+        "Bethel's department answers fires, crashes, alarms and service calls, and assists the ambulance on medical calls. " +
+        "A new Fire Advisory Board was formed under the previous interim chief, Geary Coogler, who served the department for ten years.",
+      events: [
+        { year: 2025, text: "Members earn Firefighter I and first responder certifications, and the department updates its training program.", source: "r2025" },
+        { year: 2026, text: "Voters are asked for up to $80,000 for an air-bottle filling unit and up to $65,000 to outfit the new engine, both from the town's fund balance with no tax increase.", source: "r2025" },
+      ],
+    },
+    residents: [],
+    sources: {
+      r2025: { label: "Town of Bethel, 2025 Town Report", href: BTHL, note: "Fire department report, PDF page 41 (scanned; read by OCR); warning articles 4 and 5, page 6" },
+    },
+  },
+  bridgewater: {
+    description:
+      "Bridgewater Volunteer Fire Department: more than 20 members, a new Emergency Services Building out of the floodplain, " +
+      "dry hydrants across town and its trucks.",
+    facts: [
+      ["Members", "More than 20 active, plus a new auxiliary"],
+      ["Station", "Emergency Services Building, 28 Southgate Loop, leased from the town since 2022"],
+      ["Mutual aid", "Connecticut River Valley and Upper Valley associations"],
+    ],
+    contact: { chief: "Ed Earle", website: `${BRGW}/Emergency-Services`, source: "page" },
+    history: {
+      intro:
+        "The department is a nonprofit funded by fundraising and town support. Its old station stood in the 100-year floodplain, " +
+        "so the town built a new one outside it. A separate Fast Squad answers medical calls.",
+      events: [
+        { year: 2011, text: "The department installs a pressurised dry hydrant on Gold Coast Road.", source: "hmp" },
+        { year: 2012, text: "Dry hydrants go in at Long Trail Brewery, the Grange Hall on River Road and the ball field.", source: "hmp" },
+        { year: 2013, text: "A dry hydrant is added on Route 4 in West Bridgewater.", source: "hmp" },
+        { year: 2022, text: "The department leases the town's new 7,070-square-foot Emergency Services Building for ten years.", source: "lease" },
+      ],
+    },
+    residents: [
+      { label: "Burn permits", href: `${BRGW}/fire-warden`, text: "By phone from the town fire warden." },
+    ],
+    sources: {
+      page: { label: "Town of Bridgewater, Emergency Services", href: `${BRGW}/Emergency-Services` },
+      hmp: { label: "Town of Bridgewater Hazard Mitigation Plan, adopted 17 November 2020", href: `${BRGU}/Hazard_Mitigation_Plan.pdf`, note: "Fire department, PDF page 6; dry hydrants, pages 40–41" },
+      lease: { label: "Town of Bridgewater, fire station lease (2022)", href: `${BRGU}/Fire_Station_Lease.pdf`, note: "Scanned; read by OCR" },
+    },
+  },
+  hartland: {
+    description:
+      "Hartland Volunteer Fire Department: 226 calls in 2025 including 66 crashes, 32 members, two stations, " +
+      "and the department's budget.",
+    facts: [
+      ["Calls", "226 in 2025, up from 150 in 2024"],
+      ["Members", "32, all volunteers"],
+      ["Stations", "Hartland Three Corners and North Hartland"],
+      ["Meets", "Business first Thursday, drills third Thursday, 7 pm, at Station 1"],
+    ],
+    contact: { chief: "Scott Bowers", phone: "802-436-2222", website: `${HRTL}/hartlandvolunteerfiredepartment`, source: "r2025" },
+    history: {
+      intro:
+        "Established in 1948, Hartland's department works from Station One at Three Corners and Station Two in North Hartland. " +
+        "Crashes are its most common call.",
+      events: [
+        { year: 1948, text: "The Hartland Volunteer Fire Department is established.", source: "page" },
+        { year: 2023, calls: 174, text: "Calls for the year.", source: "r2024" },
+        { year: 2024, calls: 150, text: "Calls for the year.", source: "r2024" },
+        { year: 2025, calls: 226, text: "Three members earn Firefighter I, both stations switch to propane heat, and the department holds its second cornhole tournament. Chief John Sanders announces that Scott Bowers, the town fire warden, will take over as chief.", source: "r2025" },
+      ],
+    },
+    calls: {
+      intro: "Crashes were 66 of 2025's 226 calls.",
+      byYear: {
+        title: "Calls by year",
+        bars: [{ label: "2023", value: 174 }, { label: "2024", value: 150 }, { label: "2025", value: 226 }],
+        note: "Calendar years, as the town reports print them.",
+        source: "r2025",
+      },
+      byType: {
+        title: "Calls by type, 2025",
+        bars: [
+          { label: "Motor vehicle crashes", value: 66 },
+          { label: "Structure and chimney fires", value: 34 },
+          { label: "Brush fires and illegal burns", value: 34 },
+          { label: "Other", value: 30 },
+          { label: "Fire alarms", value: 19 },
+          { label: "Public and medical assists", value: 18 },
+          { label: "Down power lines", value: 15 },
+          { label: "Spills, leaks and odors", value: 6 },
+          { label: "Vehicle fires", value: 4 },
+        ],
+        note: "The types add up to the 226 calls reported.",
+        source: "r2025",
+      },
+    },
+    money: {
+      intro: "The fire department is a line in the town budget.",
+      year: "fiscal year 2027 (proposed)",
+      lines: [
+        { label: "Truck and equipment maintenance", amount: 32350 },
+        { label: "Turnout gear", amount: 17500 },
+        { label: "Chief's stipend", amount: 12000 },
+        { label: "New equipment", amount: 12000 },
+      ],
+      linesNote: "The largest lines of $133,600 proposed. Fiscal 2026's budget is $122,000. In fiscal 2025, $177,193 was spent against $92,000 budgeted, including $54,430 of new equipment.",
+      capital: { title: "Equipment reserve", lines: [{ label: "Yearly appropriation", amount: 68000 }], note: "The town's Fire Department Equipment Reserve." },
+      source: "r2025",
+    },
+    careers: {
+      intro: "The department is 100% volunteer and always looking for volunteers. Contact any officer.",
+      points: ["Business meeting first Thursday, drills third Thursday, 7 pm, at Station 1"],
+      applyUrl: `${HRTL}/hartlandvolunteerfiredepartment`,
+      source: "page",
+    },
+    residents: [
+      { label: "Burn permits", href: HR25, text: "Required year-round, even with snow on the ground, from a fire officer or the town office." },
+    ],
+    sources: {
+      page: { label: "Town of Hartland, Hartland Volunteer Fire Department", href: `${HRTL}/hartlandvolunteerfiredepartment` },
+      r2025: { label: "Town of Hartland, 2026 Town Report (fiscal year 2025)", href: HR25, note: "Fire department report, PDF pages 40–42; appropriations, page 24" },
+      r2024: { label: "Town of Hartland, 2025 Town Report (fiscal year 2024)", href: HR24, note: "Fire department report, PDF page 47" },
+    },
+  },
+  ludlow: {
+    description:
+      "Ludlow Fire Department: a town department led by its first full-time chief since 2024, " +
+      "two new trucks approved by voters in 2025, and its budget.",
+    facts: [
+      ["Station", "67 Pond Street"],
+      ["Chief", "Ben Whalen, the department's first full-time paid chief, since 1 July 2024"],
+      ["New trucks", "Engine 3 and Tower 1 replacements approved in March 2025"],
+    ],
+    contact: { chief: "Ben Whalen", phone: "802-228-2211", website: `${LDLW}/fire`, source: "page" },
+    history: {
+      intro:
+        "Traditionally all-volunteer, Ludlow hired a full-time chief because, as the town manager put it, the town's population can reach 30,000 in winter.",
+      events: [
+        { year: 2024, text: "Peter Kolenda retires as chief after 25 years; Ben Whalen becomes the first full-time chief.", source: "vj24" },
+        { year: 2025, text: "Voters approve $3,623,000 to replace Tower 1, more than 30 years old, and Engine 3. Town meeting also adds $2,500 for Okemo Valley Technical Rescue.", source: "vj25" },
+      ],
+    },
+    money: {
+      intro: "The fire department is part of the town's general fund.",
+      year: "fiscal year 2025 (actual)",
+      lines: [{ label: "Fire department spending", amount: 456218 }],
+      linesNote: "Against a budget of $294,850, from the town's audited accounts. Fire department charges for services brought in $31,461.",
+      capital: { title: "New trucks", lines: [{ label: "Tower 1 and Engine 3, approved 2025", amount: 3623000 }], note: "From the Vermont Journal's report of the 2025 town meeting." },
+      source: "audit",
+    },
+    residents: [],
+    sources: {
+      page: { label: "Town of Ludlow, Fire Department", href: `${LDLW}/fire` },
+      audit: { label: "Town of Ludlow, audit report for the year ended 30 June 2025", href: "https://www.ludlow.vt.us/vertical/sites/%7B78E8DA21-0D46-4486-AF59-9D2B5A1048F3%7D/uploads/2025_FINAL_Town_of_Ludlow_Vermont_Audit_Report.pdf", note: "General fund budget and actual, PDF pages 64–65" },
+      vj24: { label: "Vermont Journal, \"Ludlow fire chief Peter Kolenda retires after 25 years of service\" (2 July 2024)", href: "https://vermontjournal.com/featured-articles/ludlow-fire-chief-peter-kolenda-retires-after-25-years-of-service" },
+      vj25: { label: "Vermont Journal, Ludlow town meeting 2025 (7 March 2025)", href: "https://vermontjournal.com/featured-articles/ludlow-town-meeting-2025" },
+    },
+  },
+  sharon: {
+    description:
+      "Sharon Firemen's Association: 102 calls in fiscal 2025, 21 active members, new bay doors, an air refill system " +
+      "and the town's fire budget.",
+    facts: [
+      ["Calls", "102 in fiscal 2025 (July 2024 to June 2025)"],
+      ["Members", "21 active"],
+      ["Meets", "Last Tuesday of the month, 7 pm"],
+      ["Station phone", "802-763-7331"],
+    ],
+    contact: { chief: "Nathan Potter", phone: "802-763-7331", source: "r2025" },
+    history: {
+      intro:
+        "The Sharon Firemen's Association runs the town's volunteer fire department from the station on Route 14. Hartford dispatches its calls, " +
+        "and South Royalton Rescue provides the ambulance.",
+      events: [
+        { year: 2025, calls: 102, text: "With a town building fund the department replaces all three front bay doors, and with its own fundraising buys a cascade air system from Barnard's fire department to refill breathing-air bottles. It hosts Fire Prevention Day at the elementary school and a chicken barbecue at Old Home Days, with free meals for seniors and veterans.", source: "r2025" },
+      ],
+    },
+    money: {
+      intro: "The fire department is a line in the town budget.",
+      year: "fiscal year 2027 (proposed)",
+      lines: [{ label: "Fire department", amount: 46900 }],
+      linesNote: "Down from $53,250 only because $12,000 of Hartford dispatch fees moved to the general fund; the town says the fire budget actually rose $5,650.",
+      capital: { title: "Reserves", lines: [{ label: "Fire equipment reserve, yearly", amount: 30000 }, { label: "Fire building improvements, fiscal 2027", amount: 5000 }], note: "From the town's reserve fund tables." },
+      source: "r2025",
+    },
+    residents: [
+      { label: "Burn permits", href: SHRN, text: "Required for any planned burning. Contact the town fire wardens; the number is on the Fire Safety sign at the firehouse." },
+    ],
+    sources: {
+      r2025: { label: "Town of Sharon, 2025 Town Report", href: SHRN, note: "Fire department report, PDF page 86; budget and reserves, pages 29–30 and 35" },
+    },
+  },
+  springfield: {
+    description:
+      "Springfield Fire Department: founded in 1835, a combination career and call department, " +
+      "over 3,300 calls in 2024, most of them medical.",
+    facts: [
+      ["Founded", "1835"],
+      ["Calls", "Over 3,300 in 2024, 82% medical"],
+      ["Covers", "About 9,000 people over 56 square miles"],
+      ["Staffing", "Career firefighters on four 24-hour shifts, plus call members"],
+    ],
+    contact: { chief: "Paul Stagner", phone: "802-885-4546", website: SPFD, source: "page" },
+    history: {
+      intro:
+        "Springfield's department works from 77 Hartness Avenue and runs the town's ambulance. Each career shift has its own captain.",
+      events: [
+        { year: 1835, text: "The Springfield Fire Department is founded.", source: "vj" },
+        { year: 2024, text: "The department answers over 3,300 calls, 82% of them medical.", source: "vj" },
+        { year: 2025, text: "The selectboard raises pay for on-call members.", source: "sb" },
+      ],
+    },
+    careers: {
+      intro: "Career firefighters need Vermont Firefighter I (Firefighter II within 18 months), EMT (Advanced EMT within 12 months) and the CPAT physical test.",
+      points: ["Career members work 24-hour shifts on a four-shift rotation"],
+      applyUrl: SPFD,
+      source: "page",
+    },
+    residents: [],
+    sources: {
+      page: { label: "Town of Springfield, Fire Department", href: SPFD },
+      vj: { label: "Vermont Journal, \"Springfield Rotary hears from fire chief\" (10 March 2025)", href: "https://vermontjournal.com/news/springfield-rotary-hears-from-fire-chief/" },
+      sb: { label: "Town of Springfield, selectboard minutes, 18 August 2025 (draft)", href: "https://springfieldvt.gov/vertical/sites/%7B234B28A5-DB73-489E-ABFA-F2FB1EF67C08%7D/uploads/8-18-2025_Approved_SB_Minutes.pdf", note: "PDF page 3" },
+    },
+  },
+  "west-windsor": {
+    description:
+      "West Windsor Volunteer Fire Department in Brownsville: 96 calls in 2025 including 9 structure fires, two new firefighters, " +
+      "and the department's budget line by line.",
+    facts: [
+      ["Calls", "96 in 2025"],
+      ["Station", "889 Route 44, Brownsville"],
+      ["Town appropriation", "$88,750 requested for 2027"],
+    ],
+    contact: { chief: "Erik Boedtker", source: "r2025" },
+    history: {
+      intro:
+        "West Windsor's volunteers answer fires and alarms and back up the town's separate Fast Squad. They also help with the Independence Day fireworks.",
+      events: [
+        { year: 2025, calls: 96, text: "Nine structure fires. Two new members earn Firefighter I, and the department moves its incident reporting from NFIRS to the new national NERIS system.", source: "r2025" },
+        { year: 2026, text: "Town meeting renews the five-year tax exemption for the department's property.", source: "r2025" },
+      ],
+    },
+    money: {
+      intro: "The department presents its own budget to the town each year.",
+      year: "2025 (actual)",
+      lines: [
+        { label: "Protective equipment", amount: 14000 },
+        { label: "Insurance", amount: 11286 },
+        { label: "Trucks", amount: 11220 },
+        { label: "Utilities", amount: 8555 },
+        { label: "Equipment", amount: 7504 },
+        { label: "Admin and technology", amount: 6337 },
+      ],
+      linesNote: "The largest lines of $71,344 spent against $72,000 approved. $83,750 is approved for 2026 and $88,750 proposed for 2027.",
+      capital: { title: "Fire trucks (town capital assets)", lines: [{ label: "2017 truck", amount: 275000 }, { label: "2007 truck", amount: 250000 }], note: "Values as the town report lists them." },
+      source: "r2025",
+    },
+    careers: {
+      intro: "The department welcomes new members. Email the chief to find out how to get involved.",
+      points: ["Monthly meetings; state-mandated and elective training"],
+      applyUrl: WWSR,
+      source: "r2025",
+    },
+    residents: [],
+    sources: {
+      r2025: { label: "Town of West Windsor, Town Report 2025", href: WWSR, note: "Fire department report and budget, PDF pages 46–47; warning, page 5" },
     },
   },
   jericho: UJFD,
