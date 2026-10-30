@@ -339,6 +339,18 @@ const SLB = "https://sites.google.com/view/salisbury-fire-vermont";
 const SLB23 = "https://www.townofsalisbury.org/vertical/sites/%7B59D8C83C-9968-4A65-BB2B-00DE19899066%7D/uploads/2023_Annual_Report.pdf";
 const WHTP = "https://www.whitingvt.com/_files/ugd/5c2f54_7858c73ca01a448884bf733ff15aad52.pdf";
 
+const BAKHMP = "https://www.townofbakersfield.org/_files/ugd/6e5057_e9f7db918bef4a779feba4b2934fa7ca.pdf";
+const BAKAW = "https://1strespondernews.com/features/072126130/Bakersfield-Fire-Department-Members-Earned-Statewide-Honors";
+const GEOTM25 = "https://mccmeetingspublic.blob.core.usgovcloudapi.net/georgiavt-meet-fc86df693f56464fb49a2f0ed525a2d7/ITEM-Attachment-001-95e261883cf64c22b650543de532e5f0.pdf";
+const GEOBUD26 = "https://mccmeetingspublic.blob.core.usgovcloudapi.net/georgiavt-meet-f87dc724eeb043fea66d36a72e52f412/ITEM-Attachment-001-9581852d1cb6455785d43f689d3eda32.pdf";
+const HGT25 = "https://www.highgatevt.org/vertical/sites/%7B27DD8364-9602-460E-9A11-4C6436D74153%7D/uploads/2025_HIGHGATE_TOWN_REPORT.pdf";
+const JOH20 = "https://storage.googleapis.com/juniper-media-library/237/2025/03/TOWNREPORTTweb1-1%20(1).pdf";
+const ALBMIN23 = "https://alburghvt.org/wp-content/uploads/2023/12/Alburgh-Selectboard-Minutes-11-27.pdf";
+const ALBMIN25 = "https://alburghvt.org/wp-content/uploads/2025/09/Selectboard-Minutes-09-22-2025.pdf";
+const NHWCAX = "https://www.wcax.com/2026/03/16/north-hero-breaks-ground-new-fire-station-replace-aging-facility";
+const NH18 = "https://digital-release.mychamplainvalley.com/?p=13235";
+const RICH18 = "https://www.richmondvt.gov/fileadmin/files/Archive/2019/02/17-18TownReportFinalrev.pdf";
+
 // One department, two town pages: Underhill and Jericho share the profile.
 const UJFD: Profile = {
   description:
@@ -8947,6 +8959,299 @@ export const profiles: Record<string, Profile> = {
     sources: {
       tp: { label: "Town of Whiting, Town Plan", href: WHTP, note: "Town fire protection, PDF page 61" },
       agenda: { label: "Town of Whiting, selectboard agenda, 27 July 2026", href: "https://www.whitingvt.com/_files/ugd/9d1539_1195d5ed522f4b08b4a02cfc55daef7e.pdf" },
+    },
+  },
+  bakersfield: {
+    description:
+      "Bakersfield Volunteer Fire Department: about 28 volunteers in a station built in 2009, " +
+      "and two statewide awards for its officers in 2026.",
+    facts: [
+      ["Members", "About 28 volunteers (2019 plan)"],
+      ["Station", "181 North Main Street, built 2009"],
+      ["Ambulance", "Enosburgh Ambulance Services, by agreement with the town"],
+      ["Mutual aid", "Agreement with 27 communities; regularly serves 4 or 5"],
+    ],
+    contact: { website: "https://www.townofbakersfield.org/fire-warden", source: "plan" },
+    history: {
+      intro:
+        "Bakersfield's volunteers, first responders among them, provide fire protection, rescue and emergency medical response, " +
+        "and help neighbouring towns under the Franklin County mutual aid agreement.",
+      events: [
+        { year: 2009, text: "A new fire station is built.", source: "plan" },
+        { year: 2019, text: "The town's hazard plan lists a 1989 pumper, a 1997 tanker/pumper and a 1989 rescue truck, and notes the pumper and rescue truck need replacing. The department averages four structure fires a year.", source: "plan" },
+        { year: 2026, text: "At the Vermont State Firefighters Convention in St. Albans, Second Assistant Chief Ginger Parent is named Rescue Squad Member of the Year and First Assistant Chief Todd Cosgrove Chief of the Year.", source: "award" },
+      ],
+    },
+    residents: [
+      { label: "Burn permits", href: "https://www.townofbakersfield.org/fire-warden", text: "Request one from the town fire warden through the online form on the town website." },
+    ],
+    sources: {
+      plan: { label: "Town of Bakersfield, Hazard Mitigation Plan (2019)", href: BAKHMP, note: "Fire department, PDF pages 10 and 16; mutual aid agreement, page 36" },
+      award: { label: "1st Responder News, Bakersfield Fire Department members earn statewide honors (July 2026)", href: BAKAW },
+    },
+  },
+  georgia: {
+    description:
+      "Georgia Fire and Rescue: 417 fire and EMS calls in 2024, a 75-foot ladder truck since 2021, " +
+      "and voters' 2025 approval of up to $1.6 million to replace it in 2029.",
+    facts: [
+      ["Calls", "417 fire and EMS calls in 2024"],
+      ["Training", "Over 2,500 hours in 2024"],
+      ["Fleet", "A fire engine, two tankers and a 75-foot ladder truck"],
+      ["Phone", "802-782-8045"],
+    ],
+    contact: { chief: "Keith Baker", phone: "802-782-8045", source: "tm25" },
+    history: {
+      intro:
+        "Georgia's department answers fire and emergency medical calls from its station on Ethan Allen Highway. " +
+        "Jim Bryce, who died in 2024, donated the building and provided a crew to build it. " +
+        "Its trucks are replaced every 20 years, spaced five years apart, so only one is ever being financed.",
+      events: [
+        { year: 2021, text: "The department buys its ladder truck from the St. Albans Town Fire Department. It goes into service in July and, by early 2025, has answered 80 incidents, 17 of them building fires.", source: "tm25" },
+        { year: 2023, calls: 439, text: "439 fire and EMS calls.", source: "tm25" },
+        { year: 2024, calls: 417, text: "417 fire and EMS calls. An EMT and a cadet join.", source: "tm25" },
+        { year: 2025, text: "Town meeting approves buying a new ladder truck for up to $1.6 million, financed over no more than five years from delivery in 2029. The chief estimated the cost at about $8 per resident a year.", source: "tm25" },
+        { year: 2026, text: "The Selectboard adds $35,000 to the draft budget for extrication equipment for fire and rescue.", source: "bud26" },
+      ],
+    },
+    calls: {
+      intro: "Calls fell slightly from 2023 to 2024.",
+      byYear: {
+        title: "Fire and EMS calls by year",
+        bars: [{ label: "2023", value: 439 }, { label: "2024", value: 417 }],
+        note: "Calendar years, from the chief's report to town meeting.",
+        source: "tm25",
+      },
+    },
+    careers: {
+      intro: "The department looks for firefighters, EMS providers and cadets aged 14 to 17.",
+      points: ["Talk to any member or email firechief@townofgeorgia.com"],
+      applyUrl: "mailto:firechief@townofgeorgia.com",
+      source: "tm25",
+    },
+    residents: [],
+    sources: {
+      tm25: { label: "Town of Georgia, Town Meeting minutes, 4 March 2025", href: GEOTM25, note: "Chief's report and Article 4, PDF pages 3 to 5" },
+      bud26: { label: "Town of Georgia, Selectboard budget minutes, 7 January 2026", href: GEOBUD26, note: "PDF pages 2 and 3" },
+    },
+  },
+  highgate: {
+    description:
+      "Highgate Volunteer Fire Department: 124 calls in 2025, 37 of them vehicle accidents, " +
+      "and a side-by-side with trailer paid for by fundraising.",
+    facts: [
+      ["Calls", "124 in 2025"],
+      ["Largest call type", "37 vehicle accidents in 2025"],
+      ["Station", "2996 Route 78, Highgate Center"],
+      ["Officers", "Elected by the members"],
+    ],
+    contact: { chief: "Gary Greenough", phone: "802-868-4697 ext. 210", source: "r2025" },
+    history: {
+      intro:
+        "Highgate's volunteers answer fires, crashes, medical calls and alarms, and give mutual aid to neighbouring towns.",
+      events: [
+        { year: 2025, calls: 124, text: "124 calls, including 37 vehicle accidents, 22 medical calls and 16 fire alarms. After a lot of fundraising the department buys a side-by-side and trailer.", source: "r2025" },
+      ],
+    },
+    residents: [
+      { label: "Smoke and CO detectors", href: HGT25, text: "Available from the department on request: ask at the station or email highgatefirevt@gmail.com." },
+      { label: "Burn permits", href: HGT25, text: "Issued by the town fire warden. A permitted burn that turns into a nuisance burn can still bring the department out." },
+    ],
+    sources: {
+      r2025: { label: "Town of Highgate, 2025 Annual Report", href: HGT25, note: "Fire department report, PDF page 25; officers, page 7" },
+    },
+  },
+  johnson: {
+    description:
+      "Johnson Fire Department: 98 alarms in the town's 2020 report, led by vehicle accidents, " +
+      "and a full replacement of its air packs.",
+    facts: [
+      ["Calls", "98 alarms (2020 report)"],
+      ["Station", "251 Lower Main Street West"],
+      ["Funding", "Village tax, a town contract and an appropriation from Waterville"],
+    ],
+    contact: { chief: "Arjay West (2020 report)", source: "r2020" },
+    history: {
+      intro:
+        "Fire protection in Johnson is a village service, paid for by the village tax with a contract from the town and an appropriation from Waterville. " +
+        "The department saves toward trucks and small tools through two capital plans.",
+      events: [
+        { year: 2020, calls: 98, text: "New air packs (SCBA) replace the old set, chosen after trials of three vendors' gear at the training facility and paid for from the small-tools capital plan. The department asks for a 3% ($2,643) increase for 2021.", source: "r2020" },
+      ],
+    },
+    calls: {
+      intro: "Vehicle accidents and automatic alarms led the calls.",
+      byType: {
+        title: "Alarms by type (2020 report)",
+        bars: [
+          { label: "Vehicle accidents", value: 21 },
+          { label: "Automatic alarms", value: 12 },
+          { label: "Vehicle fires", value: 10 },
+          { label: "Other", value: 10 },
+          { label: "Carbon monoxide", value: 9 },
+          { label: "Mutual aid", value: 9 },
+          { label: "Medical assist", value: 7 },
+          { label: "Structure fires", value: 5 },
+          { label: "Wildland fires", value: 4 },
+          { label: "Smoke conditions", value: 4 },
+          { label: "Chimney fires", value: 3 },
+          { label: "Wilderness rescue", value: 3 },
+          { label: "Hazardous materials", value: 1 },
+        ],
+        note: "98 alarms in all, as reported by the chief in the town report for the year ending 30 June 2020. No water rescues.",
+        source: "r2020",
+      },
+    },
+    residents: [],
+    sources: {
+      r2020: { label: "Town of Johnson, Annual Report for the year ending 30 June 2020", href: JOH20, note: "Fire department report, PDF page 70" },
+    },
+  },
+  alburgh: {
+    description:
+      "Alburgh Volunteer Fire Department: an independent, non-municipal department on Firehouse Road " +
+      "that hosts the town's annual fire training school.",
+    facts: [
+      ["Status", "Its own organisation, not a municipal department"],
+      ["Station", "60 Firehouse Road"],
+      ["Rescue", "Alburgh Rescue, Inc., a separate agency"],
+      ["Burn permits", "802-796-3402"],
+    ],
+    contact: { chief: "Ron Kumetz", phone: "802-796-3402", source: "es" },
+    history: {
+      intro:
+        "The Alburgh Volunteer Fire Department, Inc. is its own organisation rather than a town department, " +
+        "so it can't use municipal financing. Its chief is also the town fire warden.",
+      events: [
+        { year: 2023, text: "The department asks the Selectboard to take out municipal financing for a new pumper costing $603,000, to be repaid from the department's capital equipment fund. The board tables the request.", source: "m23" },
+        { year: 2025, text: "The annual Alburgh fire training school, held at the station and Alburgh School, asks the town for a permanent training facility made from a 40-foot shipping container.", source: "m25" },
+      ],
+    },
+    residents: [
+      { label: "Burn permits", href: "https://alburghvt.org/community-links/emergency-services/", text: "Call the town fire warden and fire chief, Ron Kumetz, at 802-796-3402." },
+    ],
+    sources: {
+      es: { label: "Town of Alburgh, Emergency Services", href: "https://alburghvt.org/community-links/emergency-services/" },
+      m23: { label: "Town of Alburgh, Selectboard minutes, 27 November 2023", href: ALBMIN23, note: "Pages 1 and 2" },
+      m25: { label: "Town of Alburgh, Selectboard minutes, 22 September 2025", href: ALBMIN25, note: "Pages 1 and 2" },
+    },
+  },
+  "north-hero": {
+    description:
+      "North Hero Volunteer Fire Department: founded in 1947, now building a 7,000-square-foot station " +
+      "after voters approved a $4.5 million bond in 2025.",
+    facts: [
+      ["Founded", "1947"],
+      ["New station", "7,000 sq ft, due to open late 2026"],
+      ["Bond", "$4.5 million, approved September 2025"],
+      ["Drills", "Monday nights (2018)"],
+    ],
+    contact: { chief: "Mike Murdock", source: "wcax" },
+    history: {
+      intro:
+        "North Hero's volunteers serve the island town, with mutual aid from the towns around it. " +
+        "Daytime coverage is thin because many members work off the island.",
+      events: [
+        { year: 1947, text: "The department is founded. Chief Mike Murdock's grandfather was one of the founding members.", source: "f2018" },
+        { year: 2017, text: "The idea of a new station is first raised.", source: "wcax" },
+        { year: 2018, text: "Twelve volunteers drill every Monday night; the most the department has ever had is 24. Its needs include 24 air-pack bottles at the end of their 15-year life and a 30-year-old tanker. Two suppers a year are its main fundraisers.", source: "f2018" },
+        { year: 2025, text: "Voters approve a $4.5 million bond for a new fire station and town garage.", source: "wcax" },
+        { year: 2026, text: "Ground is broken on 16 March for a 7,000-square-foot station with exhaust removal, sprinklers, more office space and a training area, beside a separate public works building. It replaces the building the department has used for 52 years.", source: "wcax" },
+      ],
+    },
+    careers: {
+      intro: "The department is all volunteer, and daytime coverage is thin because many members work off the island.",
+      points: ["Drills are held on Monday nights"],
+      applyUrl: NH18,
+      source: "f2018",
+    },
+    residents: [],
+    sources: {
+      wcax: { label: "WCAX, North Hero breaks ground on new fire station (16 March 2026)", href: NHWCAX },
+      f2018: { label: "mychamplainvalley.com, North Hero Volunteer Fire Department feature (5 October 2018)", href: NH18 },
+    },
+  },
+  richmond: {
+    description:
+      "Richmond Fire Department: 163 alarms in 2018, about half of them crashes, and a 2019 Toyne pumper-tanker " +
+      "in a fleet that still keeps a 1932 Maxim.",
+    facts: [
+      ["Calls", "163 alarms in 2018"],
+      ["Station", "357 East Main Street"],
+      ["EMS", "Provided by Richmond Rescue, not the fire department"],
+      ["Phone", "802-434-2002"],
+    ],
+    contact: { chief: "Gerald Levesque", phone: "802-434-2002", website: "https://richmondvt.gov/departments/fire", source: "page" },
+    history: {
+      intro:
+        "Richmond's department answers fires, crashes and rescue calls, many on Interstate 89, with dispatch from Shelburne " +
+        "and mutual aid from Bolton, Huntington, Williston, Hinesburg and Underhill-Jericho.",
+      events: [
+        { year: 2018, calls: 163, text: "163 alarms, including 51 crashes on I-89 and 29 elsewhere. A new Toyne pumper-tanker with a 1,250-gallon-a-minute pump and a 2,000-gallon tank arrives on 27 December, bought with a bond voters approved.", source: "r2018" },
+      ],
+    },
+    residents: [
+      { label: "Burn permits", href: "https://richmondvt.gov/departments/fire", text: "Ask the town forest fire warden, or call Shelburne dispatch at 802-985-8051." },
+    ],
+    sources: {
+      page: { label: "Town of Richmond, Fire Department", href: "https://richmondvt.gov/departments/fire" },
+      r2018: { label: "Town of Richmond, 2017-18 Town Report", href: RICH18, note: "Fire department report, PDF page 41" },
+    },
+  },
+  "saint-albans-city": {
+    description:
+      "St. Albans City Fire Department: a combination department at 30 Lower Welden Street " +
+      "that trains every Tuesday and recruits volunteers.",
+    facts: [
+      ["Staffing", "Career and volunteer (combination)"],
+      ["Station", "30 Lower Welden Street"],
+      ["Training", "Tuesdays, 6:30 pm, at the station"],
+      ["Phone", "802-524-2132"],
+    ],
+    contact: { phone: "802-524-2132", website: "https://www.stalbansvt.com/fire", source: "site" },
+    history: {
+      intro:
+        "The city department's work covers code enforcement, public education, hazardous materials and incident response. " +
+        "It is separate from the St. Albans Town Fire Department.",
+      events: [],
+    },
+    careers: {
+      intro: "The department recruits volunteers.",
+      points: ["Come to training at the station, Tuesdays at 6:30 pm"],
+      applyUrl: "https://www.stalbansvt.com/fire",
+      source: "site",
+    },
+    residents: [
+      { label: "Burn permits", href: "https://www.stalbansvt.com/fire", text: "Request by email, Monday to Friday, 8 am to 4 pm. No permits when winds over 8 mph are expected, and no leaf burning." },
+    ],
+    sources: {
+      site: { label: "City of St. Albans, Fire Department", href: "https://www.stalbansvt.com/fire" },
+      neris: { label: "NERIS department record", href: "https://neris.fsri.org/departments/FD50011002", note: "Staffing type" },
+    },
+  },
+  sheldon: {
+    description:
+      "Sheldon Fire Department: a volunteer department on Mill Street that meets every Thursday " +
+      "and sends mutual aid to its neighbours.",
+    facts: [
+      ["Staffing", "Volunteer"],
+      ["Station", "479 Mill Street"],
+      ["Meets", "Thursdays, 7 pm, at the firehouse"],
+      ["Non-emergency", "802-933-7188"],
+    ],
+    contact: { chief: "Richard Piaseczny", phone: "802-933-7188", website: "https://sheldonvt.com/fire", source: "site" },
+    history: {
+      intro: "Sheldon's volunteers are led by a chief, an assistant chief and two captains, and the town has its own fire ordinance.",
+      events: [
+        { year: 2025, text: "Sheldon crews help fight a house fire on St. Armand Road in Highgate, alongside departments from Vermont and Quebec.", source: "wcax" },
+      ],
+    },
+    residents: [
+      { label: "Burn permits", href: "https://sheldonvt.com/fire", text: "Use the request form on the town's fire page." },
+    ],
+    sources: {
+      site: { label: "Town of Sheldon, Fire Department", href: "https://sheldonvt.com/fire" },
+      wcax: { label: "WCAX, Fire crews battle massive blaze in Highgate (10 October 2025)", href: "https://www.wcax.com/2025/10/10/fire-crews-battle-massive-blaze-highgate/" },
     },
   },
   jericho: UJFD,
