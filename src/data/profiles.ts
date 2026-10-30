@@ -330,6 +330,15 @@ const CNCD = "https://www.concordvt.us";
 const CN24 = "https://www.concordvt.us/wp-content/uploads/2025/03/Concord_2024_VermontMunicipalReport.pdf";
 const BTVL = "https://bartonvt.com/wp-content/uploads";
 
+const FRB25 = "https://www.ferrisburghvt.org/vertical/sites/%7BB16C9BC8-6A0C-4814-B183-6F54A75E8A13%7D/uploads/WEB_Ferrisburgh.pdf";
+const GRV25 = "https://granvillevermont.org/wp-content/uploads/2026/02/Town-Report-for-Website.pdf";
+const LNC25 = "https://lincolnvermont.org/vertical/sites/%7B53E9A1A8-33C4-4381-8550-24F9124297B8%7D/uploads/2025_Lincoln_Town_Report.gold.pdf";
+const LNCP = "https://lincolnvermont.org/index.asp?SEC=EC4B747D-9634-4A0F-BD55-78C42CF5EDF7";
+const NHV = "https://www.newhavenvt.com/vertical/sites/%7B95C9AC24-F92E-457E-9A2F-56C2E251493B%7D/uploads";
+const SLB = "https://sites.google.com/view/salisbury-fire-vermont";
+const SLB23 = "https://www.townofsalisbury.org/vertical/sites/%7B59D8C83C-9968-4A65-BB2B-00DE19899066%7D/uploads/2023_Annual_Report.pdf";
+const WHTP = "https://www.whitingvt.com/_files/ugd/5c2f54_7858c73ca01a448884bf733ff15aad52.pdf";
+
 // One department, two town pages: Underhill and Jericho share the profile.
 const UJFD: Profile = {
   description:
@@ -8692,6 +8701,252 @@ export const profiles: Record<string, Profile> = {
     sources: {
       site: { label: "Lyndonville Fire Department", href: "https://sites.google.com/view/lyndonville-fire-vt" },
       lhmp: { label: "Lyndon Hazard Mitigation Plan, November 2022 (NVDA)", href: `${NVDA}/hmp-plans/LyndonMigitationPlan.pdf`, note: "Fire department, PDF page 50" },
+    },
+  },
+  ferrisburgh: {
+    description:
+      "Ferrisburgh Volunteer Fire Department: over 90 calls in 2025, a new Engine II paid for by donations and grants, " +
+      "1,440 hours of training, and its 2026 budget.",
+    facts: [
+      ["Calls", "Over 90 in 2025"],
+      ["Service", "Entering its 85th year in 2026"],
+      ["Training", "Over 1,440 hours of continuing education in 2025"],
+      ["Meets", "Wednesdays, 7 pm, at the station on Route 7"],
+    ],
+    contact: { chief: "Bill Wager", website: "https://www.ferrisburghvolfire.org", source: "r2025" },
+    history: {
+      intro:
+        "Ferrisburgh's department has run as a private corporation serving the town, with the City of Vergennes' department providing dual coverage under contract. " +
+        "In 2025 it asked to become a town department, which would let it qualify for grants it can't get now.",
+      events: [
+        { year: 2025, text: "Engine II arrives: it carries a crew of four, reaches places with limited access and fights fires with foam. Donations, fundraising and federal recovery grants paid for all of it. Five members and four cadets join, and federal grants fund a high-efficiency heating system and insulation for the station.", source: "r2025" },
+      ],
+    },
+    money: {
+      intro: "The department presents its budget to the town each year.",
+      year: "2026 (requested)",
+      lines: [
+        { label: "Stipends", amount: 35000 },
+        { label: "Equipment", amount: 34850 },
+        { label: "Insurance", amount: 21000 },
+        { label: "Communication", amount: 14400 },
+        { label: "Trucks", amount: 12000 },
+        { label: "Facilities", amount: 11050 },
+      ],
+      linesNote: "The largest lines of $144,155 requested.",
+      capital: { title: "Fire protection from Vergennes", lines: [{ label: "Contract with the City of Vergennes, latest year in the town budget", amount: 135000 }], note: "Under a fire protection agreement running 1 July 2024 to 30 June 2027." },
+      source: "r2025",
+    },
+    careers: {
+      intro: "The department welcomes new members and cadets.",
+      points: ["Stop by the station on Route 7 any Wednesday at 7 pm"],
+      applyUrl: "https://www.ferrisburghvolfire.org",
+      source: "site",
+    },
+    residents: [
+      { label: "Burn permits", href: FRB25, text: "Call Shelburne Dispatch at 802-985-8051. The fire warden issued 212 permits in 2025." },
+    ],
+    sources: {
+      r2025: { label: "Town of Ferrisburgh, 2025 Town Report", href: FRB25, note: "Fire department report and budget, PDF page 52; fire warden, page 53; town budget, page 54" },
+      site: { label: "Ferrisburgh Volunteer Fire Department", href: "https://www.ferrisburghvolfire.org" },
+    },
+  },
+  granville: {
+    description:
+      "Granville Volunteer Fire Department: serving since 1951 and marking 75 years in 2026, 36 calls in 2025, " +
+      "and a new quick-attack truck.",
+    facts: [
+      ["Founded", "1951; 75 years in 2026"],
+      ["Calls", "36 in Granville in 2025"],
+      ["Station", "5051 Route 100, shared with Valley Rescue Squad"],
+      ["Phone", "802-967-5556"],
+    ],
+    contact: { chief: "Danial Sargeant", phone: "802-967-5556", source: "r2025" },
+    history: {
+      intro:
+        "Granville's volunteers answer fire and first-response calls. Rochester's fire department now covers first response in Rochester, " +
+        "so Granville's can focus on its own town. Valley Rescue Squad, which shares the station, serves Granville, Hancock and Rochester.",
+      events: [
+        { year: 1951, text: "The Granville Volunteer Fire Department begins serving the town.", source: "r2025" },
+        { year: 2025, calls: 36, text: "A replacement quick-attack truck, a 2003 Ford F-450 4x4 with pump and water, reaches parts of town that before could only be reached on foot or with mutual aid.", source: "r2025" },
+        { year: 2026, text: "Town meeting hears of a grant for renovations to the historic firehouse.", source: "tm" },
+      ],
+    },
+    careers: {
+      intro: "Members help with administration, recruiting, fundraising and emergency response. Training is free.",
+      points: ["Contact any member or the chief"],
+      applyUrl: GRV25,
+      source: "r2025",
+    },
+    residents: [],
+    sources: {
+      r2025: { label: "Town of Granville, Town Report for fiscal year 2025", href: GRV25, note: "Fire department report, PDF pages 38–40 (scanned; read by OCR)" },
+      tm: { label: "Town of Granville, annual town meeting minutes, 3 March 2026", href: "https://granvillevermont.org/wp-content/uploads/2026/03/Annual-Town-Meeting-Minutes-2026.pdf" },
+    },
+  },
+  lincoln: {
+    description:
+      "Lincoln Volunteer Fire Company: 106 calls in 2025, most of them medical, mountain rescues, 34 members " +
+      "and the company's budget.",
+    facts: [
+      ["Calls", "106 in 2025, \"a pretty typical year\""],
+      ["Members", "34"],
+      ["Station", "34 Gove Hill Road"],
+      ["Meets", "First Wednesday of the month, 7 pm, at the fire station"],
+    ],
+    contact: { chief: "Dan Ober", website: LNCP, source: "page" },
+    history: {
+      intro:
+        "Medical calls are most of Lincoln's work, and the company makes mountain rescues too. It replaces a couple of sets of protective gear (about $3,000 each) " +
+        "and breathing apparatus (about $15,000 each) every year to stay close to national standards.",
+      events: [
+        { year: 2025, calls: 106, text: "A Ripton firefighter who works in Lincoln joins for daytime calls and answers 44, the third most in the company. A letter campaign brings $24,615 in donations, and Shelburne's dispatch fee rises from about $1,100 to almost $4,000 a year.", source: "r2025" },
+      ],
+    },
+    calls: {
+      intro: "Three in four calls in 2025 were medical.",
+      byType: {
+        title: "Calls by type, 2025",
+        bars: [
+          { label: "Medical", value: 75 },
+          { label: "Motor vehicle accidents", value: 9 },
+          { label: "Alarm activations", value: 6 },
+          { label: "Mutual aid", value: 6 },
+          { label: "Mountain rescues", value: 5 },
+          { label: "Fire hazards", value: 3 },
+          { label: "Downed power lines", value: 2 },
+        ],
+        note: "The types add up to the 106 calls reported.",
+        source: "r2025",
+      },
+    },
+    money: {
+      intro: "The company asks the town for level funding and raises the rest itself.",
+      year: "2025 (actual)",
+      lines: [
+        { label: "Truck payments", amount: 18299.16 },
+        { label: "Insurance", amount: 13169 },
+        { label: "EMS and fire equipment", amount: 12511.72 },
+        { label: "Utilities", amount: 10182.38 },
+        { label: "Equipment and vehicle maintenance", amount: 10002.16 },
+      ],
+      linesNote: "The largest lines of $85,438.89 spent against a $91,500 budget. The town appropriation is level at $56,000.",
+      capital: { title: "Tanker loan", lines: [{ label: "Outstanding, end of 2025", amount: 29081.52 }], note: "From the company's financial report." },
+      source: "r2025",
+    },
+    careers: {
+      intro: "The company is \"a friendly and welcoming organization\" and gives new members all the training and support they need.",
+      points: ["Meetings on the first Wednesday of the month at 7 pm"],
+      applyUrl: LNCP,
+      source: "r2025",
+    },
+    residents: [],
+    sources: {
+      page: { label: "Town of Lincoln, Lincoln Volunteer Fire Company", href: LNCP },
+      r2025: { label: "Town of Lincoln, 2025 Town Report", href: LNC25, note: "Fire company report and finances, PDF pages 115–116" },
+    },
+  },
+  "new-haven": {
+    description:
+      "New Haven Volunteer Fire Department: 63 calls in 2025, record fundraising of $57,665.95, awards for its members, " +
+      "and plans for a new fire station.",
+    facts: [
+      ["Calls", "63 in 2025"],
+      ["Fundraising", "$57,665.95 in 2025"],
+      ["New station", "Being designed; land secured with Velco in 2024"],
+      ["Meets", "First Wednesday of the month, 7 pm, at the fire station"],
+    ],
+    contact: { chief: "Mark Livingston", phone: "802-453-3654", source: "r2025" },
+    history: {
+      intro:
+        "New Haven's volunteers answer crashes, alarms, grass and structure fires and medical calls, and help the town crew. " +
+        "Pancake breakfasts, chicken barbecues and Field Days fund much of the department.",
+      events: [
+        { year: 2024, text: "Alan Mayer steps down as chief after 16 years. The town reaches a deal with Velco for land and a septic site for a new station.", source: "r2024" },
+        { year: 2025, calls: 63, text: "July's barbecue sells about 750 half-chickens in an hour and a half, and Field Days bring the department just over $23,000. Alan Mayer is named Senior Firefighter of the Year by the Vermont State Firefighters Association, and Jerad Gorton Maintenance Technician of the Year. Architects work on the new station's plans.", source: "r2025" },
+      ],
+    },
+    careers: {
+      intro: "Anyone interested in joining or helping with fundraising can contact any firefighter. Cadets are welcome.",
+      points: ["Meetings on the first Wednesday of the month at 7 pm"],
+      applyUrl: `${NHV}/2025_New_Haven_Annual_Report_.pdf`,
+      source: "r2025",
+    },
+    residents: [],
+    sources: {
+      r2025: { label: "Town of New Haven, 2025 Annual Report", href: `${NHV}/2025_New_Haven_Annual_Report_.pdf`, note: "Fire department report, PDF page 40; directory, page 5" },
+      r2024: { label: "Town of New Haven, 2024 Annual Report", href: `${NHV}/2024_New_Haven_Annual_Report_with_warning.pdf`, note: "Fire department report, PDF page 26" },
+    },
+  },
+  salisbury: {
+    description:
+      "Salisbury Volunteer Fire Department: established in 1972, 18 unpaid volunteers covering 30 square miles, " +
+      "a cadet program, and its budget request.",
+    facts: [
+      ["Established", "1972"],
+      ["Members", "18 unpaid volunteers on 24-hour call"],
+      ["Covers", "About 1,200 people over 30 square miles, with mutual aid to 18 other departments"],
+      ["Calls", "68 in 2023"],
+    ],
+    contact: { chief: "Ryan M. Emilio", website: SLB, source: "r2023" },
+    history: {
+      intro:
+        "Salisbury's is one of the few remaining all-volunteer incorporated departments in Vermont. Its area takes in mountains, national forest, two lakes and a stretch of highway. " +
+        "The firehouse stands on land donated by founding member Lionel Cloutier.",
+      events: [
+        { year: 1972, text: "The department is founded and the firehouse built.", source: "site" },
+        { year: 2023, calls: 68, text: "A new tanker arrives, bought with federal recovery funds. Fundraising pays for LED lights and a new furnace at the station. Two former cadets begin Firefighter I and two more become firefighters at 18.", source: "r2023" },
+      ],
+    },
+    money: {
+      intro: "The department asks the town for its funding each year.",
+      year: "fiscal year 2024 (requested)",
+      lines: [
+        { label: "Loan payments", amount: 15361.9 },
+        { label: "Insurance", amount: 11360 },
+        { label: "Station utilities", amount: 6495.3 },
+        { label: "Dress uniforms", amount: 5200 },
+        { label: "Truck and equipment maintenance", amount: 4742.6 },
+      ],
+      linesNote: "The largest lines of $59,069.85 requested.",
+      capital: { title: "Breathing apparatus", lines: [{ label: "Air pack replacement", amount: 3299.2 }], note: "Part of the request." },
+      source: "r2023",
+    },
+    careers: {
+      intro: "A cadet program lets young people start training before they turn 18, and many stay on.",
+      points: ["Members include business owners, farmers, teachers, electricians and truck drivers"],
+      applyUrl: SLB,
+      source: "site",
+    },
+    residents: [],
+    sources: {
+      site: { label: "Salisbury Volunteer Fire Department", href: `${SLB}/about-us` },
+      r2023: { label: "Town of Salisbury, Annual Report for the year ending 30 June 2023", href: SLB23, note: "Fire department report and budget request, PDF page 17; tanker, page 23" },
+    },
+  },
+  whiting: {
+    description:
+      "Whiting Volunteer Fire Department: started in 1966 in the old milk plant, a six-bay station since 2007, " +
+      "and fire protection for Sudbury too.",
+    facts: [
+      ["Founded", "1966"],
+      ["Station", "Six bays and a training room, after a 2007 expansion"],
+      ["Covers", "Whiting and Sudbury"],
+    ],
+    contact: { chief: "Steve White", source: "agenda" },
+    history: {
+      intro:
+        "The department also houses the Whiting First Response Squad's vehicle. Fundraisers, revenue sharing and town contributions have kept it going and growing.",
+      events: [
+        { year: 1966, text: "The department starts when the old milk plant becomes available to house equipment; the town lends money for a second-hand pumper and a new tanker.", source: "tp" },
+        { year: 1984, text: "The department buys its first radio equipment.", source: "tp" },
+        { year: 2007, text: "The station is expanded to six bays and a training room.", source: "tp" },
+      ],
+    },
+    residents: [],
+    sources: {
+      tp: { label: "Town of Whiting, Town Plan", href: WHTP, note: "Town fire protection, PDF page 61" },
+      agenda: { label: "Town of Whiting, selectboard agenda, 27 July 2026", href: "https://www.whitingvt.com/_files/ugd/9d1539_1195d5ed522f4b08b4a02cfc55daef7e.pdf" },
     },
   },
   jericho: UJFD,
