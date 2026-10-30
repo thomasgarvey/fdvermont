@@ -325,6 +325,11 @@ const SHRN = "https://www.sharonvt.gov/Documents/Annual%20Reports/2025%20Digital
 const SPFD = "https://springfieldvt.gov/fire";
 const WWSR = "https://westwindsorvt.govoffice2.com/vertical/sites/%7BD8CDCAEE-6783-4071-AE03-8A27DD92A280%7D/uploads/West_Windsor_Town_Report_2025.pdf";
 
+const NVDA = "https://nvda.net";
+const CNCD = "https://www.concordvt.us";
+const CN24 = "https://www.concordvt.us/wp-content/uploads/2025/03/Concord_2024_VermontMunicipalReport.pdf";
+const BTVL = "https://bartonvt.com/wp-content/uploads";
+
 // One department, two town pages: Underhill and Jericho share the profile.
 const UJFD: Profile = {
   description:
@@ -8382,6 +8387,311 @@ export const profiles: Record<string, Profile> = {
     residents: [],
     sources: {
       r2025: { label: "Town of West Windsor, Town Report 2025", href: WWSR, note: "Fire department report and budget, PDF pages 46–47; warning, page 5" },
+    },
+  },
+  albany: {
+    description:
+      "Albany Volunteer Fire Department: a chief and part-time staff, fire prevention at the school, open house days, " +
+      "and the Northeast International Mutual Aid group.",
+    facts: [
+      ["Staffing", "A chief plus part-time staff; the town says more volunteers are needed (2022)"],
+      ["Station", "Shares a building with the town office"],
+      ["Mutual aid", "Northeast International Mutual Aid, 19 members"],
+    ],
+    history: {
+      intro:
+        "Albany's department teaches fire prevention at Albany Community School and holds open house days at the station, " +
+        "which is the town's back-up emergency shelter. Orleans' department also covers parts of Albany.",
+      events: [
+        { year: 2022, text: "The town's hazard plan sets aside federal recovery money for two radio repeater towers for fire and EMS in 2023.", source: "ahmp" },
+      ],
+    },
+    residents: [],
+    sources: {
+      ahmp: { label: "Town of Albany All-Hazards Mitigation Plan, adopted 4 October 2022 (NVDA)", href: `${NVDA}/files/AlbanyAHMP1042022.pdf`, note: "PDF pages 46, 59 and 62–63" },
+    },
+  },
+  barton: {
+    description:
+      "Fire protection in Barton: Barton Village's department has been run by Orleans Village since 2018, " +
+      "with Barton's firefighters reporting to the Orleans chief.",
+    facts: [
+      ["Department", "Run by Orleans Village since 2018, with the Orleans Fire Department"],
+      ["Mutual aid", "A 19-community mutual aid district"],
+      ["Emergency", "911 (Orleans Fire Department)"],
+    ],
+    history: {
+      intro:
+        "Until 2018 Barton Village and Orleans Village each had a volunteer department, splitting Barton Town between them. " +
+        "Barton's department now operates under Orleans Village.",
+      events: [
+        { year: 2018, text: "Barton Village trustees discuss Orleans Village operating both fire departments: firefighters report to the Orleans chief, and residents ask to keep a Barton assistant chief. Barton has two fire buildings, an original with heavy capital needs and a newer one.", source: "minutes" },
+        { year: 2024, text: "The village's restricted Fire Department Building fund ends the year at $41,415.16.", source: "r2024" },
+      ],
+    },
+    residents: [],
+    sources: {
+      hmp: { label: "Barton All-Hazards Mitigation Plan, January 2018 (NVDA)", href: `${NVDA}/hmp-plans/BartonAHMP.pdf`, note: "Fire protection, PDF page 12" },
+      minutes: { label: "Village of Barton, trustees' meeting, 8 October 2018 (draft minutes)", href: `${BTVL}/2019/10/TRUSTEES-10_08_2018_DRAFT.pdf` },
+      r2024: { label: "Village of Barton, 2024 Annual Report", href: `${BTVL}/2025/03/Barton-Village-2024-Annual-Report.pdf`, note: "Restricted funds, PDF page 29; contacts, page 8" },
+    },
+  },
+  derby: {
+    description:
+      "Derby Line Fire Department: stations in Derby Line and Derby Center with seven trucks, 27 volunteers, " +
+      "and the daytime staffing challenge.",
+    subtitle: "Derby Line Fire Department",
+    facts: [
+      ["Stations", "239 Elm Street, Derby Line (five trucks); 3427 Route 5, Derby Center (two trucks)"],
+      ["Volunteers", "27, against a preferred 30 (2020)"],
+      ["Daytime", "Often only four or five volunteers can respond"],
+    ],
+    history: {
+      intro:
+        "The department covers Derby from two stations. The town plan notes that few members work in town and employers are reluctant to release them, " +
+        "so daytime calls are thinly staffed, and that some equipment is nearing its 25-year life.",
+      events: [
+        { year: 2020, text: "The town plan calls for a study of fire capacity and infrastructure and an equipment replacement program.", source: "tp" },
+      ],
+    },
+    residents: [],
+    sources: {
+      tp: { label: "Town of Derby Town Plan, adopted 3 March 2020 (NVDA)", href: `${NVDA}/files/DerbyTownPlan.03.02.20.pdf`, note: "Fire protection, PDF pages 43–44" },
+    },
+  },
+  irasburg: {
+    description:
+      "Irasburg Fire Department: housed with the town garage, a new tanker approved by voters, " +
+      "and how residents rate the service.",
+    facts: [
+      ["Station", "The town shed, shared with the town garage"],
+      ["Satisfaction", "78% of residents satisfied with fire service (2016 survey)"],
+      ["Not to confuse", "Irasburg Fire District #1 is the village water system"],
+    ],
+    history: {
+      intro:
+        "The department shares the town shed with the highway crew and has partitioned off a small meeting room and office. " +
+        "It has considered an addition or buying nearby property to expand.",
+      events: [
+        { year: 2015, text: "Voters approve buying a new tanker.", source: "tp" },
+        { year: 2016, text: "In a town survey 78% are satisfied with the fire service.", source: "tp" },
+      ],
+    },
+    residents: [],
+    sources: {
+      tp: { label: "Irasburg Town Plan 2019, chapter 4, Utilities and Facilities", href: "https://www.leachpubliclibrary.org/uploads/1/2/1/7/121793599/irasburg-4-utilities-facilities.pdf", note: "PDF pages 1 and 4–5" },
+    },
+  },
+  jay: {
+    description:
+      "Jay Volunteer Fire Department: Station 1 in Jay Village, built in 1979, Station 2 near Jay Peak Resort, built in 2010, " +
+      "and an education scholarship for members.",
+    facts: [
+      ["Stations", "Jay Village (built 1979) and Fire House Road near Jay Peak Resort (built 2010)"],
+      ["Organisation", "An incorporated volunteer department with a board of directors"],
+      ["Scholarship", "For members' continuing education"],
+    ],
+    contact: { chief: "Jeff Morse", source: "page" },
+    history: {
+      intro:
+        "The department is wholly dependent on volunteers. Its board meets the second Wednesday of each month at 6:30 pm, and members elect line and corporate officers each January.",
+      events: [
+        { year: 1979, text: "Station 1 is built in Jay Village.", source: "page" },
+        { year: 2010, text: "Station 2 is built near the Jay Peak Resort entrance, as part of the Act 250 permit for the resort's next phase.", source: "page" },
+      ],
+    },
+    residents: [],
+    sources: {
+      page: { label: "Town of Jay, Fire Department", href: "https://www.jayvt.com/fire" },
+    },
+  },
+  lowell: {
+    description:
+      "Lowell Fire Department: 21 volunteers, 37 calls in 2021, a 2020 tanker, and the town's fire assessment.",
+    facts: [
+      ["Volunteers", "21, training monthly (2023)"],
+      ["Calls", "37 in 2021"],
+      ["Station", "2534 Route 100, just north of the four corners"],
+      ["Nearest help", "Troy"],
+      ["Town assessment", "$30,000 in 2020, up from $16,500 in 2010"],
+    ],
+    history: {
+      intro:
+        "Lowell's station stands just north of where Route 58 crosses Route 100. Its trucks are a 2020 Freightliner tanker, a 2000 International pumper and a 2002 Freightliner rescue van, " +
+        "with a rescue sled and a 54 kW generator kept at the school.",
+      events: [
+        { year: 2021, calls: 37, text: "Calls for the year.", source: "tp" },
+      ],
+    },
+    residents: [],
+    sources: {
+      tp: { label: "Lowell Town Plan, August 2023 (NVDA)", href: `${NVDA}/files/LowelPlan82023.pdf`, note: "Fire department, PDF pages 52–53; assessments, page 41" },
+    },
+  },
+  orleans: {
+    description:
+      "Orleans Fire Department: Orleans Village's volunteer department, which has also run Barton's since 2018 " +
+      "and helps cover Albany.",
+    facts: [
+      ["Covers", "Orleans Village, Barton (since 2018) and parts of Albany"],
+      ["Run by", "Orleans Village"],
+    ],
+    history: {
+      intro:
+        "Orleans Village's volunteer department covered the village and part of Barton Town. Since 2018 the village has also operated Barton Village's department, " +
+        "with all members reporting to the Orleans chief.",
+      events: [
+        { year: 2018, text: "Orleans Village takes over operating Barton's fire department.", source: "minutes" },
+      ],
+    },
+    residents: [],
+    sources: {
+      hmp: { label: "Barton All-Hazards Mitigation Plan, January 2018 (NVDA)", href: `${NVDA}/hmp-plans/BartonAHMP.pdf`, note: "Adopted by Barton Town, Barton Village and Orleans Village; PDF pages 12–13" },
+      minutes: { label: "Village of Barton, trustees' meeting, 8 October 2018 (draft minutes)", href: `${BTVL}/2019/10/TRUSTEES-10_08_2018_DRAFT.pdf` },
+      albany: { label: "Town of Albany All-Hazards Mitigation Plan, 2022 (NVDA)", href: `${NVDA}/files/AlbanyAHMP1042022.pdf`, note: "PDF page 59" },
+    },
+  },
+  brighton: {
+    description:
+      "Brighton Fire Department in Island Pond: about 17 volunteers, a ladder truck and five more vehicles, " +
+      "95 hydrants, and coverage reaching into neighbouring towns and the Conte Refuge.",
+    facts: [
+      ["Volunteers", "About 17 (2018)"],
+      ["Station", "102 Railroad Street, Island Pond"],
+      ["Hydrants", "95, cared for with the water department"],
+      ["Rescue", "Contracted to Lyndon Rescue"],
+    ],
+    history: {
+      intro:
+        "Brighton's department serves many adjoining towns and the Silvio O. Conte National Fish and Wildlife Refuge, and charges a fee to the towns it covers. " +
+        "The town plan says more daytime volunteers are needed.",
+      events: [
+        { year: 2008, text: "Voters approve a 15-year bond for a 4,000-square-foot addition to the station on Railroad Street.", source: "tp" },
+      ],
+    },
+    residents: [],
+    sources: {
+      tp: { label: "Town of Brighton Town Plan, adopted 17 October 2018 (NVDA)", href: `${NVDA}/files/Brighton-Town-Plan2018.pdf`, note: "Fire department, PDF pages 16–17" },
+    },
+  },
+  concord: {
+    description:
+      "Concord Fire & Rescue: 77 calls in 2024, five years of call figures, 14 members, a 2021 E-One engine " +
+      "and a shared first alarm with Waterford.",
+    facts: [
+      ["Calls", "77 in 2024"],
+      ["Members", "14 (2024)"],
+      ["Meets", "Tuesdays, 6:30 pm, at the station"],
+      ["First alarms", "Toned out together with Waterford since 2023"],
+    ],
+    contact: { chief: "Jordan Boulanger", website: `${CNCD}/community/fire-department/`, source: "page" },
+    history: {
+      intro:
+        "Concord's department answers fires, rescues and medical calls, and needs EMS volunteers in particular. Officers are elected each February.",
+      events: [
+        { year: 2021, calls: 74, text: "The new E-One engine arrives after pandemic delays, and the old one is sold.", source: "r2021" },
+        { year: 2022, calls: 88, text: "Four new members join, and a $14,000 grant buys a battery-powered extrication tool.", source: "r2022" },
+        { year: 2023, calls: 90, text: "Concord and Waterford begin to be dispatched together for first alarms in either town.", source: "r2023" },
+        { year: 2024, calls: 77, text: "277 firefighter-hours on calls. Four new members join on the fire side.", source: "r2024" },
+      ],
+    },
+    calls: {
+      intro: "Rescues and crashes led 2024's calls.",
+      byYear: {
+        title: "Calls by year",
+        bars: [{ label: "2020", value: 76 }, { label: "2021", value: 74, approx: true }, { label: "2022", value: 88 }, { label: "2023", value: 90 }, { label: "2024", value: 77 }],
+        note: "2021's figure runs to 7 December.",
+        source: "r2024",
+      },
+      byType: {
+        title: "Calls by type, 2024",
+        bars: [
+          { label: "Rescue", value: 19 },
+          { label: "Vehicle accidents", value: 14 },
+          { label: "Assist EMS", value: 13 },
+          { label: "Mutual aid", value: 12 },
+          { label: "Power lines", value: 3 },
+          { label: "Smoke investigations", value: 2 },
+          { label: "Shorted electrical equipment", value: 2 },
+          { label: "Smoke or fire detector", value: 2 },
+          { label: "Furnace malfunctions", value: 2 },
+          { label: "Fires (structure, chimney, oven, pellet stove, brush)", value: 5 },
+          { label: "Other (crash alarm, plugged chimney, flooding)", value: 3 },
+        ],
+        note: "The types add up to the 77 calls reported; the five fires were one of each kind.",
+        source: "r2024",
+      },
+    },
+    careers: {
+      intro: "The department needs volunteers for EMS. Ask any member for an application.",
+      points: ["Business meeting, training and work sessions on Tuesdays at 6:30 pm"],
+      applyUrl: `${CNCD}/community/fire-department/`,
+      source: "r2024",
+    },
+    residents: [],
+    sources: {
+      page: { label: "Town of Concord, Fire Department", href: `${CNCD}/community/fire-department/` },
+      r2021: { label: "Town of Concord, Fire Chief's Report 2021", href: `${CNCD}/wp-content/uploads/2022/02/B031-Fire-Chiefs-Report-2021.pdf` },
+      r2022: { label: "Town of Concord, Fire Chief's Report 2022", href: `${CNCD}/wp-content/uploads/2023/02/pg-56-Fire-Chief-Report-2022.pdf` },
+      r2023: { label: "Town of Concord, Fire Chief's Report 2023", href: `${CNCD}/wp-content/uploads/2024/02/pg-49-Fire-Chiefs-Report-2023-and-Meeting-Schedule.pdf` },
+      r2024: { label: "Town of Concord, 2024 Town Report", href: CN24, note: "Fire chief's report, PDF page 68. 2020's figure: Fire Chief's Report 2020" },
+    },
+  },
+  danville: {
+    description:
+      "Danville Fire Department: more than 100 years of service, stations in Danville and North Danville, " +
+      "a record year in 2022, and a decision on the station's future.",
+    facts: [
+      ["Stations", "296 Peacham Road and North Danville, 24 McReynolds Road"],
+      ["Trucks", "Four fire trucks, a rescue vehicle and a UTV for remote rescues"],
+      ["Service", "More than 100 years"],
+    ],
+    history: {
+      intro:
+        "Danville's town department has mutual aid agreements with the surrounding towns. Ambulance service comes from CALEX, which uses the former Danville Rescue Squad building. " +
+        "Danville Fire District No. 1 is the village water system, not the fire department.",
+      events: [
+        { year: 2022, text: "A record number of emergency calls; the department recruits eight new members.", source: "lhmp" },
+        { year: 2024, text: "The town plan asks the fire chief and selectboard to decide by March 2025 whether to renovate the station or build a new one, and to take part in regionalisation talks.", source: "tp" },
+      ],
+    },
+    residents: [],
+    sources: {
+      tp: { label: "Danville Town Plan, adopted 5 September 2024 (NVDA)", href: `${NVDA}/files/DanvilleTP2024.pdf`, note: "PDF pages 29–32 and 38" },
+      lhmp: { label: "Danville Local Hazard Mitigation Plan, 2023 (NVDA)", href: `${NVDA}/files/DanvilleLHMP2023.pdf`, note: "PDF pages 14 and 63" },
+    },
+  },
+  lyndon: {
+    description:
+      "Lyndonville Fire Department: 242 calls in 2024, a five-year high, Thursday-night drills, " +
+      "and a public safety building shared with the police.",
+    subtitle: "Lyndonville Fire Department",
+    facts: [
+      ["Calls", "242 in 2024, a five-year high"],
+      ["Station", "The Public Safety Facility, completed 2005"],
+      ["Training", "Every Thursday night"],
+      ["Trucks", "Four engines, an aerial, a heavy rescue, a support truck, a Polaris Ranger and a Zodiac boat (2022)"],
+    ],
+    history: {
+      intro:
+        "The volunteer department is headquartered in downtown Lyndonville, in a building it shares with the police department and the Lyndon Area Training Center. " +
+        "It has mutual aid agreements with all the surrounding towns.",
+      events: [
+        { year: 2005, text: "The Public Safety Facility for fire and police is completed.", source: "lhmp" },
+        { year: 2022, text: "26 state-certified and 11 probationary firefighters.", source: "lhmp" },
+        { year: 2024, calls: 242, text: "The busiest year in five.", source: "site" },
+      ],
+    },
+    careers: {
+      intro: "Every firefighter must be certified Vermont Level I: a 184-hour course at the Vermont Fire Academy in Pittsford, including live burns.",
+      points: ["Weekly Thursday-night training keeps skills and certifications current"],
+      applyUrl: "https://sites.google.com/view/lyndonville-fire-vt",
+      source: "site",
+    },
+    residents: [],
+    sources: {
+      site: { label: "Lyndonville Fire Department", href: "https://sites.google.com/view/lyndonville-fire-vt" },
+      lhmp: { label: "Lyndon Hazard Mitigation Plan, November 2022 (NVDA)", href: `${NVDA}/hmp-plans/LyndonMigitationPlan.pdf`, note: "Fire department, PDF page 50" },
     },
   },
   jericho: UJFD,
