@@ -314,7 +314,7 @@
     "town": "BOLTON",
     "lat": null,
     "lng": null,
-    "stationAddress": "3107 Theodore Roosevelt Hwy",
+    "stationAddress": "3045 Theodore Roosevelt Hwy",
     "placedBy": "station-link",
     "esiteid": 25482
   },
@@ -796,7 +796,7 @@
     "town": "SAINT ALBANS CITY",
     "lat": null,
     "lng": null,
-    "stationAddress": "32 Lower Welden St",
+    "stationAddress": "30 Lower Welden St",
     "placedBy": "station-link",
     "esiteid": 241097
   },
@@ -850,7 +850,7 @@
     "town": "SAINT ALBANS CITY",
     "lat": null,
     "lng": null,
-    "stationAddress": "32 Lower Welden St",
+    "stationAddress": "30 Lower Welden St",
     "placedBy": "station-link",
     "esiteid": 241097
   },

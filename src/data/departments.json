@@ -12,7 +12,7 @@
     "chief": null,
     "phone": null,
     "email": null,
-    "website": "http://www.addisonfd.org/",
+    "website": "https://addisonvt.gov/wp-content/uploads/sites/12/2025/02/Town-of-Addison-2024-Town-Report.pdf",
     "joinUrl": null,
     "members": {
       "volunteer": 29,
@@ -169,18 +169,18 @@
   },
   {
     "id": "recUOiGnjzNe2FNrQ",
-    "name": "East Barnard Fire Department",
+    "name": "Broad Brook Volunteer Fire Association",
     "town": "Barnard",
     "county": "Windsor",
     "ownPage": null,
     "fdid": "14801",
     "type": null,
     "stations": null,
-    "founded": null,
+    "founded": 1955,
     "chief": null,
     "phone": null,
     "email": null,
-    "website": null,
+    "website": "https://barnardvt.us/fire",
     "joinUrl": null,
     "members": {
       "volunteer": null,
@@ -2156,6 +2156,34 @@
     "budgetNote": null
   },
   {
+    "id": "recjKUIpzDeNEjbfN",
+    "name": "Granville Volunteer Fire Department",
+    "town": "Granville",
+    "county": "Addison",
+    "ownPage": null,
+    "fdid": null,
+    "type": "Volunteer",
+    "stations": null,
+    "founded": 1951,
+    "chief": "Danial Sargeant",
+    "phone": "802-967-5556",
+    "email": null,
+    "website": null,
+    "joinUrl": null,
+    "members": {
+      "volunteer": null,
+      "paidPerCall": null,
+      "career": null
+    },
+    "budget": null,
+    "budgetLines": [],
+    "joining": null,
+    "burnPermits": null,
+    "history": null,
+    "callsNote": null,
+    "budgetNote": null
+  },
+  {
     "id": "rech1c6r9llOjMimX",
     "name": "Greensboro Fire Department",
     "town": "Greensboro",
@@ -3904,7 +3932,7 @@
     "chief": null,
     "phone": null,
     "email": null,
-    "website": "https://www.plainfieldvt.us/fire--rescue-department.html",
+    "website": "https://www.plainfieldvt.gov/fire--rescue-department.html",
     "joinUrl": null,
     "members": {
       "volunteer": 23,
@@ -4100,7 +4128,7 @@
     "chief": null,
     "phone": null,
     "email": null,
-    "website": "https://www.putneyvt.org/firedepartment",
+    "website": "https://putneyvt.gov/departments/fire.php",
     "joinUrl": null,
     "members": {
       "volunteer": 0,
@@ -4701,7 +4729,7 @@
     "chief": null,
     "phone": null,
     "email": null,
-    "website": "https://www.sover.net/~svfd72",
+    "website": "https://sites.google.com/view/salisbury-fire-vermont",
     "joinUrl": null,
     "members": {
       "volunteer": 18,
@@ -5821,7 +5849,7 @@
     "chief": null,
     "phone": null,
     "email": null,
-    "website": "https://www.waterfordfd.org",
+    "website": "https://waterfordvt.gov/services_1",
     "joinUrl": null,
     "members": {
       "volunteer": 20,

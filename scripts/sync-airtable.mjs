@@ -464,6 +464,9 @@ const ownPage = (r) => {
 
 const departments = depts
   .filter((r) => r.fields.Status !== 'Retired')
+  // A row with no name is a stray (one appears when a select option is added by
+  // typing into a blank row); listing it puts an empty name on its town's page.
+  .filter((r) => (r.fields['Department Name'] ?? '').trim())
   .map((r) => {
     const f = r.fields;
     return {
