@@ -2548,34 +2548,6 @@
     "budgetNote": null
   },
   {
-    "id": "recxYs8JBIQ6PjbIW",
-    "name": "North Hyde Park/Eden Fire Department",
-    "town": "Hyde Park",
-    "county": "Lamoille",
-    "ownPage": null,
-    "fdid": "8448",
-    "type": "Volunteer",
-    "stations": 1,
-    "founded": null,
-    "chief": "Brent Lanpher",
-    "phone": "(802) 635-7357",
-    "email": null,
-    "website": "https://www.edenvt.org/community/fire-department/",
-    "joinUrl": null,
-    "members": {
-      "volunteer": 0,
-      "paidPerCall": 25,
-      "career": 0
-    },
-    "budget": null,
-    "budgetLines": [],
-    "joining": null,
-    "burnPermits": null,
-    "history": null,
-    "callsNote": null,
-    "budgetNote": null
-  },
-  {
     "id": "recY425esqyfs1gfM",
     "name": "Ira Volunteer Fire Department",
     "town": "Ira",
@@ -3629,6 +3601,34 @@
     "members": {
       "volunteer": 20,
       "paidPerCall": 0,
+      "career": 0
+    },
+    "budget": null,
+    "budgetLines": [],
+    "joining": null,
+    "burnPermits": null,
+    "history": null,
+    "callsNote": null,
+    "budgetNote": null
+  },
+  {
+    "id": "recxYs8JBIQ6PjbIW",
+    "name": "North Hyde Park/Eden Fire Department",
+    "town": "North Hyde Park",
+    "county": "Lamoille",
+    "ownPage": null,
+    "fdid": "8448",
+    "type": "Volunteer",
+    "stations": 1,
+    "founded": null,
+    "chief": "Brent Lanpher",
+    "phone": "(802) 635-7357",
+    "email": null,
+    "website": "https://www.edenvt.org/community/fire-department/",
+    "joinUrl": null,
+    "members": {
+      "volunteer": 0,
+      "paidPerCall": 25,
       "career": 0
     },
     "budget": null,
