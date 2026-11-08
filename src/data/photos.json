@@ -10,7 +10,7 @@
     "height": 1214,
     "thumbWidth": 813,
     "thumbHeight": 512,
-    "caption": "Underhill Jericho FD 1",
+    "caption": "Jericho Center Station",
     "photographer": "TGG",
     "dateTaken": "2026-03-21",
     "featured": false,
@@ -20,12 +20,12 @@
       "city": "Jericho",
       "county": "Chittenden"
     },
-    "town": "UNDERHILL",
+    "town": "JERICHO",
     "lat": null,
     "lng": null,
-    "stationAddress": "420 VT Route 15",
+    "stationAddress": "288 Browns Trce",
     "placedBy": "station-link",
-    "esiteid": 263994
+    "esiteid": 136634
   },
   {
     "id": "recofCtqpHw9TwZoN",
@@ -1758,5 +1758,61 @@
     "stationAddress": "35 Cambridge Rd",
     "placedBy": "station-link",
     "esiteid": 281742
+  },
+  {
+    "id": "recor1NBVUdOKU7bB",
+    "src": "/photos/recor1NBVUdOKU7bB.jpg",
+    "medium": "/photos/recor1NBVUdOKU7bB.medium.jpg",
+    "mediumWidth": 825,
+    "mediumHeight": 1100,
+    "thumb": "/photos/recor1NBVUdOKU7bB.thumb.jpg",
+    "width": 1202,
+    "height": 1602,
+    "thumbWidth": 512,
+    "thumbHeight": 682,
+    "caption": "Johnson Fire Department",
+    "photographer": "Tom Garvey",
+    "dateTaken": "2026-11-07",
+    "featured": false,
+    "created": "2026-11-08T00:28:01.000Z",
+    "department": {
+      "name": "Johnson Fire Department",
+      "city": "Johnson",
+      "county": "Lamoille"
+    },
+    "town": "JOHNSON",
+    "lat": null,
+    "lng": null,
+    "stationAddress": "251 Lower Main St W",
+    "placedBy": "station-link",
+    "esiteid": 138184
+  },
+  {
+    "id": "recKhoeESq2Rv4tf7",
+    "src": "/photos/recKhoeESq2Rv4tf7.jpg",
+    "medium": "/photos/recKhoeESq2Rv4tf7.medium.jpg",
+    "mediumWidth": 1100,
+    "mediumHeight": 825,
+    "thumb": "/photos/recKhoeESq2Rv4tf7.thumb.jpg",
+    "width": 2136,
+    "height": 1602,
+    "thumbWidth": 683,
+    "thumbHeight": 512,
+    "caption": "Johnson Fire Department 2",
+    "photographer": "Tom Garvey",
+    "dateTaken": "2026-11-07",
+    "featured": false,
+    "created": "2026-11-08T00:41:37.000Z",
+    "department": {
+      "name": "Johnson Fire Department",
+      "city": "Johnson",
+      "county": "Lamoille"
+    },
+    "town": "JOHNSON",
+    "lat": null,
+    "lng": null,
+    "stationAddress": "251 Lower Main St W",
+    "placedBy": "station-link",
+    "esiteid": 138184
   }
 ]
