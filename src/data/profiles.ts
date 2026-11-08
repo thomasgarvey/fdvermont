@@ -2393,6 +2393,8 @@ export const profiles: Record<string, Profile> = {
       ["Hours", "2,793 hours of training and calls by volunteers in 2025"],
       ["Certified", "11 at Firefighter 1, 3 at Firefighter 2"],
       ["Chief", "Mark LaRose"],
+      ["Officers", "Assistant Chiefs David Kennison and Joey Clark, Captains Michael Wright and Frank Adams, Lt. Cody Kennison"],
+      ["Training", "Three evenings a month, plus a vehicle and equipment night"],
     ],
     contact: { chief: "Mark LaRose", phone: "802-933-4345", website: `${ENO}/fire`, source: "dept" },
     history: {
@@ -2546,6 +2548,8 @@ export const profiles: Record<string, Profile> = {
       ["Staffing", "Volunteer, with a full-time firefighter"],
       ["Station", "428 Lake Road"],
       ["Chief", "Matt Mulheron"],
+      ["Calls", "396 in 2023"],
+      ["Fire budget", "$408,513 for fiscal 2025"],
     ],
     contact: { chief: "Matt Mulheron", phone: "(802) 527-7646", website: `${SAT}/departments/fire/index.php`, source: "dept" },
     history: {
@@ -2553,7 +2557,12 @@ export const profiles: Record<string, Profile> = {
         "Chartered in 1975 to fight fires in the town, the department has taken on far more since: marine " +
         "emergencies and ice rescue on Lake Champlain, crashes, hazardous materials and mutual aid.",
       events: [
-        { year: 1975, text: "The St. Albans Town Fire Department is chartered.", source: "dept" },
+        { year: 1975, text: "The department is formed with 24 volunteers under Chief Roy Parah Sr., because buying fire protection from another town had grown costly. It starts with a new Maxim 1,500 gpm pumper and a GMC 4x4 mini-pumper, alongside a 1969 Ford tanker and a 1958 GMC tanker.", source: "history" },
+        { year: 1980, text: "After a run of crashes with people trapped, the department spends over $10,000 on Jaws of Life tools, training and turning the mini-pumper into a rescue truck, starting its heavy rescue division.", source: "history" },
+        { year: 1984, text: "A portable air cascade system, $6,900, lets crews refill air bottles at fires, and is shared through mutual aid.", source: "history" },
+        { year: 1990, text: "A water rescue division is founded for Lake Champlain, with a 1985 Bayliner boat.", source: "history" },
+        { year: 2011, text: "A new International/E-One rescue truck replaces the 1975 conversion.", source: "history" },
+        { year: 2023, calls: 396, text: "396 calls, more than the year before. The department buys a rescue pumper, a rescue truck and pumper in one, and new Holmatro extrication tools.", source: "r2023" },
       ],
     },
     residents: [
@@ -2561,6 +2570,8 @@ export const profiles: Record<string, Profile> = {
     ],
     sources: {
       dept: { label: "Town of St. Albans, Fire Department", href: `${SAT}/departments/fire/index.php` },
+      history: { label: "Town of St. Albans, Fire Department history", href: `${SAT}/departments/fire/satfd_history.php` },
+      r2023: { label: "Town of St. Albans, FY2023 Town Report", href: "https://stalbanstown.com/FY%202023%20St%20Albans%20Town%20Report.pdf", note: "Fire Department report, PDF page 36; fiscal 2025 budget, page 22" },
     },
   },
   swanton: {
@@ -2598,6 +2609,7 @@ export const profiles: Record<string, Profile> = {
       ["Calls", "142 in 2025"],
       ["Staffing", "Volunteer, with cadets"],
       ["Chief", "Andy Pond"],
+      ["Training", "Tuesdays, 6 pm"],
     ],
     contact: { chief: "Andy Pond", phone: "802-848-7443", website: `${RCH}/richford-fire-department.html`, source: "dept" },
     history: {
@@ -3653,6 +3665,7 @@ export const profiles: Record<string, Profile> = {
       ["Staff", "33 career firefighters and EMS providers, on duty 24/7"],
       ["Emergencies", "More than 4,500 a year"],
       ["EMS", "Every firefighter is a nationally registered EMS provider"],
+      ["Chief", "Peter Lynch (interim); Assistant Chief Charles Keir III"],
     ],
     contact: { phone: "802-254-4831", website: `${BRA}/brattleboro-fire-department`, source: "dept" },
     history: {
@@ -3661,10 +3674,11 @@ export const profiles: Record<string, Profile> = {
         "hazardous materials, technical rescues and wildland fires.",
       events: [
         { year: 1831, text: "The Brattleboro Fire Department is founded.", source: "dept" },
+        { year: 2023, text: "After a study of how to provide fire and ambulance service, the Selectboard votes unanimously on 19 September for a municipal model of emergency services.", source: "ems" },
       ],
     },
     stationNotes: {
-      "brattleboro-103-elliot-st": { text: "The department's headquarters on Elliot Street.", source: "dept" },
+      "brattleboro-103-elliot-st": { text: "The department's headquarters on Elliot Street. The fleet: four engines, three ambulances, a ladder truck, a brush truck, a squad, hazmat and rescue trailers, a bucket truck, a boat and two utility vehicles.", source: "about" },
     },
     careers: {
       intro: "The department is hiring career firefighters.",
@@ -3679,6 +3693,8 @@ export const profiles: Record<string, Profile> = {
     ],
     sources: {
       dept: { label: "Town of Brattleboro, Brattleboro Fire Department", href: `${BRA}/brattleboro-fire-department` },
+      about: { label: "Town of Brattleboro, About the Fire Department", href: `${BRA}/about-the-fire-department` },
+      ems: { label: "Town of Brattleboro, Fire-EMS project", href: `${BRA}/emsproject` },
     },
   },
   guilford: {
@@ -3783,19 +3799,89 @@ export const profiles: Record<string, Profile> = {
   },
   westminster: {
     description:
-      "Westminster Volunteer Fire and Rescue: Westminster Fire District #3, fire protection for the town and mutual aid " +
-      "for its neighbours, and burn permits.",
-    facts: [["Run by", "Westminster Fire District #3"], ["Station", "103 Grout Avenue"]],
-    contact: { website: `${WMS}/services/fire/`, source: "dept" },
+      "Westminster Volunteer Fire and Rescue: Westminster Fire District #3, 520 calls in fiscal 2025, calls by type, " +
+      "its budget, a new utility truck, and how to join.",
+    facts: [
+      ["Run by", "Westminster Fire District #3"],
+      ["Station", "103 Grout Avenue; PO Box 98, Westminster VT 05158"],
+      ["Chief", "Cole Streeter"],
+      ["Calls", "520 in fiscal 2025, up from 472"],
+      ["Ambulance", "Golden Cross Ambulance, under contract with the town"],
+    ],
+    contact: { chief: "Cole Streeter", website: `${WMS}/services/fire/`, source: "report" },
     history: {
-      intro: "Westminster Volunteer Fire and Rescue, run by Westminster Fire District #3, protects the town and gives mutual aid to its neighbours.",
-      events: [],
+      intro:
+        "Westminster Volunteer Fire and Rescue, run by Westminster Fire District #3 under a three-member Prudential " +
+        "Committee, protects the town, covers Interstate 91 and gives mutual aid through Southwestern New Hampshire " +
+        "District Fire Mutual Aid.",
+      events: [
+        { year: 2025, calls: 520, text: "520 calls in the fiscal year to June, including 6 structure fires, 37 calls on I-91 and 47 mutual aid cover assignments. A 2026 Chevrolet 3500 utility truck is bought, to be fitted out by Dingee, and work starts on an outdoor pavilion at the Grout Avenue station.", source: "report" },
+      ],
+    },
+    calls: {
+      intro: "Rescue and medical calls are more than half of the total.",
+      byType: {
+        title: "Calls by type, fiscal 2025",
+        bars: [
+          { label: "Rescue and EMS", value: 271 },
+          { label: "Motor vehicle crashes", value: 63 },
+          { label: "Mutual aid cover assignments", value: 47 },
+          { label: "False alarms", value: 35 },
+          { label: "Power lines down", value: 25 },
+          { label: "Dispatched and cancelled", value: 25 },
+          { label: "Public assists", value: 23 },
+          { label: "Illegal burns", value: 12 },
+          { label: "Structure fires", value: 6 },
+          { label: "Hazmat incidents", value: 5 },
+          { label: "No incident found", value: 3 },
+          { label: "Search and rescue", value: 2 },
+          { label: "Brush fires", value: 1 },
+          { label: "Agency assists", value: 1 },
+          { label: "Vehicle fires", value: 1 },
+        ],
+        note: "July 2024 to June 2025; the types add up to the 520 calls reported.",
+        source: "report",
+      },
+    },
+    money: {
+      intro: "The district's budget is raised almost entirely from fire district property taxes.",
+      year: "fiscal year 2027 (proposed)",
+      lines: [
+        { label: "Capital reserve fund", amount: 73000 },
+        { label: "Mutual aid dues", amount: 52000 },
+        { label: "Transfer to capital fund", amount: 50000 },
+        { label: "Insurance", amount: 30000 },
+        { label: "Vehicle maintenance", amount: 30000 },
+        { label: "Firefighter expenses", amount: 25000 },
+      ],
+      linesNote: "Some of the lines of $394,800 proposed, of which $371,800 is from property taxes.",
+      capital: {
+        title: "Spending by year",
+        lines: [
+          { label: "FY2027 (proposed)", amount: 394800 },
+          { label: "FY2026 (budget)", amount: 383800 },
+          { label: "FY2025 (actual)", amount: 345565.22 },
+        ],
+        note: "Total expenditures.",
+      },
+      source: "report",
+    },
+    careers: {
+      intro: "Volunteers are welcome; contact Chief Cole Streeter or stop in on a Tuesday evening.",
+      points: [
+        "First Tuesday: department meeting; second Tuesday: rescue meeting and drill; third Tuesday: training",
+        "Sundays 9 to noon: station and truck maintenance",
+      ],
+      applyUrl: `${WMS}/services/fire/`,
+      source: "report",
     },
     residents: [
-      { label: "Burn permits", href: `${WMS}/services/fire/`, text: "Call one of the two permit contacts listed on the town's fire page." },
+      { label: "Burn permits", href: `${WMS}/services/fire/`, text: "From the fire wardens, Cole Streeter and Mark Lund; contacts are on the town's fire page." },
+      { label: "Fire prevention day", href: `${WMS}/services/fire/`, text: "Each October at Westminster Center School, with tower rides and a smoke room." },
     ],
     sources: {
       dept: { label: "Town of Westminster, Fire Department", href: `${WMS}/services/fire/` },
+      report: { label: "Town of Westminster, 2025–2026 Town Report", href: "https://www.westminstervt.org/wp-content/uploads/2026/03/TOWN-REPORT-2025-2026.pdf", note: "Fire District #3 reports, PDF pages 38–41; budget, pages 42–43" },
     },
   },
   vernon: {
@@ -6088,8 +6174,10 @@ export const profiles: Record<string, Profile> = {
       ["Founded", "1924, approved at Town Meeting"],
       ["Members", "18 active volunteers"],
       ["Covers", "Grafton, and Athens by contract"],
-      ["Apparatus", "58 Engine One (2015 Pierce) and 58 Ladder One (2002 American LaFrance, 75 ft aerial)"],
+      ["Apparatus", "58 Engine One (2015 Pierce on Freightliner, 1,250 gpm, 1,250 gallons), 58 Ladder One (2002 American LaFrance, 75 ft aerial, 1,500 gpm), 58 Rescue One (2008 Ford F550) and a Polaris Ranger"],
       ["Calls", "A three-year average of 53 a year"],
+      ["Rescue squad", "A separate volunteer squad since 1981, sharing members and the firehouse; 12 active members"],
+      ["Dispatch", "Southwestern New Hampshire mutual aid, Keene"],
     ],
     contact: { chief: "Robbie Sprague", phone: "802-843-2401", website: `${GRA}/?p=146`, source: "town" },
     history: {
@@ -6141,7 +6229,7 @@ export const profiles: Record<string, Profile> = {
       ["Apparatus", "Engines 1, 2 and 4, Brush 1 and 2, Utility 1 and an ATV"],
       ["Meets", "Business meeting 2nd Thursday, 7 pm; work detail 4th Monday, 6 pm"],
     ],
-    contact: { phone: "802-365-4017", website: TSH, source: "dept" },
+    contact: { chief: "Glen Beattie", phone: "802-365-4017", website: TSH, source: "town" },
     history: {
       intro:
         "Most of Townshend's calls are crashes, DHART helicopter landings at Grace Cottage Hospital, and assists " +
@@ -6190,6 +6278,7 @@ export const profiles: Record<string, Profile> = {
     ],
     sources: {
       dept: { label: "Townshend Fire Department", href: TSH },
+      town: { label: "Town of Townshend, Police, Fire and Emergencies", href: "https://www.townshendvt.gov/services/police-fire-emergencies" },
       house: { label: "Townshend Fire Department, Fire House", href: `${TSH}/fire-house` },
       join: { label: "Townshend Fire Department, Join our team", href: `${TSH}/join-our-team` },
       r2026: { label: "Town of Townshend, 2026 Town Report", href: TSHR, note: "Fire Department report, PDF page 36; budget, pages 15–16; warning, page 5" },
@@ -6863,6 +6952,7 @@ export const profiles: Record<string, Profile> = {
       ["Stations", "2: Jacksonville and Whitingham"],
       ["Calls", "207 last year, down from 333"],
       ["Chief", "Stanley Janovsky Jr."],
+      ["Officers", "Assistant Chief Michael Stevens, Captains David R. Briggs and Dennis Pike, three lieutenants"],
       ["Meets", "Second Monday, 6 pm, Jacksonville Station"],
       ["Town budget", "$193,425 for fiscal 2025, plus $60,000 to the equipment fund"],
     ],
@@ -9552,6 +9642,7 @@ export const profiles: Record<string, Profile> = {
       ["Station", "479 Mill Street"],
       ["Meets", "Thursdays, 7 pm, at the firehouse"],
       ["Non-emergency", "802-933-7188"],
+      ["Officers", "Chief Richard Piaseczny, Assistant Chief Adam Regan, Captains Brian Paradis and Hunter Kirouac"],
     ],
     contact: { chief: "Richard Piaseczny", phone: "802-933-7188", website: "https://sheldonvt.com/fire", source: "site" },
     history: {
