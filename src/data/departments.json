@@ -68,7 +68,7 @@
     "chief": null,
     "phone": null,
     "email": null,
-    "website": null,
+    "website": "https://www.avfd-ems.com/",
     "joinUrl": null,
     "members": {
       "volunteer": null,
@@ -432,7 +432,7 @@
     "chief": null,
     "phone": null,
     "email": null,
-    "website": null,
+    "website": "https://www.berlinfiredepartment.org/",
     "joinUrl": null,
     "members": {
       "volunteer": 30,
@@ -544,7 +544,7 @@
     "chief": null,
     "phone": null,
     "email": null,
-    "website": null,
+    "website": "https://www.brandonfiredistrict.org/fire",
     "joinUrl": null,
     "members": {
       "volunteer": 35,
@@ -852,7 +852,7 @@
     "chief": "Dean Deasy",
     "phone": null,
     "email": null,
-    "website": "https://cabotvt.us/volunteer-fire-dept/",
+    "website": "https://www.cabotfirevt.us/",
     "joinUrl": null,
     "members": {
       "volunteer": 12,
@@ -880,7 +880,7 @@
     "chief": null,
     "phone": null,
     "email": null,
-    "website": null,
+    "website": "https://cambridgefirecompany.org/",
     "joinUrl": null,
     "members": {
       "volunteer": 28,
@@ -1132,7 +1132,7 @@
     "chief": null,
     "phone": null,
     "email": null,
-    "website": null,
+    "website": "https://sites.google.com/view/cvfdvt",
     "joinUrl": null,
     "members": {
       "volunteer": null,
@@ -1552,7 +1552,7 @@
     "chief": null,
     "phone": null,
     "email": null,
-    "website": null,
+    "website": "https://www.dorsetfiredistrict.org/",
     "joinUrl": null,
     "members": {
       "volunteer": 18,
@@ -1748,7 +1748,7 @@
     "chief": null,
     "phone": "802-888-0311",
     "email": null,
-    "website": "https://elmorevt.org/community/elmore-fire-department/",
+    "website": "https://sites.google.com/elmorefire.org/elmorefire",
     "joinUrl": null,
     "members": {
       "volunteer": 15,
@@ -1860,7 +1860,7 @@
     "chief": null,
     "phone": null,
     "email": null,
-    "website": null,
+    "website": "https://fairhavenvt.gov/fire-department/",
     "joinUrl": null,
     "members": {
       "volunteer": 15,
@@ -2924,7 +2924,7 @@
     "chief": null,
     "phone": null,
     "email": null,
-    "website": null,
+    "website": "https://sites.google.com/view/lyndonville-fire-vt",
     "joinUrl": null,
     "members": {
       "volunteer": 5,
@@ -3736,7 +3736,7 @@
     "chief": null,
     "phone": null,
     "email": null,
-    "website": null,
+    "website": "https://www.orwellvtfire.gov/",
     "joinUrl": null,
     "members": {
       "volunteer": 22,
@@ -4813,7 +4813,7 @@
     "chief": null,
     "phone": null,
     "email": null,
-    "website": null,
+    "website": "https://sites.google.com/site/sharonvtfire",
     "joinUrl": null,
     "members": {
       "volunteer": 26,
