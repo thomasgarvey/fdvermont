@@ -1940,6 +1940,8 @@ export const profiles: Record<string, Profile> = {
       ["Staffing", "Paid on call"],
       ["Station address used by the department", "62 Firehouse Drive"],
       ["Mutual aid", "One of 17 departments in the Addison County system"],
+      ["Officers", "Chief Brett LaRose, Deputy Chief Eric Forand, Assistant Chief Kevin LaRose, Captain Amos Martin, two lieutenants"],
+      ["Roster", "29 names, including driver-operators, support and probationary firefighters, honorary officers and a retired chief"],
     ],
     contact: { chief: "Brett LaRose", phone: "802-453-3201", website: BFD, source: "contact" },
     history: {
@@ -1975,7 +1977,8 @@ export const profiles: Record<string, Profile> = {
           "The department gives its address as 62 Firehouse Drive; the state's E911 file lists 79 West St. " +
           "Engine 1, a 2023 pumper-tanker (1,500 gpm, 1,000 gallons), is first due; Engine 2, a 2007 Spartan " +
           "pumper-tanker (2,000 gpm, 3,000 gallons), brings water and answers mutual aid calls; plus a 2001 " +
-          "Ford heavy rescue for crashes and technical rescue.",
+          "Ford heavy rescue for crashes and technical rescue; a 1993 Ford F450 brush truck (500 gpm, 300 gallons, " +
+          "with foam); and a 2009 Ford F550 mini-pumper (1,250 gpm, 300 gallons) carrying 1,400 feet of 5-inch supply line.",
         source: "fleet",
       },
     },
@@ -1989,19 +1992,21 @@ export const profiles: Record<string, Profile> = {
         "About 230 hours of training for Firefighter 1, within two years",
         "Answer at least 15% of calls a year",
         "Cadets aged 15 to 18 train with the department, with a parent's consent",
+        "A medical exam and background check; keep Firefighter 1; two or three training or meeting nights a month",
       ],
       applyUrl: `${BFD}/paidoncall.html`,
       source: "join",
     },
     residents: [
-      { label: "Burn permits", href: `${BFD}/open-burning.html`, text: "Free, same-day only, issued after 8 a.m. once the morning fire danger rating is out. Natural wood only." },
-      { label: "Knox Box programme", href: `${BFD}/knox-box-program.html`, text: "A key box keyed to the department's master key, so crews can get in without forcing doors." },
-      { label: "Car seat checks", href: `${BFD}/car-seats.html`, text: "Free child safety seat inspections by a certified technician." },
+      { label: "Burn permits", href: `${BFD}/open-burning.html`, text: "Free, same-day only, issued after 8 a.m. once the morning fire danger rating is out. Natural wood only; clear a 20-foot circle. Brush and leaf piles always need one; a campfire 36 inches or less in a ring does not. Call the station, 802-453-3201." },
+      { label: "Knox Box programme", href: `${BFD}/knox-box-program.html`, text: "A key box keyed to the department's master key, so crews can get in without forcing doors. Businesses are encouraged to join; Lt. Adrian Ludka coordinates." },
+      { label: "Car seat checks", href: `${BFD}/car-seats.html`, text: "Free inspections by a nationally certified technician; the station is approved under Vermont's Be Seat Smart programme." },
       { label: "Cadet programme", href: `${BFD}/bfd-Cadet-firefighter-program.html`, text: "For 15- to 18-year-olds interested in the fire service." },
     ],
     sources: {
       contact: { label: "Bristol Fire Department, Contact", href: `${BFD}/contact-us.html` },
       fleet: { label: "Bristol Fire Department, Apparatus", href: `${BFD}/apparatus.html` },
+      roster: { label: "Bristol Fire Department, Firefighters", href: `${BFD}/firefighters.html` },
       join: { label: "Bristol Fire Department, Paid on-call firefighter", href: `${BFD}/paidoncall.html` },
       r2024: { label: "Town of Bristol, 2024 Annual Town Report", href: `${BRT}/2025/02/Town_of_Bristol_FY2024_Annual_Report_web.pdf`, note: "Fire Department report, pages 70–71" },
       r2025: { label: "Town of Bristol, 2025 Annual Town Report", href: `${BRT}/2026/02/Town_of_Bristol_FY2025_Annual_Report_web.pdf`, note: "Fire Department report, page 77. Earlier years from the 2020–2023 town reports on bristolvt.org" },
@@ -4036,6 +4041,7 @@ export const profiles: Record<string, Profile> = {
       ["Dispatch", "Washington County (NY) Department of Public Safety, since the mid-1990s"],
       ["Incorporated", "1967"],
       ["Chief", "Jon Weiss"],
+      ["Meets", "First Tuesday, 7 pm, business meeting; other Tuesdays, 7 pm, drills and training"],
     ],
     contact: { chief: "Jon Weiss", phone: "(802) 325-3222", website: `${PAW}/`, source: "contact" },
     history: {
@@ -4048,12 +4054,14 @@ export const profiles: Record<string, Profile> = {
         { year: 1904, text: "The Crescent Valley Hotel burns. The town buys a horse-drawn, gasoline-powered pump, kept in the shed by the Mill Pond, which still stands.", source: "history" },
         { year: 1950, text: "In the early 1950s young men in town organise the Pawlet Volunteer Fire Department, with a 1947 ex-Army tanker kept in a barn on Route 133.", source: "history" },
         { year: 1967, text: "The department is formally incorporated, and holds its first game supper the next autumn.", source: "history" },
-        { year: 1973, text: "Today's firehouse is built, just before the temporary one burns down; the trucks are saved.", source: "history" },
+        { year: 1973, text: "Today's firehouse is built, just before the temporary one burns down; the trucks are saved. The department holds its first auction that summer.", source: "history" },
+        { year: 1992, text: "A 1972 Maxim pumper is bought from the A.A. Young Jr. Hose Company of Jewett City, Connecticut.", source: "history" },
         { year: 1979, text: "The Methodist Church on Route 133 is lost to fire in February despite many departments' work.", source: "history" },
         { year: 1990, text: "In the early 1990s radio pagers replace the fire phones, a ten-phone party line answered by firefighters. Mid-decade, dispatch moves to Washington County, New York, for better radio reach past the Taconics.", source: "history" },
         { year: 1998, text: "An E-One on a Freightliner chassis becomes Pawlet's first brand-new fire truck.", source: "history" },
+        { year: 2004, text: "An E-One brush truck on a Ford chassis replaces the pickup.", source: "history" },
         { year: 2023, text: "ETA 542, an HME Ahrens-Fox pumper-tanker built for Pawlet, enters service in October.", source: "today" },
-        { year: 2025, text: "Members build Attack 543, a small initial-attack and wildland truck, on a Ford F350 chassis.", source: "today" },
+        { year: 2025, text: "Members build Attack 543, a small initial-attack and wildland truck, on a Ford F350 chassis. It replaces Brush 544, a 22-year-old F450 that goes on to serve the Chittenden Volunteer Fire Department.", source: "attack" },
         { year: 2026, text: "Under Act 162, signed in June, the Pawlet and West Pawlet departments take over issuing burn permits.", source: "burn" },
       ],
     },
@@ -4082,7 +4090,11 @@ export const profiles: Record<string, Profile> = {
     residents: [
       { label: "Burn permits", href: `${PAW}/fire-safety-information/burn-permits/`, text: "Request online, or call 325-3222 (Pawlet) or 645-0276 (West Pawlet). No permit is needed for a fire pit 36 inches or less." },
       { label: "Pool fills", href: `${PAW}/frequently-asked-questions/`, text: "In the Pawlet fire district, $30 per 1,000 gallons; call the station a few weeks ahead." },
-      { label: "Address markers", href: `${PAW}/address-marker-program/`, text: "Green reflective 911 address signs made by the department for homes and businesses." },
+      { label: "Address markers", href: `${PAW}/address-marker-program/`, text: "Reflective 6 x 18 inch 911 signs, $20 at cost with free installation, in the Pawlet fire district." },
+      { label: "Free smoke and CO alarms", href: `${PAW}/fire-safety-information/firesafe802/`, text: "Installed by the department through Fire Safe 802, the state's grant programme." },
+      { label: "Fireworks displays", href: `${PAW}/frequently-asked-questions/`, text: "A display permit is free; ask in writing at least 15 days ahead." },
+      { label: "Firehouse rental", href: `${PAW}/events/`, text: "Tables and chairs for over 200 and a commercial-style kitchen, in the warmer months; community groups meet free." },
+      { label: "Game supper", href: `${PAW}/events/`, text: "Each November, with roast bear and venison; in 2026 on Saturday 14 November, 5 to 7 pm. It raises money for the department." },
       { label: "Dry hydrants", href: `${PAW}/non-emergency-services/`, text: "Have a pond? The department installs dry hydrants with landowners, often at little or no cost." },
       { label: "Home safety visits", href: `${PAW}/non-emergency-services/`, text: "Fire safety evaluations and free smoke and CO detectors." },
     ],
@@ -4092,6 +4104,7 @@ export const profiles: Record<string, Profile> = {
       history: { label: "Pawlet Volunteer Fire Department, History", href: `${PAW}/history/` },
       volunteer: { label: "Pawlet Volunteer Fire Department, Volunteer", href: `${PAW}/volunteer/` },
       burn: { label: "Pawlet Volunteer Fire Department, Burn permits", href: `${PAW}/fire-safety-information/burn-permits/` },
+      attack: { label: "Pawlet Volunteer Fire Department, \"Coming soon: Attack 543\" (9 August 2025)", href: `${PAW}/2025/08/09/coming-soon-attack-543/` },
     },
   },
   pittsford: {
@@ -4259,6 +4272,7 @@ export const profiles: Record<string, Profile> = {
       ["Staffing", "On-call volunteers, paid minimum wage for alarms and training (policy of July 2025)"],
       ["Station", "In the town building at the north end of the park, with the town offices and police"],
       ["Chief", "Jim Heller, also emergency management coordinator"],
+      ["Assistant chiefs", "Tom Fucile and Don Proctor"],
       ["Meets", "Tuesdays at 6:30 pm: officers, two training nights, then the monthly meeting"],
     ],
     contact: { chief: "Jim Heller", phone: "802-265-3125", website: `${FH}/fire-department/`, source: "dept" },
@@ -4737,6 +4751,8 @@ export const profiles: Record<string, Profile> = {
       ["Station", "266 Chittenden Road, on the original site"],
       ["Chief", "Gary Rowe, a member since 1982 and chief since 2017"],
       ["Also runs", "Chittenden First Response, for medical calls, since 1980"],
+      ["Officers", "Assistant Chief Conrad Zeller and Captain Ryder Paskevich"],
+      ["Answers", "Chimney and forest fires, crashes, medical calls and mutual aid"],
     ],
     contact: { chief: "Gary Rowe", phone: "(802) 483-6200 (Tuesdays at 7 pm)", website: "https://sites.google.com/view/cvfdvt", source: "chief" },
     history: {
@@ -4749,7 +4765,7 @@ export const profiles: Record<string, Profile> = {
         { year: 1980, text: "Chittenden First Response is founded to provide medical coverage; a response vehicle follows in 1983.", source: "history" },
         { year: 1993, text: "An addition gives the firehouse a second-floor meeting room and three more apparatus bays.", source: "history" },
         { year: 2024, text: "Capt. Charley Parker, a member for over 40 years, collapses at the firehouse after returning from a barn fire on 8 July and dies. The department unveils a marble memorial to him in July 2025.", source: "memorial" },
-        { year: 2025, text: "A Freightliner pumper-tanker with 1,500 gallons and a 1,250 gpm pump joins the fleet.", source: "trucks" },
+        { year: 2025, text: "A Freightliner pumper-tanker with 1,500 gallons and a 1,250 gpm pump joins the fleet. It replaces the old tanker, sold to Danby–Mount Tabor, and Engine 3, a 2007 HME, put up for sale.", source: "home" },
       ],
     },
     stationNotes: {
@@ -4757,17 +4773,21 @@ export const profiles: Record<string, Profile> = {
         text:
           "The firehouse: Brush 44 (2006 Ford F-450), Engine 1 (2006 Ford F-550, ex-West Rutland, 500 gpm, 300 gallons), " +
           "Engine 2 (2025 Freightliner pumper-tanker, 1,250 gpm, 1,500 gallons) and Engine 4 (2019 Kenworth, 1,250 gpm, " +
-          "1,000 gallons), plus a 6x6 utility vehicle.",
+          "1,000 gallons), plus a Polaris Ranger 6x6 with a small pump for wildland fires. Brush 44 carries its own " +
+          "wildland pump and is the first truck out to crashes and brush fires.",
         source: "trucks",
       },
     },
     residents: [
-      { label: "Call the firehouse", href: "https://sites.google.com/view/cvfdvt/contact", text: "(802) 483-6200, answered Tuesdays at 7 pm. Dial 911 for emergencies." },
+      { label: "Call the firehouse", href: "https://sites.google.com/view/cvfdvt/contact", text: "(802) 483-6200, answered Tuesdays at 7 pm, or email cvfdvt@comcast.net. Dial 911 for emergencies." },
+      { label: "Join", href: "https://sites.google.com/view/cvfdvt/contact", text: "The department is always accepting new members." },
     ],
     sources: {
       history: { label: "Chittenden Volunteer Fire Department, History", href: "https://sites.google.com/view/cvfdvt/history" },
       chief: { label: "Chittenden Volunteer Fire Department, Meet the Chief", href: "https://sites.google.com/view/cvfdvt/chief" },
       trucks: { label: "Chittenden Volunteer Fire Department, Trucks", href: "https://sites.google.com/view/cvfdvt/trucks" },
+      home: { label: "Chittenden Volunteer Fire Department", href: "https://sites.google.com/view/cvfdvt/home" },
+      contact: { label: "Chittenden Volunteer Fire Department, Contact", href: "https://sites.google.com/view/cvfdvt/contact" },
       memorial: { label: "WCAX, 13 July 2025", href: "https://www.wcax.com/2025/07/13/fallen-chittenden-fire-captain-honored-with-memorial/", note: "With Firehouse.com, 9 July 2024" },
     },
   },
@@ -7854,12 +7874,13 @@ export const profiles: Record<string, Profile> = {
   },
   dorset: {
     description:
-      "Dorset's two fire districts: Dorset Fire Department, with a record 144 calls in 2024 and a new tanker, " +
-      "and East Dorset Fire Department, with 148 calls in 2025, plus both budgets.",
+      "Dorset's two fire districts: Dorset Fire Department, organised in 1912, with 151 calls in 2025 and three " +
+      "pumpers, and East Dorset Fire Department, with 148 calls in 2025, plus both budgets.",
     subtitle: "Dorset Fire District #1 and East Dorset Fire District #1",
     facts: [
       ["Departments", "Two fire districts, each run by a five-member Prudential Committee that also runs a water system"],
-      ["Dorset FD calls", "144 in 2024, a record"],
+      ["Dorset FD calls", "151 in 2025; 144 in 2024"],
+      ["Dorset FD officers", "Chief Jacob Gribble; Assistant Chiefs Joe Clark and Chris Dyer; Captain Tyler King"],
       ["East Dorset FD calls", "148 in 2025"],
       ["Meets", "Both departments meet Tuesdays, 7 pm, at their stations"],
     ],
@@ -7868,9 +7889,21 @@ export const profiles: Record<string, Profile> = {
         "Dorset is covered by two departments, each a fire district of its own: Dorset Fire Department on Route 30 and East Dorset Fire Department on Village Street. " +
         "Fire district taxes now appear on the town's property tax bill.",
       events: [
+        { year: 1912, text: "Dorset Fire Department is organised.", source: "fire" },
+        { year: 1972, text: "Dorset's firehouse on Route 30 is built.", source: "fire" },
+        { year: 2013, text: "On 5 December the Dorset and Manchester selectboards agree to study combining their public safety and emergency services; both town meetings fund the study in March 2014.", source: "safety" },
         { year: 2024, calls: 144, text: "Dorset Fire Department has its busiest year on record, adds a new attack truck and starts building a 3,000-gallon tanker. Manchester's police begin dispatching for East Dorset.", source: "dfd" },
-        { year: 2025, text: "East Dorset answers 148 calls, puts in 550 hours of in-house training and 1,480 firefighter-hours on calls, and holds monthly winter pancake breakfasts toward a side-by-side to replace a 20-year-old six-wheeler.", source: "r2025" },
+        { year: 2025, calls: 151, text: "Dorset Fire Department answers 151 calls, including mutual aid to Arlington, Danby, East Dorset, Manchester, Pawlet and Rupert. East Dorset answers 148 calls, puts in 550 hours of in-house training and 1,480 firefighter-hours on calls, and holds monthly winter pancake breakfasts toward a side-by-side to replace a 20-year-old six-wheeler.", source: "r2025" },
       ],
+    },
+    stationNotes: {
+      "dorset-2788-vt-route-30": {
+        text:
+          "Dorset Fire Department's firehouse, built in 1972. Three KME and Toyne pumpers: ETA 513, a 2012 KME (2,000 gpm, " +
+          "1,000 gallons); ETA 512, a 2005 KME (2,250 gpm, 1,800 gallons); and ETA 511, a 2020 Toyne (1,250 gpm, " +
+          "750 gallons). The department is dispatched from Washington County, New York.",
+        source: "fire",
+      },
     },
     money: {
       intro: "Each district sets its own budget.",
@@ -7891,10 +7924,14 @@ export const profiles: Record<string, Profile> = {
     },
     residents: [
       { label: "Burn permits", href: "https://www.dorsetfiredistrict.org", text: "When burning is allowed, you need a written permit from a fire department official." },
+      { label: "Contact Dorset FD", href: `https://www.dorsetfiredistrict.org/about`, text: "2788 Route 30, (802) 867-5311; mail to PO Box 341, Dorset VT 05251." },
+      { label: "Prudential Committee", href: `https://www.dorsetfiredistrict.org/prudential-meetings`, text: "Meets the second Monday of the month at 7 pm, open to the public, with a Zoom option." },
     ],
     sources: {
       town: { label: "Town of Dorset, Fire Districts & Water Systems", href: DRST },
       site: { label: "Dorset Fire District", href: "https://www.dorsetfiredistrict.org" },
+      fire: { label: "Dorset Fire District, Fire Department", href: "https://www.dorsetfiredistrict.org/fire", note: "2025 call total and mutual aid; the page's breakdown by type does not add up to its total, so it isn't shown" },
+      safety: { label: "Town of Dorset, Public Safety", href: "https://dorsetvt.org/public-safety.html" },
       dfd: { label: "Dorset Fire District #1, 2026 annual meeting packet", href: DFDP, note: "2025 meeting minutes and FY27 budgets, PDF pages 12 and 18" },
       r2025: { label: "Town of Dorset, 2025 Town Report", href: DR25, note: "East Dorset Fire District report and budget, PDF page 22" },
       mvt: { label: "Town of Manchester, 2024 Town Report", href: MVT24, note: "Dispatch, PDF page 56" },
