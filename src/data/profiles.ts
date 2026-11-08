@@ -92,6 +92,8 @@ const SB = "https://www.southburlingtonvt.gov";
 const BTV = "https://www.burlingtonvt.gov";
 const COL = "https://colchestervt.gov";
 const WIL = "https://www.willistonfire.com";
+const AV = "https://www.avfd-ems.com";
+const CFC = "https://cambridgefirecompany.org";
 const SHEL = "https://www.shelburnefire.org";
 const WIN = "https://www.winooskivt.gov";
 const WILT = "https://www.town.williston.vt.us/vertical/sites/%7BF506B13C-605B-4878-8062-87E5927E49F0%7D/uploads";
@@ -1085,7 +1087,7 @@ export const profiles: Record<string, Profile> = {
         "services after a serious fire. It now answers more than 2,600 calls a year, most of them medical, " +
         "with career firefighter-paramedics backed by paid-on-call staff.",
       events: [
-        { year: 1949, text: "Local volunteers, turned down at first by the Selectboard, organise the Williston Volunteer Fire Department; it answers five calls in its first year.", source: "whistory" },
+        { year: 1949, text: "After a fire at Williston Academy, Howard Lunderville and Roland Osborne ask the Selectboard for a fire department. Turned down early in the year, they return in August, are accepted, and personally sign for the first truck, a 1930 Maxim pumper. Lunderville is chief for 45 years. The department answers five calls in its first year.", source: "whistory" },
         { year: 2016, text: "More than 30 call staff on the roster.", source: "r2021" },
         { year: 2021, text: "Call staff fall to an all-time low of eight, as demand rises; the town leans on career firefighter-paramedics.", calls: 1722, source: "r2021" },
         { year: 2023, text: "Nearly 500 calls come in while the on-duty crew is already out on another.", calls: 2324, source: "r2023" },
@@ -1151,7 +1153,9 @@ export const profiles: Record<string, Profile> = {
         text:
           "Staffed around the clock with an engine company of three and an advanced life support " +
           "ambulance of two. Fleet: two engines, a pumper-tanker for areas without hydrants, a 105-foot " +
-          "ladder, ambulances, a command vehicle and an off-road UTV for patient rescue.",
+          "ladder, ambulances, a command vehicle and an off-road UTV for patient rescue: Engine 1, a 2019 Spartan Smeal " +
+          "(1,500 gpm, 1,000 gallons); Engine 2, a 2009 KME rescue pumper; Engine 3, a 2021 Smeal pumper-tanker with " +
+          "1,500 gallons; Ladder 4, a 2021 Smeal 105-foot aerial; and Osage ambulances from 2014, 2019 and 2022.",
         source: "r2025",
       },
     },
@@ -1163,6 +1167,9 @@ export const profiles: Record<string, Profile> = {
         "Call staff: experienced firefighters and EMS providers who fill in on busy days and big incidents",
         "About a third of the department's medical providers are paramedics; the rest are Advanced EMTs and EMTs",
         "More than 3,000 hours of training in 2025",
+        "Lateral career firefighter-EMTs can start at up to about $80,000, depending on certifications and up to six years' service",
+        "Career hires need NREMT EMT, a CPAT certificate and Firefighter 1 within a year",
+        "A union contract moves shifts from a 48-hour week to a 42-hour, four-shift rotation from fiscal 2029",
       ],
       applyUrl: WIL,
       source: "wsite",
@@ -1170,11 +1177,17 @@ export const profiles: Record<string, Profile> = {
     residents: [
       { label: "Burn permits online", href: "https://williston.burnpermits.com", text: "Brush piles need a same-day permit with a photo; campfires that meet the town's rules don't. 121 permits in 2025." },
       { label: "Burn permits and campfires", href: `${WIL}/burn-permits--campfires.html`, text: "What counts as a campfire, what you can burn, and the 4 mph wind limit." },
-      { label: "Fire station", href: WIL, text: "645 Talcott Road; the department welcomes visitors with questions." },
+      { label: "Fire station", href: WIL, text: "645 Talcott Road, 802-878-5622; the department welcomes visitors with questions." },
+      { label: "911 address signs", href: `${WIL}/reflective-911-address-signs.html`, text: "Green and silver reflective signs, $25, from the Williston Professional Firefighters." },
+      { label: "Key boxes", href: `${WIL}/key-safe--sign-programs.html`, text: "Required on commercial and industrial buildings; buy from the Knox Company." },
+      { label: "Sharps disposal", href: `${WIL}/sharps--medication-disposal.html`, text: "A free kiosk outside the station's front door, open around the clock." },
+      { label: "Vial of Life", href: `${WIL}/vial-of-life.html`, text: "A free kit at the station for keeping medical information where crews can find it." },
     ],
     sources: {
       wsite: { label: "Williston Fire Department", href: WIL },
       whistory: { label: "Williston Fire Department, History", href: `${WIL}/history.html` },
+      wfleet: { label: "Williston Fire Department, Apparatus", href: `${WIL}/apparatus.html` },
+      wjobs: { label: "Williston Fire Department, Employment", href: `${WIL}/employment.html` },
       reports: { label: "Town of Williston, Annual Town Reports 2021–2025", href: "https://www.town.williston.vt.us/index.asp?Type=B_BASIC&SEC=%7B0FDD35C4-979C-482B-B25F-B9A97AAFC2B1%7D", note: "Fire Department section, incident tables" },
       r2021: { label: "Town of Williston, 2021 Annual Town Report", href: `${WILT}/2021_Annual_Town_Report.pdf`, note: "Pages 52–53" },
       r2023: { label: "Town of Williston, 2023 Annual Town Report", href: `${WILT}/2023_Annual_Town_Report.pdf`, note: "Pages 54–57" },
@@ -1190,6 +1203,7 @@ export const profiles: Record<string, Profile> = {
       ["Members", "About 30, all volunteers"],
       ["Emergencies", "Nearly 300 a year"],
       ["Services", "Fire, heavy rescue, marine rescue, hazmat"],
+      ["Stipend", "Paid by hours at calls and training; on average $500 to $750 a member a year"],
     ],
     contact: { phone: "(802) 985-2366", website: SHEL, source: "contact" },
     history: {
@@ -1199,16 +1213,26 @@ export const profiles: Record<string, Profile> = {
       events: [
         { year: 1923, text: "Town Meeting appropriates the first money for fire protection: a chemical engine on a Ford chassis.", source: "history" },
         { year: 1924, text: "The first town fire committee is set up.", source: "about" },
+        { year: 1925, text: "In its first year the Model T chemical truck, kept in a barn behind the Shelburne Hotel, answers six fires.", source: "history" },
+        { year: 1939, text: "Voters agree in May to pay Burlington for fire protection.", source: "history" },
         { year: 1941, text: "The department is chartered and a station built for its new 1941 Buffalo pumper. In its first year members answer ten fire calls, taken by phone at the Shelburne Farms Inn's front desk, with a siren on the schoolhouse roof.", source: "about" },
+        { year: 1942, text: "On 3 December the department is reorganised with 25 members under Chief James Corey, and written records begin. Members become town employees at $1 a year.", source: "history" },
+        { year: 1961, text: "A Maxim pumper is bought for $11,504.32 without a town vote; auditors then recommend competitive bidding.", source: "history" },
+        { year: 1974, text: "The first tanker, a converted 1962 Ford oil truck.", source: "history" },
         { year: 1983, text: "The current station on Shelburne Road opens.", source: "contact" },
+        { year: 2012, text: "A new KME pumper becomes Engine 1, and the department buys Marine 1, a former military ordnance-disposal boat.", source: "history" },
         { year: 2016, text: "The department marks 75 years of service.", source: "about" },
         { year: 2023, text: "A century since the town first paid for fire protection.", source: "about" },
+        { year: 2024, text: "In March voters approve a new engine-tanker to replace Tanker 1, built in 1994 with a two-person cab and a 500 gpm pump. The new truck carries at least four firefighters and the same water, with up to three times the pump. Builds take 18 to 24 months, and prices have risen 30 to 40% since COVID.", source: "faq" },
       ],
     },
     stationNotes: {
       "shelburne-5380-shelburne-rd": {
-        text: "The volunteer station, built in 1983. Shelburne Rescue, a separate volunteer service, provides ambulance cover around the clock.",
-        source: "contact",
+        text:
+          "The volunteer station, built in 1983. Shelburne Rescue, a separate volunteer service, provides ambulance " +
+          "cover around the clock. The oldest truck is Tanker 5, from 1995; the department now aims to keep trucks 25 " +
+          "years or more. Fireboat 1 and Marine 4 go out on Lake Champlain when the Coast Guard asks.",
+        source: "faq",
       },
     },
     careers: {
@@ -1219,6 +1243,8 @@ export const profiles: Record<string, Profile> = {
         "Apply, then an interview, which is also your chance to ask questions",
         "No experience needed: the department trains new firefighters from scratch",
         "Applications to join@shelburnefire.org",
+        "After the interview, a vote at the monthly meeting, a month's wait, then about six months' probation",
+        "The hardest hours to cover are weekday daytimes",
       ],
       applyUrl: `${SHEL}/join-our-department`,
       source: "join",
@@ -1227,6 +1253,7 @@ export const profiles: Record<string, Profile> = {
       { label: "Burn permits", href: `${SHEL}/resources`, text: "Request online or through Shelburne Dispatch, (802) 985-8051. Same day only; out before dark; brush only." },
       { label: "Reflective mailbox signs", href: `${SHEL}/resources`, text: "Help crews find your house; proceeds go to the Shelburne Firefighters' Association." },
       { label: "Knox Box programme", href: `${SHEL}/resources`, text: "A locked key box for businesses, so crews can get in without forcing doors." },
+      { label: "Old fire extinguishers", href: `${SHEL}/resources`, text: "The department doesn't take them; the CSWD Environmental Depot does, free, by appointment." },
       { label: "Support the firefighters", href: `${SHEL}/about/donate-to-firefighters-association`, text: "The Shelburne Firefighters' Association, a 501(c)(3), buys equipment beyond the town budget." },
     ],
     sources: {
@@ -1234,6 +1261,7 @@ export const profiles: Record<string, Profile> = {
       history: { label: "Shelburne Fire Department, history by Tom Tompkins (2015)", href: `${SHEL}/about/shelburne-fire-history-by-tom-tompkins` },
       join: { label: "Shelburne Fire Department, Join our department", href: `${SHEL}/join-our-department` },
       contact: { label: "Shelburne Fire Department, Contact", href: `${SHEL}/contact` },
+      faq: { label: "Shelburne Fire Department, FAQs", href: `${SHEL}/resources/faqs` },
     },
   },
   winooski: {
@@ -1716,7 +1744,7 @@ export const profiles: Record<string, Profile> = {
         text:
           "Engine 10, a 2017 E-One pumper (1,250 gpm, 1,280 gallons), first out to alarms and fires; Engine 11, " +
           "a 1995 Desorcie pumper that supplies water; Tanker 12, a 1992 Desorcie with 1,800 gallons; and Rescue " +
-          "14, a 2008 E-One rescue carrying the Jaws of Life.",
+          "14, a 2008 E-One rescue carrying the Jaws of Life, a generator and a cascade system for refilling air bottles.",
         source: "apparatus",
       },
     },
@@ -1754,6 +1782,8 @@ export const profiles: Record<string, Profile> = {
         "Apply by email, at the town office or at Monday training, 7 to 8:30 p.m. at the station",
         "About six months' probation, then full membership",
         "CPR/AED and the free online ICS 100 and 700 courses within a year",
+        "The department pays for response training and supplies protective gear",
+        "Essex Police dispatches to pagers, with a phone app as backup",
       ],
       applyUrl: `${WF}/join/`,
       source: "join",
@@ -1761,6 +1791,7 @@ export const profiles: Record<string, Profile> = {
     residents: [
       { label: "Burn permits", href: `${WT}/administration/fire-warden/`, text: "Apply online. The Fire Warden opens or closes the system each day, and closes it when strong winds are forecast." },
       { label: "Ambulance", href: `${WT}/emergency/`, text: "Essex Rescue and Fairfax Rescue, which covers the north of town." },
+      { label: "Ice rink", href: `${WF}/join/`, text: "Each winter the department floods the rink on Westford Common with water pumped from the river." },
     ],
     sources: {
       home: { label: "Westford Volunteer Fire Department", href: WF },
@@ -9289,29 +9320,59 @@ export const profiles: Record<string, Profile> = {
   },
   alburgh: {
     description:
-      "Alburgh Volunteer Fire Department: an independent, non-municipal department on Firehouse Road " +
-      "that hosts the town's annual fire training school.",
+      "Alburgh Volunteer Fire Department: chartered in 1968, owned by its members, with fire, ambulance, marine " +
+      "and heavy rescue, and host of the North Country International Fire Training School.",
     facts: [
       ["Status", "Its own organisation, not a municipal department"],
       ["Station", "60 Firehouse Road"],
-      ["Rescue", "Alburgh Rescue, Inc., a separate agency"],
+      ["Chartered", "1968, owned and run by its members"],
+      ["Services", "Fire, ambulance, marine rescue, heavy rescue and hazmat; ambulance cover for Alburgh and Isle La Motte"],
+      ["Officers", "Assistant Chiefs Tyler Gotshall and Bill Gett, Captain Noah Vincelette, Lieutenants Dustin Marchand and Kaitlynn Pease"],
+      ["Mutual aid", "Grand Isle County (Vermont) and Clinton County (New York) associations"],
       ["Burn permits", "802-796-3402"],
     ],
-    contact: { chief: "Ron Kumetz", phone: "802-796-3402", source: "es" },
+    contact: { chief: "Ron Kumetz", phone: "802-796-3402", website: AV, source: "avcontact" },
     history: {
       intro:
         "The Alburgh Volunteer Fire Department, Inc. is its own organisation rather than a town department, " +
         "so it can't use municipal financing. Its chief is also the town fire warden.",
       events: [
+        { year: 1968, text: "The Alburgh Volunteer Fire Department is chartered.", source: "av" },
         { year: 2023, text: "The department asks the Selectboard to take out municipal financing for a new pumper costing $603,000, to be repaid from the department's capital equipment fund. The board tables the request.", source: "m23" },
         { year: 2025, text: "The annual Alburgh fire training school, held at the station and Alburgh School, asks the town for a permanent training facility made from a 40-foot shipping container.", source: "m25" },
       ],
     },
+    stationNotes: {
+      "alburgh-60-fire-house-rd": {
+        text:
+          "Engine 362, a Kenworth/Pierreville (1,500 gpm, 2,500 gallons); Engine 367, a 1997 HME; Engine 1, a 2006 " +
+          "Chevrolet with compressed-air foam; Tanker 364, a 2008 International/KME with 2,000 gallons; Tanker 363, a " +
+          "Mack; Utility 368, a 1995 rescue; ambulances 365 (2004 International) and 366 (2015 Kenworth); and an " +
+          "antique 1940s Chevrolet. The bingo hall raises money and hosts other events.",
+        source: "avfleet",
+      },
+    },
+    careers: {
+      intro: "Training for volunteers is free.",
+      points: [
+        "Business meeting on the third Monday at 7 pm",
+        "Fire training on the fourth Monday and EMS training on the first Monday, at 6:30 pm",
+        "Apply with the form on the department's site, or email Membership@avfd-ems.com",
+      ],
+      applyUrl: AV,
+      source: "avabout",
+    },
     residents: [
+      { label: "Free smoke alarms", href: AV, text: "Installed by the Red Cross in Grand Isle County; call (802) 309-7960, 8 to 5." },
+      { label: "Community services", href: AV, text: "911 house numbers, Knox Box installation, CPR and first aid classes, and school visits." },
       { label: "Burn permits", href: "https://alburghvt.org/community-links/emergency-services/", text: "Call the town fire warden and fire chief, Ron Kumetz, at 802-796-3402." },
     ],
     sources: {
       es: { label: "Town of Alburgh, Emergency Services", href: "https://alburghvt.org/community-links/emergency-services/" },
+      av: { label: "Alburgh Volunteer Fire Department", href: AV },
+      avabout: { label: "Alburgh Volunteer Fire Department, About us", href: `${AV}/index.php/about-us/` },
+      avcontact: { label: "Alburgh Volunteer Fire Department, Contact", href: `${AV}/index.php/contact/` },
+      avfleet: { label: "Alburgh Volunteer Fire Department, Emergency vehicles", href: `${AV}/index.php/emergency-vehicles/`, note: "Pump and tank figures from the page's shorthand, e.g. 1500/2500" },
       m23: { label: "Town of Alburgh, Selectboard minutes, 27 November 2023", href: ALBMIN23, note: "Pages 1 and 2" },
       m25: { label: "Town of Alburgh, Selectboard minutes, 22 September 2025", href: ALBMIN25, note: "Pages 1 and 2" },
     },
@@ -9432,6 +9493,54 @@ export const profiles: Record<string, Profile> = {
     sources: {
       site: { label: "Town of Sheldon, Fire Department", href: "https://sheldonvt.com/fire" },
       wcax: { label: "WCAX, Fire crews battle massive blaze in Highgate (10 October 2025)", href: "https://www.wcax.com/2025/10/10/fire-crews-battle-massive-blaze-highgate/" },
+    },
+  },
+  cambridge: {
+    description:
+      "Cambridge Fire Department: a volunteer company founded in 1950 at 153 Church Street, Jeffersonville, covering " +
+      "Cambridge, Fletcher and Smugglers' Notch Resort, with its officers and how to join.",
+    facts: [
+      ["Founded", "1950"],
+      ["Members", "30 or more volunteers"],
+      ["Covers", "Cambridge, Jeffersonville, Fletcher and Smugglers' Notch Resort; 5,000 to 20,000 people, depending on the season"],
+      ["Services", "Fire protection and heavy rescue"],
+      ["Chief", "Darren Severance, since December 1998"],
+    ],
+    contact: { chief: "Darren Severance", phone: "(802) 644-2201", website: CFC, source: "home" },
+    history: {
+      intro:
+        "The Cambridge Fire Company works from its station on Church Street in Jeffersonville. Its members hold " +
+        "Firefighter 1, hazardous materials, wildland and CPR certifications, and many are also EMTs, " +
+        "advanced EMTs or paramedics.",
+      events: [
+        { year: 1950, text: "The Cambridge Fire Company is established.", source: "home" },
+        { year: 1998, text: "Darren Severance becomes chief on 1 December.", source: "roster" },
+      ],
+    },
+    stationNotes: {
+      "cambridge-153-church-st": {
+        text:
+          "Two engines (22-E1 and 22-E2), a rescue (22-R1), a tanker (22-T1) and a utility truck (22-U1), with an air " +
+          "trailer, an ATV trailer and the LCMA hazmat decontamination unit. A 1956 Ward-LaFrance pumper is being restored.",
+        source: "apparatus",
+      },
+    },
+    careers: {
+      intro: "The company meets every Thursday at 7 pm, and visitors are welcome.",
+      points: [
+        "Members need Firefighter 1, Hazmat Operations, wildland firefighting and CPR/AED/First Aid",
+        "Officers: Assistant Chiefs Schuyler Lamphere and Corey White, Captains Logan Smith and Kevin Mahoney, Lieutenants Dan Burnor Jr and Jason Luneau",
+      ],
+      applyUrl: CFC,
+      source: "home",
+    },
+    residents: [
+      { label: "Burn permits", href: `${CFC}/department-roster`, text: "From the town fire warden, Mike Spaulding." },
+    ],
+    sources: {
+      home: { label: "Cambridge Fire Department", href: CFC },
+      roster: { label: "Cambridge Fire Department, Department roster", href: `${CFC}/department-roster` },
+      apparatus: { label: "Cambridge Fire Department, Apparatus", href: `${CFC}/apparatus`, note: "Restoration from the Retired apparatus page" },
     },
   },
   jericho: UJFD,
