@@ -233,6 +233,7 @@ for (const r of photos) {
     photographer: f.Photographer ?? '',
     dateTaken: f['Date Taken'] ?? null,
     featured: !!f.Featured,
+    created: r.createdTime,
     department: dept
       ? { name: dept['Department Name'] ?? '', city: dept.City ?? '', county: dept.County ?? '' }
       : null,
@@ -271,6 +272,8 @@ for (const p of out) {
 
 // Featured first, then newest
 out.sort((a, b) => (b.featured - a.featured) || String(b.dateTaken).localeCompare(String(a.dateTaken)));
+// Upload order: a station's first photograph leads its card, the rest follow it.
+out.sort((a, b) => a.created.localeCompare(b.created));
 writeFileSync(`${ROOT}/src/data/photos.json`, JSON.stringify(out, null, 2) + '\n');
 console.log(`Synced ${out.length} photos (${photos.length} records total), ${geocoded} geocoded -> src/data/photos.json + public/photos/`);
 

@@ -26,6 +26,8 @@ export interface Station {
    */
   department: string | null;
   photo: Photo | null;
+  /** The station's other photographs, in upload order, after the lead one. */
+  morePhotos: Photo[];
   /** What to call the station in a heading. */
   name: string;
   /**
@@ -69,8 +71,9 @@ const slugify = (s: string) =>
 // by editing code.
 const features = stationsData;
 
-// photos indexed by normalised street address, the same join the map uses
-const photoByAddr = new Map<string, Photo>();
+// photos indexed by normalised street address, the same join the map uses.
+// photos.json is in upload order, so each station's first photograph leads.
+const photosByAddr = new Map<string, Photo[]>();
 const townPhotos = new Map<string, Photo[]>();
 const stationsPerTown = new Map<string, number>();
 for (const f of features) {
@@ -79,7 +82,10 @@ for (const f of features) {
 }
 for (const p of photosData) {
   const a = normAddr(p.stationAddress);
-  if (a && !photoByAddr.has(a)) photoByAddr.set(a, p);
+  if (a) {
+    if (!photosByAddr.has(a)) photosByAddr.set(a, []);
+    photosByAddr.get(a)!.push(p);
+  }
   const t = normTown(p.town);
   if (t) {
     if (!townPhotos.has(t)) townPhotos.set(t, []);
@@ -87,12 +93,12 @@ for (const p of photosData) {
   }
 }
 
-function photoFor(townRaw: string, addrRaw: string): Photo | null {
-  const exact = photoByAddr.get(normAddr(addrRaw));
+function photosFor(townRaw: string, addrRaw: string): Photo[] {
+  const exact = photosByAddr.get(normAddr(addrRaw));
   if (exact) return exact;
   // town-wide only where it cannot be ambiguous
-  if ((stationsPerTown.get(townRaw) ?? 0) > 1) return null;
-  return townPhotos.get(townRaw)?.[0] ?? null;
+  if ((stationsPerTown.get(townRaw) ?? 0) > 1) return [];
+  return townPhotos.get(townRaw) ?? [];
 }
 
 const deptById = new Map(departmentsData.map((d) => [d.id, d]));
@@ -109,7 +115,7 @@ const seen = new Set<string>();
 export const stations: Station[] = features.map((f) => {
   const town = titleCase(f.town);
   const address = titleCase(f.address);
-  const photo = photoFor(normTown(f.town), f.address);
+  const [photo = null, ...morePhotos] = photosFor(normTown(f.town), f.address);
 
   let slug = slugify(`${town} ${address}`);
   if (seen.has(slug)) slug = `${slug}-${f.esiteid ?? f.id}`; // guarantees uniqueness
@@ -140,6 +146,7 @@ export const stations: Station[] = features.map((f) => {
     updated: f.updated ?? '',
     department,
     photo,
+    morePhotos,
     name,
     page: linked?.ownPage ?? slugify(town),
   };
@@ -154,7 +161,7 @@ export const photographedCount = stations.filter((s) => s.photo).length;
 
 /** Photo id → the station page showing it, for linking a thumbnail anywhere. */
 export const slugByPhotoId = new Map(
-  stations.filter((s) => s.photo).map((s) => [s.photo!.id, s.slug]),
+  stations.flatMap((s) => [s.photo, ...s.morePhotos].filter((p): p is Photo => !!p).map((p) => [p.id, s.slug] as const)),
 );
 
 /**

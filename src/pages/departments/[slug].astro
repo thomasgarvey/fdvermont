@@ -396,6 +396,22 @@ const structured = {
                 )}
                 <span class="credit">{credit(s.photo)}</span>
               </figcaption>
+              {s.morePhotos.length > 0 && (
+                <ul class="more" aria-label={`More photographs of ${s.name}`}>
+                  {s.morePhotos.map((p) => (
+                    <li>
+                      <button type="button" data-full={p.src}
+                              data-caption={p.caption || s.name} data-credit={credit(p)}
+                              aria-label={`View another photograph of ${s.name} full screen`}>
+                        <img src={p.thumb}
+                             alt={`${p.caption || s.name}, ${s.town}, Vermont`}
+                             width={p.thumbWidth ?? undefined} height={p.thumbHeight ?? undefined}
+                             loading="lazy" />
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              )}
             </figure>
           ) : (
             <div class="nophoto">
@@ -932,6 +948,8 @@ const structured = {
   .shot { margin: 0 0 2.4rem; }
   .shot img { display: block; width: 100%; height: auto; border: 1px solid var(--line); box-shadow: var(--shadow); }
   .shot figcaption { margin-top: 0.6rem; font-size: 0.82rem; color: var(--ink-2); }
+  .more { list-style: none; margin: 0.9rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.6rem; }
+  .more img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border: 1px solid var(--line); }
   .fleet { width: 100%; border-collapse: collapse; margin: 1.4rem 0 0; font-size: 0.88rem; }
   .fleet caption {
     text-align: left; font-size: 0.72rem; letter-spacing: 0.09em;
