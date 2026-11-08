@@ -362,6 +362,7 @@ const UJFD: Profile = {
     ["Stations", "2: Underhill Village (main) and Jericho Center"],
     ["EMS", "First response, 24/7, with over 10 EMT responders"],
     ["ISO rating", "4/6/10, effective 1 March 2014"],
+    ["Calls", "About 400 emergency calls a year (2018)"],
   ],
   contact: { chief: "Todd Fischer", phone: "802-899-4025", website: UJ, source: "home" },
   history: {
@@ -376,6 +377,8 @@ const UJFD: Profile = {
       { year: 1982, text: "The Jericho substation is built on Browns Trace Road, on land given by Don and Alice Rivers.", source: "about" },
       { year: 1997, text: "The main station opens on Route 15 in Underhill Village, built as both a fire station and an emergency operations center.", source: "about" },
       { year: 2014, text: "A new ISO rating of 4/6/10 takes effect on 1 March, which may lower homeowners' insurance premiums for many residents.", source: "about" },
+      { year: 2018, text: "The department surveys residents about a third station on Pleasant Valley Road in Underhill, an area more than five miles from any station and so rated Class 10 by ISO. The station had been in its capital plan for over 20 years; 150 people respond. It expects the station to answer 25 to 30 calls a year and to cost about $7,500 a year to run.", source: "pv" },
+      { year: 2020, text: "Plans go in for a new Engine 2, with full engine and tanker capability, to replace Tanker 2 at the Jericho station, which is near the end of its service life.", source: "e2" },
     ],
   },
   stationNotes: {
@@ -403,6 +406,7 @@ const UJFD: Profile = {
       "A medical exam with a department physician, paid for by the department",
       "Firefighters: the Chittenden County basic course or Firefighter 1 within two years; under-18s need a parent's approval",
       "EMS first responders: 18 or over, with a Vermont EMR, EMT or AEMT licence and a National Registry card",
+      "Paid posts listed on the department's site: a full-time firefighter/EMT, with benefits, and a part-time administrative assistant",
     ],
     applyUrl: `${UJ}/join-the-ujfd`,
     source: "apply",
@@ -413,12 +417,17 @@ const UJFD: Profile = {
     { label: "Reflective address signs", href: `${UJ}/fire-safety-new`, text: "Help crews find your house faster." },
     { label: "Dry hydrants", href: `${UJ}/fire-safety-new`, text: "Have a pond a truck can reach? The department reimburses the strainer and coupling hardware." },
     { label: "Community CPR", href: UJ, text: "Classes about every three months; call 802-899-4025." },
+    { label: "Life Alert and medical alert users", href: `${UJ}/life-and-medical-alert`, text: "Ask your provider to add the department's dispatch number, 802-985-8051, alongside the ambulance. First responders usually arrive 10 to 15 minutes before the ambulance." },
   ],
   sources: {
     home: { label: "Underhill Jericho Fire Department", href: UJ },
     about: { label: "Underhill Jericho Fire Department, About", href: `${UJ}/about-ujfd` },
     apparatus: { label: "Underhill Jericho Fire Department, Apparatus", href: `${UJ}/apparatus` },
     apply: { label: "Underhill Jericho Fire Department, Membership application", href: `${UJ}/membership-application`, note: "Requirements for members" },
+    specs: { label: "Underhill Jericho Fire Department, Apparatus specs", href: `${UJ}/apparatus-specs` },
+    jobs: { label: "Underhill Jericho Fire Department, Employment", href: `${UJ}/employment` },
+    pv: { label: "Underhill Jericho Fire Department, Pleasant Valley station survey results (25 November 2018)", href: `${UJ}/post/pleasant-valley-station-survey-results` },
+    e2: { label: "Underhill Jericho Fire Department, Brand new Engine 2 (6 September 2020)", href: `${UJ}/post/brand-new-engine-2` },
   },
 };
 
