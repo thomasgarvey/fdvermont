@@ -2843,6 +2843,8 @@ export const profiles: Record<string, Profile> = {
       ["Founded", "1882"],
       ["Stations", "Main Street, Waterbury, and Maple Street, Waterbury Center"],
       ["Chief Engineer", "Gary Dillon, chief since 2009"],
+      ["Members", "39 on the 2026 roster, 13 of them officers"],
+      ["Staffing", "All volunteer; the stations are not staffed around the clock"],
     ],
     contact: { chief: "Gary Dillon", phone: "802-244-8856", website: "https://www.waterburyvtfire.com/", source: "roster" },
     history: {
@@ -2851,6 +2853,9 @@ export const profiles: Record<string, Profile> = {
         "fire wards. Today's department works from two stations, with members who have served 25 and even 50 years.",
       events: [
         { year: 1882, text: "The Waterbury Village Fire Department is formed on 20 December.", source: "history" },
+        { year: 1931, text: "A demonstrator Seagrave pumper is tested for the village, which is weighing whether to buy a pumper.", source: "c1931" },
+        { year: 1949, text: "Firefighters rebuild the station to house a third truck and adopt new alarm signals.", source: "c1949" },
+        { year: 1955, text: "A special village meeting lets the trustees borrow more to finish a new fire station, begun after a 1953 petition.", source: "c1955" },
         { year: 1965, text: "Bob Grace joins; he is still on the roster, a half-century member.", source: "roster" },
         { year: 2009, text: "Gary Dillon, a member since 1981, becomes chief.", source: "roster" },
       ],
@@ -2871,12 +2876,19 @@ export const profiles: Record<string, Profile> = {
       applyUrl: "https://www.waterburyvtfire.com/WFD/ContactUs.html",
       source: "companies",
     },
-    residents: [],
+    residents: [
+      { label: "Chimney cleaning", href: `${WFD}/Community.html`, text: "Free, usually in the fall; call 802-244-8856. Donations are welcome." },
+      { label: "Pool filling", href: `${WFD}/Community.html`, text: "Non-potable water by tanker, 1,800 gallons a load: $95 for the first load, $65 for each one after." },
+      { label: "Tent rental", href: `${WFD}/Community.html`, text: "The department rents out five tents and sets them up and takes them down." },
+    ],
     sources: {
       history: { label: "Waterbury Fire Department, History", href: `${WFD}/History.html` },
       roster: { label: "Waterbury Fire Department, Roster", href: `${WFD}/Roster.html` },
       stations: { label: "Waterbury Fire Department, Stations", href: `${WFD}/Stations.html` },
       companies: { label: "Waterbury Fire Department, Training Companies 2026", href: `${WFD}/Companies.html` },
+      c1931: { label: "Waterbury Record, 1 July 1931, pumper demonstration (clipping on the department's site)", href: `${WFD}/MajorEvents/1931PumperDemonstration.pdf` },
+      c1949: { label: "Burlington Free Press, 22 September 1949, station rebuilt (clipping on the department's site)", href: `${WFD}/MajorEvents/1949StationReno.pdf` },
+      c1955: { label: "New village fire station, 1955 (clipping on the department's site)", href: `${WFD}/MajorEvents/1955FireStation.pdf` },
     },
   },
   northfield: {
@@ -3310,22 +3322,26 @@ export const profiles: Record<string, Profile> = {
   },
   newark: {
     description:
-      "Newark Volunteer Fire Department: a nonprofit with twelve volunteer firefighters, three of them EMTs, four " +
-      "apparatus in two bays of the town garage, and plans for a new station.",
+      "Newark Volunteer Fire Department: a nonprofit founded in 1982, 20 members on its 2026 roster, four " +
+      "apparatus in two bays of the town garage, free smoke alarms, and plans for a new station.",
     facts: [
       ["Run by", "Newark Volunteer Fire Department, Inc., a 501(c)(3) nonprofit"],
-      ["Members", "12 firefighters (3 also EMTs) and a junior"],
+      ["Founded", "1982, by local volunteers"],
+      ["Members", "20 on the July 2026 roster, including EMTs and a junior"],
+      ["Dispatch", "St. Johnsbury; member of two mutual aid associations"],
       ["Serves", "About 581 residents, more in summer"],
     ],
-    contact: { phone: "802-467-0003", website: NWK, source: "join" },
+    contact: { chief: "Lilly Young", phone: "802-467-0003", website: NWK, source: "roster" },
     history: {
       intro:
         "Newark's volunteers are unpaid, independent of the town but funded by a town appropriation and donations. They " +
         "answer fire and medical calls, with Lyndon Rescue providing the ambulance.",
       events: [
+        { year: 1982, text: "Local volunteers start the department.", source: "home" },
         { year: 2011, text: "Tanker 51, a 1977 Maxim rebuilt in 1997, is donated by Georgetown, Connecticut.", source: "station" },
         { year: 2017, text: "Rescue 55 is bought from Waterford, Vermont.", source: "station" },
         { year: 2019, text: "The town forms a committee and hires a consultant to plan a renovated or new station.", source: "station" },
+        { year: 2021, text: "The department joins Fire Safe 802, the state program of free home safety visits and smoke and CO alarms.", source: "safety" },
       ],
     },
     stationNotes: {
@@ -3349,13 +3365,20 @@ export const profiles: Record<string, Profile> = {
       source: "join",
     },
     residents: [
-      { label: "Fire safety", href: `${NWK}/fire-safety/`, text: "The department's fire safety pages." },
+      { label: "Free smoke and CO alarms", href: `${NWK}/fire-safety/`, text: "Free home safety visits and alarms through Fire Safe 802, including a bed-shaker alarm for people who are hard of hearing. Call 802-467-0003." },
+      { label: "Knox Box", href: `${NWK}/fire-safety/`, text: "Order a key box and the department locks it with its master key, so crews can get in without forcing a door." },
+      { label: "Address signs", href: `${NWK}/about-us/faq/`, text: "A reflective 911 sign, installed on your post, for a $15 donation." },
+      { label: "Burn permits", href: `${NWK}/about-us/faq/`, text: "From the fire warden, Chief Lilly Young, at 802-467-0003; the phone line announces burn bans." },
       { label: "Support the station project", href: `${NWK}/support-us/`, text: "Donations towards the department's share of a new or renovated station." },
     ],
     sources: {
       about: { label: "Newark Volunteer Fire Department, About Us", href: `${NWK}/about-us/` },
       station: { label: "Newark Volunteer Fire Department, Fire Station and Apparatus", href: `${NWK}/about-us/fire-station/` },
       join: { label: "Newark Volunteer Fire Department, Recruitment", href: `${NWK}/recruitment/` },
+      home: { label: "Newark Volunteer Fire Department", href: NWK },
+      roster: { label: "Newark Volunteer Fire Department, Roster (July 2026)", href: `${NWK}/about-us/roster/` },
+      safety: { label: "Newark Volunteer Fire Department, Fire Safety", href: `${NWK}/fire-safety/` },
+      faq: { label: "Newark Volunteer Fire Department, FAQ", href: `${NWK}/about-us/faq/` },
     },
   },
   ryegate: {
@@ -3417,31 +3440,50 @@ export const profiles: Record<string, Profile> = {
       ["Serves", "About 772 people over 36 square miles"],
       ["Services", "Fire, prevention, medical first response, all hazards"],
       ["Chief", "Jeffrey Berwick, since 1986"],
+      ["Members", "17 on the July 2026 roster, including a junior"],
+      ["Station", "64 Macks Mountain Road, enlarged in 2000"],
     ],
     contact: { chief: "Jeffrey Berwick", phone: "802-592-3392", website: PCH, source: "contact" },
     history: {
       intro:
         "Peacham's department has always been all volunteer; its members are unpaid. Jeff Berwick has been chief since 1986.",
       events: [
-        { year: 1950, text: "The Peacham Fire Department is founded.", source: "history" },
+        { year: 1950, text: "The Peacham Fire Department is founded, with Gib Randall as first chief. Its first new equipment is a Willys Jeep fire truck, which passes its test by throwing water over a barn; the department still keeps it for parades.", source: "history" },
+        { year: 1973, text: "Town meeting votes $2,000 to turn the old town garage into a fire station, and $1,000 for a tank.", source: "salute" },
+        { year: 1974, text: "The department buys its tank truck, moves into the station and joins Capital Mutual Aid.", source: "salute" },
+        { year: 1976, text: "The Peacham Academy fire on 28 August draws 12 departments, 18 pieces of equipment and about 125 firefighters.", source: "salute" },
         { year: 1986, text: "Jeff Berwick becomes chief.", source: "history" },
+        { year: 1996, calls: 28, text: "28 emergencies, six of them chimney fires, down from an average of 12 chimney fires a year.", source: "history" },
+        { year: 2000, text: "Ground is broken on 29 August for an addition with two more truck bays, a loft, an office and radio room, and a kitchen.", source: "station" },
+        { year: 2022, text: "The department raises over $30,000 for a Zoll monitor-defibrillator, now in service.", source: "aed" },
+        { year: 2024, text: "A new Rescue 1, a Ram 5500 light rescue, enters service in February for medical first response and ice, water and rope rescue.", source: "apparatus" },
         { year: 2026, text: "Under a new state law, Act 162, the fire chief becomes Peacham's forest fire warden from 1 July.", source: "permits" },
       ],
     },
     careers: {
       intro: "The department is recruiting firefighters and EMS medical first responders.",
-      points: ["Stop by the station any Monday at 7:30 p.m.", "Roles include firefighter, EMT, building upkeep and office work"],
+      points: [
+        "Stop by the station any Monday at 7:30 p.m.; the business meeting is the first Monday",
+        "18 or older, or 16 as a junior, with a background check",
+        "The department pays for all training and equipment",
+        "Roles include interior or exterior firefighter, EMT, fire police, dispatcher, maintenance and prevention educator",
+      ],
       applyUrl: PCH,
       source: "home",
     },
     residents: [
-      { label: "Burn permits", href: `${PCH}/burn-permits/`, text: "Needed whenever there's no snow on the ground; from Chief Berwick or a deputy warden." },
+      { label: "Burn permits", href: `${PCH}/burn-permits/`, text: "Needed whenever there's no snow on the ground; from Chief Berwick or a deputy warden. Allow up to 24 hours." },
+      { label: "House numbers", href: `${PCH}/help-us-find-you/`, text: "Post reflective numbers at least 4 inches tall where they can be seen from the road." },
     ],
     sources: {
       home: { label: "Peacham Volunteer Fire Department", href: PCH },
       history: { label: "Peacham Volunteer Fire Department, History", href: `${PCH}/history/` },
       permits: { label: "Peacham Volunteer Fire Department, Burn Permits", href: `${PCH}/burn-permits/` },
       contact: { label: "Peacham Volunteer Fire Department, Contact", href: `${PCH}/contact/` },
+      salute: { label: "Peacham Patriot, \"Salute to the PVFD\" (November 1997), on the department's site", href: `${PCH}/salute-to-pvfd/` },
+      station: { label: "Peacham Volunteer Fire Department, Our Fire Station", href: `${PCH}/our-fire-station/` },
+      aed: { label: "Peacham Volunteer Fire Department, Buying a monitor/AED", href: `${PCH}/update-buying-a-monitor-aed/` },
+      apparatus: { label: "Peacham Volunteer Fire Department, Apparatus", href: `${PCH}/apparatus/` },
     },
   },
   brattleboro: {
@@ -8700,14 +8742,18 @@ export const profiles: Record<string, Profile> = {
       ["Calls", "242 in 2024, a five-year high"],
       ["Station", "The Public Safety Facility, completed 2005"],
       ["Training", "Every Thursday night"],
-      ["Trucks", "Four engines, an aerial, a heavy rescue, a support truck, a Polaris Ranger and a Zodiac boat (2022)"],
+      ["Trucks", "Engine 32, Ladder 35 (75 ft), Rescue 36, Tanker 38, Utility 33, Squad 34, a side-by-side and a Zodiac boat"],
+      ["Members", "About 28 active, including 8 probationary (2025)"],
     ],
+    contact: { chief: "Jeff Corrow", phone: "802-626-4100", website: "https://sites.google.com/view/lyndonville-fire-vt", source: "officers" },
     history: {
       intro:
         "The volunteer department is headquartered in downtown Lyndonville, in a building it shares with the police department and the Lyndon Area Training Center. " +
         "It has mutual aid agreements with all the surrounding towns.",
       events: [
-        { year: 2005, text: "The Public Safety Facility for fire and police is completed.", source: "lhmp" },
+        { year: 2003, text: "A fire at the firehouse destroys Tower 1, a 1978 Sutphen 85-foot tower, out of service from 15 March.", source: "past" },
+        { year: 2005, text: "The Public Safety Facility for fire and police is completed, and Engine 32, a 2005 E-One, goes into service that summer as first-due engine.", source: "lhmp" },
+        { year: 2009, text: "Ladder 35, a 2010 E-One 75-foot aerial, replaces Tower 35 in December. It is one of three aerials in the area, with East Burke and St. Johnsbury.", source: "apparatus" },
         { year: 2022, text: "26 state-certified and 11 probationary firefighters.", source: "lhmp" },
         { year: 2024, calls: 242, text: "The busiest year in five.", source: "site" },
       ],
@@ -8718,9 +8764,15 @@ export const profiles: Record<string, Profile> = {
       applyUrl: "https://sites.google.com/view/lyndonville-fire-vt",
       source: "site",
     },
-    residents: [],
+    residents: [
+      { label: "Burn permits", href: "https://sites.google.com/view/lyndonville-fire-vt/services/burn-permits", text: "Call the on-duty fire officer at 802-745-8844, any time." },
+      { label: "Car seat checks", href: "https://sites.google.com/view/lyndonville-fire-vt/services/free-car-seat-inspection", text: "Free, with Lyndon Rescue; book through Lyndon Rescue at 802-427-1886." },
+    ],
     sources: {
       site: { label: "Lyndonville Fire Department", href: "https://sites.google.com/view/lyndonville-fire-vt" },
+      officers: { label: "Lyndonville Fire Department, Fire Officers", href: "https://sites.google.com/view/lyndonville-fire-vt/fire-officers" },
+      apparatus: { label: "Lyndonville Fire Department, Apparatus", href: "https://sites.google.com/view/lyndonville-fire-vt/apparatus" },
+      past: { label: "Lyndonville Fire Department, Past Apparatus", href: "https://sites.google.com/view/lyndonville-fire-vt/apparatus/past-apparatus" },
       lhmp: { label: "Lyndon Hazard Mitigation Plan, November 2022 (NVDA)", href: `${NVDA}/hmp-plans/LyndonMigitationPlan.pdf`, note: "Fire department, PDF page 50" },
     },
   },
