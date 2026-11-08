@@ -1524,7 +1524,7 @@
     "chief": null,
     "phone": null,
     "email": null,
-    "website": "http://www.derbylinefire.org/",
+    "website": null,
     "joinUrl": null,
     "members": {
       "volunteer": 0,
@@ -2812,7 +2812,7 @@
     "chief": null,
     "phone": null,
     "email": null,
-    "website": "https://londonderryvtfire.com/",
+    "website": "https://www.londonderryvt.gov/services/fire_and_rescue/index.php",
     "joinUrl": null,
     "members": {
       "volunteer": 16,
@@ -2952,7 +2952,7 @@
     "chief": null,
     "phone": null,
     "email": null,
-    "website": "https://manchesterfiredepartment.com/",
+    "website": "https://manchester-vt.gov/fire",
     "joinUrl": null,
     "members": {
       "volunteer": 41,
@@ -6325,7 +6325,7 @@
     "chief": null,
     "phone": null,
     "email": null,
-    "website": "https://www.wilmingtonvtfd.com/",
+    "website": "http://wilmingtonvtfire.com/",
     "joinUrl": null,
     "members": {
       "volunteer": 0,

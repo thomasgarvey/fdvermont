@@ -407,9 +407,17 @@ writeFileSync(`${ROOT}/src/data/retired-stations.json`, JSON.stringify(retired, 
 // link, so it is not an orphan just because it has no E911 id.
 const rosterIds = new Set(roster.map((s) => s.esiteid));
 const rosterAddrs = new Set(roster.map((s) => `${s.town}|${s.address}`.toLowerCase()));
+// The site also places a photo by town alone when its town has a single station
+// (src/lib/stations.ts, photosFor), so such a photo has somewhere to land too.
+const stationsInTown = new Map();
+for (const s of roster) {
+  const t = s.town.toLowerCase();
+  stationsInTown.set(t, (stationsInTown.get(t) ?? 0) + 1);
+}
 const orphaned = out.filter(
   (p) =>
     !(p.esiteid != null && rosterIds.has(p.esiteid)) &&
+    !(p.town && stationsInTown.get(p.town.toLowerCase()) === 1) &&
     p.lat == null &&
     !(p.placedBy === 'station-link' && p.stationAddress && [...rosterAddrs].some((k) => k.endsWith(`|${p.stationAddress}`.toLowerCase()))),
 );
