@@ -2665,6 +2665,7 @@ export const profiles: Record<string, Profile> = {
       ["Active members", "22, plus an auxiliary"],
       ["Station", "7,400 sq ft, on Hyde Road"],
       ["Chief", "Adam White"],
+      ["Officers", "Assistant Chiefs Joe Clark and Tyler Hemingway, Captains Bill Baron and Ray Mitchell, Lt. Tim Olver"],
     ],
     contact: { chief: "Adam White", phone: "802-372-5012", website: GIF, source: "join" },
     history: {
@@ -2729,13 +2730,15 @@ export const profiles: Record<string, Profile> = {
       source: "report",
     },
     residents: [
-      { label: "Address signs", href: GIF, text: "The department's reflective 911 address signs help crews find your house." },
-      { label: "Fireworks", href: `${GIF}/fireworks`, text: "The department's fireworks information." },
+      { label: "Address signs", href: `${GIF}/address-signs`, text: "Reflective 911 signs, $15 each, or $20 installed by the department." },
+      { label: "Fireworks", href: `${GIF}/fireworks`, text: "Permits for professional displays only, after a site visit; apply through the chief at least 15 days ahead." },
+      { label: "Water", href: `${GIF}/faq`, text: "The department doesn't fill pools, ponds or wells. Burn permits come from the forest fire warden." },
     ],
     sources: {
       about: { label: "Grand Isle Fire Department, About Us", href: `${GIF}/about-us` },
       fleet: { label: "Grand Isle Fire Department, Apparatus", href: `${GIF}/apparatus` },
       join: { label: "Grand Isle Fire Department, Join Us", href: `${GIF}/join-us` },
+      members: { label: "Grand Isle Fire Department, Members", href: `${GIF}/members` },
       report: { label: "Town of Grand Isle, 2025 Town Report", href: `${GIT}/wp-content/uploads/2026/02/2025-Town-Report.pdf`, note: "Fire Department letter and budget, pages 37–38. A scanned report, read with text recognition" },
     },
   },
@@ -2748,14 +2751,17 @@ export const profiles: Record<string, Profile> = {
       ["Calls", "211 in fiscal 2023, down from 259 in fiscal 2021"],
       ["Services", "Fire, first response EMS, water rescue"],
       ["Chief", "Patrick Robinson"],
+      ["Station", "131 Community Drive, shared with South Hero Rescue since 2018; (802) 378-5021"],
     ],
-    contact: { chief: "Patrick Robinson", website: SHF, source: "personnel" },
+    contact: { chief: "Patrick Robinson", phone: "(802) 378-5021", website: SHF, source: "personnel" },
     history: {
       intro:
         "South Hero's volunteers have served the town since 1953 and are part of the Grand Isle County mutual aid group " +
         "with Alburgh, Grand Isle and North Hero. Members include certified EMTs who run the town's first response service.",
       events: [
         { year: 1953, text: "The South Hero Volunteer Fire Department begins.", source: "report" },
+        { year: 2016, text: "The First Response Unit starts: EMRs and EMTs sent with South Hero Rescue, the town's advanced life support ambulance.", source: "fru" },
+        { year: 2018, text: "In June the department and South Hero Rescue move into a new emergency services station, replacing four buildings, with a shared training room, a dispatch room and bays big enough to wash trucks indoors. In December new Scott X3 Pro air packs at 4,500 psi match Grand Isle's and North Hero's.", source: "station" },
         { year: 2019, text: "A landing-craft fire boat is built, able to launch around the county and pull up to islands' shores.", source: "fleet" },
         { year: 2023, text: "The department's old fire boat, from the Coast Guard and known as \"the Titanic\", goes to Isle La Motte. A new E-One engine goes into service.", source: "fleet" },
       ],
@@ -2796,9 +2802,13 @@ export const profiles: Record<string, Profile> = {
     residents: [
       { label: "Burn permits", href: `${SHF}/burn-permits/`, text: "Through the Town Clerk, 372-5552. Campfires under 4 feet in a ring don't need one; no permits during red flag warnings or moderate fire danger." },
       { label: "Fire safety", href: `${SHF}/fire-safety-and-prevention/`, text: "Smoke and CO alarms, extinguishers, emergency access and boater safety." },
+      { label: "Loaner key boxes", href: `${SHF}/emergency-access/`, text: "Free for six months, renewable once, for people with a medical condition likely to need 911; the county sheriff keys them." },
+      { label: "Auxiliary", href: `${SHF}/auxiliary/`, text: "Helps at incidents and fire victims, and runs the rabies clinic, Trunk or Treat and Christmas in South Hero." },
     ],
     sources: {
       personnel: { label: "South Hero Volunteer Fire Department, Personnel", href: `${SHF}/personnel/` },
+      fru: { label: "South Hero Volunteer Fire Department, First Response Unit", href: `${SHF}/first-response-unit/` },
+      station: { label: "South Hero Volunteer Fire Department, \"Our new station\" (2 October 2018)", href: `${SHF}/2018/10/02/our-new-station/`, note: "Air packs from \"New SCBAs put into service\", 24 December 2018" },
       fleet: { label: "South Hero Volunteer Fire Department, Apparatus", href: `${SHF}/apparatus/` },
       cadets: { label: "South Hero Volunteer Fire Department, Become a Cadet or Junior Member", href: `${SHF}/2025/04/10/become-a-cadet-or-junior-member/` },
       report: { label: "Town of South Hero, Annual Report 2024", href: `${SHT}/wp-content/uploads/2025/12/South-HeroTown-Report-2024.pdf`, note: "Fire Department, page 55. A scanned report, read with text recognition" },
@@ -3067,6 +3077,7 @@ export const profiles: Record<string, Profile> = {
       ["Covers", "Fire for East Montpelier and Calais; ambulance also for Plainfield and Marshfield"],
       ["Members", "More than 20 active volunteers and more than a dozen EMTs"],
       ["Chief", "Troy Seckington, also the fire warden"],
+      ["Calls in 2026", "396 from January to July, most of them medical"],
     ],
     contact: { chief: "Troy Seckington", phone: "(802) 225-6245", website: EMF, source: "home" },
     history: {
@@ -3096,7 +3107,10 @@ export const profiles: Record<string, Profile> = {
       intro:
         "Volunteers fight fires, and also help with organisation, technical work and fundraising. Licensed BLS, ALS and " +
         "paramedic providers can ask about paid ambulance work.",
-      points: ["Come by the station at 54 Village Acres any Tuesday evening"],
+      points: [
+        "Come by the station at 54 Village Acres any Tuesday evening",
+        "Members meet on the first Tuesday of the month; other Tuesdays are work nights and fire or EMS training",
+      ],
       applyUrl: EMF,
       source: "home",
     },
@@ -3107,19 +3121,22 @@ export const profiles: Record<string, Profile> = {
     ],
     sources: {
       home: { label: "East Montpelier Volunteer Fire Department", href: EMF },
+      stats: { label: "East Montpelier Volunteer Fire Department, Call statistics", href: `${EMF}/call-statistics.html`, note: "1 January to 31 July 2026" },
       town: { label: "Town of East Montpelier, East Montpelier Fire Department", href: `${EMT}/east-montpelier-fire-department/` },
     },
   },
   cabot: {
     description:
-      "Cabot Volunteer Fire Department: an all-volunteer, unpaid town department at work since at least 1908, its " +
-      "monthly meeting, and burn permits.",
+      "Cabot Volunteer Fire Department: an all-volunteer town department since at least 1908, its flood-condemned " +
+      "station, the temporary one on South Walden Road, and the plan for a public safety building.",
     facts: [
       ["Staffing", "100% volunteer; members are unpaid"],
       ["On record since", "1908 or earlier"],
       ["Chief", "Dean Deasy"],
+      ["Station", "Temporary, at 137 South Walden Road, since April 2024"],
+      ["Trucks", "An engine (pumper-tanker), a tanker and a rescue"],
     ],
-    contact: { chief: "Dean Deasy", website: `${CAB}/volunteer-fire-dept/`, source: "dept" },
+    contact: { chief: "Dean Deasy", website: "https://www.cabotfirevt.us", source: "dept" },
     history: {
       intro:
         "Nobody knows exactly when Cabot's department began. Marshfield's town records show it helping fight a fire there " +
@@ -3127,6 +3144,11 @@ export const profiles: Record<string, Profile> = {
         "Cabot residents who are paid nothing.",
       events: [
         { year: 1908, text: "Marshfield's records note \"the Cabot Fire Department\" helping at a fire in that town, the earliest mention found.", source: "dept" },
+        { year: 1962, text: "The fire station is built; additions follow in 1970 and 1992.", source: "building" },
+        { year: 2018, text: "In February the town buys 2466 Main Street for $95,000 as a site for a public safety building. A working group forms in March; a first vote narrowly fails in August.", source: "building" },
+        { year: 2023, text: "After the July flood the State Geologist finds the bank behind the station unstable, and on 28 July the Department of Public Safety condemns the building. Over the winter the engine and tanker share the town garage and the rescue truck at a private home. In December the Selectboard approves a design concept for the new building.", source: "building" },
+        { year: 2024, text: "A temporary station opens at 137 South Walden Road in April, under a state waiver, since it has no sprinklers.", source: "building" },
+        { year: 2026, text: "The town has $5.1 million in USDA grants for the public safety building, to be matched by FEMA money; the Selectboard aims for no cost to taxpayers. Fitting sprinklers to the temporary station is put at over $1 million. Town Meeting holds a non-binding vote on the Main Street site.", source: "building" },
       ],
     },
     careers: {
@@ -3138,9 +3160,12 @@ export const profiles: Record<string, Profile> = {
     residents: [
       { label: "Burn permits", href: `${CAB}/volunteer-fire-dept/`, text: "Required whenever there's no snow on the ground; from Chief Deasy." },
       { label: "Key box ordinance", href: `${CAB}/volunteer-fire-dept/`, text: "The town's key box rules." },
+      { label: "911 address signs", href: "https://www.cabotfirevt.us/copy-of-apparatus", text: "$10 a sign, ordered through the department's site." },
+      { label: "Newsletter", href: "https://www.cabotfirevt.us", text: "Flashover, the department's newsletter; subscribe on its site." },
     ],
     sources: {
       dept: { label: "Town of Cabot, Volunteer Fire Department", href: `${CAB}/volunteer-fire-dept/` },
+      building: { label: "Cabot Volunteer Fire Department, Proposed Public Safety Building (8 February 2026)", href: "https://www.cabotfirevt.us/proposed-building" },
     },
   },
   roxbury: {
@@ -3323,22 +3348,37 @@ export const profiles: Record<string, Profile> = {
   },
   elmore: {
     description:
-      "Elmore Fire Department: the Lake Elmore firehouse on Beach Road, weekly Thursday meetings, and online burn permits.",
+      "Elmore Fire Department: the Lake Elmore firehouse on Beach Road, its officers and trucks, weekly Thursday meetings, " +
+      "free Knox Box installation and online burn permits.",
     facts: [
       ["Station", "343 Beach Road, Lake Elmore"],
       ["Meets", "Thursdays, 7 p.m."],
+      ["Chief", "Adam Audet"],
+      ["Members", "12: six officers and six firefighters"],
+      ["Trucks", "Engine 1, Engine 2, Rescue 1 and Rescue 2"],
     ],
-    contact: { phone: "802-888-0311", website: `${ELM}/community/elmore-fire-department/`, source: "dept" },
+    contact: { chief: "Adam Audet", phone: "802-888-0311", website: `${ELM}/community/elmore-fire-department/`, source: "dept" },
     history: {
       intro: "Elmore's department meets every Thursday evening at the firehouse on Beach Road, and new members are always welcome.",
       events: [],
     },
+    careers: {
+      intro: "New members are always welcome; come to a Thursday meeting at the firehouse.",
+      points: [
+        "Officers: Assistant Chiefs Brent Hosking and Trevor Braun, Captains Jason Cohen and Eddie Adams",
+        "The department raises money with a harvest supper and a chicken barbecue",
+      ],
+      applyUrl: "https://sites.google.com/elmorefire.org/elmorefire/about-the-department",
+      source: "about",
+    },
     residents: [
-      { label: "Burn permits", href: "https://sites.google.com/elmorefire.org/elmorefire/burn-permit", text: "Apply online for a reply within 24 hours, or call the fire warden." },
+      { label: "Burn permits", href: "https://sites.google.com/elmorefire.org/elmorefire/burn-permit", text: "Apply online for a reply within 24 hours, or call the fire warden. Check the state's daily fire danger report first." },
+      { label: "Knox Box", href: "https://sites.google.com/elmorefire.org/elmorefire/knoxbox-program", text: "Buy a Knox Box online and the department installs it free. Recommended for homes with monitored alarms." },
     ],
     sources: {
       dept: { label: "Town of Elmore, Elmore Fire Department", href: `${ELM}/community/elmore-fire-department/` },
       permit: { label: "Elmore Fire Department, Burn Permit", href: "https://sites.google.com/elmorefire.org/elmorefire/burn-permit" },
+      about: { label: "Elmore Fire Department, About the Department", href: "https://sites.google.com/elmorefire.org/elmorefire/about-the-department", note: "Fundraisers from the Harvest Supper and Chicken BBQ pages" },
     },
   },
   // St. Johnsbury's station is missing from the E911 file, so this has no page
@@ -6955,14 +6995,17 @@ export const profiles: Record<string, Profile> = {
       ["Fleet", "Six vehicles, from a 1979 tower truck to a 2011 pickup"],
       ["Meets", "Every Tuesday, 6:30 to 9:30 pm"],
       ["Phone", "802-223-5531 (business)"],
+      ["Officers", "Chief Joe Staab, Deputy Chief Matt Romei, Assistant Chief John Silk, two lieutenants"],
+      ["Services", "Fire, a Fast Squad for medical calls, rescue and hazmat; it houses state hazmat decontamination trailers"],
     ],
-    contact: { phone: "802-223-5531", website: "https://www.berlinfiredepartment.org", source: "r2021" },
+    contact: { chief: "Joe Staab", phone: "802-223-5531", website: "https://www.berlinfiredepartment.org", source: "r2021" },
     history: {
       intro:
         "Berlin's department covers the interstate, commercial buildings, the hospital, and back-country and " +
         "cold-water rescue around Irish Hill and Berlin Pond. More volunteers can respond on nights and weekends than on weekdays.",
       events: [
         { year: 2021, calls: 661, text: "Two structure fires, eight car fires, four outside fires and one extrication, plus seven fires in neighbouring towns. Battery-powered extrication tools replace an obsolete hose-powered tool. A community survey finds residents value training (29%), response times (27%) and equipment (18.9%) most, and the department plans paid weekend staffing and an overnight bunk-in program.", source: "r2021" },
+        { year: 2023, text: "In the mid-July floods members put in over 800 hours in seven days, about 12 hours a day.", source: "storm" },
       ],
     },
     calls: {
@@ -6979,12 +7022,21 @@ export const profiles: Record<string, Profile> = {
     },
     careers: {
       intro: "Berlin is looking for firefighters, EMTs and corporation support members.",
-      points: ["Weekly meetings every Tuesday, 6:30 to 9:30 pm: training, maintenance and business"],
+      points: [
+        "Weekly meetings every Tuesday, 6:30 to 9:30 pm: training, maintenance and business",
+        "A corporation board, president Ryan Barr, runs the business side alongside the responders",
+      ],
       applyUrl: "https://www.berlinfiredepartment.org",
       source: "r2021",
     },
-    residents: [],
+    residents: [
+      { label: "Burn permits", href: `https://www.berlinfiredepartment.org/burn-permits`, text: "Needed for any fire over 2.5 by 2.5 feet. Apply online at least 24 hours ahead, or leave a message at the station; none during burn bans." },
+      { label: "Fireworks", href: `https://www.berlinfiredepartment.org/firework-permits`, text: "Display permits: apply at least 15 days ahead to FireChief@BerlinVT.gov." },
+      { label: "Fans and dehumidifiers", href: `https://www.berlinfiredepartment.org/storm`, text: "Lent to Berlin residents after flooding; call 802-223-5531." },
+      { label: "Station tours", href: `https://www.berlinfiredepartment.org/station-tours`, text: "For groups or individuals, on request." },
+    ],
     sources: {
+      storm: { label: "Berlin Volunteer Fire Department, Storm", href: "https://www.berlinfiredepartment.org/storm" },
       r2021: { label: "Town of Berlin, 2021 Town Report", href: BER, note: "Berlin Volunteer Fire Department report, PDF pages 56–58" },
     },
   },
