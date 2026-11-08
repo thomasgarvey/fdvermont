@@ -94,6 +94,9 @@ const COL = "https://colchestervt.gov";
 const WIL = "https://www.willistonfire.com";
 const AV = "https://www.avfd-ems.com";
 const CFC = "https://cambridgefirecompany.org";
+const BFD1 = "https://www.brandonfiredistrict.org";
+const BFR25 = "https://brandonfiredistrict.org/wp-content/uploads/2025/12/2025-Annual-Report.pdf";
+const BFR24 = "https://brandonfiredistrict.org/wp-content/uploads/2025/01/2024-Annual-Report-of-the-Board-of-Officers.pdf";
 const SHEL = "https://www.shelburnefire.org";
 const WIN = "https://www.winooskivt.gov";
 const WILT = "https://www.town.williston.vt.us/vertical/sites/%7BF506B13C-605B-4878-8062-87E5927E49F0%7D/uploads";
@@ -3687,6 +3690,7 @@ export const profiles: Record<string, Profile> = {
       ["Calls", "More than 300 fire and EMS calls a year"],
       ["Members", "25 active firefighters, EMTs and first responders"],
       ["EMS", "The town's first response service since 2004"],
+      ["Mutual aid", "Southwestern New Hampshire District Fire Mutual Aid and the Tri-State Fire Mutual Aid System"],
     ],
     contact: { phone: "(802) 254-4413", website: GVF, source: "home" },
     history: {
@@ -3695,18 +3699,20 @@ export const profiles: Record<string, Profile> = {
         "were sometimes surprised to see a truck that seemed to be pumping oil onto a fire.",
       events: [
         { year: 1949, text: "Residents form the Broad Brook Fire Control; two weeks later it becomes the Guilford Volunteer Fire Department. The truck lives in a barn.", source: "history" },
-        { year: 1957, text: "A firehouse is finished on Guilford Center Road, begun in 1954.", source: "history" },
+        { year: 1950, text: "The truck moves from the barn across from the fairgrounds to an old garage at Route 5 and Guilford Center Road; in 1951 a temporary firehouse is built off a house basement on Guilford Center Road.", source: "history" },
+        { year: 1957, text: "A firehouse is finished on Guilford Center Road, begun in 1954. It is added onto in the 1970s.", source: "history" },
         { year: 1999, text: "The department starts helping Rescue Inc. on medical calls in town.", source: "history" },
         { year: 2004, text: "With enough members certified, it becomes the town's EMS service; Rescue Inc. still transports.", source: "history" },
-        { year: 2006, text: "A new station is finished after the old one, too small for new trucks (Tanker 1 stood three inches taller than its doors), was demolished in 2005.", source: "history" },
+        { year: 2006, text: "A new station is finished after the old one, too small for new trucks (Tanker 1 stood three inches taller than its doors), was demolished in 2005. While it was rebuilt, the trucks were scattered among garages across town.", source: "history" },
       ],
     },
     stationNotes: {
       "guilford-108-guilford-center-rd": {
         text:
           "The station finished in 2006: Engine 1, a 2008 Pierce, and Engine 2, a 2019 Pierce (both 1,500 gpm, 1,000 " +
-          "gallons); Tanker 1, a 2006 KME/International with 2,500 gallons; a utility pickup, a brush truck, an off-road " +
-          "rescue unit and a water rescue trailer.",
+          "gallons); Tanker 1, a 2006 KME/International with a 2,000 gpm pump and 2,500 gallons; Utility 1, a 2013 GMC " +
+          "pickup; Brush 1, a 2016 Ford F350 built by the department with two portable pumps and 250 gallons; an off-road " +
+          "rescue trailer carrying a Polaris ATV and a rescue sled; and a 2019 swiftwater and ice rescue trailer.",
         source: "apparatus",
       },
     },
@@ -3714,6 +3720,7 @@ export const profiles: Record<string, Profile> = {
       intro: "Firefighters and EMTs need Vermont certification and annual training hours.",
       points: [
         "Training every Tuesday evening",
+        "Juniors can take the firefighter and EMS classes at the Windham Regional Career Center in Brattleboro, and become full members at 18",
         "Juniors from 16, living in or near Guilford, with at least a learner's permit; not on interstate or mutual aid calls, or after 9:30 p.m. on school nights",
         "Call (802) 254-4413 or email guilford.fire@gmail.com",
       ],
@@ -3737,8 +3744,10 @@ export const profiles: Record<string, Profile> = {
       ["Members", "About 60 volunteers: 20 firefighters, 8 EMS responders, about 25 support staff"],
       ["Calls", "About 240 in an average year"],
       ["Run by", "The NewBrook Volunteer Fire Association, a nonprofit"],
+      ["Station", "698 Vermont Route 30; PO Box 77, Newfane VT 05345"],
+      ["Rescue squad", "All volunteer since the 1970s; Rescue, Inc. transports"],
     ],
-    contact: { website: NBF, source: "home" },
+    contact: { website: NBF, source: "contact" },
     history: {
       intro:
         "NewBrook began in 1948 with a dozen volunteers, no firehouse, no trucks and some used hose. It owns its firehouse " +
@@ -3754,16 +3763,22 @@ export const profiles: Record<string, Profile> = {
     },
     careers: {
       intro: "Every member is a volunteer, including firefighters, EMS responders and support staff; a 45-member auxiliary raises money and feeds crews at scenes.",
-      points: ["Juniors are welcome", "Get in touch through the department's website"],
+      points: [
+        "Two or three new members join each year; non-firefighters are welcome for bingo, upkeep and support",
+        "Training covers hazmat, air packs, extrication, chimney fires and arson investigation",
+        "Juniors from 10 to 13 meet every third Sunday",
+        "Get in touch through the department's website",
+      ],
       applyUrl: NBF,
       source: "home",
     },
     residents: [
-      { label: "Bingo and benefit events", href: NBF, text: "Saturday bingo, the Fourth of July open house and barbecue, the Hunters' Breakfast and more." },
+      { label: "Bingo and benefit events", href: NBF, text: "Saturday bingo, early bird at 7 pm, brings in more than a third of the department's income; volunteers are welcome, no membership needed. Also the Horse Show in Brookline in July, the Heritage Festival coin drop on Columbus Day, the Hunters' Breakfast in November and a December silent auction." },
       { label: "Emergency shelter", href: NBF, text: "The firehouse, with a generator and full kitchen, has served as a public shelter." },
     ],
     sources: {
       home: { label: "NewBrook Volunteer Fire and Rescue", href: NBF },
+      contact: { label: "NewBrook Fire and Rescue, Contact", href: `${NBF}/Contact.htm`, note: "Rescue squad from /Rescue_squad.htm; bingo from /BINGOTEXT.htm; juniors from /Juniors.htm" },
     },
   },
   westminster: {
@@ -5107,14 +5122,16 @@ export const profiles: Record<string, Profile> = {
       "woodstock-454-woodstock-rd": { text: "Station One, the emergency services building, remodelled and enlarged in 2022 and shared with the police.", source: "r2023" },
     },
     residents: [
-      { label: "Burn permits", href: "https://townofwoodstock.org/wp-content/uploads/2023/02/2023-Town-Report.pdf", text: "Needed for any outdoor fire, all year, even with snow on the ground. Get the first at the fire station; after that a phone call will do. Natural brush and wood only." },
+      { label: "Burn permits", href: "https://fire-ems.townofwoodstock.org/permits", text: "Needed for any outdoor fire, all year. Call 802-457-2337 on the morning you want to burn, for a permit good that day only. Natural, untreated wood only." },
+      { label: "Fire alarms and Knox boxes", href: "https://fire-ems.townofwoodstock.org/permits", text: "Fire alarm systems must be registered every year, and any building with one needs a Knox box." },
+      { label: "Liquor licence inspections", href: "https://fire-ems.townofwoodstock.org/permits", text: "A fire safety inspection is needed before a licence is granted or renewed, usually in January; call 802-457-7517." },
       { label: "Short-term rentals", href: "https://townofwoodstock.org/wp-content/uploads/2023/02/2023-Town-Report.pdf", text: "Every short-term rental in the town and village needs an annual fire department permit and inspection." },
       { label: "Smoke and CO alarms", href: "https://townofwoodstock.org/wp-content/uploads/2023/02/2023-Town-Report.pdf", text: "Free checks on request. CO alarms expire after 5 years, smoke alarms after 10." },
       { label: "Join", href: "https://fire-ems.townofwoodstock.org/fire-ems", text: "Always looking for residents to become firefighters or EMTs, part-time or on call. Ask at the fire station." },
     ],
     sources: {
       town: { label: "Town of Woodstock, Emergency Services", href: "https://townofwoodstock.org/departments/emergency-services/" },
-      dept: { label: "Woodstock Fire/EMS", href: "https://fire-ems.townofwoodstock.org/fire-ems" },
+      dept: { label: "Woodstock Fire/EMS", href: "https://fire-ems.townofwoodstock.org/fire-ems", note: "Website launched 5 March 2026" },
       r2023: { label: "Town of Woodstock, 2023 Town Report", href: "https://townofwoodstock.org/wp-content/uploads/2023/02/2023-Town-Report.pdf", note: "Fire/EMS report and calls, PDF pages 46–47" },
       r2024: { label: "Town of Woodstock, 2024 Town Report", href: "https://www.townofwoodstock.org/fileadmin/files/Fire-EMS/TownReport2024.pdf", note: "Fire/EMS, PDF page 26; budget summary, PDF page 14; fire budget, PDF page 43" },
     },
@@ -8557,9 +8574,10 @@ export const profiles: Record<string, Profile> = {
       ["Calls", "102 in fiscal 2025 (July 2024 to June 2025)"],
       ["Members", "21 active"],
       ["Meets", "Last Tuesday of the month, 7 pm"],
-      ["Station phone", "802-763-7331"],
+      ["Station", "5808 Route 14; PO Box 74, Sharon VT 05065; 802-763-7331"],
+      ["Trucks", "Car 1, Engine 1, Engine 2 and Tanker 1, plus a 1925 Model T for parades"],
     ],
-    contact: { chief: "Nathan Potter", phone: "802-763-7331", source: "r2025" },
+    contact: { chief: "Nathan Potter", phone: "802-763-7331", website: "https://sites.google.com/site/sharonvtfire", source: "r2025" },
     history: {
       intro:
         "The Sharon Firemen's Association runs the town's volunteer fire department from the station on Route 14. Hartford dispatches its calls, " +
@@ -8577,9 +8595,12 @@ export const profiles: Record<string, Profile> = {
       source: "r2025",
     },
     residents: [
+      { label: "Emergency shelter", href: "https://sites.google.com/site/sharonvtfire", text: "The firehouse, with a kitchen and meeting room, is the town's emergency shelter, and town committees can meet there." },
+      { label: "Old Home Day", href: "https://sites.google.com/site/sharonvtfire", text: "The department hosts a chicken barbecue each year." },
       { label: "Burn permits", href: SHRN, text: "Required for any planned burning. Contact the town fire wardens; the number is on the Fire Safety sign at the firehouse." },
     ],
     sources: {
+      site: { label: "Sharon Firemen's Association", href: "https://sites.google.com/site/sharonvtfire" },
       r2025: { label: "Town of Sharon, 2025 Town Report", href: SHRN, note: "Fire department report, PDF page 86; budget and reserves, pages 29–30 and 35" },
     },
   },
@@ -9593,6 +9614,82 @@ export const profiles: Record<string, Profile> = {
       home: { label: "Cambridge Fire Department", href: CFC },
       roster: { label: "Cambridge Fire Department, Department roster", href: `${CFC}/department-roster` },
       apparatus: { label: "Cambridge Fire Department, Apparatus", href: `${CFC}/apparatus`, note: "Restoration from the Retired apparatus page" },
+    },
+  },
+  brandon: {
+    description:
+      "Brandon Fire Department: run by Brandon Fire District No. 1, established in 1856, with a record 189 calls in " +
+      "fiscal 2025 across Brandon, Goshen and Leicester, a new rescue pumper, and how to join.",
+    subtitle: "Brandon Fire District No. 1 and the Dunmore Hose Company",
+    facts: [
+      ["Fire district established", "29 February 1856"],
+      ["Covers", "Brandon, Goshen and Leicester"],
+      ["Calls", "189 in fiscal 2025, a record"],
+      ["Members", "29 (2025)"],
+      ["Chief", "Thomas Kilpeck, 30 years with the department"],
+      ["Station", "61 Franklin Street; non-emergency 802-247-3400"],
+    ],
+    contact: { chief: "Thomas Kilpeck", phone: "802-247-3400", website: `${BFD1}/fire`, source: "fire" },
+    history: {
+      intro:
+        "Brandon's fire department belongs to Brandon Fire District No. 1, which is separate from the town and also runs " +
+        "the village water system, under an elected Prudential Committee. The firefighters' own company is the Dunmore Hose Company.",
+      events: [
+        { year: 1856, text: "Brandon Fire District No. 1 is established on 29 February.", source: "about" },
+        { year: 1878, text: "The district builds its water system from Fern Lake. An R.D. Wood hydrant from it still stands on Park Street.", source: "historypage" },
+        { year: 2011, text: "Wooden water pipes, \"pump logs\" over 150 years old, are dug up near 256 Grove Street; preserved by the Lake Champlain Maritime Museum, they hang in the fire station's conference room.", source: "historypage" },
+        { year: 2024, calls: 151, text: "151 calls in fiscal 2024; 26 members log 1,371 hours of training. Work on a custom rescue pumper begins at the end of October.", source: "r2024" },
+        { year: 2025, calls: 189, text: "A record 189 calls in fiscal 2025, and 1,244 hours of training. The new truck arrives in May, under budget. The district wins a $463,748 Municipal Energy Resilience Program grant for energy work on the district office and fire station.", source: "r2025" },
+      ],
+    },
+    calls: {
+      intro:
+        "Most calls are in Brandon: in fiscal 2025, 139 there, 35 in Leicester, 3 in Goshen and 12 on mutual aid. The " +
+        "department works with the Brandon Area Rescue Squad and Brandon Police, and its mutual aid partners are Pittsford, " +
+        "Salisbury and Whiting.",
+      byYear: {
+        title: "Calls by fiscal year",
+        bars: [
+          { label: "FY2024", value: 151 },
+          { label: "FY2025", value: 189 },
+        ],
+        note: "Fiscal years run July to June.",
+        source: "r2025",
+      },
+      byType: {
+        title: "Calls by type, fiscal 2025",
+        bars: [
+          { label: "Motor vehicle crashes", value: 38 },
+          { label: "Alarm activations", value: 38 },
+          { label: "Assistance to EMS and police", value: 35 },
+          { label: "Outdoor fires and other", value: 33 },
+          { label: "Good intent and cancelled", value: 16 },
+          { label: "Other building emergencies", value: 15 },
+          { label: "Structure fires", value: 9 },
+          { label: "Rescues of people or animals", value: 5 },
+        ],
+        note: "189 calls in all, July 2024 to June 2025.",
+        source: "r2025",
+      },
+    },
+    careers: {
+      intro: "The department is looking for new members, from firefighters to pump operators and support staff.",
+      points: [
+        "Open to residents of Brandon, Goshen and Leicester",
+        "Stop by the station on the second or third Wednesday of the month, 7 to 9 p.m.",
+        "Or email chief@dunmorehose.org, or leave a message on 802-247-3400",
+        "Officers: Assistant Chief Roland Euber, Captains Jordan Martin and Jesse Bilodeau, Lieutenants Brian Kilpeck and Bradley Danforth",
+      ],
+      applyUrl: `${BFD1}/fire`,
+      source: "r2025",
+    },
+    residents: [],
+    sources: {
+      fire: { label: "Brandon Fire District, Fire Department", href: `${BFD1}/fire` },
+      about: { label: "Brandon Fire District, About us", href: `${BFD1}/about-us` },
+      historypage: { label: "Brandon Fire District, History", href: "https://brandonfiredistrict.org/about-us/history/" },
+      r2024: { label: "Brandon Fire District No. 1, 2024 Annual Report", href: BFR24, note: "Report of the Fire Chief, page 9. A scanned report, read with text recognition" },
+      r2025: { label: "Brandon Fire District No. 1, 2025 Annual Report", href: BFR25, note: "Report of the Fire Chief, page 9; MERP grant, page 4. A scanned report, read with text recognition" },
     },
   },
   jericho: UJFD,
