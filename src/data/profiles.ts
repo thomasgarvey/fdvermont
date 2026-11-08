@@ -1346,9 +1346,12 @@ export const profiles: Record<string, Profile> = {
       ["Run by", "Charlotte Volunteer Fire & Rescue Services, Inc., a nonprofit"],
       ["Ambulance", "Two-person paid crew around the clock; paramedic level since 2011"],
       ["Rescue calls", "Over 500 a year"],
-      ["Chief", "Jamie Valyou, Director of Emergency Services"],
+      ["Chief", "Jamie Valyou, Director of Emergency Services, since November 2024"],
+      ["Fire members", "11 life members, 7 volunteers and 4 juniors on the roster"],
+      ["Budget", "$1,266,196 for fiscal 2026, $1,020,246 of it from the town"],
+      ["Station", "170 Ferry Road; 802-425-3111"],
     ],
-    contact: { chief: "Jamie Valyou", website: CVF, source: "members" },
+    contact: { chief: "Jamie Valyou", phone: "802-425-3111", website: CVF, source: "contactus" },
     history: {
       intro:
         "Charlotte's fire and rescue services are run by a private, not-for-profit corporation with two " +
@@ -1357,6 +1360,7 @@ export const profiles: Record<string, Profile> = {
       events: [
         { year: 1950, text: "Charlotte Volunteer Fire & Rescue Services is founded.", source: "about" },
         { year: 2011, text: "In March, Charlotte Rescue begins paramedic coverage.", source: "ems" },
+        { year: 2024, text: "Voters back the budget and the financing for a replacement ambulance. On 4 November Jamie Valyou, after more than 25 years at the Burlington Fire Department, latterly as a battalion chief, becomes Director of Emergency Services after a year-long search.", source: "valyou" },
       ],
     },
     stationNotes: {
@@ -1364,9 +1368,34 @@ export const profiles: Record<string, Profile> = {
         text:
           "Engine 1, a 2004 Seagrave, and Engine 2, a 2019 KME, both 2,000 gpm with compressed-air foam; " +
           "Engine 4, a 2008 GMC; a 1993 International tanker (1,500 gallons); Rescue 3, a 2012 Spartan heavy " +
-          "rescue; ambulances A-1 (2014 Ford F450) and A-2 (2020 Ford F-550); two boats and a Kawasaki Mule.",
+          "rescue; ambulances A-1 (2014 Ford F450) and A-2 (2020 Ford F-550); two boats and a Kawasaki Mule. " +
+          "Marine 2, an 18-foot Zodiac, goes to any water; Marine 3, a 25-foot SAFE Boat, is moored at Point Bay " +
+          "Marina in summer for Lake Champlain. A structure fire gets Engine 2, Engine 1, the tanker and Rescue 3, " +
+          "and an ambulance goes to every fire call.",
         source: "fleet",
       },
+    },
+    money: {
+      intro:
+        "The town pays most of the corporation's costs through a yearly appropriation; ambulance billing covers " +
+        "about a fifth. The fiscal 2026 request was 3.15% more than fiscal 2025's $989,087.",
+      year: "fiscal 2026, July 2025 to June 2026 (proposed 28 January 2025)",
+      lines: [
+        { label: "Wages and payroll taxes", amount: 817998 },
+        { label: "Fire division operating", amount: 35100 },
+        { label: "Member incentives", amount: 35000 },
+        { label: "Rescue division operating", amount: 28000 },
+      ],
+      linesNote: "Some of the lines of $1,266,196 in expenses.",
+      capital: {
+        title: "Where the money comes from",
+        lines: [
+          { label: "Town appropriation", amount: 1020246 },
+          { label: "Patient billing", amount: 245950 },
+        ],
+        note: "Fiscal 2026 budget.",
+      },
+      source: "budget26",
     },
     careers: {
       intro:
@@ -1377,6 +1406,9 @@ export const profiles: Record<string, Profile> = {
         "Openings: full-time and part-time AEMT or paramedic crew chief, part-time firefighter, per-diem crew chief",
         "Volunteer EMS providers and volunteer firefighters are welcome",
         "Send a cover letter and application to admin@cvfrs.org",
+        "No experience needed; gear, uniforms and training are provided, with a modest yearly incentive for volunteers",
+        "Fire cadets from 14, full members from 18, drivers from 21 with a clean record; six months' probation",
+        "Rescue volunteers train on the first Thursday of the month and cover about two 12-hour shifts a month",
       ],
       applyUrl: `${CVF}/join-us`,
       source: "join",
@@ -1385,13 +1417,20 @@ export const profiles: Record<string, Profile> = {
       { label: "Station tours", href: `${CVF}/the-membership-1`, text: "Stop by to see the station and meet the members." },
       { label: "Ambulance billing", href: `${CVF}/rescue-1`, text: "Handled by ECP Services, the squad's billing partner." },
       { label: "Form 990", href: `${CVF}/about-cvfrs`, text: "The corporation's public inspection copy of its tax return." },
+      { label: "911 address signs", href: `${CVF}/e911-sign-posts`, text: "Reflective numbers at least 4 inches tall, readable from both directions; the department will help place your sign." },
+      { label: "Smoke and CO alarms", href: `${CVF}/fire`, text: "Required in every home. Change the batteries yearly and replace alarms over 7 years old." },
+      { label: "Burn permits", href: `${CVF}/contact-us`, text: "Call 802-985-8051 before you burn." },
+      { label: "Donations", href: `${CVF}/donate`, text: "By mail to PO Box 85, Charlotte VT 05445; gifts can be earmarked." },
     ],
     sources: {
       about: { label: "CVFRS, About", href: `${CVF}/about-cvfrs` },
       ems: { label: "CVFRS, EMS", href: `${CVF}/rescue-1` },
+      contactus: { label: "CVFRS, Contact us", href: `${CVF}/contact-us` },
+      valyou: { label: "CVFRS, \"CVFRS welcomes Director of Emergency Services\" (22 October 2024)", href: `${CVF}/post/cvfrs-welcomes-director-of-emergency-services`, note: "Ambulance financing from \"A Note of Appreciation\", 6 March 2024" },
+      budget26: { label: "CVFRS, FY26 budget (28 January 2025)", href: `${CVF}/_files/ugd/cbe466_f5231532e7da48a6942df0d954aa6d8b.pdf`, note: "Wages from the budget trends sheet, cbe466_dcbae40a7a8a4cb7952adb6ebd9e20a3.pdf" },
       members: { label: "CVFRS, Fire members", href: `${CVF}/the-membership-1` },
-      fleet: { label: "CVFRS, Apparatus", href: `${CVF}/apparatus-1`, note: "Ambulances from the rescue fleet page, /apparatus" },
-      join: { label: "CVFRS, Join our team", href: `${CVF}/join-us`, note: "Staffing from the EMS members page, /the-membership" },
+      fleet: { label: "CVFRS, Apparatus", href: `${CVF}/apparatus-1`, note: "Ambulances from the rescue fleet page, /apparatus; boats and fire response from /fire" },
+      join: { label: "CVFRS, Join our team", href: `${CVF}/join-us`, note: "Staffing from the EMS members page, /the-membership; requirements from /faq" },
     },
   },
   hinesburg: {
@@ -1476,6 +1515,7 @@ export const profiles: Record<string, Profile> = {
       ["Calls", "666 in 2025"],
       ["Area protected", "4.6 square miles"],
       ["Station address used by the department", "2 Lincoln Street"],
+      ["Calls in 2026", "474 by 7 November: 329 fire, 145 first response"],
     ],
     contact: { phone: "802-878-6958", website: EJ, source: "contact" },
     history: {
@@ -1493,8 +1533,9 @@ export const profiles: Record<string, Profile> = {
         { year: 1962, text: "On 30 November a tank truck carrying 3,000 gallons of vinyl acetate overturns and burns near the Green Mountain Power station on Park Street. The NFPA calls it the first fire of its kind in the country.", source: "about" },
         { year: 1984, text: "On 7 July the department answers the Amtrak derailment in Williston: 35 members, 559 hours of rescue work, and national praise.", source: "about" },
         { year: 2006, text: "In June the station is dedicated to former Assistant Chief Ernie Martin, after his 65 years of service.", source: "about" },
-        { year: 2024, text: "The roster stands at 39, six of them new that year. The city starts paying members for training.", calls: 584, source: "review24" },
+        { year: 2024, text: "The roster stands at 39, six of them new that year. The city starts paying members for training. Members put in about 2,100 hours of training and 1,660 at community events.", calls: 584, source: "review24" },
         { year: 2025, text: "Calls rise 14% in a year.", calls: 666, source: "review25" },
+        { year: 2026, text: "A four-alarm fire at 197 Pearl Street on 12 August, a second alarm at 48 Park Street on 22 August, and a fire in the Champlain Valley Fairgrounds grandstand on 7 October, each with automatic mutual aid from Essex Fire and Essex Rescue.", source: "recent" },
       ],
     },
     calls: {
@@ -1554,13 +1595,16 @@ export const profiles: Record<string, Profile> = {
       { label: "Knox Box programme", href: `${EJ}/key-access-box`, text: "Required for new and changing commercial and apartment buildings; available for homes too." },
       { label: "Fire prevention visits", href: `${EJ}/fire-prevention`, text: "Presentations, extinguisher training and station tours on request." },
       { label: "Recent calls", href: `${EJ}/recent-calls`, text: "The department writes up its working fires." },
+      { label: "Firefighters Association", href: `${EJ}/ej-firefighters-association`, text: "A separate nonprofit that buys gas meters, thermal cameras, fans and nozzles; its raffle, Memorial Day barbecue and boot drops pay for them." },
+      { label: "$1,000 scholarship", href: `${EJ}/ejfa-scholarship`, text: "One a year from the Association, for an Essex High School senior or Essex Junction resident going on to further study." },
     ],
     sources: {
-      home: { label: "Essex Junction Fire Department", href: EJ },
+      home: { label: "Essex Junction Fire Department", href: EJ, note: "2026 call count from the home page, read 7 November 2026" },
       about: { label: "Essex Junction Fire Department, About", href: `${EJ}/about` },
       fleet: { label: "Essex Junction Fire Department, Apparatus", href: `${EJ}/apparatus` },
       join: { label: "Essex Junction Fire Department, Become a member", href: `${EJ}/become-a-member` },
       contact: { label: "Essex Junction Fire Department, Contact", href: `${EJ}/contact` },
+      recent: { label: "Essex Junction Fire Department, Recent Calls", href: `${EJ}/recent-calls` },
       review24: { label: "Essex Junction Fire Department, 2024 Year in Review", href: `${EJ}/single-post/2024-year-in-review` },
       review25: { label: "Essex Junction Fire Department, 2025 Year in Review", href: `${EJ}/single-post/2025-year-in-review-a-closer-look-at-call-volume` },
     },
@@ -1774,6 +1818,8 @@ export const profiles: Record<string, Profile> = {
       ["Staffing", "Paid on call; residents and selected Middlebury College students"],
       ["Technical rescue", "Swift water, rope, ice and land search"],
       ["Chief", "David Shaw, a member since 1980"],
+      ["Officers", "Assistant Chiefs Myron Selleck and Patrick Shaw, four captains and two lieutenants"],
+      ["Station", "5 Seymour Street"],
     ],
     contact: { chief: "David Shaw", phone: "802-388-4462", website: MFD, source: "contact" },
     history: {
@@ -1783,6 +1829,8 @@ export const profiles: Record<string, Profile> = {
         "ice rescue.",
       events: [
         { year: 1920, text: "The Middlebury Fire Department is established under its current name on 7 May.", source: "history" },
+        { year: 2018, text: "Captain Paul Garrow and Assistant Chief Patrick Shaw receive the department's valor award.", source: "members" },
+        { year: 2024, text: "Six new firefighters join, and Andrew L'Roe is named the Vermont State Firefighters' Association Firefighter of the Year.", source: "members" },
         {
           year: 2025,
           text:
@@ -1811,21 +1859,22 @@ export const profiles: Record<string, Profile> = {
         "No fire or EMT experience is needed.",
       points: [
         "Live in Middlebury and be 18 or over; cadets from 16",
-        "Contact the membership coordinator at mfdvtmembership@gmail.com",
+        "Contact the membership coordinator, Firefighter Andrew L'Roe, at mfdvtmembership@gmail.com",
         "Middlebury College students apply through the department's student, faculty and staff liaisons",
-        "Any member can train with and join the technical rescue team",
+        "Any member can train with and join the technical rescue team, which trains monthly",
       ],
       applyUrl: `${MFD}/apply-now`,
       source: "apply",
     },
     residents: [
-      { label: "Burn permits", href: `${MFD}/your-safety`, text: "Always required. Burning only from 1 November to the third Sunday of April, 8 a.m. to 4 p.m.; permits issued on the day, at the police station or from Chief Shaw." },
+      { label: "Burn permits", href: `${MFD}/your-safety`, text: "Always required. Burning only from 1 November to the third Sunday of April, 8 a.m. to 4 p.m.; permits issued on the day, at the police station or from Chief Shaw. Only brush, garden waste and untreated wood; burning without a permit can cost $1,000 plus the cost of putting it out. The Addison County transfer station on Route 7 South takes brush and yard waste." },
       { label: "Technical rescue", href: `${MFD}/technical-rescue`, text: "For water, ice or rope emergencies call 911, or the department's dispatch on 802-388-2217." },
       { label: "Fire safety for kids", href: `${MFD}/your-safety`, text: "Links to Sparky and the U.S. Fire Administration." },
     ],
     sources: {
       history: { label: "Middlebury Fire Department, Our History", href: `${MFD}/our-history` },
       contact: { label: "Middlebury Fire Department, Contact", href: `${MFD}/contact-us` },
+      members: { label: "Middlebury Fire Department, Our Members", href: `${MFD}/our-members` },
       rescue: { label: "Middlebury Fire Department, Technical Rescue Team", href: `${MFD}/technical-rescue` },
       apply: { label: "Middlebury Fire Department, Become a Firefighter", href: `${MFD}/apply-now` },
       report: { label: "Town of Middlebury, 2025 Town Report", href: `${MIDT}/Document/Government/Selectboard/Town%20Meeting/2026/2025%20Town%20Report.pdf`, note: "Middlebury Fire Department, pages 14–15. A scanned report, read with text recognition" },
@@ -2217,19 +2266,30 @@ export const profiles: Record<string, Profile> = {
   },
   orwell: {
     description:
-      "Orwell Volunteer Fire Department: 55 calls in 2025, mostly crashes and brush fires, new battery-powered " +
-      "rescue tools and thermal cameras, and a welcome for new volunteers.",
+      "Orwell Volunteer Fire Department: founded in 1947, 55 calls in 2025, six trucks at 604 Main Street, " +
+      "its history, officers and how to join.",
     facts: [
       ["Calls", "55 in 2025"],
       ["Largest share", "Motor vehicle crashes, 20"],
       ["Chief", "Alex Kansky"],
+      ["Founded", "January 1947"],
+      ["Officers", "Assistant Chiefs Paul Metcalf and Seth Gero, Captain Ben Alger; 16 firefighters"],
+      ["Station", "604 Main Street; 802-382-0963"],
     ],
-    contact: { chief: "Alex Kansky", website: ORW, source: "report" },
+    contact: { chief: "Alex Kansky", phone: "802-382-0963", website: "https://www.orwellvtfire.gov", source: "team" },
     history: {
       intro:
         "Orwell's volunteers answer fires, crashes, rescues and mutual aid calls, often in bad weather and remote " +
         "parts of town. The department also holds the fund for the Champlain Large Animal Technical Rescue team.",
       events: [
+        { year: 1946, text: "The town buys its first fire truck from the Bennington Fire Department, with a hook and ladder and 1,500 feet of three-inch hose. It arrives in November.", source: "history" },
+        { year: 1947, text: "The department is formally established in January, with John Beeman as chief. Its first call, on 15 April, is a fire at Orwell Depot, the old Whiting Milk Company building; with Shoreham's help it saves a building next door.", source: "history" },
+        { year: 1950, text: "The Phelps farm burns to the ground for lack of water.", source: "history" },
+        { year: 1951, text: "The truck moves from John Beeman's garage to a firehouse bought from C.A. Belanger.", source: "history" },
+        { year: 1962, text: "The first truck retires after 16 years, replaced by a 500-gallon pumper and an 810-gallon tank truck.", source: "history" },
+        { year: 1967, text: "In January the department moves into a new station on Route 73 East. The Orwell Rescue Squad adds two bays in 1976.", source: "history" },
+        { year: 1978, text: "Elizabeth Trott becomes the first woman to join.", source: "history" },
+        { year: 1979, text: "Pagers for every firefighter and a ten-phone alerting system replace the old red phones; the town's insurance rating improves, and again in 1984.", source: "history" },
         { year: 2025, text: "55 calls. The department buys battery-powered extrication tools and two thermal imaging cameras, and puts up new signs at the firehouse and the roadside.", calls: 55, source: "report" },
       ],
     },
@@ -2255,14 +2315,33 @@ export const profiles: Record<string, Profile> = {
         source: "report",
       },
     },
+    stationNotes: {
+      "orwell-604-main-st": {
+        text:
+          "Engine 1, a 2020 Kenworth T370 with an HME Ahrens-Fox body, 1,500 gpm and 1,200 gallons, the first-out " +
+          "engine for structure fires and mutual aid; a 1994 International pumper-tanker built by the department, " +
+          "2,200 gallons; Tanker 1, a 1993 International, 3,500 gallons; Tanker 2, a 1987 Mack, 1,500 gpm and " +
+          "2,000 gallons; a GMC Sierra 3500 brush truck; and Utility 1, a 1996 Freightliner walk-in.",
+        source: "apparatus",
+      },
+    },
     careers: {
       intro: "New volunteers are welcome: no experience is needed, and training is provided.",
-      points: ["Get in touch with any member, or through the town office"],
-      applyUrl: ORW,
-      source: "report",
+      points: [
+        "Live or work in Orwell; 18 or over, or 16 as a cadet",
+        "Three months' probation, with monthly training and meetings",
+        "Apply on paper to PO Box 124, Orwell VT 05760, or by email",
+        "The department works with the Orwell First Response Squad on medical calls",
+      ],
+      applyUrl: "https://www.orwellvtfire.gov/join/",
+      source: "join",
     },
     residents: [],
     sources: {
+      history: { label: "Orwell Fire Department, Our History", href: "https://www.orwellvtfire.gov/our-history/" },
+      team: { label: "Orwell Fire Department, Our Team", href: "https://www.orwellvtfire.gov/team/" },
+      apparatus: { label: "Orwell Fire Department, Our Apparatus", href: "https://www.orwellvtfire.gov/our-apparatus/" },
+      join: { label: "Orwell Fire Department, Join", href: "https://www.orwellvtfire.gov/join/", note: "First Response Squad from the home page" },
       report: { label: "Town of Orwell, 2025 Town Report", href: `${ORW}/wp-content/uploads/2015/09/orwell-town-report-2025.pdf`, note: "Orwell Volunteer Fire Department annual and financial reports, pages 42–45. A scanned report, read with text recognition" },
     },
   },
@@ -8817,7 +8896,7 @@ export const profiles: Record<string, Profile> = {
       source: "site",
     },
     residents: [
-      { label: "Burn permits", href: FRB25, text: "Call Shelburne Dispatch at 802-985-8051. The fire warden issued 212 permits in 2025." },
+      { label: "Burn permits", href: FRB25, text: "Call Shelburne Dispatch at 802-985-8051; the town fire warden decides. Only natural vegetation and untreated wood; household trash is banned. The warden issued 212 permits in 2025." },
     ],
     sources: {
       r2025: { label: "Town of Ferrisburgh, 2025 Town Report", href: FRB25, note: "Fire department report and budget, PDF page 52; fire warden, page 53; town budget, page 54" },
@@ -8960,6 +9039,7 @@ export const profiles: Record<string, Profile> = {
       ["Members", "18 unpaid volunteers on 24-hour call"],
       ["Covers", "About 1,200 people over 30 square miles, with mutual aid to 18 other departments"],
       ["Calls", "68 in 2023"],
+      ["Answers", "Fires, crashes, search and rescue, ice rescue, hazardous materials, downed lines and medical first response"],
     ],
     contact: { chief: "Ryan M. Emilio", website: SLB, source: "r2023" },
     history: {
@@ -8968,6 +9048,7 @@ export const profiles: Record<string, Profile> = {
         "The firehouse stands on land donated by founding member Lionel Cloutier.",
       events: [
         { year: 1972, text: "The department is founded and the firehouse built.", source: "site" },
+        { year: 2018, text: "With help from the Selectboard and the Vergennes Fire Department, the department buys a used engine from the City of Vergennes to replace its aging one.", source: "home" },
         { year: 2023, calls: 68, text: "A new tanker arrives, bought with federal recovery funds. Fundraising pays for LED lights and a new furnace at the station. Two former cadets begin Firefighter I and two more become firefighters at 18.", source: "r2023" },
       ],
     },
@@ -8994,6 +9075,7 @@ export const profiles: Record<string, Profile> = {
     residents: [],
     sources: {
       site: { label: "Salisbury Volunteer Fire Department", href: `${SLB}/about-us` },
+      home: { label: "Salisbury Volunteer Fire Department, Home", href: `${SLB}/home` },
       r2023: { label: "Town of Salisbury, Annual Report for the year ending 30 June 2023", href: SLB23, note: "Fire department report and budget request, PDF page 17; tanker, page 23" },
     },
   },
