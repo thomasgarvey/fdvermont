@@ -276,9 +276,18 @@ const MARK_NEEDS = "#5C6469";
             <span class="key"><i style={`background:${MARK_PHOTO}`}></i>Photographed</span>
             <span class="key"><i style={`background:${MARK_NEEDS}`}></i>Awaiting a photograph</span>
             <span class="key-note">
-              {photosData.length} photographs in the archive · <a href="/map">Full-screen map</a> · <a href="/coverage">Distance to the nearest station</a>
+              {photosData.length} photographs in the archive · <a href="/map">Full-screen map</a>
             </span>
           </div>
+
+          <a class="covcall" href="/coverage">
+            <span class="covcall-text">
+              <span class="stamp">New · Coverage</span>
+              <strong>How far is the nearest fire station?</strong>
+              <span>A map of every part of Vermont by its distance to the closest station, and the places furthest from one.</span>
+            </span>
+            <span class="covcall-go">See the map →</span>
+          </a>
         </div>
       </section>
 
@@ -1082,6 +1091,34 @@ const MARK_NEEDS = "#5C6469";
     background: var(--surface);
     box-shadow: var(--shadow);
   }
+  .covcall {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.8rem 1.5rem;
+    margin-top: 1.4rem;
+    padding: 1rem 1.2rem;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--red);
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .covcall-text { display: flex; flex-direction: column; gap: 0.2rem; flex: 1 1 22rem; }
+  .covcall-text .stamp { margin: 0; }
+  .covcall-text strong { font-size: 1.1rem; }
+  .covcall-text span:last-child { color: var(--ink-3); font-size: 0.92rem; }
+  .covcall-go {
+    padding-bottom: 3px;
+    border-bottom: 2px solid var(--brass);
+    font-size: 0.76rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .covcall:hover .covcall-go, .covcall:hover strong { color: var(--red); }
   .mapfoot {
     display: flex;
     flex-wrap: wrap;
