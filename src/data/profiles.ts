@@ -2858,20 +2858,53 @@ export const profiles: Record<string, Profile> = {
   },
   montpelier: {
     description:
-      "Montpelier Fire & Ambulance: the capital's career fire and ambulance department, firefighter-EMTs on Main " +
-      "Street, ambulance service for three neighbouring towns, and its fleet.",
+      "Montpelier Fire & Ambulance: the capital's career fire and paramedic ambulance department, 2,261 calls in 2025, " +
+      "16 years of call figures, its budget, and a new ladder truck on order.",
     facts: [
       ["Services", "Fire and ambulance, from one station"],
       ["Staff", "Career firefighters, all dual-trained as EMTs"],
       ["Ambulance", "Also serves three surrounding towns under contract"],
       ["Chief", "Derek Libby"],
+      ["Calls", "2,261 in 2025, 1,488 of them EMS"],
+      ["Staff", "17 full-time; at least three on duty"],
     ],
     contact: { chief: "Derek Libby", phone: "802-229-4913", website: `${MPL}/200/Fire-Ambulance`, source: "dept" },
     history: {
       intro:
         "Montpelier's department runs both the fire service and the ambulance for Vermont's capital. Its staff are " +
-        "trained as both firefighters and EMTs, and ambulance fees and contracts cover more than 20% of the budget.",
-      events: [],
+        "trained as both firefighters and EMTs, and ambulance fees and contracts cover more than 20% of the budget. " +
+        "In 2025, 286 calls (13.71%) came in while crews were already busy, and mutual aid came in 67 times, nearly " +
+        "two-thirds of them for the ambulance.",
+      events: [
+        { year: 2023, text: "The July floods damage the fire station; the basement space is lost.", source: "r2026" },
+        { year: 2025, calls: 2261, text: "2,261 calls, 1,488 of them EMS, and over 1,600 hours of training. Sheetrock goes back on the station's first-floor walls. Voters have approved replacing the nearly 30-year-old ladder truck; the new one is on order, with delivery years away. The city commissions a staffing assessment.", source: "r2026" },
+      ],
+    },
+    calls: {
+      intro: "Medical calls have grown from half the total in 2010 to almost two-thirds in 2025.",
+      byYear: {
+        title: "Calls by year (EMS calls in brackets)",
+        bars: [
+          { label: "2010", value: 2095, sub: "1,044 EMS" },
+          { label: "2011", value: 2181, sub: "950 EMS" },
+          { label: "2012", value: 2073, sub: "959 EMS" },
+          { label: "2013", value: 2102, sub: "1,041 EMS" },
+          { label: "2014", value: 1878, sub: "1,071 EMS" },
+          { label: "2015", value: 1949, sub: "1,079 EMS" },
+          { label: "2016", value: 1787, sub: "949 EMS" },
+          { label: "2017", value: 1938, sub: "1,062 EMS" },
+          { label: "2018", value: 1900, sub: "1,088 EMS" },
+          { label: "2019", value: 2058, sub: "1,117 EMS" },
+          { label: "2020", value: 1967, sub: "1,158 EMS" },
+          { label: "2021", value: 1964, sub: "1,226 EMS" },
+          { label: "2022", value: 1952, sub: "1,240 EMS" },
+          { label: "2023", value: 2133, sub: "1,343 EMS" },
+          { label: "2024", value: 2216, sub: "1,418 EMS" },
+          { label: "2025", value: 2261, sub: "1,488 EMS" },
+        ],
+        note: "Calendar years, as printed in the city's 2026 annual report.",
+        source: "r2026",
+      },
     },
     stationNotes: {
       "montpelier-61-main-st": {
@@ -2879,11 +2912,32 @@ export const profiles: Record<string, Profile> = {
         source: "dept",
       },
     },
+    money: {
+      intro: "Fire and EMS is a General Fund line; the proposed fiscal 2027 budget adds one firefighter.",
+      year: "fiscal year 2027 (proposed)",
+      lines: [{ label: "Fire/EMS, General Fund", amount: 3103780 }],
+      linesNote: "Up $142,533 (4.8%) from fiscal 2026.",
+      capital: {
+        title: "Fire/EMS spending by year",
+        lines: [
+          { label: "FY2027 (proposed)", amount: 3103780 },
+          { label: "FY2026", amount: 2961247 },
+          { label: "FY2025", amount: 2753295 },
+          { label: "FY2024", amount: 2623533 },
+          { label: "FY2023", amount: 2528794 },
+          { label: "FY2022", amount: 2362215 },
+          { label: "FY2021", amount: 2242047 },
+        ],
+        note: "From the budget summary in the 2026 annual report.",
+      },
+      source: "r2026",
+    },
     residents: [
       { label: "Ambulance billing", href: `${MPL}/200/Fire-Ambulance`, text: "The department's ambulance billing specialist, 802-262-6010." },
     ],
     sources: {
       dept: { label: "City of Montpelier, Fire & Ambulance", href: `${MPL}/200/Fire-Ambulance` },
+      r2026: { label: "City of Montpelier, 2026 Annual Report", href: "https://www.montpelier-vt.org/Archive.aspx?ADID=6798", note: "Fire and Emergency Services, PDF pages 32–34; budget, pages 8 and 11" },
     },
   },
   // Barre City's station is missing from the E911 file, so this has no page until
@@ -2897,6 +2951,8 @@ export const profiles: Record<string, Profile> = {
       ["Services", "Fire, ambulance and code enforcement"],
       ["Station", "15 Fourth Street"],
       ["Chief", "Keith Cushman, since 2023"],
+      ["Officers", "Captains Matthew Cetin, Zack Tillinghast, Mike Charbonneau and Brian Farnham; Fire Marshal Nicholas Copping"],
+      ["Shifts", "24 hours"],
     ],
     contact: { chief: "Keith Cushman", phone: "802-476-0254", website: `${BAC}/fire/`, source: "dept" },
     history: {
@@ -2905,7 +2961,7 @@ export const profiles: Record<string, Profile> = {
         "square miles. About a fifth of its calls overlap with another, which means calling in off-duty staff.",
       events: [
         { year: 2023, text: "Keith Cushman becomes chief. In April a fire destroys a downtown building; mutual aid keeps it from spreading to neighbours as close as two feet away. In July the city floods, and crews answer more than 50 calls in 12 hours.", source: "r2023" },
-        { year: 2024, text: "The department reaches full staffing for the first time in over a year, buys new rescue tools to replace a 20-year-old set, and orders a new ambulance.", source: "r2024" },
+        { year: 2024, text: "The department reaches full staffing for the first time in over a year, buys new rescue tools to replace a 20-year-old set, and orders a new ambulance to replace a 2008 one with over 100,000 miles. Fire and ambulance spending is $2,084,093 against a budget of $2,023,457; ambulance income is $613,143.", source: "r2024" },
       ],
     },
     calls: {
@@ -2949,14 +3005,19 @@ export const profiles: Record<string, Profile> = {
       ["Staffing", "Call/paid, about 30 firefighters"],
       ["Calls", "About 200 a year"],
       ["Covers", "Barre Town and parts of Orange"],
-      ["Chief", "Andy Lange"],
+      ["Chief", "Andy Lange; Deputy Chief Chris Sanborn"],
+      ["Pay", "$17 an hour for calls, plus officer stipends"],
+      ["Fire budget", "$695,472 proposed for fiscal 2027, up from $590,632"],
     ],
     contact: { chief: "Andy Lange", website: `${BAT}/departments/emergency_services/fire/index.php`, source: "dept" },
     history: {
       intro:
         "Barre Town's firefighters work from two stations in the unincorporated villages of East Barre and South Barre, " +
-        "each assigned to one. Each station has an assistant chief.",
-      events: [],
+        "each assigned to one. Each station has an assistant chief. The town of Orange pays $4,000 a year for cover.",
+      events: [
+        { year: 2015, text: "The Barre Town Fire Department Auxiliary is formed in October, bringing food and water to firefighters at long incidents.", source: "aux" },
+        { year: 2025, text: "The chassis for FD14, a Spartan rescue-pumper, is paid for while its body is built; it is leased at $105,000 a year for ten years. A pumper to replace Engine 2 is on order, with delivery perhaps more than three years away.", source: "plan" },
+      ],
     },
     stationNotes: {
       "barre-town-119-mill-st": {
@@ -2968,11 +3029,48 @@ export const profiles: Record<string, Profile> = {
         source: "dept",
       },
     },
+    money: {
+      intro: "The fire department is a General Fund line in the town budget.",
+      year: "fiscal year 2027 (proposed)",
+      lines: [
+        { label: "FD14 rescue-pumper lease (principal and interest)", amount: 105954 },
+        { label: "Tanker 1 refurbishment (East Barre)", amount: 100000 },
+        { label: "Engine 2 replacement reserve", amount: 75000 },
+        { label: "Call pay ($17 an hour)", amount: 58000 },
+        { label: "Turnout gear reserve", amount: 25135 },
+        { label: "SCBA and Jaws of Life reserve", amount: 21100 },
+      ],
+      linesNote: "Some of the lines of the $695,472 proposed. Officer stipends run from $5,400 for the chief to $1,425 for each lieutenant.",
+      capital: {
+        title: "Fire department budget by year",
+        lines: [
+          { label: "FY2027 (proposed)", amount: 695472 },
+          { label: "FY2026 (budget)", amount: 590632 },
+          { label: "FY2025 (actual)", amount: 758769 },
+        ],
+        note: "Fiscal 2025's actual spending includes paying for the FD14 chassis.",
+      },
+      source: "budget",
+    },
+    careers: {
+      intro: "Applications are open all year.",
+      points: [
+        "Live in Barre Town or Orange (some exceptions)",
+        "Attend Monday-night training",
+        "Hold a valid driver's licence and car insurance, and pass a physical agility test",
+      ],
+      applyUrl: `${BAT}/departments/emergency_services/fire/employement.php`,
+      source: "join",
+    },
     residents: [
-      { label: "Burn permits", href: `${BAT}/departments/emergency_services/fire/index.php`, text: "From the town's fire warden; see the Fire Warden page." },
+      { label: "Burn permits", href: `${BAT}/departments/emergency_services/fire/index.php`, text: "From the town's fire warden. Burning near woods or fields without a permit, or burning trash at any time, can cost a $500 fine." },
     ],
     sources: {
       dept: { label: "Town of Barre, Fire Department", href: `${BAT}/departments/emergency_services/fire/index.php` },
+      join: { label: "Town of Barre, Fire Department employment", href: `${BAT}/departments/emergency_services/fire/employement.php` },
+      aux: { label: "Town of Barre, Fire Department Auxiliary", href: `${BAT}/departments/emergency_services/fire/auxillary.php` },
+      budget: { label: "Town of Barre, FY2026–27 General Fund budget", href: "https://barretown.org/Budget_Comission/2026-2027/GF%20Combined.pdf", note: "Fire Department, PDF pages 35–42; Orange contract, page 7" },
+      plan: { label: "Town of Barre, Equipment Purchase Plan FY27–FY31", href: "https://barretown.org/A-Eq%20Purchase%20Plan.pdf", note: "Fire, PDF pages 3–14" },
     },
   },
   waterbury: {
@@ -3039,28 +3137,34 @@ export const profiles: Record<string, Profile> = {
       ["Station", "128 Wall Street"],
       ["Mutual aid", "Capital Fire Mutual Aid"],
       ["Chief", "Peter J. DeMasi"],
+      ["Volunteers", "21 in December 2024"],
+      ["Email", "firechief@northfield.vt.us"],
     ],
     contact: { chief: "Peter J. DeMasi", website: `${NFD}/fire-department`, source: "dept" },
     history: {
       intro:
         "Northfield's department fights fires and protects life and property in town, gives and receives mutual aid " +
         "through Capital Fire Mutual Aid, reviews fire protection plans with the state, and helps the fire warden prevent wildfires.",
-      events: [],
+      events: [
+        { year: 2024, text: "Budget talks in December put replacing the 2007 pumper at an estimated $920,000, and plan to replace the 2000 aerial ladder with a used truck for about $650,000 in fiscal 2027–28. The town budgets about half a truck's price and borrows the rest. The station has a new roof, but its sprinklers must be extended upstairs and the bathrooms upgraded. Annual hose testing, now done by an outside contractor, costs $5,000.", source: "minutes" },
+      ],
     },
     residents: [
       { label: "Burn permits", href: `${NFD}/fire-department`, text: "Required in Northfield: contact the Fire Warden or Assistant Fire Warden before you burn." },
     ],
     sources: {
       dept: { label: "Town of Northfield, Fire Department", href: `${NFD}/fire-department` },
+      minutes: { label: "Town of Northfield, Select Board special meeting minutes, 10 December 2024", href: "https://northfield-vt.gov/_files/ugd/13fb68_0bc59f449e6c46ac8b0c4a7e47b75796.pdf", note: "Fire department budget, pages 1–2" },
     },
   },
   warren: {
     description:
       "Warren Volunteer Fire Department: serving since 1947 from stations in Warren Village and at Sugarbush's " +
-      "Lincoln Peak, 48 to 90 calls a year, burn permits and fire alarm registration.",
+      "Lincoln Peak, 124 calls in 2024 by type, its budget, burn permits and fire alarm registration.",
     facts: [
       ["Founded", "1947"],
-      ["Calls", "48 to 90 a year over the past five years"],
+      ["Calls", "124 in 2024, 50 of them false alarms"],
+      ["Officers", "Assistant Chiefs Chad Koenig and Lucas Van Vught, Captains Jared Alvord and Zac Putnam (2026)"],
       ["Stations", "Warren Village and Sugarbush Resort's Lincoln Peak base area"],
       ["Chief", "Jeff Campbell, also the town's public safety officer and emergency management director"],
     ],
@@ -3071,7 +3175,48 @@ export const profiles: Record<string, Profile> = {
         "mutual aid. Ambulance service comes from Mad River Valley Ambulance.",
       events: [
         { year: 1947, text: "The Warren Volunteer Fire Department is founded.", source: "dept" },
+        { year: 2024, calls: 124, text: "124 calls, continuing a steady rise. Members log over 1,300 hours of training and over 4,100 hours in all; three complete Firefighter I, and three new members join.", source: "r2024" },
       ],
+    },
+    calls: {
+      intro: "False alarms were two calls in five in 2024.",
+      byType: {
+        title: "Calls by type, 2024",
+        bars: [
+          { label: "False alarms, not malicious", value: 50 },
+          { label: "Miscellaneous (public service, good intent, water)", value: 15 },
+          { label: "Fires (structure, trash, vehicle, brush)", value: 13 },
+          { label: "Motor vehicle accidents", value: 13 },
+          { label: "Cancelled", value: 12 },
+          { label: "Gas or carbon monoxide", value: 11 },
+          { label: "Electrical or power lines", value: 10 },
+        ],
+        note: "The types add up to the 124 calls reported.",
+        source: "r2024",
+      },
+    },
+    money: {
+      intro: "The fire department has an operating line and an equipment line in the town budget.",
+      year: "2025 (budget)",
+      lines: [
+        { label: "Firefighter pay", amount: 75000 },
+        { label: "Repairs and maintenance", amount: 32000 },
+        { label: "Radio dispatch and telephone", amount: 19000 },
+        { label: "Contracted services", amount: 16000 },
+        { label: "Minor equipment", amount: 7500 },
+        { label: "Utilities", amount: 7000 },
+      ],
+      linesNote: "Some of the lines of the $189,800 operating budget, up from $179,557 spent in 2024.",
+      capital: {
+        title: "Capital lines, 2025 budget",
+        lines: [
+          { label: "Fire department equipment", amount: 150000 },
+          { label: "Firefighter training and personal equipment", amount: 30000 },
+          { label: "Fire protection and standpipes", amount: 12500 },
+        ],
+        note: "Equipment spending was $26,855 in 2024 and $165,828 in 2023.",
+      },
+      source: "r2024",
     },
     residents: [
       { label: "Burn permits", href: `${WRN}/departments/volunteer-fire-department/`, text: "From the Forest Fire Warden, Garrett Swann." },
@@ -3080,6 +3225,7 @@ export const profiles: Record<string, Profile> = {
     ],
     sources: {
       dept: { label: "Town of Warren, Volunteer Fire Department", href: `${WRN}/departments/volunteer-fire-department/` },
+      r2024: { label: "Town of Warren, 2024 Town Report", href: "https://www.warrenvt.org/wp-content/uploads/2025/02/TOWN-REPORT-2024-FINAL-1.pdf", note: "Fire Department report, PDF page 36; budget, pages 22 and 26–27" },
     },
   },
   "east-montpelier": {
@@ -3191,13 +3337,18 @@ export const profiles: Record<string, Profile> = {
       ["Members", "9 active volunteers, 6 with state fire certification"],
       ["Mutual aid", "Capital Fire Mutual Aid (27 towns); automatic response with Northfield"],
       ["Chief", "Clarence Baker, also the forest fire warden"],
+      ["Calls", "26 in 2024/25"],
+      ["Trucks", "A 2003 International engine, a 2005 International and a 1990 Mack"],
     ],
     contact: { chief: "Clarence Baker", phone: "(802) 485-6707", website: `${ROX}/our-roxbury-vt/roxbury-vt-fire-department/`, source: "dept" },
     history: {
       intro:
         "Roxbury's nine volunteers answer fires and assist the ambulance, with automatic help from Northfield and the " +
         "27-town Capital Fire Mutual Aid district behind them.",
-      events: [],
+      events: [
+        { year: 2024, text: "Town Meeting on 5 March approves $17,070 for operating costs and $8,000 for two sets of turnout gear, and amends the $15,000 truck fund article to zero.", source: "r2024" },
+        { year: 2025, calls: 26, text: "26 calls in the 2024/25 reporting period. Two members train for Firefighter 2, both tankers' pumps are certified, and the department gives its chicken barbecue proceeds to Roxbury Neighbors Helping Neighbors. The town is asked for $17,056 for operations and $15,000 for the truck fund.", source: "r2024" },
+      ],
     },
     stationNotes: {
       "roxbury-1726-roxbury-rd": {
@@ -3216,6 +3367,7 @@ export const profiles: Record<string, Profile> = {
     ],
     sources: {
       dept: { label: "Town of Roxbury, Roxbury Volunteer Fire Department", href: `${ROX}/our-roxbury-vt/roxbury-vt-fire-department/` },
+      r2024: { label: "Town of Roxbury, 2024 Annual Report", href: "https://roxburyvt.gov/wp-content/uploads/2025/03/2024-annualreport-roxbury.pdf", note: "Fire department report, PDF page 55; warning, page 9; 2024 Town Meeting, page 46; property schedule, page 37" },
     },
   },
   moretown: {
@@ -3226,17 +3378,64 @@ export const profiles: Record<string, Profile> = {
       ["Station", "1049 Route 100B"],
       ["Meets", "1st and 3rd Tuesdays, 7 p.m."],
       ["Chief", "Stefan Pratt, also the fire warden"],
+      ["Officers", "Assistant Chief Bill Glennon, Captain Brandon Guyette, Lieutenants Al Laurent and Owen von Recklinghausen"],
+      ["Calls", "35 in 2025"],
     ],
     contact: { chief: "Stefan Pratt", phone: "(802) 496-3254", website: `${MOR}/town-departments/fire/`, source: "dept" },
     history: {
-      intro: "Moretown's department meets twice a month at the station on Route 100B. Its chief also serves as the town's fire warden.",
-      events: [],
+      intro: "Moretown's department meets twice a month at the station on Route 100B. Its chief also serves as the town's fire warden. Many new members joined in 2025.",
+      events: [
+        { year: 2024, text: "A new tanker is bought on a 15-year note of $245,238 at 4.99%.", source: "r2025" },
+        { year: 2025, calls: 35, text: "35 calls, 14 of them crashes.", source: "r2025" },
+      ],
+    },
+    calls: {
+      intro: "Crashes were the most common call in 2025, then mutual aid.",
+      byType: {
+        title: "Calls by type, 2025",
+        bars: [
+          { label: "Motor vehicle accidents", value: 14 },
+          { label: "Mutual aid", value: 9 },
+          { label: "Alarm activations", value: 2 },
+          { label: "Chimney fires", value: 2 },
+          { label: "Odour investigations", value: 2 },
+          { label: "Power lines or trees down", value: 2 },
+          { label: "Illegal burns", value: 2 },
+          { label: "Electric car fire", value: 1 },
+          { label: "Oven fire", value: 1 },
+        ],
+        note: "The types add up to the 35 calls reported.",
+        source: "r2025",
+      },
+    },
+    money: {
+      intro: "The fire department is a line in the town's General Fund.",
+      year: "fiscal year 2026",
+      lines: [
+        { label: "Debt payments", amount: 32730.2 },
+        { label: "Dispatching service", amount: 26926.99 },
+        { label: "Fire equipment", amount: 9800 },
+        { label: "Fire vehicles", amount: 9000 },
+        { label: "Building maintenance", amount: 7500 },
+        { label: "Waterbury contract", amount: 4000 },
+      ],
+      linesNote: "Some of the lines of $107,157.19 budgeted. In fiscal 2025 the department spent $90,075.74 of $117,898.37.",
+      capital: {
+        title: "Loans, 31 December 2025",
+        lines: [
+          { label: "2024 tanker note (balance)", amount: 228889 },
+          { label: "2022 SCBA note (balance)", amount: 8800 },
+        ],
+        note: "The tanker note runs to December 2039 at 4.99%; the SCBA note to August 2027 at 3.349%.",
+      },
+      source: "r2025",
     },
     residents: [
       { label: "Burn permits", href: `${MOR}/town-departments/fire/`, text: "From the Fire Warden, Stefan Pratt." },
     ],
     sources: {
       dept: { label: "Town of Moretown, Fire Department", href: `${MOR}/town-departments/fire/` },
+      r2025: { label: "Town of Moretown, 2025 Town Report", href: "https://www.moretownvt.org/wp-content/uploads/2026/02/Moretown-Town-Report-2025.pdf", note: "Fire Department report, PDF page 41; budget, pages 17–18; debt, page 25" },
     },
   },
   stowe: {
@@ -7157,6 +7356,8 @@ export const profiles: Record<string, Profile> = {
       ["Cost split", "Waitsfield 60%, Fayston 40%, by historical share of calls"],
       ["Calls", "126 in 2023: 73 in Waitsfield, 44 in Fayston, 9 mutual aid"],
       ["Town budget", "$191,648 for fiscal 2025 (proposed), 7% of Waitsfield's general fund"],
+      ["Officers", "Assistant Chiefs Daniel Beede and Evan Theurer, Captain Evan DaCosta, Lieutenants Josh Noyes and Cameron Mills (2026)"],
+      ["Truck reserve", "$264,879 on 30 June 2025"],
     ],
     contact: { chief: "Jared Young", phone: "802-496-2404", website: `${WFF}/departments/public-safety/fire`, source: "dept" },
     history: {
@@ -7165,6 +7366,7 @@ export const profiles: Record<string, Profile> = {
         "2024 was a decontamination space in the fire house, with a gear extractor, to protect firefighters from cancer.",
       events: [
         { year: 2023, calls: 126, text: "23 training sessions. Five members attend the Franklin Fire School and one completes Firefighter One; about six more plan to take the 220-hour course in 2024.", source: "r2023" },
+        { year: 2025, calls: 120, text: "120 calls, with no structure fires in Waitsfield or Fayston; crews help Warren and Waterbury at theirs. Five members complete the 250-hour Firefighter 1 course. Engine 7 is ordered to replace Engine 5 in 2027. Gordon Eurich marks 65 years on the department.", source: "r2025" },
       ],
     },
     calls: {
@@ -7207,6 +7409,7 @@ export const profiles: Record<string, Profile> = {
     ],
     sources: {
       dept: { label: "Town of Waitsfield, Fire", href: `${WFF}/departments/public-safety/fire` },
+      r2025: { label: "Town of Waitsfield, 2025 Annual Report", href: "https://www.waitsfieldvt.gov/fileadmin/files/Departments/Town_Clerk/Annual_Reports/2025_Waitsfield_Town_Report.pdf", note: "Fire department report, PDF pages 77–80; reserves, page 54 (scanned)" },
       r2023: { label: "Town of Waitsfield, 2023 Annual Report", href: `${WFF}/fileadmin/files/Departments/Town_Clerk/Annual_Reports/2023_Waitsfield_Annual_Report.pdf`, note: "Chief's report and calls by type, PDF pages 57–58; budget, pages 19 and 29; reserves, pages 35–36" },
     },
   },
@@ -7962,6 +8165,7 @@ export const profiles: Record<string, Profile> = {
       ["Service", "113 years, as of 2025"],
       ["Members", "20"],
       ["Station", "169 Main Street"],
+      ["Officers", "Deputy Chief Greg Light; Assistant Chiefs Andy Hebert and Gary Graves (February 2026)"],
     ],
     contact: { chief: "Johnathan Matthew", website: `${PLFD}/fire--rescue-department.html`, source: "r2025" },
     history: {
