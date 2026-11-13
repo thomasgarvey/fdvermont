@@ -6,6 +6,7 @@ import 'leaflet.markercluster/dist/MarkerCluster.Default.css';
 import 'leaflet.markercluster';
 import photosData from '../../data/photos.json';
 import { stations as stationRecords } from '../../lib/stations';
+import { towns, apart } from '../../lib/towns';
 import photoFocus from '../../data/photo-focus.json';
 
 // Slugs come from the same module that generates /stations/[slug], so a popup
@@ -74,7 +75,33 @@ function buildPopup(st: StationRecord): string {
   // redirects there.
   const page = `/departments/${st.page}#${st.slug}`;
   const more = `<a href="${page}" style="display:inline-block;margin-top:7px;font-weight:600;color:var(--fdvt-link,#8B211E)">Station record →</a>`;
-  return `${headHtml(st.name, [st.address, st.town].filter(Boolean).join(', '))}${p ? photoBlockHtml(p, page) : ''}${more}`;
+  const tel = deptsOf(st)
+    .filter((d) => d.phone)
+    .map((d, _, all) =>
+      `<div style="margin-top:4px;font-size:13px">${all.length > 1 ? `${d.name}: ` : ''}<a href="tel:${d.phone!.replace(/[^0-9+]/g, '')}" style="color:var(--fdvt-link,#8B211E);font-weight:600;white-space:nowrap">${d.phone}</a>${all.length > 1 ? '' : ' <span style="color:var(--fdvt-muted,#555)">· not for emergencies</span>'}</div>`)
+    .join('');
+  return `${headHtml(st.name, [st.address, st.town].filter(Boolean).join(', '))}${tel}${p ? photoBlockHtml(p, page) : ''}${more}`;
+}
+
+/**
+ * The departments a station's page lists: a department with a page of its own for
+ * its stations, otherwise the departments of the station's town. Airtable links
+ * departments to towns, not to individual stations, so in a town with several
+ * departments each is shown.
+ */
+type Dept = (typeof towns)[number]['departments'][number];
+const deptsByStation = new Map<string, Dept[]>();
+for (const a of apart) for (const s of a.stations) deptsByStation.set(s.id, [a.department]);
+for (const t of towns) for (const s of t.stations) if (!deptsByStation.has(s.id)) deptsByStation.set(s.id, t.departments);
+const deptsOf = (st: StationRecord): Dept[] => deptsByStation.get(st.id) ?? [];
+
+/** What hovering a pin shows: whose station it is and the department's phone. */
+function tipHtml(st: StationRecord): string {
+  const ds = deptsOf(st);
+  const rows = ds.length
+    ? ds.map((d) => `<div style="margin-top:2px"><strong>${d.name}</strong><br>${d.phone ?? '<span style="opacity:.7">No phone on record</span>'}</div>`).join('')
+    : '<div style="opacity:.7">No department on record</div>';
+  return `<div style="font-size:12px;opacity:.75">${st.name}</div>${rows}`;
 }
 
 const titleCase = (s: string) =>
@@ -315,6 +342,9 @@ export default function LocationMap({
       const marker = L.marker([st.lat, st.lng], {
         icon: photo ? ICON_WITH_PHOTO : ICON_NO_PHOTO,
       }).bindPopup(buildPopup(st), photo ? POPUP_OPTS_PHOTO : POPUP_OPTS_PLAIN);
+      // Hover only exists with a mouse; on a touch screen a tooltip would fight
+      // the popup for the same tap, and the popup already carries the phone.
+      if (!L.Browser.mobile) marker.bindTooltip(tipHtml(st), { direction: 'top', offset: [0, -10], opacity: 0.95 });
       cluster.addLayer(marker);
       indexRef.current.push({
         town: st.town.toUpperCase(),

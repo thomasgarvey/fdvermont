@@ -120,8 +120,14 @@ const photographed = photographedCount;
                 </span>
                 {isWritten(r) && <span class="badge">Written up</span>}
                 <span class="ct">
-                  {r.stations} station{r.stations === 1 ? "" : "s"}
-                  {r.photographed > 0 && ` · ${r.photographed} photographed`}
+                  <span class="ct-st">
+                    {r.stations} station{r.stations === 1 ? "" : "s"}
+                    {r.photographed > 0 && ` · ${r.photographed} photographed`}
+                  </span>
+                  {/* Shown on hover in place of the count, where there is a mouse. */}
+                  {r.departments.some((d) => d.phone) && (
+                    <span class="ct-ph">{r.departments.map((d) => d.phone).filter(Boolean).join(" · ")}</span>
+                  )}
                 </span>
               </a>
             </li>
@@ -170,6 +176,11 @@ const photographed = photographedCount;
   .nm { display: flex; flex-direction: column; gap: 0.06rem; }
   .in { font-size: 0.78rem; color: var(--ink-3); }
   .ct { color: var(--ink-3); font-size: 0.84rem; text-align: right; }
+  .ct-ph { display: none; color: var(--red); font-weight: 600; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  @media (hover: hover) {
+    .county a:hover .ct-ph { display: inline; }
+    .county a:hover .ct-ph ~ .ct-st, .county a:hover .ct-st:has(+ .ct-ph) { display: none; }
+  }
   .badge {
     font-size: 0.66rem; letter-spacing: 0.08em; text-transform: uppercase;
     color: var(--red); border: 1px solid var(--red); padding: 0.1rem 0.42rem;
