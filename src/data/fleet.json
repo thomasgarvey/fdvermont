@@ -13,6 +13,19 @@
     "source": "https://www.southburlingtonvt.gov/559/Fire-Stations"
   },
   {
+    "id": "recs718yEBXfVttuS",
+    "unit": "Ladder 2",
+    "departmentId": "rec8RrRGaYQkJS3aM",
+    "stationId": "recxPnKaG23EU0Zd4",
+    "role": "Front line",
+    "year": 2017,
+    "make": "E-One HP 75' straight stick",
+    "pumpGpm": 1500,
+    "waterGal": null,
+    "notes": "2,213 calls in 2023. ALS; rope and ice-water rescue",
+    "source": "https://www.burlingtonvt.gov/528/Station-2"
+  },
+  {
     "id": "reclEDF6W7CIx6X0k",
     "unit": "Ladder 3",
     "departmentId": "recIf6g3Feu0dmia7",
@@ -24,6 +37,19 @@
     "waterGal": 500,
     "notes": "Five Corners Hook & Ladder Co.; crew of 6",
     "source": "https://www.essexjctfire.org/apparatus"
+  },
+  {
+    "id": "rec0VNaApatb8bUOn",
+    "unit": "Ladder 4",
+    "departmentId": "rec8RrRGaYQkJS3aM",
+    "stationId": "recPzgncmFTJsg6zy",
+    "role": "Front line",
+    "year": 2024,
+    "make": "E-One HP 75' straight stick",
+    "pumpGpm": 1500,
+    "waterGal": null,
+    "notes": "1,558 calls in 2023. ALS; rope and ice-water rescue; extrication",
+    "source": "https://www.burlingtonvt.gov/530/Station-4"
   },
   {
     "id": "reclhBIs8hFxfGwZ8",
@@ -50,6 +76,19 @@
     "waterGal": 500,
     "notes": "Replaced Tower 35 in December 2009",
     "source": "https://sites.google.com/view/lyndonville-fire-vt/apparatus"
+  },
+  {
+    "id": "recZO6H0fNaWpO5in",
+    "unit": "Tower 1",
+    "departmentId": "rec8RrRGaYQkJS3aM",
+    "stationId": "recNYqTRVMitmfGPz",
+    "role": "Front line",
+    "year": 2019,
+    "make": "E-One 100 ft rear-mount tower ladder",
+    "pumpGpm": null,
+    "waterGal": null,
+    "notes": "2,068 calls in 2023. Technical, rope and ice-water rescue; extrication",
+    "source": "https://www.burlingtonvt.gov/527/Station-1"
   },
   {
     "id": "recXGDVndStfBKSJA",
@@ -154,6 +193,19 @@
     "waterGal": 300,
     "notes": "Compressed-air foam. Pump and tank from the site's shorthand \"500/300\"",
     "source": "https://www.avfd-ems.com/index.php/emergency-vehicles/"
+  },
+  {
+    "id": "recXoO8xG2pk0h0Cs",
+    "unit": "Engine 1",
+    "departmentId": "rec8RrRGaYQkJS3aM",
+    "stationId": "recNYqTRVMitmfGPz",
+    "role": "Front line",
+    "year": 2024,
+    "make": "E-One Typhoon",
+    "pumpGpm": 1500,
+    "waterGal": null,
+    "notes": "Busiest engine in Vermont: 3,806 calls in 2023. ALS; carries equipment for EV fires",
+    "source": "https://www.burlingtonvt.gov/527/Station-1"
   },
   {
     "id": "reca6RIkvXVi28Q3k",
@@ -325,6 +377,19 @@
     "source": "https://www.willistonfire.com/apparatus.html"
   },
   {
+    "id": "rec1GYmQswtO1bk3n",
+    "unit": "Engine 3",
+    "departmentId": "rec8RrRGaYQkJS3aM",
+    "stationId": "rectW7bvUl78T5N4A",
+    "role": "Front line",
+    "year": 2011,
+    "make": "E-One Cyclone",
+    "pumpGpm": 1500,
+    "waterGal": null,
+    "notes": "2,273 calls in 2022. ALS; ice-water rescue and tactical EMS",
+    "source": "https://www.burlingtonvt.gov/529/Station-3"
+  },
+  {
     "id": "recFizmRwOI6acJPv",
     "unit": "Engine 3",
     "departmentId": "rec3Q99ZGQf46yrni",
@@ -388,6 +453,19 @@
     "waterGal": 1000,
     "notes": "Hubbells Falls Engine Co.; extrication and stabilisation gear; crew of 6",
     "source": "https://www.essexjctfire.org/apparatus"
+  },
+  {
+    "id": "reczmwTK8Ad8tmiLG",
+    "unit": "Engine 5",
+    "departmentId": "rec8RrRGaYQkJS3aM",
+    "stationId": "rec1tYI16gweTsHiF",
+    "role": "Front line",
+    "year": 2019,
+    "make": "E-One Typhoon",
+    "pumpGpm": 1500,
+    "waterGal": null,
+    "notes": "1,022 calls in 2022. ALS; ice-water rescue, extrication and tactical EMS",
+    "source": "https://www.burlingtonvt.gov/531/Station-5"
   },
   {
     "id": "rec4NsnNqvpr7tGGo",
@@ -531,6 +609,19 @@
     "waterGal": null,
     "notes": "Hydraulic tools, rescue jacks, hazmat first response",
     "source": "https://www.bristolfiredepartment.org/apparatus.html"
+  },
+  {
+    "id": "recEcgoeDPBmnwP5B",
+    "unit": "Rescue 1",
+    "departmentId": "rec8RrRGaYQkJS3aM",
+    "stationId": "recNYqTRVMitmfGPz",
+    "role": "Front line",
+    "year": 2018,
+    "make": "E-One Typhoon Rescue",
+    "pumpGpm": null,
+    "waterGal": null,
+    "notes": "Not staffed. Water, trench and collapse rescue gear; air-bottle cascade; goes to all second alarms",
+    "source": "https://www.burlingtonvt.gov/527/Station-1"
   },
   {
     "id": "recYZFZiWUVjF2PmY",
@@ -910,6 +1001,32 @@
     "source": "https://www.southburlingtonvt.gov/559/Fire-Stations"
   },
   {
+    "id": "recuafjP0naEIyrHo",
+    "unit": "Ambulance 1",
+    "departmentId": "rec8RrRGaYQkJS3aM",
+    "stationId": "recNYqTRVMitmfGPz",
+    "role": "Front line",
+    "year": 2020,
+    "make": "Ford F-450, Osage patient compartment",
+    "pumpGpm": null,
+    "waterGal": null,
+    "notes": "Busiest 911 ambulance in Vermont: 3,604 calls in 2023. Paramedic-equipped",
+    "source": "https://www.burlingtonvt.gov/527/Station-1"
+  },
+  {
+    "id": "rec5g3WC2SxOUVpLO",
+    "unit": "Ambulance 2",
+    "departmentId": "rec8RrRGaYQkJS3aM",
+    "stationId": "recxPnKaG23EU0Zd4",
+    "role": "Front line",
+    "year": 2014,
+    "make": "Ford F-450, Osage patient compartment",
+    "pumpGpm": null,
+    "waterGal": null,
+    "notes": "3,140 calls in 2023. Paramedic-equipped",
+    "source": "https://www.burlingtonvt.gov/528/Station-2"
+  },
+  {
     "id": "recc38ORFtOSvnpLw",
     "unit": "Ambulance 2",
     "departmentId": "recZasaq8UGxdjLkB",
@@ -921,6 +1038,19 @@
     "waterGal": null,
     "notes": null,
     "source": "https://www.southburlingtonvt.gov/559/Fire-Stations"
+  },
+  {
+    "id": "recUVvW2mae5Hty36",
+    "unit": "Ambulance 4",
+    "departmentId": "rec8RrRGaYQkJS3aM",
+    "stationId": "recPzgncmFTJsg6zy",
+    "role": "Front line",
+    "year": 2024,
+    "make": "Ford F-450, Braun patient compartment",
+    "pumpGpm": null,
+    "waterGal": null,
+    "notes": "2,002 calls in 2023. Paramedic-equipped; permanently staffed since August 2021",
+    "source": "https://www.burlingtonvt.gov/530/Station-4"
   },
   {
     "id": "recdvl1seUYaCUKuD",
@@ -1183,6 +1313,19 @@
     "source": "https://pawletfire.org/today/"
   },
   {
+    "id": "recwNcYsulg6TJHGi",
+    "unit": "Battalion 1",
+    "departmentId": "rec8RrRGaYQkJS3aM",
+    "stationId": "recNYqTRVMitmfGPz",
+    "role": "Front line",
+    "year": 2018,
+    "make": "Chevrolet Tahoe",
+    "pumpGpm": null,
+    "waterGal": null,
+    "notes": "Incident command; 669 calls in 2023",
+    "source": "https://www.burlingtonvt.gov/527/Station-1"
+  },
+  {
     "id": "recNngt5z74KNMqQP",
     "unit": "ETA 511",
     "departmentId": "rec4WlUsfwKLDQOWF",
@@ -1428,6 +1571,19 @@
     "waterGal": 750,
     "notes": null,
     "source": "https://www.southburlingtonvt.gov/559/Fire-Stations"
+  },
+  {
+    "id": "recEDiaCGEb0UBOtb",
+    "unit": "Ambulance 5",
+    "departmentId": "rec8RrRGaYQkJS3aM",
+    "stationId": "rec1tYI16gweTsHiF",
+    "role": "Reserve",
+    "year": 2013,
+    "make": "Ford F-450, Osage patient compartment",
+    "pumpGpm": null,
+    "waterGal": null,
+    "notes": "Reserve; no assigned crew. Sometimes covers special events",
+    "source": "https://www.burlingtonvt.gov/531/Station-5"
   },
   {
     "id": "recROzqYrmeIIOTbN",
