@@ -37,7 +37,7 @@ const fmt = (n: number) => n.toLocaleString("en-US");
 ---
 
 <Archive title="Vermont's Statewide Fire Teams: HAZMAT, Search and Rescue, Fire Investigation"
-  description="The state teams that back up Vermont's local fire departments: the HAZMAT Response Team, Vermont Task Force 1 for urban search and rescue, and the Fire and Explosion Investigation Unit, with 2025 figures.">
+  description="The teams that back up Vermont's local fire departments: the state HAZMAT Response Team, Vermont Task Force 1 for urban search and rescue, the Fire and Explosion Investigation Unit, and backcountry rescue such as Stowe Mountain Rescue.">
   <main class="wrap page st">
     <p class="kicker">Statewide</p>
     <h1>The teams behind the local fire department</h1>
@@ -53,6 +53,7 @@ const fmt = (n: number) => n.toLocaleString("en-US");
       <a href="#hazmat">HAZMAT team</a>
       <a href="#usar">Search and rescue</a>
       <a href="#feiu">Fire investigation</a>
+      <a href="#backcountry">Backcountry rescue</a>
       <a href="#numbers">2025 in numbers</a>
     </nav>
 
@@ -122,6 +123,26 @@ const fmt = (n: number) => n.toLocaleString("en-US");
         <a href="tel:+18003227766">1-800-32-ARSON</a> (1-800-322-7766).</p>
     </section>
 
+    <section id="backcountry">
+      <h2>Backcountry rescue</h2>
+      <p>Searches for lost people anywhere in Vermont are managed by the Vermont State Police's Search and
+        Rescue Team. Getting people off cliffs and out of the backcountry takes specialist teams, such as
+        <b>Stowe Mountain Rescue</b>.</p>
+      <ul class="facts">
+        <li>Founded in <b>1980</b> for climbers and ice climbers in the Smugglers' Notch cliffs; it now also does
+          backcountry rescue, flood and swiftwater rescue and wilderness searches</li>
+        <li><b>45 to 55</b> calls a year, in every season</li>
+        <li>Free to the people it rescues; funded mainly by the Town of Stowe, with state and federal grants for equipment</li>
+        <li>An accredited member of the Mountain Rescue Association and a licensed first responder service</li>
+        <li>Under an agreement with the state Department of Public Safety, it can be sent to other parts of Vermont</li>
+      </ul>
+      <p>Inside Stowe's ski area, injuries are Mt. Mansfield Ski Patrol's; outside the boundary they are
+        Mountain Rescue's. The team carries people out of the backcountry and hands them to Stowe's ambulance
+        service. It trains with the State Police search team, Colchester Technical Rescue and the New York
+        State Police's helicopter crews. New members can apply each November and December, followed by a nine-month probation:
+        <a href="https://www.stowevt.gov/Departments/Mountain-Rescue" target="_blank" rel="noopener">Stowe Mountain Rescue</a>.</p>
+    </section>
+
     <section id="numbers">
       <h2>Vermont's fire departments in 2025</h2>
       <p>Departments reported <b>{fmt(46347)}</b> incidents in their own towns in 2025, plus
@@ -144,7 +165,8 @@ const fmt = (n: number) => n.toLocaleString("en-US");
     <p class="src">Sources: Vermont Division of Fire Safety,
       <a href={REPORT} target="_blank" rel="noopener">2025 Fire Marshal Report</a>;
       <a href={`${DFS}/emergency/hazmat`} target="_blank" rel="noopener">HAZMAT Response Team</a>;
-      <a href={`${DFS}/emergency/usar`} target="_blank" rel="noopener">Urban Search and Rescue</a>.
+      <a href={`${DFS}/emergency/usar`} target="_blank" rel="noopener">Urban Search and Rescue</a>;
+      Town of Stowe, <a href="https://www.stowevt.gov/Departments/Mountain-Rescue" target="_blank" rel="noopener">Mountain Rescue</a>.
       Read November 2026.</p>
     <p><a href="/departments">← All departments</a></p>
   </main>
