@@ -85,14 +85,19 @@ function buildPopup(st: StationRecord): string {
 
 /**
  * The departments a station's page lists: a department with a page of its own for
- * its stations, otherwise the departments of the station's town. Airtable links
- * departments to towns, not to individual stations, so in a town with several
- * departments each is shown.
+ * its stations; else the town department the station is linked to in Airtable;
+ * else every department in the station's town, since most stations are not linked.
  */
 type Dept = (typeof towns)[number]['departments'][number];
 const deptsByStation = new Map<string, Dept[]>();
 for (const a of apart) for (const s of a.stations) deptsByStation.set(s.id, [a.department]);
-for (const t of towns) for (const s of t.stations) if (!deptsByStation.has(s.id)) deptsByStation.set(s.id, t.departments);
+for (const t of towns)
+  for (const s of t.stations) {
+    if (deptsByStation.has(s.id)) continue;
+    // A station linked to one of its town's departments shows only that one.
+    const own = t.departments.filter((d) => d.name === s.department);
+    deptsByStation.set(s.id, own.length ? own : t.departments);
+  }
 const deptsOf = (st: StationRecord): Dept[] => deptsByStation.get(st.id) ?? [];
 
 /** What hovering a pin shows: whose station it is and the department's phone. */
