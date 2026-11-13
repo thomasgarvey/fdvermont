@@ -381,6 +381,7 @@ const structured = {
           <span class="qv"><a href={contact.website} target="_blank" rel="noopener">{(() => { try { return new URL(contact.website).hostname.replace(/^www\./, ""); } catch { return contact.website; } })()}</a></span>
         </div>
       )}
+      <p class="qstate">Backed up by the state’s <a href="/statewide-teams">HAZMAT, search and rescue and fire investigation teams</a>.</p>
     </aside>
 
     <div class="facts">
@@ -937,6 +938,8 @@ const structured = {
 
   .facts { margin-bottom: 2rem; }
 
+  .qstate { margin: .5rem 0 0; font-size: .85rem; color: var(--ink-3); }
+  .qstate a { color: inherit; }
   .quick {
     margin: -0.6rem 0 2rem; padding: 0.9rem 1.1rem;
     background: var(--surface); border: 1px solid var(--line); border-left: 3px solid var(--red);

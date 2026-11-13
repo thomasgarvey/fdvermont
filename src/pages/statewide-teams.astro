@@ -1,0 +1,184 @@
+---
+// The state's own response teams, which back up local fire departments: the HAZMAT
+// team, Vermont Task Force 1 (urban search and rescue) and fire investigation.
+// Sources: the Division of Fire Safety's pages and its 2025 Fire Marshal Report,
+// read 2026-11-13 (notes in ~/Desktop/FDVT/sites/dfs/NOTES.md).
+import Archive from "../layouts/Archive.astro";
+
+const DFS = "https://firesafety.vermont.gov";
+const REPORT = `${DFS}/sites/firesafety/files/2025%20Fire%20Marshal%20Report/2025%20FM%20Report%202.0.pdf`;
+
+const hazmatCalls: [string, number][] = [
+  ["Vehicle or boat spills", 60],
+  ["Chemical spills", 49],
+  ["Above- or underground tank spills", 29],
+  ["Other assistance", 27],
+  ["Propane and natural gas", 18],
+  ["Special event support", 9],
+  ["White powder, suspicious package or unknown substance", 7],
+  ["Radiological", 3],
+  ["Drone-only missions", 3],
+  ["Clandestine labs", 2],
+  ["Lithium-ion battery or energy storage", 1],
+];
+const hazmatTotal = hazmatCalls.reduce((a, [, n]) => a + n, 0);
+const max = hazmatCalls[0][1];
+
+const incidents: [string, number][] = [
+  ["Rescue and EMS", 29611],
+  ["False alarms", 5703],
+  ["Good intent", 4128],
+  ["Service calls", 3154],
+  ["Hazardous conditions", 2054],
+  ["Fires", 1396],
+  ["Everything else", 301],
+];
+const fmt = (n: number) => n.toLocaleString("en-US");
+---
+
+<Archive title="Vermont's Statewide Fire Teams: HAZMAT, Search and Rescue, Fire Investigation"
+  description="The state teams that back up Vermont's local fire departments: the HAZMAT Response Team, Vermont Task Force 1 for urban search and rescue, and the Fire and Explosion Investigation Unit, with 2025 figures.">
+  <main class="wrap page st">
+    <p class="kicker">Statewide</p>
+    <h1>The teams behind the local fire department</h1>
+    <p class="lede">Vermont's fire service is local: towns and fire districts run their own departments.
+      When an incident is bigger or more specialised than one department can handle, the state
+      Division of Fire Safety sends its own teams. A local incident commander, usually the fire
+      chief, asks for them.</p>
+
+    <p class="e911"><strong>Emergency? Call 911.</strong> The HAZMAT and task force numbers below are for
+      fire departments and incident commanders requesting help, not for the public.</p>
+
+    <nav class="toc" aria-label="On this page">
+      <a href="#hazmat">HAZMAT team</a>
+      <a href="#usar">Search and rescue</a>
+      <a href="#feiu">Fire investigation</a>
+      <a href="#numbers">2025 in numbers</a>
+    </nav>
+
+    <section id="hazmat">
+      <h2>Hazardous Materials Response Team</h2>
+      <p>The state HAZMAT team was created in 1994 to help every fire department in Vermont manage
+        hazardous materials incidents, under <a href="https://legislature.vermont.gov/statutes/section/20/001/00033" target="_blank" rel="noopener">20 V.S.A. § 33</a>.
+        It is Vermont's only FEMA Type I hazardous materials team, equipped for chemical, biological,
+        radiological and other hazardous materials emergencies anywhere in the state.</p>
+      <ul class="facts">
+        <li><b>35</b> hazardous materials technicians, led by a chief, a deputy chief, three captains and two lieutenants</li>
+        <li><b>4</b> regional response vehicles</li>
+        <li><b>18</b> HAZMAT trailers kept at local fire departments around the state, for operations-level response and decontamination</li>
+        <li><b>1,098</b> responders given refresher training in 2025</li>
+      </ul>
+      <h3>{hazmatTotal} responses in 2025</h3>
+      <div class="bars" role="table" aria-label="HAZMAT team responses in 2025, by type">
+        {hazmatCalls.map(([k, n]) => (
+          <div class="bar" role="row">
+            <span class="bk" role="cell">{k}</span>
+            <span class="bt" role="cell"><i style={`width:${(100 * n) / max}%`}></i><b>{n}</b></span>
+          </div>
+        ))}
+      </div>
+      <p>Among them: two ammonia releases at an industrial site in Brattleboro, about 100 gallons of
+        mixed sulfuric and nitric acid leaking from a chemical room in Middlebury, a box truck that
+        left Interstate 91 in Hartland and fell about 60 feet into the river below, and two days of
+        drone reconnaissance and thermal imaging over a wildfire in Fair Haven.</p>
+      <p>Departments can recover the costs of responding to a hazardous materials incident; the
+        Division has a <a href={`${DFS}/emergency/hazmat`} target="_blank" rel="noopener">cost recovery information sheet</a>.</p>
+      <p class="call">To request the team: the HAZMAT hotline, <a href="tel:+18006415005">800-641-5005</a>.</p>
+    </section>
+
+    <section id="usar">
+      <h2>Vermont Task Force 1: urban search and rescue</h2>
+      <p>Vermont Task Force One (VT-TF1) rescues people trapped in collapsed or damaged buildings, and
+        brings a large water rescue team with boats for moving water and rescue swimmers. Its 90
+        members are trained in rope, confined space, trench, building collapse and swiftwater rescue,
+        with specialists in search, medical, HAZMAT, logistics and planning, structural engineers,
+        search dogs and drones.</p>
+      <ul class="facts">
+        <li><b>90</b> members</li>
+        <li><b>18</b> calls in 2025, from building collapses to floods</li>
+        <li>Activated for several days during the <b>March and July 2025</b> floods in central Vermont and the Northeast Kingdom</li>
+        <li><b>14 days</b> in Kentucky in April 2025, after flooding and tornadoes there, under the interstate mutual aid compact</li>
+      </ul>
+      <p class="call">To request the task force or the Division's other special operations teams after
+        hours: Vermont Emergency Management's watch officer, <a href="tel:+18003470488">1-800-347-0488</a>.</p>
+    </section>
+
+    <section id="feiu">
+      <h2>Fire and Explosion Investigation Unit</h2>
+      <p>State investigators from the Department of Public Safety look into serious fires and explosions
+        and work out their cause. In 2025 they were directly involved in
+        <b>159</b> fire investigations.</p>
+      <div class="causes" aria-label="Causes of fires investigated in 2025">
+        <div><b>59</b><span>accidental</span></div>
+        <div><b>22</b><span>set deliberately</span></div>
+        <div><b>76</b><span>undetermined</span></div>
+        <div><b>2</b><span>other causes</span></div>
+      </div>
+      <p>Most were in homes: 79 single-family houses (9 of them mobile homes), 15 multi-unit buildings
+        and 3 duplexes, along with barns, vehicles, garages, businesses and campers. The Division notes
+        that Vermont's fire deaths happen mostly in single-family homes in winter, and that investigators
+        keep finding missing smoke alarms, or alarms with the battery taken out.</p>
+      <p class="call">To report information about a fire set deliberately, without giving your name:
+        <a href="tel:+18003227766">1-800-32-ARSON</a> (1-800-322-7766).</p>
+    </section>
+
+    <section id="numbers">
+      <h2>Vermont's fire departments in 2025</h2>
+      <p>Departments reported <b>{fmt(46347)}</b> incidents in their own towns in 2025, plus
+        {fmt(3628)} calls helping neighbouring departments. Almost two-thirds were medical calls and
+        rescues; fires were 3%.</p>
+      <div class="bars" role="table" aria-label="Incidents reported by Vermont fire departments in 2025, by type">
+        {incidents.map(([k, n]) => (
+          <div class="bar" role="row">
+            <span class="bk" role="cell">{k}</span>
+            <span class="bt" role="cell"><i style={`width:${(100 * n) / incidents[0][1]}%`}></i><b>{fmt(n)}</b></span>
+          </div>
+        ))}
+      </div>
+      <p class="small">From the report's table by incident type. Its introduction gives a different
+        total, 51,347; the figures here are the table's. Departments filed these through the national
+        reporting system (NFIRS), which closed in early 2026; they now report to its replacement,
+        NERIS.</p>
+    </section>
+
+    <p class="src">Sources: Vermont Division of Fire Safety,
+      <a href={REPORT} target="_blank" rel="noopener">2025 Fire Marshal Report</a>;
+      <a href={`${DFS}/emergency/hazmat`} target="_blank" rel="noopener">HAZMAT Response Team</a>;
+      <a href={`${DFS}/emergency/usar`} target="_blank" rel="noopener">Urban Search and Rescue</a>.
+      Read November 2026.</p>
+    <p><a href="/departments">← All departments</a></p>
+  </main>
+</Archive>
+
+<style>
+  .st { padding: 2.5rem 0 4rem; max-width: 46rem; }
+  .kicker { margin: 0; text-transform: uppercase; letter-spacing: .08em; font-size: .8rem; font-weight: 700; color: var(--red); }
+  h1 { margin: .3rem 0 .8rem; font-family: "Source Serif 4", Georgia, serif; font-size: clamp(1.9rem, 4vw, 2.6rem); line-height: 1.15; }
+  h2 { font-family: "Source Serif 4", Georgia, serif; font-size: 1.55rem; margin: 2.6rem 0 .7rem; line-height: 1.2; }
+  h3 { font-size: 1rem; margin: 1.4rem 0 .6rem; }
+  p { line-height: 1.65; margin: 0 0 1.05rem; }
+  .lede { font-size: 1.1rem; }
+  main a { color: var(--red); }
+  .e911 { border-left: 4px solid var(--red); padding: .6rem .9rem; background: color-mix(in srgb, var(--red) 7%, transparent); border-radius: 0 6px 6px 0; }
+  .toc { display: flex; flex-wrap: wrap; gap: .5rem; margin: 1.2rem 0 0; }
+  .toc a { border: 1px solid var(--line); border-radius: 999px; padding: .3rem .8rem; font-size: .9rem; text-decoration: none; }
+  section { scroll-margin-top: 5rem; }
+  .facts { padding-left: 1.2rem; margin: 0 0 1rem; line-height: 1.6; }
+  .facts li { margin-bottom: .35rem; }
+  .bars { display: grid; gap: .35rem; margin: 0 0 1.2rem; }
+  .bar { display: grid; grid-template-columns: minmax(9rem, 40%) 1fr; gap: .7rem; align-items: center; font-size: .92rem; }
+  .bt { display: flex; align-items: center; gap: .45rem; }
+  .bt i { display: block; height: .8rem; min-width: 2px; background: var(--red); border-radius: 2px; }
+  .bt b { font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .causes { display: grid; grid-template-columns: repeat(4, 1fr); gap: .6rem; margin: 0 0 1.2rem; }
+  .causes div { border: 1px solid var(--line); border-radius: 8px; padding: .6rem .7rem; }
+  .causes b { display: block; font-size: 1.5rem; }
+  .causes span { font-size: .85rem; color: var(--ink-3); }
+  .call { font-weight: 600; }
+  .call a { white-space: nowrap; }
+  .small, .src { font-size: .88rem; color: var(--ink-3); }
+  @media (max-width: 560px) {
+    .bar { grid-template-columns: 1fr; gap: .15rem; }
+    .causes { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
