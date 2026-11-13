@@ -14,18 +14,30 @@ const counties = new Set(stations.map((s) => s.county).filter(Boolean)).size;
 ---
 
 <Archive
-  title="Every fire station in Vermont – Vermont Fire Departments"
-  description={`An index of all ${stations.length} fire stations recorded in Vermont, by town, with photographs where we have them.`}
+  title="Vermont Fire Stations Near You: All Addresses by Town"
+  description={`Find the nearest fire station in Vermont: all ${stations.length} stations with their addresses, by town, and a button to list the closest ones to where you are. In an emergency, call 911.`}
 >
   <main class="wrap page">
     <header class="head">
-      <h1>Every station in the archive</h1>
+      <h1>Every fire station in Vermont</h1>
       <p class="sub">
-        {stations.length} stations across {towns.length} towns and {counties} counties, from the
-        Vermont E911 site file. {photographedCount} have been photographed so far — the rest are
-        waiting. <a href="/contact">Send a photograph</a> if you have one.
+        {stations.length} stations across {towns.length} towns and {counties} counties, with their
+        addresses. Select one for its department's page, phone number and photographs.
+        <strong>In an emergency, call 911.</strong>
       </p>
     </header>
+
+    {/* Search Console showed this page coming up for "fire station near me", so it
+        answers that: the visitor's position never leaves the browser. */}
+    <section class="near" aria-labelledby="near-h">
+      <h2 id="near-h" class="vh">Find a station</h2>
+      <div class="near-bar">
+        <button type="button" id="near-btn">Find the nearest station to me</button>
+        <input type="search" id="town-q" placeholder="Or type a town…" aria-label="Filter by town" autocomplete="off" />
+      </div>
+      <p id="near-msg" class="near-msg" role="status"></p>
+      <ol id="near-list" class="near-list"></ol>
+    </section>
 
     <nav class="atoz" aria-label="Jump to town">
       {[...new Set(towns.map(([t]) => t[0]))].map((letter) => (
@@ -40,12 +52,12 @@ const counties = new Set(stations.map((s) => s.county).filter(Boolean)).size;
       // own has no page to link to; its stations still link to theirs.
       const townSlug = townSlugForStation(list[0]);
       return (
-        <section class="town" id={first ? `letter-${letter}` : undefined}>
+        <section class="town" id={first ? `letter-${letter}` : undefined} data-town={town.toLowerCase()}>
           <h2>{townBySlug.has(townSlug) ? <a href={`/departments/${townSlug}`}>{town}</a> : town}</h2>
           <ul>
             {list.map((s) => (
               <li>
-                <a href={`/departments/${s.page}#${s.slug}`}>
+                <a href={`/departments/${s.page}#${s.slug}`} data-lat={s.lat} data-lng={s.lng} data-name={s.name} data-addr={`${s.address}, ${s.town}`}>
                   <span class="dot" data-has={s.photo ? "yes" : "no"} aria-hidden="true"></span>
                   <span class="nm">{s.name}</span>
                   <span class="ad">{s.address}</span>
@@ -56,8 +68,55 @@ const counties = new Set(stations.map((s) => s.county).filter(Boolean)).size;
         </section>
       );
     })}
+    <p class="appeal">
+      {photographedCount} of the {stations.length} stations have been photographed so far; a red dot
+      marks one we have. <a href="/contact#photo">Send a photograph</a> of one that's missing.
+    </p>
   </main>
 </Archive>
+
+<script>
+  const links = [...document.querySelectorAll<HTMLAnchorElement>("li a[data-lat]")];
+  const msg = document.getElementById("near-msg")!;
+  const list = document.getElementById("near-list")!;
+  const miles = (a: number, b: number, c: number, d: number) => {
+    const r = Math.PI / 180, h = Math.sin(((c - a) * r) / 2) ** 2 + Math.cos(a * r) * Math.cos(c * r) * Math.sin(((d - b) * r) / 2) ** 2;
+    return 3958.8 * 2 * Math.asin(Math.sqrt(h));
+  };
+  document.getElementById("near-btn")!.addEventListener("click", () => {
+    if (!navigator.geolocation) { msg.textContent = "Your browser can't share its location."; return; }
+    msg.textContent = "Finding you…";
+    navigator.geolocation.getCurrentPosition(
+      ({ coords }) => {
+        const near = links
+          .map((a) => ({ a, d: miles(coords.latitude, coords.longitude, +a.dataset.lat!, +a.dataset.lng!) }))
+          .sort((x, y) => x.d - y.d)
+          .slice(0, 5);
+        list.innerHTML = "";
+        for (const { a, d } of near) {
+          const li = document.createElement("li");
+          const link = document.createElement("a");
+          link.href = a.href;
+          link.innerHTML = `<b></b><span></span>`;
+          link.querySelector("b")!.textContent = a.dataset.name!;
+          link.querySelector("span")!.textContent = `${a.dataset.addr} · ${d.toFixed(1)} miles in a straight line`;
+          li.append(link);
+          list.append(li);
+        }
+        msg.textContent = near[0].d > 40
+          ? "You seem to be outside Vermont; these are the closest Vermont stations."
+          : "The closest stations to you, as the crow flies. Your location stays on your device.";
+      },
+      () => { msg.textContent = "Location wasn't shared. Type your town instead, or browse the list below."; },
+      { enableHighAccuracy: false, timeout: 10000, maximumAge: 600000 },
+    );
+  });
+  const sections = [...document.querySelectorAll<HTMLElement>("section.town")];
+  document.getElementById("town-q")!.addEventListener("input", (e) => {
+    const q = (e.target as HTMLInputElement).value.trim().toLowerCase();
+    for (const sec of sections) sec.hidden = q !== "" && !sec.dataset.town!.includes(q);
+  });
+</script>
 
 <style>
   .page { padding: 2.4rem 0 3.4rem; max-width: 52rem; }
@@ -68,6 +127,27 @@ const counties = new Set(stations.map((s) => s.county).filter(Boolean)).size;
   }
   .sub { margin: 0; color: var(--ink-2); font-size: 0.96rem; max-width: 40rem; }
   .sub a { color: var(--red); }
+  .vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .sub strong { color: var(--ink); font-weight: 600; }
+  .near { margin: 1.4rem 0 0.4rem; padding: 1rem 1.1rem; background: var(--surface); border: 1px solid var(--line); border-left: 3px solid var(--red); }
+  .near-bar { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+  #near-btn {
+    font: inherit; font-weight: 600; font-size: 0.92rem; cursor: pointer;
+    background: var(--red); color: #fff; border: 0; padding: 0.6rem 1rem; border-radius: 3px;
+  }
+  #town-q {
+    font: inherit; font-size: 0.92rem; flex: 1 1 12rem; min-width: 0;
+    padding: 0.55rem 0.7rem; border: 1px solid var(--line); border-radius: 3px;
+    background: var(--paper); color: var(--ink);
+  }
+  .near-msg { margin: 0.6rem 0 0; font-size: 0.85rem; color: var(--ink-3); }
+  .near-msg:empty { display: none; }
+  .near-list { margin: 0.5rem 0 0; padding: 0; list-style: none; }
+  .near-list li a { display: block; padding: 0.45rem 0; }
+  .near-list b { display: block; font-weight: 600; }
+  .near-list span { color: var(--ink-3); font-size: 0.83rem; }
+  .appeal { margin: 2.4rem 0 0; padding-top: 1rem; border-top: 1px solid var(--line); color: var(--ink-2); font-size: 0.92rem; }
+  .appeal a { color: var(--red); }
   .atoz {
     display: flex; flex-wrap: wrap; gap: 0.35rem; margin: 1.4rem 0 2rem;
     padding-bottom: 1rem; border-bottom: 1px solid var(--line);

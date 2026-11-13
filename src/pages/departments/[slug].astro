@@ -248,18 +248,29 @@ const plural = (n: number, one: string) => `${n} ${one}${n === 1 ? "" : "s"}`;
 const oneDept =
   departments.length === 1 ||
   (departments.length > 1 && departments.every((d) => /station\s*#?\s*\d+\s*$/i.test(d.name.trim())));
+// Search Console (Nov 2026) showed people finding these pages with "non emergency
+// number", "phone number" and "dispatch" queries, so a page that holds a phone
+// says so in its title, and every description leads with the address and phone.
 const title = standalone
   ? `${dept!.name} – Vermont Fire Departments`
   : departments.length === 0
     ? `Fire stations in ${place} – Vermont Fire Departments`
-    : `${place} Fire ${oneDept ? "Department" : "Departments"} – Vermont Fire Departments`;
-const description = profile
+    : oneDept && contact.phone
+      ? `${place} Fire Department, VT – Phone & Address`
+      : `${place} Fire ${oneDept ? "Department" : "Departments"} – Vermont Fire Departments`;
+const firstAddr = stations[0] ? `${stations[0].address}, ${stations[0].town}, VT` : null;
+const lead = [
+  stations.length === 1 && firstAddr ? `${firstAddr}.` : stations.length > 1 ? `${stations.length} stations in ${place}, VT.` : null,
+  contact.phone ? `Phone ${contact.phone} (911 for emergencies).` : null,
+].filter(Boolean).join(" ");
+const body = profile
   ? profile.description
   : standalone
   ? `${dept!.name}, working from ${place}, Vermont: ${plural(stations.length, "station")}, with contact and what is on record about its calls.`
   : dept
     ? `${dept.name}: contact, coverage, joining, burn permits and history, with ${plural(stations.length, "station")} in ${place}, Vermont.`
     : `Fire stations in ${place}, Vermont — ${stations.length} on record, with the town's boundary and area.`;
+const description = lead ? `${lead} ${body}` : body;
 // The first photographed station is the link-preview image; pages with none
 // fall back to the homepage hero.
 const shown = stations.find((s: Station) => s.photo);
@@ -339,6 +350,38 @@ const structured = {
         </p>
       )}
     </header>
+
+    {/* What most visitors from search came for: where it is and how to call. */}
+    <aside class="quick" aria-label="Address and phone">
+      <div class="q911"><strong>Emergency? Call 911.</strong></div>
+      {stations.length > 0 && (
+        <div class="qrow">
+          <span class="qk">{stations.length === 1 ? "Address" : "Stations"}</span>
+          <span class="qv">
+            {stations.length <= 3
+              ? stations.map((s, i) => (
+                  <>{i > 0 && <br />}<a href={`#${s.slug}`}>{s.address}</a>, {s.town}</>
+                ))
+              : <a href="#st-h">{stations.length} stations, listed below</a>}
+          </span>
+        </div>
+      )}
+      {contact.phone && (
+        <div class="qrow">
+          <span class="qk">Phone</span>
+          <span class="qv">
+            <a class="qtel" href={`tel:${contact.phone.replace(/[^0-9+]/g, "")}`}>{contact.phone}</a>
+            <span class="qnote">business line, not for emergencies</span>
+          </span>
+        </div>
+      )}
+      {contact.website && (
+        <div class="qrow">
+          <span class="qk">Website</span>
+          <span class="qv"><a href={contact.website} target="_blank" rel="noopener">{(() => { try { return new URL(contact.website).hostname.replace(/^www\./, ""); } catch { return contact.website; } })()}</a></span>
+        </div>
+      )}
+    </aside>
 
     <div class="facts">
       <dl>
@@ -893,6 +936,19 @@ const structured = {
   .also a { color: var(--red); }
 
   .facts { margin-bottom: 2rem; }
+
+  .quick {
+    margin: -0.6rem 0 2rem; padding: 0.9rem 1.1rem;
+    background: var(--surface); border: 1px solid var(--line); border-left: 3px solid var(--red);
+    display: grid; gap: 0.45rem; max-width: 40rem;
+  }
+  .q911 { color: var(--red); font-size: 0.95rem; }
+  .qrow { display: grid; grid-template-columns: 5.5rem 1fr; gap: 0.8rem; font-size: 0.95rem; }
+  .qk { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); padding-top: 0.2rem; }
+  .qv { min-width: 0; overflow-wrap: anywhere; }
+  .qv a { color: var(--ink); }
+  .qtel { font-weight: 700; font-size: 1.05rem; white-space: nowrap; }
+  .qnote { display: block; font-size: 0.78rem; color: var(--ink-3); }
 
   .cmap { margin: 0 0 2.4rem; }
   .cmap svg { width: 100%; height: auto; display: block; background: var(--surface); }
