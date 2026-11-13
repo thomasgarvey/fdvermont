@@ -2,6 +2,7 @@
 import LocationMap from "../components/islands/LocationMap.tsx";
 import Analytics from "../components/Analytics.astro";
 import Seo from "../components/Seo.astro";
+import { phoneById } from "../lib/phone";
 ---
 <html lang="en">
   <head>
@@ -17,6 +18,6 @@ import Seo from "../components/Seo.astro";
     <h1 style="position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0">
       Map of every fire department's stations in Vermont
     </h1>
-    <LocationMap client:only="preact" height="100vh" />
+    <LocationMap client:only="preact" height="100vh" phones={phoneById} />
   </body>
 </html>

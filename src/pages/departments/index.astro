@@ -77,6 +77,7 @@ const written = rows.filter(isWritten).length;
 // department's page is off its town's.
 const stationTotal = stations.length;
 const photographed = photographedCount;
+import { phoneFor } from "../../lib/phone";
 ---
 
 <Archive
@@ -125,8 +126,8 @@ const photographed = photographedCount;
                     {r.photographed > 0 && ` · ${r.photographed} photographed`}
                   </span>
                   {/* Shown on hover in place of the count, where there is a mouse. */}
-                  {r.departments.some((d) => d.phone) && (
-                    <span class="ct-ph">{r.departments.map((d) => d.phone).filter(Boolean).join(" · ")}</span>
+                  {r.departments.some((d) => phoneFor(d)) && (
+                    <span class="ct-ph">{r.departments.map((d) => phoneFor(d)).filter(Boolean).join(" · ")}</span>
                   )}
                 </span>
               </a>

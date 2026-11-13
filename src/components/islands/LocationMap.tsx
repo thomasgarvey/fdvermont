@@ -7,6 +7,7 @@ import 'leaflet.markercluster';
 import photosData from '../../data/photos.json';
 import { stations as stationRecords } from '../../lib/stations';
 import { towns, apart } from '../../lib/towns';
+import { telHref } from '../../lib/tel';
 import photoFocus from '../../data/photo-focus.json';
 
 // Slugs come from the same module that generates /stations/[slug], so a popup
@@ -76,9 +77,13 @@ function buildPopup(st: StationRecord): string {
   const page = `/departments/${st.page}#${st.slug}`;
   const more = `<a href="${page}" style="display:inline-block;margin-top:7px;font-weight:600;color:var(--fdvt-link,#8B211E)">Station record →</a>`;
   const tel = deptsOf(st)
-    .filter((d) => d.phone)
-    .map((d, _, all) =>
-      `<div style="margin-top:4px;font-size:13px">${all.length > 1 ? `${d.name}: ` : ''}<a href="tel:${d.phone!.replace(/[^0-9+]/g, '')}" style="color:var(--fdvt-link,#8B211E);font-weight:600;white-space:nowrap">${d.phone}</a>${all.length > 1 ? '' : ' <span style="color:var(--fdvt-muted,#555)">· not for emergencies</span>'}</div>`)
+    .map((d) => [d, phoneOf(d)] as const)
+    .filter(([, ph]) => ph)
+    .map(([d, ph], _, all) => {
+      const href = telHref(ph!);
+      const num = href ? `<a href="${href}" style="color:var(--fdvt-link,#8B211E);font-weight:600;white-space:nowrap">${ph}</a>` : ph;
+      return `<div style="margin-top:4px;font-size:13px">${all.length > 1 ? `${d.name}: ` : ''}${num}${all.length > 1 ? '' : ' <span style="color:var(--fdvt-muted,#555)">· not for emergencies</span>'}</div>`;
+    })
     .join('');
   return `${headHtml(st.name, [st.address, st.town].filter(Boolean).join(', '))}${tel}${p ? photoBlockHtml(p, page) : ''}${more}`;
 }
@@ -99,12 +104,16 @@ for (const t of towns)
     deptsByStation.set(s.id, own.length ? own : t.departments);
   }
 const deptsOf = (st: StationRecord): Dept[] => deptsByStation.get(st.id) ?? [];
+// Each department's number as its page shows it (lib/phone.ts), set from the
+// component's props; Airtable's field alone misses the ones written into profiles.
+let PHONES: Record<string, string> = {};
+const phoneOf = (d: Dept): string | null => PHONES[d.id] ?? d.phone ?? null;
 
 /** What hovering a pin shows: whose station it is and the department's phone. */
 function tipHtml(st: StationRecord): string {
   const ds = deptsOf(st);
   const rows = ds.length
-    ? ds.map((d) => `<div style="margin-top:2px"><strong>${d.name}</strong><br>${d.phone ?? '<span style="opacity:.7">No phone on record</span>'}</div>`).join('')
+    ? ds.map((d) => `<div style="margin-top:2px"><strong>${d.name}</strong><br>${phoneOf(d) ?? '<span style="opacity:.7">No phone on record</span>'}</div>`).join('')
     : '<div style="opacity:.7">No department on record</div>';
   return `<div style="font-size:12px;opacity:.75">${st.name}</div>${rows}`;
 }
@@ -160,6 +169,8 @@ interface SearchEntry {
 
 interface Props {
   height?: string;
+  /** Department id -> phone, from lib/phone.ts at build time. */
+  phones?: Record<string, string>;
   zoom?: number;
   tileUrl?: string;
   attribution?: string;
@@ -170,7 +181,9 @@ export default function LocationMap({
   zoom = 13,
   tileUrl = OSM_TILE,
   attribution = OSM_ATTR,
+  phones = {},
 }: Props) {
+  PHONES = phones;
   const containerRef = useRef<HTMLDivElement>(null);
   const clusterRef = useRef<any>(null);
   const mapRef = useRef<L.Map | null>(null);

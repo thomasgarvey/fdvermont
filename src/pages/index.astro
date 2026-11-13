@@ -103,6 +103,7 @@ const record = [
 // Kept in step with the marker colours in LocationMap.tsx.
 const MARK_PHOTO = "#8B211E";
 const MARK_NEEDS = "#5C6469";
+import { phoneById } from "../lib/phone";
 ---
 
 <html lang="en">
@@ -236,7 +237,7 @@ const MARK_NEEDS = "#5C6469";
           </div>
 
           <div class="mapframe">
-            <LocationMap client:only="preact" height="100%" />
+            <LocationMap client:only="preact" height="100%" phones={phoneById} />
           </div>
 
           <div class="mapfoot">

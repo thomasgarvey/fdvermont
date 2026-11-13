@@ -299,6 +299,7 @@ const structured = {
     ...(s.department ? { parentOrganization: { "@type": "Organization", name: s.department } } : {}),
   })),
 };
+import { telHref } from "../../lib/tel";
 ---
 
 <Archive
@@ -370,7 +371,7 @@ const structured = {
         <div class="qrow">
           <span class="qk">Phone</span>
           <span class="qv">
-            <a class="qtel" href={`tel:${contact.phone.replace(/[^0-9+]/g, "")}`}>{contact.phone}</a>
+            <a class="qtel" href={telHref(contact.phone) ?? undefined}>{contact.phone}</a>
             <span class="qnote">business line, not for emergencies</span>
           </span>
         </div>
@@ -795,7 +796,7 @@ const structured = {
           {contact.chief && <div class="row"><dt>Chief</dt><dd>{contact.chief}</dd></div>}
           {contact.phone && (
             <div class="row"><dt>Telephone</dt>
-              <dd><a href={`tel:${contact.phone.replace(/[^0-9+]/g, "")}`}>{contact.phone}</a></dd></div>
+              <dd><a href={telHref(contact.phone) ?? undefined}>{contact.phone}</a></dd></div>
           )}
           {contact.email && (
             <div class="row"><dt>Email</dt>
