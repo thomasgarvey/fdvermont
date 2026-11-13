@@ -34,10 +34,69 @@ const incidents: [string, number][] = [
   ["Everything else", 301],
 ];
 const fmt = (n: number) => n.toLocaleString("en-US");
+
+// Backcountry and technical rescue teams, from each team's own page or its
+// host's, read 2026-11-13. Roughly north to south.
+const rescueTeams = [
+  {
+    name: "Stowe Mountain Rescue",
+    where: "Stowe · run by the town",
+    text: "Cliff, ice-climbing, backcountry, swiftwater and wilderness search; 45 to 55 calls a year. More below.",
+    url: "https://www.stowevt.gov/Departments/Mountain-Rescue",
+  },
+  {
+    name: "Colchester Technical Rescue",
+    where: "Colchester · run by the town",
+    text: "One of the state's high-angle rope rescue teams, alongside Stowe's, with dive and boat crews for floods.",
+    url: "https://www.sevendaysvt.com/arts-culture/backcountry-911-2138536",
+  },
+  {
+    name: "Camels Hump Backcountry Rescue",
+    where: "Richmond · part of Richmond Rescue",
+    text: "About 30 volunteers, most of them EMTs or paramedics: ground search, medical care, ropes and extrication in northern Vermont.",
+    url: "https://www.newsar.org/rtcl_listing/camels-hump-backcountry-rescue-chbr/",
+  },
+  {
+    name: "Waterbury Backcountry Rescue",
+    where: "Waterbury · part of Waterbury Ambulance Service",
+    text: "Founded in 2002. Rescuers and EMTs who find, free and treat people hurt or lost where an ambulance can't reach, and bring them out to one.",
+    url: "https://waterburyambulance.org/backcountry.html",
+  },
+  {
+    name: "Huntington Backcountry Search and Rescue",
+    where: "Huntington · part of the volunteer fire department",
+    text: "The volunteer fire department answers Huntington's backcountry search and rescue calls as well as its fires and medical calls; the search and rescue team trains once or twice a month.",
+    url: "https://www.huntingtonvt.org/?p=205",
+  },
+  {
+    name: "Upper Valley Wilderness Response Team",
+    where: "Upper Valley · volunteer nonprofit, Vermont and New Hampshire",
+    text: "Founded in 1995 at Dartmouth's medical school. Searches for missing people in wilderness areas at the request of the Vermont State Police and New Hampshire Fish and Game; it also has a drone team.",
+    url: "https://www.uvwrt.org/about",
+  },
+  {
+    name: "Okemo Valley Technical Rescue",
+    where: "Ludlow area · new volunteer nonprofit",
+    text: "Formed by the Ludlow, Mount Holly and Proctorsville fire departments and Ludlow Ambulance after the 2023 floods, starting with swiftwater rescue and tactical casualty care.",
+    url: "https://vermontjournal.com/news/okemo-valley-technical-rescue",
+  },
+  {
+    name: "Rescue Inc. Technical Rescue Team",
+    where: "Brattleboro · regional ambulance service",
+    text: "On standby around the clock for flood, swiftwater and ice rescue, rope rescue, backcountry and wilderness rescue, confined spaces and drone work across southern Vermont.",
+    url: "https://www.rescueinc.org",
+  },
+  {
+    name: "New England K-9 Search and Rescue",
+    where: "Statewide · volunteer dog teams, Vermont and New Hampshire",
+    text: "Air-scent dogs and their handlers, called by the Vermont State Police and New Hampshire Fish and Game to search the woods for lost and missing people.",
+    url: "https://northernwoodlands.org/articles/article/new-england-k-9-search-and-rescue",
+  },
+];
 ---
 
 <Archive title="Vermont's Statewide Fire Teams: HAZMAT, Search and Rescue, Fire Investigation"
-  description="The teams that back up Vermont's local fire departments: the state HAZMAT Response Team, Vermont Task Force 1 for urban search and rescue, the Fire and Explosion Investigation Unit, and backcountry rescue such as Stowe Mountain Rescue.">
+  description="The teams that back up Vermont's local fire departments: the state HAZMAT Response Team, Vermont Task Force 1 for urban search and rescue, the Fire and Explosion Investigation Unit, and Vermont's backcountry and technical rescue teams, from Stowe Mountain Rescue to Rescue Inc.">
   <main class="wrap page st">
     <p class="kicker">Statewide</p>
     <h1>The teams behind the local fire department</h1>
@@ -53,7 +112,7 @@ const fmt = (n: number) => n.toLocaleString("en-US");
       <a href="#hazmat">HAZMAT team</a>
       <a href="#usar">Search and rescue</a>
       <a href="#feiu">Fire investigation</a>
-      <a href="#backcountry">Backcountry rescue</a>
+      <a href="#backcountry">Backcountry rescue teams</a>
       <a href="#numbers">2025 in numbers</a>
     </nav>
 
@@ -124,10 +183,24 @@ const fmt = (n: number) => n.toLocaleString("en-US");
     </section>
 
     <section id="backcountry">
-      <h2>Backcountry rescue</h2>
+      <h2>Backcountry and technical rescue</h2>
       <p>Searches for lost people anywhere in Vermont are managed by the Vermont State Police's Search and
-        Rescue Team. Getting people off cliffs and out of the backcountry takes specialist teams, such as
-        <b>Stowe Mountain Rescue</b>.</p>
+        Rescue Team. Carrying an injured hiker off a mountain, lowering a climber off a cliff or pulling someone
+        out of a flooded river takes specialist teams. Vermont relies on
+        <a href="https://www.sevendaysvt.com/arts-culture/outdoorsrecreation/vermont-backcountry-volunteers-answer-the-call-for-rescue/" target="_blank" rel="noopener">a dozen or so local ones</a>,
+        most of them volunteers, many run by a town's fire department or ambulance service.</p>
+
+      <div class="teams">
+        {rescueTeams.map((t) => (
+          <article class="team">
+            <h3><a href={t.url} target="_blank" rel="noopener">{t.name}</a></h3>
+            <p class="where">{t.where}</p>
+            <p>{t.text}</p>
+          </article>
+        ))}
+      </div>
+
+      <h3>Stowe Mountain Rescue, in more detail</h3>
       <ul class="facts">
         <li>Founded in <b>1980</b> for climbers and ice climbers in the Smugglers' Notch cliffs; it now also does
           backcountry rescue, flood and swiftwater rescue and wilderness searches</li>
@@ -138,9 +211,8 @@ const fmt = (n: number) => n.toLocaleString("en-US");
       </ul>
       <p>Inside Stowe's ski area, injuries are Mt. Mansfield Ski Patrol's; outside the boundary they are
         Mountain Rescue's. The team carries people out of the backcountry and hands them to Stowe's ambulance
-        service. It trains with the State Police search team, Colchester Technical Rescue and the New York
-        State Police's helicopter crews. New members can apply each November and December, followed by a nine-month probation:
-        <a href="https://www.stowevt.gov/Departments/Mountain-Rescue" target="_blank" rel="noopener">Stowe Mountain Rescue</a>.</p>
+        service. New members can apply each November and December, followed by a nine-month probation.</p>
+      <p class="small">Know a team that's missing? <a href="/contact">Tell us</a>.</p>
     </section>
 
     <section id="numbers">
@@ -196,6 +268,11 @@ const fmt = (n: number) => n.toLocaleString("en-US");
   .causes div { border: 1px solid var(--line); border-radius: 8px; padding: .6rem .7rem; }
   .causes b { display: block; font-size: 1.5rem; }
   .causes span { font-size: .85rem; color: var(--ink-3); }
+  .teams { display: grid; grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr)); gap: .8rem; margin: 0 0 1.4rem; }
+  .team { border: 1px solid var(--line); border-radius: 8px; padding: .8rem .9rem; }
+  .team h3 { margin: 0 0 .15rem; font-size: 1rem; }
+  .team .where { margin: 0 0 .4rem; font-size: .82rem; color: var(--ink-3); }
+  .team p:last-child { margin: 0; font-size: .92rem; line-height: 1.5; }
   .call { font-weight: 600; }
   .call a { white-space: nowrap; }
   .small, .src { font-size: .88rem; color: var(--ink-3); }
