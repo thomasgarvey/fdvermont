@@ -45,13 +45,6 @@ const deptIndex = [
 const count = (key: "town" | "county") =>
   new Set(stations.map((s) => s[key]).filter(Boolean)).size;
 
-// The gap is the point of the appeal: most of the state is still unphotographed,
-// and it is concentrated — a handful of counties have nothing at all.
-const awaiting = stations.length - photographedCount;
-const emptyCounties = [...new Set(stations.map((s) => s.county).filter(Boolean))]
-  .filter((c) => !stations.some((s) => s.county === c && s.photo))
-  .sort();
-
 // Departments lead: the site is about Vermont's fire departments, and stations
 // (and apparatus) are what each one has. departments.json holds the active
 // Airtable records only, so retired departments are not counted.
@@ -229,32 +222,6 @@ const MARK_NEEDS = "#5C6469";
           </p>
         </div>
       </div>
-
-      <section class="appeal" id="contribute">
-        <div class="wrap appeal-in">
-          <div>
-            <p class="stamp">Help finish it</p>
-            <h2>{awaiting.toLocaleString()} stations are still waiting.</h2>
-            <p>
-              {photographedCount} of {stations.length} have been photographed.
-              {emptyCounties.length > 0 && (
-                <>
-                  {" "}Not a single station has been photographed yet in{" "}
-                  {emptyCounties.slice(0, -1).join(", ")}
-                  {emptyCounties.length > 1 ? " or " : ""}
-                  {emptyCounties[emptyCounties.length - 1]}.
-                </>
-              )}
-              {" "}If you pass one, a photograph from a phone is plenty — you will be
-              credited beside it.
-            </p>
-          </div>
-          <div class="appeal-do">
-            <a class="appeal-btn" href="/contact#photo">Send a photograph →</a>
-            <a class="appeal-alt" href="/stations">See which are missing</a>
-          </div>
-        </div>
-      </section>
 
       <section class="sec" id="map">
         <div class="wrap">
@@ -989,72 +956,6 @@ const MARK_NEEDS = "#5C6469";
   }
 
   /* ---- sections ------------------------------------------------------- */
-  .appeal {
-    background: var(--surface);
-    border-bottom: 1px solid var(--line);
-  }
-  .appeal-in {
-    display: flex;
-    align-items: center;
-    gap: 2.4rem;
-    padding: 1.9rem 0;
-  }
-  .appeal h2 {
-    font-family: "Source Serif 4", Georgia, serif;
-    font-size: clamp(1.25rem, 2.4vw, 1.7rem);
-    line-height: 1.2;
-    margin: 0.15rem 0 0.5rem;
-  }
-  .appeal p {
-    margin: 0;
-    max-width: 60ch;
-    color: var(--ink-2);
-    font-size: 0.95rem;
-  }
-  .appeal-do {
-    margin-left: auto;
-    display: grid;
-    gap: 0.55rem;
-    justify-items: start;
-    flex: none;
-  }
-  .appeal-btn {
-    display: inline-block;
-    background: var(--red);
-    color: #fff;
-    text-decoration: none;
-    font-size: 0.78rem;
-    font-weight: 700;
-    letter-spacing: 0.11em;
-    text-transform: uppercase;
-    padding: 0.7rem 1.15rem;
-    white-space: nowrap;
-  }
-  .appeal-btn:hover {
-    background: var(--red-deep);
-  }
-  .appeal-alt {
-    font-size: 0.82rem;
-    color: var(--ink-2);
-    text-decoration: none;
-    border-bottom: 1px solid var(--line);
-    white-space: nowrap;
-  }
-  .appeal-alt:hover {
-    color: var(--ink);
-    border-color: var(--red);
-  }
-  @media (max-width: 780px) {
-    .appeal-in {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 1.2rem;
-    }
-    .appeal-do {
-      margin-left: 0;
-    }
-  }
-
   .sec {
     padding: 4.4rem 0;
   }
