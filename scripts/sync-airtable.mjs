@@ -5,7 +5,7 @@
 // diff, and commit the result — the deployed build never needs the token.
 //
 // Usage:  node scripts/sync-airtable.mjs        (requires .env)
-import { readFileSync, writeFileSync, mkdirSync, existsSync, copyFileSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync, existsSync, copyFileSync, statSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -104,6 +104,16 @@ function makeMedium(fullFile, mediumFile, w, h) {
   if (!long) return { width: null, height: null };
   const k = MEDIUM_PX / long;
   return { width: Math.round(w * k), height: Math.round(h * k) };
+}
+
+// The full-size copy only serves the full-screen viewer, so photographs straight
+// off a phone (3-6 MB) are shrunk to 2000px on the long side, which keeps the repo
+// and the deploy small. The medium copy is made first, from the untouched original.
+const FULL_PX = 2000;
+function shrinkFull(file, w, h) {
+  const long = Math.max(w ?? 0, h ?? 0);
+  if ((long && long <= FULL_PX) || statSync(file).size < 800_000) return;
+  execFileSync('sips', ['-Z', String(FULL_PX), '-s', 'formatOptions', '78', file], { stdio: 'ignore' });
 }
 
 const ext = (type, filename) =>
@@ -218,6 +228,7 @@ for (const r of photos) {
   const station = linkedStation && linkedStation.Status !== 'Retired' ? linkedStation : undefined;
   const mediumPath = `photos/${r.id}.medium.${e}`;
   const medium = makeMedium(`${ROOT}/public/${fullPath}`, `${ROOT}/public/${mediumPath}`, att.width, att.height);
+  shrinkFull(`${ROOT}/public/${fullPath}`, att.width, att.height);
   out.push({
     id: r.id,
     src: `/${fullPath}`,
