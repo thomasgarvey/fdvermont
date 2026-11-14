@@ -253,13 +253,15 @@ const oneDept =
 // Search Console (Nov 2026) showed people finding these pages with "non emergency
 // number", "phone number" and "dispatch" queries, so a page that holds a phone
 // says so in its title, and every description leads with the address and phone.
+// Pages without a phone still name the state and say what they hold, so every
+// title reads as a Vermont address page.
 const title = standalone
-  ? `${dept!.name} – Vermont Fire Departments`
+  ? `${dept!.name}, VT – Address & Details`
   : departments.length === 0
-    ? `Fire stations in ${place} – Vermont Fire Departments`
+    ? `Fire stations in ${place}, VT – Addresses & Map`
     : oneDept && contact.phone
       ? `${place} Fire Department, VT – Phone & Address`
-      : `${place} Fire ${oneDept ? "Department" : "Departments"} – Vermont Fire Departments`;
+      : `${place} Fire ${oneDept ? "Department" : "Departments"}, VT – Address & Details`;
 const firstAddr = stations[0] ? `${stations[0].address}, ${stations[0].town}, VT` : null;
 const lead = [
   stations.length === 1 && firstAddr ? `${firstAddr}.` : stations.length > 1 ? `${stations.length} stations in ${place}, VT.` : null,
