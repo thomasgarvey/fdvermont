@@ -174,6 +174,13 @@ interface Props {
   zoom?: number;
   tileUrl?: string;
   attribution?: string;
+  /**
+   * For a map embedded in a long page. A one-finger drag or a plain scroll
+   * wheel moves the page past the map instead of trapping the visitor in it;
+   * two fingers (touch) or Ctrl/Cmd + scroll (mouse and trackpad) move and zoom
+   * the map, with a short hint when someone tries the wrong way.
+   */
+  cooperative?: boolean;
 }
 
 export default function LocationMap({
@@ -182,6 +189,7 @@ export default function LocationMap({
   tileUrl = OSM_TILE,
   attribution = OSM_ATTR,
   phones = {},
+  cooperative = false,
 }: Props) {
   PHONES = phones;
   const containerRef = useRef<HTMLDivElement>(null);
@@ -193,6 +201,7 @@ export default function LocationMap({
   const [query, setQuery] = useState('');
   const [results, setResults] = useState<SearchEntry[]>([]);
   const [towns, setTowns] = useState<TownHit[]>([]);
+  const [gestureHint, setGestureHint] = useState('');
 
   // Returns the results it just rendered, so callers outside the input (the
   // homepage hero search) can act on the top hit without waiting for state.
@@ -295,10 +304,14 @@ export default function LocationMap({
     // box lands on 7 when it wants about 7.6 — and 7 frames Montreal and
     // Massachusetts around a small Vermont. Fractional zoom lets the fit be
     // exact; zoomDelta keeps the +/- buttons stepping a whole level at a time.
+    // On a touch screen a cooperative map starts with dragging off, so a
+    // one-finger swipe scrolls the page; see the gesture block below.
+    const touchScreen = cooperative && window.matchMedia('(pointer: coarse)').matches;
     const map = L.map(containerRef.current, {
       zoomControl: false,
       zoomSnap: 0,
       zoomDelta: 1,
+      dragging: !touchScreen,
     });
     // The search pill sits bottom-centre and spans nearly the full width on a
     // phone, which puts it straight over a bottom-left zoom control.
@@ -443,7 +456,62 @@ export default function LocationMap({
     const ro = new ResizeObserver(() => { if (!userHasMoved) fitToStations(); });
     ro.observe(containerRef.current);
 
+    // Cooperative gestures. Listeners sit on the wrapper so they run before
+    // Leaflet's own on the map container.
+    let undoGestures = () => {};
+    const frame = containerRef.current.parentElement;
+    if (cooperative && frame) {
+      let hintTimer = 0;
+      const hint = (text: string) => {
+        setGestureHint(text);
+        clearTimeout(hintTimer);
+        hintTimer = window.setTimeout(() => setGestureHint(''), 1600);
+      };
+      const mac = /Mac|iPhone|iPad/.test(navigator.platform);
+      const onWheel = (e: WheelEvent) => {
+        // A trackpad pinch arrives as a wheel event with ctrlKey set.
+        if (e.ctrlKey || e.metaKey) return;
+        e.stopPropagation();
+        hint(`Hold ${mac ? '⌘' : 'Ctrl'} and scroll to zoom the map`);
+      };
+      frame.addEventListener('wheel', onWheel, { capture: true, passive: true });
+
+      let startX = 0, startY = 0, warned = false;
+      const onStart = (e: TouchEvent) => {
+        warned = false;
+        if (e.touches.length === 1) { startX = e.touches[0].clientX; startY = e.touches[0].clientY; }
+        if (e.touches.length >= 2) map.dragging.enable();
+      };
+      const onMove = (e: TouchEvent) => {
+        if (e.touches.length >= 2) {
+          // Claim the gesture before the browser decides it is a page scroll.
+          if (e.cancelable) e.preventDefault();
+        } else if (!warned && Math.hypot(e.touches[0].clientX - startX, e.touches[0].clientY - startY) > 12) {
+          warned = true;
+          hint('Use two fingers to move the map');
+        }
+      };
+      const onEnd = (e: TouchEvent) => {
+        if (touchScreen && e.touches.length < 2) map.dragging.disable();
+      };
+      if (touchScreen) {
+        frame.addEventListener('touchstart', onStart, { capture: true, passive: true });
+        frame.addEventListener('touchmove', onMove, { capture: true, passive: false });
+        frame.addEventListener('touchend', onEnd, { capture: true, passive: true });
+        frame.addEventListener('touchcancel', onEnd, { capture: true, passive: true });
+      }
+      undoGestures = () => {
+        clearTimeout(hintTimer);
+        frame.removeEventListener('wheel', onWheel, true);
+        frame.removeEventListener('touchstart', onStart, true);
+        frame.removeEventListener('touchmove', onMove, true);
+        frame.removeEventListener('touchend', onEnd, true);
+        frame.removeEventListener('touchcancel', onEnd, true);
+      };
+    }
+
     return () => {
+      undoGestures();
       ro.disconnect();
       cancelAnimationFrame(raf);
       map.remove();
@@ -456,6 +524,19 @@ export default function LocationMap({
   return (
     <div style={{ position: 'relative', height, width: '100%' }}>
       <div ref={containerRef} style={{ height: '100%', width: '100%' }} />
+      {gestureHint && (
+        <div
+          role="status"
+          style={{
+            position: 'absolute', inset: 0, zIndex: 1100, pointerEvents: 'none',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            background: 'rgba(0,0,0,.45)', color: '#fff', textAlign: 'center',
+            font: '600 16px system-ui, sans-serif', padding: '0 24px',
+          }}
+        >
+          {gestureHint}
+        </div>
+      )}
       <div
         style={{
           position: 'absolute', bottom: '18px', left: '50%', transform: 'translateX(-50%)',

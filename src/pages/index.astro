@@ -81,10 +81,18 @@ const focus = (p: (typeof photosData)[number]) => {
 
 const HERO_ID = "recKofDfSCLcl7RG9"; // Isle La Motte Volunteer Fire Company
 const hero = photosData.find((p) => p.id === HERO_ID) ?? photosData[0];
-const featured =
-  photosData.find((p) => p.featured) ??
-  photosData.find((p) => p.id === "receny9qpGCc1uy6J") ?? // Montpelier City
-  photosData.find((p) => p.id !== hero.id)!;
+// Department of the week. One station per calendar week, in a fixed order, so it
+// changes every Monday (UTC) and never repeats until the whole archive has had a
+// turn. Picked here for the static page and again in the browser (see the
+// script below), so it rotates without a redeploy.
+const WEEK_MS = 7 * 24 * 3600 * 1000;
+const weekIndex = (now: number, n: number) =>
+  // 1970-01-01 was a Thursday; shift 4 days so a week starts on Monday.
+  Math.floor((now + 4 * 24 * 3600 * 1000) / WEEK_MS) % n;
+const pool = [...photosData]
+  .filter((p) => p.id !== hero.id && p.department?.name)
+  .sort((a, b) => a.id.localeCompare(b.id));
+const featured = pool[weekIndex(Date.now(), pool.length)] ?? photosData.find((p) => p.id !== hero.id)!;
 
 const plates = [...photosData]
   .filter((p) => p.id !== hero.id && p.id !== featured.id)
@@ -92,13 +100,26 @@ const plates = [...photosData]
   .slice(0, 12);
 
 // The station record, built from the fields the archive actually holds.
-const record = [
-  ["Town", featured.department?.city ?? titleCase(featured.town ?? "—")],
-  ["County", featured.department?.county ? `${titleCase(featured.department.county)}` : "—"],
-  ["Address", featured.stationAddress ? titleCase(featured.stationAddress) : "Not recorded"],
-  ["Photographed", featured.dateTaken ?? "—"],
-  ["Photographer", featured.photographer ?? "—"],
+const recordOf = (p: (typeof photosData)[number]) => [
+  ["Town", p.department?.city ?? titleCase(p.town ?? "—")],
+  ["County", p.department?.county ? `${titleCase(p.department.county)}` : "—"],
+  ["Address", p.stationAddress ? titleCase(p.stationAddress) : "Not recorded"],
+  ["Photographed", p.dateTaken ?? "—"],
+  ["Photographer", p.photographer ?? "—"],
 ].filter(([, v]) => v && v !== "—");
+const record = recordOf(featured);
+
+// Everything the browser needs to swap in a different week's station.
+const weekly = pool.map((p) => ({
+  id: p.id,
+  title: label(p),
+  place: place(p),
+  href: photoHref(p.id),
+  img: p.medium,
+  pos: (photoFocus as Record<string, string>)[p.id] ?? ((p.height ?? 0) > (p.width ?? 0) ? "50% 28%" : ""),
+  find: p.department?.city ?? p.town ?? "",
+  record: recordOf(p),
+}));
 
 // Kept in step with the marker colours in LocationMap.tsx.
 const MARK_PHOTO = "#8B211E";
@@ -237,14 +258,14 @@ import { phoneById } from "../lib/phone";
           </div>
 
           <div class="mapframe">
-            <LocationMap client:only="preact" height="100%" phones={phoneById} />
+            <LocationMap client:only="preact" height="100%" phones={phoneById} cooperative />
           </div>
 
           <div class="mapfoot">
             <span class="key"><i style={`background:${MARK_PHOTO}`}></i>Photographed</span>
             <span class="key"><i style={`background:${MARK_NEEDS}`}></i>Awaiting a photograph</span>
             <span class="key-note">
-              {photosData.length} photographs in the archive · <a href="/map">Full-screen map</a>
+              {photosData.length} photographs in the archive
             </span>
           </div>
 
@@ -260,19 +281,20 @@ import { phoneById } from "../lib/phone";
       </section>
 
       <section class="sec alt" id="featured">
+        <script type="application/json" id="weekly" set:html={JSON.stringify(weekly)} />
         <div class="wrap">
           <div class="sec-head">
             <p class="stamp">Department of the week</p>
-            <h2>{label(featured)}</h2>
-            <p class="sec-sub">{place(featured)}</p>
+            <h2 id="wk-title">{label(featured)}</h2>
+            <p class="sec-sub" id="wk-place">{place(featured)}</p>
           </div>
 
           <div class="feature">
-            <a class="feature-plate" href={photoHref(featured.id)}
+            <a class="feature-plate" id="wk-plate" href={photoHref(featured.id)}
               style={`background-image:url("${featured.medium}")${focus(featured)}`}
               aria-label={`${featured.caption} — open the station record`}></a>
             <div class="feature-record">
-              <dl class="record">
+              <dl class="record" id="wk-record">
                 {record.map(([k, v]) => (
                   <div class="row"><dt>{k}</dt><dd>{v}</dd></div>
                 ))}
@@ -282,7 +304,7 @@ import { phoneById } from "../lib/phone";
                 a building is replaced, a company merges, a hand-painted sign comes down. This
                 archive is an attempt to photograph them before that happens.
               </p>
-              <button class="link" type="button" data-find={featured.department?.city ?? featured.town ?? ""}>
+              <button class="link" id="wk-find" type="button" data-find={featured.department?.city ?? featured.town ?? ""}>
                 Find this station on the map →
               </button>
             </div>
@@ -365,6 +387,44 @@ import { phoneById } from "../lib/phone";
     </footer>
 
     <script>
+      // Department of the week: the static page shows the week it was built; if the
+      // visitor's week is later, swap in that week's station. Same order and maths
+      // as the frontmatter, so both always agree.
+      {
+        const raw = document.getElementById("weekly")?.textContent;
+        if (raw) {
+          const pool = JSON.parse(raw) as {
+            id: string; title: string; place: string; href: string; img: string; pos: string;
+            find: string; record: string[][];
+          }[];
+          const WEEK_MS = 7 * 24 * 3600 * 1000;
+          const w = pool[Math.floor((Date.now() + 4 * 24 * 3600 * 1000) / WEEK_MS) % pool.length];
+          const plate = document.getElementById("wk-plate") as HTMLAnchorElement | null;
+          if (w && plate && plate.getAttribute("href") !== w.href) {
+            const set = (id: string, t: string) => { const el = document.getElementById(id); if (el) el.textContent = t; };
+            set("wk-title", w.title);
+            set("wk-place", w.place);
+            plate.href = w.href;
+            plate.style.backgroundImage = `url("${w.img}")`;
+            plate.style.backgroundPosition = w.pos;
+            plate.setAttribute("aria-label", `${w.title} — open the station record`);
+            const rec = document.getElementById("wk-record");
+            if (rec) {
+              rec.textContent = "";
+              for (const [k, v] of w.record) {
+                const row = document.createElement("div");
+                row.className = "row";
+                const dt = document.createElement("dt"); dt.textContent = k;
+                const dd = document.createElement("dd"); dd.textContent = v;
+                row.append(dt, dd);
+                rec.append(row);
+              }
+            }
+            const find = document.getElementById("wk-find");
+            if (find) find.dataset.find = w.find;
+          }
+        }
+      }
       const form = document.getElementById("hero-search") as HTMLFormElement | null;
       const input = document.getElementById("q") as HTMLInputElement | null;
       const hint = document.getElementById("searchhint");
