@@ -11,6 +11,7 @@ import {
 } from "../../lib/towns";
 import type { Station } from "../../lib/stations";
 import apparatusData from "../../data/apparatus.json";
+import { nearby } from "../../lib/nearby";
 import Lightbox from "../../components/Lightbox.astro";
 import fleetData from "../../data/fleet.json";
 import { profiles, dollars } from "../../data/profiles";
@@ -31,6 +32,7 @@ const props = Astro.props as { town: Town } | { standalone: Apart };
 const town = "town" in props ? props.town : null;
 const standalone = "standalone" in props ? props.standalone : null;
 const subject = (town ?? standalone)!;
+const near = nearby(subject.slug);
 // Curated sections for this page, where someone has written them up — see
 // src/data/profiles.ts. Most pages have none and render as before.
 const profile = profiles[subject.slug] ?? null;
@@ -911,6 +913,17 @@ import { telHref } from "../../lib/tel";
       </section>
     )}
 
+    {near.length > 0 && (
+      <section class="block" aria-labelledby="n-h">
+        <h2 id="n-h">Nearby departments</h2>
+        <ul class="nearby">
+          {near.map((n) => (
+            <li><a href={`/departments/${n.slug}`}>{n.name}</a> <span>{n.miles} mi</span></li>
+          ))}
+        </ul>
+      </section>
+    )}
+
     <p class="back"><a href="/#map">← Back to the map</a></p>
     <Lightbox />
   </main>
@@ -1100,6 +1113,9 @@ import { telHref } from "../../lib/tel";
   .credit { display: block; color: var(--ink-3); }
 
   .block { margin-bottom: 2.2rem; }
+  .nearby { list-style: none; margin: 0; padding: 0; }
+  .nearby li { padding: 0.3rem 0; overflow-wrap: anywhere; }
+  .nearby span { color: var(--ink-3); font-size: 0.85rem; white-space: nowrap; }
   h2 {
     font-family: "Source Serif 4", Georgia, serif; font-size: 1.15rem;
     margin: 0 0 0.9rem; padding-bottom: 0.4rem; border-bottom: 1px solid var(--line);

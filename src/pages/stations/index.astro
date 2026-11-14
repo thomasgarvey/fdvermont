@@ -1,6 +1,6 @@
 ---
 import Archive from "../../layouts/Archive.astro";
-import { stations, photographedCount } from "../../lib/stations";
+import { stations, photographedCount, titleCase } from "../../lib/stations";
 import { townBySlug, townSlugForStation } from "../../lib/towns";
 
 // Grouped by town so the list reads as a gazetteer rather than 274 flat rows.
@@ -11,6 +11,25 @@ for (const s of stations) {
 }
 const towns = [...byTown.entries()].sort((a, b) => a[0].localeCompare(b[0]));
 const counties = new Set(stations.map((s) => s.county).filter(Boolean)).size;
+
+const byCounty = new Map<string, { name: string; total: number; done: number }>();
+for (const s of stations) {
+  if (!s.county) continue;
+  const c = byCounty.get(s.county) ?? { name: titleCase(s.county), total: 0, done: 0 };
+  c.total++;
+  if (s.photo) c.done++;
+  byCounty.set(s.county, c);
+}
+const countyRows = [...byCounty.entries()]
+  .map(([key, c]) => ({ key, ...c, pct: (100 * c.done) / c.total }))
+  .sort((a, b) => a.pct - b.pct || a.name.localeCompare(b.name));
+const worst = new Set(countyRows.slice(0, 3).map((c) => c.key));
+const townSize = new Map<string, number>();
+for (const s of stations) townSize.set(s.town, (townSize.get(s.town) ?? 0) + 1);
+const wanted = stations
+  .filter((s) => !s.photo && worst.has(s.county))
+  .sort((a, b) => townSize.get(b.town)! - townSize.get(a.town)! || a.name.localeCompare(b.name))
+  .slice(0, 8);
 ---
 
 <Archive
@@ -72,6 +91,29 @@ const counties = new Set(stations.map((s) => s.county).filter(Boolean)).size;
       {photographedCount} of the {stations.length} stations have been photographed so far; a red dot
       marks one we have. <a href="/contact#photo">Send a photograph</a> of one that's missing.
     </p>
+    <section class="progress" aria-labelledby="pc-h">
+      <h2 id="pc-h">Photographs by county</h2>
+      <ul class="bars">
+        {countyRows.map((c) => (
+          <li>
+            <span class="cn">{c.name}</span>
+            <span class="cx">{c.done} of {c.total}</span>
+            <div class="bar" aria-hidden="true"><div style={`width:${c.pct.toFixed(1)}%`}></div></div>
+          </li>
+        ))}
+      </ul>
+      {wanted.length > 0 && (
+        <>
+          <h3>Wanted next</h3>
+          <ul class="wanted">
+            {wanted.map((s) => (
+              <li><a href={`/departments/${s.page}#${s.slug}`}>{s.name}</a> <span>{s.town}, {titleCase(s.county)}</span></li>
+            ))}
+          </ul>
+        </>
+      )}
+      <p><a href="/contact#photo">Send a photograph</a></p>
+    </section>
   </main>
 </Archive>
 
@@ -148,6 +190,17 @@ const counties = new Set(stations.map((s) => s.county).filter(Boolean)).size;
   .near-list span { color: var(--ink-3); font-size: 0.83rem; }
   .appeal { margin: 2.4rem 0 0; padding-top: 1rem; border-top: 1px solid var(--line); color: var(--ink-2); font-size: 0.92rem; }
   .appeal a { color: var(--red); }
+  .progress { margin-top: 1.6rem; }
+  .progress h2 { font-size: 1.1rem; margin: 0 0 0.8rem; }
+  .progress h3 { font-size: 0.95rem; margin: 1.4rem 0 0.5rem; }
+  .bars, .wanted { list-style: none; margin: 0; padding: 0; }
+  .bars li { display: grid; grid-template-columns: 1fr auto; gap: 0.15rem 0.8rem; margin-bottom: 0.6rem; font-size: 0.9rem; }
+  .cx { color: var(--ink-3); }
+  .bar { grid-column: 1 / -1; height: 4px; background: var(--line); }
+  .bar div { height: 100%; background: var(--red); }
+  .wanted li { padding: 0.2rem 0; font-size: 0.9rem; overflow-wrap: anywhere; }
+  .wanted span { color: var(--ink-3); }
+  .progress a { color: var(--red); }
   .atoz {
     display: flex; flex-wrap: wrap; gap: 0.35rem; margin: 1.4rem 0 2rem;
     padding-bottom: 1rem; border-bottom: 1px solid var(--line);
