@@ -354,6 +354,93 @@ import { telHref } from "../../lib/tel";
       )}
     </header>
 
+    {map && (
+      <figure class="cmap">
+        <svg viewBox={`0 0 ${map.width} ${map.height}`} role="img"
+             aria-label={town
+               ? `${place} within ${map.county} County, with every fire station in the county marked`
+               : `${dept!.name}'s ${stations.length === 1 ? "station" : "stations"} in ${place}, with every fire station in ${map.county} County marked`}>
+          {/* Neighbours first, so the subject town draws over their shared edges. */}
+          {map.shapes.map((s) => !s.isSubject && (
+            <path d={s.d} class={s.onRoster ? "nb" : "nb none"} />
+          ))}
+          {map.shapes.map((s) => s.isSubject && (
+            <path d={s.d} class="me" />
+          ))}
+
+          {/* The lake over the towns: a town boundary runs out into Lake
+              Champlain, so this is what puts the shoreline back. Clipped to the
+              county, because the far side of the lake is New York and drawing
+              it would say this map covers more than it does. The clip reuses
+              the town paths rather than repeating them — they are the single
+              largest thing on the page. */}
+          {map.water && (
+            <>
+              {/* One path holding every town, not a <use> per town: a clip made
+                  of many shapes has to be merged first, and Chrome and Safari
+                  both gave up on the merge and drew almost no lake. */}
+              <clipPath id="county">
+                <path d={map.shapes.map((s) => s.d).join("")} />
+              </clipPath>
+              <path d={map.water} class="water" fill-rule="evenodd" clip-path="url(#county)" />
+            </>
+          )}
+          {map.waterLabels.map((w) => (
+            <text x={w.cx} y={w.cy} class="wl" text-anchor="middle"
+                  transform={w.vertical ? `rotate(-90 ${w.cx.toFixed(1)} ${w.cy.toFixed(1)})` : undefined}
+            >{w.name}</text>
+          ))}
+
+          {map.shapes.filter((s) => !s.isSubject && s.labelled).map((s) => (
+            <text x={s.lx} y={s.ly} class="nbl" text-anchor="middle">{s.name}</text>
+          ))}
+
+          {map.points.filter((p) => !p.mine).map((p) => (
+            <circle cx={p.x} cy={p.y} r="3" class="pt"><title>{p.label}</title></circle>
+          ))}
+          {map.points.filter((p) => p.mine).map((p) => (
+            <circle cx={p.x} cy={p.y} r="5.5" class={p.photo ? "pt mine lit" : "pt mine"}>
+              <title>{p.label}</title>
+            </circle>
+          ))}
+
+          {map.label && (
+            <text x={map.label.x} y={map.label.y} class="mel" text-anchor="middle">{map.label.text}</text>
+          )}
+
+          <g class="bar" transform={`translate(${map.width - map.scale.px - 16}, ${map.height - 18})`}>
+            <line x1="0" y1="0" x2={map.scale.px} y2="0" />
+            <line x1="0" y1="-4" x2="0" y2="4" />
+            <line x1={map.scale.px} y1="-4" x2={map.scale.px} y2="4" />
+            <text x={map.scale.px / 2} y="-7" text-anchor="middle">{map.scale.miles} miles</text>
+          </g>
+        </svg>
+        {town ? (
+          <figcaption>
+            {place} in {map.county} County. Every fire station in the county is marked —
+            {" "}{stations.length} here, {neighbourStations} in neighbouring towns, which is
+            who turns out on a mutual aid call.
+            {apartHere > 0 && (
+              ` The ${apartHere === 1 ? "one other station" : `${apartHere} other stations`} inside
+              the town line ${apartHere === 1 ? "belongs" : "belong"} to ${apartNames}.`
+            )}
+            {" "}Boundaries and water from VCGI; fire district lines are not town lines, and
+            village districts and contracted coverage cross them. A town line runs out into
+            the lake, so the shoreline here is the water drawn over the boundary, not the
+            boundary itself.
+          </figcaption>
+        ) : (
+          <figcaption>
+            The {dept!.name}'s {stations.length === 1 ? "station" : `${stations.length} stations`},
+            in {place}, with every other fire station in {map.county} County marked
+            — {others} of them. No town is drawn as its own, because the ground it covers is
+            not a town's. Boundaries and water from VCGI; a town line runs out into the lake,
+            so the shoreline here is the water drawn over the boundary, not the boundary itself.
+          </figcaption>
+        )}
+      </figure>
+    )}
+
     {/* What most visitors from search came for: where it is and how to call. */}
     <aside class="quick" aria-label="Address and phone">
       <div class="q911"><strong>Emergency? Call 911.</strong></div>
@@ -640,92 +727,6 @@ import { telHref } from "../../lib/tel";
       </section>
     )}
 
-    {map && (
-      <figure class="cmap">
-        <svg viewBox={`0 0 ${map.width} ${map.height}`} role="img"
-             aria-label={town
-               ? `${place} within ${map.county} County, with every fire station in the county marked`
-               : `${dept!.name}'s ${stations.length === 1 ? "station" : "stations"} in ${place}, with every fire station in ${map.county} County marked`}>
-          {/* Neighbours first, so the subject town draws over their shared edges. */}
-          {map.shapes.map((s) => !s.isSubject && (
-            <path d={s.d} class={s.onRoster ? "nb" : "nb none"} />
-          ))}
-          {map.shapes.map((s) => s.isSubject && (
-            <path d={s.d} class="me" />
-          ))}
-
-          {/* The lake over the towns: a town boundary runs out into Lake
-              Champlain, so this is what puts the shoreline back. Clipped to the
-              county, because the far side of the lake is New York and drawing
-              it would say this map covers more than it does. The clip reuses
-              the town paths rather than repeating them — they are the single
-              largest thing on the page. */}
-          {map.water && (
-            <>
-              {/* One path holding every town, not a <use> per town: a clip made
-                  of many shapes has to be merged first, and Chrome and Safari
-                  both gave up on the merge and drew almost no lake. */}
-              <clipPath id="county">
-                <path d={map.shapes.map((s) => s.d).join("")} />
-              </clipPath>
-              <path d={map.water} class="water" fill-rule="evenodd" clip-path="url(#county)" />
-            </>
-          )}
-          {map.waterLabels.map((w) => (
-            <text x={w.cx} y={w.cy} class="wl" text-anchor="middle"
-                  transform={w.vertical ? `rotate(-90 ${w.cx.toFixed(1)} ${w.cy.toFixed(1)})` : undefined}
-            >{w.name}</text>
-          ))}
-
-          {map.shapes.filter((s) => !s.isSubject && s.labelled).map((s) => (
-            <text x={s.lx} y={s.ly} class="nbl" text-anchor="middle">{s.name}</text>
-          ))}
-
-          {map.points.filter((p) => !p.mine).map((p) => (
-            <circle cx={p.x} cy={p.y} r="3" class="pt"><title>{p.label}</title></circle>
-          ))}
-          {map.points.filter((p) => p.mine).map((p) => (
-            <circle cx={p.x} cy={p.y} r="5.5" class={p.photo ? "pt mine lit" : "pt mine"}>
-              <title>{p.label}</title>
-            </circle>
-          ))}
-
-          {map.label && (
-            <text x={map.label.x} y={map.label.y} class="mel" text-anchor="middle">{map.label.text}</text>
-          )}
-
-          <g class="bar" transform={`translate(${map.width - map.scale.px - 16}, ${map.height - 18})`}>
-            <line x1="0" y1="0" x2={map.scale.px} y2="0" />
-            <line x1="0" y1="-4" x2="0" y2="4" />
-            <line x1={map.scale.px} y1="-4" x2={map.scale.px} y2="4" />
-            <text x={map.scale.px / 2} y="-7" text-anchor="middle">{map.scale.miles} miles</text>
-          </g>
-        </svg>
-        {town ? (
-          <figcaption>
-            {place} in {map.county} County. Every fire station in the county is marked —
-            {" "}{stations.length} here, {neighbourStations} in neighbouring towns, which is
-            who turns out on a mutual aid call.
-            {apartHere > 0 && (
-              ` The ${apartHere === 1 ? "one other station" : `${apartHere} other stations`} inside
-              the town line ${apartHere === 1 ? "belongs" : "belong"} to ${apartNames}.`
-            )}
-            {" "}Boundaries and water from VCGI; fire district lines are not town lines, and
-            village districts and contracted coverage cross them. A town line runs out into
-            the lake, so the shoreline here is the water drawn over the boundary, not the
-            boundary itself.
-          </figcaption>
-        ) : (
-          <figcaption>
-            The {dept!.name}'s {stations.length === 1 ? "station" : `${stations.length} stations`},
-            in {place}, with every other fire station in {map.county} County marked
-            — {others} of them. No town is drawn as its own, because the ground it covers is
-            not a town's. Boundaries and water from VCGI; a town line runs out into the lake,
-            so the shoreline here is the water drawn over the boundary, not the boundary itself.
-          </figcaption>
-        )}
-      </figure>
-    )}
 
     {profile?.coverage && (
       <section class="block" aria-labelledby="cv-h">
@@ -968,7 +969,7 @@ import { telHref } from "../../lib/tel";
   .qnote { display: block; font-size: 0.78rem; color: var(--ink-3); }
 
   .cmap { margin: 0 0 2.4rem; }
-  .cmap svg { width: 100%; height: auto; display: block; background: var(--surface); }
+  .cmap svg { width: 100%; height: auto; max-height: 46vh; display: block; margin: 0 auto; background: var(--surface); }
   /* Neighbouring towns: outlined, not filled, so the subject reads first.
      A town with no station on the roster is left hollow — the gap is data. */
   .nb { fill: color-mix(in srgb, var(--ink-3) 8%, transparent); stroke: var(--ink-3); stroke-width: 0.6; }
