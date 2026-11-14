@@ -99,6 +99,23 @@ const plates = [...photosData]
   .sort((a, b) => (b.dateTaken ?? "").localeCompare(a.dateTaken ?? ""))
   .slice(0, 12);
 
+// Every department page, grouped by county, so the homepage links to all of them in
+// plain text: a visitor can browse by county and a crawler can reach every page.
+const countyLinks = new Map<string, { href: string; name: string }[]>();
+for (const t of towns) {
+  const c = titleCase(t.county || "Other");
+  if (!countyLinks.has(c)) countyLinks.set(c, []);
+  countyLinks.get(c)!.push({ href: `/departments/${t.slug}`, name: t.name });
+}
+for (const a of apart) {
+  const c = titleCase(a.county || "Other");
+  if (!countyLinks.has(c)) countyLinks.set(c, []);
+  countyLinks.get(c)!.push({ href: `/departments/${a.slug}`, name: a.department.name });
+}
+const countyList = [...countyLinks.entries()]
+  .sort(([a], [b]) => a.localeCompare(b))
+  .map(([county, links]) => ({ county, links: links.sort((x, y) => x.name.localeCompare(y.name)) }));
+
 // The station record, built from the fields the archive actually holds.
 const recordOf = (p: (typeof photosData)[number]) => [
   ["Town", p.department?.city ?? titleCase(p.town ?? "—")],
@@ -135,14 +152,14 @@ import { phoneById } from "../lib/phone";
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <meta name="color-scheme" content="light dark" />
-    <title>Vermont Fire Departments</title>
+    <title>Vermont Fire Departments – Stations, Phone Numbers and Photographs</title>
     <meta
       name="description"
-      content="Every fire department in Vermont, town by town: its history, calls, stations, apparatus and photographs."
+      content="Every fire department in Vermont, town by town: phone numbers, station addresses, history, apparatus and photographs."
     />
     <Seo
-      title="Vermont Fire Departments"
-      description="Every fire department in Vermont, town by town: its history, calls, stations, apparatus and photographs."
+      title="Vermont Fire Departments – Stations, Phone Numbers and Photographs"
+      description="Every fire department in Vermont, town by town: phone numbers, station addresses, history, apparatus and photographs."
     />
     <!-- The site's name for search results. Google takes it from WebSite
          structured data first, then the title; both say Vermont Fire Departments. -->
@@ -337,6 +354,31 @@ import { phoneById } from "../lib/phone";
             ))}
           </div>
           <p class="all-photos"><a href="/photos">See all photographs →</a></p>
+        </div>
+      </section>
+
+      <section class="sec" id="browse">
+        <div class="wrap">
+          <div class="sec-head">
+            <p class="stamp">Browse</p>
+            <h2>Fire departments by county</h2>
+            <p class="sec-sub">
+              Every town and department with a page here: its phone number, station addresses,
+              history, and the photographs we have. <a href="/departments">See the full list</a>.
+            </p>
+          </div>
+          <div class="counties">
+            {countyList.map(({ county, links }) => (
+              <div>
+                <h3>{county} County</h3>
+                <p>
+                  {links.map((l, i) => (
+                    <>{i > 0 && " · "}<a href={l.href}>{l.name}</a></>
+                  ))}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -1334,6 +1376,12 @@ import { phoneById } from "../lib/phone";
     }
   }
 
+  .counties { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: 1.6rem 2.4rem; }
+  .counties p { overflow-wrap: anywhere; }
+  .counties h3 { margin: 0 0 0.4rem; font-size: 1rem; }
+  .counties p { margin: 0; font-size: 0.88rem; line-height: 1.7; color: var(--ink-2, inherit); }
+  .counties a { color: inherit; text-decoration: underline; text-decoration-color: color-mix(in srgb, currentColor 30%, transparent); text-underline-offset: 2px; }
+  .counties a:hover { color: var(--red); }
   .all-photos { margin: 1.6rem 0 0; }
   .all-photos a { color: var(--red); font-weight: 600; text-decoration: none; }
   .all-photos a:hover { text-decoration: underline; }
