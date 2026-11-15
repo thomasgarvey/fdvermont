@@ -49,7 +49,9 @@ const description = p
 <Archive title={title} description={description}>
   <main class="wrap page">
     <nav class="crumbs" aria-label="Breadcrumb">
-      <a href="/stations">All stations</a>
+      <a href="/">Home</a>
+      <span aria-hidden="true">/</span>
+      <a href="/stations">Stations</a>
       <span aria-hidden="true">/</span>
       <a href={townHref}>{station.town}</a>
     </nav>

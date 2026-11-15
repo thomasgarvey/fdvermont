@@ -149,7 +149,11 @@ import { phoneById } from "../lib/phone";
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
-    <meta name="viewport" content="width=device-width" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#14100e" />
+    <link rel="preload" as="image" href={hero.medium} fetchpriority="high" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
     <meta name="color-scheme" content="light dark" />
     <title>Vermont Fire Departments – Stations, Phone Numbers and Photographs</title>
@@ -179,14 +183,13 @@ import { phoneById } from "../lib/phone";
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300..700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300..700;1,8..60,400&display=swap"
-    />
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300..700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300..700;1,8..60,400&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300..700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300..700;1,8..60,400&display=swap" /></noscript>
     <Analytics />
   </head>
 
   <body>
+    <a class="skip" href="#main">Skip to content</a>
     <header class="masthead">
       <div class="wrap mast-in">
         <a class="brand" href="/">
@@ -201,6 +204,7 @@ import { phoneById } from "../lib/phone";
         </a>
         <nav class="nav" id="sitenav">
           <a href="/departments">Departments</a>
+          <a href="/stations">Stations</a>
           <a href="#map">Map</a>
           <a href="/photos">Photographs</a>
           <a href="#about">About</a>
@@ -226,9 +230,9 @@ import { phoneById } from "../lib/phone";
       </div>
     </header>
 
-    <main>
+    <main id="main">
       <section class="hero">
-        <div class="hero-photo" style={`background-image:url("${hero.src}")${focus(hero)}`} role="img"
+        <div class="hero-photo" style={`background-image:url("${hero.medium}")${focus(hero)}`} role="img"
           aria-label={`${label(hero)}, ${place(hero)}`}></div>
         <div class="wrap hero-wrap">
           <div class="panel">
@@ -418,6 +422,9 @@ import { phoneById } from "../lib/phone";
       <div class="wrap foot">
         <p class="foot-name">© {new Date().getFullYear()} Vermont Fire Departments</p>
         <nav class="foot-links" aria-label="Footer">
+          <a href="/stations">Stations</a>
+          <a href="/statewide-teams">Statewide teams</a>
+          <a href="/map">Map</a>
           <a href="/privacy">Privacy Policy</a>
           <a href="/contact">Contact</a>
         </nav>
@@ -642,7 +649,7 @@ import { phoneById } from "../lib/phone";
     --fdvt-panel-ink: #394044;
     --fdvt-panel-hover: #f0e7d7;
     --fdvt-muted: #5c6469;
-    --fdvt-faint: #8a8177;
+    --fdvt-faint: #6b635a;
     --shadow: 0 1px 2px rgba(36, 37, 38, 0.06), 0 12px 30px rgba(36, 37, 38, 0.09);
   }
   :root[data-theme="dark"] {
@@ -663,7 +670,7 @@ import { phoneById } from "../lib/phone";
     --fdvt-panel-ink: #e8e0d2;
     --fdvt-panel-hover: #2f2a26;
     --fdvt-muted: #a9a093;
-    --fdvt-faint: #7e766b;
+    --fdvt-faint: #968d80;
     --shadow: 0 1px 2px rgba(0, 0, 0, 0.45), 0 14px 34px rgba(0, 0, 0, 0.4);
   }
 
@@ -1424,6 +1431,9 @@ import { phoneById } from "../lib/phone";
 </style>
 
 <style is:global>
+.skip { position: absolute; left: -999px; top: 0; }
+.skip:focus { left: 1rem; top: 1rem; z-index: 99; background: #faf7f0; color: #1a1918; padding: .75rem 1rem; }
+
   /* The map should read like a paper atlas, not a slick web map: OSM's raster
      tiles are muted toward cream, green and grey in light, and warmed down in
      dark. One tile source, one attribution. */

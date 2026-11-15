@@ -39,6 +39,7 @@
     const show = (i: number) => {
       at = (i + triggers.length) % triggers.length;
       const t = triggers[at];
+      img.decoding = "async";
       img.src = t.dataset.full!;
       img.alt = t.querySelector("img")?.alt ?? "";
       title.textContent = t.dataset.caption ?? "";

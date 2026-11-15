@@ -19,7 +19,10 @@ import Seo from "../components/Seo.astro";
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
-    <meta name="viewport" content="width=device-width" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#14100e" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
     <meta name="color-scheme" content="light dark" />
     <title>{title}</title>
@@ -35,15 +38,14 @@ import Seo from "../components/Seo.astro";
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300..700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300..700;1,8..60,400&display=swap"
-    />
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300..700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300..700;1,8..60,400&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300..700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300..700;1,8..60,400&display=swap" /></noscript>
     <Analytics />
     <slot name="head" />
   </head>
 
   <body>
+    <a class="skip" href="#main">Skip to content</a>
     <header class="masthead">
       <div class="wrap mast-in">
         <a class="brand" href="/">
@@ -87,7 +89,9 @@ import Seo from "../components/Seo.astro";
       </div>
     </header>
 
-    <slot />
+    <main id="main">
+      <slot />
+    </main>
 
     <footer>
       <div class="wrap foot">
@@ -143,13 +147,19 @@ import Seo from "../components/Seo.astro";
 </html>
 
 <style is:global>
+.skip { position: absolute; left: -999px; top: 0; }
+.skip:focus { left: 1rem; top: 1rem; z-index: 99; background: var(--surface, #faf7f0); color: var(--ink, #1a1918); padding: .75rem 1rem; }
+:focus-visible { outline: 2px solid var(--red, #8b211e); outline-offset: 3px; }
+.masthead :focus-visible { outline-color: #efe7d9; }
+html { overflow-x: clip; }
+
 :root {
     color-scheme: light;
     --paper: #f3ebdd;
     --surface: #faf7f0;
     --ink: #394044;
     --ink-2: #5c6469;
-    --ink-3: #8a8177;
+    --ink-3: #6b635a;
     --line: #ddd2c0;
     --brass: #b08a4a;
     --red: #8b211e;
@@ -164,7 +174,7 @@ import Seo from "../components/Seo.astro";
     --surface: #232120;
     --ink: #e8e0d2;
     --ink-2: #a9a093;
-    --ink-3: #7e766b;
+    --ink-3: #968d80;
     --line: #383431;
     --brass: #c9a45e;
     --red: #b8453c;

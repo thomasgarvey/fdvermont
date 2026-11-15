@@ -18,11 +18,12 @@ const fallback = photosData.find((p) => p.id === "recKofDfSCLcl7RG9") ?? photosD
 
 const { title, description, type = "website" } = Astro.props;
 const image = Astro.props.image ?? fallback.medium;
-const imageAlt = Astro.props.image ? Astro.props.imageAlt : fallback.caption ?? undefined;
+const imageAlt = Astro.props.image ? Astro.props.imageAlt ?? "Vermont fire station photograph" : fallback.caption ?? "Vermont fire station photograph";
 
 const path = Astro.url.pathname.replace(/\/+$/, "") || "/";
 const canonical = new URL(path, Astro.site).href;
 const imageUrl = new URL(image, Astro.site).href;
+const imageType = /\.png$/i.test(image) ? "image/png" : /\.webp$/i.test(image) ? "image/webp" : "image/jpeg";
 ---
 
 <link rel="canonical" href={canonical} />
@@ -32,6 +33,11 @@ const imageUrl = new URL(image, Astro.site).href;
 <meta property="og:title" content={title} />
 {description && <meta property="og:description" content={description} />}
 <meta property="og:image" content={imageUrl} />
+<meta property="og:image:type" content={imageType} />
 {imageAlt && <meta property="og:image:alt" content={imageAlt} />}
 <meta property="og:locale" content="en_US" />
 <meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+{description && <meta name="twitter:description" content={description} />}
+<meta name="twitter:image" content={imageUrl} />
+{imageAlt && <meta name="twitter:image:alt" content={imageAlt} />}

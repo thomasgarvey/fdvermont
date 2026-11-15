@@ -178,6 +178,8 @@ const deptById = new Map(depts.map((r) => [r.id, r.fields]));
 const stationById = new Map(stationRows.map((r) => [r.id, r.fields]));
 
 mkdirSync(`${ROOT}/public/photos`, { recursive: true });
+// Duplicate photographs removed from the site on request (kept in Airtable).
+const EXCLUDED = new Set(JSON.parse(readFileSync(`${ROOT}/src/data/photo-excluded.json`, 'utf8')));
 const out = [];
 // Photos whose Subject is "Apparatus" — engines, tankers, rescues — rather than
 // a building. They go to their own file so nothing that expects a station
@@ -188,6 +190,7 @@ for (const r of photos) {
   const f = r.fields;
   const att = f.Photo?.[0];
   if (!att) continue;
+  if (EXCLUDED.has(r.id)) continue;
   if (HIDDEN_STATUSES.has(f['Publication Status'])) continue;
 
   const e = ext(att.type, att.filename);

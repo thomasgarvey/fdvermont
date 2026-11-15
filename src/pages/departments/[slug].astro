@@ -45,6 +45,7 @@ const maxOf = (bars: { value: number | null }[]) => Math.max(...bars.map((b) => 
 const yearScale = maxOf([...(profile?.calls?.byYear?.bars ?? []), ...(profile?.calls?.byYear2?.bars ?? [])]);
 const place = town ? town.name : standalone!.town;
 const county = subject.county;
+const countyHref = county ? `/departments#c-${county.toLowerCase().replace(/\s+/g, "-")}` : "/departments";
 const stations = subject.stations;
 const departments = town ? town.departments : [standalone!.department];
 // The town a standalone department works from, when the town has a page.
@@ -325,7 +326,10 @@ import { telHref } from "../../lib/tel";
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(structured)} />
   <main class="wrap page">
     <nav class="crumbs" aria-label="Breadcrumb">
-      <a href="/stations">All stations</a>
+      <a href="/">Home</a>
+      <span aria-hidden="true">/</span>
+      <a href="/departments">Departments</a>
+      {county && <><span aria-hidden="true">/</span><a href={countyHref}>{county} County</a></>}
       <span aria-hidden="true">/</span>
       {home ? <a href={`/departments/${home.slug}`}>{place}</a> : <span>{place}</span>}
     </nav>
@@ -336,12 +340,12 @@ import { telHref } from "../../lib/tel";
           there is no single name to put at the top. */}
       {departments.length === 1 ? (
         <>
-          <p class="stamp">{place}{county && `, ${county} County`}</p>
+          <p class="stamp">{place}{county && <>, <a href={countyHref}>{county} County</a></>}</p>
           <h1>{departments[0].name}</h1>
         </>
       ) : (
         <>
-          <p class="stamp">{county && `${county} County`}</p>
+          <p class="stamp">{county && <a href={countyHref}>{county} County</a>}</p>
           <h1>{place}</h1>
           {departments.length > 1 && (
             <p class="sub">{profile?.subtitle ?? departments.map((d) => d.name).join(" · ")}</p>
@@ -534,7 +538,7 @@ import { telHref } from "../../lib/tel";
                 <img src={s.photo.medium}
                      alt={`${s.name} at ${s.address}, ${s.town}, Vermont`}
                      width={s.photo.mediumWidth ?? undefined} height={s.photo.mediumHeight ?? undefined}
-                     loading="lazy" />
+                     loading="lazy" decoding="async" />
               </button>
               <figcaption>
                 {s.photo.caption && s.photo.caption !== s.name && (
@@ -552,7 +556,7 @@ import { telHref } from "../../lib/tel";
                         <img src={p.thumb}
                              alt={`${p.caption || s.name}, ${s.town}, Vermont`}
                              width={p.thumbWidth ?? undefined} height={p.thumbHeight ?? undefined}
-                             loading="lazy" />
+                             loading="lazy" decoding="async" />
                       </button>
                     </li>
                   ))}
@@ -726,7 +730,7 @@ import { telHref } from "../../lib/tel";
                 <img src={a.thumb}
                      alt={[a.caption || "Fire apparatus", a.department].filter(Boolean).join(", ")}
                      width={a.thumbWidth ?? undefined} height={a.thumbHeight ?? undefined}
-                     loading="lazy" />
+                     loading="lazy" decoding="async" />
               </button>
               <figcaption>
                 {a.caption && <span class="cap">{a.caption}</span>}

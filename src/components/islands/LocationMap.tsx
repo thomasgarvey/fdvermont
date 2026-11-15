@@ -46,7 +46,10 @@ type Photo = (typeof photosData)[number];
 const cropAt = (p: Photo) =>
   (photoFocus as Record<string, string>)[p.id] ?? ((p.height ?? 0) > (p.width ?? 0) ? '50% 28%' : '50% 50%');
 
-function photoBlockHtml(p: Photo, href?: string): string {
+const escAttr = (s: string) =>
+  s.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/'/g, '&#39;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+function photoBlockHtml(p: Photo, href?: string, stationName?: string): string {
   const credit = p.photographer
     ? `<div style="color:var(--fdvt-faint,#888);font-size:11px;margin-top:3px">Photograph by ${p.photographer}</div>`
     : '';
@@ -54,7 +57,7 @@ function photoBlockHtml(p: Photo, href?: string): string {
   // focus point (photo-focus.json) or, for portraits, toward the sign above the doors.
   const portrait = (p.height ?? 0) > (p.width ?? 0);
   const pos = cropAt(p);
-  const img = `<img src="${p.thumb}" alt="${p.caption || 'Station photo'}" style="width:100%;aspect-ratio:${portrait ? '4/3' : '16/9'};object-fit:cover;object-position:${pos};border-radius:4px;display:block" />`;
+  const img = `<img src="${p.thumb}" alt="${escAttr(p.caption || stationName || 'Station photo')}" style="width:100%;aspect-ratio:${portrait ? '4/3' : '16/9'};object-fit:cover;object-position:${pos};border-radius:4px;display:block" />`;
   const block = href
     ? `<a href="${href}" style="display:block;margin-top:8px">${img}</a>`
     : `<div style="margin-top:8px">${img}</div>`;
@@ -85,7 +88,7 @@ function buildPopup(st: StationRecord): string {
       return `<div style="margin-top:4px;font-size:13px">${all.length > 1 ? `${d.name}: ` : ''}${num}${all.length > 1 ? '' : ' <span style="color:var(--fdvt-muted,#555)">· not for emergencies</span>'}</div>`;
     })
     .join('');
-  return `${headHtml(st.name, [st.address, st.town].filter(Boolean).join(', '))}${tel}${p ? photoBlockHtml(p, page) : ''}${more}`;
+  return `${headHtml(st.name, [st.address, st.town].filter(Boolean).join(', '))}${tel}${p ? photoBlockHtml(p, page, st.name) : ''}${more}`;
 }
 
 /**
@@ -394,7 +397,7 @@ export default function LocationMap({
       if (placed.has(p.id) || p.lat == null || p.lng == null) continue;
       const name = p.department?.name || p.caption || 'Station';
       const marker = L.marker([p.lat, p.lng], { icon: ICON_WITH_PHOTO })
-        .bindPopup(`${headHtml(name, p.stationAddress ?? '')}${photoBlockHtml(p)}`, POPUP_OPTS_PHOTO);
+        .bindPopup(`${headHtml(name, p.stationAddress ?? '')}${photoBlockHtml(p, undefined, name)}`, POPUP_OPTS_PHOTO);
       cluster.addLayer(marker);
       // These pins sit outside the E911 town list, so fall back to the
       // department's city for the label the search results show.
@@ -544,8 +547,12 @@ export default function LocationMap({
           fontFamily: 'system-ui, sans-serif',
         }}
       >
+        <div role="status" aria-live="polite" style={{ position: 'absolute', width: '1px', height: '1px', overflow: 'hidden', clip: 'rect(0 0 0 0)', whiteSpace: 'nowrap' }}>
+          {results.length + towns.length > 0 ? `${results.length + towns.length} results` : ''}
+        </div>
         {(results.length > 0 || towns.length > 0) && (
           <ul
+            aria-label="Search results"
             style={{
               listStyle: 'none', margin: '0 0 -1px', padding: '4px 0',
               background: 'var(--fdvt-panel, #fff)', color: 'var(--fdvt-panel-ink, #2b2b2b)',
@@ -559,7 +566,7 @@ export default function LocationMap({
                   onClick={() => goToTown(tw)}
                   style={{
                     display: 'block', flex: 1, textAlign: 'left', border: 'none',
-                    background: 'none', color: 'inherit', padding: '8px 14px', fontSize: '14px', cursor: 'pointer',
+                    background: 'none', color: 'inherit', padding: '12px 14px', minHeight: '44px', fontSize: '14px', cursor: 'pointer',
                   }}
                   onMouseOver={(e) => ((e.currentTarget as HTMLElement).style.background = 'var(--fdvt-panel-hover, #f6efe7)')}
                   onMouseOut={(e) => ((e.currentTarget as HTMLElement).style.background = 'none')}
@@ -571,7 +578,7 @@ export default function LocationMap({
                   <a
                     href={`/departments/${tw.page}`}
                     style={{
-                      display: 'flex', alignItems: 'center', padding: '8px 14px', fontSize: '13px',
+                      display: 'flex', alignItems: 'center', padding: '12px 14px', minHeight: '44px', fontSize: '13px',
                       fontWeight: 600, color: 'var(--fdvt-link, #8B211E)', textDecoration: 'none', whiteSpace: 'nowrap',
                     }}
                   >
@@ -586,7 +593,7 @@ export default function LocationMap({
                   onClick={() => goTo(r)}
                   style={{
                     display: 'block', width: '100%', textAlign: 'left', border: 'none',
-                    background: 'none', color: 'inherit', padding: '8px 14px', fontSize: '14px', cursor: 'pointer',
+                    background: 'none', color: 'inherit', padding: '12px 14px', minHeight: '44px', fontSize: '14px', cursor: 'pointer',
                   }}
                   onMouseOver={(e) => ((e.target as HTMLElement).style.background = 'var(--fdvt-panel-hover, #f6efe7)')}
                   onMouseOut={(e) => ((e.target as HTMLElement).style.background = 'none')}
@@ -608,13 +615,14 @@ export default function LocationMap({
         >
         <input
           type="search"
-          placeholder="🔍 Search a town or address…"
+          aria-label="Search a town or address"
+          placeholder="Search a town or address…"
           value={query}
           onInput={(e) => runSearch((e.target as HTMLInputElement).value)}
           style={{
             width: '100%', padding: '10px 14px', fontSize: '15px', border: 'none',
             borderRadius: results.length || towns.length ? '0 0 12px 12px' : '999px',
-            boxShadow: '0 2px 8px rgba(0,0,0,.25)', outline: 'none', boxSizing: 'border-box',
+            boxShadow: '0 2px 8px rgba(0,0,0,.25)', boxSizing: 'border-box',
           }}
         />
         </form>
