@@ -1,0 +1,38 @@
+---
+import Archive from "../../layouts/Archive.astro";
+import { insights } from "../../data/insights";
+const fmt = (d: string) => new Date(d + "T12:00:00").toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
+---
+<Archive
+  title="Insights – Vermont Fire Departments"
+  description="Data stories about Vermont's fire departments: how much ground a station covers, where the stations are, and what the numbers say."
+>
+  <main class="wrap page">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><span>Insights</span></nav>
+    <p class="kicker">Insights</p>
+    <h1>What the numbers say about Vermont's fire departments</h1>
+    <p class="lede">Short articles built from the same data as the department pages. Each one says where its figures come from and what they leave out.</p>
+    <ul class="list">
+      {insights.map((a) => (
+        <li>
+          <a href={`/insights/${a.slug}`}>{a.title}</a>
+          <p>{a.dek}</p>
+          <time datetime={a.date}>{fmt(a.date)}</time>
+        </li>
+      ))}
+    </ul>
+  </main>
+</Archive>
+<style>
+  .page { padding: 2.5rem 0 4rem; max-width: 46rem; }
+  .crumbs { display: flex; gap: .5rem; font-size: .85rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+  .crumbs a { color: var(--red); }
+  .kicker { margin: 0; text-transform: uppercase; letter-spacing: .08em; font-size: .8rem; font-weight: 700; color: var(--red); }
+  h1 { margin: .3rem 0 .8rem; font-family: "Source Serif 4", Georgia, serif; font-size: clamp(1.9rem, 4vw, 2.6rem); line-height: 1.15; }
+  .lede { font-size: 1.1rem; line-height: 1.6; }
+  .list { list-style: none; padding: 0; margin: 2rem 0 0; display: grid; gap: 1.4rem; }
+  .list li { border-top: 1px solid var(--line); padding-top: 1rem; }
+  .list a { font-family: "Source Serif 4", Georgia, serif; font-size: 1.35rem; color: var(--red); line-height: 1.25; }
+  .list p { margin: .4rem 0; line-height: 1.55; }
+  time { font-size: .85rem; color: var(--ink-3); }
+</style>

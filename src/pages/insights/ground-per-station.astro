@@ -1,0 +1,114 @@
+---
+// Built from the site's own roster: each town's land area (Census, via VCGI's town
+// lines) divided by the fire stations on this site's list for that town.
+import Archive from "../../layouts/Archive.astro";
+import { towns } from "../../lib/towns";
+import { insights } from "../../data/insights";
+
+const meta = insights.find((a) => a.slug === "ground-per-station")!;
+const fmt = (n: number, d = 0) => n.toLocaleString("en-US", { maximumFractionDigits: d, minimumFractionDigits: d });
+
+const rows = towns
+  .filter((t) => t.stations.length > 0 && t.boundary?.landSqmi)
+  .map((t) => ({
+    name: t.name,
+    slug: t.stations.length ? t.slug : "",
+    county: t.county,
+    stations: t.stations.length,
+    sqmi: t.boundary!.landSqmi as number,
+    per: (t.boundary!.landSqmi as number) / t.stations.length,
+  }));
+const withNone = towns.filter((t) => t.stations.length === 0 && t.boundary?.landSqmi);
+
+const byPer = [...rows].sort((a, b) => b.per - a.per);
+const most = byPer.slice(0, 10);
+const least = byPer.slice(-10).reverse();
+const totalStations = rows.reduce((a, r) => a + r.stations, 0);
+const totalSqmi = rows.reduce((a, r) => a + r.sqmi, 0);
+const sorted = [...rows].map((r) => r.per).sort((a, b) => a - b);
+const median = sorted[Math.floor(sorted.length / 2)];
+
+const cMap = new Map<string, { stations: number; sqmi: number; towns: number }>();
+for (const r of rows) {
+  const c = cMap.get(r.county) ?? { stations: 0, sqmi: 0, towns: 0 };
+  c.stations += r.stations; c.sqmi += r.sqmi; c.towns++;
+  cMap.set(r.county, c);
+}
+const counties = [...cMap.entries()]
+  .map(([name, c]) => ({ name, ...c, per: c.sqmi / c.stations }))
+  .sort((a, b) => b.per - a.per);
+const maxPer = Math.max(...counties.map((c) => c.per));
+const oneStation = rows.filter((r) => r.stations === 1).length;
+const bigOne = rows.filter((r) => r.stations === 1 && r.sqmi >= 50).length;
+---
+<Archive title={`${meta.title} – Vermont Fire Departments`} description={meta.dek}>
+  <main class="wrap page">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <a href="/">Home</a><span aria-hidden="true">/</span><a href="/insights">Insights</a><span aria-hidden="true">/</span><span>Ground per station</span>
+    </nav>
+    <p class="kicker">Insights</p>
+    <h1>{meta.title}</h1>
+    <p class="lede">
+      Across the {rows.length} Vermont towns where this site lists at least one fire station, the typical station sits in a town of
+      {fmt(median)} square miles of land. The range is wide: from under 2 square miles in the small cities to more than 70 in the largest rural towns.
+    </p>
+
+    <h2>The towns with the most ground per station</h2>
+    <p>Divide a town's land area by its stations and the large rural towns stand out. In each of these, the stations on our list are few for the ground inside the town line.</p>
+    <ol class="rank">
+      {most.map((r) => (
+        <li><a href={`/departments/${r.slug}`}>{r.name}</a> <span>{fmt(r.per)} sq mi per station · {r.stations} station{r.stations > 1 ? "s" : ""} · {r.county} County</span></li>
+      ))}
+    </ol>
+
+    <h2>The towns with the least</h2>
+    <p>The other end is cities and compact village centres, where several stations or one close to everything share a small footprint.</p>
+    <ol class="rank">
+      {least.map((r) => (
+        <li><a href={`/departments/${r.slug}`}>{r.name}</a> <span>{fmt(r.per, r.per < 10 ? 1 : 0)} sq mi per station · {r.stations} station{r.stations > 1 ? "s" : ""} · {r.county} County</span></li>
+      ))}
+    </ol>
+
+    <h2>By county</h2>
+    <p>Combining every town in a county with a listed station:</p>
+    <div class="bars" role="list">
+      {counties.map((c) => (
+        <div class="bar" role="listitem">
+          <span>{c.name} County</span>
+          <span class="bt"><i style={`width:${(c.per / maxPer) * 100}%`}></i><b>{fmt(c.per)} sq mi per station</b></span>
+        </div>
+      ))}
+    </div>
+
+    <h2>What this does and doesn't show</h2>
+    <ul class="facts">
+      <li><b>It is a count of buildings, not of service.</b> {fmt(oneStation)} of the {rows.length} towns have a single station, and {bigOne} of those have 50 square miles or more. A station's real response area follows its department's district and mutual-aid agreements, not the town line.</li>
+      <li><b>The list is not complete.</b> This site's station list is built from the state's E911 layer plus stations added by hand. Some real stations are still missing from it, which makes the ground per station look larger than it is in those towns.</li>
+      <li><b>{withNone.length} towns have no station on our list at all.</b> Most are small towns or gores served by a neighbour, so they are left out of the figures above.</li>
+      <li><b>Land only.</b> Area is land area from the Census, so lakeside towns are not inflated by the water inside their line.</li>
+      <li>Statewide, {fmt(totalStations)} listed stations over {fmt(totalSqmi)} square miles of land is about {fmt(totalSqmi / totalStations)} square miles per station.</li>
+    </ul>
+    <p class="src">Sources: town boundaries and land area from VCGI and the U.S. Census; stations from the Vermont E911 fire-station layer and this site's roster. Updated {new Date(meta.date + "T12:00:00").toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}.</p>
+  </main>
+</Archive>
+<style>
+  .page { padding: 2.5rem 0 4rem; max-width: 46rem; }
+  .crumbs { display: flex; gap: .5rem; font-size: .85rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+  .crumbs a, main a { color: var(--red); }
+  .kicker { margin: 0; text-transform: uppercase; letter-spacing: .08em; font-size: .8rem; font-weight: 700; color: var(--red); }
+  h1 { margin: .3rem 0 .8rem; font-family: "Source Serif 4", Georgia, serif; font-size: clamp(1.9rem, 4vw, 2.6rem); line-height: 1.15; }
+  h2 { font-family: "Source Serif 4", Georgia, serif; font-size: 1.55rem; margin: 2.4rem 0 .7rem; line-height: 1.2; }
+  p { line-height: 1.65; margin: 0 0 1.05rem; }
+  .lede { font-size: 1.1rem; }
+  .rank { padding-left: 1.4rem; margin: 0 0 1rem; line-height: 1.5; }
+  .rank li { margin-bottom: .45rem; }
+  .rank span { display: block; font-size: .88rem; color: var(--ink-3); }
+  .bars { display: grid; gap: .35rem; margin: 0 0 1.2rem; }
+  .bar { display: grid; grid-template-columns: minmax(8rem, 34%) 1fr; gap: .7rem; align-items: center; font-size: .92rem; }
+  .bt { display: flex; align-items: center; gap: .45rem; min-width: 0; }
+  .bt i { display: block; height: .8rem; min-width: 2px; background: var(--red); border-radius: 2px; }
+  .bt b { font-variant-numeric: tabular-nums; font-weight: 600; }
+  .facts { padding-left: 1.2rem; margin: 0 0 1rem; line-height: 1.6; }
+  .facts li { margin-bottom: .55rem; }
+  .src { font-size: .85rem; color: var(--ink-3); border-top: 1px solid var(--line); padding-top: 1rem; margin-top: 2rem; }
+</style>
